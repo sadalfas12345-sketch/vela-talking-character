@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#09111f" />
-  <title>Vela â€” Talking Character</title>
+  <title>Vela — Talking Character</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
     :root { color-scheme: dark; --ink:#ecf3ff; --muted:#8e9bb2; --panel:rgba(11,20,37,.84); --line:rgba(167,190,224,.15); --accent:#8af1d1; --accent2:#82a9ff; }
@@ -60,7 +60,7 @@
   <main class="shell">
     <header>
       <div class="brand"><div class="mark">V</div><div><strong>VELA</strong><small>realtime character studio</small></div></div>
-      <div class="status"><span id="statusDot" class="dot"></span><span id="statusText">Loading avatarâ€¦</span></div>
+      <div class="status"><span id="statusDot" class="dot"></span><span id="statusText">Loading avatar…</span></div>
     </header>
     <div class="character-switch">
       <select id="characterSelect" aria-label="Active character"><option value="default">Vela · default</option></select>
@@ -70,21 +70,21 @@
     <div id="compatibility" class="compatibility" role="status" aria-live="polite"></div>
     <nav class="camera-tools" aria-label="Camera controls">
       <button type="button" id="zoomIn" aria-label="Zoom in" title="Zoom in">+</button>
-      <button type="button" id="zoomOut" aria-label="Zoom out" title="Zoom out">âˆ’</button>
-      <button type="button" id="panLeft" aria-label="Pan left" title="Pan left">â†</button>
-      <button type="button" id="panRight" aria-label="Pan right" title="Pan right">â†’</button>
-      <button type="button" id="resetCamera" aria-label="Reset camera" title="Reset camera">â†º</button>
+      <button type="button" id="zoomOut" aria-label="Zoom out" title="Zoom out">−</button>
+      <button type="button" id="panLeft" aria-label="Pan left" title="Pan left">←</button>
+      <button type="button" id="panRight" aria-label="Pan right" title="Pan right">→</button>
+      <button type="button" id="resetCamera" aria-label="Reset camera" title="Reset camera">↺</button>
     </nav>
     <section class="content">
       <form class="panel" id="talkForm">
-        <div class="panel-top"><span class="panel-title">Give Vela a line</span><span class="inference" id="inferenceMode">RTX inference Â· connecting</span></div>
+        <div class="panel-top"><span class="panel-title">Give Vela a line</span><span class="inference" id="inferenceMode">RTX inference · connecting</span></div>
         <label for="text">Dialogue</label>
-        <textarea id="text" maxlength="500">Every good idea starts as a conversation. Letâ€™s make this one memorable.</textarea>
+        <textarea id="text" maxlength="500">Every good idea starts as a conversation. Let’s make this one memorable.</textarea>
         <div class="row">
           <div><label for="emotion">Emotion</label><select id="emotion"><option value="neutral">Neutral</option><option value="happy">Happy</option><option value="sad">Sad</option><option value="angry">Angry</option><option value="nervous">Nervous</option></select></div>
-          <div><label for="voice">Voice</label><select id="voice"><option value="af_bella">Bella Â· warm</option><option value="am_fenrir">Fenrir Â· grounded</option></select></div>
+          <div><label for="voice">Voice</label><select id="voice"><option value="af_bella">Bella · warm</option><option value="am_fenrir">Fenrir · grounded</option></select></div>
         </div>
-        <button id="speak" type="submit" disabled>Loading characterâ€¦</button>
+        <button id="speak" type="submit" disabled>Loading character…</button>
         <div id="progress" class="progress" role="status"></div>
       </form>
     </section>
@@ -109,17 +109,17 @@
       headtts = new HeadTTS({
         // Prefer the RTX PC's local HeadTTS REST endpoint. The browser engines remain a fallback
         // for phones or when the desktop inference service is not running.
-        endpoints: [`http://${location.hostname || '127.0.0.1'}:8882/v1`, 'webgpu', 'wasm'],
+        endpoints: [`${location.origin}/v1`, 'webgpu', 'wasm'],
         languages:['en-us'], voices:['af_bella','am_fenrir'], voiceURL:'../voices', audioCtx:head.audioCtx,
         transformersModule:'https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.0.0/dist/transformers.min.js',
         dictionaryURL:'../dictionaries', trace:0
       });
       headtts.onmessage = (message) => {
-        if (message.type === 'audio') { head.speakMarker(() => {}); head.speakAudio(message.data, {}, (word) => { el.progress.textContent = word || 'Speakingâ€¦'; }); }
+        if (message.type === 'audio') { head.speakMarker(() => {}); head.speakAudio(message.data, {}, (word) => { el.progress.textContent = word || 'Speaking…'; }); }
         else if (message.type === 'error') { el.progress.textContent = `TTS error: ${message.data?.error || 'unknown error'}`; el.speak.disabled=false; }
       };
       const info = { head:'', tts:'' };
-      const progress = (name, ev) => { if (ev?.lengthComputable) info[name]=`${Math.round(ev.loaded/ev.total*100)}%`; else if (ev) info[name]=`${Math.round(ev.loaded/1000)} KB`; el.progress.textContent=`Loading ${info.head || 'avatar'} Â· ${info.tts || 'voice engine'}`; };
+      const progress = (name, ev) => { if (ev?.lengthComputable) info[name]=`${Math.round(ev.loaded/ev.total*100)}%`; else if (ev) info[name]=`${Math.round(ev.loaded/1000)} KB`; el.progress.textContent=`Loading ${info.head || 'avatar'} · ${info.tts || 'voice engine'}`; };
       defaultAvatar = { url:'./TalkingHead/avatars/avaturn.glb', body:'F', avatarMood:'neutral', lipsyncLang:'en', retarget:{ Hips:{y:0.03}, Spine:{y:0.02}, Spine1:{y:0.02,z:0.01}, Spine2:{y:0.02,z:0.01}, Neck:{z:0.02,y:0.01}, Head:{z:0.02}, LeftShoulder:{rx:-0.5}, RightShoulder:{rx:-0.5}, scaleToHipsLevel:1.0 }, baseline:{ headRotateX:-0.05, eyeBlinkLeft:0.15, eyeBlinkRight:0.15 } };
       await Promise.all([
         head.showAvatar(defaultAvatar, progress.bind(null,'head')),
@@ -155,8 +155,8 @@
         if (el.characterSelect.value === 'default') await activateAvatar(defaultAvatar);
         else if (importedCharacter) await activateAvatar(importedCharacter.avatar);
       });
-      ready=true; el.speak.disabled=false; el.speak.textContent='Speak'; el.progress.textContent='Ready Â· type a line and press Speak'; setStatus('Ready to speak', true);
-      el.inference.textContent = 'RTX inference Â· ready';
+      ready=true; el.speak.disabled=false; el.speak.textContent='Speak'; el.progress.textContent='Ready · type a line and press Speak'; setStatus('Ready to speak', true);
+      el.inference.textContent = 'RTX inference · ready';
     }
     async function importCharacterFile() {
       const file=el.characterFile.files?.[0]; if (!file) return;
@@ -210,7 +210,7 @@
       } finally { el.speak.disabled=!ready; }
     }
     el.voice.addEventListener('change', () => { if (ready) headtts.setup({voice:el.voice.value}); });
-    el.form.addEventListener('submit', (event) => { event.preventDefault(); const text=el.text.value.trim(); if (!ready || !text) return; setMood(el.emotion.value); el.speak.disabled=true; el.progress.textContent='Synthesizing locallyâ€¦'; headtts.synthesize({ input:text }).finally(() => { el.speak.disabled=false; }); });
+    el.form.addEventListener('submit', (event) => { event.preventDefault(); const text=el.text.value.trim(); if (!ready || !text) return; setMood(el.emotion.value); el.speak.disabled=true; el.progress.textContent='Synthesizing locally…'; headtts.synthesize({ input:text }).finally(() => { el.speak.disabled=false; }); });
     document.addEventListener('visibilitychange', () => { if (!head) return; document.visibilityState === 'visible' ? head.start() : head.stop(); });
     window.addEventListener('resize',()=>{if(!head?.camera)return;head.camera.fov=window.innerWidth<700?24:18;head.camera.updateProjectionMatrix();});
     boot().catch((error) => { console.error(error); setStatus('Startup needs attention'); el.progress.textContent=`Could not start: ${error.message || error}`; el.speak.textContent='Retry'; el.speak.disabled=false; el.inference.textContent='Browser fallback available'; });

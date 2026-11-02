@@ -11,7 +11,7 @@ npm.cmd run tts
 npm.cmd run serve
 ```
 
-Open `http://<PC-Tailscale-IP>:4174` from an Android phone connected to the same Tailscale tailnet. The TTS endpoint is exposed on port `8882` and is preferred by the browser, so Kokoro inference stays on the RTX PC when reachable. Browser WebGPU/WASM remains the fallback.
+Open `http://<PC-Tailscale-IP>:4174` from an Android phone connected to the same Tailscale tailnet. The Vela server proxies `/v1` requests to HeadTTS on the PC, so the phone only needs access to port `4174` and Kokoro inference stays on the RTX PC. Browser WebGPU/WASM remains the fallback.
 
 Clone with upstream source included:
 
