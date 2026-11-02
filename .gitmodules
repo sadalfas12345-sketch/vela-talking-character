@@ -1,0 +1,6 @@
+[submodule "TalkingHead"]
+	path = TalkingHead
+	url = https://github.com/met4citizen/TalkingHead.git
+[submodule "HeadTTS"]
+	path = HeadTTS
+	url = https://github.com/met4citizen/HeadTTS.git

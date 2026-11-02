@@ -1,0 +1,21 @@
+import { chromium } from 'playwright';
+const browser = await chromium.launch({ headless: true });
+const page = await browser.newPage({ viewport: { width: 412, height: 915 } });
+const errors = [];
+page.on('pageerror', error => errors.push(error.message));
+await page.goto('http://100.116.192.77:4174', { waitUntil: 'domcontentloaded', timeout: 15000 });
+await page.waitForFunction(() => !document.querySelector('#speak')?.disabled, null, { timeout: 60000 });
+const rig = await page.evaluate(() => {
+  let meshes = 0, morphTargets = 0, visemes = [];
+  window.talkingHead.scene.traverse(o => { if (o.isMesh) { meshes++; if (o.morphTargetDictionary) { const keys = Object.keys(o.morphTargetDictionary); morphTargets += keys.length; visemes.push(...keys); } } });
+  return { meshes, morphTargets, hasVisemes: ['viseme_aa','viseme_E','viseme_I','viseme_O','viseme_U'].every(k => visemes.includes(k)) };
+});
+await page.evaluate(() => { window.__speakAudioCalls = 0; const original = window.talkingHead.speakAudio.bind(window.talkingHead); window.talkingHead.speakAudio = (...args) => { window.__speakAudioCalls++; return original(...args); }; });
+await page.locator('#text').fill('This is a Tailscale phone-path speech check.');
+await page.locator('#emotion').selectOption('nervous');
+await page.locator('#speak').click();
+await page.waitForTimeout(10000);
+const speech = await page.evaluate(() => ({ mood: window.talkingHead.moodName, speakAudioCalls: window.__speakAudioCalls, progress: document.querySelector('#progress')?.textContent, status: document.querySelector('#statusText')?.textContent }));
+console.log(JSON.stringify({ url: page.url(), rig, speech, errors }, null, 2));
+await page.screenshot({ path: 'artifacts-tailscale.png', fullPage: true });
+await browser.close();
