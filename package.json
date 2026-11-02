@@ -3,8 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "serve": "python -m http.server 4173 --bind 0.0.0.0",
-    "tts": "node ./HeadTTS/modules/headtts-node.mjs --config ./HeadTTS/headtts-node.json"
+    "serve": "python -m http.server 4174 --bind 0.0.0.0",
+    "tts": "node ./HeadTTS/modules/headtts-node.mjs --config ./HeadTTS/headtts-node.json",
+    "test:import": "node ./character-import-tests.mjs"
   },
   "devDependencies": {
     "playwright": "^1.64.1"

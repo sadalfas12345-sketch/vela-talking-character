@@ -23,6 +23,11 @@
     .brand strong { font-family:'Space Grotesk'; font-size:18px; letter-spacing:.02em; }
     .brand small { display:block; color:var(--muted); font-size:11px; margin-top:2px; }
     .status { display:flex; align-items:center; gap:9px; font-size:12px; color:#b9c5d7; background:rgba(10,19,34,.58); border:1px solid var(--line); padding:9px 12px; border-radius:999px; backdrop-filter:blur(12px); }
+    .character-switch { pointer-events:auto; position:fixed; z-index:4; top:74px; left:clamp(12px,2.5vw,30px); display:flex; gap:8px; align-items:center; }
+    .character-switch select,.character-switch button { width:auto; margin:0; padding:9px 12px; border:1px solid var(--line); border-radius:11px; color:var(--ink); background:rgba(8,15,27,.84); font:inherit; font-size:12px; cursor:pointer; }
+    .character-switch button { color:var(--accent); }
+    .compatibility { display:none; pointer-events:auto; position:fixed; z-index:4; top:120px; left:clamp(12px,2.5vw,30px); max-width:min(440px,calc(100vw - 24px)); padding:10px 12px; border:1px solid var(--line); border-radius:12px; background:rgba(8,15,27,.88); color:#d8e3f4; font-size:12px; line-height:1.45; }
+    .compatibility[data-kind="error"] { border-color:rgba(255,132,132,.5); color:#ffd0d0; }
     .camera-tools { pointer-events:auto; position:fixed; z-index:3; right:16px; top:50%; transform:translateY(-50%); display:grid; gap:8px; }
     .camera-tools button { width:42px; height:42px; padding:0; border:1px solid var(--line); border-radius:50%; color:var(--ink); background:rgba(8,15,27,.72); box-shadow:none; backdrop-filter:blur(10px); font-size:18px; }
     .dot { width:8px; height:8px; border-radius:50%; background:#ffbe71; box-shadow:0 0 12px #ffbe71; }
@@ -57,6 +62,12 @@
       <div class="brand"><div class="mark">V</div><div><strong>VELA</strong><small>realtime character studio</small></div></div>
       <div class="status"><span id="statusDot" class="dot"></span><span id="statusText">Loading avatarâ€¦</span></div>
     </header>
+    <div class="character-switch">
+      <select id="characterSelect" aria-label="Active character"><option value="default">Vela · default</option></select>
+      <button type="button" id="importCharacter">Import Character</button>
+      <input id="characterFile" type="file" accept=".glb,model/gltf-binary" hidden />
+    </div>
+    <div id="compatibility" class="compatibility" role="status" aria-live="polite"></div>
     <nav class="camera-tools" aria-label="Camera controls">
       <button type="button" id="zoomIn" aria-label="Zoom in" title="Zoom in">+</button>
       <button type="button" id="zoomOut" aria-label="Zoom out" title="Zoom out">âˆ’</button>
@@ -81,13 +92,16 @@
   <script type="module">
     import { TalkingHead } from "talkinghead";
     import { HeadTTS } from "headtts";
+    import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+    import { inspectCharacter, adaptCharacterGLTF, compatibilityMessage, cacheKey } from "./character-adapter.mjs";
 
     const $ = (id) => document.getElementById(id);
-    const el = { avatar:$('avatar'), form:$('talkForm'), text:$('text'), emotion:$('emotion'), voice:$('voice'), speak:$('speak'), progress:$('progress'), statusDot:$('statusDot'), statusText:$('statusText'), inference:$('inferenceMode') };
-    let head, headtts, ready = false, moodTimer;
+    const el = { avatar:$('avatar'), form:$('talkForm'), text:$('text'), emotion:$('emotion'), voice:$('voice'), speak:$('speak'), progress:$('progress'), statusDot:$('statusDot'), statusText:$('statusText'), inference:$('inferenceMode'), characterFile:$('characterFile'), characterSelect:$('characterSelect'), compatibility:$('compatibility'), importCharacter:$('importCharacter') };
+    let head, headtts, ready = false, moodTimer, defaultAvatar, importedCharacter = null, cameraHome = null;
     const moods = { neutral:'neutral', happy:'happy', sad:'sad', angry:'angry', nervous:'fear' };
 
     function setStatus(text, isReady=false) { el.statusText.textContent=text; el.statusDot.classList.toggle('ready', isReady); }
+    function showCompatibility(text, kind='info') { el.compatibility.textContent=text; el.compatibility.dataset.kind=kind; el.compatibility.style.display='block'; }
     function setMood(mood) { if (!head) return; head.setMood(moods[mood] || 'neutral'); clearTimeout(moodTimer); moodTimer=setTimeout(() => head.setMood('neutral'), 5200); }
 
     async function boot() {
@@ -106,8 +120,9 @@
       };
       const info = { head:'', tts:'' };
       const progress = (name, ev) => { if (ev?.lengthComputable) info[name]=`${Math.round(ev.loaded/ev.total*100)}%`; else if (ev) info[name]=`${Math.round(ev.loaded/1000)} KB`; el.progress.textContent=`Loading ${info.head || 'avatar'} Â· ${info.tts || 'voice engine'}`; };
+      defaultAvatar = { url:'./TalkingHead/avatars/avaturn.glb', body:'F', avatarMood:'neutral', lipsyncLang:'en', retarget:{ Hips:{y:0.03}, Spine:{y:0.02}, Spine1:{y:0.02,z:0.01}, Spine2:{y:0.02,z:0.01}, Neck:{z:0.02,y:0.01}, Head:{z:0.02}, LeftShoulder:{rx:-0.5}, RightShoulder:{rx:-0.5}, scaleToHipsLevel:1.0 }, baseline:{ headRotateX:-0.05, eyeBlinkLeft:0.15, eyeBlinkRight:0.15 } };
       await Promise.all([
-        head.showAvatar({ url:'./TalkingHead/avatars/avaturn.glb', body:'F', avatarMood:'neutral', lipsyncLang:'en', retarget:{ Hips:{y:0.03}, Spine:{y:0.02}, Spine1:{y:0.02,z:0.01}, Spine2:{y:0.02,z:0.01}, Neck:{z:0.02,y:0.01}, Head:{z:0.02}, LeftShoulder:{rx:-0.5}, RightShoulder:{rx:-0.5}, scaleToHipsLevel:1.0 }, baseline:{ headRotateX:-0.05, eyeBlinkLeft:0.15, eyeBlinkRight:0.15 } }, progress.bind(null,'head')),
+        head.showAvatar(defaultAvatar, progress.bind(null,'head')),
         headtts.connect(null, progress.bind(null,'tts'))
       ]);
       headtts.setup({ voice:el.voice.value, language:'en-us', speed:1, audioEncoding:'wav' });
@@ -126,19 +141,78 @@
       head.controlsEnd.x += centerShift;
       window.talkingHead = head; window.headtts = headtts;
       const controls = head.controls;
-      const baseView = { ...portraitView };
-      let view = { ...baseView };
-      $('zoomIn').onclick = () => { view.cameraDistance=Math.max(-0.75,view.cameraDistance-0.12); head.setView('head',view); };
-      $('zoomOut').onclick = () => { view.cameraDistance=Math.min(3.5,view.cameraDistance+0.12); head.setView('head',view); };
-      $('panLeft').onclick = () => { view.cameraX=Math.max(-0.65,view.cameraX-0.12); head.setView('head',view); };
-      $('panRight').onclick = () => { view.cameraX=Math.min(0.65,view.cameraX+0.12); head.setView('head',view); };
-      $('resetCamera').onclick = () => { view={...baseView}; head.setView('head',view); const shift=faceTarget.x-head.controls.target.x; head.controls.target.x+=shift; head.camera.position.x+=shift; head.cameraEnd.x+=shift; head.controlsEnd.x+=shift; controls?.update(); };
+      cameraHome={ position:head.camera.position.clone(), target:controls.target.clone() };
+      const zoom=(factor)=>{const offset=head.camera.position.clone().sub(controls.target);const next=Math.max(2.15,Math.min(8,offset.length()*factor));offset.setLength(next);head.camera.position.copy(controls.target).add(offset);controls.update();};
+      const pan=(direction)=>{const right=new head.camera.position.constructor(1,0,0).applyQuaternion(head.camera.quaternion);const shift=right.multiplyScalar(direction*0.12);head.camera.position.add(shift);controls.target.add(shift);controls.update();};
+      $('zoomIn').onclick = () => zoom(0.88);
+      $('zoomOut').onclick = () => zoom(1.14);
+      $('panLeft').onclick = () => pan(-1);
+      $('panRight').onclick = () => pan(1);
+      $('resetCamera').onclick = () => { if(!cameraHome)return; head.camera.position.copy(cameraHome.position); controls.target.copy(cameraHome.target); controls.update(); };
+      el.importCharacter.addEventListener('click', () => el.characterFile.click());
+      el.characterFile.addEventListener('change', importCharacterFile);
+      el.characterSelect.addEventListener('change', async () => {
+        if (el.characterSelect.value === 'default') await activateAvatar(defaultAvatar);
+        else if (importedCharacter) await activateAvatar(importedCharacter.avatar);
+      });
       ready=true; el.speak.disabled=false; el.speak.textContent='Speak'; el.progress.textContent='Ready Â· type a line and press Speak'; setStatus('Ready to speak', true);
       el.inference.textContent = 'RTX inference Â· ready';
+    }
+    async function importCharacterFile() {
+      const file=el.characterFile.files?.[0]; if (!file) return;
+      el.importCharacter.disabled=true; showCompatibility('Inspecting GLB hierarchy, face shapes, skeleton, materials, and textures…');
+      try {
+        const loader=new GLTFLoader(); const gltf=await loader.parseAsync(await file.arrayBuffer(),'');
+        let report=inspectCharacter(gltf); const cache=cacheKey(file);
+        try {
+          const cached=JSON.parse(localStorage.getItem(cache) || 'null');
+          if (cached?.adapterVersion===1 && cached?.report?.morphTargets?.join('|')===report.morphTargets.join('|')) report=cached.report;
+        } catch {}
+        const jaw=report.bones.some(name=>['jaw','lowerjaw','mandible'].includes(name.toLowerCase()));
+        const eyes=report.bones.filter(name=>/eye/i.test(name));
+        const details=`${report.meshes} meshes · ${report.materials.length} materials · ${report.textures.length} textures · ${report.bones.length} bones · ${report.morphTargets.length} morph targets. Speech visemes ${report.visemes.length}/15; blink targets ${report.blinks.length}/2; expression targets ${report.expressions.length}. ${jaw?'Jaw bone detected. ':''}${eyes.length?`Eye bones detected: ${eyes.join(', ')}. `:''}`;
+        if (!report.importable) {
+          let remedy=compatibilityMessage(report);
+          if (!report.morphMeshes) remedy += ' Required conversion: generate facial shape keys on the same face mesh, including jawOpen, both eyeBlink shapes, and Oculus/ARKit speech shapes. A jaw bone alone cannot produce accurate lip sync. Export the rigged GLB again; Vela does not synthesize missing deformations.';
+          showCompatibility(`${file.name}: ${details} Not activated. ${remedy}`, 'error');
+          return;
+        }
+        const url=URL.createObjectURL(file);
+        const avatar={ url, body:'F', avatarMood:'neutral', lipsyncLang:'en', retarget:{ scaleToHipsLevel:1 }, baseline:{ headRotateX:-0.04 } };
+        avatar.preprocess=(sceneGltf)=>adaptCharacterGLTF(sceneGltf,report);
+        avatar.compatibility=report;
+        importedCharacter={ name:file.name, url, avatar, report, cache };
+        try { localStorage.setItem(cache,JSON.stringify({ adapterVersion:1, name:file.name, report, avatarConfig:{ body:'F', avatarMood:'neutral', lipsyncLang:'en', retarget:avatar.retarget }, checkedAt:Date.now() })); } catch {}
+        const option=document.createElement('option'); option.value='imported'; option.textContent=file.name; el.characterSelect.replaceChildren(el.characterSelect.options[0],option); el.characterSelect.value='imported';
+        await activateAvatar(avatar);
+        showCompatibility(`${file.name}: ${details} ${compatibilityMessage(report)}`, report.hasBothBlinks && report.missingVisemes.length===0 ? 'ok':'info');
+      } catch(error) {
+        showCompatibility(`Could not import ${file.name}: ${error.message || error}. Confirm this is a valid, uncompressed or supported GLB file. The current character remains active.`, 'error');
+      } finally { el.importCharacter.disabled=false; el.characterFile.value=''; }
+    }
+    async function activateAvatar(avatar) {
+      el.speak.disabled=true; el.progress.textContent='Loading character…';
+      try {
+        const { compatibility, preprocess, ...headAvatar }=avatar;
+        await head.showAvatar(headAvatar, null, preprocess);
+        head.camera.fov=window.innerWidth<700?24:18; head.camera.updateProjectionMatrix();
+        head.setView('head',{ cameraY:0.02, cameraDistance:0.9 });
+        await new Promise(resolve=>setTimeout(resolve,1050));
+        const headPoint=new head.camera.position.constructor(); head.objectHead.getWorldPosition(headPoint);
+        const shift=headPoint.clone().sub(head.controls.target); head.controls.target.add(shift); head.camera.position.add(shift); head.controls.update();
+        head.cameraEnd.copy(head.camera.position); head.controlsEnd.copy(head.controls.target);
+        cameraHome={position:head.camera.position.clone(),target:head.controls.target.clone()};
+        el.progress.textContent='Character ready · type a line and press Speak';
+      } catch(error) {
+        console.error(error); showCompatibility(`Character could not be activated: ${error.message || error}. The previous character remains active if it is still visible.`, 'error');
+        if (el.characterSelect.value==='imported') el.characterSelect.value='default';
+        el.progress.textContent='Character load failed';
+      } finally { el.speak.disabled=!ready; }
     }
     el.voice.addEventListener('change', () => { if (ready) headtts.setup({voice:el.voice.value}); });
     el.form.addEventListener('submit', (event) => { event.preventDefault(); const text=el.text.value.trim(); if (!ready || !text) return; setMood(el.emotion.value); el.speak.disabled=true; el.progress.textContent='Synthesizing locallyâ€¦'; headtts.synthesize({ input:text }).finally(() => { el.speak.disabled=false; }); });
     document.addEventListener('visibilitychange', () => { if (!head) return; document.visibilityState === 'visible' ? head.start() : head.stop(); });
+    window.addEventListener('resize',()=>{if(!head?.camera)return;head.camera.fov=window.innerWidth<700?24:18;head.camera.updateProjectionMatrix();});
     boot().catch((error) => { console.error(error); setStatus('Startup needs attention'); el.progress.textContent=`Could not start: ${error.message || error}`; el.speak.textContent='Retry'; el.speak.disabled=false; el.inference.textContent='Browser fallback available'; });
   </script>
 </body>
