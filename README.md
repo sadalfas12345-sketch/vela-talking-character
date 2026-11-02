@@ -29,6 +29,8 @@ Recognized mappings are applied in memory to the GLB scene before TalkingHead lo
 
 Models without facial morph deformation are inspected but not activated or silently replaced. A jaw or eye bone cannot create accurate visemes. For these files, generate facial shape keys on the face mesh in Blender with a facial-rigging workflow such as Faceit, including `jawOpen`, both blink targets, and Oculus visemes or equivalent ARKit shapes; export as GLB and import again. Vela does not claim to generate missing face deformation. A valid model with only partial facial targets is also reported with its missing visemes, blink shapes, and expression targets.
 
+The generated Tripo reference character is preserved under `assets/tripo/`. Its Mixamo conversion added body bones but no facial deformations, so Vela correctly keeps it inactive. See [the Tripo inspection and conversion report](assets/tripo/README.md) and run `npm.cmd run test:tripo` to reproduce the browser compatibility check.
+
 Run the automated browser checks with `npm.cmd run test:import`. The suite exercises the original avatar, recognized alias mapping, compatible GLB activation, a valid GLB stripped of facial morphs, malformed-file handling, switching back to the default, TTS audio delivery, live viseme/blink/expression values, and mobile rendering.
 
 The browser renders imported GLB geometry locally. Heavy Kokoro inference stays on the RTX PC when the HeadTTS service is reachable; speech audio and timed visemes are then sent to the browser renderer. No webcam or body tracking is used.

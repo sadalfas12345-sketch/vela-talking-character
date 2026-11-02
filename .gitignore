@@ -4,3 +4,10 @@ node_modules/
 artifacts-*.png
 camtest-*.png
 frame-*.png
+.env
+.env.*
+!.env.example
+*.secret
+*.pem
+__pycache__/
+*.py[cod]
