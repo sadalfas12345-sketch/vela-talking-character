@@ -1,3 +1,5 @@
+import { Bone, Vector3 } from 'three';
+
 const MORPH_ALIASES = new Map();
 
 function register(target, ...names) {
@@ -104,7 +106,7 @@ export function inspectCharacter(gltf) {
   };
 }
 
-export function adaptCharacterGLTF(gltf, report) {
+export function adaptCharacterGLTF(gltf, report, options = {}) {
   if (!report.importable) throw new Error(compatibilityMessage(report));
   gltf.scene.traverse(object => {
     if (object.isBone) {
@@ -124,6 +126,33 @@ export function adaptCharacterGLTF(gltf, report) {
       }
     }
   });
+  // TalkingHead's gaze and speech animation paths expect eye Object3Ds. A
+  // Mixamo body rig often omits them, so add measured anchors from the target
+  // character's registered eye landmarks. These anchors do not invent eyelid
+  // deformation; actual blinking still requires the mesh shape keys above.
+  if (options.eyeLandmarks3d) {
+    gltf.scene.updateMatrixWorld(true);
+    const head = gltf.scene.getObjectByName('Head');
+    if (head) {
+      for (const [side, landmark] of [['Left', 'eye_outer_left'], ['Right', 'eye_outer_right']]) {
+        if (gltf.scene.getObjectByName(`${side}Eye`)) continue;
+        const p = options.eyeLandmarks3d[landmark];
+        if (!Array.isArray(p) || p.length < 3) continue;
+        // Calibration points are in Blender Z-up source coordinates. Convert
+        // to glTF Y-up and account for the Tripo rig export's measured root lift.
+        const world = new Vector3(p[0], p[2] + (options.sourceRootLift || 0), -p[1]);
+        const anchor = new Bone();
+        anchor.name = `${side}Eye`;
+        head.add(anchor);
+        anchor.position.copy(head.worldToLocal(world));
+        head.updateMatrixWorld(true);
+      }
+    }
+  }
+  if (Number.isFinite(options.faceForwardYawRadians)) {
+    const root = gltf.scene.getObjectByName('Armature');
+    if (root) root.rotation.y += options.faceForwardYawRadians;
+  }
   return gltf;
 }
 

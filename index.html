@@ -97,7 +97,7 @@
 
     const $ = (id) => document.getElementById(id);
     const el = { avatar:$('avatar'), form:$('talkForm'), text:$('text'), emotion:$('emotion'), voice:$('voice'), speak:$('speak'), progress:$('progress'), statusDot:$('statusDot'), statusText:$('statusText'), inference:$('inferenceMode'), characterFile:$('characterFile'), characterSelect:$('characterSelect'), compatibility:$('compatibility'), importCharacter:$('importCharacter') };
-    let head, headtts, ready = false, moodTimer, defaultAvatar, importedCharacter = null, cameraHome = null;
+    let head, headtts, ready = false, moodTimer, defaultAvatar, importedCharacter = null, cameraHome = null, defaultRandomizedMorphs = [];
     const moods = { neutral:'neutral', happy:'happy', sad:'sad', angry:'angry', nervous:'fear' };
 
     function setStatus(text, isReady=false) { el.statusText.textContent=text; el.statusDot.classList.toggle('ready', isReady); }
@@ -106,6 +106,19 @@
 
     async function boot() {
       head = new TalkingHead(el.avatar, { ttsEndpoint:'N/A', lipsyncModules:[], cameraView:'head', mixerGainSpeech:3, cameraRotateEnable:true, cameraPanEnable:true, cameraZoomEnable:true, ambientLightColor:0x9fb8d6, ambientLightIntensity:1.5, cameraY:0.02, cameraRotateX:0, cameraRotateY:0 });
+      // Supply neutral internal channels needed by TalkingHead eye/blink paths
+      // when imported face meshes omit Oculus gaze/brow shapes.
+      head.mtCustoms.push('eyeLookInLeft','eyeLookOutLeft','eyeLookInRight','eyeLookOutRight','eyesLookDown','eyesLookUp','eyesClosed','browDownLeft','browDownRight');
+      defaultRandomizedMorphs=[...head.mtRandomized];
+      const setMoodNative=head.setMood.bind(head);
+      head.setMood=(name)=>{
+        const mood=head.animMoods[String(name||'').trim().toLowerCase()];
+        if(head.avatar?.avatarDisableMoodPose && mood){
+          const anims=mood.anims; mood.anims=anims.filter(anim=>anim.name!=='pose');
+          try{return setMoodNative(name);}finally{mood.anims=anims;}
+        }
+        return setMoodNative(name);
+      };
       headtts = new HeadTTS({
         // Prefer the RTX PC's local HeadTTS REST endpoint. The browser engines remain a fallback
         // for phones or when the desktop inference service is not running.
@@ -125,6 +138,8 @@
         head.showAvatar(defaultAvatar, progress.bind(null,'head')),
         headtts.connect(null, progress.bind(null,'tts'))
       ]);
+      defaultRandomizedMorphs=defaultRandomizedMorphs.filter(name=>head.mtAvatar[name]);
+      head.mtRandomized=[...defaultRandomizedMorphs];
       headtts.setup({ voice:el.voice.value, language:'en-us', speed:1, audioEncoding:'wav' });
       // TalkingHead defaults to a 10° portrait lens. Widen it for this avatar so
       // its eyes, cheeks and jaw remain in frame on tall phone screens.
@@ -178,13 +193,23 @@
           return;
         }
         const url=URL.createObjectURL(file);
+        let adapterOptions={};
+        if (file.name==='vela-reference-faced.glb') {
+          const calibration=await fetch('./assets/tripo/face-transfer-calibration.json').then(response=>{
+            if(!response.ok) throw new Error('Tripo facial landmark calibration is missing');
+            return response.json();
+          });
+          adapterOptions={eyeLandmarks3d:calibration.landmarks3d,sourceRootLift:calibration.riggedVerticalOffsetMeters,faceForwardYawRadians:calibration.faceForwardYawRadians};
+        }
         const avatar={ url, body:'F', avatarMood:'neutral', lipsyncLang:'en', retarget:{ scaleToHipsLevel:1 }, baseline:{ headRotateX:-0.04 } };
-        avatar.preprocess=(sceneGltf)=>adaptCharacterGLTF(sceneGltf,report);
+        if(Number.isFinite(adapterOptions.faceForwardYawRadians)) Object.assign(avatar,{avatarIgnoreCamera:true,avatarIdleEyeContact:false,avatarSpeakingEyeContact:false,avatarIdleHeadMove:0,avatarSpeakingHeadMove:0,avatarDisableMoodPose:true});
+        avatar.preprocess=(sceneGltf)=>adaptCharacterGLTF(sceneGltf,report,adapterOptions);
         avatar.compatibility=report;
         importedCharacter={ name:file.name, url, avatar, report, cache };
         try { localStorage.setItem(cache,JSON.stringify({ adapterVersion:1, name:file.name, report, avatarConfig:{ body:'F', avatarMood:'neutral', lipsyncLang:'en', retarget:avatar.retarget }, checkedAt:Date.now() })); } catch {}
         const option=document.createElement('option'); option.value='imported'; option.textContent=file.name; el.characterSelect.replaceChildren(el.characterSelect.options[0],option); el.characterSelect.value='imported';
-        await activateAvatar(avatar);
+        const activated=await activateAvatar(avatar);
+        if(!activated){showCompatibility(`${file.name}: inspected, but activation failed. ${compatibilityMessage(report)}`, 'error');return;}
         showCompatibility(`${file.name}: ${details} ${compatibilityMessage(report)}`, report.hasBothBlinks && report.missingVisemes.length===0 ? 'ok':'info');
       } catch(error) {
         showCompatibility(`Could not import ${file.name}: ${error.message || error}. Confirm this is a valid, uncompressed or supported GLB file. The current character remains active.`, 'error');
@@ -195,24 +220,33 @@
       try {
         const { compatibility, preprocess, ...headAvatar }=avatar;
         await head.showAvatar(headAvatar, null, preprocess);
-        head.camera.fov=window.innerWidth<700?24:18; head.camera.updateProjectionMatrix();
+        const isConvertedTripo=Boolean(avatar.avatarDisableMoodPose);
+        head.mtRandomized=isConvertedTripo?defaultRandomizedMorphs.filter(name=>head.mtAvatar[name]):[...defaultRandomizedMorphs];
+        head.camera.fov=window.innerWidth<700?(isConvertedTripo?18:24):(isConvertedTripo?14:18); head.camera.updateProjectionMatrix();
         head.setView('head',{ cameraY:0.02, cameraDistance:0.9 });
         await new Promise(resolve=>setTimeout(resolve,1050));
-        const headPoint=new head.camera.position.constructor(); head.objectHead.getWorldPosition(headPoint);
+        const headPoint=new head.camera.position.constructor();
+        if(head.objectLeftEye&&head.objectRightEye){
+          const left=head.objectLeftEye.getWorldPosition(new head.camera.position.constructor());
+          const right=head.objectRightEye.getWorldPosition(new head.camera.position.constructor());
+          headPoint.copy(left).add(right).multiplyScalar(0.5);
+        }else head.objectHead.getWorldPosition(headPoint);
         const shift=headPoint.clone().sub(head.controls.target); head.controls.target.add(shift); head.camera.position.add(shift); head.controls.update();
         head.cameraEnd.copy(head.camera.position); head.controlsEnd.copy(head.controls.target);
         cameraHome={position:head.camera.position.clone(),target:head.controls.target.clone()};
         el.progress.textContent='Character ready · type a line and press Speak';
+        return true;
       } catch(error) {
         console.error(error); showCompatibility(`Character could not be activated: ${error.message || error}. The previous character remains active if it is still visible.`, 'error');
         if (el.characterSelect.value==='imported') el.characterSelect.value='default';
         el.progress.textContent='Character load failed';
+        return false;
       } finally { el.speak.disabled=!ready; }
     }
     el.voice.addEventListener('change', () => { if (ready) headtts.setup({voice:el.voice.value}); });
     el.form.addEventListener('submit', (event) => { event.preventDefault(); const text=el.text.value.trim(); if (!ready || !text) return; setMood(el.emotion.value); el.speak.disabled=true; el.progress.textContent='Synthesizing locally…'; headtts.synthesize({ input:text }).finally(() => { el.speak.disabled=false; }); });
     document.addEventListener('visibilitychange', () => { if (!head) return; document.visibilityState === 'visible' ? head.start() : head.stop(); });
-    window.addEventListener('resize',()=>{if(!head?.camera)return;head.camera.fov=window.innerWidth<700?24:18;head.camera.updateProjectionMatrix();});
+    window.addEventListener('resize',()=>{if(!head?.camera)return;const tripo=head.avatar?.avatarDisableMoodPose;head.camera.fov=window.innerWidth<700?(tripo?18:24):(tripo?14:18);head.camera.updateProjectionMatrix();});
     boot().catch((error) => { console.error(error); setStatus('Startup needs attention'); el.progress.textContent=`Could not start: ${error.message || error}`; el.speak.textContent='Retry'; el.speak.disabled=false; el.inference.textContent='Browser fallback available'; });
   </script>
 </body>

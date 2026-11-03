@@ -4,9 +4,10 @@
   "type": "module",
   "scripts": {
     "serve": "python ./serve.py",
-    "tts": "node ./HeadTTS/modules/headtts-node.mjs --config ./HeadTTS/headtts-node.json",
+    "tts": "cd HeadTTS && node ./modules/headtts-node.mjs --config ./headtts-node.json",
     "test:import": "node ./character-import-tests.mjs",
-    "test:tripo": "node ./scripts/verify_tripo_asset.mjs"
+    "test:tripo": "node ./scripts/verify_tripo_asset.mjs",
+    "test:tripo-face": "node ./scripts/verify_tripo_face_animation.mjs"
   },
   "devDependencies": {
     "playwright": "^1.64.1"

@@ -96,13 +96,14 @@ try {
       const p=window.__faceMotion; for(const key of ['viseme_aa','viseme_E','viseme_O','viseme_PP'])p.mouth=Math.max(p.mouth,head.mtAvatar[key]?.applied||0);
       for(const key of ['eyeBlinkLeft','eyeBlinkRight'])p.blink=Math.max(p.blink,head.mtAvatar[key]?.applied||0);
       for(const key of ['mouthSmileLeft','mouthSmileRight','browInnerUp'])p.expression=Math.max(p.expression,head.mtAvatar[key]?.applied||0);
-      if(performance.now()-start<18000)requestAnimationFrame(sample);
+      if(performance.now()-start<60000)requestAnimationFrame(sample);
     }; requestAnimationFrame(sample);
   });
   await page.locator('#emotion').selectOption('happy');
   await page.locator('#text').fill('The imported character is speaking with synchronized facial movement.');
   await page.locator('#speak').click();
-  await page.waitForTimeout(18000);
+  await page.waitForFunction(()=>window.talkingHead?.isSpeaking,null,{timeout:60000});
+  await page.waitForFunction(()=>!window.talkingHead?.isSpeaking,null,{timeout:60000});
   const speech=await page.evaluate(()=>({motion:window.__faceMotion,mood:window.talkingHead.moodName,progress:document.querySelector('#progress').textContent}));
   if (synthStatus !== 200 || speech.motion.mouth <= 0 || speech.motion.blink <= 0 || speech.motion.expression <= 0) throw new Error(`Speech/face motion check failed: ${JSON.stringify({synthStatus,speech})}`);
 

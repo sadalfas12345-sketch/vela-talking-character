@@ -4,10 +4,17 @@ Browser-based talking character demo built from pinned upstream TalkingHead and 
 
 ## Run
 
-From this directory:
+From this directory, use two terminals:
+
+Terminal 1 runs local Kokoro on the PC:
 
 ```powershell
 npm.cmd run tts
+```
+
+Terminal 2 serves Vela to the local network and Tailscale:
+
+```powershell
 npm.cmd run serve
 ```
 
@@ -29,9 +36,9 @@ Recognized mappings are applied in memory to the GLB scene before TalkingHead lo
 
 Models without facial morph deformation are inspected but not activated or silently replaced. A jaw or eye bone cannot create accurate visemes. For these files, generate facial shape keys on the face mesh in Blender with a facial-rigging workflow such as Faceit, including `jawOpen`, both blink targets, and Oculus visemes or equivalent ARKit shapes; export as GLB and import again. Vela does not claim to generate missing face deformation. A valid model with only partial facial targets is also reported with its missing visemes, blink shapes, and expression targets.
 
-The generated Tripo reference character is preserved under `assets/tripo/`. Its Mixamo conversion added body bones but no facial deformations, so Vela correctly keeps it inactive. See [the Tripo inspection and conversion report](assets/tripo/README.md) and run `npm.cmd run test:tripo` to reproduce the browser compatibility check.
+The original Tripo GLB and its Mixamo body-rigged GLB remain preserved byte-for-byte under `assets/tripo/`. `vela-reference-faced.glb` is the derived TalkingHead version, with 29 actual shape-key deformations added to the original skinned mesh. See [the Tripo face conversion report](assets/tripo/README.md). Rebuild it without any Tripo API calls with Blender 5.x using `blender -b --python scripts/build_tripo_face_rig.py`.
 
-Run the automated browser checks with `npm.cmd run test:import`. The suite exercises the original avatar, recognized alias mapping, compatible GLB activation, a valid GLB stripped of facial morphs, malformed-file handling, switching back to the default, TTS audio delivery, live viseme/blink/expression values, and mobile rendering.
+Run the automated browser checks with `npm.cmd run test:import`. The Tripo-specific `npm.cmd run test:tripo-face` uploads the derived GLB into Vela, verifies facial vertex deformation, synthesizes a spoken line through the PC-side HeadTTS service, captures the canvas during a live viseme, samples live viseme/blink/expression channels, and checks mobile rendering. The original `npm.cmd run test:tripo` still confirms the two unconverted GLBs are accurately diagnosed and are not silently activated.
 
 The browser renders imported GLB geometry locally. Heavy Kokoro inference stays on the RTX PC when the HeadTTS service is reachable; speech audio and timed visemes are then sent to the browser renderer. No webcam or body tracking is used.
 
