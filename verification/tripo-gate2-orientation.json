@@ -1,0 +1,281 @@
+{
+  "measurements": [
+    {
+      "stage": "A_mixamo_rigged_source",
+      "path": "assets/tripo/vela-photoreal/generated-rigged.glb",
+      "armature": true,
+      "appliedAdapterYawDegrees": 0,
+      "boneNamesRenamedOnly": false,
+      "sourceFaceForwardWorld": [
+        1,
+        0,
+        0
+      ],
+      "torsoForwardWorld": [
+        0.9953500032424927,
+        0.0000014790143723075744,
+        0.09632433205842972
+      ],
+      "hipLocalForwardAxisIndex": 0,
+      "headLocalForwardAxisIndex": 0,
+      "headToHipForwardDisagreementDegrees": 18.29768875173056,
+      "headToTorsoForwardDisagreementDegrees": 22.494208335933624,
+      "shoulderToHipFacingDisagreementDegrees": 5.527546285894884,
+      "spineRollDegrees": {
+        "Spine": 3.8157730762057294,
+        "Spine1": 7.127762503293974,
+        "Spine2": 10.051054908613898,
+        "Neck": -13.67849011844053,
+        "Head": -13.678490121353912
+      },
+      "maxAbsoluteSpineRollDegrees": 13.678490121353912,
+      "shoulderHeightDeltaMeters": 1.1920928955078125e-7,
+      "shoulderWidthMeters": 0.053659015181233054,
+      "shoulderHeightDeltaRatio": 0.0000022216078537437276,
+      "worldBoundsMeters": {
+        "min": [
+          -0.08417041599750519,
+          -0.16234910488128662,
+          7.791095413267612e-8
+        ],
+        "max": [
+          0.0841703861951828,
+          0.16234901547431946,
+          0.9811928272247314
+        ],
+        "height": 0.9811927493137773
+      },
+      "meshArmatureRelationships": [
+        {
+          "mesh": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+          "parent": "Armature",
+          "armatureModifiers": [
+            "Armature"
+          ]
+        }
+      ],
+      "neutralPoseDeviationDegrees": {
+        "Hips": 0,
+        "Spine": 0,
+        "Spine1": 0,
+        "Spine2": 0,
+        "Neck": 0,
+        "Head": 0
+      },
+      "missingBones": []
+    },
+    {
+      "stage": "B_facial_converted_before_preprocess",
+      "path": "assets/tripo/vela-photoreal/vela-photoreal-faced.glb",
+      "armature": true,
+      "appliedAdapterYawDegrees": 0,
+      "boneNamesRenamedOnly": false,
+      "sourceFaceForwardWorld": [
+        1,
+        0,
+        0
+      ],
+      "torsoForwardWorld": [
+        0.9953500032424927,
+        0.0000010644013173077838,
+        0.09632430970668793
+      ],
+      "hipLocalForwardAxisIndex": 0,
+      "headLocalForwardAxisIndex": 0,
+      "headToHipForwardDisagreementDegrees": 18.297678368349533,
+      "headToTorsoForwardDisagreementDegrees": 22.494184889910624,
+      "shoulderToHipFacingDisagreementDegrees": 5.527546285900167,
+      "spineRollDegrees": {
+        "Spine": 3.8157730717225102,
+        "Spine1": 7.127765486220866,
+        "Spine2": 10.051057178712101,
+        "Neck": -13.678495243102763,
+        "Head": -13.678487733899944
+      },
+      "maxAbsoluteSpineRollDegrees": 13.678495243102763,
+      "shoulderHeightDeltaMeters": 1.1920928955078125e-7,
+      "shoulderWidthMeters": 0.05365893924728377,
+      "shoulderHeightDeltaRatio": 0.0000022216109975900364,
+      "worldBoundsMeters": {
+        "min": [
+          -0.08417157083749771,
+          -0.16235968470573425,
+          0.0000027558417059481144
+        ],
+        "max": [
+          0.08417391777038574,
+          0.16235491633415222,
+          0.9811943769454956
+        ],
+        "height": 0.9811916211037897
+      },
+      "meshArmatureRelationships": [
+        {
+          "mesh": "Generated inner mouth surface",
+          "parent": "Armature",
+          "armatureModifiers": [
+            "Armature"
+          ]
+        },
+        {
+          "mesh": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+          "parent": "Armature",
+          "armatureModifiers": [
+            "Armature"
+          ]
+        }
+      ],
+      "neutralPoseDeviationDegrees": {
+        "Hips": 0,
+        "Spine": 0,
+        "Spine1": 0,
+        "Spine2": 0,
+        "Neck": 0,
+        "Head": 0
+      },
+      "missingBones": []
+    },
+    {
+      "stage": "C_bone_renaming_only",
+      "path": "assets/tripo/vela-photoreal/vela-photoreal-faced.glb",
+      "armature": true,
+      "appliedAdapterYawDegrees": 0,
+      "boneNamesRenamedOnly": true,
+      "sourceFaceForwardWorld": [
+        1,
+        0,
+        0
+      ],
+      "torsoForwardWorld": [
+        0.9953500032424927,
+        0.0000010644013173077838,
+        0.09632430970668793
+      ],
+      "hipLocalForwardAxisIndex": 0,
+      "headLocalForwardAxisIndex": 0,
+      "headToHipForwardDisagreementDegrees": 18.297678368349533,
+      "headToTorsoForwardDisagreementDegrees": 22.494184889910624,
+      "shoulderToHipFacingDisagreementDegrees": 5.527546285900167,
+      "spineRollDegrees": {
+        "Spine": 3.8157730717225102,
+        "Spine1": 7.127765486220866,
+        "Spine2": 10.051057178712101,
+        "Neck": -13.678495243102763,
+        "Head": -13.678487733899944
+      },
+      "maxAbsoluteSpineRollDegrees": 13.678495243102763,
+      "shoulderHeightDeltaMeters": 1.1920928955078125e-7,
+      "shoulderWidthMeters": 0.05365893924728377,
+      "shoulderHeightDeltaRatio": 0.0000022216109975900364,
+      "worldBoundsMeters": {
+        "min": [
+          -0.08417157083749771,
+          -0.16235968470573425,
+          0.0000027558417059481144
+        ],
+        "max": [
+          0.08417391777038574,
+          0.16235491633415222,
+          0.9811943769454956
+        ],
+        "height": 0.9811916211037897
+      },
+      "meshArmatureRelationships": [
+        {
+          "mesh": "Generated inner mouth surface",
+          "parent": "Armature",
+          "armatureModifiers": [
+            "Armature"
+          ]
+        },
+        {
+          "mesh": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+          "parent": "Armature",
+          "armatureModifiers": [
+            "Armature"
+          ]
+        }
+      ],
+      "neutralPoseDeviationDegrees": {
+        "Hips": 0,
+        "Spine": 0,
+        "Spine1": 0,
+        "Spine2": 0,
+        "Neck": 0,
+        "Head": 0
+      },
+      "missingBones": []
+    },
+    {
+      "stage": "D_adapter_minus_90_yaw",
+      "path": "assets/tripo/vela-photoreal/vela-photoreal-faced.glb",
+      "armature": true,
+      "appliedAdapterYawDegrees": -90,
+      "boneNamesRenamedOnly": true,
+      "sourceFaceForwardWorld": [
+        -1.3435884227419592e-7,
+        -1,
+        0
+      ],
+      "torsoForwardWorld": [
+        0.0000010125745575351175,
+        -0.9953500032424927,
+        0.09632430970668793
+      ],
+      "hipLocalForwardAxisIndex": 0,
+      "headLocalForwardAxisIndex": 0,
+      "headToHipForwardDisagreementDegrees": 18.297676574596757,
+      "headToTorsoForwardDisagreementDegrees": 22.494183144680918,
+      "shoulderToHipFacingDisagreementDegrees": 5.527546285928432,
+      "spineRollDegrees": {
+        "Spine": 3.815773082770167,
+        "Spine1": 7.127765524628035,
+        "Spine2": 10.05105726782961,
+        "Neck": -13.678495090646546,
+        "Head": -13.678487594405732
+      },
+      "maxAbsoluteSpineRollDegrees": 13.678495090646546,
+      "shoulderHeightDeltaMeters": 1.1920928955078125e-7,
+      "shoulderWidthMeters": 0.053658939247280255,
+      "shoulderHeightDeltaRatio": 0.000002221610997590182,
+      "worldBoundsMeters": {
+        "min": [
+          -0.1617935299873352,
+          -0.08459222316741943,
+          0.0000027558417059481144
+        ],
+        "max": [
+          0.16292105615139008,
+          0.08375328034162521,
+          0.9811943769454956
+        ],
+        "height": 0.9811916211037897
+      },
+      "meshArmatureRelationships": [
+        {
+          "mesh": "Generated inner mouth surface",
+          "parent": "Armature",
+          "armatureModifiers": [
+            "Armature"
+          ]
+        },
+        {
+          "mesh": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+          "parent": "Armature",
+          "armatureModifiers": [
+            "Armature"
+          ]
+        }
+      ],
+      "neutralPoseDeviationDegrees": {
+        "Hips": 0,
+        "Spine": 0,
+        "Spine1": 0,
+        "Spine2": 0,
+        "Neck": 0,
+        "Head": 0
+      },
+      "missingBones": []
+    }
+  ]
+}

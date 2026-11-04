@@ -10,6 +10,7 @@
     "test:tripo-face": "node ./scripts/verify_tripo_face_animation.mjs",
     "test:tripo-photoreal": "node ./scripts/verify_tripo_photoreal_animation.mjs",
     "test:tripo-mobile": "node ./scripts/verify_tripo_photoreal_mobile.mjs",
+    "certify:tripo": "python ./scripts/tripo-certify-integrity.py > verification/tripo-gate1-integrity.json && node ./scripts/verify_tripo_skinning_renderer.mjs > verification/tripo-gate1-renderer.json && node ./scripts/tripo-certify.mjs",
     "generate:tripo": "node ./scripts/generate_tripo_character.mjs",
     "rig:tripo": "node ./scripts/tripo_autorig_character.mjs"
   },

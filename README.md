@@ -44,6 +44,12 @@ The browser renders imported GLB geometry locally. Heavy Kokoro inference stays 
 
 The speech bridge is intentionally kept at the `head.speakAudio(message.data)` boundary. NVIDIA Audio2Face v3 can be added there later as another audio and facial-animation provider without replacing the UI or avatar lifecycle.
 
+## Tripo certification
+
+Run `npm.cmd run certify:tripo` on Windows with Python, Playwright/Chromium dependencies, and Blender 5.2 installed. The runner checks the preserved GLBs, validates real WebGL skin deformation, then measures rest-pose orientation in Blender. It stops at the first failed gate, records later gates as `UNVERIFIED`, and writes `verification/tripo-certification.json` and `verification/tripo-certification.md` with raw evidence. It does not regenerate the Tripo character or change certification thresholds.
+
+The current certification result is **FAILED**. Gate 1 passes. Gate 2 fails: the head forward axis is 18.30 degrees from the hips and maximum spine roll is 13.68 degrees. The adapter root yaw does not correct the internal rest-pose mismatch. Gates 3 through 9 remain unverified in this sequential run. The inspected 412x915 browser screenshot is `verification/tripo-mobile-browser.png`; this confirms the avatar loads in a phone-sized browser, not Android-device performance or framing compliance.
+
 ## Generate a Tripo character
 
 Set `TRIPO_API_KEY` in the shell environment. `.env` files and secret files are ignored by Git. Then run `npm.cmd run generate:tripo`. The one-shot script checks the available balance, uploads `assets/tripo/vela-photoreal/reference-image.png`, submits one H3.1 image-to-model task with detailed geometry and texture, polls the returned task, and downloads `assets/tripo/vela-photoreal/generated-original.glb`. It records the task and estimate in `generation.json` and refuses to submit another paid generation over that manifest. The script never prints or saves the API key.

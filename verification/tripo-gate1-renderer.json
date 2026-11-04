@@ -1,0 +1,30 @@
+{
+  "gates": [
+    {
+      "path": "assets/tripo/vela-photoreal/generated-rigged.glb",
+      "skinnedMeshCount": 1,
+      "skinDeformedVertices": 999787,
+      "skinDeformedFiniteVertices": 999787,
+      "skinningFiniteFraction": 1,
+      "deformationBone": "mixamorigHips",
+      "rendererChangedPixelsForPose": 1989,
+      "neutralMorphInfluences": 0,
+      "neutralMorphNonzero": 0,
+      "textureCount": 3,
+      "screenshot": "verification/tripo-gate1-rigged-render.png"
+    },
+    {
+      "path": "assets/tripo/vela-photoreal/vela-photoreal-faced.glb",
+      "skinnedMeshCount": 2,
+      "skinDeformedVertices": 318177,
+      "skinDeformedFiniteVertices": 318177,
+      "skinningFiniteFraction": 1,
+      "deformationBone": "mixamorigHips",
+      "rendererChangedPixelsForPose": 1999,
+      "neutralMorphInfluences": 58,
+      "neutralMorphNonzero": 0,
+      "textureCount": 3,
+      "screenshot": "verification/tripo-gate1-faced-render.png"
+    }
+  ]
+}
