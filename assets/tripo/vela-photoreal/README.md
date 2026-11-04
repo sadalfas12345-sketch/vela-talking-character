@@ -31,7 +31,7 @@ The landmark detector is `scripts/detect_tripo_face_landmarks.py`; it requires M
 
 > I am absolutely gorgeous, and apparently I just failed my math test. Mother is going to be furious!
 
-The recorded run returned HTTP 200 from `/v1/synthesize`; the active audio payload contained timed visemes. The Playwright sampler observed a peak `viseme_aa` weight of 0.577, a blink weight of 1.0, and expression weight of 0.339. It captured an actual canvas frame while a viseme was active. Browser page errors: 0. The same run rendered at a 412×915 mobile viewport.
+The terminal driven Playwright run returned HTTP 200 from /v1/synthesize and confirmed timed viseme payloads. It captured the canvas atomically while a speech viseme was active, sampled mouth, blink, and expression channels during playback, and reported zero browser page errors. The app rendered to a 412×915 phone viewport. The jaw mask was corrected to deform the lower face while leaving the upper face largely stable.
 
 Captured outputs are in `verification/`, including `vela-photoreal-speaking-canvas.png`, `vela-photoreal-talking-desktop.png`, `vela-photoreal-talking-mobile.png`, and direct-control frames for jaw, viseme, each blink, smile, frown, and brow movement.
 

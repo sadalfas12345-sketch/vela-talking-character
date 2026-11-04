@@ -110,16 +110,16 @@ try {
   await page.locator('#speak').click();
   await page.waitForFunction(() => {
     const h=window.talkingHead;
-    return h?.isSpeaking && ['viseme_aa','viseme_O','viseme_U']
-      .some(name => (h.mtAvatar[name]?.applied||0)>0.20);
+    const weights=Object.fromEntries(['viseme_aa','viseme_O','viseme_U'].map(name=>[name,h?.mtAvatar[name]?.applied||0]));
+    if (!h?.isSpeaking || Math.max(...Object.values(weights)) <= 0.20) return false;
+    h.renderer.render(h.scene,h.camera);
+    window.__tripoLiveVisemeFrame={weight:Math.max(...Object.values(weights)),weights,speaking:true,image:h.renderer.domElement.toDataURL('image/png')};
+    return true;
   }, null, { timeout: 120000 }).catch(()=>{});
   const liveVisemeFrame = await page.evaluate(() => {
-    const h=window.talkingHead;
-    h.renderer.render(h.scene,h.camera);
-    const weights=Object.fromEntries(['viseme_aa','viseme_O','viseme_U'].map(name=>[name,h.mtAvatar[name]?.applied||0]));
-    return { weight:Math.max(0,...Object.values(weights)), weights, speaking:h.isSpeaking, image:h.renderer.domElement.toDataURL('image/png') };
+    return window.__tripoLiveVisemeFrame || {weight:0,weights:{},speaking:false,image:null};
   });
-  if (liveVisemeFrame.weight > 0) await writeFile('assets/tripo/vela-photoreal/verification/vela-photoreal-speaking-canvas.png',Buffer.from(liveVisemeFrame.image.split(',')[1],'base64'));
+  if (liveVisemeFrame.weight > 0 && liveVisemeFrame.image) await writeFile('assets/tripo/vela-photoreal/verification/vela-photoreal-speaking-canvas.png',Buffer.from(liveVisemeFrame.image.split(',')[1],'base64'));
   await page.screenshot({ path: 'assets/tripo/vela-photoreal/verification/vela-photoreal-speaking-frame.png', fullPage: true });
   await page.waitForFunction(() => !window.talkingHead?.isSpeaking, null, { timeout: 120000 }).catch(()=>{});
   await page.waitForTimeout(600);

@@ -198,11 +198,11 @@ def main():
     delta_y = screen_y - mouth_center[1]
     mouth_region = gaussian(screen_x, screen_y, mouth_center[0], mouth_center[1], mouth_width * 0.72, max(mouth_width * 0.42, mouth_height * 2.2))
     side = np.clip(np.abs(delta_x) / max(mouth_width * 0.50, 1e-6), 0, 1)
-    lip_lower_start = lower[1] - mouth_height * 0.20
+    lip_lower_start = lower[1] + mouth_height * 0.20
     lower_t = np.clip((lip_lower_start - screen_y) / jaw_length, 0, 1)
-    jaw_weight = smooth(1 - lower_t) * np.clip(1 - (delta_x / (mouth_width * 0.70)) ** 4, 0, 1)
     upper_weight = gaussian(screen_x, screen_y, upper[0], upper[1], mouth_width * 0.72, max(mouth_height * 0.85, 0.001))
     lower_lip_weight = gaussian(screen_x, screen_y, lower[0], lower[1], mouth_width * 0.70, max(mouth_height * 1.1, 0.001))
+    jaw_weight = np.maximum(smooth(lower_t), lower_lip_weight * 0.82) * np.clip(1 - (delta_x / (mouth_width * 0.70)) ** 4, 0, 1)
 
     shapes = {}
     def store(name, dx, dy, dd=None):
