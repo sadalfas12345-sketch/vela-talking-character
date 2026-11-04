@@ -1,0 +1,29 @@
+{
+  "task_id": "2846e6ad-a54e-46c7-ba97-ac51260202b5",
+  "status": "success",
+  "created_at": "2026-11-04T08:44:26.423Z",
+  "source_generation_task": "86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+  "rig_check": {
+    "task_id": "f41f2f1b-cdd8-4eec-88dd-55f18dff39f4",
+    "type": "animate_prerigcheck",
+    "status": "success",
+    "input_generation_task": "86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+    "riggable": true,
+    "rig_type": "biped",
+    "credits_consumed": 0
+  },
+  "parameters": {
+    "model": "v3.0-20260909",
+    "rig_type": "biped",
+    "spec": "mixamo",
+    "out_format": "glb"
+  },
+  "estimated_credits": 25,
+  "available_before_task": 345,
+  "progress": 100,
+  "last_polled_at": "2026-11-04T08:46:24.694Z",
+  "credits_consumed": 25,
+  "completed_at": "2026-11-04T08:45:54.368201Z",
+  "downloaded_file": "generated-rigged.glb",
+  "download_bytes": 81219904
+}

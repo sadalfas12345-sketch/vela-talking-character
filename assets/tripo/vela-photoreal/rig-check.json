@@ -1,0 +1,9 @@
+{
+  "task_id": "f41f2f1b-cdd8-4eec-88dd-55f18dff39f4",
+  "type": "animate_prerigcheck",
+  "status": "success",
+  "input_generation_task": "86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+  "riggable": true,
+  "rig_type": "biped",
+  "credits_consumed": 0
+}

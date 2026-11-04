@@ -1,0 +1,250 @@
+{
+  "source": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\vela-photoreal\\generated-rigged.glb",
+  "file_bytes": 81219904,
+  "meshes": [
+    {
+      "name": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "vertices": 999787,
+      "triangles": 1943912,
+      "uv_layers": [
+        "UVMap"
+      ],
+      "vertex_groups": 65,
+      "weighted_vertices": 999787,
+      "shape_key_count": 0,
+      "shape_keys": [],
+      "world_bounds": [
+        [
+          -0.08417041599750519,
+          -0.16234910488128662,
+          7.791095413267612e-08
+        ],
+        [
+          -0.08417041599750519,
+          -0.16234910488128662,
+          0.9811928272247314
+        ],
+        [
+          -0.08417041599750519,
+          0.16234901547431946,
+          0.9811928272247314
+        ],
+        [
+          -0.08417041599750519,
+          0.16234901547431946,
+          7.791095413267612e-08
+        ],
+        [
+          0.0841703861951828,
+          -0.16234910488128662,
+          7.791095413267612e-08
+        ],
+        [
+          0.0841703861951828,
+          -0.16234910488128662,
+          0.9811928272247314
+        ],
+        [
+          0.0841703861951828,
+          0.16234901547431946,
+          0.9811928272247314
+        ],
+        [
+          0.0841703861951828,
+          0.16234901547431946,
+          7.791095413267612e-08
+        ]
+      ],
+      "modifiers": [
+        {
+          "name": "Armature",
+          "type": "ARMATURE",
+          "target": "Armature"
+        }
+      ],
+      "materials": [
+        "tripo_material_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f"
+      ]
+    },
+    {
+      "name": "Icosphere",
+      "vertices": 42,
+      "triangles": 80,
+      "uv_layers": [
+        "UVMap"
+      ],
+      "vertex_groups": 0,
+      "weighted_vertices": 0,
+      "shape_key_count": 0,
+      "shape_keys": [],
+      "world_bounds": [
+        [
+          -0.9510578513145447,
+          -0.9999999403953552,
+          -1.0
+        ],
+        [
+          -0.9510578513145447,
+          -0.9999999403953552,
+          1.0
+        ],
+        [
+          -0.9510578513145447,
+          0.9999999403953552,
+          1.0
+        ],
+        [
+          -0.9510578513145447,
+          0.9999999403953552,
+          -1.0
+        ],
+        [
+          0.9510578513145447,
+          -0.9999999403953552,
+          -1.0
+        ],
+        [
+          0.9510578513145447,
+          -0.9999999403953552,
+          1.0
+        ],
+        [
+          0.9510578513145447,
+          0.9999999403953552,
+          1.0
+        ],
+        [
+          0.9510578513145447,
+          0.9999999403953552,
+          -1.0
+        ]
+      ],
+      "modifiers": [],
+      "materials": []
+    }
+  ],
+  "materials": [
+    {
+      "name": "tripo_material_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "use_nodes": true,
+      "images": [
+        {
+          "node": "Image Texture",
+          "image": "Color_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f"
+        },
+        {
+          "node": "Image Texture.001",
+          "image": "ORM_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f"
+        },
+        {
+          "node": "Image Texture.002",
+          "image": "NormalGL_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f"
+        }
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Color_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "width": 4096,
+      "height": 4096,
+      "channels": 4,
+      "format": "JPEG",
+      "packed": true
+    },
+    {
+      "name": "NormalGL_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "width": 4096,
+      "height": 4096,
+      "channels": 4,
+      "format": "PNG",
+      "packed": true
+    },
+    {
+      "name": "ORM_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "width": 4096,
+      "height": 4096,
+      "channels": 4,
+      "format": "JPEG",
+      "packed": true
+    }
+  ],
+  "armatures": [
+    {
+      "name": "Armature",
+      "bones": [
+        "mixamorig:Hips",
+        "mixamorig:LeftUpLeg",
+        "mixamorig:LeftLeg",
+        "mixamorig:LeftFoot",
+        "mixamorig:LeftToeBase",
+        "mixamorig:LeftToe_End",
+        "mixamorig:RightUpLeg",
+        "mixamorig:RightLeg",
+        "mixamorig:RightFoot",
+        "mixamorig:RightToeBase",
+        "mixamorig:RightToe_End",
+        "mixamorig:Spine",
+        "mixamorig:Spine1",
+        "mixamorig:Spine2",
+        "mixamorig:LeftShoulder",
+        "mixamorig:LeftArm",
+        "mixamorig:LeftForeArm",
+        "mixamorig:LeftHand",
+        "mixamorig:LeftHandIndex1",
+        "mixamorig:LeftHandIndex2",
+        "mixamorig:LeftHandIndex3",
+        "mixamorig:LeftHandIndex4",
+        "mixamorig:LeftHandMiddle1",
+        "mixamorig:LeftHandMiddle2",
+        "mixamorig:LeftHandMiddle3",
+        "mixamorig:LeftHandMiddle4",
+        "mixamorig:LeftHandPinky1",
+        "mixamorig:LeftHandPinky2",
+        "mixamorig:LeftHandPinky3",
+        "mixamorig:LeftHandPinky4",
+        "mixamorig:LeftHandRing1",
+        "mixamorig:LeftHandRing2",
+        "mixamorig:LeftHandRing3",
+        "mixamorig:LeftHandRing4",
+        "mixamorig:LeftHandThumb1",
+        "mixamorig:LeftHandThumb2",
+        "mixamorig:LeftHandThumb3",
+        "mixamorig:LeftHandThumb4",
+        "mixamorig:Neck",
+        "mixamorig:Head",
+        "mixamorig:HeadTop_End",
+        "mixamorig:RightShoulder",
+        "mixamorig:RightArm",
+        "mixamorig:RightForeArm",
+        "mixamorig:RightHand",
+        "mixamorig:RightHandIndex1",
+        "mixamorig:RightHandIndex2",
+        "mixamorig:RightHandIndex3",
+        "mixamorig:RightHandIndex4",
+        "mixamorig:RightHandMiddle1",
+        "mixamorig:RightHandMiddle2",
+        "mixamorig:RightHandMiddle3",
+        "mixamorig:RightHandMiddle4",
+        "mixamorig:RightHandPinky1",
+        "mixamorig:RightHandPinky2",
+        "mixamorig:RightHandPinky3",
+        "mixamorig:RightHandPinky4",
+        "mixamorig:RightHandRing1",
+        "mixamorig:RightHandRing2",
+        "mixamorig:RightHandRing3",
+        "mixamorig:RightHandRing4",
+        "mixamorig:RightHandThumb1",
+        "mixamorig:RightHandThumb2",
+        "mixamorig:RightHandThumb3",
+        "mixamorig:RightHandThumb4"
+      ]
+    }
+  ],
+  "facial_rig": {
+    "shape_key_count": 0,
+    "arkit_names_detected": [],
+    "oculus_visemes_detected": [],
+    "eye_bones_detected": []
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "task_id": "86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+  "status": "success",
+  "created_at": "2026-11-03T13:14:05.009Z",
+  "model": "v3.1-20260211",
+  "input": "reference-image.png",
+  "parameters": {
+    "input": "[uploaded file token omitted]",
+    "model": "v3.1-20260211",
+    "texture": true,
+    "pbr": true,
+    "texture_quality": "detailed",
+    "geometry_quality": "detailed",
+    "orientation": "default"
+  },
+  "estimated_credits": 60,
+  "available_before_task": 405,
+  "progress": 100,
+  "last_polled_at": "2026-11-03T13:15:45.177Z",
+  "completed_at": "2026-11-03T13:15:24.353838Z",
+  "downloaded_file": "generated-original.glb",
+  "download_bytes": 61202748,
+  "preview_available": true
+}

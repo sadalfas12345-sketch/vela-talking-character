@@ -63,7 +63,7 @@
       <div class="status"><span id="statusDot" class="dot"></span><span id="statusText">Loading avatar…</span></div>
     </header>
     <div class="character-switch">
-      <select id="characterSelect" aria-label="Active character"><option value="default">Vela · default</option></select>
+      <select id="characterSelect" aria-label="Active character"><option value="default">Vela · default</option><option value="tripo">Tripo · portrait</option></select>
       <button type="button" id="importCharacter">Import Character</button>
       <input id="characterFile" type="file" accept=".glb,model/gltf-binary" hidden />
     </div>
@@ -97,7 +97,7 @@
 
     const $ = (id) => document.getElementById(id);
     const el = { avatar:$('avatar'), form:$('talkForm'), text:$('text'), emotion:$('emotion'), voice:$('voice'), speak:$('speak'), progress:$('progress'), statusDot:$('statusDot'), statusText:$('statusText'), inference:$('inferenceMode'), characterFile:$('characterFile'), characterSelect:$('characterSelect'), compatibility:$('compatibility'), importCharacter:$('importCharacter') };
-    let head, headtts, ready = false, moodTimer, defaultAvatar, importedCharacter = null, cameraHome = null, defaultRandomizedMorphs = [];
+    let head, headtts, ready = false, moodTimer, defaultAvatar, importedCharacter = null, tripoCharacter = null, cameraHome = null, defaultRandomizedMorphs = [];
     const moods = { neutral:'neutral', happy:'happy', sad:'sad', angry:'angry', nervous:'fear' };
 
     function setStatus(text, isReady=false) { el.statusText.textContent=text; el.statusDot.classList.toggle('ready', isReady); }
@@ -168,13 +168,27 @@
       el.characterFile.addEventListener('change', importCharacterFile);
       el.characterSelect.addEventListener('change', async () => {
         if (el.characterSelect.value === 'default') await activateAvatar(defaultAvatar);
-        else if (importedCharacter) await activateAvatar(importedCharacter.avatar);
+        else if (el.characterSelect.value === 'tripo') {
+          if (tripoCharacter) await activateAvatar(tripoCharacter.avatar);
+          else {
+            el.importCharacter.disabled=true;
+            try {
+              const response=await fetch('./assets/tripo/vela-photoreal/vela-photoreal-faced.glb');
+              if(!response.ok) throw new Error(`Character download failed with HTTP ${response.status}`);
+              const file=new File([await response.blob()],'vela-photoreal-faced.glb',{type:'model/gltf-binary'});
+              await importCharacterFile(file);
+            } catch(error) {
+              showCompatibility(`Could not load the built-in Tripo portrait: ${error.message || error}`, 'error');
+              el.characterSelect.value='default';
+            } finally { el.importCharacter.disabled=false; }
+          }
+        } else if (importedCharacter) await activateAvatar(importedCharacter.avatar);
       });
       ready=true; el.speak.disabled=false; el.speak.textContent='Speak'; el.progress.textContent='Ready · type a line and press Speak'; setStatus('Ready to speak', true);
       el.inference.textContent = 'RTX inference · ready';
     }
-    async function importCharacterFile() {
-      const file=el.characterFile.files?.[0]; if (!file) return;
+    async function importCharacterFile(fileOverride=null) {
+      const file=fileOverride instanceof File ? fileOverride : el.characterFile.files?.[0]; if (!file) return;
       el.importCharacter.disabled=true; showCompatibility('Inspecting GLB hierarchy, face shapes, skeleton, materials, and textures…');
       try {
         const loader=new GLTFLoader(); const gltf=await loader.parseAsync(await file.arrayBuffer(),'');
@@ -194,8 +208,8 @@
         }
         const url=URL.createObjectURL(file);
         let adapterOptions={};
-        if (file.name==='vela-reference-faced.glb') {
-          const calibration=await fetch('./assets/tripo/face-transfer-calibration.json').then(response=>{
+        if (file.name==='vela-photoreal-faced.glb') {
+          const calibration=await fetch('./assets/tripo/vela-photoreal/face-calibration.json').then(response=>{
             if(!response.ok) throw new Error('Tripo facial landmark calibration is missing');
             return response.json();
           });
@@ -205,9 +219,14 @@
         if(Number.isFinite(adapterOptions.faceForwardYawRadians)) Object.assign(avatar,{avatarIgnoreCamera:true,avatarIdleEyeContact:false,avatarSpeakingEyeContact:false,avatarIdleHeadMove:0,avatarSpeakingHeadMove:0,avatarDisableMoodPose:true});
         avatar.preprocess=(sceneGltf)=>adaptCharacterGLTF(sceneGltf,report,adapterOptions);
         avatar.compatibility=report;
-        importedCharacter={ name:file.name, url, avatar, report, cache };
+        const character={ name:file.name, url, avatar, report, cache };
+        const isTripoPortrait=file.name==='vela-photoreal-faced.glb';
+        if (isTripoPortrait) tripoCharacter=character; else importedCharacter=character;
         try { localStorage.setItem(cache,JSON.stringify({ adapterVersion:1, name:file.name, report, avatarConfig:{ body:'F', avatarMood:'neutral', lipsyncLang:'en', retarget:avatar.retarget }, checkedAt:Date.now() })); } catch {}
-        const option=document.createElement('option'); option.value='imported'; option.textContent=file.name; el.characterSelect.replaceChildren(el.characterSelect.options[0],option); el.characterSelect.value='imported';
+        if (!isTripoPortrait && !el.characterSelect.querySelector('option[value="imported"]')) {
+          const option=document.createElement('option'); option.value='imported'; option.textContent=file.name; el.characterSelect.append(option);
+        }
+        el.characterSelect.value=isTripoPortrait?'tripo':'imported';
         const activated=await activateAvatar(avatar);
         if(!activated){showCompatibility(`${file.name}: inspected, but activation failed. ${compatibilityMessage(report)}`, 'error');return;}
         showCompatibility(`${file.name}: ${details} ${compatibilityMessage(report)}`, report.hasBothBlinks && report.missingVisemes.length===0 ? 'ok':'info');
@@ -238,7 +257,7 @@
         return true;
       } catch(error) {
         console.error(error); showCompatibility(`Character could not be activated: ${error.message || error}. The previous character remains active if it is still visible.`, 'error');
-        if (el.characterSelect.value==='imported') el.characterSelect.value='default';
+        if (el.characterSelect.value==='imported' || el.characterSelect.value==='tripo') el.characterSelect.value='default';
         el.progress.textContent='Character load failed';
         return false;
       } finally { el.speak.disabled=!ready; }

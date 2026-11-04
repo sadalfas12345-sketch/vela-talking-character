@@ -1,0 +1,59 @@
+{
+  "source": "assets\\tripo\\vela-photoreal\\generated-rigged.glb",
+  "output": "assets\\tripo\\vela-photoreal\\vela-photoreal-faced.glb",
+  "sourcePreserved": true,
+  "derivedMeshDecimationRatio": 0.3,
+  "vertices": 318094,
+  "triangles": 583172,
+  "landmarksHit": 476,
+  "registeredFaceVertices": 11821,
+  "depthToleranceMeters": 0.023441005099151653,
+  "mouthWidthMeters": 0.030834412250956848,
+  "eyeWidthMeters": {
+    "Left": 0.01820368593310958,
+    "Right": 0.01778767079736231
+  },
+  "shapeKeys": [
+    "jawOpen",
+    "mouthOpen",
+    "viseme_aa",
+    "viseme_E",
+    "viseme_I",
+    "viseme_O",
+    "viseme_U",
+    "viseme_PP",
+    "viseme_sil",
+    "mouthClose",
+    "viseme_FF",
+    "viseme_TH",
+    "viseme_DD",
+    "viseme_kk",
+    "viseme_CH",
+    "viseme_SS",
+    "viseme_nn",
+    "viseme_RR",
+    "eyeBlinkLeft",
+    "eyeBlinkRight",
+    "mouthSmileLeft",
+    "mouthFrownLeft",
+    "mouthSmileRight",
+    "mouthFrownRight",
+    "browOuterUpLeft",
+    "browDownLeft",
+    "browOuterUpRight",
+    "browDownRight",
+    "browInnerUp"
+  ],
+  "shapeKeyCount": 29,
+  "generatedMouthSurface": {
+    "geometry": "24-sided shape-keyed inner-mouth surface weighted to Mixamo Head",
+    "visemeDriven": true,
+    "restState": "thin closed-lip seam",
+    "includesTeethOrTongue": false
+  },
+  "geometryMethod": "measured landmark-space face selection and actual per-vertex surface deltas; Mixamo weights and PBR textures retained",
+  "limitations": [
+    "The generated Tripo head is one closed shell with no original oral anatomy or separate eyelids. A small shape-keyed dark inner-mouth surface makes opening visible, but does not provide teeth or tongue; lip motion is still surface deformation.",
+    "Blinking is a measured skin-surface deformation. Eye gaze has no separate eyeball geometry or eye bones in the source GLB."
+  ]
+}

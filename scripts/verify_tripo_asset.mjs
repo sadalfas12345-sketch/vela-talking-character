@@ -13,8 +13,8 @@ try {
   if (!defaultAvatar?.includes('avaturn.glb')) throw new Error(`Unexpected initial avatar: ${defaultAvatar}`);
 
   const results = [];
-  for (const name of ['vela-reference-original.glb', 'vela-reference-rigged.glb']) {
-    await page.locator('#characterFile').setInputFiles(`assets/tripo/${name}`);
+  for (const name of ['generated-original.glb', 'generated-rigged.glb']) {
+    await page.locator('#characterFile').setInputFiles(`assets/tripo/vela-photoreal/${name}`);
     await page.getByText(`${name}:`, { exact: false }).waitFor({ timeout: 60000 });
     const compatibility = await page.locator('#compatibility').textContent();
     const currentAvatar = await page.evaluate(() => window.talkingHead?.avatar?.url);
@@ -25,7 +25,7 @@ try {
     results.push({ file: name, compatibility, activeAvatar: currentAvatar });
   }
 
-  await page.screenshot({ path: 'artifacts-tripo-import-diagnostic.png', fullPage: true });
+  await page.screenshot({ path: 'assets/tripo/vela-photoreal/verification/tripo-import-diagnostic.png', fullPage: true });
   if (errors.length) throw new Error(`Browser errors: ${errors.join('; ')}`);
   console.log(JSON.stringify({ defaultAvatar, results, mobileViewport: await page.evaluate(() => [innerWidth, innerHeight]), errors }, null, 2));
 } finally {

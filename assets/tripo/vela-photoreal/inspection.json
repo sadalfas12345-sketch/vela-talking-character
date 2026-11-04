@@ -1,0 +1,117 @@
+{
+  "source": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\vela-photoreal\\generated-original.glb",
+  "file_bytes": 61202748,
+  "meshes": [
+    {
+      "name": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "vertices": 999787,
+      "triangles": 1943912,
+      "uv_layers": [
+        "UVMap"
+      ],
+      "vertex_groups": 0,
+      "weighted_vertices": 0,
+      "shape_key_count": 0,
+      "shape_keys": [],
+      "world_bounds": [
+        [
+          -0.08424436300992966,
+          -0.16185681521892548,
+          -0.4902181625366211
+        ],
+        [
+          -0.08424436300992966,
+          -0.16185681521892548,
+          0.4909743070602417
+        ],
+        [
+          -0.08424436300992966,
+          0.16284115612506866,
+          0.4909743070602417
+        ],
+        [
+          -0.08424436300992966,
+          0.16284115612506866,
+          -0.4902181625366211
+        ],
+        [
+          0.08409646153450012,
+          -0.16185681521892548,
+          -0.4902181625366211
+        ],
+        [
+          0.08409646153450012,
+          -0.16185681521892548,
+          0.4909743070602417
+        ],
+        [
+          0.08409646153450012,
+          0.16284115612506866,
+          0.4909743070602417
+        ],
+        [
+          0.08409646153450012,
+          0.16284115612506866,
+          -0.4902181625366211
+        ]
+      ],
+      "modifiers": [],
+      "materials": [
+        "tripo_material_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f"
+      ]
+    }
+  ],
+  "materials": [
+    {
+      "name": "tripo_material_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "use_nodes": true,
+      "images": [
+        {
+          "node": "Image Texture",
+          "image": "Color_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f"
+        },
+        {
+          "node": "Image Texture.001",
+          "image": "ORM_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f"
+        },
+        {
+          "node": "Image Texture.002",
+          "image": "NormalGL_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f"
+        }
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Color_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "width": 4096,
+      "height": 4096,
+      "channels": 4,
+      "format": "JPEG",
+      "packed": true
+    },
+    {
+      "name": "NormalGL_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "width": 4096,
+      "height": 4096,
+      "channels": 4,
+      "format": "PNG",
+      "packed": true
+    },
+    {
+      "name": "ORM_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "width": 4096,
+      "height": 4096,
+      "channels": 4,
+      "format": "JPEG",
+      "packed": true
+    }
+  ],
+  "armatures": [],
+  "facial_rig": {
+    "shape_key_count": 0,
+    "arkit_names_detected": [],
+    "oculus_visemes_detected": [],
+    "eye_bones_detected": []
+  }
+}
