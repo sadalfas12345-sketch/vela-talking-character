@@ -1,0 +1,239 @@
+{
+  "model": "TalkingHead\\avatars\\brunette.glb",
+  "pipeline": "model-agnostic GLB onboarding audit, no geometry edits",
+  "meshCount": 10,
+  "nodeCount": 78,
+  "materialCount": 9,
+  "animationCount": 0,
+  "boundsWorld": {
+    "minXYZ": [
+      -0.46395790576934814,
+      -0.0061792065389454365,
+      -0.14615941047668457
+    ],
+    "maxXYZ": [
+      0.4639582335948944,
+      1.765710711479187,
+      0.19684748351573944
+    ]
+  },
+  "worldDiagonal": 2.029353584911529,
+  "meshInventory": [
+    {
+      "nodeIndex": 67,
+      "nodeName": "EyeLeft",
+      "meshIndex": 0,
+      "meshName": "EyeLeft",
+      "vertexCount": 120,
+      "minXYZ": [
+        0.011139238253235817,
+        1.6101057529449463,
+        0.10159635543823242
+      ],
+      "maxXYZ": [
+        0.05498107895255089,
+        1.6538804769515991,
+        0.12341027706861496
+      ]
+    },
+    {
+      "nodeIndex": 68,
+      "nodeName": "EyeRight",
+      "meshIndex": 1,
+      "meshName": "EyeRight",
+      "vertexCount": 120,
+      "minXYZ": [
+        -0.05512099340558052,
+        1.6100620031356812,
+        0.10159638524055481
+      ],
+      "maxXYZ": [
+        -0.011453433893620968,
+        1.6539268493652344,
+        0.12341030687093735
+      ]
+    },
+    {
+      "nodeIndex": 69,
+      "nodeName": "Wolf3D_Head",
+      "meshIndex": 2,
+      "meshName": "Wolf3D_Head",
+      "vertexCount": 2162,
+      "minXYZ": [
+        -0.09170764684677124,
+        1.432160496711731,
+        -0.05559131130576134
+      ],
+      "maxXYZ": [
+        0.09171132743358612,
+        1.7430979013442993,
+        0.15651151537895203
+      ]
+    },
+    {
+      "nodeIndex": 70,
+      "nodeName": "Wolf3D_Teeth",
+      "meshIndex": 3,
+      "meshName": "Wolf3D_Teeth",
+      "vertexCount": 84,
+      "minXYZ": [
+        -0.027403676882386208,
+        1.5479158163070679,
+        0.07262828946113586
+      ],
+      "maxXYZ": [
+        0.027403676882386208,
+        1.582823395729065,
+        0.13821448385715485
+      ]
+    },
+    {
+      "nodeIndex": 72,
+      "nodeName": "Wolf3D_Body",
+      "meshIndex": 4,
+      "meshName": "Wolf3D_Body",
+      "vertexCount": 1182,
+      "minXYZ": [
+        -0.46395790576934814,
+        0.051462750881910324,
+        -0.07710623741149902
+      ],
+      "maxXYZ": [
+        0.4639582335948944,
+        1.1862270832061768,
+        0.1766614019870758
+      ]
+    },
+    {
+      "nodeIndex": 73,
+      "nodeName": "Wolf3D_Outfit_Bottom",
+      "meshIndex": 5,
+      "meshName": "Wolf3D_Outfit_Bottom",
+      "vertexCount": 1252,
+      "minXYZ": [
+        -0.2035125195980072,
+        0.20342209935188293,
+        -0.09896022081375122
+      ],
+      "maxXYZ": [
+        0.20351555943489075,
+        1.1524560451507568,
+        0.15099427103996277
+      ]
+    },
+    {
+      "nodeIndex": 74,
+      "nodeName": "Wolf3D_Outfit_Footwear",
+      "meshIndex": 6,
+      "meshName": "Wolf3D_Outfit_Footwear",
+      "vertexCount": 298,
+      "minXYZ": [
+        -0.21330626308918,
+        -0.0061792065389454365,
+        -0.09750760346651077
+      ],
+      "maxXYZ": [
+        0.21329250931739807,
+        0.1378580927848816,
+        0.19684748351573944
+      ]
+    },
+    {
+      "nodeIndex": 75,
+      "nodeName": "Wolf3D_Outfit_Top",
+      "meshIndex": 7,
+      "meshName": "Wolf3D_Outfit_Top",
+      "vertexCount": 1262,
+      "minXYZ": [
+        -0.3630053699016571,
+        1.1283330917358398,
+        -0.07106982916593552
+      ],
+      "maxXYZ": [
+        0.36524391174316406,
+        1.4985467195510864,
+        0.15317542850971222
+      ]
+    },
+    {
+      "nodeIndex": 76,
+      "nodeName": "Wolf3D_Hair",
+      "meshIndex": 8,
+      "meshName": "Wolf3D_Hair",
+      "vertexCount": 932,
+      "minXYZ": [
+        -0.11984172463417053,
+        1.3717135190963745,
+        -0.14615941047668457
+      ],
+      "maxXYZ": [
+        0.12044637650251389,
+        1.765710711479187,
+        0.1555251032114029
+      ]
+    },
+    {
+      "nodeIndex": 77,
+      "nodeName": "Wolf3D_Glasses",
+      "meshIndex": 9,
+      "meshName": "Wolf3D_Glasses",
+      "vertexCount": 614,
+      "minXYZ": [
+        -0.08233150839805603,
+        1.60507071018219,
+        0.011507797054946423
+      ],
+      "maxXYZ": [
+        0.08233152329921722,
+        1.6453516483306885,
+        0.14227046072483063
+      ]
+    }
+  ],
+  "candidateHeadMetadata": [
+    {
+      "nodeIndex": 0,
+      "name": "HeadTop_End",
+      "hasMesh": false
+    },
+    {
+      "nodeIndex": 3,
+      "name": "Head",
+      "hasMesh": false
+    },
+    {
+      "nodeIndex": 4,
+      "name": "Neck",
+      "hasMesh": false
+    },
+    {
+      "nodeIndex": 69,
+      "name": "Wolf3D_Head",
+      "hasMesh": true
+    }
+  ],
+  "cameras": [],
+  "skins": [
+    {
+      "index": 0,
+      "name": "Armature",
+      "jointCount": 67,
+      "skeleton": null
+    }
+  ],
+  "orientationStatus": "UNVERIFIED_NO_MODEL_CAMERA_CALIBRATION",
+  "headDetectionStatus": "CANDIDATE_HEAD_METADATA_FOUND",
+  "detectionStatus": "UNVERIFIED_NO_RENDERED_FACE_INPUT",
+  "landmarksDetected": 0,
+  "validVisibleSurfaceAttachments": null,
+  "anatomicallyPlausibleAttachments": null,
+  "deterministicAttachments": null,
+  "unresolvedOrAmbiguous": null,
+  "independentAccuracy": "UNVERIFIED unless an external anatomical reference and reviewer are supplied",
+  "sourceCodeChangesBetweenModels": false,
+  "limitations": [
+    "A GLB alone does not contain anatomical ground truth or a guaranteed frontal camera.",
+    "Automatic head orientation is not asserted when metadata is absent or ambiguous.",
+    "2D MediaPipe detection requires a calibrated render image; this command does not silently invent one."
+  ]
+}

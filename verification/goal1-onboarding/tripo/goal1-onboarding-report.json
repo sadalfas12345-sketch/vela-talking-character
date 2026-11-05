@@ -1,0 +1,81 @@
+{
+  "model": "assets\\tripo\\vela-photoreal\\generated-rigged.glb",
+  "pipeline": "model-agnostic GLB onboarding audit, no geometry edits",
+  "meshCount": 1,
+  "nodeCount": 67,
+  "materialCount": 1,
+  "animationCount": 0,
+  "boundsWorld": {
+    "minXYZ": [
+      -0.0840965062379837,
+      -0.0003777742385864258,
+      -0.1618567481637001
+    ],
+    "maxXYZ": [
+      0.08424431085586548,
+      0.9808149337768555,
+      0.1628412976861
+    ]
+  },
+  "worldDiagonal": 1.0471421020764946,
+  "meshInventory": [
+    {
+      "nodeIndex": 65,
+      "nodeName": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "meshIndex": 0,
+      "meshName": "tripo_mesh_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "vertexCount": 999787,
+      "minXYZ": [
+        -0.0840965062379837,
+        -0.0003777742385864258,
+        -0.1618567481637001
+      ],
+      "maxXYZ": [
+        0.08424431085586548,
+        0.9808149337768555,
+        0.1628412976861
+      ]
+    }
+  ],
+  "candidateHeadMetadata": [
+    {
+      "nodeIndex": 34,
+      "name": "mixamorig:HeadTop_End",
+      "hasMesh": false
+    },
+    {
+      "nodeIndex": 35,
+      "name": "mixamorig:Head",
+      "hasMesh": false
+    },
+    {
+      "nodeIndex": 36,
+      "name": "mixamorig:Neck",
+      "hasMesh": false
+    }
+  ],
+  "cameras": [],
+  "skins": [
+    {
+      "index": 0,
+      "name": "Armature",
+      "jointCount": 65,
+      "skeleton": null
+    }
+  ],
+  "orientationStatus": "CALIBRATED_FROM_SUPPLIED_EVIDENCE",
+  "headDetectionStatus": "CANDIDATE_HEAD_METADATA_FOUND",
+  "detectionStatus": "EVIDENCE_ATTACHED",
+  "landmarksDetected": 478,
+  "validVisibleSurfaceAttachments": 476,
+  "anatomicallyPlausibleAttachments": null,
+  "deterministicAttachments": 29,
+  "unresolvedOrAmbiguous": 2,
+  "independentAccuracy": "UNVERIFIED unless an external anatomical reference and reviewer are supplied",
+  "sourceCodeChangesBetweenModels": false,
+  "limitations": [
+    "A GLB alone does not contain anatomical ground truth or a guaranteed frontal camera.",
+    "Automatic head orientation is not asserted when metadata is absent or ambiguous.",
+    "2D MediaPipe detection requires a calibrated render image; this command does not silently invent one."
+  ]
+}

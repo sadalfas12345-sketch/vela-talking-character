@@ -1,0 +1,251 @@
+{
+  "model": "TalkingHead\\avatars\\avaturn.glb",
+  "pipeline": "model-agnostic GLB onboarding audit, no geometry edits",
+  "meshCount": 11,
+  "nodeCount": 66,
+  "materialCount": 11,
+  "animationCount": 0,
+  "boundsWorld": {
+    "minXYZ": [
+      -0.8831449151039124,
+      -0.0035086008720099926,
+      -0.19247999787330627
+    ],
+    "maxXYZ": [
+      0.8838350176811218,
+      1.8731716871261597,
+      0.23228153586387634
+    ]
+  },
+  "worldDiagonal": 2.6123876716078454,
+  "meshInventory": [
+    {
+      "nodeIndex": 54,
+      "nodeName": "Body_Mesh",
+      "meshIndex": 0,
+      "meshName": "Body_Mesh",
+      "vertexCount": 3212,
+      "minXYZ": [
+        -0.8831449151039124,
+        0.006427109707146883,
+        -0.12959328293800354
+      ],
+      "maxXYZ": [
+        0.8838350176811218,
+        1.5654116868972778,
+        0.1902606040239334
+      ]
+    },
+    {
+      "nodeIndex": 55,
+      "nodeName": "Eye_Mesh",
+      "meshIndex": 1,
+      "meshName": "Eye_Mesh",
+      "vertexCount": 196,
+      "minXYZ": [
+        -0.04796373471617699,
+        1.7236084938049316,
+        0.01992994174361229
+      ],
+      "maxXYZ": [
+        0.050099585205316544,
+        1.7574975490570068,
+        0.04944460093975067
+      ]
+    },
+    {
+      "nodeIndex": 56,
+      "nodeName": "EyeAO_Mesh",
+      "meshIndex": 2,
+      "meshName": "EyeAO_Mesh",
+      "vertexCount": 182,
+      "minXYZ": [
+        -0.04636929929256439,
+        1.7338933944702148,
+        0.04139111563563347
+      ],
+      "maxXYZ": [
+        0.0473412461578846,
+        1.7454118728637695,
+        0.0500422939658165
+      ]
+    },
+    {
+      "nodeIndex": 57,
+      "nodeName": "Eyelash_Mesh",
+      "meshIndex": 3,
+      "meshName": "Eyelash_Mesh",
+      "vertexCount": 242,
+      "minXYZ": [
+        -0.05756951868534088,
+        1.729661226272583,
+        0.04073631018400192
+      ],
+      "maxXYZ": [
+        0.05853326991200447,
+        1.7535868883132935,
+        0.058496762067079544
+      ]
+    },
+    {
+      "nodeIndex": 58,
+      "nodeName": "Head_Mesh",
+      "meshIndex": 4,
+      "meshName": "Head_Mesh",
+      "vertexCount": 4354,
+      "minXYZ": [
+        -0.09680721908807755,
+        1.5149341821670532,
+        -0.1410699188709259
+      ],
+      "maxXYZ": [
+        0.09627243876457214,
+        1.848844051361084,
+        0.08123907446861267
+      ]
+    },
+    {
+      "nodeIndex": 59,
+      "nodeName": "Teeth_Mesh",
+      "meshIndex": 5,
+      "meshName": "Teeth_Mesh",
+      "vertexCount": 909,
+      "minXYZ": [
+        -0.029673539102077484,
+        1.6528842449188232,
+        0.004441887140274048
+      ],
+      "maxXYZ": [
+        0.02959413453936577,
+        1.7014906406402588,
+        0.06163834035396576
+      ]
+    },
+    {
+      "nodeIndex": 60,
+      "nodeName": "Tongue_Mesh",
+      "meshIndex": 6,
+      "meshName": "Tongue_Mesh",
+      "vertexCount": 96,
+      "minXYZ": [
+        -0.015520020388066769,
+        1.6617252826690674,
+        0.003973156213760376
+      ],
+      "maxXYZ": [
+        0.015384655445814133,
+        1.68309485912323,
+        0.05680540204048157
+      ]
+    },
+    {
+      "nodeIndex": 61,
+      "nodeName": "avaturn_hair_0",
+      "meshIndex": 7,
+      "meshName": "avaturn_hair_0",
+      "vertexCount": 2187,
+      "minXYZ": [
+        -0.1785133332014084,
+        1.3696075677871704,
+        -0.18679052591323853
+      ],
+      "maxXYZ": [
+        0.17613932490348816,
+        1.871629238128662,
+        0.14207367599010468
+      ]
+    },
+    {
+      "nodeIndex": 62,
+      "nodeName": "avaturn_hair_1",
+      "meshIndex": 8,
+      "meshName": "avaturn_hair_1",
+      "vertexCount": 2637,
+      "minXYZ": [
+        -0.18701376020908356,
+        1.3814646005630493,
+        -0.19247999787330627
+      ],
+      "maxXYZ": [
+        0.1788541078567505,
+        1.8731716871261597,
+        0.1515554040670395
+      ]
+    },
+    {
+      "nodeIndex": 63,
+      "nodeName": "avaturn_shoes_0",
+      "meshIndex": 9,
+      "meshName": "avaturn_shoes_0",
+      "vertexCount": 4998,
+      "minXYZ": [
+        -0.1487482637166977,
+        -0.0035086008720099926,
+        -0.06705290079116821
+      ],
+      "maxXYZ": [
+        0.15191955864429474,
+        0.12954874336719513,
+        0.23228153586387634
+      ]
+    },
+    {
+      "nodeIndex": 64,
+      "nodeName": "avaturn_look_0",
+      "meshIndex": 10,
+      "meshName": "avaturn_look_0",
+      "vertexCount": 5571,
+      "minXYZ": [
+        -0.7277619242668152,
+        0.10321367532014847,
+        -0.14162646234035492
+      ],
+      "maxXYZ": [
+        0.7232229113578796,
+        1.620657205581665,
+        0.17169249057769775
+      ]
+    }
+  ],
+  "candidateHeadMetadata": [
+    {
+      "nodeIndex": 10,
+      "name": "Head",
+      "hasMesh": false
+    },
+    {
+      "nodeIndex": 11,
+      "name": "Neck",
+      "hasMesh": false
+    },
+    {
+      "nodeIndex": 58,
+      "name": "Head_Mesh",
+      "hasMesh": true
+    }
+  ],
+  "cameras": [],
+  "skins": [
+    {
+      "index": 0,
+      "name": "Armature",
+      "jointCount": 54,
+      "skeleton": null
+    }
+  ],
+  "orientationStatus": "UNVERIFIED_NO_MODEL_CAMERA_CALIBRATION",
+  "headDetectionStatus": "CANDIDATE_HEAD_METADATA_FOUND",
+  "detectionStatus": "UNVERIFIED_NO_RENDERED_FACE_INPUT",
+  "landmarksDetected": 0,
+  "validVisibleSurfaceAttachments": null,
+  "anatomicallyPlausibleAttachments": null,
+  "deterministicAttachments": null,
+  "unresolvedOrAmbiguous": null,
+  "independentAccuracy": "UNVERIFIED unless an external anatomical reference and reviewer are supplied",
+  "sourceCodeChangesBetweenModels": false,
+  "limitations": [
+    "A GLB alone does not contain anatomical ground truth or a guaranteed frontal camera.",
+    "Automatic head orientation is not asserted when metadata is absent or ambiguous.",
+    "2D MediaPipe detection requires a calibrated render image; this command does not silently invent one."
+  ]
+}

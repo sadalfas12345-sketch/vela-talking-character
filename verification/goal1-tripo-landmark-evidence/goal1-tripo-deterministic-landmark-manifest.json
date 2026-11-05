@@ -1,0 +1,1455 @@
+{
+  "status": "UNVERIFIED_PENDING_SECOND_INDEPENDENT_REVIEW",
+  "sourceGLB": "assets\\tripo\\vela-photoreal\\generated-rigged.glb",
+  "meshIdentifier": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+  "selectedAnchorCount": 30,
+  "deterministicAttachmentCount": 29,
+  "provisionallyAcceptedCount": 29,
+  "correctedCount": 0,
+  "rejectedCount": 0,
+  "unresolvedCount": 1,
+  "independentlyValidatedCount": 0,
+  "independentReview": "PENDING: the reference set has one visual reviewer and is not independent ground truth.",
+  "outlierCauseSummary": {
+    "B_REFERENCE_PRECISION": [
+      "right_eyelid_upper_contour",
+      "right_eyelid_lower_contour",
+      "left_eyelid_upper_contour",
+      "left_eyelid_lower_contour",
+      "nose_bridge_lower",
+      "lower_lip_center",
+      "upper_lip_right_boundary",
+      "upper_lip_left_boundary",
+      "lower_lip_right_boundary",
+      "lower_lip_left_boundary",
+      "upper_lip_right_contour",
+      "lower_lip_left_contour"
+    ],
+    "E_SURFACE_OCCLUSION_OR_AMBIGUITY": [
+      "jawline_left"
+    ],
+    "other": []
+  },
+  "attachments": [
+    {
+      "number": 1,
+      "name": "right_eye_outer",
+      "mediapipeIndex": 33,
+      "region": "right_eye",
+      "meshIdentifier": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "triangleIndex": 744304,
+      "triangleVertexIndices": [
+        475936,
+        476467,
+        476738
+      ],
+      "barycentricCoordinates": [
+        0.4846890362546262,
+        0.35251147007509137,
+        0.16279949367028243
+      ],
+      "local3D": [
+        0.06886877119541168,
+        -0.02389037236571312,
+        0.8906744718551636
+      ],
+      "world3D": [
+        0.06886877119541168,
+        -0.02389037236571312,
+        0.8906744718551636
+      ],
+      "cameraProjectionXY": [
+        389.6812744140625,
+        150.14669799804688
+      ],
+      "projectionResidualPixels": 3.8902431591741825e-05,
+      "surfaceNormal": [
+        0.6399747729301453,
+        0.6560186743736267,
+        -0.4000898003578186
+      ],
+      "frontalVisibility": true,
+      "obliqueVisibility": true,
+      "surfaceClassification": "FRONT_SURFACE",
+      "pixelErrorAgainstManualReference": 1.0919061927626446,
+      "manualUncertaintyPixels": 4,
+      "status": "PROVISIONALLY_ACCEPTED",
+      "causeClassification": "NO_DEMONSTRATED_FAILURE",
+      "validationMethod": "first-visible frontal ray, normal, ROI, oblique-view audit, barycentric reconstruction",
+      "confidence": "provisional_geometry_only",
+      "attachmentReconstructionResidualMeters": 8.478862705242164e-08
+    },
+    {
+      "number": 2,
+      "name": "right_eye_inner",
+      "mediapipeIndex": 133,
+      "region": "right_eye",
+      "meshIdentifier": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "triangleIndex": 914219,
+      "triangleVertexIndices": [
+        404423,
+        400439,
+        403407
+      ],
+      "barycentricCoordinates": [
+        0.5863752650721629,
+        0.0726893358630666,
+        0.34093539906477055
+      ],
+      "local3D": [
+        0.055532172322273254,
+        -0.006297432351857424,
+        0.8889785408973694
+      ],
+      "world3D": [
+        0.055532172322273254,
+        -0.006297432351857424,
+        0.8889785408973694
+      ],
+      "cameraProjectionXY": [
+        479.75714111328125,
+        158.8297119140625
+      ],
+      "projectionResidualPixels": 0.00016052990454650372,
+      "surfaceNormal": [
+        0.8486105799674988,
+        -0.33504053950309753,
+        0.4093994200229645
+      ],
+      "frontalVisibility": true,
+      "obliqueVisibility": true,
+      "surfaceClassification": "FRONT_SURFACE",
+      "pixelErrorAgainstManualReference": 0.8645243196090715,
+      "manualUncertaintyPixels": 4,
+      "status": "PROVISIONALLY_ACCEPTED",
+      "causeClassification": "NO_DEMONSTRATED_FAILURE",
+      "validationMethod": "first-visible frontal ray, normal, ROI, oblique-view audit, barycentric reconstruction",
+      "confidence": "provisional_geometry_only",
+      "attachmentReconstructionResidualMeters": 2.3279229396071047e-08
+    },
+    {
+      "number": 3,
+      "name": "right_eyelid_upper",
+      "mediapipeIndex": 159,
+      "region": "right_eyelid",
+      "meshIdentifier": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "triangleIndex": 833376,
+      "triangleVertexIndices": [
+        402977,
+        402393,
+        403071
+      ],
+      "barycentricCoordinates": [
+        0.25972638808804577,
+        0.36904237890838393,
+        0.37123123300357036
+      ],
+      "local3D": [
+        0.055410221219062805,
+        -0.016297468915581703,
+        0.8938634991645813
+      ],
+      "world3D": [
+        0.055410221219062805,
+        -0.016297468915581703,
+        0.8938634991645813
+      ],
+      "cameraProjectionXY": [
+        428.55694580078125,
+        133.81881713867188
+      ],
+      "projectionResidualPixels": 7.237879166034804e-05,
+      "surfaceNormal": [
+        0.9825862646102905,
+        0.012923859991133213,
+        0.18535706400871277
+      ],
+      "frontalVisibility": true,
+      "obliqueVisibility": false,
+      "surfaceClassification": "FRONT_SURFACE",
+      "pixelErrorAgainstManualReference": 1.4543839421287332,
+      "manualUncertaintyPixels": 4,
+      "status": "PROVISIONALLY_ACCEPTED",
+      "causeClassification": "NO_DEMONSTRATED_FAILURE",
+      "validationMethod": "first-visible frontal ray, normal, ROI, oblique-view audit, barycentric reconstruction",
+      "confidence": "provisional_geometry_only",
+      "attachmentReconstructionResidualMeters": 5.0632160799577104e-08
+    },
+    {
+      "number": 4,
+      "name": "right_eyelid_lower",
+      "mediapipeIndex": 145,
+      "region": "right_eyelid",
+      "meshIdentifier": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "triangleIndex": 833364,
+      "triangleVertexIndices": [
+        405534,
+        404863,
+        405429
+      ],
+      "barycentricCoordinates": [
+        0.21279402738241615,
+        0.10154074100271761,
+        0.6856652316148663
+      ],
+      "local3D": [
+        0.05576510727405548,
+        -0.01581868901848793,
+        0.8877235651016235
+      ],
+      "world3D": [
+        0.05576510727405548,
+        -0.01581868901848793,
+        0.8877235651016235
+      ],
+      "cameraProjectionXY": [
+        431.00830078125,
+        165.2552947998047
+      ],
+      "projectionResidualPixels": 5.737918455692796e-05,
+      "surfaceNormal": [
+        0.9885023236274719,
+        -0.018412476405501366,
+        0.15008042752742767
+      ],
+      "frontalVisibility": true,
+      "obliqueVisibility": true,
+      "surfaceClassification": "FRONT_SURFACE",
+      "pixelErrorAgainstManualReference": 0.2554297120083641,
+      "manualUncertaintyPixels": 4,
+      "status": "PROVISIONALLY_ACCEPTED",
+      "causeClassification": "NO_DEMONSTRATED_FAILURE",
+      "validationMethod": "first-visible frontal ray, normal, ROI, oblique-view audit, barycentric reconstruction",
+      "confidence": "provisional_geometry_only",
+      "attachmentReconstructionResidualMeters": 4.2193217609077674e-10
+    },
+    {
+      "number": 5,
+      "name": "right_eyelid_upper_contour",
+      "mediapipeIndex": 160,
+      "region": "right_eyelid",
+      "meshIdentifier": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "triangleIndex": 791727,
+      "triangleVertexIndices": [
+        398470,
+        399738,
+        398328
+      ],
+      "barycentricCoordinates": [
+        0.4508983867547382,
+        0.204218909736265,
+        0.3448827035089968
+      ],
+      "local3D": [
+        0.054846182465553284,
+        -0.019525984302163124,
+        0.8934372067451477
+      ],
+      "world3D": [
+        0.054846182465553284,
+        -0.019525984302163124,
+        0.8934372067451477
+      ],
+      "cameraProjectionXY": [
+        412.0269470214844,
+        136.00149536132812
+      ],
+      "projectionResidualPixels": 2.412626388678268e-05,
+      "surfaceNormal": [
+        0.949471116065979,
+        -0.3113127052783966,
+        0.039862871170043945
+      ],
+      "frontalVisibility": true,
+      "obliqueVisibility": false,
+      "surfaceClassification": "FRONT_SURFACE",
+      "pixelErrorAgainstManualReference": 11.01838931889593,
+      "manualUncertaintyPixels": 5,
+      "status": "PROVISIONALLY_ACCEPTED",
+      "causeClassification": "B_REFERENCE_PRECISION",
+      "validationMethod": "first-visible frontal ray, normal, ROI, oblique-view audit, barycentric reconstruction",
+      "confidence": "provisional_geometry_only",
+      "attachmentReconstructionResidualMeters": 6.992205392309693e-09
+    },
+    {
+      "number": 6,
+      "name": "right_eyelid_lower_contour",
+      "mediapipeIndex": 144,
+      "region": "right_eyelid",
+      "meshIdentifier": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "triangleIndex": 798927,
+      "triangleVertexIndices": [
+        400310,
+        400584,
+        399195
+      ],
+      "barycentricCoordinates": [
+        0.6074222838608161,
+        0.29733710791591866,
+        0.09524060822326527
+      ],
+      "local3D": [
+        0.05507422983646393,
+        -0.0190273504704237,
+        0.8879115581512451
+      ],
+      "world3D": [
+        0.05507422983646393,
+        -0.0190273504704237,
+        0.8879115581512451
+      ],
+      "cameraProjectionXY": [
+        414.5799560546875,
+        164.29275512695312
+      ],
+      "projectionResidualPixels": 7.126442601115954e-05,
+      "surfaceNormal": [
+        0.9354208707809448,
+        -0.25650477409362793,
+        0.2432965785264969
+      ],
+      "frontalVisibility": true,
+      "obliqueVisibility": false,
+      "surfaceClassification": "FRONT_SURFACE",
+      "pixelErrorAgainstManualReference": 23.421873621995445,
+      "manualUncertaintyPixels": 5,
+      "status": "PROVISIONALLY_ACCEPTED",
+      "causeClassification": "B_REFERENCE_PRECISION",
+      "validationMethod": "first-visible frontal ray, normal, ROI, oblique-view audit, barycentric reconstruction",
+      "confidence": "provisional_geometry_only",
+      "attachmentReconstructionResidualMeters": 6.035548409200703e-08
+    },
+    {
+      "number": 7,
+      "name": "left_eye_outer",
+      "mediapipeIndex": 263,
+      "region": "left_eye",
+      "meshIdentifier": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "triangleIndex": 1244617,
+      "triangleVertexIndices": [
+        370864,
+        374144,
+        373150
+      ],
+      "barycentricCoordinates": [
+        0.6362875057952023,
+        0.32338050872277274,
+        0.04033198548202488
+      ],
+      "local3D": [
+        0.05064971745014191,
+        0.031834300607442856,
+        0.8908981084823608
+      ],
+      "world3D": [
+        0.05064971745014191,
+        0.031834300607442856,
+        0.8908981084823608
+      ],
+      "cameraProjectionXY": [
+        674.9916381835938,
+        149.0017547607422
+      ],
+      "projectionResidualPixels": 7.854942429341889e-05,
+      "surfaceNormal": [
+        0.6440990567207336,
+        0.6661025285720825,
+        -0.37609028816223145
+      ],
+      "frontalVisibility": true,
+      "obliqueVisibility": true,
+      "surfaceClassification": "FRONT_SURFACE",
+      "pixelErrorAgainstManualReference": 0.9982802600845612,
+      "manualUncertaintyPixels": 4,
+      "status": "PROVISIONALLY_ACCEPTED",
+      "causeClassification": "NO_DEMONSTRATED_FAILURE",
+      "validationMethod": "first-visible frontal ray, normal, ROI, oblique-view audit, barycentric reconstruction",
+      "confidence": "provisional_geometry_only",
+      "attachmentReconstructionResidualMeters": 2.197090403099067e-10
+    },
+    {
+      "number": 8,
+      "name": "left_eye_inner",
+      "mediapipeIndex": 362,
+      "region": "left_eye",
+      "meshIdentifier": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "triangleIndex": 1077055,
+      "triangleVertexIndices": [
+        399307,
+        397659,
+        401041
+      ],
+      "barycentricCoordinates": [
+        0.3339271177031121,
+        0.18062706894714803,
+        0.4854458133497398
+      ],
+      "local3D": [
+        0.055015042424201965,
+        0.013748775236308575,
+        0.8890261054039001
+      ],
+      "world3D": [
+        0.055015042424201965,
+        0.013748775236308575,
+        0.8890261054039001
+      ],
+      "cameraProjectionXY": [
+        582.3937377929688,
+        158.58621215820312
+      ],
+      "projectionResidualPixels": 0.00013095931273236015,
+      "surfaceNormal": [
+        0.850908637046814,
+        0.3243831396102905,
+        0.4131951332092285
+      ],
+      "frontalVisibility": true,
+      "obliqueVisibility": true,
+      "surfaceClassification": "FRONT_SURFACE",
+      "pixelErrorAgainstManualReference": 0.5711828320518902,
+      "manualUncertaintyPixels": 4,
+      "status": "PROVISIONALLY_ACCEPTED",
+      "causeClassification": "NO_DEMONSTRATED_FAILURE",
+      "validationMethod": "first-visible frontal ray, normal, ROI, oblique-view audit, barycentric reconstruction",
+      "confidence": "provisional_geometry_only",
+      "attachmentReconstructionResidualMeters": 1.9871933860030624e-08
+    },
+    {
+      "number": 9,
+      "name": "left_eyelid_upper",
+      "mediapipeIndex": 386,
+      "region": "left_eyelid",
+      "meshIdentifier": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "triangleIndex": 1172356,
+      "triangleVertexIndices": [
+        401377,
+        399539,
+        400357
+      ],
+      "barycentricCoordinates": [
+        0.5258890068452154,
+        0.3698849671426785,
+        0.1042260260121061
+      ],
+      "local3D": [
+        0.05511803925037384,
+        0.02430564910173416,
+        0.8939235210418701
+      ],
+      "world3D": [
+        0.05511803925037384,
+        0.02430564910173416,
+        0.8939235210418701
+      ],
+      "cameraProjectionXY": [
+        636.4449462890625,
+        133.51133728027344
+      ],
+      "projectionResidualPixels": 0.0002402047957066523,
+      "surfaceNormal": [
+        0.9724135398864746,
+        0.16855812072753906,
+        0.16124564409255981
+      ],
+      "frontalVisibility": true,
+      "obliqueVisibility": true,
+      "surfaceClassification": "FRONT_SURFACE",
+      "pixelErrorAgainstManualReference": 0.6608845994582192,
+      "manualUncertaintyPixels": 4,
+      "status": "PROVISIONALLY_ACCEPTED",
+      "causeClassification": "NO_DEMONSTRATED_FAILURE",
+      "validationMethod": "first-visible frontal ray, normal, ROI, oblique-view audit, barycentric reconstruction",
+      "confidence": "provisional_geometry_only",
+      "attachmentReconstructionResidualMeters": 3.3917480355199587e-08
+    },
+    {
+      "number": 10,
+      "name": "left_eyelid_lower",
+      "mediapipeIndex": 374,
+      "region": "left_eyelid",
+      "meshIdentifier": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "triangleIndex": 1159265,
+      "triangleVertexIndices": [
+        404031,
+        403828,
+        404193
+      ],
+      "barycentricCoordinates": [
+        0.3279830639499863,
+        0.6360810087244124,
+        0.0359359273256013
+      ],
+      "local3D": [
+        0.05554415285587311,
+        0.023610122501850128,
+        0.8881006240844727
+      ],
+      "world3D": [
+        0.05554415285587311,
+        0.023610122501850128,
+        0.8881006240844727
+      ],
+      "cameraProjectionXY": [
+        632.8838500976562,
+        163.3248291015625
+      ],
+      "projectionResidualPixels": 4.779801973778407e-05,
+      "surfaceNormal": [
+        0.9966554641723633,
+        0.0801520049571991,
+        0.015921389684081078
+      ],
+      "frontalVisibility": true,
+      "obliqueVisibility": true,
+      "surfaceClassification": "FRONT_SURFACE",
+      "pixelErrorAgainstManualReference": 0.6850887109793619,
+      "manualUncertaintyPixels": 4,
+      "status": "PROVISIONALLY_ACCEPTED",
+      "causeClassification": "NO_DEMONSTRATED_FAILURE",
+      "validationMethod": "first-visible frontal ray, normal, ROI, oblique-view audit, barycentric reconstruction",
+      "confidence": "provisional_geometry_only",
+      "attachmentReconstructionResidualMeters": 1.3492090337323283e-08
+    },
+    {
+      "number": 11,
+      "name": "left_eyelid_upper_contour",
+      "mediapipeIndex": 387,
+      "region": "left_eyelid",
+      "meshIdentifier": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "triangleIndex": 1205028,
+      "triangleVertexIndices": [
+        394572,
+        394320,
+        396209
+      ],
+      "barycentricCoordinates": [
+        0.29352068417863497,
+        0.259064629931691,
+        0.44741468588967404
+      ],
+      "local3D": [
+        0.05434794723987579,
+        0.027446599677205086,
+        0.8935164213180542
+      ],
+      "world3D": [
+        0.05434794723987579,
+        0.027446599677205086,
+        0.8935164213180542
+      ],
+      "cameraProjectionXY": [
+        652.526611328125,
+        135.595703125
+      ],
+      "projectionResidualPixels": 0.00022484881917002263,
+      "surfaceNormal": [
+        0.9190149307250977,
+        0.38335704803466797,
+        0.0919182077050209
+      ],
+      "frontalVisibility": true,
+      "obliqueVisibility": true,
+      "surfaceClassification": "FRONT_SURFACE",
+      "pixelErrorAgainstManualReference": 7.656495791012644,
+      "manualUncertaintyPixels": 5,
+      "status": "PROVISIONALLY_ACCEPTED",
+      "causeClassification": "B_REFERENCE_PRECISION",
+      "validationMethod": "first-visible frontal ray, normal, ROI, oblique-view audit, barycentric reconstruction",
+      "confidence": "provisional_geometry_only",
+      "attachmentReconstructionResidualMeters": 7.798565689651242e-08
+    },
+    {
+      "number": 12,
+      "name": "left_eyelid_lower_contour",
+      "mediapipeIndex": 373,
+      "region": "left_eyelid",
+      "meshIdentifier": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "triangleIndex": 1198299,
+      "triangleVertexIndices": [
+        397345,
+        396955,
+        399697
+      ],
+      "barycentricCoordinates": [
+        0.51850281947464,
+        0.12150091274434133,
+        0.35999626778101856
+      ],
+      "local3D": [
+        0.05477781593799591,
+        0.026769479736685753,
+        0.8883013725280762
+      ],
+      "world3D": [
+        0.05477781593799591,
+        0.026769479736685753,
+        0.8883013725280762
+      ],
+      "cameraProjectionXY": [
+        649.0597534179688,
+        162.29698181152344
+      ],
+      "projectionResidualPixels": 3.7034011533637236e-05,
+      "surfaceNormal": [
+        0.888481855392456,
+        0.3390484154224396,
+        0.30926716327667236
+      ],
+      "frontalVisibility": true,
+      "obliqueVisibility": true,
+      "surfaceClassification": "FRONT_SURFACE",
+      "pixelErrorAgainstManualReference": 8.237711824817675,
+      "manualUncertaintyPixels": 5,
+      "status": "PROVISIONALLY_ACCEPTED",
+      "causeClassification": "B_REFERENCE_PRECISION",
+      "validationMethod": "first-visible frontal ray, normal, ROI, oblique-view audit, barycentric reconstruction",
+      "confidence": "provisional_geometry_only",
+      "attachmentReconstructionResidualMeters": 1.147773057404135e-07
+    },
+    {
+      "number": 13,
+      "name": "nose_bridge",
+      "mediapipeIndex": 168,
+      "region": "nose_bridge",
+      "meshIdentifier": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "triangleIndex": 997659,
+      "triangleVertexIndices": [
+        457713,
+        457020,
+        457040
+      ],
+      "barycentricCoordinates": [
+        0.14179923662963068,
+        0.11603551637520672,
+        0.7421652469951626
+      ],
+      "local3D": [
+        0.06389982998371124,
+        0.003201400861144066,
+        0.8927829265594482
+      ],
+      "world3D": [
+        0.06389982998371124,
+        0.003201400861144066,
+        0.8927829265594482
+      ],
+      "cameraProjectionXY": [
+        528.3911743164062,
+        139.35147094726562
+      ],
+      "projectionResidualPixels": 5.357791198311861e-05,
+      "surfaceNormal": [
+        0.9326267838478088,
+        0.02352827973663807,
+        0.3600746691226959
+      ],
+      "frontalVisibility": true,
+      "obliqueVisibility": true,
+      "surfaceClassification": "FRONT_SURFACE",
+      "pixelErrorAgainstManualReference": 4.6649587029181125,
+      "manualUncertaintyPixels": 6,
+      "status": "PROVISIONALLY_ACCEPTED",
+      "causeClassification": "NO_DEMONSTRATED_FAILURE",
+      "validationMethod": "first-visible frontal ray, normal, ROI, oblique-view audit, barycentric reconstruction",
+      "confidence": "provisional_geometry_only",
+      "attachmentReconstructionResidualMeters": 6.955252930188757e-09
+    },
+    {
+      "number": 14,
+      "name": "nose_bridge_lower",
+      "mediapipeIndex": 6,
+      "region": "nose_bridge",
+      "meshIdentifier": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "triangleIndex": 997482,
+      "triangleVertexIndices": [
+        469438,
+        468403,
+        471349
+      ],
+      "barycentricCoordinates": [
+        0.05295679923427754,
+        0.28322753356999064,
+        0.6638156671957318
+      ],
+      "local3D": [
+        0.06678600609302521,
+        0.0030977721326053143,
+        0.8881739974021912
+      ],
+      "world3D": [
+        0.06678600609302521,
+        0.0030977721326053143,
+        0.8881739974021912
+      ],
+      "cameraProjectionXY": [
+        527.860595703125,
+        162.94900512695312
+      ],
+      "projectionResidualPixels": 0.00012978733132142136,
+      "surfaceNormal": [
+        0.8155872225761414,
+        -0.023316366598010063,
+        0.578164279460907
+      ],
+      "frontalVisibility": true,
+      "obliqueVisibility": true,
+      "surfaceClassification": "FRONT_SURFACE",
+      "pixelErrorAgainstManualReference": 28.06419317087059,
+      "manualUncertaintyPixels": 6,
+      "status": "PROVISIONALLY_ACCEPTED",
+      "causeClassification": "B_REFERENCE_PRECISION",
+      "validationMethod": "first-visible frontal ray, normal, ROI, oblique-view audit, barycentric reconstruction",
+      "confidence": "provisional_geometry_only",
+      "attachmentReconstructionResidualMeters": 6.268436408033823e-08
+    },
+    {
+      "number": 15,
+      "name": "nose_tip",
+      "mediapipeIndex": 1,
+      "region": "nose_tip",
+      "meshIdentifier": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "triangleIndex": 989646,
+      "triangleVertexIndices": [
+        495430,
+        495043,
+        495148
+      ],
+      "barycentricCoordinates": [
+        0.25166957840484716,
+        0.09136618300651193,
+        0.656964238588641
+      ],
+      "local3D": [
+        0.07634676992893219,
+        0.002903103595599532,
+        0.8702240586280823
+      ],
+      "world3D": [
+        0.07634676992893219,
+        0.002903103595599532,
+        0.8702240586280823
+      ],
+      "cameraProjectionXY": [
+        526.8638916015625,
+        254.85263061523438
+      ],
+      "projectionResidualPixels": 0.0001907497638604127,
+      "surfaceNormal": [
+        0.7542133927345276,
+        -0.10096926987171173,
+        -0.6488200426101685
+      ],
+      "frontalVisibility": true,
+      "obliqueVisibility": true,
+      "surfaceClassification": "FRONT_SURFACE",
+      "pixelErrorAgainstManualReference": 0.20060715762758835,
+      "manualUncertaintyPixels": 5,
+      "status": "PROVISIONALLY_ACCEPTED",
+      "causeClassification": "NO_DEMONSTRATED_FAILURE",
+      "validationMethod": "first-visible frontal ray, normal, ROI, oblique-view audit, barycentric reconstruction",
+      "confidence": "provisional_geometry_only",
+      "attachmentReconstructionResidualMeters": 2.3282565938761528e-08
+    },
+    {
+      "number": 16,
+      "name": "nose_wing_right",
+      "mediapipeIndex": 98,
+      "region": "nose_wing",
+      "meshIdentifier": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "triangleIndex": 922721,
+      "triangleVertexIndices": [
+        456464,
+        455077,
+        453646
+      ],
+      "barycentricCoordinates": [
+        0.3871158035951434,
+        0.24120246100812495,
+        0.37168173539673166
+      ],
+      "local3D": [
+        0.06355144083499908,
+        -0.005145042669028044,
+        0.8662503957748413
+      ],
+      "world3D": [
+        0.06355144083499908,
+        -0.005145042669028044,
+        0.8662503957748413
+      ],
+      "cameraProjectionXY": [
+        485.6573791503906,
+        275.1978759765625
+      ],
+      "projectionResidualPixels": 8.025043291630335e-05,
+      "surfaceNormal": [
+        0.7822431921958923,
+        -0.6011709570884705,
+        0.16336803138256073
+      ],
+      "frontalVisibility": true,
+      "obliqueVisibility": true,
+      "surfaceClassification": "FRONT_SURFACE",
+      "pixelErrorAgainstManualReference": 0.39565635175946945,
+      "manualUncertaintyPixels": 5,
+      "status": "PROVISIONALLY_ACCEPTED",
+      "causeClassification": "NO_DEMONSTRATED_FAILURE",
+      "validationMethod": "first-visible frontal ray, normal, ROI, oblique-view audit, barycentric reconstruction",
+      "confidence": "provisional_geometry_only",
+      "attachmentReconstructionResidualMeters": 7.665641189808146e-08
+    },
+    {
+      "number": 17,
+      "name": "nose_wing_left",
+      "mediapipeIndex": 327,
+      "region": "nose_wing",
+      "meshIdentifier": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "triangleIndex": 1057060,
+      "triangleVertexIndices": [
+        453445,
+        455042,
+        455161
+      ],
+      "barycentricCoordinates": [
+        0.19321344210721286,
+        0.31806788051816126,
+        0.4887186773746259
+      ],
+      "local3D": [
+        0.06349851191043854,
+        0.011826441623270512,
+        0.8662578463554382
+      ],
+      "world3D": [
+        0.06349851191043854,
+        0.011826441623270512,
+        0.8662578463554382
+      ],
+      "cameraProjectionXY": [
+        572.5513916015625,
+        275.1597595214844
+      ],
+      "projectionResidualPixels": 5.3482341357459844e-05,
+      "surfaceNormal": [
+        0.7792285680770874,
+        0.6056212782859802,
+        0.16132479906082153
+      ],
+      "frontalVisibility": true,
+      "obliqueVisibility": true,
+      "surfaceClassification": "FRONT_SURFACE",
+      "pixelErrorAgainstManualReference": 0.4762064676729782,
+      "manualUncertaintyPixels": 5,
+      "status": "PROVISIONALLY_ACCEPTED",
+      "causeClassification": "NO_DEMONSTRATED_FAILURE",
+      "validationMethod": "first-visible frontal ray, normal, ROI, oblique-view audit, barycentric reconstruction",
+      "confidence": "provisional_geometry_only",
+      "attachmentReconstructionResidualMeters": 7.694729864336638e-08
+    },
+    {
+      "number": 18,
+      "name": "mouth_corner_right",
+      "mediapipeIndex": 61,
+      "region": "mouth_corner",
+      "meshIdentifier": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "triangleIndex": 869766,
+      "triangleVertexIndices": [
+        418380,
+        417222,
+        418971
+      ],
+      "barycentricCoordinates": [
+        0.21820604311629282,
+        0.4284732157786907,
+        0.3533207411050165
+      ],
+      "local3D": [
+        0.057616546750068665,
+        -0.012396440841257572,
+        0.8530492782592773
+      ],
+      "world3D": [
+        0.057616546750068665,
+        -0.012396440841257572,
+        0.8530492782592773
+      ],
+      "cameraProjectionXY": [
+        448.53021240234375,
+        342.7877197265625
+      ],
+      "projectionResidualPixels": 4.649590203570902e-05,
+      "surfaceNormal": [
+        0.8434295654296875,
+        -0.05322190001606941,
+        -0.5345969796180725
+      ],
+      "frontalVisibility": true,
+      "obliqueVisibility": true,
+      "surfaceClassification": "FRONT_SURFACE",
+      "pixelErrorAgainstManualReference": 0.5155223578103383,
+      "manualUncertaintyPixels": 5,
+      "status": "PROVISIONALLY_ACCEPTED",
+      "causeClassification": "NO_DEMONSTRATED_FAILURE",
+      "validationMethod": "first-visible frontal ray, normal, ROI, oblique-view audit, barycentric reconstruction",
+      "confidence": "provisional_geometry_only",
+      "attachmentReconstructionResidualMeters": 3.503928581856595e-08
+    },
+    {
+      "number": 19,
+      "name": "mouth_corner_left",
+      "mediapipeIndex": 291,
+      "region": "mouth_corner",
+      "meshIdentifier": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "triangleIndex": 1112925,
+      "triangleVertexIndices": [
+        415299,
+        417341,
+        414313
+      ],
+      "barycentricCoordinates": [
+        0.14194645486395552,
+        0.7528666730134667,
+        0.10518687212257782
+      ],
+      "local3D": [
+        0.05739213526248932,
+        0.01869373209774494,
+        0.8527388572692871
+      ],
+      "world3D": [
+        0.05739213526248932,
+        0.01869373209774494,
+        0.8527388572692871
+      ],
+      "cameraProjectionXY": [
+        607.7119140625,
+        344.3769226074219
+      ],
+      "projectionResidualPixels": 0.00011167359289783056,
+      "surfaceNormal": [
+        0.9215214848518372,
+        -0.14035436511039734,
+        -0.36207571625709534
+      ],
+      "frontalVisibility": true,
+      "obliqueVisibility": true,
+      "surfaceClassification": "FRONT_SURFACE",
+      "pixelErrorAgainstManualReference": 0.47440927411988776,
+      "manualUncertaintyPixels": 5,
+      "status": "PROVISIONALLY_ACCEPTED",
+      "causeClassification": "NO_DEMONSTRATED_FAILURE",
+      "validationMethod": "first-visible frontal ray, normal, ROI, oblique-view audit, barycentric reconstruction",
+      "confidence": "provisional_geometry_only",
+      "attachmentReconstructionResidualMeters": 6.189017221944192e-08
+    },
+    {
+      "number": 20,
+      "name": "upper_lip_center",
+      "mediapipeIndex": 13,
+      "region": "upper_lip",
+      "meshIdentifier": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "triangleIndex": 990238,
+      "triangleVertexIndices": [
+        471367,
+        468957,
+        471244
+      ],
+      "barycentricCoordinates": [
+        0.5107655516574492,
+        0.0387815422348476,
+        0.45045290610770317
+      ],
+      "local3D": [
+        0.06704463064670563,
+        0.002764129312708974,
+        0.8534416556358337
+      ],
+      "world3D": [
+        0.06704463064670563,
+        0.002764129312708974,
+        0.8534416556358337
+      ],
+      "cameraProjectionXY": [
+        526.15234375,
+        340.7787780761719
+      ],
+      "projectionResidualPixels": 7.253569362566535e-05,
+      "surfaceNormal": [
+        0.4290928244590759,
+        -0.08438578248023987,
+        -0.8993099927902222
+      ],
+      "frontalVisibility": true,
+      "obliqueVisibility": true,
+      "surfaceClassification": "FRONT_SURFACE",
+      "pixelErrorAgainstManualReference": 0.793538852287668,
+      "manualUncertaintyPixels": 4,
+      "status": "PROVISIONALLY_ACCEPTED",
+      "causeClassification": "NO_DEMONSTRATED_FAILURE",
+      "validationMethod": "first-visible frontal ray, normal, ROI, oblique-view audit, barycentric reconstruction",
+      "confidence": "provisional_geometry_only",
+      "attachmentReconstructionResidualMeters": 3.9913949717797686e-08
+    },
+    {
+      "number": 21,
+      "name": "lower_lip_center",
+      "mediapipeIndex": 14,
+      "region": "lower_lip",
+      "meshIdentifier": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "triangleIndex": 990239,
+      "triangleVertexIndices": [
+        471244,
+        468957,
+        468965
+      ],
+      "barycentricCoordinates": [
+        0.13322294276084679,
+        0.31026848354565495,
+        0.5565085736934983
+      ],
+      "local3D": [
+        0.06643886864185333,
+        0.0028640744276344776,
+        0.8531470894813538
+      ],
+      "world3D": [
+        0.06643886864185333,
+        0.0028640744276344776,
+        0.8531470894813538
+      ],
+      "cameraProjectionXY": [
+        526.6640625,
+        342.28692626953125
+      ],
+      "projectionResidualPixels": 4.204354642884621e-05,
+      "surfaceNormal": [
+        0.4215686321258545,
+        -0.07503462582826614,
+        -0.9036867618560791
+      ],
+      "frontalVisibility": true,
+      "obliqueVisibility": true,
+      "surfaceClassification": "FRONT_SURFACE",
+      "pixelErrorAgainstManualReference": 5.722942027810379,
+      "manualUncertaintyPixels": 4,
+      "status": "PROVISIONALLY_ACCEPTED",
+      "causeClassification": "B_REFERENCE_PRECISION",
+      "validationMethod": "first-visible frontal ray, normal, ROI, oblique-view audit, barycentric reconstruction",
+      "confidence": "provisional_geometry_only",
+      "attachmentReconstructionResidualMeters": 3.979648252690774e-08
+    },
+    {
+      "number": 22,
+      "name": "upper_lip_right_boundary",
+      "mediapipeIndex": 78,
+      "region": "upper_lip",
+      "meshIdentifier": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "triangleIndex": 885174,
+      "triangleVertexIndices": [
+        423700,
+        418805,
+        423018
+      ],
+      "barycentricCoordinates": [
+        0.3236298029697255,
+        0.5465008324344068,
+        0.12986936459586768
+      ],
+      "local3D": [
+        0.05807913839817047,
+        -0.010851859115064144,
+        0.8530884385108948
+      ],
+      "world3D": [
+        0.05807913839817047,
+        -0.010851859115064144,
+        0.8530884385108948
+      ],
+      "cameraProjectionXY": [
+        456.4384765625,
+        342.587158203125
+      ],
+      "projectionResidualPixels": 2.132480599880018e-05,
+      "surfaceNormal": [
+        0.4496461749076843,
+        -0.48876819014549255,
+        -0.7476122379302979
+      ],
+      "frontalVisibility": true,
+      "obliqueVisibility": true,
+      "surfaceClassification": "FRONT_SURFACE",
+      "pixelErrorAgainstManualReference": 18.150733479018385,
+      "manualUncertaintyPixels": 5,
+      "status": "PROVISIONALLY_ACCEPTED",
+      "causeClassification": "B_REFERENCE_PRECISION",
+      "validationMethod": "first-visible frontal ray, normal, ROI, oblique-view audit, barycentric reconstruction",
+      "confidence": "provisional_geometry_only",
+      "attachmentReconstructionResidualMeters": 1.0235390676252736e-08
+    },
+    {
+      "number": 23,
+      "name": "upper_lip_left_boundary",
+      "mediapipeIndex": 308,
+      "region": "upper_lip",
+      "meshIdentifier": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "triangleIndex": 1101679,
+      "triangleVertexIndices": [
+        419711,
+        414811,
+        420815
+      ],
+      "barycentricCoordinates": [
+        0.2785714697688675,
+        0.4637148306962103,
+        0.2577136995349223
+      ],
+      "local3D": [
+        0.05756886303424835,
+        0.017265794798731804,
+        0.8527653217315674
+      ],
+      "world3D": [
+        0.05756886303424835,
+        0.017265794798731804,
+        0.8527653217315674
+      ],
+      "cameraProjectionXY": [
+        600.40087890625,
+        344.24163818359375
+      ],
+      "projectionResidualPixels": 0.00010474800275990281,
+      "surfaceNormal": [
+        0.3192611634731293,
+        0.20525452494621277,
+        -0.9251718521118164
+      ],
+      "frontalVisibility": true,
+      "obliqueVisibility": true,
+      "surfaceClassification": "FRONT_SURFACE",
+      "pixelErrorAgainstManualReference": 22.033437970677298,
+      "manualUncertaintyPixels": 5,
+      "status": "PROVISIONALLY_ACCEPTED",
+      "causeClassification": "B_REFERENCE_PRECISION",
+      "validationMethod": "first-visible frontal ray, normal, ROI, oblique-view audit, barycentric reconstruction",
+      "confidence": "provisional_geometry_only",
+      "attachmentReconstructionResidualMeters": 3.5105910248716516e-08
+    },
+    {
+      "number": 24,
+      "name": "lower_lip_right_boundary",
+      "mediapipeIndex": 95,
+      "region": "lower_lip",
+      "meshIdentifier": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "triangleIndex": 899651,
+      "triangleVertexIndices": [
+        439354,
+        435840,
+        435555
+      ],
+      "barycentricCoordinates": [
+        0.3459162060386076,
+        0.01131869058894662,
+        0.6427651033724457
+      ],
+      "local3D": [
+        0.06062068045139313,
+        -0.008499007672071457,
+        0.8531695604324341
+      ],
+      "world3D": [
+        0.06062068045139313,
+        -0.008499007672071457,
+        0.8531695604324341
+      ],
+      "cameraProjectionXY": [
+        468.4850769042969,
+        342.17169189453125
+      ],
+      "projectionResidualPixels": 0.0001414045296957556,
+      "surfaceNormal": [
+        0.5958784222602844,
+        -0.40516436100006104,
+        -0.693376362323761
+      ],
+      "frontalVisibility": true,
+      "obliqueVisibility": true,
+      "surfaceClassification": "FRONT_SURFACE",
+      "pixelErrorAgainstManualReference": 10.914655601939472,
+      "manualUncertaintyPixels": 5,
+      "status": "PROVISIONALLY_ACCEPTED",
+      "causeClassification": "B_REFERENCE_PRECISION",
+      "validationMethod": "first-visible frontal ray, normal, ROI, oblique-view audit, barycentric reconstruction",
+      "confidence": "provisional_geometry_only",
+      "attachmentReconstructionResidualMeters": 1.3035115760193117e-08
+    },
+    {
+      "number": 25,
+      "name": "lower_lip_left_boundary",
+      "mediapipeIndex": 324,
+      "region": "lower_lip",
+      "meshIdentifier": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "triangleIndex": 1081474,
+      "triangleVertexIndices": [
+        437783,
+        431084,
+        434052
+      ],
+      "barycentricCoordinates": [
+        0.13941721147277275,
+        0.12511609754887662,
+        0.7354666909783506
+      ],
+      "local3D": [
+        0.06015594303607941,
+        0.014806769788265228,
+        0.8529226779937744
+      ],
+      "world3D": [
+        0.06015594303607941,
+        0.014806769788265228,
+        0.8529226779937744
+      ],
+      "cameraProjectionXY": [
+        587.8106689453125,
+        343.43572998046875
+      ],
+      "projectionResidualPixels": 0.00014218385362272556,
+      "surfaceNormal": [
+        0.29692116379737854,
+        0.2389698475599289,
+        -0.9245167374610901
+      ],
+      "frontalVisibility": true,
+      "obliqueVisibility": true,
+      "surfaceClassification": "FRONT_SURFACE",
+      "pixelErrorAgainstManualReference": 13.512273747415195,
+      "manualUncertaintyPixels": 5,
+      "status": "PROVISIONALLY_ACCEPTED",
+      "causeClassification": "B_REFERENCE_PRECISION",
+      "validationMethod": "first-visible frontal ray, normal, ROI, oblique-view audit, barycentric reconstruction",
+      "confidence": "provisional_geometry_only",
+      "attachmentReconstructionResidualMeters": 4.056973862747071e-08
+    },
+    {
+      "number": 26,
+      "name": "chin",
+      "mediapipeIndex": 152,
+      "region": "chin",
+      "meshIdentifier": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "triangleIndex": 983798,
+      "triangleVertexIndices": [
+        418950,
+        415412,
+        416070
+      ],
+      "barycentricCoordinates": [
+        0.31419264701054517,
+        0.003620282379780617,
+        0.6821870706096742
+      ],
+      "local3D": [
+        0.05744452774524689,
+        0.0025384542532265186,
+        0.8268606066703796
+      ],
+      "world3D": [
+        0.05744452774524689,
+        0.0025384542532265186,
+        0.8268606066703796
+      ],
+      "cameraProjectionXY": [
+        524.9968872070312,
+        476.873779296875
+      ],
+      "projectionResidualPixels": 0.00011733125498691638,
+      "surfaceNormal": [
+        0.23984935879707336,
+        0.0013393511762842536,
+        -0.9708091616630554
+      ],
+      "frontalVisibility": true,
+      "obliqueVisibility": true,
+      "surfaceClassification": "FRONT_SURFACE",
+      "pixelErrorAgainstManualReference": 0.12625908037616812,
+      "manualUncertaintyPixels": 7,
+      "status": "PROVISIONALLY_ACCEPTED",
+      "causeClassification": "NO_DEMONSTRATED_FAILURE",
+      "validationMethod": "first-visible frontal ray, normal, ROI, oblique-view audit, barycentric reconstruction",
+      "confidence": "provisional_geometry_only",
+      "attachmentReconstructionResidualMeters": 5.8447242567848113e-08
+    },
+    {
+      "number": 27,
+      "name": "jawline_right",
+      "mediapipeIndex": 172,
+      "region": "jawline",
+      "meshIdentifier": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "triangleIndex": 679186,
+      "triangleVertexIndices": [
+        348378,
+        348170,
+        349098
+      ],
+      "barycentricCoordinates": [
+        0.14683111991472977,
+        0.8451754191213213,
+        0.007993460963948892
+      ],
+      "local3D": [
+        0.04635824263095856,
+        -0.028805812820792198,
+        0.8458065390586853
+      ],
+      "world3D": [
+        0.04635824263095856,
+        -0.028805812820792198,
+        0.8458065390586853
+      ],
+      "cameraProjectionXY": [
+        364.51422119140625,
+        379.87054443359375
+      ],
+      "projectionResidualPixels": 5.544449559688047e-05,
+      "surfaceNormal": [
+        0.8115316033363342,
+        0.5671727061271667,
+        0.1404695361852646
+      ],
+      "frontalVisibility": true,
+      "obliqueVisibility": true,
+      "surfaceClassification": "FRONT_SURFACE",
+      "pixelErrorAgainstManualReference": 0.5027323289309393,
+      "manualUncertaintyPixels": 8,
+      "status": "PROVISIONALLY_ACCEPTED",
+      "causeClassification": "NO_DEMONSTRATED_FAILURE",
+      "validationMethod": "first-visible frontal ray, normal, ROI, oblique-view audit, barycentric reconstruction",
+      "confidence": "provisional_geometry_only",
+      "attachmentReconstructionResidualMeters": 1.2180976830016592e-08
+    },
+    {
+      "number": 28,
+      "name": "jawline_left",
+      "mediapipeIndex": 397,
+      "region": "jawline",
+      "meshIdentifier": null,
+      "triangleIndex": null,
+      "triangleVertexIndices": null,
+      "barycentricCoordinates": null,
+      "local3D": null,
+      "world3D": null,
+      "cameraProjectionXY": [
+        700.166748046875,
+        377.5323486328125
+      ],
+      "projectionResidualPixels": null,
+      "surfaceNormal": null,
+      "frontalVisibility": false,
+      "obliqueVisibility": null,
+      "surfaceClassification": "UNRESOLVED",
+      "pixelErrorAgainstManualReference": 0.496490395042004,
+      "manualUncertaintyPixels": 8,
+      "status": "UNRESOLVED",
+      "causeClassification": "E_SURFACE_OCCLUSION_OR_AMBIGUITY",
+      "validationMethod": "first-visible frontal ray, normal, ROI, oblique-view audit, barycentric reconstruction",
+      "confidence": "unresolved",
+      "attachmentReconstructionResidualMeters": null
+    },
+    {
+      "number": 29,
+      "name": "upper_lip_right_contour",
+      "mediapipeIndex": 82,
+      "region": "upper_lip",
+      "meshIdentifier": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "triangleIndex": 954861,
+      "triangleVertexIndices": [
+        469239,
+        466984,
+        468951
+      ],
+      "barycentricCoordinates": [
+        0.10962241927138988,
+        0.7067647939671018,
+        0.18361278676150833
+      ],
+      "local3D": [
+        0.06590588390827179,
+        -0.0008840619120746851,
+        0.8536254167556763
+      ],
+      "world3D": [
+        0.06590588390827179,
+        -0.0008840619120746851,
+        0.8536254167556763
+      ],
+      "cameraProjectionXY": [
+        507.4736022949219,
+        339.83782958984375
+      ],
+      "projectionResidualPixels": 1.9118509202595026e-05,
+      "surfaceNormal": [
+        0.5805395245552063,
+        -0.3034071922302246,
+        -0.7555912137031555
+      ],
+      "frontalVisibility": true,
+      "obliqueVisibility": true,
+      "surfaceClassification": "FRONT_SURFACE",
+      "pixelErrorAgainstManualReference": 10.85124978116279,
+      "manualUncertaintyPixels": 5,
+      "status": "PROVISIONALLY_ACCEPTED",
+      "causeClassification": "B_REFERENCE_PRECISION",
+      "validationMethod": "first-visible frontal ray, normal, ROI, oblique-view audit, barycentric reconstruction",
+      "confidence": "provisional_geometry_only",
+      "attachmentReconstructionResidualMeters": 6.412036521193137e-08
+    },
+    {
+      "number": 30,
+      "name": "lower_lip_left_contour",
+      "mediapipeIndex": 317,
+      "region": "lower_lip",
+      "meshIdentifier": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "triangleIndex": 1024490,
+      "triangleVertexIndices": [
+        467483,
+        463514,
+        467312
+      ],
+      "barycentricCoordinates": [
+        0.42373969594093586,
+        0.38237224303726425,
+        0.19388806102179987
+      ],
+      "local3D": [
+        0.0655192881822586,
+        0.006544803734868765,
+        0.8531605005264282
+      ],
+      "world3D": [
+        0.0655192881822586,
+        0.006544803734868765,
+        0.8531605005264282
+      ],
+      "cameraProjectionXY": [
+        545.5093994140625,
+        342.21807861328125
+      ],
+      "projectionResidualPixels": 0.00014143427393835352,
+      "surfaceNormal": [
+        0.29229211807250977,
+        0.2393338531255722,
+        -0.9258967041969299
+      ],
+      "frontalVisibility": true,
+      "obliqueVisibility": true,
+      "surfaceClassification": "FRONT_SURFACE",
+      "pixelErrorAgainstManualReference": 12.273133257276557,
+      "manualUncertaintyPixels": 5,
+      "status": "PROVISIONALLY_ACCEPTED",
+      "causeClassification": "B_REFERENCE_PRECISION",
+      "validationMethod": "first-visible frontal ray, normal, ROI, oblique-view audit, barycentric reconstruction",
+      "confidence": "provisional_geometry_only",
+      "attachmentReconstructionResidualMeters": 1.6804891051951825e-08
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "status": "UNVERIFIED",
+  "command": "python scripts/onboard_goal1_model.py <model.glb> <output-directory>",
+  "models": [
+    {
+      "name": "original_tripo_generated_rigged",
+      "report": "verification/goal1-onboarding/tripo/goal1-onboarding-report.json",
+      "landmarksDetected": 478,
+      "validVisibleSurfaceAttachments": 476,
+      "deterministicSelectedAttachments": 29,
+      "unresolvedSelectedAttachments": 1,
+      "independentAccuracy": "UNVERIFIED"
+    },
+    {
+      "name": "avaturn_demo",
+      "report": "verification/goal1-onboarding/avaturn/goal1-onboarding-report.json",
+      "landmarksDetected": 0,
+      "validVisibleSurfaceAttachments": null,
+      "deterministicSelectedAttachments": null,
+      "unresolvedSelectedAttachments": null,
+      "independentAccuracy": "UNVERIFIED_NO_CALIBRATED_RENDER_INPUT"
+    },
+    {
+      "name": "brunette_demo",
+      "report": "verification/goal1-onboarding/brunette/goal1-onboarding-report.json",
+      "landmarksDetected": 0,
+      "validVisibleSurfaceAttachments": null,
+      "deterministicSelectedAttachments": null,
+      "unresolvedSelectedAttachments": null,
+      "independentAccuracy": "UNVERIFIED_NO_CALIBRATED_RENDER_INPUT"
+    }
+  ],
+  "sourceCodeChangesBetweenModels": false,
+  "nextPrerequisite": "Provide calibrated frontal renders and independent anatomical reference annotations for the additional character models, then rerun the same command."
+}
