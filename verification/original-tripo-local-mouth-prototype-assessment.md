@@ -91,6 +91,25 @@ Tripo vertices outside the smallest lip boundary while improving cavity
 occlusion and the upper/lower lip boundary, then measure the aperture and
 self-intersection state in neutral, half-open, and full-open poses.
 
+## v11 and v12 local boundary tests
+
+V11 added a lip boundary built from original Tripo vertices bordering the
+localized cut. V12 retained that boundary, reused the source material UVs for
+the rim, and added small local upper-teeth and lower-tongue proxy elements
+behind the recessed cavity. The v12 source and evidence are:
+
+- Builder: `scripts/build_original_tripo_local_mouth_prototype.py`
+- Output: `verification/vela-original-tripo-local-mouth-v12.glb`
+- Report: `verification/vela-original-tripo-local-mouth-v12.json`
+- Renders: `verification/vela-original-tripo-local-mouth-v12-render/`
+
+The v12 build completed successfully and the render shows a real open region
+under jawOpen. It still fails visual review: the rim is visibly procedural,
+the interior elements read as dark or floating, and the full-open mouth has
+visible self-intersection or occlusion artifacts. This is negative evidence
+for the current surgery construction, not evidence against transferring donor
+motion onto original Tripo vertices. Gate 4 remains FAILED.
+
 ## Gate disposition
 
 - Original-vertex architecture proof: PASS from

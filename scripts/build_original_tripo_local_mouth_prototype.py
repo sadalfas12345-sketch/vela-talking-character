@@ -87,6 +87,10 @@ bone_inverse = bone_world.inverted()
 
 coords = np.empty((len(body.data.vertices), 3), dtype=np.float64)
 body.data.vertices.foreach_get('co', coords.ravel())
+vertex_uv = np.zeros((len(coords), 2), dtype=np.float64)
+if body.data.uv_layers.active:
+    for loop in body.data.loops:
+        vertex_uv[loop.vertex_index] = body.data.uv_layers.active.data[loop.index].uv[:]
 world_matrix = np.asarray(body.matrix_world, dtype=np.float64)
 world = coords @ world_matrix[:3, :3].T + world_matrix[:3, 3]
 landmark_data = json.loads(LANDMARKS.read_text(encoding='utf-8'))
@@ -244,6 +248,124 @@ cavity_key.data.foreach_set('co', ring_moved_local.ravel())
 cavity_key.value = 0.0
 cavity_mesh.shape_keys.use_relative = True
 cavity_mesh.shape_keys.animation_data_clear()
+
+# Rebuild a minimal upper/lower lip boundary from the original Tripo vertices
+# bordering the cut. This preserves their UVs and material continuity instead
+# of introducing any donor-face surface.
+boundary_bm = bmesh.new()
+boundary_bm.from_mesh(body.data)
+boundary_ids = set()
+for edge in boundary_bm.edges:
+    if not edge.is_boundary:
+        continue
+    ids = [int(v.index) for v in edge.verts]
+    center = world[ids].mean(axis=0)
+    rel = center - camera_location
+    sx = 0.5 + rel @ right / 0.20
+    sy = 0.5 - rel @ up / 0.20
+    distance = ((sx - mouth_center_screen[0]) / (seam_rx * 1.25)) ** 2 + ((sy - mouth_center_screen[1]) / (seam_ry * 2.5)) ** 2
+    if distance <= 1.0:
+        boundary_ids.update(ids)
+boundary_bm.free()
+if len(boundary_ids) >= 8:
+    boundary_ids = sorted(boundary_ids, key=lambda index: np.arctan2(
+        (world[index] - center_world) @ up,
+        (world[index] - center_world) @ right))
+    sample_count = min(64, len(boundary_ids))
+    sample_positions = np.linspace(0, len(boundary_ids) - 1, sample_count).round().astype(int)
+    boundary_ids = [boundary_ids[index] for index in sample_positions]
+    rim_outer = world[boundary_ids]
+    rim_center = rim_outer.mean(axis=0)
+    rim_inner = rim_center + (rim_outer - rim_center) * 0.90 + forward * (ipd * 0.015)
+    rim_world = np.vstack([rim_outer, rim_inner])
+    rim_local = np.asarray([(bone_inverse @ Vector(point.tolist()))[:] for point in rim_world], dtype=np.float32)
+    rim_delta = np.asarray([
+        upper_mean * (1.0 - 1.0 / (1.0 + np.exp(-((point - rim_center) @ up) / max(mouth_width_world * 0.055, 1e-6))))
+        + lower_mean * (1.0 / (1.0 + np.exp(-((point - rim_center) @ up) / max(mouth_width_world * 0.055, 1e-6))))
+        for point in rim_world
+    ], dtype=np.float64)
+    rim_moved_local = np.asarray([(bone_inverse @ Vector((point + delta).tolist()))[:] for point, delta in zip(rim_world, rim_delta)], dtype=np.float32)
+    rim_faces = []
+    rim_count = len(boundary_ids)
+    for index in range(rim_count):
+        nxt = (index + 1) % rim_count
+        rim_faces.append((index, nxt, rim_count + nxt, rim_count + index))
+    rim_mesh = bpy.data.meshes.new('Original Tripo localized lip boundary geometry')
+    rim_mesh.from_pydata(rim_local.tolist(), [], rim_faces)
+    rim_mesh.update()
+    rim_obj = bpy.data.objects.new('Original Tripo localized lip boundary', rim_mesh)
+    bpy.context.scene.collection.objects.link(rim_obj)
+    rim_obj.parent = armature
+    rim_obj.parent_type = 'BONE'
+    rim_obj.parent_bone = head_bone.name
+    rim_obj.matrix_world = bone_world
+    if body.material_slots and body.material_slots[0].material:
+        rim_mesh.materials.append(body.material_slots[0].material)
+    uv_layer = rim_mesh.uv_layers.new(name='UVMap')
+    for poly in rim_mesh.polygons:
+        for loop_index in poly.loop_indices:
+            vertex_index = rim_mesh.loops[loop_index].vertex_index
+            source_index = boundary_ids[vertex_index % rim_count]
+            uv_layer.data[loop_index].uv = vertex_uv[source_index]
+    rim_obj.shape_key_add(name='Basis', from_mix=False)
+    rim_key = rim_obj.shape_key_add(name='xfer_jawOpen_original_tripo', from_mix=False)
+    rim_key.data.foreach_set('co', rim_moved_local.ravel())
+    rim_key.value = 0.0
+    rim_mesh.shape_keys.use_relative = True
+    rim_mesh.shape_keys.animation_data_clear()
+else:
+    rim_count = 0
+
+def add_interior_ellipse(name, center, radius_x, radius_y, delta, color):
+    count = 20
+    points = []
+    for index in range(count):
+        angle = 2.0 * np.pi * index / count
+        points.append(center + right * (np.cos(angle) * radius_x) + up * (np.sin(angle) * radius_y))
+    points.append(center)
+    local_points = np.asarray([(bone_inverse @ Vector(point.tolist()))[:] for point in points], dtype=np.float32)
+    moved_points = np.asarray([(bone_inverse @ Vector((point + delta).tolist()))[:] for point in points], dtype=np.float32)
+    faces = [(index, (index + 1) % count, count) for index in range(count)]
+    mesh = bpy.data.meshes.new(name + ' geometry')
+    mesh.from_pydata(local_points.tolist(), [], faces)
+    mesh.update()
+    obj = bpy.data.objects.new(name, mesh)
+    bpy.context.scene.collection.objects.link(obj)
+    obj.parent = armature
+    obj.parent_type = 'BONE'
+    obj.parent_bone = head_bone.name
+    obj.matrix_world = bone_world
+    mat = bpy.data.materials.new(name + ' material')
+    mat.diffuse_color = (*color, 1.0)
+    mat.use_nodes = True
+    shader = mat.node_tree.nodes.get('Principled BSDF')
+    if shader:
+        shader.inputs['Base Color'].default_value = (*color, 1.0)
+        shader.inputs['Roughness'].default_value = 0.8
+    mesh.materials.append(mat)
+    obj.shape_key_add(name='Basis', from_mix=False)
+    shape = obj.shape_key_add(name='xfer_jawOpen_original_tripo', from_mix=False)
+    shape.data.foreach_set('co', moved_points.ravel())
+    shape.value = 0.0
+    mesh.shape_keys.use_relative = True
+    mesh.shape_keys.animation_data_clear()
+    return obj
+
+# Interior elements are deliberately small and local. They are not donor
+# geometry; they provide the minimum oral anatomy needed behind the new lip
+# boundary and follow the measured upper/lower donor motion.
+add_interior_ellipse(
+    'Original Tripo localized upper teeth',
+    center_world + up * (mouth_width_world * 0.035) - forward * (ipd * 0.075),
+    mouth_width_world * 0.18, mouth_width_world * 0.020, upper_mean,
+    (0.75, 0.60, 0.45),
+)
+add_interior_ellipse(
+    'Original Tripo localized lower tongue',
+    center_world - up * (mouth_width_world * 0.035) - forward * (ipd * 0.075),
+    mouth_width_world * 0.22, mouth_width_world * 0.030, lower_mean,
+    (0.22, 0.025, 0.035),
+)
 
 bpy.ops.object.select_all(action='DESELECT')
 for obj in bpy.context.scene.objects:
