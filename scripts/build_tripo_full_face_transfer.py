@@ -26,6 +26,7 @@ OUTPUT = Path(os.environ.get('VELA_FACEFIT_OUTPUT', ASSET / 'vela-photoreal-face
 REPORT = Path(os.environ.get('VELA_FACEFIT_REPORT', ASSET / 'facial-facefit-prototype-report.json'))
 COLOR_SOURCE_MODE = os.environ.get('VELA_FACE_COLOR_SOURCE', 'face').lower()
 FACE_PATCH_SCOPE = os.environ.get('VELA_FACE_PATCH_SCOPE', 'oval').lower()
+FACE_CUT_MODE = os.environ.get('VELA_FACE_CUT_MODE', 'landmark-oval').lower()
 SURFACE_CONFORM = os.environ.get('VELA_FACE_SURFACE_CONFORM', 'true').lower() != 'false'
 FACE_OVAL_EXPANSION = float(os.environ.get('VELA_FACE_OVAL_EXPANSION', '1.0'))
 FACE_DEPTH_TOLERANCE_IPD = float(os.environ.get('VELA_FACE_DEPTH_TOLERANCE_IPD', '0.42'))
@@ -45,6 +46,29 @@ def point_in_polygon(x, y, polygon):
         inside ^= crosses & (x < edge_x)
         x0, y0 = x1, y1
     return inside
+
+
+def convex_hull(points):
+    """Return the 2D monotonic-chain hull for a set of screen points."""
+    unique = sorted({(float(point[0]), float(point[1])) for point in points})
+    if len(unique) <= 2:
+        return np.asarray(unique, dtype=np.float64)
+
+    def cross(a, b, c):
+        return ((b[0] - a[0]) * (c[1] - a[1])
+                - (b[1] - a[1]) * (c[0] - a[0]))
+
+    lower = []
+    for point in unique:
+        while len(lower) >= 2 and cross(lower[-2], lower[-1], point) <= 0:
+            lower.pop()
+        lower.append(point)
+    upper = []
+    for point in reversed(unique):
+        while len(upper) >= 2 and cross(upper[-2], upper[-1], point) <= 0:
+            upper.pop()
+        upper.append(point)
+    return np.asarray(lower[:-1] + upper[:-1], dtype=np.float64)
 
 
 def screen_project(world, camera_location, right, up, forward, scale):
@@ -467,6 +491,24 @@ cam = np.asarray(camera_location[:], dtype=np.float64)
 face_polygon = landmark_pixels[FACE_OVAL, :2]
 if FACE_OVAL_EXPANSION != 1.0:
     face_polygon = face_polygon.mean(axis=0) + (face_polygon - face_polygon.mean(axis=0)) * FACE_OVAL_EXPANSION
+if FACE_CUT_MODE == 'donor-hull':
+    donor_basis = fitted_arrays['Head_Mesh__Basis'].astype(np.float64)
+    donor_triangles = fitted_arrays['Head_Mesh__Triangles'].astype(np.int32)
+    donor_faces = donor_basis[donor_triangles]
+    donor_normals = np.cross(donor_faces[:, 1] - donor_faces[:, 0],
+                             donor_faces[:, 2] - donor_faces[:, 0])
+    donor_toward_camera = donor_normals @ -forward
+    donor_projected = screen_project(donor_basis, cam, right, up, forward, 0.20)
+    donor_inside = point_in_polygon(
+        donor_projected[:, 0], donor_projected[:, 1], face_polygon)
+    donor_selected = np.ones(len(donor_triangles), dtype=bool) if FACE_PATCH_SCOPE == 'full-head' else (
+        donor_inside[donor_triangles].all(axis=1) & (donor_toward_camera > 0.0))
+    donor_vertices = np.unique(donor_triangles[donor_selected].ravel())
+    if len(donor_vertices) < 3:
+        raise RuntimeError('Donor silhouette cut could not find enough fitted head vertices.')
+    face_polygon = convex_hull(donor_projected[donor_vertices, :2])
+    if len(face_polygon) < 3:
+        raise RuntimeError('Donor silhouette cut produced an invalid screen hull.')
 valid = np.isfinite(target_points[:, 0])
 target_xy = landmark_pixels[valid, :2]
 target_depth = (target_points[valid] - cam) @ forward
@@ -653,7 +695,7 @@ report = {
     'retainedFittedFaceTriangles': int(len(head_selected_faces)),
     'retainedFittedFaceVertices': int(len(head_used_vertices)),
     'facePatchScope': FACE_PATCH_SCOPE,
-    'faceCutCoverage': {'ovalExpansion': FACE_OVAL_EXPANSION, 'depthToleranceIPD': FACE_DEPTH_TOLERANCE_IPD},
+    'faceCutCoverage': {'mode': FACE_CUT_MODE, 'ovalExpansion': FACE_OVAL_EXPANSION, 'depthToleranceIPD': FACE_DEPTH_TOLERANCE_IPD},
     'faceSurfaceFit': face_surface_fit,
     'textureTransfer': bake,
     'facialParts': [obj.name for obj in created],
