@@ -44,6 +44,13 @@ jawOpen upper/lower lip fields while retaining vertical and facial-depth motion:
 - Result: slightly improved symmetry, but Gate 4 remains failed because the
   lip boundary and recessed interior are still visibly synthetic.
 
+Topology measurement for v3 is recorded in
+`verification/vela-original-tripo-local-mouth-v3-measurements.json`.
+The imported original shell has 55,196 boundary edges and the v3 body has
+55,546, an increase of 350 localized boundary edges, with zero non-manifold
+edges in both measurements. The separate cavity has an intentional open front
+boundary, so this is evidence for diagnosis, not a Gate 4 pass.
+
 ## Result
 
 The first prototype removed too much depth and produced a dark block-like
