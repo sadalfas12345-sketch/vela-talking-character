@@ -1,0 +1,39 @@
+{
+  "index": 16,
+  "cameraLocation": [
+    7.814005374908447,
+    -0.3138313591480255,
+    7.428563594818115
+  ],
+  "target": [
+    -0.0019164066761732101,
+    0.005749141797423363,
+    0.8412960171699524
+  ],
+  "orthoScale": 0.3657343089580536,
+  "resolution": [
+    640,
+    640
+  ],
+  "projection": "ORTHOGRAPHIC",
+  "sourceGLB": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\vela-photoreal\\generated-rigged.glb",
+  "boundsMin": [
+    -0.9510578513145447,
+    -0.9999999403953552,
+    -1.0
+  ],
+  "boundsMax": [
+    0.9510578513145447,
+    0.9999999403953552,
+    1.0
+  ],
+  "center": [
+    -0.0019164066761732101,
+    0.005749141797423363,
+    0.8412960171699524
+  ],
+  "selectionScore": 0.8641337695836693,
+  "eyeDistancePixels": 86.06062309548024,
+  "detectedLandmarks": 478,
+  "selectionMethod": "spherical GLB-bound candidate views scored by MediaPipe eye, nose, mouth symmetry and face size"
+}

@@ -1,0 +1,56 @@
+{
+  "baselineCommit": "2a553daffc1e72a99e9f3ed8c95451c6bd02ae5a",
+  "geometryModified": false,
+  "models": {
+    "female": {
+      "path": "assets/tripo/vela-photoreal/generated-rigged.glb",
+      "candidateCount": 32,
+      "detectedCandidateCount": 8,
+      "selectedIndex": 16,
+      "selectionScore": 0.8641337695836693,
+      "focusMethod": "head-bone-metadata",
+      "landmarksDetected": 478,
+      "frontalSurfaceHits": 478,
+      "validFrontSurfaceHits": 477,
+      "ambiguousSurfaceHits": 1,
+      "ambiguousIndices": [286],
+      "unresolvedLandmarks": 0,
+      "anatomicalScore": "UNVERIFIED"
+    },
+    "male": {
+      "path": "assets/tripo/generalization-male-20261105/generated-original.glb",
+      "candidateCount": 32,
+      "detectedCandidateCount": 10,
+      "selectedIndex": 16,
+      "selectionScore": 0.90459995241319,
+      "focusMethod": "full-mesh-bounds",
+      "landmarksDetected": 478,
+      "frontalSurfaceHits": 475,
+      "validFrontSurfaceHits": 474,
+      "ambiguousSurfaceHits": 1,
+      "ambiguousIndices": [62],
+      "unresolvedLandmarkIndices": [148, 377, 400],
+      "anatomicalScore": "UNVERIFIED"
+    }
+  },
+  "regionalScores": {
+    "female": {
+      "lipsMouth": "UNVERIFIED",
+      "eyesEyelids": "UNVERIFIED",
+      "nose": "UNVERIFIED",
+      "jawChin": "UNVERIFIED",
+      "eyebrows": "UNVERIFIED",
+      "remaining": "UNVERIFIED",
+      "overall": "UNVERIFIED"
+    },
+    "male": {
+      "lipsMouth": "UNVERIFIED",
+      "eyesEyelids": "UNVERIFIED",
+      "nose": "UNVERIFIED",
+      "jawChin": "UNVERIFIED",
+      "eyebrows": "UNVERIFIED",
+      "remaining": "UNVERIFIED",
+      "overall": "UNVERIFIED"
+    }
+  }
+}

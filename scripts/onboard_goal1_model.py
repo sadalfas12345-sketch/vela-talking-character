@@ -15,6 +15,8 @@ import argparse
 import json
 import math
 import struct
+import subprocess
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -146,8 +148,34 @@ def main():
     parser.add_argument('--landmarks-json', type=Path, help='MediaPipe landmark JSON for this exact model and calibrated image')
     parser.add_argument('--raycast-report', type=Path, help='First-visible surface audit for this exact model and camera')
     parser.add_argument('--attachment-manifest', type=Path, help='Barycentric attachment manifest for this exact model')
+    parser.add_argument('--auto-camera', action='store_true', help='Discover a frontal camera, detect landmarks, and raycast them automatically')
+    parser.add_argument('--blender', type=Path, default=Path(r'C:\Program Files\Blender Foundation\Blender 5.2\blender.exe'))
+    parser.add_argument('--landmarker-model', type=Path, default=Path('models/face_landmarker.task'))
+    parser.add_argument('--candidate-count', type=int, default=32)
     args = parser.parse_args()
     args.output_dir.mkdir(parents=True, exist_ok=True)
+
+    if args.auto_camera:
+        camera_dir = args.output_dir / 'camera-discovery'
+        render_script = Path(__file__).with_name('render_goal1_camera_candidates.py').resolve()
+        discover_script = Path(__file__).with_name('discover_goal1_camera.py').resolve()
+        raycast_script = Path(__file__).with_name('raycast_goal1_discovered_camera.py').resolve()
+        subprocess.run([
+            str(args.blender), '-b', '--python', str(render_script), '--',
+            str(args.glb.resolve()), str(camera_dir.resolve()), str(args.candidate_count)
+        ], check=True)
+        subprocess.run([
+            sys.executable, str(discover_script), str(camera_dir.resolve()),
+            str(args.landmarker_model.resolve())
+        ], check=True)
+        args.landmarks_json = camera_dir / 'detected-landmarks.json'
+        args.raycast_report = camera_dir / 'raycast-report.json'
+        subprocess.run([
+            str(args.blender), '-b', '--python', str(raycast_script), '--',
+            str(args.glb.resolve()), str((camera_dir / 'discovered-camera.json').resolve()),
+            str(args.raycast_report.resolve())
+        ], check=True)
+
     document, binary = read_glb(args.glb)
     matrices = world_matrices(document)
     meshes = transformed_bounds(document, binary, matrices)
@@ -162,7 +190,7 @@ def main():
     detected_count = len(landmark_data.get('landmarks', [])) if landmark_data else 0
     surface_count = raycast_data.get('validFrontSurfaceHits') if raycast_data else None
     attachment_count = attachment_data.get('deterministicAttachmentCount') if attachment_data else None
-    orientation_status = 'CALIBRATED_FROM_SUPPLIED_EVIDENCE' if raycast_data else 'UNVERIFIED_NO_MODEL_CAMERA_CALIBRATION'
+    orientation_status = 'CALIBRATED_AUTOMATICALLY' if args.auto_camera else ('CALIBRATED_FROM_SUPPLIED_EVIDENCE' if raycast_data else 'UNVERIFIED_NO_MODEL_CAMERA_CALIBRATION')
     head_status = 'CANDIDATE_HEAD_METADATA_FOUND' if head_nodes else 'AMBIGUOUS_NO_HEAD_METADATA'
     detection_status = 'EVIDENCE_ATTACHED' if landmark_data else 'UNVERIFIED_NO_RENDERED_FACE_INPUT'
     report = {
@@ -190,8 +218,8 @@ def main():
         'sourceCodeChangesBetweenModels': False,
         'limitations': [
             'A GLB alone does not contain anatomical ground truth or a guaranteed frontal camera.',
-            'Automatic head orientation is not asserted when metadata is absent or ambiguous.',
-            '2D MediaPipe detection requires a calibrated render image; this command does not silently invent one.',
+            'Automatic focus uses head-bone metadata when available and otherwise the imported mesh bounds; the method is recorded in camera-discovery/candidate-cameras.json.',
+            'Anatomical correctness remains unverified without independent reference annotations.',
         ],
     }
     (args.output_dir / 'goal1-onboarding-report.json').write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')

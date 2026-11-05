@@ -1,0 +1,39 @@
+{
+  "index": 16,
+  "cameraLocation": [
+    3.599574089050293,
+    -0.147231325507164,
+    3.033668041229248
+  ],
+  "target": [
+    0.00010097026824951172,
+    -5.4642558097839355e-05,
+    2.8073787689208984e-05
+  ],
+  "orthoScale": 1.1571879386901855,
+  "resolution": [
+    640,
+    640
+  ],
+  "projection": "ORTHOGRAPHIC",
+  "sourceGLB": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\generalization-male-20261105\\generated-original.glb",
+  "boundsMin": [
+    -0.4212241768836975,
+    -0.44494861364364624,
+    -0.4903058111667633
+  ],
+  "boundsMax": [
+    0.42142611742019653,
+    0.44483932852745056,
+    0.4903619587421417
+  ],
+  "center": [
+    0.00010097026824951172,
+    -5.4642558097839355e-05,
+    2.8073787689208984e-05
+  ],
+  "selectionScore": 0.90459995241319,
+  "eyeDistancePixels": 170.24427879880534,
+  "detectedLandmarks": 478,
+  "selectionMethod": "spherical GLB-bound candidate views scored by MediaPipe eye, nose, mouth symmetry and face size"
+}
