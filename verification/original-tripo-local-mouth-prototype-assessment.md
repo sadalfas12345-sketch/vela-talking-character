@@ -56,6 +56,12 @@ alignment failure rather than cavity lighting. V6 remains failed and is
 retained as negative evidence in
 `verification/vela-original-tripo-local-mouth-v6-render/`.
 
+The v7/v8 candidates moved only the cavity inner and back rings toward the
+visible seam. The assembled render still exposes the same black center, so
+simple cavity depth alignment is also insufficient. These remain diagnostic
+artifacts; the next repair must create explicit upper and lower lip boundaries
+from the original Tripo local surface.
+
 Topology measurement for v3 is recorded in
 `verification/vela-original-tripo-local-mouth-v3-measurements.json`.
 The imported original shell has 55,196 boundary edges and the v3 body has

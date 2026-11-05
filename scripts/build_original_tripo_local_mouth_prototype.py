@@ -202,9 +202,9 @@ for index in range(ring_count):
     angle = 2.0 * np.pi * index / ring_count
     xy = right * (np.cos(angle) * mouth_width_world * 0.31) + up * (np.sin(angle) * mouth_width_world * 0.045)
     outer_ring.append(center_world + xy)
-    inner_ring.append(center_world + xy * 0.88 + forward * (ipd * 0.10))
-    back_ring.append(center_world + xy * 0.72 + forward * (ipd * 0.20))
-back_center = center_world + forward * (ipd * 0.20)
+    inner_ring.append(center_world + xy * 0.88 - forward * (ipd * 0.02))
+    back_ring.append(center_world + xy * 0.72 - forward * (ipd * 0.04))
+back_center = center_world - forward * (ipd * 0.04)
 ring_world = np.vstack([np.asarray(outer_ring), np.asarray(inner_ring), np.asarray(back_ring), back_center[None]])
 ring_vertical = np.asarray([(point - center_world) @ up for point in ring_world], dtype=np.float64)
 ring_lower_fraction = 1.0 / (1.0 + np.exp(ring_vertical / max(mouth_width_world * 0.055, 1e-6)))

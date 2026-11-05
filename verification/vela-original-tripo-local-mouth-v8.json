@@ -1,0 +1,26 @@
+{
+  "status": "LOCAL_MOUTH_SURGERY_PROTOTYPE_REQUIRES_RENDER_REVIEW",
+  "sourceTripo": "assets\\tripo\\vela-photoreal\\generated-rigged.glb",
+  "originalTripoVertexCount": 999787,
+  "localizedCutFaces": 1110,
+  "localizedCutVerticesEstimated": 1781,
+  "preservesOutsideMouth": true,
+  "donorGeometryImported": false,
+  "topologyReplacement": false,
+  "mouthSurgery": true,
+  "cavityVertices": 73,
+  "cavityFaces": 72,
+  "motionSource": "Avaturn landmark displacement only",
+  "solver": {
+    "type": "localized Gaussian RBF interpolation with constrained upper/lower lip fields",
+    "handleCount": 476,
+    "neighbors": 24,
+    "sigmaMeters": 0.01953417091595971,
+    "depthToleranceMeters": 0.025115362606233916
+  },
+  "output": "assets\\tripo\\vela-photoreal\\intermediates\\vela-original-tripo-local-mouth-v8.glb",
+  "limitations": [
+    "Only jawOpen is wired in this prototype.",
+    "Upper/lower lip boundary quality, cavity occlusion, self-intersections, and runtime behavior remain to be reviewed."
+  ]
+}

@@ -48,6 +48,10 @@ if os.environ.get('VELA_HIDE_CAVITY') == '1':
     for obj in meshes:
         if 'cavity' in obj.name.lower():
             obj.hide_render = True
+if os.environ.get('VELA_HIDE_BODY') == '1':
+    for obj in meshes:
+        if 'cavity' not in obj.name.lower():
+            obj.hide_render = True
 key_name = os.environ.get('VELA_ORIGINAL_TRANSFER_KEY', 'xfer_jawOpen_original_tripo')
 captures = []
 for state, value in [('neutral', 0.0), ('jawOpenTransfer', 1.0)]:
