@@ -44,6 +44,10 @@ if scene.world is None:
     scene.world = bpy.data.worlds.new('Original Tripo Transfer Proof World')
 scene.world.color = (0.05, 0.05, 0.05)
 meshes = [obj for obj in scene.objects if obj.type == 'MESH']
+if os.environ.get('VELA_HIDE_CAVITY') == '1':
+    for obj in meshes:
+        if 'cavity' in obj.name.lower():
+            obj.hide_render = True
 key_name = os.environ.get('VELA_ORIGINAL_TRANSFER_KEY', 'xfer_jawOpen_original_tripo')
 captures = []
 for state, value in [('neutral', 0.0), ('jawOpenTransfer', 1.0)]:

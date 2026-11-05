@@ -50,6 +50,12 @@ brighter emissive cavity material. The render still contains a black central
 artifact and fails Gate 4, so the defect is not accepted as a lighting-only
 issue. Evidence is in `verification/vela-original-tripo-local-mouth-v5-render/`.
 
+The v6 candidate removes the hidden shell depth column behind the narrow seam.
+The black center remains, proving that the current defect is a boundary or
+alignment failure rather than cavity lighting. V6 remains failed and is
+retained as negative evidence in
+`verification/vela-original-tripo-local-mouth-v6-render/`.
+
 Topology measurement for v3 is recorded in
 `verification/vela-original-tripo-local-mouth-v3-measurements.json`.
 The imported original shell has 55,196 boundary edges and the v3 body has

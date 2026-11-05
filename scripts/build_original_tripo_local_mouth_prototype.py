@@ -110,9 +110,10 @@ for start in range(0, len(screen), 20000):
     nearest[start:stop] = np.argmin(np.sum((screen[start:stop, None, :2] - mouth_xy[None, :, :]) ** 2, axis=2), axis=1)
 target_depth = np.asarray([screen[np.argmin(np.sum((screen[:, :2] - landmark_pixels[index, :2]) ** 2, axis=1)), 2] for index in mouth_indices])
 ipd = float(np.linalg.norm((landmark_pixels[33, :2] - landmark_pixels[263, :2]) * 0.20))
-# Restrict surgery to the visible lip shell. The first prototype admitted
-# roughly 25 mm of hidden geometry behind the lips and produced jagged cuts.
-depth_tolerance = max(ipd * 0.08, 0.0015)
+# The seam is narrow in screen space, but the closed shell has hidden layers
+# behind it. Remove that depth column as well so its backfaces cannot show
+# through the opening. The narrow seam keeps this local to the mouth.
+depth_tolerance = max(ipd * 0.45, 0.004)
 face_mask = inside & (np.abs(screen[:, 2] - target_depth[nearest]) <= depth_tolerance)
 
 body.data.calc_loop_triangles()
