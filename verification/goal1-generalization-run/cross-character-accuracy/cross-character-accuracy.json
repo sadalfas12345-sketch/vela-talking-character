@@ -1,0 +1,1652 @@
+{
+  "female": {
+    "landmarksDetected": 478,
+    "validGeometricAttachments": 477,
+    "reviewedPoints": 36,
+    "provisionalWeightedScore": 93.333,
+    "medianPixelError": 0.401,
+    "p90PixelError": 5.114,
+    "p95PixelError": 36.926,
+    "interocularPixels": 86.061,
+    "regions": {
+      "lipsMouth": {
+        "maximumPoints": 30,
+        "evaluated": 8,
+        "correct": 8,
+        "incorrect": 0,
+        "occludedOrAmbiguous": 0,
+        "score": 30.0,
+        "status": "PROVISIONAL"
+      },
+      "eyesEyelids": {
+        "maximumPoints": 25,
+        "evaluated": 8,
+        "correct": 8,
+        "incorrect": 0,
+        "occludedOrAmbiguous": 0,
+        "score": 25.0,
+        "status": "PROVISIONAL"
+      },
+      "nose": {
+        "maximumPoints": 15,
+        "evaluated": 5,
+        "correct": 5,
+        "incorrect": 0,
+        "occludedOrAmbiguous": 0,
+        "score": 15.0,
+        "status": "PROVISIONAL"
+      },
+      "jawChin": {
+        "maximumPoints": 10,
+        "evaluated": 3,
+        "correct": 3,
+        "incorrect": 0,
+        "occludedOrAmbiguous": 0,
+        "score": 10.0,
+        "status": "PROVISIONAL"
+      },
+      "eyebrows": {
+        "maximumPoints": 10,
+        "evaluated": 6,
+        "correct": 6,
+        "incorrect": 0,
+        "occludedOrAmbiguous": 0,
+        "score": 10.0,
+        "status": "PROVISIONAL"
+      },
+      "remaining": {
+        "maximumPoints": 10,
+        "evaluated": 6,
+        "correct": 2,
+        "incorrect": 4,
+        "occludedOrAmbiguous": 0,
+        "score": 3.333,
+        "status": "PROVISIONAL"
+      }
+    },
+    "independentValidation": "UNVERIFIED: single provisional reviewer",
+    "points": [
+      {
+        "model": "female",
+        "feature": "left eye outer",
+        "region": "eyesEyelids",
+        "mediapipeIndex": 33,
+        "detectedXY": [
+          276.032,
+          315.648
+        ],
+        "referenceXY": [
+          275,
+          316
+        ],
+        "pixelError": 1.091,
+        "interocularNormalizedError": 0.01268,
+        "tolerancePixels": 4,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "female",
+        "feature": "left eye inner",
+        "region": "eyesEyelids",
+        "mediapipeIndex": 133,
+        "detectedXY": [
+          302.478,
+          319.678
+        ],
+        "referenceXY": [
+          303,
+          320
+        ],
+        "pixelError": 0.613,
+        "interocularNormalizedError": 0.00713,
+        "tolerancePixels": 4,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "female",
+        "feature": "left upper lid",
+        "region": "eyesEyelids",
+        "mediapipeIndex": 159,
+        "detectedXY": [
+          287.172,
+          312.909
+        ],
+        "referenceXY": [
+          287,
+          313
+        ],
+        "pixelError": 0.195,
+        "interocularNormalizedError": 0.00226,
+        "tolerancePixels": 4,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "female",
+        "feature": "left lower lid",
+        "region": "eyesEyelids",
+        "mediapipeIndex": 145,
+        "detectedXY": [
+          290.133,
+          321.441
+        ],
+        "referenceXY": [
+          290,
+          321
+        ],
+        "pixelError": 0.46,
+        "interocularNormalizedError": 0.00535,
+        "tolerancePixels": 4,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "female",
+        "feature": "right eye outer",
+        "region": "eyesEyelids",
+        "mediapipeIndex": 263,
+        "detectedXY": [
+          362.083,
+          314.347
+        ],
+        "referenceXY": [
+          362,
+          314
+        ],
+        "pixelError": 0.357,
+        "interocularNormalizedError": 0.00415,
+        "tolerancePixels": 4,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "female",
+        "feature": "right eye inner",
+        "region": "eyesEyelids",
+        "mediapipeIndex": 362,
+        "detectedXY": [
+          335.822,
+          319.109
+        ],
+        "referenceXY": [
+          336,
+          319
+        ],
+        "pixelError": 0.209,
+        "interocularNormalizedError": 0.00242,
+        "tolerancePixels": 4,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "female",
+        "feature": "right upper lid",
+        "region": "eyesEyelids",
+        "mediapipeIndex": 386,
+        "detectedXY": [
+          351.712,
+          311.63
+        ],
+        "referenceXY": [
+          352,
+          312
+        ],
+        "pixelError": 0.469,
+        "interocularNormalizedError": 0.00545,
+        "tolerancePixels": 4,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "female",
+        "feature": "right lower lid",
+        "region": "eyesEyelids",
+        "mediapipeIndex": 374,
+        "detectedXY": [
+          348.164,
+          320.043
+        ],
+        "referenceXY": [
+          348,
+          320
+        ],
+        "pixelError": 0.169,
+        "interocularNormalizedError": 0.00197,
+        "tolerancePixels": 4,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "female",
+        "feature": "nose bridge",
+        "region": "nose",
+        "mediapipeIndex": 168,
+        "detectedXY": [
+          319.854,
+          320.33
+        ],
+        "referenceXY": [
+          320,
+          320
+        ],
+        "pixelError": 0.361,
+        "interocularNormalizedError": 0.00419,
+        "tolerancePixels": 5,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "female",
+        "feature": "nose dorsum",
+        "region": "nose",
+        "mediapipeIndex": 6,
+        "detectedXY": [
+          319.882,
+          329.641
+        ],
+        "referenceXY": [
+          320,
+          330
+        ],
+        "pixelError": 0.378,
+        "interocularNormalizedError": 0.00439,
+        "tolerancePixels": 5,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "female",
+        "feature": "nose tip",
+        "region": "nose",
+        "mediapipeIndex": 1,
+        "detectedXY": [
+          320.723,
+          365.551
+        ],
+        "referenceXY": [
+          321,
+          366
+        ],
+        "pixelError": 0.527,
+        "interocularNormalizedError": 0.00613,
+        "tolerancePixels": 5,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "female",
+        "feature": "left nose wing",
+        "region": "nose",
+        "mediapipeIndex": 98,
+        "detectedXY": [
+          302.986,
+          359.253
+        ],
+        "referenceXY": [
+          303,
+          359
+        ],
+        "pixelError": 0.253,
+        "interocularNormalizedError": 0.00295,
+        "tolerancePixels": 5,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "female",
+        "feature": "right nose wing",
+        "region": "nose",
+        "mediapipeIndex": 327,
+        "detectedXY": [
+          337.346,
+          358.512
+        ],
+        "referenceXY": [
+          337,
+          359
+        ],
+        "pixelError": 0.598,
+        "interocularNormalizedError": 0.00695,
+        "tolerancePixels": 5,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "female",
+        "feature": "left mouth corner",
+        "region": "lipsMouth",
+        "mediapipeIndex": 61,
+        "detectedXY": [
+          292.373,
+          370.097
+        ],
+        "referenceXY": [
+          292,
+          370
+        ],
+        "pixelError": 0.385,
+        "interocularNormalizedError": 0.00448,
+        "tolerancePixels": 4,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "female",
+        "feature": "right mouth corner",
+        "region": "lipsMouth",
+        "mediapipeIndex": 291,
+        "detectedXY": [
+          347.38,
+          367.796
+        ],
+        "referenceXY": [
+          347,
+          368
+        ],
+        "pixelError": 0.431,
+        "interocularNormalizedError": 0.00501,
+        "tolerancePixels": 4,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "female",
+        "feature": "upper lip center",
+        "region": "lipsMouth",
+        "mediapipeIndex": 13,
+        "detectedXY": [
+          320.763,
+          379.138
+        ],
+        "referenceXY": [
+          321,
+          379
+        ],
+        "pixelError": 0.274,
+        "interocularNormalizedError": 0.00318,
+        "tolerancePixels": 4,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "female",
+        "feature": "lower lip center",
+        "region": "lipsMouth",
+        "mediapipeIndex": 14,
+        "detectedXY": [
+          320.55,
+          380.123
+        ],
+        "referenceXY": [
+          321,
+          381
+        ],
+        "pixelError": 0.986,
+        "interocularNormalizedError": 0.01146,
+        "tolerancePixels": 4,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "female",
+        "feature": "left upper vermilion",
+        "region": "lipsMouth",
+        "mediapipeIndex": 78,
+        "detectedXY": [
+          294.652,
+          371.153
+        ],
+        "referenceXY": [
+          295,
+          371
+        ],
+        "pixelError": 0.38,
+        "interocularNormalizedError": 0.00442,
+        "tolerancePixels": 4,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "female",
+        "feature": "right upper vermilion",
+        "region": "lipsMouth",
+        "mediapipeIndex": 308,
+        "detectedXY": [
+          345.108,
+          369.27
+        ],
+        "referenceXY": [
+          345,
+          369
+        ],
+        "pixelError": 0.291,
+        "interocularNormalizedError": 0.00338,
+        "tolerancePixels": 4,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "female",
+        "feature": "left lower vermilion",
+        "region": "lipsMouth",
+        "mediapipeIndex": 82,
+        "detectedXY": [
+          313.918,
+          378.377
+        ],
+        "referenceXY": [
+          314,
+          378
+        ],
+        "pixelError": 0.386,
+        "interocularNormalizedError": 0.00448,
+        "tolerancePixels": 4,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "female",
+        "feature": "right lower vermilion",
+        "region": "lipsMouth",
+        "mediapipeIndex": 312,
+        "detectedXY": [
+          327.359,
+          377.921
+        ],
+        "referenceXY": [
+          327,
+          378
+        ],
+        "pixelError": 0.367,
+        "interocularNormalizedError": 0.00427,
+        "tolerancePixels": 4,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "female",
+        "feature": "chin",
+        "region": "jawChin",
+        "mediapipeIndex": 152,
+        "detectedXY": [
+          319.61,
+          409.937
+        ],
+        "referenceXY": [
+          320,
+          410
+        ],
+        "pixelError": 0.395,
+        "interocularNormalizedError": 0.00459,
+        "tolerancePixels": 6,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "female",
+        "feature": "left jawline",
+        "region": "jawChin",
+        "mediapipeIndex": 172,
+        "detectedXY": [
+          269.248,
+          368.315
+        ],
+        "referenceXY": [
+          269,
+          368
+        ],
+        "pixelError": 0.401,
+        "interocularNormalizedError": 0.00466,
+        "tolerancePixels": 7,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "female",
+        "feature": "right jawline",
+        "region": "jawChin",
+        "mediapipeIndex": 397,
+        "detectedXY": [
+          366.635,
+          365.021
+        ],
+        "referenceXY": [
+          367,
+          365
+        ],
+        "pixelError": 0.366,
+        "interocularNormalizedError": 0.00425,
+        "tolerancePixels": 7,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "female",
+        "feature": "left brow inner",
+        "region": "eyebrows",
+        "mediapipeIndex": 70,
+        "detectedXY": [
+          266.04,
+          303.424
+        ],
+        "referenceXY": [
+          266,
+          303
+        ],
+        "pixelError": 0.426,
+        "interocularNormalizedError": 0.00495,
+        "tolerancePixels": 5,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "female",
+        "feature": "left brow",
+        "region": "eyebrows",
+        "mediapipeIndex": 63,
+        "detectedXY": [
+          272.214,
+          301.913
+        ],
+        "referenceXY": [
+          272,
+          302
+        ],
+        "pixelError": 0.231,
+        "interocularNormalizedError": 0.00269,
+        "tolerancePixels": 5,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "female",
+        "feature": "left brow outer",
+        "region": "eyebrows",
+        "mediapipeIndex": 105,
+        "detectedXY": [
+          280.514,
+          302.355
+        ],
+        "referenceXY": [
+          281,
+          302
+        ],
+        "pixelError": 0.602,
+        "interocularNormalizedError": 0.00699,
+        "tolerancePixels": 5,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "female",
+        "feature": "right brow inner",
+        "region": "eyebrows",
+        "mediapipeIndex": 336,
+        "detectedXY": [
+          333.851,
+          308.144
+        ],
+        "referenceXY": [
+          334,
+          308
+        ],
+        "pixelError": 0.208,
+        "interocularNormalizedError": 0.00241,
+        "tolerancePixels": 5,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "female",
+        "feature": "right brow",
+        "region": "eyebrows",
+        "mediapipeIndex": 293,
+        "detectedXY": [
+          369.921,
+          299.416
+        ],
+        "referenceXY": [
+          370,
+          299
+        ],
+        "pixelError": 0.424,
+        "interocularNormalizedError": 0.00492,
+        "tolerancePixels": 5,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "female",
+        "feature": "right brow outer",
+        "region": "eyebrows",
+        "mediapipeIndex": 334,
+        "detectedXY": [
+          360.621,
+          300.023
+        ],
+        "referenceXY": [
+          361,
+          300
+        ],
+        "pixelError": 0.38,
+        "interocularNormalizedError": 0.00441,
+        "tolerancePixels": 5,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "female",
+        "feature": "forehead center",
+        "region": "remaining",
+        "mediapipeIndex": 10,
+        "detectedXY": [
+          319.92,
+          272.969
+        ],
+        "referenceXY": [
+          320,
+          274
+        ],
+        "pixelError": 1.034,
+        "interocularNormalizedError": 0.01201,
+        "tolerancePixels": 8,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "female",
+        "feature": "left cheek",
+        "region": "remaining",
+        "mediapipeIndex": 234,
+        "detectedXY": [
+          254.533,
+          314.575
+        ],
+        "referenceXY": [
+          260,
+          350
+        ],
+        "pixelError": 35.845,
+        "interocularNormalizedError": 0.4165,
+        "tolerancePixels": 8,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "incorrect",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "female",
+        "feature": "right cheek",
+        "region": "remaining",
+        "mediapipeIndex": 454,
+        "detectedXY": [
+          384.082,
+          313.3
+        ],
+        "referenceXY": [
+          380,
+          350
+        ],
+        "pixelError": 36.926,
+        "interocularNormalizedError": 0.42907,
+        "tolerancePixels": 8,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "incorrect",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "female",
+        "feature": "left face outline",
+        "region": "remaining",
+        "mediapipeIndex": 127,
+        "detectedXY": [
+          254.201,
+          303.843
+        ],
+        "referenceXY": [
+          250,
+          342
+        ],
+        "pixelError": 38.387,
+        "interocularNormalizedError": 0.44605,
+        "tolerancePixels": 8,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "incorrect",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "female",
+        "feature": "right face outline",
+        "region": "remaining",
+        "mediapipeIndex": 356,
+        "detectedXY": [
+          385.116,
+          302.766
+        ],
+        "referenceXY": [
+          390,
+          341
+        ],
+        "pixelError": 38.544,
+        "interocularNormalizedError": 0.44787,
+        "tolerancePixels": 8,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "incorrect",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "female",
+        "feature": "lower face",
+        "region": "remaining",
+        "mediapipeIndex": 199,
+        "detectedXY": [
+          319.62,
+          404.1
+        ],
+        "referenceXY": [
+          320,
+          399
+        ],
+        "pixelError": 5.114,
+        "interocularNormalizedError": 0.05942,
+        "tolerancePixels": 8,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      }
+    ]
+  },
+  "male": {
+    "landmarksDetected": 478,
+    "validGeometricAttachments": 474,
+    "reviewedPoints": 36,
+    "provisionalWeightedScore": 91.667,
+    "medianPixelError": 0.57,
+    "p90PixelError": 19.824,
+    "p95PixelError": 92.874,
+    "interocularPixels": 170.244,
+    "regions": {
+      "lipsMouth": {
+        "maximumPoints": 30,
+        "evaluated": 8,
+        "correct": 8,
+        "incorrect": 0,
+        "occludedOrAmbiguous": 0,
+        "score": 30.0,
+        "status": "PROVISIONAL"
+      },
+      "eyesEyelids": {
+        "maximumPoints": 25,
+        "evaluated": 8,
+        "correct": 8,
+        "incorrect": 0,
+        "occludedOrAmbiguous": 0,
+        "score": 25.0,
+        "status": "PROVISIONAL"
+      },
+      "nose": {
+        "maximumPoints": 15,
+        "evaluated": 5,
+        "correct": 5,
+        "incorrect": 0,
+        "occludedOrAmbiguous": 0,
+        "score": 15.0,
+        "status": "PROVISIONAL"
+      },
+      "jawChin": {
+        "maximumPoints": 10,
+        "evaluated": 3,
+        "correct": 3,
+        "incorrect": 0,
+        "occludedOrAmbiguous": 0,
+        "score": 10.0,
+        "status": "PROVISIONAL"
+      },
+      "eyebrows": {
+        "maximumPoints": 10,
+        "evaluated": 6,
+        "correct": 6,
+        "incorrect": 0,
+        "occludedOrAmbiguous": 0,
+        "score": 10.0,
+        "status": "PROVISIONAL"
+      },
+      "remaining": {
+        "maximumPoints": 10,
+        "evaluated": 6,
+        "correct": 1,
+        "incorrect": 5,
+        "occludedOrAmbiguous": 0,
+        "score": 1.667,
+        "status": "PROVISIONAL"
+      }
+    },
+    "independentValidation": "UNVERIFIED: single provisional reviewer",
+    "points": [
+      {
+        "model": "male",
+        "feature": "left eye outer",
+        "region": "eyesEyelids",
+        "mediapipeIndex": 33,
+        "detectedXY": [
+          242.814,
+          357.817
+        ],
+        "referenceXY": [
+          244,
+          358
+        ],
+        "pixelError": 1.2,
+        "interocularNormalizedError": 0.00705,
+        "tolerancePixels": 5,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "male",
+        "feature": "left eye inner",
+        "region": "eyesEyelids",
+        "mediapipeIndex": 133,
+        "detectedXY": [
+          295.696,
+          364.224
+        ],
+        "referenceXY": [
+          296,
+          364
+        ],
+        "pixelError": 0.378,
+        "interocularNormalizedError": 0.00222,
+        "tolerancePixels": 5,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "male",
+        "feature": "left upper lid",
+        "region": "eyesEyelids",
+        "mediapipeIndex": 159,
+        "detectedXY": [
+          265.751,
+          359.921
+        ],
+        "referenceXY": [
+          266,
+          360
+        ],
+        "pixelError": 0.262,
+        "interocularNormalizedError": 0.00154,
+        "tolerancePixels": 5,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "male",
+        "feature": "left lower lid",
+        "region": "eyesEyelids",
+        "mediapipeIndex": 145,
+        "detectedXY": [
+          272.229,
+          368.102
+        ],
+        "referenceXY": [
+          272,
+          369
+        ],
+        "pixelError": 0.927,
+        "interocularNormalizedError": 0.00545,
+        "tolerancePixels": 5,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "male",
+        "feature": "right eye outer",
+        "region": "eyesEyelids",
+        "mediapipeIndex": 263,
+        "detectedXY": [
+          412.635,
+          345.828
+        ],
+        "referenceXY": [
+          413,
+          346
+        ],
+        "pixelError": 0.403,
+        "interocularNormalizedError": 0.00237,
+        "tolerancePixels": 5,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "male",
+        "feature": "right eye inner",
+        "region": "eyesEyelids",
+        "mediapipeIndex": 362,
+        "detectedXY": [
+          360.978,
+          360.661
+        ],
+        "referenceXY": [
+          361,
+          361
+        ],
+        "pixelError": 0.34,
+        "interocularNormalizedError": 0.00199,
+        "tolerancePixels": 5,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "male",
+        "feature": "right upper lid",
+        "region": "eyesEyelids",
+        "mediapipeIndex": 386,
+        "detectedXY": [
+          392.101,
+          348.816
+        ],
+        "referenceXY": [
+          392,
+          349
+        ],
+        "pixelError": 0.21,
+        "interocularNormalizedError": 0.00124,
+        "tolerancePixels": 5,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "male",
+        "feature": "right lower lid",
+        "region": "eyesEyelids",
+        "mediapipeIndex": 374,
+        "detectedXY": [
+          385.161,
+          361.325
+        ],
+        "referenceXY": [
+          385,
+          362
+        ],
+        "pixelError": 0.694,
+        "interocularNormalizedError": 0.00408,
+        "tolerancePixels": 5,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "male",
+        "feature": "nose bridge",
+        "region": "nose",
+        "mediapipeIndex": 168,
+        "detectedXY": [
+          328.762,
+          368.544
+        ],
+        "referenceXY": [
+          329,
+          369
+        ],
+        "pixelError": 0.514,
+        "interocularNormalizedError": 0.00302,
+        "tolerancePixels": 6,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "male",
+        "feature": "nose dorsum",
+        "region": "nose",
+        "mediapipeIndex": 6,
+        "detectedXY": [
+          329.521,
+          386.496
+        ],
+        "referenceXY": [
+          330,
+          387
+        ],
+        "pixelError": 0.696,
+        "interocularNormalizedError": 0.00409,
+        "tolerancePixels": 6,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "male",
+        "feature": "nose tip",
+        "region": "nose",
+        "mediapipeIndex": 1,
+        "detectedXY": [
+          332.227,
+          468.753
+        ],
+        "referenceXY": [
+          333,
+          469
+        ],
+        "pixelError": 0.811,
+        "interocularNormalizedError": 0.00477,
+        "tolerancePixels": 7,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "male",
+        "feature": "left nose wing",
+        "region": "nose",
+        "mediapipeIndex": 98,
+        "detectedXY": [
+          296.648,
+          457.657
+        ],
+        "referenceXY": [
+          297,
+          458
+        ],
+        "pixelError": 0.491,
+        "interocularNormalizedError": 0.00289,
+        "tolerancePixels": 7,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "male",
+        "feature": "right nose wing",
+        "region": "nose",
+        "mediapipeIndex": 327,
+        "detectedXY": [
+          366.619,
+          454.668
+        ],
+        "referenceXY": [
+          367,
+          455
+        ],
+        "pixelError": 0.505,
+        "interocularNormalizedError": 0.00297,
+        "tolerancePixels": 7,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "male",
+        "feature": "left mouth corner",
+        "region": "lipsMouth",
+        "mediapipeIndex": 61,
+        "detectedXY": [
+          283.833,
+          494.103
+        ],
+        "referenceXY": [
+          284,
+          494
+        ],
+        "pixelError": 0.196,
+        "interocularNormalizedError": 0.00115,
+        "tolerancePixels": 9,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "male",
+        "feature": "right mouth corner",
+        "region": "lipsMouth",
+        "mediapipeIndex": 291,
+        "detectedXY": [
+          376.071,
+          491.839
+        ],
+        "referenceXY": [
+          376,
+          492
+        ],
+        "pixelError": 0.176,
+        "interocularNormalizedError": 0.00103,
+        "tolerancePixels": 9,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "male",
+        "feature": "upper lip center",
+        "region": "lipsMouth",
+        "mediapipeIndex": 13,
+        "detectedXY": [
+          330.974,
+          501.796
+        ],
+        "referenceXY": [
+          331,
+          502
+        ],
+        "pixelError": 0.206,
+        "interocularNormalizedError": 0.00121,
+        "tolerancePixels": 10,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "male",
+        "feature": "lower lip center",
+        "region": "lipsMouth",
+        "mediapipeIndex": 14,
+        "detectedXY": [
+          330.695,
+          502.175
+        ],
+        "referenceXY": [
+          331,
+          503
+        ],
+        "pixelError": 0.88,
+        "interocularNormalizedError": 0.00517,
+        "tolerancePixels": 10,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "male",
+        "feature": "left upper vermilion",
+        "region": "lipsMouth",
+        "mediapipeIndex": 78,
+        "detectedXY": [
+          287.282,
+          494.868
+        ],
+        "referenceXY": [
+          288,
+          495
+        ],
+        "pixelError": 0.73,
+        "interocularNormalizedError": 0.00429,
+        "tolerancePixels": 9,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "male",
+        "feature": "right upper vermilion",
+        "region": "lipsMouth",
+        "mediapipeIndex": 308,
+        "detectedXY": [
+          373.296,
+          492.835
+        ],
+        "referenceXY": [
+          373,
+          493
+        ],
+        "pixelError": 0.339,
+        "interocularNormalizedError": 0.00199,
+        "tolerancePixels": 9,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "male",
+        "feature": "left lower vermilion",
+        "region": "lipsMouth",
+        "mediapipeIndex": 82,
+        "detectedXY": [
+          319.265,
+          500.657
+        ],
+        "referenceXY": [
+          319,
+          501
+        ],
+        "pixelError": 0.433,
+        "interocularNormalizedError": 0.00254,
+        "tolerancePixels": 10,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "male",
+        "feature": "right lower vermilion",
+        "region": "lipsMouth",
+        "mediapipeIndex": 312,
+        "detectedXY": [
+          342.972,
+          500.0
+        ],
+        "referenceXY": [
+          343,
+          500
+        ],
+        "pixelError": 0.028,
+        "interocularNormalizedError": 0.00017,
+        "tolerancePixels": 10,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "male",
+        "feature": "chin",
+        "region": "jawChin",
+        "mediapipeIndex": 152,
+        "detectedXY": [
+          332.411,
+          576.58
+        ],
+        "referenceXY": [
+          332,
+          577
+        ],
+        "pixelError": 0.588,
+        "interocularNormalizedError": 0.00345,
+        "tolerancePixels": 7,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "male",
+        "feature": "left jawline",
+        "region": "jawChin",
+        "mediapipeIndex": 172,
+        "detectedXY": [
+          225.837,
+          486.815
+        ],
+        "referenceXY": [
+          226,
+          487
+        ],
+        "pixelError": 0.246,
+        "interocularNormalizedError": 0.00145,
+        "tolerancePixels": 9,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "male",
+        "feature": "right jawline",
+        "region": "jawChin",
+        "mediapipeIndex": 397,
+        "detectedXY": [
+          430.474,
+          477.612
+        ],
+        "referenceXY": [
+          431,
+          478
+        ],
+        "pixelError": 0.654,
+        "interocularNormalizedError": 0.00384,
+        "tolerancePixels": 9,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "male",
+        "feature": "left brow inner",
+        "region": "eyebrows",
+        "mediapipeIndex": 70,
+        "detectedXY": [
+          214.964,
+          332.305
+        ],
+        "referenceXY": [
+          215,
+          333
+        ],
+        "pixelError": 0.696,
+        "interocularNormalizedError": 0.00409,
+        "tolerancePixels": 6,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "male",
+        "feature": "left brow",
+        "region": "eyebrows",
+        "mediapipeIndex": 63,
+        "detectedXY": [
+          226.183,
+          329.041
+        ],
+        "referenceXY": [
+          226,
+          329
+        ],
+        "pixelError": 0.187,
+        "interocularNormalizedError": 0.0011,
+        "tolerancePixels": 6,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "male",
+        "feature": "left brow outer",
+        "region": "eyebrows",
+        "mediapipeIndex": 105,
+        "detectedXY": [
+          243.478,
+          329.737
+        ],
+        "referenceXY": [
+          244,
+          330
+        ],
+        "pixelError": 0.585,
+        "interocularNormalizedError": 0.00343,
+        "tolerancePixels": 6,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "male",
+        "feature": "right brow inner",
+        "region": "eyebrows",
+        "mediapipeIndex": 336,
+        "detectedXY": [
+          358.16,
+          342.066
+        ],
+        "referenceXY": [
+          358,
+          342
+        ],
+        "pixelError": 0.173,
+        "interocularNormalizedError": 0.00101,
+        "tolerancePixels": 6,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "male",
+        "feature": "right brow",
+        "region": "eyebrows",
+        "mediapipeIndex": 293,
+        "detectedXY": [
+          428.604,
+          318.824
+        ],
+        "referenceXY": [
+          429,
+          319
+        ],
+        "pixelError": 0.433,
+        "interocularNormalizedError": 0.00254,
+        "tolerancePixels": 6,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "male",
+        "feature": "right brow outer",
+        "region": "eyebrows",
+        "mediapipeIndex": 334,
+        "detectedXY": [
+          411.426,
+          321.621
+        ],
+        "referenceXY": [
+          411,
+          322
+        ],
+        "pixelError": 0.57,
+        "interocularNormalizedError": 0.00335,
+        "tolerancePixels": 6,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "male",
+        "feature": "forehead center",
+        "region": "remaining",
+        "mediapipeIndex": 10,
+        "detectedXY": [
+          324.766,
+          265.88
+        ],
+        "referenceXY": [
+          330,
+          285
+        ],
+        "pixelError": 19.824,
+        "interocularNormalizedError": 0.11644,
+        "tolerancePixels": 10,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "incorrect",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "male",
+        "feature": "left cheek",
+        "region": "remaining",
+        "mediapipeIndex": 234,
+        "detectedXY": [
+          192.256,
+          363.979
+        ],
+        "referenceXY": [
+          235,
+          440
+        ],
+        "pixelError": 87.214,
+        "interocularNormalizedError": 0.51229,
+        "tolerancePixels": 10,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "incorrect",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "male",
+        "feature": "right cheek",
+        "region": "remaining",
+        "mediapipeIndex": 454,
+        "detectedXY": [
+          455.115,
+          352.02
+        ],
+        "referenceXY": [
+          420,
+          438
+        ],
+        "pixelError": 92.874,
+        "interocularNormalizedError": 0.54553,
+        "tolerancePixels": 10,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "incorrect",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "male",
+        "feature": "left face outline",
+        "region": "remaining",
+        "mediapipeIndex": 127,
+        "detectedXY": [
+          190.343,
+          338.584
+        ],
+        "referenceXY": [
+          215,
+          430
+        ],
+        "pixelError": 94.683,
+        "interocularNormalizedError": 0.55616,
+        "tolerancePixels": 10,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "incorrect",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "male",
+        "feature": "right face outline",
+        "region": "remaining",
+        "mediapipeIndex": 356,
+        "detectedXY": [
+          455.948,
+          326.805
+        ],
+        "referenceXY": [
+          444,
+          423
+        ],
+        "pixelError": 96.935,
+        "interocularNormalizedError": 0.56938,
+        "tolerancePixels": 10,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "incorrect",
+        "confidence": "provisional single-reviewer reference"
+      },
+      {
+        "model": "male",
+        "feature": "lower face",
+        "region": "remaining",
+        "mediapipeIndex": 199,
+        "detectedXY": [
+          331.869,
+          558.049
+        ],
+        "referenceXY": [
+          332,
+          556
+        ],
+        "pixelError": 2.053,
+        "interocularNormalizedError": 0.01206,
+        "tolerancePixels": 10,
+        "surfaceValid": true,
+        "occludedOrAmbiguous": false,
+        "status": "correct",
+        "confidence": "provisional single-reviewer reference"
+      }
+    ]
+  }
+}
