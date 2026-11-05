@@ -1,0 +1,14 @@
+{
+  "status": "GATE3_FAILED_REQUIRES_REPAIR",
+  "architecture": "Avaturn motion source to original Tripo vertex shape keys",
+  "topologyReplacement": false,
+  "mouthSurgery": false,
+  "channels": {
+    "jawOpen": {"movedOriginalVertices": 31094, "donorP95Millimeters": 16.483356733492553, "visual": "CLOSED_SHELL_COLLAPSE"},
+    "viseme_PP": {"movedOriginalVertices": 31094, "donorP95Millimeters": 0.7256779113987004, "visual": "NOT_VISIBLY_DISTINGUISHABLE"},
+    "viseme_O": {"movedOriginalVertices": 31094, "donorP95Millimeters": 6.761363204728563, "visual": "ROUNDED_PUCKER_NO_VERIFIED_APERTURE"},
+    "eyeBlinkLeft": {"movedOriginalVertices": 31094, "donorP95Millimeters": 0.4720768321726393, "visual": "INSUFFICIENT_EYELID_CLOSURE"}
+  },
+  "gate3": "FAILED",
+  "gates4to9": "UNVERIFIED"
+}
