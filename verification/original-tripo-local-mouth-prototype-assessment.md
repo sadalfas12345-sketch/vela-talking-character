@@ -44,6 +44,12 @@ jawOpen upper/lower lip fields while retaining vertical and facial-depth motion:
 - Result: slightly improved symmetry, but Gate 4 remains failed because the
   lip boundary and recessed interior are still visibly synthetic.
 
+The v4/v5 candidates replace spatially varying mouth RBF motion with measured
+upper/lower lip group constraints and a multi-ring cavity. V5 also tested a
+brighter emissive cavity material. The render still contains a black central
+artifact and fails Gate 4, so the defect is not accepted as a lighting-only
+issue. Evidence is in `verification/vela-original-tripo-local-mouth-v5-render/`.
+
 Topology measurement for v3 is recorded in
 `verification/vela-original-tripo-local-mouth-v3-measurements.json`.
 The imported original shell has 55,196 boundary edges and the v3 body has

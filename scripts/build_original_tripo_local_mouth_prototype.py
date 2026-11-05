@@ -169,13 +169,16 @@ if upper_rows.any() and lower_rows.any():
         anatomical_horizontal /= max(np.linalg.norm(anatomical_horizontal), 1e-12)
         upper_motion = upper_motion - (upper_motion @ anatomical_horizontal)[:, None] * anatomical_horizontal
         lower_motion = lower_motion - (lower_motion @ anatomical_horizontal)[:, None] * anatomical_horizontal
-    upper_field = rbf_displacement(world, target_handles[upper_rows], upper_motion, sigma)
-    lower_field = rbf_displacement(world, target_handles[lower_rows], lower_motion, sigma)
+    # The closed target has no independent upper/lower lip surface. Use the
+    # measured group means as positional constraints rather than interpolating
+    # through coincident target surfaces, which created wrinkles in v3.
+    upper_mean = np.mean(upper_motion, axis=0)
+    lower_mean = np.mean(lower_motion, axis=0)
     mouth_cx, mouth_cy = landmark_pixels[[61, 291, 13, 14], :2].mean(axis=0)
     mouth_w = max(float(np.linalg.norm(landmark_pixels[291, :2] - landmark_pixels[61, :2])), 1e-6)
-    mouth_region = np.exp(-(((screen[:, 0] - mouth_cx) / (mouth_w * 0.72)) ** 2 + ((screen[:, 1] - mouth_cy) / (mouth_w * 0.52)) ** 2))
+    mouth_region = np.exp(-(((screen[:, 0] - mouth_cx) / (mouth_w * 0.62)) ** 2 + ((screen[:, 1] - mouth_cy) / (mouth_w * 0.35)) ** 2))
     lower_fraction = 1.0 / (1.0 + np.exp(-(screen[:, 1] - mouth_cy) / max(mouth_w * 0.055, 1e-6)))
-    constrained = upper_field * (1.0 - lower_fraction[:, None]) + lower_field * lower_fraction[:, None]
+    constrained = upper_mean[None] * (1.0 - lower_fraction[:, None]) + lower_mean[None] * lower_fraction[:, None]
     delta_world = delta_world * (1.0 - mouth_region[:, None]) + constrained * mouth_region[:, None]
 local_delta = delta_world @ np.linalg.inv(world_matrix[:3, :3]).T
 body.shape_key_add(name='Basis', from_mix=False)
@@ -202,7 +205,9 @@ for index in range(ring_count):
     back_ring.append(center_world + xy * 0.72 + forward * (ipd * 0.20))
 back_center = center_world + forward * (ipd * 0.20)
 ring_world = np.vstack([np.asarray(outer_ring), np.asarray(inner_ring), np.asarray(back_ring), back_center[None]])
-ring_delta = rbf_displacement(ring_world, target_handles, landmark_displacements, sigma)
+ring_vertical = np.asarray([(point - center_world) @ up for point in ring_world], dtype=np.float64)
+ring_lower_fraction = 1.0 / (1.0 + np.exp(ring_vertical / max(mouth_width_world * 0.055, 1e-6)))
+ring_delta = upper_mean[None] * (1.0 - ring_lower_fraction[:, None]) + lower_mean[None] * ring_lower_fraction[:, None]
 ring_local = np.asarray([(bone_inverse @ Vector(point.tolist()))[:] for point in ring_world], dtype=np.float32)
 ring_moved_local = np.asarray([(bone_inverse @ Vector((point + delta).tolist()))[:] for point, delta in zip(ring_world, ring_delta)], dtype=np.float32)
 cavity_vertices = ring_local.tolist()
@@ -222,15 +227,15 @@ cavity_obj.parent_type = 'BONE'
 cavity_obj.parent_bone = head_bone.name
 cavity_obj.matrix_world = bone_world
 material = bpy.data.materials.new('Localized original Tripo oral cavity')
-material.diffuse_color = (0.035, 0.004, 0.008, 1.0)
+material.diffuse_color = (0.18, 0.008, 0.018, 1.0)
 material.use_nodes = True
 bsdf = material.node_tree.nodes.get('Principled BSDF')
 if bsdf:
-    bsdf.inputs['Base Color'].default_value = (0.035, 0.004, 0.008, 1.0)
+    bsdf.inputs['Base Color'].default_value = (0.18, 0.008, 0.018, 1.0)
     bsdf.inputs['Roughness'].default_value = 0.92
     if 'Emission Color' in bsdf.inputs:
-        bsdf.inputs['Emission Color'].default_value = (0.012, 0.001, 0.002, 1.0)
-        bsdf.inputs['Emission Strength'].default_value = 0.2
+        bsdf.inputs['Emission Color'].default_value = (0.08, 0.002, 0.006, 1.0)
+        bsdf.inputs['Emission Strength'].default_value = 1.0
 cavity_mesh.materials.append(material)
 cavity_obj.shape_key_add(name='Basis', from_mix=False)
 cavity_key = cavity_obj.shape_key_add(name='xfer_jawOpen_original_tripo', from_mix=False)
