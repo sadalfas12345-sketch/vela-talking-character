@@ -1,0 +1,74 @@
+{
+  "status": "LOCAL_MOUTH_REGION_MEASURED_REQUIRES_SURGERY_REVIEW",
+  "source": "assets\\tripo\\vela-photoreal\\generated-rigged.glb",
+  "originalVertexCount": 999787,
+  "lipLandmarkIndices": [
+    61,
+    146,
+    91,
+    181,
+    84,
+    17,
+    314,
+    405,
+    321,
+    291,
+    409,
+    270,
+    269,
+    267,
+    0,
+    37,
+    39,
+    40,
+    185
+  ],
+  "mouthLandmarkIndices": [
+    61,
+    291,
+    13,
+    14,
+    78,
+    308,
+    95,
+    324,
+    82,
+    312,
+    87,
+    317
+  ],
+  "ipdMeters": 0.05581191690274204,
+  "depthToleranceMeters": 0.025115362606233916,
+  "candidateVertices": 1781,
+  "candidateFaces": 2852,
+  "boundaryEdges": 656,
+  "boundaryVertices": 651,
+  "boundaryBoundsMeters": [
+    [
+      -0.05542203411459923,
+      -0.011868917383253574,
+      0.8466289043426514
+    ],
+    [
+      0.06948059797286987,
+      0.018431413918733597,
+      0.8585206866264343
+    ]
+  ],
+  "boundaryScreenBounds": [
+    [
+      0.4406554201581582,
+      0.3073965898279466
+    ],
+    [
+      0.5921570586076892,
+      0.3668554941588068
+    ]
+  ],
+  "preservesOutsideMouth": true,
+  "topologyChanged": false,
+  "limitations": [
+    "This is a geometric selection measurement only. No faces or vertices were modified.",
+    "The candidate follows a reviewed landmark lip contour; independent visual contour review and surgery quality remain outstanding."
+  ]
+}
