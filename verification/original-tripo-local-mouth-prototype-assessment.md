@@ -15,7 +15,7 @@ or donor face geometry is imported.
 - No forehead, temple, cheek, eyelid, hair, ear, or neck boundary was created
 - Donor geometry imported: false
 
-## Prototype output
+## Prototype outputs
 
 - Builder: `scripts/build_original_tripo_local_mouth_prototype.py`
 - Output: `assets/tripo/vela-photoreal/intermediates/vela-original-tripo-local-mouth-prototype.glb`
@@ -27,18 +27,30 @@ or donor face geometry is imported.
 - Cavity vertices: 39
 - Cavity faces: 38
 
+The subsequent constrained candidate is:
+
+- Output: `assets/tripo/vela-photoreal/intermediates/vela-original-tripo-local-mouth-v2.glb`
+- Neutral render: `verification/vela-original-tripo-local-mouth-v2-render/neutral.png`
+- Full jawOpen render: `verification/vela-original-tripo-local-mouth-v2-render/jawOpenTransfer.png`
+- Localized cut: 954 faces
+- Cavity: 73 vertices and 72 faces
+- Motion constraint: explicit upper-lip and lower-lip donor displacement fields
+
 ## Result
 
-The neutral state retains the Tripo identity, but the cavity reads as a dark,
-block-like opening. At full transferred jawOpen, the surrounding lip and cheek
-surface collapses into a wrinkled ring and the cavity remains visibly jagged.
-This is not a Gate 4 pass and is not suitable for Vela runtime integration.
+The first prototype removed too much depth and produced a dark block-like
+opening. The constrained v2 candidate corrects the cut to a thin seam and
+separates upper and lower donor motion more plausibly. It still fails visual
+Gate 4: the recessed interior is too dark, the lip boundary remains visibly
+synthetic, and the full jawOpen pose does not yet provide a clean anatomical
+oral opening. It is not suitable for Vela runtime integration.
 
-The failure is localized to the mouth surgery and its interaction with the
+The failure is localized to mouth surgery and its interaction with the
 transferred deformation field. It does not invalidate the original-Tripo
 vertex-transfer architecture. The next repair must preserve the original
-Tripo vertices outside the smallest lip boundary while improving upper/lower
-lip separation, cavity depth and occlusion, and jaw/lip deformation constraints.
+Tripo vertices outside the smallest lip boundary while improving cavity
+occlusion and the upper/lower lip boundary, then measure the aperture and
+self-intersection state in neutral, half-open, and full-open poses.
 
 ## Gate disposition
 

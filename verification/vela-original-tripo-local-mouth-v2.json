@@ -1,0 +1,28 @@
+{
+  "status": "LOCAL_MOUTH_SURGERY_V2_REQUIRES_REPAIR",
+  "sourceTripo": "assets/tripo/vela-photoreal/generated-rigged.glb",
+  "output": "assets/tripo/vela-photoreal/intermediates/vela-original-tripo-local-mouth-v2.glb",
+  "originalTripoVertexCount": 999787,
+  "localizedCutFaces": 954,
+  "localizedCutVerticesEstimated": 1352,
+  "cavityVertices": 73,
+  "cavityFaces": 72,
+  "preservesOutsideMouth": true,
+  "donorGeometryImported": false,
+  "topologyReplacement": false,
+  "mouthSurgery": true,
+  "motionSource": "Avaturn jawOpen landmark displacement only",
+  "solver": {
+    "base": "localized Gaussian RBF interpolation",
+    "neighbors": 24,
+    "sigmaMeters": 0.01953417091595971,
+    "constraints": "upper and lower lip displacement fields blended by measured mouth-region weights"
+  },
+  "visualReview": {
+    "neutral": "FAIL_REQUIRES_REPAIR",
+    "fullJawOpen": "FAIL_REQUIRES_REPAIR",
+    "reason": "Dark synthetic cavity and incomplete anatomical lip opening remain visible"
+  },
+  "gate4": "FAILED",
+  "gates5to9": "UNVERIFIED"
+}

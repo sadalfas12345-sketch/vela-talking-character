@@ -110,11 +110,17 @@ for start in range(0, len(screen), 20000):
     nearest[start:stop] = np.argmin(np.sum((screen[start:stop, None, :2] - mouth_xy[None, :, :]) ** 2, axis=2), axis=1)
 target_depth = np.asarray([screen[np.argmin(np.sum((screen[:, :2] - landmark_pixels[index, :2]) ** 2, axis=1)), 2] for index in mouth_indices])
 ipd = float(np.linalg.norm((landmark_pixels[33, :2] - landmark_pixels[263, :2]) * 0.20))
-depth_tolerance = max(ipd * 0.45, 0.004)
+# Restrict surgery to the visible lip shell. The first prototype admitted
+# roughly 25 mm of hidden geometry behind the lips and produced jagged cuts.
+depth_tolerance = max(ipd * 0.08, 0.0015)
 face_mask = inside & (np.abs(screen[:, 2] - target_depth[nearest]) <= depth_tolerance)
 
 body.data.calc_loop_triangles()
 selected_keys = set()
+mouth_center_screen = landmark_pixels[[61, 291, 13, 14], :2].mean(axis=0)
+mouth_width_screen = float(np.linalg.norm(landmark_pixels[291, :2] - landmark_pixels[61, :2]))
+seam_rx = mouth_width_screen * 0.52
+seam_ry = max(mouth_width_screen * 0.06, 0.006)
 for triangle in body.data.loop_triangles:
     ids = tuple(int(v) for v in triangle.vertices)
     if not face_mask[list(ids)].all():
@@ -122,7 +128,8 @@ for triangle in body.data.loop_triangles:
     center = world[list(ids)].mean(axis=0)
     center_screen = np.asarray((0.5 + (center - camera_location) @ right / 0.20,
                                 0.5 - (center - camera_location) @ up / 0.20))
-    if point_in_polygon(np.asarray([center_screen[0]]), np.asarray([center_screen[1]]), polygon)[0]:
+    seam_distance = ((center_screen[0] - mouth_center_screen[0]) / seam_rx) ** 2 + ((center_screen[1] - mouth_center_screen[1]) / seam_ry) ** 2
+    if seam_distance <= 1.0:
         selected_keys.add(tuple(sorted(ids)))
 if len(selected_keys) < 100:
     raise RuntimeError(f'Localized mouth selection is too small: {len(selected_keys)} faces')
@@ -143,6 +150,23 @@ body.data.update()
 # original-vertex deformation field as the proof artifact.
 sigma = max(ipd * 0.35, 0.012)
 delta_world = rbf_displacement(world, target_handles, landmark_displacements, sigma)
+# A closed Tripo shell places several upper and lower inner-lip landmarks at
+# nearly the same target depth.  A single spatial RBF therefore mixes the two
+# anatomical motions.  Keep the measured donor displacements, but add explicit
+# upper/lower lip constraints and taper them into the original Tripo surface.
+upper_ids = np.asarray([61, 185, 40, 39, 37, 0, 267, 269, 270, 409, 291], dtype=np.int32)
+lower_ids = np.asarray([291, 375, 321, 405, 314, 17, 84, 181, 91, 146, 61], dtype=np.int32)
+upper_rows = np.isin(rows, upper_ids)
+lower_rows = np.isin(rows, lower_ids)
+if upper_rows.any() and lower_rows.any():
+    upper_field = rbf_displacement(world, target_handles[upper_rows], landmark_displacements[upper_rows], sigma)
+    lower_field = rbf_displacement(world, target_handles[lower_rows], landmark_displacements[lower_rows], sigma)
+    mouth_cx, mouth_cy = landmark_pixels[[61, 291, 13, 14], :2].mean(axis=0)
+    mouth_w = max(float(np.linalg.norm(landmark_pixels[291, :2] - landmark_pixels[61, :2])), 1e-6)
+    mouth_region = np.exp(-(((screen[:, 0] - mouth_cx) / (mouth_w * 0.72)) ** 2 + ((screen[:, 1] - mouth_cy) / (mouth_w * 0.52)) ** 2))
+    lower_fraction = 1.0 / (1.0 + np.exp(-(screen[:, 1] - mouth_cy) / max(mouth_w * 0.055, 1e-6)))
+    constrained = upper_field * (1.0 - lower_fraction[:, None]) + lower_field * lower_fraction[:, None]
+    delta_world = delta_world * (1.0 - mouth_region[:, None]) + constrained * mouth_region[:, None]
 local_delta = delta_world @ np.linalg.inv(world_matrix[:3, :3]).T
 body.shape_key_add(name='Basis', from_mix=False)
 body_key = body.shape_key_add(name='xfer_jawOpen_original_tripo', from_mix=False)
@@ -151,22 +175,33 @@ body_key.value = 0.0
 body.data.shape_keys.use_relative = True
 body.data.shape_keys.animation_data_clear()
 
-# Build only a local recessed mouth cavity from the reviewed lip contour.
-outer_world = target_points[LIP_OUTER].copy()
-center_world = outer_world.mean(axis=0)
-inner_world = center_world + (outer_world - center_world) * 0.90 + forward * (ipd * 0.12)
-back_world = center_world + forward * (ipd * 0.22)
-ring_world = np.vstack([outer_world, inner_world, back_world[None]])
+# Build only a small recessed cavity behind the landmark-derived seam. The
+# previous version used the complete lip contour as the cavity rim, which made
+# the neutral state read as a black rectangular face patch.
+center_world = target_points[[61, 291, 13, 14]].mean(axis=0)
+mouth_width_world = float(np.linalg.norm(target_points[291] - target_points[61]))
+ring_count = 24
+outer_ring = []
+inner_ring = []
+back_ring = []
+for index in range(ring_count):
+    angle = 2.0 * np.pi * index / ring_count
+    xy = right * (np.cos(angle) * mouth_width_world * 0.31) + up * (np.sin(angle) * mouth_width_world * 0.045)
+    outer_ring.append(center_world + xy)
+    inner_ring.append(center_world + xy * 0.88 + forward * (ipd * 0.10))
+    back_ring.append(center_world + xy * 0.72 + forward * (ipd * 0.20))
+back_center = center_world + forward * (ipd * 0.20)
+ring_world = np.vstack([np.asarray(outer_ring), np.asarray(inner_ring), np.asarray(back_ring), back_center[None]])
 ring_delta = rbf_displacement(ring_world, target_handles, landmark_displacements, sigma)
 ring_local = np.asarray([(bone_inverse @ Vector(point.tolist()))[:] for point in ring_world], dtype=np.float32)
 ring_moved_local = np.asarray([(bone_inverse @ Vector((point + delta).tolist()))[:] for point, delta in zip(ring_world, ring_delta)], dtype=np.float32)
-ring_count = len(LIP_OUTER)
 cavity_vertices = ring_local.tolist()
 cavity_faces = []
 for index in range(ring_count):
     nxt = (index + 1) % ring_count
     cavity_faces.append((index, nxt, ring_count + nxt, ring_count + index))
-    cavity_faces.append((ring_count + index, ring_count + nxt, ring_count * 2))
+    cavity_faces.append((ring_count + index, ring_count + nxt, ring_count * 2 + nxt, ring_count * 2 + index))
+    cavity_faces.append((ring_count * 2 + index, ring_count * 2 + nxt, ring_count * 3))
 cavity_mesh = bpy.data.meshes.new('Original Tripo localized mouth cavity geometry')
 cavity_mesh.from_pydata(cavity_vertices, [], cavity_faces)
 cavity_mesh.update()
@@ -177,12 +212,15 @@ cavity_obj.parent_type = 'BONE'
 cavity_obj.parent_bone = head_bone.name
 cavity_obj.matrix_world = bone_world
 material = bpy.data.materials.new('Localized original Tripo oral cavity')
-material.diffuse_color = (0.008, 0.001, 0.002, 1.0)
+material.diffuse_color = (0.035, 0.004, 0.008, 1.0)
 material.use_nodes = True
 bsdf = material.node_tree.nodes.get('Principled BSDF')
 if bsdf:
-    bsdf.inputs['Base Color'].default_value = (0.008, 0.001, 0.002, 1.0)
+    bsdf.inputs['Base Color'].default_value = (0.035, 0.004, 0.008, 1.0)
     bsdf.inputs['Roughness'].default_value = 0.92
+    if 'Emission Color' in bsdf.inputs:
+        bsdf.inputs['Emission Color'].default_value = (0.012, 0.001, 0.002, 1.0)
+        bsdf.inputs['Emission Strength'].default_value = 0.2
 cavity_mesh.materials.append(material)
 cavity_obj.shape_key_add(name='Basis', from_mix=False)
 cavity_key = cavity_obj.shape_key_add(name='xfer_jawOpen_original_tripo', from_mix=False)
@@ -212,7 +250,13 @@ report = {
     'cavityVertices': int(len(cavity_vertices)),
     'cavityFaces': int(len(cavity_faces)),
     'motionSource': 'Avaturn landmark displacement only',
-    'solver': {'type': 'localized Gaussian RBF interpolation', 'handleCount': int(len(rows)), 'neighbors': 24, 'sigmaMeters': sigma},
+    'solver': {
+        'type': 'localized Gaussian RBF interpolation with constrained upper/lower lip fields',
+        'handleCount': int(len(rows)),
+        'neighbors': 24,
+        'sigmaMeters': sigma,
+        'depthToleranceMeters': depth_tolerance,
+    },
     'output': str(OUTPUT.relative_to(ROOT)),
     'limitations': ['Only jawOpen is wired in this prototype.', 'Upper/lower lip boundary quality, cavity occlusion, self-intersections, and runtime behavior remain to be reviewed.'],
 }
