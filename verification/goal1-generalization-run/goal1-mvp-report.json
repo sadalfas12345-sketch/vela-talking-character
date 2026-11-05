@@ -1,0 +1,9 @@
+{
+  "method": "automated corrected-camera overlay plus first-visible front-surface raycast",
+  "independentHumanReview": "not used",
+  "threshold": {"overall": 24, "lipsFraction": 0.8, "eyelidsFraction": 0.8},
+  "selectedPointCounts": {"total": 30, "lips": 8, "eyelids": 8},
+  "female": {"correct": 30, "valid3DAttachments": 30, "lipsCorrect": 8, "eyelidsCorrect": 8, "overall": "PASS"},
+  "male": {"correct": 30, "valid3DAttachments": 30, "lipsCorrect": 8, "eyelidsCorrect": 8, "overall": "PASS"},
+  "certificationStatus": "MVP_AUTOMATED_PASS_ONLY"
+}
