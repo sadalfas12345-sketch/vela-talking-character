@@ -1,0 +1,67 @@
+{
+  "index": 16,
+  "cameraLocation": [
+    5.000699726813335,
+    -0.44847390764634104,
+    0.2520071300335907
+  ],
+  "target": [
+    0.32185218334197996,
+    0.00613103099167347,
+    -0.035323995351791385
+  ],
+  "orthoScale": 1.0853320109735898,
+  "resolution": [
+    640,
+    640
+  ],
+  "projection": "ORTHOGRAPHIC",
+  "sourceGLB": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\generalization-male-20261105\\generated-original.glb",
+  "boundsMin": [
+    -0.4212241768836975,
+    -0.44494861364364624,
+    -0.4903058111667633
+  ],
+  "boundsMax": [
+    0.42142611742019653,
+    0.44483932852745056,
+    0.4903619587421417
+  ],
+  "center": [
+    0.00010097026824951172,
+    -5.4642558097839355e-05,
+    2.8073787689208984e-05
+  ],
+  "selectionScore": 0.90459995241319,
+  "eyeDistancePixels": 170.24427879880534,
+  "detectedLandmarks": 478,
+  "selectionMethod": "spherical GLB-bound candidate views scored by MediaPipe eye, nose, mouth symmetry and face size; 3D stable-landmark orientation refinement",
+  "cameraBasis": {
+    "right": [
+      0.08787419507124997,
+      0.9874331871535746,
+      0.13135382273962795
+    ],
+    "up": [
+      -0.07292136494981498,
+      -0.12513351113692933,
+      0.9894564563053798
+    ],
+    "forward": [
+      0.9934589072399702,
+      -0.09652618970143637,
+      0.061008969236387794
+    ]
+  },
+  "refinement": {
+    "method": "3D eye-axis, nose-forward, chin-up frame from accepted attachments",
+    "yawBeforeDegrees": -8.577837294770804,
+    "pitchBeforeDegrees": -35.83967988815484,
+    "rollBeforeDegrees": -7.366072561406528,
+    "yawAfterDegrees": 0.0,
+    "pitchAfterDegrees": 0.0,
+    "rollAfterDegrees": 0.0,
+    "interocularWorldUnits": 0.3100948602781685,
+    "eyeToChinWorldUnits": 0.5059001674111785
+  }
+}

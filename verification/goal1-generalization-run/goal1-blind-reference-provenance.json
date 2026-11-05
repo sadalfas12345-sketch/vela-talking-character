@@ -1,0 +1,10 @@
+{
+  "status": "PENDING_EXTERNAL_HUMAN_ANNOTATION",
+  "method": "Clean selected refined neutral renders were exported without landmark overlays, detector coordinates, error vectors, or prior reference points visible.",
+  "femaleImage": "verification/goal1-generalization-run/blind-reference/female/clean-neutral.png",
+  "maleImage": "verification/goal1-generalization-run/blind-reference/male/clean-neutral.png",
+  "referenceCoordinates": null,
+  "reviewer": null,
+  "contaminationFinding": "Prior provisional references were too close to rounded detector outputs to certify independence. They remain historical and are excluded from certified scoring.",
+  "nextRequiredAction": "Independent reviewer annotates the clean renders before detector coordinates are disclosed."
+}

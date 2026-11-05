@@ -1,0 +1,50 @@
+{
+  "index": 16,
+  "cameraLocation": [
+    9.275024665527107,
+    2.546830322038347,
+    -2.770076518430275
+  ],
+  "target": [
+    0.06209687292575836,
+    0.003084021806716919,
+    0.8678040981292725
+  ],
+  "orthoScale": 0.20104375234918623,
+  "resolution": [
+    640,
+    640
+  ],
+  "projection": "ORTHOGRAPHIC",
+  "sourceGLB": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\vela-photoreal\\generated-rigged.glb",
+  "boundsMin": [
+    -0.9510578513145447,
+    -0.9999999403953552,
+    -1.0
+  ],
+  "boundsMax": [
+    0.9510578513145447,
+    0.9999999403953552,
+    1.0
+  ],
+  "center": [
+    -0.0019164066761732101,
+    0.005749141797423363,
+    0.8412960171699524
+  ],
+  "selectionScore": 0.8641337695836693,
+  "eyeDistancePixels": 86.06062309548024,
+  "detectedLandmarks": 478,
+  "selectionMethod": "spherical GLB-bound candidate views scored by MediaPipe eye, nose, mouth symmetry and face size; 3D stable-landmark orientation refinement",
+  "refinement": {
+    "method": "3D eye-axis, nose-forward, chin-up frame from accepted attachments",
+    "yawBeforeDegrees": 48.843780996664776,
+    "pitchBeforeDegrees": -46.668249687223835,
+    "rollBeforeDegrees": 26.719159590211113,
+    "yawAfterDegrees": 0.0,
+    "pitchAfterDegrees": 0.0,
+    "rollAfterDegrees": 0.0,
+    "interocularWorldUnits": 0.057441072099767496,
+    "eyeToChinWorldUnits": 0.1153166227037736
+  }
+}
