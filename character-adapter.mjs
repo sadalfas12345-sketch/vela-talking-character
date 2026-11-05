@@ -1,4 +1,4 @@
-import { Bone, Vector3 } from 'three';
+import { Bone, DoubleSide, Float32BufferAttribute, MeshBasicMaterial, Vector3 } from 'three';
 
 const MORPH_ALIASES = new Map();
 
@@ -125,6 +125,29 @@ export function adaptCharacterGLTF(gltf, report, options = {}) {
         for (const [targetName, index] of Object.entries(object.morphTargetDictionary)) object.morphTargetInfluences[index] ??= 0;
       }
     }
+    if (object.isMesh && /generated[_ ]inner[_ ]mouth[_ ]surface/i.test(object.name)) {
+      // The imported Tripo head is a closed shell. Its internal skin surface
+      // wins the depth test through the narrow lip aperture, hiding the mouth
+      // insert. Render this shape-keyed oral surface after the face so speech
+      // openings read as a cavity while the lip geometry continues to move.
+      const positions = object.geometry.attributes.position;
+      const colors = new Float32Array(positions.count * 3);
+      for (let vertex = 0; vertex < positions.count; vertex++) {
+        const color = vertex === 0 ? [0.012, 0.001, 0.002] : [0.16, 0.012, 0.022];
+        colors.set(color, vertex * 3);
+      }
+      object.geometry.setAttribute('color', new Float32BufferAttribute(colors, 3));
+      object.material = new MeshBasicMaterial({
+        vertexColors: true, side: DoubleSide, depthTest: true, depthWrite: false, toneMapped: false
+      });
+      object.renderOrder = 1;
+      object.frustumCulled = false;
+    }
+    if (object.isMesh && /^VelaTransplanted(?:Teeth|Tongue)$/.test(object.name)) {
+      // Keep the imported dental anatomy behind the lips and visible only in
+      // the actual shell aperture. The source shape keys animate teeth/tongue.
+      object.renderOrder = 2;
+    }
   });
   // TalkingHead's gaze and speech animation paths expect eye Object3Ds. A
   // Mixamo body rig often omits them, so add measured anchors from the target
@@ -147,6 +170,25 @@ export function adaptCharacterGLTF(gltf, report, options = {}) {
         anchor.position.copy(head.worldToLocal(world));
         head.updateMatrixWorld(true);
       }
+    }
+  }
+  // Keep the registered facial landmarks attached to the same Head transform
+  // used by the measured eye anchors. These invisible nodes support world-space
+  // certification after TalkingHead retargeting; they do not alter the mesh.
+  if (options.diagnosticLandmarks3d) {
+    gltf.scene.updateMatrixWorld(true);
+    const head = gltf.scene.getObjectByName('Head');
+    if (head) {
+      for (const [name, p] of Object.entries(options.diagnosticLandmarks3d)) {
+        if (!Array.isArray(p) || p.length < 3) continue;
+        if (gltf.scene.getObjectByName(`VelaLandmark_${name}`)) continue;
+        const marker = new Bone();
+        marker.name = `VelaLandmark_${name}`;
+        const world = new Vector3(p[0], p[2] + (options.sourceRootLift || 0), -p[1]);
+        head.add(marker);
+        marker.position.copy(head.worldToLocal(world));
+      }
+      head.updateMatrixWorld(true);
     }
   }
   if (Number.isFinite(options.faceForwardYawRadians)) {

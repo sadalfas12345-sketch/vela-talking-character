@@ -1,0 +1,25 @@
+{
+  "glb": "assets\\tripo\\vela-photoreal\\intermediates\\vela-face-fullprojection-prototype.glb",
+  "captures": [
+    "verification\\tripo-face-fullprojection-render\\neutral.png",
+    "verification\\tripo-face-fullprojection-render\\jawOpen.png",
+    "verification\\tripo-face-fullprojection-render\\viseme_PP.png",
+    "verification\\tripo-face-fullprojection-render\\viseme_O.png",
+    "verification\\tripo-face-fullprojection-render\\viseme_E.png",
+    "verification\\tripo-face-fullprojection-render\\eyeBlinkLeft.png",
+    "verification\\tripo-face-fullprojection-render\\eyeBlinkRight.png",
+    "verification\\tripo-face-fullprojection-render\\mouthSmileLeft.png",
+    "verification\\tripo-face-fullprojection-render\\browInnerUp.png"
+  ],
+  "states": [
+    "neutral",
+    "jawOpen",
+    "viseme_PP",
+    "viseme_O",
+    "viseme_E",
+    "eyeBlinkLeft",
+    "eyeBlinkRight",
+    "mouthSmileLeft",
+    "browInnerUp"
+  ]
+}

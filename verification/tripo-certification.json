@@ -1,37 +1,38 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "project": "Vela Tripo avatar certification",
-  "overall": "FAILED",
-  "testedCommitSHA": "672912e887067525046ed58a9bf65bdb94522832",
-  "generatedAt": "2026-11-04T12:32:42.040Z",
+  "overall": "INCOMPLETE",
+  "testedCommitSHA": "7b1183de29552aa1d0a0da96b952d2b5c28d91c8",
+  "generatedAt": "2026-11-04T19:34:10.090Z",
+  "acceptanceThresholdsChanged": false,
   "gateResults": [
     {
       "id": 1,
-      "name": "Structural integrity and rendered skinning",
+      "name": "Source asset integrity",
       "status": "PASS",
       "measurements": {
         "checks": {
           "allThreeGLBsParse": true,
-          "sourcePositionsFinite": true,
-          "all52RequiredBonesOnAnimationReadyFiles": true,
-          "validWeightsAndSumsOnAnimationReadyFiles": true,
-          "finiteInvertibleInverseBindMatrices": true,
-          "embeddedTextureRefsValid": true,
-          "facialMorphsAndZeroNeutralOnConvertedAvatar": true,
-          "actualWebGLSkinningChangesPixels": true,
-          "preservedSourceAssetsUnmodified": true
+          "allVertexCoordinatesFinite": true,
+          "requiredBonesOnRiggedAndFaced": true,
+          "completeValidSkinWeights": true,
+          "inverseBindMatricesFiniteAndInvertible": true,
+          "texturesResolve": true,
+          "requiredFacialTargetsAndNeutralZero": true,
+          "originalAndMixamoSourceUnchanged": true,
+          "rendererSkinningFiniteAndVisible": true
         },
         "files": [
           {
             "path": "assets/tripo/vela-photoreal/generated-original.glb",
             "bytes": 61202748,
             "sha256": "35f35fdfbb1e2a1b3c2562b2021d4efed255966b998ec4a749ea4f2678783c4c",
-            "vertices": {
+            "vertexCoordinates": {
               "finite": 999787,
               "total": 999787,
               "finiteFraction": 1
             },
-            "bones": {
+            "skeleton": {
               "skinCount": 0,
               "boneCount": 0,
               "bones": [],
@@ -92,7 +93,7 @@
               "requiredCount": 52,
               "requiredPresent": 0
             },
-            "weights": {
+            "skinWeights": {
               "weightedVertices": 0,
               "validVertices": 0,
               "coverage": null,
@@ -110,215 +111,7 @@
               "textureCount": 3,
               "missingReferences": []
             },
-            "morphs": [],
-            "neutralMorphNonzero": []
-          },
-          {
-            "path": "assets/tripo/vela-photoreal/generated-rigged.glb",
-            "bytes": 81219904,
-            "sha256": "6f7a4a885457af4c4449a7f5b1cb5c8044c37fa0b71325c4fb2877fe2c488dd6",
-            "vertices": {
-              "finite": 999787,
-              "total": 999787,
-              "finiteFraction": 1
-            },
-            "bones": {
-              "skinCount": 1,
-              "boneCount": 65,
-              "bones": [
-                "mixamorig:Head",
-                "mixamorig:HeadTop_End",
-                "mixamorig:Hips",
-                "mixamorig:LeftArm",
-                "mixamorig:LeftFoot",
-                "mixamorig:LeftForeArm",
-                "mixamorig:LeftHand",
-                "mixamorig:LeftHandIndex1",
-                "mixamorig:LeftHandIndex2",
-                "mixamorig:LeftHandIndex3",
-                "mixamorig:LeftHandIndex4",
-                "mixamorig:LeftHandMiddle1",
-                "mixamorig:LeftHandMiddle2",
-                "mixamorig:LeftHandMiddle3",
-                "mixamorig:LeftHandMiddle4",
-                "mixamorig:LeftHandPinky1",
-                "mixamorig:LeftHandPinky2",
-                "mixamorig:LeftHandPinky3",
-                "mixamorig:LeftHandPinky4",
-                "mixamorig:LeftHandRing1",
-                "mixamorig:LeftHandRing2",
-                "mixamorig:LeftHandRing3",
-                "mixamorig:LeftHandRing4",
-                "mixamorig:LeftHandThumb1",
-                "mixamorig:LeftHandThumb2",
-                "mixamorig:LeftHandThumb3",
-                "mixamorig:LeftHandThumb4",
-                "mixamorig:LeftLeg",
-                "mixamorig:LeftShoulder",
-                "mixamorig:LeftToeBase",
-                "mixamorig:LeftToe_End",
-                "mixamorig:LeftUpLeg",
-                "mixamorig:Neck",
-                "mixamorig:RightArm",
-                "mixamorig:RightFoot",
-                "mixamorig:RightForeArm",
-                "mixamorig:RightHand",
-                "mixamorig:RightHandIndex1",
-                "mixamorig:RightHandIndex2",
-                "mixamorig:RightHandIndex3",
-                "mixamorig:RightHandIndex4",
-                "mixamorig:RightHandMiddle1",
-                "mixamorig:RightHandMiddle2",
-                "mixamorig:RightHandMiddle3",
-                "mixamorig:RightHandMiddle4",
-                "mixamorig:RightHandPinky1",
-                "mixamorig:RightHandPinky2",
-                "mixamorig:RightHandPinky3",
-                "mixamorig:RightHandPinky4",
-                "mixamorig:RightHandRing1",
-                "mixamorig:RightHandRing2",
-                "mixamorig:RightHandRing3",
-                "mixamorig:RightHandRing4",
-                "mixamorig:RightHandThumb1",
-                "mixamorig:RightHandThumb2",
-                "mixamorig:RightHandThumb3",
-                "mixamorig:RightHandThumb4",
-                "mixamorig:RightLeg",
-                "mixamorig:RightShoulder",
-                "mixamorig:RightToeBase",
-                "mixamorig:RightToe_End",
-                "mixamorig:RightUpLeg",
-                "mixamorig:Spine",
-                "mixamorig:Spine1",
-                "mixamorig:Spine2"
-              ],
-              "missingRequired": [],
-              "requiredCount": 52,
-              "requiredPresent": 52
-            },
-            "weights": {
-              "weightedVertices": 999787,
-              "validVertices": 999787,
-              "coverage": 1,
-              "sumFailures": 0,
-              "nonfiniteVertices": 0,
-              "invalidJointIndexVertices": 0
-            },
-            "inverseBindMatrices": {
-              "finite": 65,
-              "invertible": 65,
-              "total": 65
-            },
-            "textures": {
-              "imageCount": 3,
-              "textureCount": 3,
-              "missingReferences": []
-            },
-            "morphs": [],
-            "neutralMorphNonzero": []
-          },
-          {
-            "path": "assets/tripo/vela-photoreal/vela-photoreal-faced.glb",
-            "bytes": 62143688,
-            "sha256": "acec7dae9400cadd00aa4c227594c1ae0dc62001f14be345a47e336a8fa1d43f",
-            "vertices": {
-              "finite": 318177,
-              "total": 318177,
-              "finiteFraction": 1
-            },
-            "bones": {
-              "skinCount": 1,
-              "boneCount": 65,
-              "bones": [
-                "mixamorig:Head",
-                "mixamorig:HeadTop_End",
-                "mixamorig:Hips",
-                "mixamorig:LeftArm",
-                "mixamorig:LeftFoot",
-                "mixamorig:LeftForeArm",
-                "mixamorig:LeftHand",
-                "mixamorig:LeftHandIndex1",
-                "mixamorig:LeftHandIndex2",
-                "mixamorig:LeftHandIndex3",
-                "mixamorig:LeftHandIndex4",
-                "mixamorig:LeftHandMiddle1",
-                "mixamorig:LeftHandMiddle2",
-                "mixamorig:LeftHandMiddle3",
-                "mixamorig:LeftHandMiddle4",
-                "mixamorig:LeftHandPinky1",
-                "mixamorig:LeftHandPinky2",
-                "mixamorig:LeftHandPinky3",
-                "mixamorig:LeftHandPinky4",
-                "mixamorig:LeftHandRing1",
-                "mixamorig:LeftHandRing2",
-                "mixamorig:LeftHandRing3",
-                "mixamorig:LeftHandRing4",
-                "mixamorig:LeftHandThumb1",
-                "mixamorig:LeftHandThumb2",
-                "mixamorig:LeftHandThumb3",
-                "mixamorig:LeftHandThumb4",
-                "mixamorig:LeftLeg",
-                "mixamorig:LeftShoulder",
-                "mixamorig:LeftToeBase",
-                "mixamorig:LeftToe_End",
-                "mixamorig:LeftUpLeg",
-                "mixamorig:Neck",
-                "mixamorig:RightArm",
-                "mixamorig:RightFoot",
-                "mixamorig:RightForeArm",
-                "mixamorig:RightHand",
-                "mixamorig:RightHandIndex1",
-                "mixamorig:RightHandIndex2",
-                "mixamorig:RightHandIndex3",
-                "mixamorig:RightHandIndex4",
-                "mixamorig:RightHandMiddle1",
-                "mixamorig:RightHandMiddle2",
-                "mixamorig:RightHandMiddle3",
-                "mixamorig:RightHandMiddle4",
-                "mixamorig:RightHandPinky1",
-                "mixamorig:RightHandPinky2",
-                "mixamorig:RightHandPinky3",
-                "mixamorig:RightHandPinky4",
-                "mixamorig:RightHandRing1",
-                "mixamorig:RightHandRing2",
-                "mixamorig:RightHandRing3",
-                "mixamorig:RightHandRing4",
-                "mixamorig:RightHandThumb1",
-                "mixamorig:RightHandThumb2",
-                "mixamorig:RightHandThumb3",
-                "mixamorig:RightHandThumb4",
-                "mixamorig:RightLeg",
-                "mixamorig:RightShoulder",
-                "mixamorig:RightToeBase",
-                "mixamorig:RightToe_End",
-                "mixamorig:RightUpLeg",
-                "mixamorig:Spine",
-                "mixamorig:Spine1",
-                "mixamorig:Spine2"
-              ],
-              "missingRequired": [],
-              "requiredCount": 52,
-              "requiredPresent": 52
-            },
-            "weights": {
-              "weightedVertices": 318177,
-              "validVertices": 318177,
-              "coverage": 1,
-              "sumFailures": 0,
-              "nonfiniteVertices": 0,
-              "invalidJointIndexVertices": 0
-            },
-            "inverseBindMatrices": {
-              "finite": 65,
-              "invertible": 65,
-              "total": 65
-            },
-            "textures": {
-              "imageCount": 3,
-              "textureCount": 3,
-              "missingReferences": []
-            },
-            "morphs": [
+            "missingRequiredMorphs": [
               "browDownLeft",
               "browDownRight",
               "browInnerUp",
@@ -327,7 +120,6 @@
               "eyeBlinkLeft",
               "eyeBlinkRight",
               "jawOpen",
-              "mouthClose",
               "mouthFrownLeft",
               "mouthFrownRight",
               "mouthOpen",
@@ -349,7 +141,247 @@
               "viseme_nn",
               "viseme_sil"
             ],
-            "neutralMorphNonzero": []
+            "neutralMorphNonzero": [],
+            "sourceGitClean": true
+          },
+          {
+            "path": "assets/tripo/vela-photoreal/generated-rigged.glb",
+            "bytes": 81219904,
+            "sha256": "6f7a4a885457af4c4449a7f5b1cb5c8044c37fa0b71325c4fb2877fe2c488dd6",
+            "vertexCoordinates": {
+              "finite": 999787,
+              "total": 999787,
+              "finiteFraction": 1
+            },
+            "skeleton": {
+              "skinCount": 1,
+              "boneCount": 65,
+              "bones": [
+                "mixamorig:Head",
+                "mixamorig:HeadTop_End",
+                "mixamorig:Hips",
+                "mixamorig:LeftArm",
+                "mixamorig:LeftFoot",
+                "mixamorig:LeftForeArm",
+                "mixamorig:LeftHand",
+                "mixamorig:LeftHandIndex1",
+                "mixamorig:LeftHandIndex2",
+                "mixamorig:LeftHandIndex3",
+                "mixamorig:LeftHandIndex4",
+                "mixamorig:LeftHandMiddle1",
+                "mixamorig:LeftHandMiddle2",
+                "mixamorig:LeftHandMiddle3",
+                "mixamorig:LeftHandMiddle4",
+                "mixamorig:LeftHandPinky1",
+                "mixamorig:LeftHandPinky2",
+                "mixamorig:LeftHandPinky3",
+                "mixamorig:LeftHandPinky4",
+                "mixamorig:LeftHandRing1",
+                "mixamorig:LeftHandRing2",
+                "mixamorig:LeftHandRing3",
+                "mixamorig:LeftHandRing4",
+                "mixamorig:LeftHandThumb1",
+                "mixamorig:LeftHandThumb2",
+                "mixamorig:LeftHandThumb3",
+                "mixamorig:LeftHandThumb4",
+                "mixamorig:LeftLeg",
+                "mixamorig:LeftShoulder",
+                "mixamorig:LeftToeBase",
+                "mixamorig:LeftToe_End",
+                "mixamorig:LeftUpLeg",
+                "mixamorig:Neck",
+                "mixamorig:RightArm",
+                "mixamorig:RightFoot",
+                "mixamorig:RightForeArm",
+                "mixamorig:RightHand",
+                "mixamorig:RightHandIndex1",
+                "mixamorig:RightHandIndex2",
+                "mixamorig:RightHandIndex3",
+                "mixamorig:RightHandIndex4",
+                "mixamorig:RightHandMiddle1",
+                "mixamorig:RightHandMiddle2",
+                "mixamorig:RightHandMiddle3",
+                "mixamorig:RightHandMiddle4",
+                "mixamorig:RightHandPinky1",
+                "mixamorig:RightHandPinky2",
+                "mixamorig:RightHandPinky3",
+                "mixamorig:RightHandPinky4",
+                "mixamorig:RightHandRing1",
+                "mixamorig:RightHandRing2",
+                "mixamorig:RightHandRing3",
+                "mixamorig:RightHandRing4",
+                "mixamorig:RightHandThumb1",
+                "mixamorig:RightHandThumb2",
+                "mixamorig:RightHandThumb3",
+                "mixamorig:RightHandThumb4",
+                "mixamorig:RightLeg",
+                "mixamorig:RightShoulder",
+                "mixamorig:RightToeBase",
+                "mixamorig:RightToe_End",
+                "mixamorig:RightUpLeg",
+                "mixamorig:Spine",
+                "mixamorig:Spine1",
+                "mixamorig:Spine2"
+              ],
+              "missingRequired": [],
+              "requiredCount": 52,
+              "requiredPresent": 52
+            },
+            "skinWeights": {
+              "weightedVertices": 999787,
+              "validVertices": 999787,
+              "coverage": 1,
+              "sumFailures": 0,
+              "nonfiniteVertices": 0,
+              "invalidJointIndexVertices": 0
+            },
+            "inverseBindMatrices": {
+              "finite": 65,
+              "invertible": 65,
+              "total": 65
+            },
+            "textures": {
+              "imageCount": 3,
+              "textureCount": 3,
+              "missingReferences": []
+            },
+            "missingRequiredMorphs": [
+              "browDownLeft",
+              "browDownRight",
+              "browInnerUp",
+              "browOuterUpLeft",
+              "browOuterUpRight",
+              "eyeBlinkLeft",
+              "eyeBlinkRight",
+              "jawOpen",
+              "mouthFrownLeft",
+              "mouthFrownRight",
+              "mouthOpen",
+              "mouthSmileLeft",
+              "mouthSmileRight",
+              "viseme_CH",
+              "viseme_DD",
+              "viseme_E",
+              "viseme_FF",
+              "viseme_I",
+              "viseme_O",
+              "viseme_PP",
+              "viseme_RR",
+              "viseme_SS",
+              "viseme_TH",
+              "viseme_U",
+              "viseme_aa",
+              "viseme_kk",
+              "viseme_nn",
+              "viseme_sil"
+            ],
+            "neutralMorphNonzero": [],
+            "sourceGitClean": true
+          },
+          {
+            "path": "assets/tripo/vela-photoreal/vela-photoreal-faced.glb",
+            "bytes": 64095392,
+            "sha256": "78586cee40136cba13ae8f25940852b6f681aa4b5f13ad00dddf4332ed2776ce",
+            "vertexCoordinates": {
+              "finite": 323187,
+              "total": 323187,
+              "finiteFraction": 1
+            },
+            "skeleton": {
+              "skinCount": 1,
+              "boneCount": 65,
+              "bones": [
+                "mixamorig:Head",
+                "mixamorig:HeadTop_End",
+                "mixamorig:Hips",
+                "mixamorig:LeftArm",
+                "mixamorig:LeftFoot",
+                "mixamorig:LeftForeArm",
+                "mixamorig:LeftHand",
+                "mixamorig:LeftHandIndex1",
+                "mixamorig:LeftHandIndex2",
+                "mixamorig:LeftHandIndex3",
+                "mixamorig:LeftHandIndex4",
+                "mixamorig:LeftHandMiddle1",
+                "mixamorig:LeftHandMiddle2",
+                "mixamorig:LeftHandMiddle3",
+                "mixamorig:LeftHandMiddle4",
+                "mixamorig:LeftHandPinky1",
+                "mixamorig:LeftHandPinky2",
+                "mixamorig:LeftHandPinky3",
+                "mixamorig:LeftHandPinky4",
+                "mixamorig:LeftHandRing1",
+                "mixamorig:LeftHandRing2",
+                "mixamorig:LeftHandRing3",
+                "mixamorig:LeftHandRing4",
+                "mixamorig:LeftHandThumb1",
+                "mixamorig:LeftHandThumb2",
+                "mixamorig:LeftHandThumb3",
+                "mixamorig:LeftHandThumb4",
+                "mixamorig:LeftLeg",
+                "mixamorig:LeftShoulder",
+                "mixamorig:LeftToeBase",
+                "mixamorig:LeftToe_End",
+                "mixamorig:LeftUpLeg",
+                "mixamorig:Neck",
+                "mixamorig:RightArm",
+                "mixamorig:RightFoot",
+                "mixamorig:RightForeArm",
+                "mixamorig:RightHand",
+                "mixamorig:RightHandIndex1",
+                "mixamorig:RightHandIndex2",
+                "mixamorig:RightHandIndex3",
+                "mixamorig:RightHandIndex4",
+                "mixamorig:RightHandMiddle1",
+                "mixamorig:RightHandMiddle2",
+                "mixamorig:RightHandMiddle3",
+                "mixamorig:RightHandMiddle4",
+                "mixamorig:RightHandPinky1",
+                "mixamorig:RightHandPinky2",
+                "mixamorig:RightHandPinky3",
+                "mixamorig:RightHandPinky4",
+                "mixamorig:RightHandRing1",
+                "mixamorig:RightHandRing2",
+                "mixamorig:RightHandRing3",
+                "mixamorig:RightHandRing4",
+                "mixamorig:RightHandThumb1",
+                "mixamorig:RightHandThumb2",
+                "mixamorig:RightHandThumb3",
+                "mixamorig:RightHandThumb4",
+                "mixamorig:RightLeg",
+                "mixamorig:RightShoulder",
+                "mixamorig:RightToeBase",
+                "mixamorig:RightToe_End",
+                "mixamorig:RightUpLeg",
+                "mixamorig:Spine",
+                "mixamorig:Spine1",
+                "mixamorig:Spine2"
+              ],
+              "missingRequired": [],
+              "requiredCount": 52,
+              "requiredPresent": 52
+            },
+            "skinWeights": {
+              "weightedVertices": 318097,
+              "validVertices": 318097,
+              "coverage": 1,
+              "sumFailures": 0,
+              "nonfiniteVertices": 0,
+              "invalidJointIndexVertices": 0
+            },
+            "inverseBindMatrices": {
+              "finite": 65,
+              "invertible": 65,
+              "total": 65
+            },
+            "textures": {
+              "imageCount": 7,
+              "textureCount": 9,
+              "missingReferences": []
+            },
+            "missingRequiredMorphs": [],
+            "neutralMorphNonzero": [],
+            "sourceGitClean": false
           }
         ],
         "renderer": [
@@ -367,376 +399,214 @@
           },
           {
             "path": "assets/tripo/vela-photoreal/vela-photoreal-faced.glb",
-            "skinnedMeshCount": 2,
-            "skinDeformedVertices": 318177,
-            "skinDeformedFiniteVertices": 318177,
+            "skinnedMeshCount": 1,
+            "skinDeformedVertices": 318097,
+            "skinDeformedFiniteVertices": 318097,
             "skinningFiniteFraction": 1,
             "deformationBone": "mixamorigHips",
-            "rendererChangedPixelsForPose": 1999,
-            "neutralMorphInfluences": 58,
+            "rendererChangedPixelsForPose": 2023,
+            "neutralMorphInfluences": 29,
             "neutralMorphNonzero": 0,
             "textureCount": 3
           }
         ]
       },
       "thresholds": {
-        "finiteCoordinates": "100%",
-        "requiredBones": "52/52 on rigged and converted avatar",
-        "validWeights": "100%; weight sum error <= 0.01",
+        "coordinateFiniteFraction": 1,
+        "requiredHumanoidBones": "52/52 on Mixamo and converted files",
+        "skinWeightCoverage": 1,
+        "maximumWeightSumError": 0.01,
         "inverseBindMatrices": "all finite and invertible",
-        "requiredMorphs": "all required on converted avatar; all neutral values zero",
-        "rendererSkinning": "finite deformed vertices and >0 changed pixels"
+        "missingTextures": 0,
+        "requiredMorphTargets": "all required; neutral weights zero",
+        "renderedSkinning": "all finite; nonzero visible pose delta"
       },
-      "method": "Independent GLB binary/accessor inspection plus live Three.js WebGL skin deformation in the app renderer.",
+      "method": "Independent GLB accessor, skin-weight, skeleton, inverse-bind, texture, and morph inspection; then real Three.js WebGL skinning in Vela.",
       "evidence": [
         "verification/tripo-gate1-integrity.json",
         "verification/tripo-gate1-renderer.json",
         "verification/tripo-gate1-rigged-render.png",
         "verification/tripo-gate1-faced-render.png"
       ],
-      "diagnosis": "The preserved raw Tripo source is intentionally unrigged; checks for animation structure are applied to the Mixamo rig and facial derivative. Both rendered successfully.",
+      "diagnosis": "The raw Tripo GLB and Mixamo GLB are unchanged. The facial GLB is an intentional derived asset and contains the converted rig.",
       "correctiveAction": null,
-      "testedCommitSHA": "672912e887067525046ed58a9bf65bdb94522832"
+      "testedCommitSHA": "7b1183de29552aa1d0a0da96b952d2b5c28d91c8"
     },
     {
       "id": 2,
-      "name": "Orientation and preprocessing stages A-E",
-      "status": "FAIL",
+      "name": "Body orientation and skeleton",
+      "status": "PASS",
       "measurements": {
-        "stagesMeasured": [
+        "stagesAtoD": [
           {
             "stage": "A_mixamo_rigged_source",
-            "headHip": false,
-            "headTorso": false,
-            "shoulderHip": true,
-            "spineRoll": false,
-            "shoulderLevel": true,
-            "headHipDegrees": 18.29768875173056,
-            "headTorsoDegrees": 22.494208335933624,
-            "shoulderHipDegrees": 5.527546285894884,
-            "maxSpineRollDegrees": 13.678490121353912,
-            "shoulderHeightRatio": 0.0000022216078537437276
+            "headHipDegrees": 5.363410428753289,
+            "headTorsoDegrees": 5.3634019089997835,
+            "shoulderHipDegrees": 0.000009507220963046152,
+            "maxSpineRollDegrees": 0.0000979195295550692,
+            "shoulderHeightRatio": 0.0000022216078537437276,
+            "maxMajorJointDeviationDegrees": 0,
+            "pass": true
           },
           {
             "stage": "B_facial_converted_before_preprocess",
-            "headHip": false,
-            "headTorso": false,
-            "shoulderHip": true,
-            "spineRoll": false,
-            "shoulderLevel": true,
-            "headHipDegrees": 18.297678368349533,
-            "headTorsoDegrees": 22.494184889910624,
-            "shoulderHipDegrees": 5.527546285900167,
-            "maxSpineRollDegrees": 13.678495243102763,
-            "shoulderHeightRatio": 0.0000022216109975900364
+            "headHipDegrees": 5.363410428753289,
+            "headTorsoDegrees": 5.363403985574294,
+            "shoulderHipDegrees": 0.0000082776426154535,
+            "maxSpineRollDegrees": 0.00007405298919865985,
+            "shoulderHeightRatio": 0.0000022216109975900364,
+            "maxMajorJointDeviationDegrees": 0,
+            "pass": true
           },
           {
             "stage": "C_bone_renaming_only",
-            "headHip": false,
-            "headTorso": false,
-            "shoulderHip": true,
-            "spineRoll": false,
-            "shoulderLevel": true,
-            "headHipDegrees": 18.297678368349533,
-            "headTorsoDegrees": 22.494184889910624,
-            "shoulderHipDegrees": 5.527546285900167,
-            "maxSpineRollDegrees": 13.678495243102763,
-            "shoulderHeightRatio": 0.0000022216109975900364
+            "headHipDegrees": 5.363410428753289,
+            "headTorsoDegrees": 5.363403985574294,
+            "shoulderHipDegrees": 0.0000082776426154535,
+            "maxSpineRollDegrees": 0.00007405298919865985,
+            "shoulderHeightRatio": 0.0000022216109975900364,
+            "maxMajorJointDeviationDegrees": 0,
+            "pass": true
           },
           {
             "stage": "D_adapter_minus_90_yaw",
-            "headHip": false,
-            "headTorso": false,
-            "shoulderHip": true,
-            "spineRoll": false,
-            "shoulderLevel": true,
-            "headHipDegrees": 18.297676574596757,
-            "headTorsoDegrees": 22.494183144680918,
-            "shoulderHipDegrees": 5.527546285928432,
-            "maxSpineRollDegrees": 13.678495090646546,
-            "shoulderHeightRatio": 0.000002221610997590182
+            "headHipDegrees": 5.363410630643274,
+            "headTorsoDegrees": 5.363404245146597,
+            "shoulderHipDegrees": 0.000019821527883571205,
+            "maxSpineRollDegrees": 0.00007339003010619481,
+            "shoulderHeightRatio": 0.000002221610997590182,
+            "maxMajorJointDeviationDegrees": 0,
+            "pass": true
           }
         ],
-        "stageE": "Not measured in this run; the independent body/face axis checks already fail in stage A.",
-        "full": [
-          {
-            "stage": "A_mixamo_rigged_source",
-            "path": "assets/tripo/vela-photoreal/generated-rigged.glb",
-            "armature": true,
-            "appliedAdapterYawDegrees": 0,
-            "boneNamesRenamedOnly": false,
-            "sourceFaceForwardWorld": [
-              1,
-              0,
-              0
-            ],
-            "torsoForwardWorld": [
-              0.9953500032424927,
-              0.0000014790143723075744,
-              0.09632433205842972
-            ],
-            "hipLocalForwardAxisIndex": 0,
-            "headLocalForwardAxisIndex": 0,
-            "headToHipForwardDisagreementDegrees": 18.29768875173056,
-            "headToTorsoForwardDisagreementDegrees": 22.494208335933624,
-            "shoulderToHipFacingDisagreementDegrees": 5.527546285894884,
-            "spineRollDegrees": {
-              "Spine": 3.8157730762057294,
-              "Spine1": 7.127762503293974,
-              "Spine2": 10.051054908613898,
-              "Neck": -13.67849011844053,
-              "Head": -13.678490121353912
-            },
-            "maxAbsoluteSpineRollDegrees": 13.678490121353912,
-            "shoulderHeightDeltaMeters": 1.1920928955078125e-7,
-            "shoulderWidthMeters": 0.053659015181233054,
-            "shoulderHeightDeltaRatio": 0.0000022216078537437276,
-            "worldBoundsMeters": {
-              "min": [
-                -0.08417041599750519,
-                -0.16234910488128662,
-                7.791095413267612e-8
-              ],
-              "max": [
-                0.0841703861951828,
-                0.16234901547431946,
-                0.9811928272247314
-              ],
-              "height": 0.9811927493137773
-            },
-            "meshArmatureRelationships": [
-              {
-                "mesh": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
-                "parent": "Armature",
-                "armatureModifiers": [
-                  "Armature"
-                ]
-              }
-            ],
-            "neutralPoseDeviationDegrees": {
-              "Hips": 0,
-              "Spine": 0,
-              "Spine1": 0,
-              "Spine2": 0,
-              "Neck": 0,
-              "Head": 0
-            },
-            "missingBones": []
+        "stageE": {
+          "checks": {
+            "activated": true,
+            "browserErrors": true,
+            "headHip": true,
+            "headTorso": true,
+            "shoulderHip": true,
+            "cameraFacing": true,
+            "cameraYaw": true,
+            "cameraPitch": true,
+            "cameraRoll": true,
+            "meshToSkeletonMeasured": true,
+            "meshToSkeletonWithinLimit": true
           },
-          {
-            "stage": "B_facial_converted_before_preprocess",
-            "path": "assets/tripo/vela-photoreal/vela-photoreal-faced.glb",
-            "armature": true,
-            "appliedAdapterYawDegrees": 0,
-            "boneNamesRenamedOnly": false,
-            "sourceFaceForwardWorld": [
-              1,
-              0,
-              0
+          "values": {
+            "faceForwardWorld": [
+              0.008132600789645013,
+              -0.09311801500336989,
+              0.9956218640057221
             ],
-            "torsoForwardWorld": [
-              0.9953500032424927,
-              0.0000010644013173077838,
-              0.09632430970668793
-            ],
-            "hipLocalForwardAxisIndex": 0,
-            "headLocalForwardAxisIndex": 0,
-            "headToHipForwardDisagreementDegrees": 18.297678368349533,
-            "headToTorsoForwardDisagreementDegrees": 22.494184889910624,
-            "shoulderToHipFacingDisagreementDegrees": 5.527546285900167,
-            "spineRollDegrees": {
-              "Spine": 3.8157730717225102,
-              "Spine1": 7.127765486220866,
-              "Spine2": 10.051057178712101,
-              "Neck": -13.678495243102763,
-              "Head": -13.678487733899944
+            "cameraFacingDegrees": 5.315987428250699,
+            "cameraPositionToFaceDegrees": 12.910429267500493,
+            "cameraYawDegrees": 0.4042740345449888,
+            "cameraPitchDegrees": 5.289869975650415,
+            "cameraRollDegrees": 7.583033279093544e-22,
+            "headToHipDegrees": 5.363407960185905,
+            "headToTorsoDegrees": 5.363400595331507,
+            "shoulderToHipDegrees": 0.00008465715707830646
+          },
+          "meshToSkeleton": {
+            "characterHeightMeters": 1.8384285199242427,
+            "expectedRootTranslationMeters": 0.10187346310016038,
+            "runtimeRaw": {
+              "vertexCount": 318097,
+              "maxDisplacementMeters": 0.054375363794786497,
+              "medianDisplacementMeters": 0.05437109717795598,
+              "p95DisplacementMeters": 0.054371433536957926,
+              "maxDisplacementFractionOfHeight": 0.0295770889134309
             },
-            "maxAbsoluteSpineRollDegrees": 13.678495243102763,
-            "shoulderHeightDeltaMeters": 1.1920928955078125e-7,
-            "shoulderWidthMeters": 0.05365893924728377,
-            "shoulderHeightDeltaRatio": 0.0000022216109975900364,
-            "worldBoundsMeters": {
-              "min": [
-                -0.08417157083749771,
-                -0.16235968470573425,
-                0.0000027558417059481144
-              ],
-              "max": [
-                0.08417391777038574,
-                0.16235491633415222,
-                0.9811943769454956
-              ],
-              "height": 0.9811916211037897
+            "runtimeUnexpected": {
+              "vertexCount": 318097,
+              "maxDisplacementMeters": 0.0006999439497663505,
+              "medianDisplacementMeters": 4.1916894512146994e-8,
+              "p95DisplacementMeters": 3.498160121517732e-7,
+              "maxDisplacementFractionOfHeight": 0.00038072948835410445
             },
-            "meshArmatureRelationships": [
+            "bindRest": {
+              "vertexCount": 318097,
+              "maxDisplacementMeters": 0.0006999072715211694,
+              "medianDisplacementMeters": 1.852843909534236e-8,
+              "p95DisplacementMeters": 3.547050211933839e-7,
+              "maxDisplacementFractionOfHeight": 0.00038070953748585825
+            },
+            "boneRestDeviation": [
               {
-                "mesh": "Generated inner mouth surface",
-                "parent": "Armature",
-                "armatureModifiers": [
-                  "Armature"
-                ]
+                "bone": "Hips",
+                "translationMeters": 0.054371101674469555,
+                "rotationDegrees": 0
               },
               {
-                "mesh": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
-                "parent": "Armature",
-                "armatureModifiers": [
-                  "Armature"
-                ]
-              }
-            ],
-            "neutralPoseDeviationDegrees": {
-              "Hips": 0,
-              "Spine": 0,
-              "Spine1": 0,
-              "Spine2": 0,
-              "Neck": 0,
-              "Head": 0
-            },
-            "missingBones": []
-          },
-          {
-            "stage": "C_bone_renaming_only",
-            "path": "assets/tripo/vela-photoreal/vela-photoreal-faced.glb",
-            "armature": true,
-            "appliedAdapterYawDegrees": 0,
-            "boneNamesRenamedOnly": true,
-            "sourceFaceForwardWorld": [
-              1,
-              0,
-              0
-            ],
-            "torsoForwardWorld": [
-              0.9953500032424927,
-              0.0000010644013173077838,
-              0.09632430970668793
-            ],
-            "hipLocalForwardAxisIndex": 0,
-            "headLocalForwardAxisIndex": 0,
-            "headToHipForwardDisagreementDegrees": 18.297678368349533,
-            "headToTorsoForwardDisagreementDegrees": 22.494184889910624,
-            "shoulderToHipFacingDisagreementDegrees": 5.527546285900167,
-            "spineRollDegrees": {
-              "Spine": 3.8157730717225102,
-              "Spine1": 7.127765486220866,
-              "Spine2": 10.051057178712101,
-              "Neck": -13.678495243102763,
-              "Head": -13.678487733899944
-            },
-            "maxAbsoluteSpineRollDegrees": 13.678495243102763,
-            "shoulderHeightDeltaMeters": 1.1920928955078125e-7,
-            "shoulderWidthMeters": 0.05365893924728377,
-            "shoulderHeightDeltaRatio": 0.0000022216109975900364,
-            "worldBoundsMeters": {
-              "min": [
-                -0.08417157083749771,
-                -0.16235968470573425,
-                0.0000027558417059481144
-              ],
-              "max": [
-                0.08417391777038574,
-                0.16235491633415222,
-                0.9811943769454956
-              ],
-              "height": 0.9811916211037897
-            },
-            "meshArmatureRelationships": [
-              {
-                "mesh": "Generated inner mouth surface",
-                "parent": "Armature",
-                "armatureModifiers": [
-                  "Armature"
-                ]
+                "bone": "LeftUpLeg",
+                "translationMeters": 0,
+                "rotationDegrees": 0.01539674317807682
               },
               {
-                "mesh": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
-                "parent": "Armature",
-                "armatureModifiers": [
-                  "Armature"
-                ]
-              }
-            ],
-            "neutralPoseDeviationDegrees": {
-              "Hips": 0,
-              "Spine": 0,
-              "Spine1": 0,
-              "Spine2": 0,
-              "Neck": 0,
-              "Head": 0
-            },
-            "missingBones": []
-          },
-          {
-            "stage": "D_adapter_minus_90_yaw",
-            "path": "assets/tripo/vela-photoreal/vela-photoreal-faced.glb",
-            "armature": true,
-            "appliedAdapterYawDegrees": -90,
-            "boneNamesRenamedOnly": true,
-            "sourceFaceForwardWorld": [
-              -1.3435884227419592e-7,
-              -1,
-              0
-            ],
-            "torsoForwardWorld": [
-              0.0000010125745575351175,
-              -0.9953500032424927,
-              0.09632430970668793
-            ],
-            "hipLocalForwardAxisIndex": 0,
-            "headLocalForwardAxisIndex": 0,
-            "headToHipForwardDisagreementDegrees": 18.297676574596757,
-            "headToTorsoForwardDisagreementDegrees": 22.494183144680918,
-            "shoulderToHipFacingDisagreementDegrees": 5.527546285928432,
-            "spineRollDegrees": {
-              "Spine": 3.815773082770167,
-              "Spine1": 7.127765524628035,
-              "Spine2": 10.05105726782961,
-              "Neck": -13.678495090646546,
-              "Head": -13.678487594405732
-            },
-            "maxAbsoluteSpineRollDegrees": 13.678495090646546,
-            "shoulderHeightDeltaMeters": 1.1920928955078125e-7,
-            "shoulderWidthMeters": 0.053658939247280255,
-            "shoulderHeightDeltaRatio": 0.000002221610997590182,
-            "worldBoundsMeters": {
-              "min": [
-                -0.1617935299873352,
-                -0.08459222316741943,
-                0.0000027558417059481144
-              ],
-              "max": [
-                0.16292105615139008,
-                0.08375328034162521,
-                0.9811943769454956
-              ],
-              "height": 0.9811916211037897
-            },
-            "meshArmatureRelationships": [
-              {
-                "mesh": "Generated inner mouth surface",
-                "parent": "Armature",
-                "armatureModifiers": [
-                  "Armature"
-                ]
+                "bone": "LeftLeg",
+                "translationMeters": 0,
+                "rotationDegrees": 0.019382826119999932
               },
               {
-                "mesh": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
-                "parent": "Armature",
-                "armatureModifiers": [
-                  "Armature"
-                ]
+                "bone": "LeftFoot",
+                "translationMeters": 0,
+                "rotationDegrees": 0.02301885248728794
+              },
+              {
+                "bone": "LeftShoulder",
+                "translationMeters": 0,
+                "rotationDegrees": 0.021014951191597353
+              },
+              {
+                "bone": "LeftHand",
+                "translationMeters": 0,
+                "rotationDegrees": 0.019139265566577093
+              },
+              {
+                "bone": "LeftHandMiddle1",
+                "translationMeters": 0,
+                "rotationDegrees": 0.010105392700292558
+              },
+              {
+                "bone": "LeftHandMiddle2",
+                "translationMeters": 0,
+                "rotationDegrees": 0.01175400743680228
+              },
+              {
+                "bone": "LeftHandRing1",
+                "translationMeters": 0,
+                "rotationDegrees": 0.010613502469847965
               }
+            ]
+          },
+          "mobile": {
+            "viewport": [
+              412,
+              915
             ],
-            "neutralPoseDeviationDegrees": {
-              "Hips": 0,
-              "Spine": 0,
-              "Spine1": 0,
-              "Spine2": 0,
-              "Neck": 0,
-              "Head": 0
+            "canvas": {
+              "left": 0,
+              "top": 0,
+              "width": 412,
+              "height": 915
             },
-            "missingBones": []
+            "document": [
+              412,
+              915
+            ],
+            "panelTop": 725,
+            "faceBox": {
+              "left": 109.04599042428264,
+              "right": 230.98830974953432,
+              "top": 384.97810248293706,
+              "bottom": 552.2278337176739
+            },
+            "faceWidthFraction": 0.2959765032166303,
+            "faceCenterOffsetFraction": -0.08733701435216387,
+            "errors": []
           }
-        ]
+        }
       },
       "thresholds": {
         "headHipDegrees": 10,
@@ -744,102 +614,122 @@
         "shoulderHipDegrees": 10,
         "spineRollDegrees": 5,
         "shoulderHeightRatio": 0.03,
-        "neutralJointDeviationDegrees": 5,
-        "meshSkeletonDisplacementFraction": 0.01,
-        "cameraFacingDegrees": 10
+        "neutralMajorJointDeviationDegrees": 5,
+        "meshToSkeletonDisplacementFraction": 0.01,
+        "cameraFacingDegrees": 10,
+        "cameraYawDegrees": 10,
+        "cameraPitchDegrees": 10,
+        "cameraRollDegrees": 2
       },
-      "method": "Blender 5.2 GLB import measured matched face-forward, hips/head/torso axes, spine roll, and shoulder leveling at each available preprocessing stage.",
+      "method": "Matched Blender world-space anatomy measurements at stages A–D, plus actual TalkingHead runtime body axes and camera measurements at stage E using the imported Tripo character.",
       "evidence": [
-        "verification/tripo-gate2-orientation.json"
+        "verification/tripo-gate2-orientation.json",
+        "verification/tripo-gate2-stage-e.json",
+        "verification/tripo-stage-e-desktop.png",
+        "verification/tripo-stage-e-mobile.png"
       ],
-      "diagnosis": "The generated Mixamo rest pose has its head forward axis 18.30 degrees from hips and up to 13.68 degrees spine roll, exceeding limits. Applying the adapter yaw rotates the character root but does not correct this internal head/neck rest-pose mismatch. Stage E is not measured.",
-      "correctiveAction": "Correct the source rest pose or adapter bone-local rest transforms, then verify camera-facing stage E and rerun downstream gates.",
-      "testedCommitSHA": "672912e887067525046ed58a9bf65bdb94522832"
+      "diagnosis": "All required body-axis, neutral-pose, root-adjusted mesh-to-skeleton displacement, and runtime camera measurements are within limits. The reported global Hips translation is recorded separately as the expected TalkingHead placement offset.",
+      "correctiveAction": null,
+      "testedCommitSHA": "7b1183de29552aa1d0a0da96b952d2b5c28d91c8"
     },
     {
       "id": 3,
-      "name": "Independent facial landmarks and neutral deformation",
+      "name": "Facial landmark and morph geometry",
       "status": "UNVERIFIED",
-      "measurements": {},
-      "thresholds": {},
-      "method": "Not run because the prior gate failed; the specification requires repair and downstream rerun after a failure.",
-      "evidence": [],
-      "diagnosis": "Stopped after Gate 2 FAIL.",
-      "correctiveAction": "Complete Gate 2 corrective action, then rerun this sequential certification.",
-      "testedCommitSHA": "672912e887067525046ed58a9bf65bdb94522832"
+      "measurements": {
+        "registeredLandmarkHits": 476,
+        "independentImageFeatureErrorMillimeters": null,
+        "neutralDriftMillimeters": null
+      },
+      "thresholds": {
+        "validLandmarkProjections": ">=95%",
+        "medianProjectionErrorMillimeters": 2,
+        "p95ProjectionErrorMillimeters": 5,
+        "outsideMaskDeformationMillimeters": 1,
+        "neutralMedianDriftMillimeters": 1,
+        "neutralP95DriftMillimeters": 3
+      },
+      "method": "MediaPipe registration points, generated vertex morphs, and the landmark overlay are recorded, but independent image-identified facial landmarks have not been measured against the rendered character.",
+      "evidence": [
+        "assets/tripo/vela-photoreal/facial-rig-report.json",
+        "verification/tripo-stage-e-landmark-overlay.png",
+        "verification/tripo-stage-e-landmark-overlay.json"
+      ],
+      "diagnosis": "Landmark hits do not establish that each ray landed on the correct visible anatomical feature. Independent feature projection and neutral-drift measurements are missing.",
+      "correctiveAction": "Annotate visible eye, lip, brow, and chin features independently on the source render, then compare those measurements to the registered markers and quantify neutral deformation.",
+      "testedCommitSHA": "7b1183de29552aa1d0a0da96b952d2b5c28d91c8"
     },
     {
       "id": 4,
-      "name": "Measured speech shapes and eye/expression deformations",
+      "name": "Speech shape quality",
       "status": "UNVERIFIED",
       "measurements": {},
       "thresholds": {},
-      "method": "Not run because the prior gate failed; the specification requires repair and downstream rerun after a failure.",
+      "method": "Not executed by this sequential certification run because the preceding gate did not pass.",
       "evidence": [],
-      "diagnosis": "Stopped after Gate 2 FAIL.",
-      "correctiveAction": "Complete Gate 2 corrective action, then rerun this sequential certification.",
-      "testedCommitSHA": "672912e887067525046ed58a9bf65bdb94522832"
+      "diagnosis": "Stopped after Gate 3 UNVERIFIED.",
+      "correctiveAction": "Complete Gate 3, then rerun this runner so downstream gates execute in order.",
+      "testedCommitSHA": "7b1183de29552aa1d0a0da96b952d2b5c28d91c8"
     },
     {
       "id": 5,
-      "name": "HeadTTS-to-TalkingHead channel mapping",
+      "name": "Adapter and animation channels",
       "status": "UNVERIFIED",
       "measurements": {},
       "thresholds": {},
-      "method": "Not run because the prior gate failed; the specification requires repair and downstream rerun after a failure.",
+      "method": "Not executed by this sequential certification run because the preceding gate did not pass.",
       "evidence": [],
-      "diagnosis": "Stopped after Gate 2 FAIL.",
-      "correctiveAction": "Complete Gate 2 corrective action, then rerun this sequential certification.",
-      "testedCommitSHA": "672912e887067525046ed58a9bf65bdb94522832"
+      "diagnosis": "Stopped after Gate 3 UNVERIFIED.",
+      "correctiveAction": "Complete Gate 3, then rerun this runner so downstream gates execute in order.",
+      "testedCommitSHA": "7b1183de29552aa1d0a0da96b952d2b5c28d91c8"
     },
     {
       "id": 6,
-      "name": "Live audio and lip synchronization",
+      "name": "Live speech synchronization",
       "status": "UNVERIFIED",
       "measurements": {},
       "thresholds": {},
-      "method": "Not run because the prior gate failed; the specification requires repair and downstream rerun after a failure.",
+      "method": "Not executed by this sequential certification run because the preceding gate did not pass.",
       "evidence": [],
-      "diagnosis": "Stopped after Gate 2 FAIL.",
-      "correctiveAction": "Complete Gate 2 corrective action, then rerun this sequential certification.",
-      "testedCommitSHA": "672912e887067525046ed58a9bf65bdb94522832"
+      "diagnosis": "Stopped after Gate 3 UNVERIFIED.",
+      "correctiveAction": "Complete Gate 3, then rerun this runner so downstream gates execute in order.",
+      "testedCommitSHA": "7b1183de29552aa1d0a0da96b952d2b5c28d91c8"
     },
     {
       "id": 7,
-      "name": "Desktop and mobile camera framing",
+      "name": "Camera, presentation, and rendering",
       "status": "UNVERIFIED",
       "measurements": {},
       "thresholds": {},
-      "method": "Not run because the prior gate failed; the specification requires repair and downstream rerun after a failure.",
+      "method": "Not executed by this sequential certification run because the preceding gate did not pass.",
       "evidence": [],
-      "diagnosis": "Stopped after Gate 2 FAIL.",
-      "correctiveAction": "Complete Gate 2 corrective action, then rerun this sequential certification.",
-      "testedCommitSHA": "672912e887067525046ed58a9bf65bdb94522832"
+      "diagnosis": "Stopped after Gate 3 UNVERIFIED.",
+      "correctiveAction": "Complete Gate 3, then rerun this runner so downstream gates execute in order.",
+      "testedCommitSHA": "7b1183de29552aa1d0a0da96b952d2b5c28d91c8"
     },
     {
       "id": 8,
-      "name": "Ten-cycle sustained performance and Android device check",
+      "name": "End-to-end stability and performance",
       "status": "UNVERIFIED",
       "measurements": {},
       "thresholds": {},
-      "method": "Not run because the prior gate failed; the specification requires repair and downstream rerun after a failure.",
+      "method": "Not executed by this sequential certification run because the preceding gate did not pass.",
       "evidence": [],
-      "diagnosis": "Stopped after Gate 2 FAIL.",
-      "correctiveAction": "Complete Gate 2 corrective action, then rerun this sequential certification.",
-      "testedCommitSHA": "672912e887067525046ed58a9bf65bdb94522832"
+      "diagnosis": "Stopped after Gate 3 UNVERIFIED.",
+      "correctiveAction": "Complete Gate 3, then rerun this runner so downstream gates execute in order.",
+      "testedCommitSHA": "7b1183de29552aa1d0a0da96b952d2b5c28d91c8"
     },
     {
       "id": 9,
-      "name": "Continuous demo and human visual quality rubric",
+      "name": "Perceptual demo acceptance",
       "status": "UNVERIFIED",
       "measurements": {},
       "thresholds": {},
-      "method": "Not run because the prior gate failed; the specification requires repair and downstream rerun after a failure.",
+      "method": "Not executed by this sequential certification run because the preceding gate did not pass.",
       "evidence": [],
-      "diagnosis": "Stopped after Gate 2 FAIL.",
-      "correctiveAction": "Complete Gate 2 corrective action, then rerun this sequential certification.",
-      "testedCommitSHA": "672912e887067525046ed58a9bf65bdb94522832"
+      "diagnosis": "Stopped after Gate 3 UNVERIFIED.",
+      "correctiveAction": "Complete Gate 3, then rerun this runner so downstream gates execute in order.",
+      "testedCommitSHA": "7b1183de29552aa1d0a0da96b952d2b5c28d91c8"
     }
-  ],
-  "note": "No threshold was relaxed. UNVERIFIED is not a pass."
+  ]
 }

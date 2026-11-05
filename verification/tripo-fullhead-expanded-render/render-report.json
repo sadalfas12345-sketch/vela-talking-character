@@ -1,0 +1,25 @@
+{
+  "glb": "assets\\tripo\\vela-photoreal\\intermediates\\vela-fullhead-expanded-prototype.glb",
+  "captures": [
+    "verification\\tripo-fullhead-expanded-render\\neutral.png",
+    "verification\\tripo-fullhead-expanded-render\\jawOpen.png",
+    "verification\\tripo-fullhead-expanded-render\\viseme_PP.png",
+    "verification\\tripo-fullhead-expanded-render\\viseme_O.png",
+    "verification\\tripo-fullhead-expanded-render\\viseme_E.png",
+    "verification\\tripo-fullhead-expanded-render\\eyeBlinkLeft.png",
+    "verification\\tripo-fullhead-expanded-render\\eyeBlinkRight.png",
+    "verification\\tripo-fullhead-expanded-render\\mouthSmileLeft.png",
+    "verification\\tripo-fullhead-expanded-render\\browInnerUp.png"
+  ],
+  "states": [
+    "neutral",
+    "jawOpen",
+    "viseme_PP",
+    "viseme_O",
+    "viseme_E",
+    "eyeBlinkLeft",
+    "eyeBlinkRight",
+    "mouthSmileLeft",
+    "browInnerUp"
+  ]
+}

@@ -13,7 +13,7 @@
     body { min-height:100dvh; overflow-x:hidden; }
     #avatar { position:fixed; inset:0; z-index:0; }
     #avatar::after { content:''; position:absolute; inset:0; pointer-events:none; background:linear-gradient(180deg, rgba(5,10,20,.25) 0%, transparent 24%, transparent 57%, rgba(5,10,20,.3) 100%); }
-    .shell { position:relative; z-index:2; min-height:100dvh; display:flex; flex-direction:column; padding:clamp(14px,2.5vw,30px); pointer-events:none; }
+    .shell { position:relative; z-index:2; min-height:100dvh; display:flex; flex-direction:column; padding:clamp(14px,2.5vw,30px); padding-bottom:8px; pointer-events:none; }
     #avatar { filter:contrast(1.035) saturate(1.04); }
     #avatar canvas { width:100% !important; height:100% !important; }
     header, .panel { pointer-events:auto; }
@@ -37,14 +37,14 @@
     .panel-top { display:none; }
     label { display:none; }
     textarea, select { width:100%; border:1px solid var(--line); color:var(--ink); background:rgba(5,13,26,.78); border-radius:14px; padding:13px 14px; font:inherit; outline:none; }
-    textarea { min-height:48px; max-height:96px; resize:vertical; line-height:1.4; }
+    textarea { height:52px; min-height:52px; max-height:96px; resize:vertical; line-height:1.4; }
     textarea:focus, select:focus { border-color:rgba(138,241,209,.7); box-shadow:0 0 0 3px rgba(138,241,209,.08); }
     .row { display:grid; grid-template-columns:150px 150px 1fr; gap:8px; margin-top:8px; align-items:center; }
     .select-wrap select { appearance:none; }
     button { width:100%; margin-top:0; border:0; border-radius:12px; padding:12px 16px; color:#06131a; background:linear-gradient(135deg,var(--accent),#b1f8e5); font-weight:700; font-size:14px; cursor:pointer; box-shadow:0 9px 24px rgba(138,241,209,.16); }
     button:disabled { opacity:.45; cursor:wait; }
     .progress { margin:5px 3px 0; color:var(--muted); font-size:11px; min-height:14px; }
-    @media (max-width:600px) { .shell { padding:12px; padding-bottom:max(12px, env(safe-area-inset-bottom)); } .status { font-size:10px; padding:7px 9px; } .content { width:100%; margin:auto auto 0; } .panel { padding:10px; border-radius:16px; } textarea { min-height:52px; } .row { grid-template-columns:1fr 1fr 100px; gap:7px; margin-top:7px; } select { padding:10px 8px; font-size:13px; border-radius:11px; } button { padding:11px 8px; font-size:13px; border-radius:11px; } .progress { margin-top:4px; } }
+    @media (max-width:600px) { .shell { padding:12px; padding-bottom:max(8px, env(safe-area-inset-bottom)); } .status { font-size:10px; padding:7px 9px; } .content { width:100%; margin:auto auto 0; } .panel { padding:10px; border-radius:16px; } textarea { height:52px; min-height:52px; } .row { grid-template-columns:1fr 1fr 100px; gap:7px; margin-top:7px; } select { padding:10px 8px; font-size:13px; border-radius:11px; } button { padding:11px 8px; font-size:13px; border-radius:11px; } .progress { margin-top:4px; } .camera-tools { right:auto; left:12px; } }
   </style>
   <script type="importmap">
   { "imports": {
@@ -92,20 +92,46 @@
   <script type="module">
     import { TalkingHead } from "talkinghead";
     import { HeadTTS } from "headtts";
+    import * as THREE from "three";
     import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
     import { inspectCharacter, adaptCharacterGLTF, compatibilityMessage, cacheKey } from "./character-adapter.mjs";
 
     const $ = (id) => document.getElementById(id);
     const el = { avatar:$('avatar'), form:$('talkForm'), text:$('text'), emotion:$('emotion'), voice:$('voice'), speak:$('speak'), progress:$('progress'), statusDot:$('statusDot'), statusText:$('statusText'), inference:$('inferenceMode'), characterFile:$('characterFile'), characterSelect:$('characterSelect'), compatibility:$('compatibility'), importCharacter:$('importCharacter') };
-    let head, headtts, ready = false, moodTimer, defaultAvatar, importedCharacter = null, tripoCharacter = null, cameraHome = null, defaultRandomizedMorphs = [];
+    let head, headtts, ready = false, moodTimer, defaultAvatar, importedCharacter = null, tripoCharacter = null, tripoBindPoseState = null, cameraHome = null, defaultRandomizedMorphs = [], defaultPoseState = null, panCamera=()=>{};
     const moods = { neutral:'neutral', happy:'happy', sad:'sad', angry:'angry', nervous:'fear' };
 
     function setStatus(text, isReady=false) { el.statusText.textContent=text; el.statusDot.classList.toggle('ready', isReady); }
     function showCompatibility(text, kind='info') { el.compatibility.textContent=text; el.compatibility.dataset.kind=kind; el.compatibility.style.display='block'; }
     function setMood(mood) { if (!head) return; head.setMood(moods[mood] || 'neutral'); clearTimeout(moodTimer); moodTimer=setTimeout(() => head.setMood('neutral'), 5200); }
+    function clonePoseProps(props) { return Object.fromEntries(Object.entries(props||{}).map(([key,value])=>[key,value?.clone?value.clone():value])); }
+    function capturePoseState(instance) {
+      return { poseBase:{...instance.poseBase,props:clonePoseProps(instance.poseBase?.props)}, poseTarget:{...instance.poseTarget,props:clonePoseProps(instance.poseTarget?.props),template:instance.poseTarget?.template}, poseDelta:{...instance.poseDelta,props:clonePoseProps(instance.poseDelta?.props)}, poseName:instance.poseName, poseCurrentTemplate:instance.poseCurrentTemplate, poseStraight:clonePoseProps(instance.poseStraight) };
+    }
+    function restorePoseState(instance,state) {
+      instance.poseBase={...state.poseBase,props:clonePoseProps(state.poseBase.props)};
+      instance.poseTarget={...state.poseTarget,props:clonePoseProps(state.poseTarget.props),template:state.poseTarget.template};
+      instance.poseDelta={...state.poseDelta,props:clonePoseProps(state.poseDelta.props)};
+      instance.poseName=state.poseName;instance.poseCurrentTemplate=state.poseCurrentTemplate;instance.poseStraight=clonePoseProps(state.poseStraight);
+    }
 
     async function boot() {
       head = new TalkingHead(el.avatar, { ttsEndpoint:'N/A', lipsyncModules:[], cameraView:'head', mixerGainSpeech:3, cameraRotateEnable:true, cameraPanEnable:true, cameraZoomEnable:true, ambientLightColor:0x9fb8d6, ambientLightIntensity:1.5, cameraY:0.02, cameraRotateX:0, cameraRotateY:0 });
+      const lookAheadNative=head.lookAhead.bind(head);
+      head.lookAhead=(duration)=>head.avatar?.avatarDisableMoodPose?undefined:lookAheadNative(duration);
+      const updateMorphTargetsNative=head.updateMorphTargets.bind(head);
+      head.updateMorphTargets=(dt)=>{
+        updateMorphTargetsNative(dt);
+        if(!head.avatar?.avatarDisableMoodPose)return;
+        for(const name of ['bodyRotateX','bodyRotateY','bodyRotateZ','headRotateX','headRotateY','headRotateZ']){
+          const channel=head.mtAvatar[name];if(!channel)continue;
+          Object.assign(channel,{system:null,systemd:null,realtime:null,fixed:null,base:null,newvalue:null,v:0,value:0,applied:0,needsUpdate:false});
+        }
+        for(const key of ['Head.quaternion','Spine1.quaternion','Spine.quaternion','Hips.quaternion','LeftUpLeg.quaternion','RightUpLeg.quaternion','LeftLeg.quaternion','RightLeg.quaternion']){
+          const delta=head.poseDelta.props[key];if(delta)delta.x=delta.y=delta.z=0;
+        }
+        head.animQueue=head.animQueue.filter(animation=>animation.template?.name!=='headmove');
+      };
       // Supply neutral internal channels needed by TalkingHead eye/blink paths
       // when imported face meshes omit Oculus gaze/brow shapes.
       head.mtCustoms.push('eyeLookInLeft','eyeLookOutLeft','eyeLookInRight','eyeLookOutRight','eyesLookDown','eyesLookUp','eyesClosed','browDownLeft','browDownRight');
@@ -114,7 +140,18 @@
       head.setMood=(name)=>{
         const mood=head.animMoods[String(name||'').trim().toLowerCase()];
         if(head.avatar?.avatarDisableMoodPose && mood){
-          const anims=mood.anims; mood.anims=anims.filter(anim=>anim.name!=='pose');
+          const scaleMovement=(value,factor)=>Array.isArray(value)?value.map(item=>scaleMovement(item,factor)):(typeof value==='number'?value*factor:value);
+          const anims=mood.anims;
+          mood.anims=anims.filter(anim=>anim.name!=='pose').map(anim=>{
+            if(anim.name!=='head')return anim;
+            const softened={...anim};
+            for(const phase of ['idle','speaking'])if(anim[phase]?.vs){
+              softened[phase]={...anim[phase],vs:{...anim[phase].vs}};
+              const factor=name==='neutral'&&phase==='idle'?0:0.18;
+              for(const channel of ['bodyRotateX','bodyRotateY','bodyRotateZ','headRotateX','headRotateY','headRotateZ'])if(softened[phase].vs[channel])softened[phase].vs[channel]=scaleMovement(softened[phase].vs[channel],factor);
+            }
+            return softened;
+          });
           try{return setMoodNative(name);}finally{mood.anims=anims;}
         }
         return setMoodNative(name);
@@ -141,6 +178,7 @@
       defaultRandomizedMorphs=defaultRandomizedMorphs.filter(name=>head.mtAvatar[name]);
       head.mtRandomized=[...defaultRandomizedMorphs];
       headtts.setup({ voice:el.voice.value, language:'en-us', speed:1, audioEncoding:'wav' });
+      defaultPoseState=capturePoseState(head);
       // TalkingHead defaults to a 10° portrait lens. Widen it for this avatar so
       // its eyes, cheeks and jaw remain in frame on tall phone screens.
       head.camera.fov = window.innerWidth < 700 ? 24 : 18;
@@ -158,7 +196,8 @@
       const controls = head.controls;
       cameraHome={ position:head.camera.position.clone(), target:controls.target.clone() };
       const zoom=(factor)=>{const offset=head.camera.position.clone().sub(controls.target);const next=Math.max(2.15,Math.min(8,offset.length()*factor));offset.setLength(next);head.camera.position.copy(controls.target).add(offset);controls.update();};
-      const pan=(direction)=>{const right=new head.camera.position.constructor(1,0,0).applyQuaternion(head.camera.quaternion);const shift=right.multiplyScalar(direction*0.12);head.camera.position.add(shift);controls.target.add(shift);controls.update();};
+    const pan=(direction)=>{const right=new head.camera.position.constructor(1,0,0).applyQuaternion(head.camera.quaternion);const shift=right.multiplyScalar(direction*0.031);head.camera.position.add(shift);controls.target.add(shift);controls.update();};
+    panCamera=pan;
       $('zoomIn').onclick = () => zoom(0.88);
       $('zoomOut').onclick = () => zoom(1.14);
       $('panLeft').onclick = () => pan(-1);
@@ -207,20 +246,31 @@
           return;
         }
         const url=URL.createObjectURL(file);
+        const isTripoPortrait=/^(?:vela-photoreal-(?:faced|facefit-prototype)|vela-face-(?:surfacefit|fullprojection)-prototype|vela-fullhead-expanded-prototype)\.glb$/i.test(file.name);
         let adapterOptions={};
-        if (file.name==='vela-photoreal-faced.glb') {
+        if (isTripoPortrait) {
           const calibration=await fetch('./assets/tripo/vela-photoreal/face-calibration.json').then(response=>{
             if(!response.ok) throw new Error('Tripo facial landmark calibration is missing');
             return response.json();
           });
-          adapterOptions={eyeLandmarks3d:calibration.landmarks3d,sourceRootLift:calibration.riggedVerticalOffsetMeters,faceForwardYawRadians:calibration.faceForwardYawRadians};
+          adapterOptions={eyeLandmarks3d:calibration.landmarks3d,diagnosticLandmarks3d:calibration.landmarks3d,sourceRootLift:calibration.sourceRootLiftMeters,faceForwardYawRadians:calibration.faceForwardYawRadians};
         }
-        const avatar={ url, body:'F', avatarMood:'neutral', lipsyncLang:'en', retarget:{ scaleToHipsLevel:1 }, baseline:{ headRotateX:-0.04 } };
+        const avatar={ url, body:'F', avatarMood:'neutral', lipsyncLang:'en', retarget:{ scaleToHipsLevel:1 }, baseline:{ headRotateX:0 } };
         if(Number.isFinite(adapterOptions.faceForwardYawRadians)) Object.assign(avatar,{avatarIgnoreCamera:true,avatarIdleEyeContact:false,avatarSpeakingEyeContact:false,avatarIdleHeadMove:0,avatarSpeakingHeadMove:0,avatarDisableMoodPose:true});
-        avatar.preprocess=(sceneGltf)=>adaptCharacterGLTF(sceneGltf,report,adapterOptions);
+        avatar.preprocess=(sceneGltf)=>{
+          if(isTripoPortrait){
+            tripoBindPoseState={};
+            const objects=[];sceneGltf.scene.traverse(object=>objects.push(object));
+            for(const key of head.posePropNames){
+              const [boneName,property]=key.split('.');
+              const object=objects.find(item=>item.isBone&&item.name.replace(/^mixamorig[:_]?/i,'')===boneName);
+              if(object?.[property]?.clone)tripoBindPoseState[key]=object[property].clone();
+            }
+          }
+          adaptCharacterGLTF(sceneGltf,report,adapterOptions);
+        };
         avatar.compatibility=report;
         const character={ name:file.name, url, avatar, report, cache };
-        const isTripoPortrait=file.name==='vela-photoreal-faced.glb';
         if (isTripoPortrait) tripoCharacter=character; else importedCharacter=character;
         try { localStorage.setItem(cache,JSON.stringify({ adapterVersion:1, name:file.name, report, avatarConfig:{ body:'F', avatarMood:'neutral', lipsyncLang:'en', retarget:avatar.retarget }, checkedAt:Date.now() })); } catch {}
         if (!isTripoPortrait && !el.characterSelect.querySelector('option[value="imported"]')) {
@@ -238,19 +288,77 @@
       el.speak.disabled=true; el.progress.textContent='Loading character…';
       try {
         const { compatibility, preprocess, ...headAvatar }=avatar;
-        await head.showAvatar(headAvatar, null, preprocess);
         const isConvertedTripo=Boolean(avatar.avatarDisableMoodPose);
+        if(!isConvertedTripo&&defaultPoseState)restorePoseState(head,defaultPoseState);
+        await head.showAvatar(headAvatar, null, preprocess);
+        if(isConvertedTripo){
+          const skeletons=new Set();head.armature.traverse(object=>{if(object.isSkinnedMesh&&object.skeleton)skeletons.add(object.skeleton);});
+          for(const skeleton of skeletons)skeleton.pose();
+          // TalkingHead reuses its last poseTarget and poseBase when showAvatar
+          // changes models. Rebase every animation property to this GLB's true
+          // bind pose so stale Avaturn rotations cannot be written back next frame.
+          head.scene.updateMatrixWorld(true);
+          for(const key of head.posePropNames){
+            const value=tripoBindPoseState?.[key]||head.poseAvatar?.props?.[key];
+            if(!value)continue;
+            head.poseAvatar.props[key].copy(value);
+            const base=head.poseBase.props[key]||value.clone();
+            base.copy(value); base.t=head.animClock; base.d=0; head.poseBase.props[key]=base;
+            const target=head.poseTarget.props[key]||value.clone();
+            target.copy(value); target.t=head.animClock; target.d=0; head.poseTarget.props[key]=target;
+          }
+          const neutralTemplateProps={};
+          for(const key of head.posePropNames){
+            const [boneName,property]=key.split('.'),value=head.poseAvatar?.props?.[key];if(!value)continue;
+            if(value.isQuaternion){const euler=new THREE.Euler().setFromQuaternion(value,'XYZ');neutralTemplateProps[`${boneName}.rotation`]={x:euler.x,y:euler.y,z:euler.z};}
+            else if(value.isVector3)neutralTemplateProps[key]={x:value.x,y:value.y,z:value.z};
+          }
+          head.poseTarget.template={standing:true,props:neutralTemplateProps};
+          head.poseCurrentTemplate=head.poseTarget.template;
+          head.poseName='tripo-bind';
+          for(const delta of Object.values(head.poseDelta.props)){delta.x=0;delta.y=0;delta.z=0;}
+          for(const name of ['bodyRotateX','bodyRotateY','bodyRotateZ','headRotateX','headRotateY','headRotateZ']){
+            const channel=head.mtAvatar[name];if(!channel)continue;
+            Object.assign(channel,{system:null,systemd:null,realtime:null,fixed:null,base:null,newvalue:null,v:0,value:0,applied:0,needsUpdate:true});
+          }
+          head.animQueue=head.animQueue.filter(animation=>!['headmove','pose'].includes(animation.template?.name));
+          head.armature.updateMatrixWorld(true);
+        }
         head.mtRandomized=isConvertedTripo?defaultRandomizedMorphs.filter(name=>head.mtAvatar[name]):[...defaultRandomizedMorphs];
-        head.camera.fov=window.innerWidth<700?(isConvertedTripo?18:24):(isConvertedTripo?14:18); head.camera.updateProjectionMatrix();
+        head.camera.fov=window.innerWidth<700?(isConvertedTripo?15.5:24):(isConvertedTripo?14:18); head.camera.updateProjectionMatrix();
         head.setView('head',{ cameraY:0.02, cameraDistance:0.9 });
-        await new Promise(resolve=>setTimeout(resolve,1050));
+        if(!isConvertedTripo)await new Promise(resolve=>setTimeout(resolve,1050));
         const headPoint=new head.camera.position.constructor();
-        if(head.objectLeftEye&&head.objectRightEye){
+        const tripoLeft=head.armature?.getObjectByName('VelaLandmark_eye_outer_left');
+        const tripoRight=head.armature?.getObjectByName('VelaLandmark_eye_outer_right');
+        if(isConvertedTripo&&tripoLeft&&tripoRight){
+          const point=(name)=>head.armature.getObjectByName(`VelaLandmark_${name}`)?.getWorldPosition(new head.camera.position.constructor());
+          const eyeLeft=point('eye_top_left').add(point('eye_bottom_left')).multiplyScalar(0.5);
+          const eyeRight=point('eye_top_right').add(point('eye_bottom_right')).multiplyScalar(0.5);
+          const brow=point('brow_left').add(point('brow_right')).multiplyScalar(0.5);
+          const chin=point('chin');
+          const upperLip=point('upper_lip'), lowerLip=point('lower_lip');
+          const faceUp=brow.clone().sub(chin).normalize();
+          const eyeLine=eyeRight.clone().sub(eyeLeft).normalize();
+          const faceForward=faceUp.clone().cross(eyeLine).normalize();
+          const faceCenter=eyeLeft.clone().add(eyeRight).add(brow).add(chin).add(upperLip).add(lowerLip).multiplyScalar(1/6);
+          const previousView=head.camera.position.clone().sub(faceCenter).normalize();
+          if(faceForward.dot(previousView)<0)faceForward.negate();
+          const distance=head.cameraEnd.distanceTo(head.controlsEnd)||head.camera.position.distanceTo(head.controls.target);
+          headPoint.copy(faceCenter);
+          head.controls.target.copy(faceCenter);
+          head.camera.position.copy(faceCenter).addScaledVector(faceForward,distance);
+          head.camera.up.set(0,1,0);
+          head.camera.lookAt(faceCenter);
+          head.camera.updateMatrixWorld(true);
+          head.controls.update();
+        }else if(head.objectLeftEye&&head.objectRightEye){
           const left=head.objectLeftEye.getWorldPosition(new head.camera.position.constructor());
           const right=head.objectRightEye.getWorldPosition(new head.camera.position.constructor());
           headPoint.copy(left).add(right).multiplyScalar(0.5);
         }else head.objectHead.getWorldPosition(headPoint);
         const shift=headPoint.clone().sub(head.controls.target); head.controls.target.add(shift); head.camera.position.add(shift); head.controls.update();
+        if(isConvertedTripo)panCamera(1);
         head.cameraEnd.copy(head.camera.position); head.controlsEnd.copy(head.controls.target);
         cameraHome={position:head.camera.position.clone(),target:head.controls.target.clone()};
         el.progress.textContent='Character ready · type a line and press Speak';
@@ -265,7 +373,7 @@
     el.voice.addEventListener('change', () => { if (ready) headtts.setup({voice:el.voice.value}); });
     el.form.addEventListener('submit', (event) => { event.preventDefault(); const text=el.text.value.trim(); if (!ready || !text) return; setMood(el.emotion.value); el.speak.disabled=true; el.progress.textContent='Synthesizing locally…'; headtts.synthesize({ input:text }).finally(() => { el.speak.disabled=false; }); });
     document.addEventListener('visibilitychange', () => { if (!head) return; document.visibilityState === 'visible' ? head.start() : head.stop(); });
-    window.addEventListener('resize',()=>{if(!head?.camera)return;const tripo=head.avatar?.avatarDisableMoodPose;head.camera.fov=window.innerWidth<700?(tripo?18:24):(tripo?14:18);head.camera.updateProjectionMatrix();});
+    window.addEventListener('resize',()=>{if(!head?.camera)return;const tripo=head.avatar?.avatarDisableMoodPose;head.camera.fov=window.innerWidth<700?(tripo?15.5:24):(tripo?14:18);head.camera.updateProjectionMatrix();});
     boot().catch((error) => { console.error(error); setStatus('Startup needs attention'); el.progress.textContent=`Could not start: ${error.message || error}`; el.speak.textContent='Retry'; el.speak.disabled=false; el.inference.textContent='Browser fallback available'; });
   </script>
 </body>

@@ -1,0 +1,71 @@
+{
+  "method": "Boundary edge vertices from Blender BMesh; nearest-surface distances to the other exported mesh via Blender BVH.",
+  "glb": "assets\\tripo\\vela-photoreal\\vela-photoreal-facefit-prototype.glb",
+  "TripoShellBoundaryEdges": 51382,
+  "TripoShellBoundaryVertices": 51382,
+  "FittedFaceBoundaryEdges": 423,
+  "FittedFaceBoundaryVertices": 423,
+  "patchBoundaryBoundsMeters": [
+    [
+      -0.009136768989264965,
+      -0.03811129555106163,
+      0.8255848288536072
+    ],
+    [
+      0.0761110931634903,
+      0.04693593457341194,
+      0.9196224212646484
+    ]
+  ],
+  "shellBoundaryBoundsMeters": [
+    [
+      -0.08222406357526779,
+      -0.15922477841377258,
+      3.69979243259877e-05
+    ],
+    [
+      0.08181408047676086,
+      0.16187900304794312,
+      0.9810169339179993
+    ]
+  ],
+  "localShellBoundaryVerticesWithin12mmOfPatchBounds": 6018,
+  "registeredFaceShellBoundaryVertices": 1045,
+  "patchBoundaryToRegisteredFaceCutBoundaryMillimeters": {
+    "median": 10.514411143958569,
+    "p95": 36.83391995728015,
+    "max": 42.953670024871826,
+    "within0_5mm": 0.016548463356973995
+  },
+  "registeredFaceBoundaryNearestInProjectionPixels": {
+    "median": 49.999384301387316,
+    "p95": 331.48723636819665,
+    "max": 354.2552999710734,
+    "worldDistanceMedianMillimeters": 21.26732250925077,
+    "worldDistanceP95Millimeters": 52.776732560086145
+  },
+  "patchBoundaryToShellBoundaryMillimeters": {
+    "median": 10.08441112935543,
+    "p95": 36.83391995728015,
+    "max": 42.953670024871826,
+    "within0_5mm": 0.016548463356973995
+  },
+  "localShellBoundaryToPatchBoundaryMillimeters": {
+    "median": 12.842349708080292,
+    "p95": 30.997656285762787,
+    "max": 48.687029629945755,
+    "within0_5mm": 0.001163177135260884
+  },
+  "patchBoundaryToShellSurfaceMillimeters": {
+    "median": 9.335678070783615,
+    "p95": 36.42261140048503,
+    "max": 42.80227795243263,
+    "within0_5mm": 0.061465721040189124
+  },
+  "shellBoundaryToPatchSurfaceMillimeters": {
+    "median": 484.31533575057983,
+    "p95": 915.3308719396591,
+    "max": 948.9136934280396,
+    "within0_5mm": 0.0
+  }
+}

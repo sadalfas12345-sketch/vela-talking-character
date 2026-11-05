@@ -15,13 +15,13 @@
     },
     {
       "path": "assets/tripo/vela-photoreal/vela-photoreal-faced.glb",
-      "skinnedMeshCount": 2,
-      "skinDeformedVertices": 318177,
-      "skinDeformedFiniteVertices": 318177,
+      "skinnedMeshCount": 1,
+      "skinDeformedVertices": 318097,
+      "skinDeformedFiniteVertices": 318097,
       "skinningFiniteFraction": 1,
       "deformationBone": "mixamorigHips",
-      "rendererChangedPixelsForPose": 1999,
-      "neutralMorphInfluences": 58,
+      "rendererChangedPixelsForPose": 2023,
+      "neutralMorphInfluences": 29,
       "neutralMorphNonzero": 0,
       "textureCount": 3,
       "screenshot": "verification/tripo-gate1-faced-render.png"

@@ -1,0 +1,41 @@
+{
+  "method": "Blender evaluated geometry at full target influence; BVH triangle overlap between transferred oral meshes and the Tripo shell near the mouth. This is a read-only test.",
+  "states": {
+    "jawOpen": {
+      "shellTrianglesInMouthAABB": 1852,
+      "teethTriangles": 1526,
+      "tongueTriangles": 148,
+      "shellTeethIntersectingTrianglePairs": 339,
+      "shellTongueIntersectingTrianglePairs": 0,
+      "mouthAABBMinWorld": [
+        0.0372505858540535,
+        -0.012301936745643616,
+        0.8406010270118713
+      ],
+      "mouthAABBMaxWorld": [
+        0.07672934234142303,
+        0.01853247545659542,
+        0.8587744832038879
+      ],
+      "bvhExpansionMeters": 0.004
+    },
+    "viseme_PP": {
+      "shellTrianglesInMouthAABB": 1764,
+      "teethTriangles": 1526,
+      "tongueTriangles": 148,
+      "shellTeethIntersectingTrianglePairs": 341,
+      "shellTongueIntersectingTrianglePairs": 86,
+      "mouthAABBMinWorld": [
+        0.046728648245334625,
+        -0.012301936745643616,
+        0.8470574021339417
+      ],
+      "mouthAABBMaxWorld": [
+        0.07672934234142303,
+        0.01853247545659542,
+        0.8587744832038879
+      ],
+      "bvhExpansionMeters": 0.004
+    }
+  }
+}

@@ -1,0 +1,424 @@
+{
+  "testedAsset": "assets/tripo/vela-photoreal/vela-photoreal-faced.glb",
+  "testedAssetSha256": "78586cee40136cba13ae8f25940852b6f681aa4b5f13ad00dddf4332ed2776ce",
+  "runtimeMouthWidthMeters": 0.057459814404653954,
+  "runtimeMouthWidthMillimeters": 57.459814404653955,
+  "runtimeMouthWidthPixels": 74.73120115181062,
+  "registeredBuilderMouthWidthMeters": 0.030834412250956848,
+  "runtimeToBuilderScaleObserved": 1.8634963409387144,
+  "lipAnchorAperture": {
+    "neutralMillimeters": 0.6153004613901863,
+    "neutralRatioW": 0.01070836144817673,
+    "jawOpenMillimeters": 1.5102972315439067,
+    "jawOpenRatioW": 0.026284400843467944,
+    "jawOpenPixelsBetweenRegisteredLipVertices": 1.7883208553694463,
+    "jawOpenRequiredMillimeters": 14.364953601163489,
+    "jawOpenRequiredPixels": 18.682800287952656,
+    "openMinusClosedMillimeters": 0.8949967267675519,
+    "openMinusClosedRatioW": 0.015576038630147119,
+    "requiredOpenMinusClosedMillimeters": 12.64115916902387,
+    "closedPPMillimeters": 0.6153005047763548,
+    "closedPPRatioW": 0.010708362213320825
+  },
+  "shapeDimensions": {
+    "OWidthRatioToNeutral": 0.9194242356110516,
+    "EWidthRatioToNeutral": 1.1991952831560018,
+    "OToEDifferenceRatioW": 0.27977104754495014,
+    "leftBlinkClosureFraction": 0.7645654619305344,
+    "rightBlinkClosureFraction": 0.7085831163158484,
+    "leftSmileCornerLiftRatioW": 0.10054687032649544
+  },
+  "renderedDarkMouthPixelEnvelope": {
+    "jawOpen": {
+      "threshold": "all RGB channels <55 in fixed mouth ROI [690,810]-[800,870]",
+      "darkComponents": [
+        {
+          "areaPixels": 365,
+          "bboxXYXY": [
+            716,
+            823,
+            761,
+            836
+          ],
+          "widthPixels": 45,
+          "heightPixels": 13
+        }
+      ],
+      "combinedDarkEnvelopeXYXY": [
+        716,
+        823,
+        761,
+        836
+      ],
+      "combinedDarkSpanPixels": 13,
+      "combinedDarkSpanRatioToNeutralMouthWidth": 0.17395679180362042,
+      "evidence": "assets\\tripo\\vela-photoreal\\verification\\aperture-jawOpen.png"
+    },
+    "viseme_PP": {
+      "threshold": "all RGB channels <55 in fixed mouth ROI [690,810]-[800,870]",
+      "darkComponents": [
+        {
+          "areaPixels": 803,
+          "bboxXYXY": [
+            716,
+            823,
+            778,
+            854
+          ],
+          "widthPixels": 62,
+          "heightPixels": 31
+        }
+      ],
+      "combinedDarkEnvelopeXYXY": [
+        716,
+        823,
+        778,
+        854
+      ],
+      "combinedDarkSpanPixels": 31,
+      "combinedDarkSpanRatioToNeutralMouthWidth": 0.41482004199324873,
+      "evidence": "assets\\tripo\\vela-photoreal\\verification\\aperture-viseme_PP.png"
+    },
+    "viseme_O": {
+      "threshold": "all RGB channels <55 in fixed mouth ROI [690,810]-[800,870]",
+      "darkComponents": [
+        {
+          "areaPixels": 373,
+          "bboxXYXY": [
+            716,
+            823,
+            761,
+            836
+          ],
+          "widthPixels": 45,
+          "heightPixels": 13
+        },
+        {
+          "areaPixels": 287,
+          "bboxXYXY": [
+            722,
+            839,
+            778,
+            857
+          ],
+          "widthPixels": 56,
+          "heightPixels": 18
+        }
+      ],
+      "combinedDarkEnvelopeXYXY": [
+        716,
+        823,
+        778,
+        857
+      ],
+      "combinedDarkSpanPixels": 34,
+      "combinedDarkSpanRatioToNeutralMouthWidth": 0.45496391702485345,
+      "evidence": "assets\\tripo\\vela-photoreal\\verification\\aperture-viseme_O.png"
+    },
+    "viseme_E": {
+      "threshold": "all RGB channels <55 in fixed mouth ROI [690,810]-[800,870]",
+      "darkComponents": [
+        {
+          "areaPixels": 356,
+          "bboxXYXY": [
+            718,
+            824,
+            761,
+            836
+          ],
+          "widthPixels": 43,
+          "heightPixels": 12
+        },
+        {
+          "areaPixels": 336,
+          "bboxXYXY": [
+            724,
+            838,
+            777,
+            856
+          ],
+          "widthPixels": 53,
+          "heightPixels": 18
+        }
+      ],
+      "combinedDarkEnvelopeXYXY": [
+        718,
+        824,
+        777,
+        856
+      ],
+      "combinedDarkSpanPixels": 32,
+      "combinedDarkSpanRatioToNeutralMouthWidth": 0.42820133367045027,
+      "evidence": "assets\\tripo\\vela-photoreal\\verification\\aperture-viseme_E.png"
+    },
+    "viseme_I": {
+      "threshold": "all RGB channels <55 in fixed mouth ROI [690,810]-[800,870]",
+      "darkComponents": [
+        {
+          "areaPixels": 361,
+          "bboxXYXY": [
+            717,
+            823,
+            761,
+            836
+          ],
+          "widthPixels": 44,
+          "heightPixels": 13
+        },
+        {
+          "areaPixels": 366,
+          "bboxXYXY": [
+            723,
+            838,
+            777,
+            855
+          ],
+          "widthPixels": 54,
+          "heightPixels": 17
+        }
+      ],
+      "combinedDarkEnvelopeXYXY": [
+        717,
+        823,
+        777,
+        855
+      ],
+      "combinedDarkSpanPixels": 32,
+      "combinedDarkSpanRatioToNeutralMouthWidth": 0.42820133367045027,
+      "evidence": "assets\\tripo\\vela-photoreal\\verification\\aperture-viseme_I.png"
+    },
+    "viseme_U": {
+      "threshold": "all RGB channels <55 in fixed mouth ROI [690,810]-[800,870]",
+      "darkComponents": [
+        {
+          "areaPixels": 370,
+          "bboxXYXY": [
+            716,
+            823,
+            761,
+            836
+          ],
+          "widthPixels": 45,
+          "heightPixels": 13
+        },
+        {
+          "areaPixels": 407,
+          "bboxXYXY": [
+            721,
+            835,
+            778,
+            855
+          ],
+          "widthPixels": 57,
+          "heightPixels": 20
+        }
+      ],
+      "combinedDarkEnvelopeXYXY": [
+        716,
+        823,
+        778,
+        855
+      ],
+      "combinedDarkSpanPixels": 32,
+      "combinedDarkSpanRatioToNeutralMouthWidth": 0.42820133367045027,
+      "evidence": "assets\\tripo\\vela-photoreal\\verification\\aperture-viseme_U.png"
+    },
+    "viseme_FF": {
+      "threshold": "all RGB channels <55 in fixed mouth ROI [690,810]-[800,870]",
+      "darkComponents": [
+        {
+          "areaPixels": 798,
+          "bboxXYXY": [
+            716,
+            823,
+            778,
+            854
+          ],
+          "widthPixels": 62,
+          "heightPixels": 31
+        }
+      ],
+      "combinedDarkEnvelopeXYXY": [
+        716,
+        823,
+        778,
+        854
+      ],
+      "combinedDarkSpanPixels": 31,
+      "combinedDarkSpanRatioToNeutralMouthWidth": 0.41482004199324873,
+      "evidence": "assets\\tripo\\vela-photoreal\\verification\\aperture-viseme_FF.png"
+    }
+  },
+  "donorMismatch": {
+    "donorTeethRawWidthMeters": 0.05926767364144325,
+    "donorTeethRawHeightMeters": 0.04860639572143555,
+    "donorWidthToBuilderMouthRatio": 1.9221275618640685,
+    "appliedHorizontalScale": 0.5202568340626704,
+    "appliedVerticalScale": 0.24106038889438455,
+    "fittedTeethHeightBuilderMeters": 0.011717076655363602,
+    "fittedTeethHeightRatioToBuilderMouth": 0.38,
+    "estimatedFittedTeethHeightRuntimeMillimeters": 21.8347294737685,
+    "sourceUpperLowerComponentZOverlapMeters": 0.012299999999999978,
+    "fittedRuntimeUpperLowerOverlapMillimeters": 5.5253463775943645,
+    "overlapRatioToRuntimeMouthWidth": 0.09616018490214336
+  },
+  "faceTopology": {
+    "node": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+    "mesh": "tripo_mesh_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+    "primitive": 0,
+    "vertices": 999787,
+    "weldedPositionVertices": 971925,
+    "triangles": 1943912,
+    "boundaryEdgesAfterPositionWeld": 4,
+    "nonManifoldEdgesAfterPositionWeld": 6,
+    "connectedComponentsAfterPositionWeld": 27863,
+    "largestComponentVertices": 971925,
+    "morphTargetNames": [],
+    "skinned": false
+  },
+  "convertedFaceTopology": {
+    "node": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+    "mesh": "tripo_mesh_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+    "primitive": 0,
+    "vertices": 318097,
+    "weldedPositionVertices": 303596,
+    "triangles": 583133,
+    "boundaryEdgesAfterPositionWeld": 35609,
+    "nonManifoldEdgesAfterPositionWeld": 5,
+    "connectedComponentsAfterPositionWeld": 14502,
+    "largestComponentVertices": 303596,
+    "morphTargetNames": [
+      "jawOpen",
+      "mouthOpen",
+      "viseme_aa",
+      "viseme_E",
+      "viseme_I",
+      "viseme_O",
+      "viseme_U",
+      "viseme_PP",
+      "viseme_sil",
+      "mouthClose",
+      "viseme_FF",
+      "viseme_TH",
+      "viseme_DD",
+      "viseme_kk",
+      "viseme_CH",
+      "viseme_SS",
+      "viseme_nn",
+      "viseme_RR",
+      "eyeBlinkLeft",
+      "eyeBlinkRight",
+      "mouthSmileLeft",
+      "mouthFrownLeft",
+      "mouthSmileRight",
+      "mouthFrownRight",
+      "browOuterUpLeft",
+      "browDownLeft",
+      "browOuterUpRight",
+      "browDownRight",
+      "browInnerUp"
+    ],
+    "skinned": true
+  },
+  "collisionTest": {
+    "method": "Blender evaluated geometry at full target influence; BVH triangle overlap between transferred oral meshes and the Tripo shell near the mouth. This is a read-only test.",
+    "states": {
+      "jawOpen": {
+        "shellTrianglesInMouthAABB": 1852,
+        "teethTriangles": 1526,
+        "tongueTriangles": 148,
+        "shellTeethIntersectingTrianglePairs": 339,
+        "shellTongueIntersectingTrianglePairs": 0,
+        "mouthAABBMinWorld": [
+          0.0372505858540535,
+          -0.012301936745643616,
+          0.8406010270118713
+        ],
+        "mouthAABBMaxWorld": [
+          0.07672934234142303,
+          0.01853247545659542,
+          0.8587744832038879
+        ],
+        "bvhExpansionMeters": 0.004
+      },
+      "viseme_PP": {
+        "shellTrianglesInMouthAABB": 1764,
+        "teethTriangles": 1526,
+        "tongueTriangles": 148,
+        "shellTeethIntersectingTrianglePairs": 341,
+        "shellTongueIntersectingTrianglePairs": 86,
+        "mouthAABBMinWorld": [
+          0.046728648245334625,
+          -0.012301936745643616,
+          0.8470574021339417
+        ],
+        "mouthAABBMaxWorld": [
+          0.07672934234142303,
+          0.01853247545659542,
+          0.8587744832038879
+        ],
+        "bvhExpansionMeters": 0.004
+      }
+    }
+  },
+  "reviewedFrames": [
+    "assets/tripo/vela-photoreal/verification/aperture-jawOpen.png",
+    "assets/tripo/vela-photoreal/verification/aperture-viseme_PP.png",
+    "assets/tripo/vela-photoreal/verification/aperture-viseme_O.png",
+    "assets/tripo/vela-photoreal/verification/aperture-viseme_E.png",
+    "assets/tripo/vela-photoreal/verification/aperture-viseme_FF.png"
+  ],
+  "visualFindings": [
+    "The Tripo lips are color painted on the continuous face surface and visibly stretch across the opened seam.",
+    "The dark cavity stays visibly open in the closed-lip viseme_PP frame; the mouth reads as a cutout rather than lip contact.",
+    "Transferred teeth intersect the shell in the BVH check and protrude through the painted lip contour in rendered frames.",
+    "The donor upper and lower dental components overlap in the fitted neutral geometry."
+  ],
+  "gate4": "FAIL",
+  "gate4FailedChecks": [
+    {
+      "metric": "Full-open aperture at jawOpen",
+      "actualRatioW": 0.026284400843467944,
+      "thresholdRatioW": 0.25,
+      "result": "FAIL"
+    },
+    {
+      "metric": "Open-versus-closed aperture difference",
+      "actualRatioW": 0.015576038630147119,
+      "thresholdRatioW": 0.22,
+      "result": "FAIL"
+    },
+    {
+      "metric": "Left blink closure",
+      "actualFraction": 0.7645654619305344,
+      "thresholdFraction": 0.85,
+      "result": "FAIL"
+    },
+    {
+      "metric": "Right blink closure",
+      "actualFraction": 0.7085831163158484,
+      "thresholdFraction": 0.85,
+      "result": "FAIL"
+    },
+    {
+      "metric": "Visible unintended mouth surface intersections",
+      "actualObserved": true,
+      "threshold": "none visible",
+      "supportingBVHTrianglePairs": {
+        "jawOpen": {
+          "shellTeeth": 339,
+          "shellTongue": 0
+        },
+        "viseme_PP": {
+          "shellTeeth": 341,
+          "shellTongue": 86
+        }
+      },
+      "result": "FAIL"
+    }
+  ],
+  "methodLimitations": [
+    "Pixel dark-component envelopes are a visual cavity proxy and are not treated as true lip-contour measurements. The separate lip-vertex projection is the quantitative aperture metric.",
+    "BVH counts are intersecting triangle pairs in the measured mouth AABB, not unique intersection curves."
+  ]
+}

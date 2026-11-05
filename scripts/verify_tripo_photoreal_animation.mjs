@@ -1,8 +1,13 @@
 import { chromium } from 'playwright';
-import { writeFile } from 'node:fs/promises';
+import { mkdir, writeFile } from 'node:fs/promises';
+import path from 'node:path';
 
 const baseUrl = process.env.VELA_URL || 'http://127.0.0.1:4174';
-const file = 'assets/tripo/vela-photoreal/vela-photoreal-faced.glb';
+const file = process.env.VELA_AVATAR_FILE || 'assets/tripo/vela-photoreal/vela-photoreal-faced.glb';
+const fileName = path.basename(file);
+const expectedSelection = /^(?:vela-photoreal-(?:faced|facefit-prototype)|vela-face-(?:surfacefit|fullprojection)-prototype|vela-fullhead-expanded-prototype)\.glb$/i.test(fileName) ? 'tripo' : 'imported';
+const evidenceDir = process.env.VELA_EVIDENCE_DIR || 'verification/tripo-photoreal-runtime';
+await mkdir(evidenceDir, { recursive: true });
 const browser = await chromium.launch({ headless: true });
 const page = await browser.newPage({ viewport: { width: 1280, height: 900 }, deviceScaleFactor: 1 });
 const errorCounts = new Map();
@@ -20,7 +25,7 @@ try {
   if (!original?.includes('avaturn.glb')) throw new Error(`Default avatar failed to load: ${original}`);
 
   await page.locator('#characterFile').setInputFiles(file);
-  await page.getByText('vela-photoreal-faced.glb:', { exact: false }).waitFor({ timeout: 90000 });
+  await page.getByText(`${fileName}:`, { exact: false }).waitFor({ timeout: 90000 });
   await page.waitForFunction(() => window.talkingHead?.avatar?.url?.startsWith('blob:'), null, { timeout: 90000 });
   const imported = await page.evaluate(() => ({
     status: document.querySelector('#compatibility').textContent,
@@ -28,7 +33,7 @@ try {
     selected: document.querySelector('#characterSelect').value,
     morphs: Object.keys(window.talkingHead.mtAvatar || {}).filter(key => /^(jawOpen|mouthOpen|viseme_|eyeBlink|mouthSmile|mouthFrown|brow)/.test(key))
   }));
-  if (imported.selected !== 'tripo' || imported.status.includes('activation failed')) throw new Error(`Tripo avatar did not activate cleanly: ${JSON.stringify(imported)}`);
+  if (imported.selected !== expectedSelection || imported.status.includes('activation failed')) throw new Error(`Tripo avatar did not activate cleanly: ${JSON.stringify(imported)}`);
   if (!imported.morphs.includes('viseme_aa') || !imported.morphs.includes('eyeBlinkLeft')) throw new Error(`Tripo morphs not registered: ${JSON.stringify(imported)}`);
 
   // First prove the imported mesh responds to real geometry controls directly.
@@ -47,7 +52,7 @@ try {
   });
   if (!direct.meshCount || !direct.changed) throw new Error(`Imported jawOpen shape key is not controllable: ${JSON.stringify(direct)}`);
   const renderChecks=[];
-  for (const [name, path] of [['jawOpen','assets/tripo/vela-photoreal/verification/vela-photoreal-jaw-open.png'],['viseme_aa','assets/tripo/vela-photoreal/verification/vela-photoreal-viseme-aa.png'],['eyeBlinkLeft','assets/tripo/vela-photoreal/verification/vela-photoreal-blink-left.png'],['eyeBlinkRight','assets/tripo/vela-photoreal/verification/vela-photoreal-blink-right.png'],['mouthSmileLeft','assets/tripo/vela-photoreal/verification/vela-photoreal-smile-left.png'],['mouthFrownLeft','assets/tripo/vela-photoreal/verification/vela-photoreal-frown-left.png'],['browInnerUp','assets/tripo/vela-photoreal/verification/vela-photoreal-brow-up.png']]) {
+  for (const [name, imageName] of [['jawOpen','jaw-open.png'],['viseme_aa','viseme-aa.png'],['eyeBlinkLeft','blink-left.png'],['eyeBlinkRight','blink-right.png'],['mouthSmileLeft','smile-left.png'],['mouthFrownLeft','frown-left.png'],['browInnerUp','brow-up.png']]) {
     const renderCheck=await page.evaluate(async name => {
       const THREE=await import('three');
       const h=window.talkingHead;
@@ -73,8 +78,8 @@ try {
     },name);
     const { image: renderedImage, beforeImage: neutralImage, ...renderSummary } = renderCheck;
     renderChecks.push({name, ...renderSummary});
-    if(name==='jawOpen'&&renderCheck?.beforeImage)await writeFile('assets/tripo/vela-photoreal/verification/vela-photoreal-render-neutral.png',Buffer.from(renderCheck.beforeImage.split(',')[1],'base64'));
-    if(renderCheck?.image)await writeFile(path,Buffer.from(renderCheck.image.split(',')[1],'base64'));
+    if(name==='jawOpen'&&renderCheck?.beforeImage)await writeFile(path.join(evidenceDir,'neutral.png'),Buffer.from(renderCheck.beforeImage.split(',')[1],'base64'));
+    if(renderCheck?.image)await writeFile(path.join(evidenceDir,imageName),Buffer.from(renderCheck.image.split(',')[1],'base64'));
     if(!renderCheck?.changedPixels && (!renderCheck?.movedVertices || renderCheck.maxDelta < 0.0001))throw new Error(`${name} has neither rendered nor geometric deformation: ${JSON.stringify({...renderCheck,image:undefined,beforeImage:undefined})}`);
     await page.evaluate(name => {
       const h=window.talkingHead;
@@ -82,11 +87,12 @@ try {
       h.renderer.render(h.scene,h.camera);
     },name);
   }
-  await page.screenshot({ path: 'assets/tripo/vela-photoreal/verification/vela-photoreal-neutral.png', fullPage: true });
+  await page.screenshot({ path: path.join(evidenceDir,'desktop-neutral.png'), fullPage: true });
   await page.evaluate(() => {
     window.__tripoMotion = { mouth: 0, blink: 0, expression: 0, channels: {}, animationNames: [] };
     const head=window.talkingHead, originalSpeakAudio=head.speakAudio.bind(head);
     head.speakAudio=(payload,...args)=>{
+      window.__tripoSpeechStartedAt=performance.now();
       window.__tripoAudioPayload={keys:Object.keys(payload||{}),wordCount:payload?.words?.length||0,visemes:payload?.visemes?.slice?.(0,8)||null,vtimes:payload?.vtimes?.slice?.(0,4)||null,vdurations:payload?.vdurations?.slice?.(0,4)||null};
       const result=originalSpeakAudio(payload,...args);
       const queued=head.speechQueue?.[0]?.anim;
@@ -97,10 +103,16 @@ try {
     const started = performance.now();
     const sample = () => {
       const h = window.talkingHead, p = window.__tripoMotion;
-      for (const n of ['jawOpen','mouthOpen','viseme_aa','viseme_E','viseme_O','viseme_PP','viseme_FF']) { const c=h.mtAvatar[n]; p.mouth=Math.max(p.mouth,c?.applied||0,c?.value||0); p.channels[n]=Math.max(p.channels[n]||0,c?.applied||0,c?.value||0); }
+      let liveMouthWeight=0;
+      for (const n of ['jawOpen','mouthOpen','viseme_aa','viseme_E','viseme_O','viseme_PP','viseme_FF']) { const c=h.mtAvatar[n]; const weight=Math.max(c?.applied||0,c?.value||0); liveMouthWeight=Math.max(liveMouthWeight,weight); p.mouth=Math.max(p.mouth,weight); p.channels[n]=Math.max(p.channels[n]||0,weight); }
       p.animationNames=[...new Set(h.animQueue.filter(a=>a.template?.name==='viseme').map(a=>a.template.name+':'+Object.keys(a.vs||{}).join(',')))].slice(0,8);
       for (const n of ['eyeBlinkLeft','eyeBlinkRight']) p.blink = Math.max(p.blink, h.mtAvatar[n]?.applied || 0);
       for (const n of ['mouthSmileLeft','mouthSmileRight','mouthFrownLeft','mouthFrownRight','browInnerUp']) p.expression = Math.max(p.expression, h.mtAvatar[n]?.applied || 0);
+      if (window.__tripoSpeechStartedAt && liveMouthWeight > (p.liveFrameWeight || 0.20)) {
+        h.renderer.render(h.scene,h.camera);
+        p.liveFrameWeight=liveMouthWeight;
+        p.liveFrame={weight:liveMouthWeight,speaking:Boolean(h.isSpeaking),elapsedMs:performance.now()-window.__tripoSpeechStartedAt,image:h.renderer.domElement.toDataURL('image/png')};
+      }
       if (performance.now() - started < 180000) requestAnimationFrame(sample);
     };
     requestAnimationFrame(sample);
@@ -117,16 +129,16 @@ try {
     return true;
   }, null, { timeout: 120000 }).catch(()=>{});
   const liveVisemeFrame = await page.evaluate(() => {
-    return window.__tripoLiveVisemeFrame || {weight:0,weights:{},speaking:false,image:null};
+    return window.__tripoMotion?.liveFrame || window.__tripoLiveVisemeFrame || {weight:0,weights:{},speaking:false,image:null};
   });
-  if (liveVisemeFrame.weight > 0 && liveVisemeFrame.image) await writeFile('assets/tripo/vela-photoreal/verification/vela-photoreal-speaking-canvas.png',Buffer.from(liveVisemeFrame.image.split(',')[1],'base64'));
-  await page.screenshot({ path: 'assets/tripo/vela-photoreal/verification/vela-photoreal-speaking-frame.png', fullPage: true });
+  if (liveVisemeFrame.weight > 0 && liveVisemeFrame.image) await writeFile(path.join(evidenceDir,'speaking-canvas.png'),Buffer.from(liveVisemeFrame.image.split(',')[1],'base64'));
+  await page.screenshot({ path: path.join(evidenceDir,'speaking-frame.png'), fullPage: true });
   await page.waitForFunction(() => !window.talkingHead?.isSpeaking, null, { timeout: 120000 }).catch(()=>{});
   await page.waitForTimeout(600);
   const motion = await page.evaluate(() => {
     const h=window.talkingHead;
     return {
-    sampled: window.__tripoMotion,
+    sampled: {...window.__tripoMotion,liveFrame:window.__tripoMotion.liveFrame?{weight:window.__tripoMotion.liveFrame.weight,speaking:window.__tripoMotion.liveFrame.speaking,elapsedMs:window.__tripoMotion.liveFrame.elapsedMs}:null},
     audioPayload:window.__tripoAudioPayload,
     audioContext:{state:h.audioCtx.state,currentTime:h.audioCtx.currentTime},
     currentVisemes:Object.fromEntries(['jawOpen','mouthOpen','viseme_aa','viseme_E','viseme_O','viseme_PP','viseme_FF'].map(n=>[n,h.mtAvatar[n]&&{value:h.mtAvatar[n].value,applied:h.mtAvatar[n].applied,realtime:h.mtAvatar[n].realtime,system:h.mtAvatar[n].system}])),
@@ -136,11 +148,11 @@ try {
     avatar: window.talkingHead.avatar.url
     };
   });
-  await page.screenshot({ path: 'assets/tripo/vela-photoreal/verification/vela-photoreal-talking-desktop.png', fullPage: true });
+  await page.screenshot({ path: path.join(evidenceDir,'talking-desktop.png'), fullPage: true });
   await page.setViewportSize({ width: 412, height: 915 });
-  await page.screenshot({ path: 'assets/tripo/vela-photoreal/verification/vela-photoreal-talking-mobile.png', fullPage: true });
+  await page.screenshot({ path: path.join(evidenceDir,'talking-mobile-viewport.png'), fullPage: true });
   const errors = [...errorCounts.entries()].map(([message, value]) => ({ message, ...value }));
-  const result = { original, imported, direct, renderChecks,synthStatus, liveVisemeFrame:{weight:liveVisemeFrame.weight,captured:liveVisemeFrame.weight>0}, motion, mobile: await page.evaluate(() => ({ width: innerWidth, height: innerHeight, canvas: [document.querySelector('canvas').width, document.querySelector('canvas').height] })), errors };
+  const result = { original, imported, direct, renderChecks,synthStatus, liveVisemeFrame:{weight:liveVisemeFrame.weight,captured:liveVisemeFrame.weight>0,speaking:liveVisemeFrame.speaking,elapsedMs:liveVisemeFrame.elapsedMs}, motion, mobile: await page.evaluate(() => ({ width: innerWidth, height: innerHeight, canvas: [document.querySelector('canvas').width, document.querySelector('canvas').height] })), errors };
   console.log(JSON.stringify(result, null, 2));
   if (synthStatus !== 200 || motion.sampled.mouth <= 0 || motion.sampled.blink <= 0 || motion.sampled.expression <= 0 || !liveVisemeFrame.weight || errors.length) {
     throw new Error(`Tripo speech/facial animation validation failed: ${JSON.stringify(result)}`);

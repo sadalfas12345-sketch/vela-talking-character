@@ -1,74 +1,71 @@
 # Tripo avatar certification
 
-**Overall: FAILED**
+**Overall: INCOMPLETE**
 
-Tested commit: `672912e887067525046ed58a9bf65bdb94522832`
+Tested commit: `7b1183de29552aa1d0a0da96b952d2b5c28d91c8`
 
-This run is sequential and stops after the first failed gate. No threshold was changed.
+No acceptance threshold was changed. UNVERIFIED is not a pass.
 
-## Gate 1: Structural integrity and rendered skinning - PASS
+## Gate 1: Source asset integrity — PASS
 
-The preserved raw Tripo source is intentionally unrigged; checks for animation structure are applied to the Mixamo rig and facial derivative. Both rendered successfully.
+The raw Tripo GLB and Mixamo GLB are unchanged. The facial GLB is an intentional derived asset and contains the converted rig.
 
 Evidence: `verification/tripo-gate1-integrity.json`, `verification/tripo-gate1-renderer.json`, `verification/tripo-gate1-rigged-render.png`, `verification/tripo-gate1-faced-render.png`
-## Gate 2: Orientation and preprocessing stages A-E - FAIL
+## Gate 2: Body orientation and skeleton — PASS
 
-The generated Mixamo rest pose has its head forward axis 18.30 degrees from hips and up to 13.68 degrees spine roll, exceeding limits. Applying the adapter yaw rotates the character root but does not correct this internal head/neck rest-pose mismatch. Stage E is not measured.
+All required body-axis, neutral-pose, root-adjusted mesh-to-skeleton displacement, and runtime camera measurements are within limits. The reported global Hips translation is recorded separately as the expected TalkingHead placement offset.
 
-Action: Correct the source rest pose or adapter bone-local rest transforms, then verify camera-facing stage E and rerun downstream gates.
+Evidence: `verification/tripo-gate2-orientation.json`, `verification/tripo-gate2-stage-e.json`, `verification/tripo-stage-e-desktop.png`, `verification/tripo-stage-e-mobile.png`
+## Gate 3: Facial landmark and morph geometry — UNVERIFIED
 
-Evidence: `verification/tripo-gate2-orientation.json`
-## Gate 3: Independent facial landmarks and neutral deformation - UNVERIFIED
+Landmark hits do not establish that each ray landed on the correct visible anatomical feature. Independent feature projection and neutral-drift measurements are missing.
 
-Stopped after Gate 2 FAIL.
+Action: Annotate visible eye, lip, brow, and chin features independently on the source render, then compare those measurements to the registered markers and quantify neutral deformation.
 
-Action: Complete Gate 2 corrective action, then rerun this sequential certification.
+Evidence: `assets/tripo/vela-photoreal/facial-rig-report.json`, `verification/tripo-stage-e-landmark-overlay.png`, `verification/tripo-stage-e-landmark-overlay.json`
+## Gate 4: Speech shape quality — UNVERIFIED
 
-Evidence: Not captured.
-## Gate 4: Measured speech shapes and eye/expression deformations - UNVERIFIED
+Stopped after Gate 3 UNVERIFIED.
 
-Stopped after Gate 2 FAIL.
-
-Action: Complete Gate 2 corrective action, then rerun this sequential certification.
+Action: Complete Gate 3, then rerun this runner so downstream gates execute in order.
 
 Evidence: Not captured.
-## Gate 5: HeadTTS-to-TalkingHead channel mapping - UNVERIFIED
+## Gate 5: Adapter and animation channels — UNVERIFIED
 
-Stopped after Gate 2 FAIL.
+Stopped after Gate 3 UNVERIFIED.
 
-Action: Complete Gate 2 corrective action, then rerun this sequential certification.
-
-Evidence: Not captured.
-## Gate 6: Live audio and lip synchronization - UNVERIFIED
-
-Stopped after Gate 2 FAIL.
-
-Action: Complete Gate 2 corrective action, then rerun this sequential certification.
+Action: Complete Gate 3, then rerun this runner so downstream gates execute in order.
 
 Evidence: Not captured.
-## Gate 7: Desktop and mobile camera framing - UNVERIFIED
+## Gate 6: Live speech synchronization — UNVERIFIED
 
-Stopped after Gate 2 FAIL.
+Stopped after Gate 3 UNVERIFIED.
 
-Action: Complete Gate 2 corrective action, then rerun this sequential certification.
-
-Evidence: Not captured.
-## Gate 8: Ten-cycle sustained performance and Android device check - UNVERIFIED
-
-Stopped after Gate 2 FAIL.
-
-Action: Complete Gate 2 corrective action, then rerun this sequential certification.
+Action: Complete Gate 3, then rerun this runner so downstream gates execute in order.
 
 Evidence: Not captured.
-## Gate 9: Continuous demo and human visual quality rubric - UNVERIFIED
+## Gate 7: Camera, presentation, and rendering — UNVERIFIED
 
-Stopped after Gate 2 FAIL.
+Stopped after Gate 3 UNVERIFIED.
 
-Action: Complete Gate 2 corrective action, then rerun this sequential certification.
+Action: Complete Gate 3, then rerun this runner so downstream gates execute in order.
+
+Evidence: Not captured.
+## Gate 8: End-to-end stability and performance — UNVERIFIED
+
+Stopped after Gate 3 UNVERIFIED.
+
+Action: Complete Gate 3, then rerun this runner so downstream gates execute in order.
+
+Evidence: Not captured.
+## Gate 9: Perceptual demo acceptance — UNVERIFIED
+
+Stopped after Gate 3 UNVERIFIED.
+
+Action: Complete Gate 3, then rerun this runner so downstream gates execute in order.
 
 Evidence: Not captured.
 
 ## Scope notes
 
-The Android hardware performance requirement is not certifiable from this PC because no Android device/ADB connection is available. It is not reported as passed.
-The Tripo source GLBs were not regenerated or modified by this certification.
+Android rendering and performance were not tested on physical Android hardware. The source Tripo and Mixamo GLBs were preserved; the facial derivative is intentional.

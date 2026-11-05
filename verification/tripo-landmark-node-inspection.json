@@ -1,0 +1,275 @@
+{
+  "markerCount": 15,
+  "landmarks": [
+    {
+      "name": "eye_outer_left",
+      "markerPresent": true,
+      "expectedBlenderWorld": [
+        0.050622060894966125,
+        0.031897056847810745,
+        0.8910354375839233
+      ],
+      "actualBlenderWorld": [
+        0.050621986389160156,
+        0.03189709037542343,
+        0.8910355567932129
+      ],
+      "exportCoordinateErrorMeters": 1.445201392566474e-07,
+      "nearestMeshDistanceMeters": 0.0001744205947034061,
+      "parent": "Armature",
+      "parentBone": "mixamorig:Head"
+    },
+    {
+      "name": "eye_inner_left",
+      "markerPresent": true,
+      "expectedBlenderWorld": [
+        0.05497105419635773,
+        0.013797539286315441,
+        0.8890908360481262
+      ],
+      "actualBlenderWorld": [
+        0.054970987141132355,
+        0.013797564432024956,
+        0.889090895652771
+      ],
+      "exportCoordinateErrorMeters": 9.317415755200543e-08,
+      "nearestMeshDistanceMeters": 0.00026047846768051386,
+      "parent": "Armature",
+      "parentBone": "mixamorig:Head"
+    },
+    {
+      "name": "eye_outer_right",
+      "markerPresent": true,
+      "expectedBlenderWorld": [
+        0.06880547106266022,
+        -0.023912793025374413,
+        0.890555739402771
+      ],
+      "actualBlenderWorld": [
+        0.06880538165569305,
+        -0.023912768810987473,
+        0.8905558586120605
+      ],
+      "exportCoordinateErrorMeters": 1.509662115421305e-07,
+      "nearestMeshDistanceMeters": 9.291828610002995e-05,
+      "parent": "Armature",
+      "parentBone": "mixamorig:Head"
+    },
+    {
+      "name": "eye_inner_right",
+      "markerPresent": true,
+      "expectedBlenderWorld": [
+        0.05560697615146637,
+        -0.006203937344253063,
+        0.888883113861084
+      ],
+      "actualBlenderWorld": [
+        0.055606890469789505,
+        -0.006203914526849985,
+        0.8888831734657288
+      ],
+      "exportCoordinateErrorMeters": 1.0683958682230987e-07,
+      "nearestMeshDistanceMeters": 4.081055158167146e-05,
+      "parent": "Armature",
+      "parentBone": "mixamorig:Head"
+    },
+    {
+      "name": "eye_top_left",
+      "markerPresent": true,
+      "expectedBlenderWorld": [
+        0.05507679283618927,
+        0.02440463937819004,
+        0.8939963579177856
+      ],
+      "actualBlenderWorld": [
+        0.055076729506254196,
+        0.024404659867286682,
+        0.8939964771270752
+      ],
+      "exportCoordinateErrorMeters": 1.3653328705061917e-07,
+      "nearestMeshDistanceMeters": 6.664785905741155e-05,
+      "parent": "Armature",
+      "parentBone": "mixamorig:Head"
+    },
+    {
+      "name": "eye_bottom_left",
+      "markerPresent": true,
+      "expectedBlenderWorld": [
+        0.05552579462528229,
+        0.023735325783491135,
+        0.8882519602775574
+      ],
+      "actualBlenderWorld": [
+        0.05552572011947632,
+        0.023735348135232925,
+        0.8882520794868469
+      ],
+      "exportCoordinateErrorMeters": 1.423431424389988e-07,
+      "nearestMeshDistanceMeters": 3.397581531316973e-05,
+      "parent": "Armature",
+      "parentBone": "mixamorig:Head"
+    },
+    {
+      "name": "eye_top_right",
+      "markerPresent": true,
+      "expectedBlenderWorld": [
+        0.055434778332710266,
+        -0.01621181331574917,
+        0.8937270045280457
+      ],
+      "actualBlenderWorld": [
+        0.0554346963763237,
+        -0.016211790964007378,
+        0.89372718334198
+      ],
+      "exportCoordinateErrorMeters": 1.9796684765199457e-07,
+      "nearestMeshDistanceMeters": 4.8845460696611553e-05,
+      "parent": "Armature",
+      "parentBone": "mixamorig:Head"
+    },
+    {
+      "name": "eye_bottom_right",
+      "markerPresent": true,
+      "expectedBlenderWorld": [
+        0.055736199021339417,
+        -0.015814131125807762,
+        0.8875969648361206
+      ],
+      "actualBlenderWorld": [
+        0.05573612451553345,
+        -0.015814103186130524,
+        0.8875970840454102
+      ],
+      "exportCoordinateErrorMeters": 1.4332688304193792e-07,
+      "nearestMeshDistanceMeters": 0.0002746885584201664,
+      "parent": "Armature",
+      "parentBone": "mixamorig:Head"
+    },
+    {
+      "name": "mouth_corner_left",
+      "markerPresent": true,
+      "expectedBlenderWorld": [
+        0.057299211621284485,
+        0.01864141784608364,
+        0.852547287940979
+      ],
+      "actualBlenderWorld": [
+        0.057299137115478516,
+        0.018641438335180283,
+        0.852547287940979
+      ],
+      "exportCoordinateErrorMeters": 7.727171671648153e-08,
+      "nearestMeshDistanceMeters": 0.0002610875526443124,
+      "parent": "Armature",
+      "parentBone": "mixamorig:Head"
+    },
+    {
+      "name": "mouth_corner_right",
+      "markerPresent": true,
+      "expectedBlenderWorld": [
+        0.05745674669742584,
+        -0.012191294692456722,
+        0.8528709411621094
+      ],
+      "actualBlenderWorld": [
+        0.05745668709278107,
+        -0.012191272340714931,
+        0.8528710603713989
+      ],
+      "exportCoordinateErrorMeters": 1.3514129182113002e-07,
+      "nearestMeshDistanceMeters": 0.00019036067533306777,
+      "parent": "Armature",
+      "parentBone": "mixamorig:Head"
+    },
+    {
+      "name": "upper_lip",
+      "markerPresent": true,
+      "expectedBlenderWorld": [
+        0.06668771803379059,
+        0.0029756140429526567,
+        0.8532556891441345
+      ],
+      "actualBlenderWorld": [
+        0.06668765097856522,
+        0.002975636161863804,
+        0.8532558083534241
+      ],
+      "exportCoordinateErrorMeters": 1.3855144963250284e-07,
+      "nearestMeshDistanceMeters": 0.0004091291921213269,
+      "parent": "Armature",
+      "parentBone": "mixamorig:Head"
+    },
+    {
+      "name": "lower_lip",
+      "markerPresent": true,
+      "expectedBlenderWorld": [
+        0.0659603625535965,
+        0.00303523032926023,
+        0.8529893755912781
+      ],
+      "actualBlenderWorld": [
+        0.06596027314662933,
+        0.003035256639122963,
+        0.8529894351959229
+      ],
+      "exportCoordinateErrorMeters": 1.1062788225906251e-07,
+      "nearestMeshDistanceMeters": 0.0004098445060662925,
+      "parent": "Armature",
+      "parentBone": "mixamorig:Head"
+    },
+    {
+      "name": "brow_left",
+      "markerPresent": true,
+      "expectedBlenderWorld": [
+        0.06343109905719757,
+        0.0123317651450634,
+        0.903221607208252
+      ],
+      "actualBlenderWorld": [
+        0.0634310394525528,
+        0.012331790290772915,
+        0.9032217860221863
+      ],
+      "exportCoordinateErrorMeters": 1.901563659071096e-07,
+      "nearestMeshDistanceMeters": 8.458166848868132e-05,
+      "parent": "Armature",
+      "parentBone": "mixamorig:Head"
+    },
+    {
+      "name": "brow_right",
+      "markerPresent": true,
+      "expectedBlenderWorld": [
+        0.0636037141084671,
+        -0.005273348651826382,
+        0.9030861854553223
+      ],
+      "actualBlenderWorld": [
+        0.06360362470149994,
+        -0.005273323971778154,
+        0.903086245059967
+      ],
+      "exportCoordinateErrorMeters": 1.1025164051661084e-07,
+      "nearestMeshDistanceMeters": 0.00011746754171326756,
+      "parent": "Armature",
+      "parentBone": "mixamorig:Head"
+    },
+    {
+      "name": "chin",
+      "markerPresent": true,
+      "expectedBlenderWorld": [
+        0.05637224018573761,
+        0.0025842979084700346,
+        0.8266751170158386
+      ],
+      "actualBlenderWorld": [
+        0.05637218803167343,
+        0.0025843214243650436,
+        0.8266752362251282
+      ],
+      "exportCoordinateErrorMeters": 1.32226693385299e-07,
+      "nearestMeshDistanceMeters": 0.0003810594498645514,
+      "parent": "Armature",
+      "parentBone": "mixamorig:Head"
+    }
+  ]
+}

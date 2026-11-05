@@ -1,0 +1,538 @@
+{
+  "viewport": [
+    1280,
+    900
+  ],
+  "mesh": "Generated_inner_mouth_surface",
+  "faceWidthMeters": 0.057760122561334025,
+  "neutralMouthApertureMeters": 0.0006223366250463363,
+  "nearestAnchorVertices": {
+    "upper": {
+      "index": 36,
+      "distance": 0.008031910582102125
+    },
+    "lower": {
+      "index": 36,
+      "distance": 0.006664462480880235
+    },
+    "cornerLeft": {
+      "index": 24,
+      "distance": 0.012680695937178531
+    },
+    "cornerRight": {
+      "index": 48,
+      "distance": 0.012170102329560171
+    },
+    "eyeTopLeft": {
+      "index": 24,
+      "distance": 0.08048412492703108
+    },
+    "eyeBottomLeft": {
+      "index": 24,
+      "distance": 0.06977049689301465
+    },
+    "eyeTopRight": {
+      "index": 48,
+      "distance": 0.07909122040990012
+    },
+    "eyeBottomRight": {
+      "index": 48,
+      "distance": 0.06777853446356848
+    }
+  },
+  "neutralEyeApertureMeters": {
+    "left": 0,
+    "right": 0
+  },
+  "controls": {
+    "jawOpen": [
+      {
+        "mesh": "Generated_inner_mouth_surface",
+        "index": 0
+      },
+      {
+        "mesh": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+        "index": 0
+      }
+    ],
+    "mouthOpen": [
+      {
+        "mesh": "Generated_inner_mouth_surface",
+        "index": 1
+      },
+      {
+        "mesh": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+        "index": 1
+      }
+    ],
+    "mouthClose": [
+      {
+        "mesh": "Generated_inner_mouth_surface",
+        "index": 9
+      },
+      {
+        "mesh": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+        "index": 9
+      }
+    ],
+    "viseme_aa": [
+      {
+        "mesh": "Generated_inner_mouth_surface",
+        "index": 2
+      },
+      {
+        "mesh": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+        "index": 2
+      }
+    ],
+    "viseme_E": [
+      {
+        "mesh": "Generated_inner_mouth_surface",
+        "index": 3
+      },
+      {
+        "mesh": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+        "index": 3
+      }
+    ],
+    "viseme_O": [
+      {
+        "mesh": "Generated_inner_mouth_surface",
+        "index": 5
+      },
+      {
+        "mesh": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+        "index": 5
+      }
+    ],
+    "viseme_I": [
+      {
+        "mesh": "Generated_inner_mouth_surface",
+        "index": 4
+      },
+      {
+        "mesh": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+        "index": 4
+      }
+    ],
+    "viseme_U": [
+      {
+        "mesh": "Generated_inner_mouth_surface",
+        "index": 6
+      },
+      {
+        "mesh": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+        "index": 6
+      }
+    ],
+    "viseme_PP": [
+      {
+        "mesh": "Generated_inner_mouth_surface",
+        "index": 7
+      },
+      {
+        "mesh": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+        "index": 7
+      }
+    ],
+    "viseme_FF": [
+      {
+        "mesh": "Generated_inner_mouth_surface",
+        "index": 10
+      },
+      {
+        "mesh": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+        "index": 10
+      }
+    ],
+    "eyeBlinkLeft": [
+      {
+        "mesh": "Generated_inner_mouth_surface",
+        "index": 18
+      },
+      {
+        "mesh": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+        "index": 18
+      }
+    ],
+    "eyeBlinkRight": [
+      {
+        "mesh": "Generated_inner_mouth_surface",
+        "index": 19
+      },
+      {
+        "mesh": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+        "index": 19
+      }
+    ],
+    "mouthSmileLeft": [
+      {
+        "mesh": "Generated_inner_mouth_surface",
+        "index": 20
+      },
+      {
+        "mesh": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+        "index": 20
+      }
+    ],
+    "mouthFrownLeft": [
+      {
+        "mesh": "Generated_inner_mouth_surface",
+        "index": 21
+      },
+      {
+        "mesh": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+        "index": 21
+      }
+    ],
+    "browInnerUp": [
+      {
+        "mesh": "Generated_inner_mouth_surface",
+        "index": 28
+      },
+      {
+        "mesh": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+        "index": 28
+      }
+    ]
+  },
+  "allFinite": {
+    "jawOpen": {
+      "finite": true,
+      "count": 954531,
+      "maxDelta": 0.007708609104156494
+    },
+    "mouthOpen": {
+      "finite": true,
+      "count": 954531,
+      "maxDelta": 0.007708609104156494
+    },
+    "mouthClose": {
+      "finite": true,
+      "count": 954531,
+      "maxDelta": 0.0033301166258752346
+    },
+    "viseme_aa": {
+      "finite": true,
+      "count": 954531,
+      "maxDelta": 0.009558677673339844
+    },
+    "viseme_E": {
+      "finite": true,
+      "count": 954531,
+      "maxDelta": 0.0037001371383666992
+    },
+    "viseme_O": {
+      "finite": true,
+      "count": 954531,
+      "maxDelta": 0.005217182915657759
+    },
+    "viseme_I": {
+      "finite": true,
+      "count": 954531,
+      "maxDelta": 0.0031081088818609715
+    },
+    "viseme_U": {
+      "finite": true,
+      "count": 954531,
+      "maxDelta": 0.005772202275693417
+    },
+    "viseme_PP": {
+      "finite": true,
+      "count": 954531,
+      "maxDelta": 0.005772202275693417
+    },
+    "viseme_FF": {
+      "finite": true,
+      "count": 954531,
+      "maxDelta": 0.0033301166258752346
+    },
+    "eyeBlinkLeft": {
+      "finite": true,
+      "count": 954531,
+      "maxDelta": 0.0031081088818609715
+    },
+    "eyeBlinkRight": {
+      "finite": true,
+      "count": 954531,
+      "maxDelta": 0.0031081088818609715
+    },
+    "mouthSmileLeft": {
+      "finite": true,
+      "count": 954531,
+      "maxDelta": 0.003391781821846962
+    },
+    "mouthFrownLeft": {
+      "finite": true,
+      "count": 954531,
+      "maxDelta": 0.0031081088818609715
+    },
+    "browInnerUp": {
+      "finite": true,
+      "count": 954531,
+      "maxDelta": 0.0031081088818609715
+    }
+  },
+  "measurements": {
+    "jawOpen": {
+      "changedPixels": 0,
+      "activeMeshes": [
+        "Generated_inner_mouth_surface",
+        "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f"
+      ],
+      "morphIndices": [
+        0,
+        0
+      ],
+      "mouthApertureMeters": 0,
+      "apertureChangeMeters": -0.0006223366250463363,
+      "mouthWidthMeters": 0.028283309882303636,
+      "mouthWidthRatio": 0.4896684533913566,
+      "leftEyeClosure": null,
+      "rightEyeClosure": null
+    },
+    "mouthOpen": {
+      "changedPixels": 0,
+      "activeMeshes": [
+        "Generated_inner_mouth_surface",
+        "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f"
+      ],
+      "morphIndices": [
+        1,
+        1
+      ],
+      "mouthApertureMeters": 0,
+      "apertureChangeMeters": -0.0006223366250463363,
+      "mouthWidthMeters": 0.028283309882303636,
+      "mouthWidthRatio": 0.4896684533913566,
+      "leftEyeClosure": null,
+      "rightEyeClosure": null
+    },
+    "mouthClose": {
+      "changedPixels": 0,
+      "activeMeshes": [
+        "Generated_inner_mouth_surface",
+        "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f"
+      ],
+      "morphIndices": [
+        9,
+        9
+      ],
+      "mouthApertureMeters": 0,
+      "apertureChangeMeters": -0.0006223366250463363,
+      "mouthWidthMeters": 0.029115173605518352,
+      "mouthWidthRatio": 0.5040704956019039,
+      "leftEyeClosure": null,
+      "rightEyeClosure": null
+    },
+    "viseme_aa": {
+      "changedPixels": 0,
+      "activeMeshes": [
+        "Generated_inner_mouth_surface",
+        "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f"
+      ],
+      "morphIndices": [
+        2,
+        2
+      ],
+      "mouthApertureMeters": 0,
+      "apertureChangeMeters": -0.0006223366250463363,
+      "mouthWidthMeters": 0.030778897562286453,
+      "mouthWidthRatio": 0.5328745196065523,
+      "leftEyeClosure": null,
+      "rightEyeClosure": null
+    },
+    "viseme_E": {
+      "changedPixels": 0,
+      "activeMeshes": [
+        "Generated_inner_mouth_surface",
+        "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f"
+      ],
+      "morphIndices": [
+        3,
+        3
+      ],
+      "mouthApertureMeters": 0,
+      "apertureChangeMeters": -0.0006223366250463363,
+      "mouthWidthMeters": 0.03410634547582264,
+      "mouthWidthRatio": 0.5904825676158489,
+      "leftEyeClosure": null,
+      "rightEyeClosure": null
+    },
+    "viseme_O": {
+      "changedPixels": 0,
+      "activeMeshes": [
+        "Generated_inner_mouth_surface",
+        "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f"
+      ],
+      "morphIndices": [
+        5,
+        5
+      ],
+      "mouthApertureMeters": 0,
+      "apertureChangeMeters": -0.0006223366250463363,
+      "mouthWidthMeters": 0.02204434504442328,
+      "mouthWidthRatio": 0.3816533633739254,
+      "leftEyeClosure": null,
+      "rightEyeClosure": null
+    },
+    "viseme_I": {
+      "changedPixels": 0,
+      "activeMeshes": [
+        "Generated_inner_mouth_surface",
+        "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f"
+      ],
+      "morphIndices": [
+        4,
+        4
+      ],
+      "mouthApertureMeters": 0,
+      "apertureChangeMeters": -0.0006223366250463363,
+      "mouthWidthMeters": 0.02994703383907174,
+      "mouthWidthRatio": 0.5184724773960051,
+      "leftEyeClosure": null,
+      "rightEyeClosure": null
+    },
+    "viseme_U": {
+      "changedPixels": 0,
+      "activeMeshes": [
+        "Generated_inner_mouth_surface",
+        "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f"
+      ],
+      "morphIndices": [
+        6,
+        6
+      ],
+      "mouthApertureMeters": 0,
+      "apertureChangeMeters": -0.0006223366250463363,
+      "mouthWidthMeters": 0.019964689226047824,
+      "mouthWidthRatio": 0.34564831826400333,
+      "leftEyeClosure": null,
+      "rightEyeClosure": null
+    },
+    "viseme_PP": {
+      "changedPixels": 0,
+      "activeMeshes": [
+        "Generated_inner_mouth_surface",
+        "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f"
+      ],
+      "morphIndices": [
+        7,
+        7
+      ],
+      "mouthApertureMeters": 0,
+      "apertureChangeMeters": -0.0006223366250463363,
+      "mouthWidthMeters": 0.019964689226047824,
+      "mouthWidthRatio": 0.34564831826400333,
+      "leftEyeClosure": null,
+      "rightEyeClosure": null
+    },
+    "viseme_FF": {
+      "changedPixels": 0,
+      "activeMeshes": [
+        "Generated_inner_mouth_surface",
+        "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f"
+      ],
+      "morphIndices": [
+        10,
+        10
+      ],
+      "mouthApertureMeters": 0,
+      "apertureChangeMeters": -0.0006223366250463363,
+      "mouthWidthMeters": 0.029115173605518352,
+      "mouthWidthRatio": 0.5040704956019039,
+      "leftEyeClosure": null,
+      "rightEyeClosure": null
+    },
+    "eyeBlinkLeft": {
+      "changedPixels": 0,
+      "activeMeshes": [
+        "Generated_inner_mouth_surface",
+        "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f"
+      ],
+      "morphIndices": [
+        18,
+        18
+      ],
+      "mouthApertureMeters": 0,
+      "apertureChangeMeters": -0.0006223366250463363,
+      "mouthWidthMeters": 0.02994703383907174,
+      "mouthWidthRatio": 0.5184724773960051,
+      "leftEyeClosure": null,
+      "rightEyeClosure": null
+    },
+    "eyeBlinkRight": {
+      "changedPixels": 0,
+      "activeMeshes": [
+        "Generated_inner_mouth_surface",
+        "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f"
+      ],
+      "morphIndices": [
+        19,
+        19
+      ],
+      "mouthApertureMeters": 0,
+      "apertureChangeMeters": -0.0006223366250463363,
+      "mouthWidthMeters": 0.02994703383907174,
+      "mouthWidthRatio": 0.5184724773960051,
+      "leftEyeClosure": null,
+      "rightEyeClosure": null
+    },
+    "mouthSmileLeft": {
+      "changedPixels": 0,
+      "activeMeshes": [
+        "Generated_inner_mouth_surface",
+        "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f"
+      ],
+      "morphIndices": [
+        20,
+        20
+      ],
+      "mouthApertureMeters": 0,
+      "apertureChangeMeters": -0.0006223366250463363,
+      "mouthWidthMeters": 0.02994703383907174,
+      "mouthWidthRatio": 0.5184724773960051,
+      "leftEyeClosure": null,
+      "rightEyeClosure": null
+    },
+    "mouthFrownLeft": {
+      "changedPixels": 0,
+      "activeMeshes": [
+        "Generated_inner_mouth_surface",
+        "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f"
+      ],
+      "morphIndices": [
+        21,
+        21
+      ],
+      "mouthApertureMeters": 0,
+      "apertureChangeMeters": -0.0006223366250463363,
+      "mouthWidthMeters": 0.02994703383907174,
+      "mouthWidthRatio": 0.5184724773960051,
+      "leftEyeClosure": null,
+      "rightEyeClosure": null
+    },
+    "browInnerUp": {
+      "changedPixels": 0,
+      "activeMeshes": [
+        "Generated_inner_mouth_surface",
+        "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f"
+      ],
+      "morphIndices": [
+        28,
+        28
+      ],
+      "mouthApertureMeters": 0,
+      "apertureChangeMeters": -0.0006223366250463363,
+      "mouthWidthMeters": 0.02994703383907174,
+      "mouthWidthRatio": 0.5184724773960051,
+      "leftEyeClosure": null,
+      "rightEyeClosure": null
+    }
+  },
+  "activation": {
+    "selected": "tripo",
+    "status": "Character ready · type a line and press Speak"
+  },
+  "errors": []
+}

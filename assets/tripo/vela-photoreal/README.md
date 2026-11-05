@@ -1,4 +1,4 @@
-# Vela photoreal Tripo character
+﻿# Vela photoreal Tripo character
 
 ## Preserved inputs
 
@@ -7,36 +7,35 @@
 - `generated-rigged.glb` is Tripo's Mixamo auto-rig result, preserved unchanged.
 - `vela-photoreal-faced.glb` is the Vela-ready derivative.
 
-The original model contains one closed 999,787-vertex surface, about 1.94 million triangles, a 4K base-color/normal/ORM texture set, no skin weights, no armature, and no facial morphs. The auto-rig output adds 65 Mixamo bones and weights every vertex, but still has no facial shapes, jaw bone, eye bones, separate eyes, teeth, or tongue. Its untextured `Icosphere` helper is not used by the facial conversion.
+The original is a single closed surface with 999,787 vertices and about 1.94 million triangles, 4K base-color/normal/ORM textures, no skin weights, no armature, and no facial morphs. Tripo's rigged file adds 65 Mixamo bones and weights every vertex, but still has no facial shapes, jaw bone, eye bones, separate eyes, teeth, or tongue. Its untextured `Icosphere` helper is not used by the facial conversion.
 
 ## Character-specific facial conversion
 
-`build_tripo_photoreal_face_rig.py` reads the Mixamo GLB and the 478-point MediaPipe landmark file, then registers the landmarks to the actual mesh using the same orthographic camera used to render the face. The resulting face mask contains 11,821 vertices. The script creates actual relative vertex deformations for jaw opening, all 15 Oculus speech visemes, both blinks, bilateral smile/frown, and brow lift/down. Morph targets are sparse in the exported GLB.
+`scripts/build_tripo_photoreal_face_rig.py` registers the 478-point MediaPipe landmarks against the Mixamo mesh using the same orthographic camera used to render the face. It creates actual relative vertex deformations for jaw opening, all 15 Oculus speech visemes, both blinks, bilateral smile/frown, and brow lift/down. These are procedural surface deformations on the closed Tripo shell, not a production facial rig.
 
-For a visible opening against the model's painted closed lips, the derivative also has a 24-sided dark inner-mouth surface. It is weighted to the existing Mixamo Head bone and has matching speech morphs. It remains slit-thin at rest. It is a visual cavity proxy only; it does not invent teeth or a tongue.
+The derivative adds a shape-keyed dark cavity proxy, plus the separate teeth and tongue meshes and their speech shape keys from Vela's bundled Avaturn avatar. The transfer preserves the donor UVs and embedded material textures. The Tripo face retains its identity surface, 4K PBR maps, and Mixamo skin. The original and rigged GLBs remain untouched. The derivative face is reduced with Blender's 0.30 Decimate ratio for browser rendering.
 
-The derivative retains the 4K PBR maps and Mixamo skin. Only the derived mesh is reduced with Blender's 0.30 Decimate ratio, to 318,094 vertices and 583,172 triangles, to stay within Blender export memory and browser rendering budgets. The original and rigged GLBs remain untouched. See `generation.json`, `rigging.json`, `inspection.json`, `rigged-inspection.json`, `faced-inspection.json`, `face-calibration.json`, and `facial-rig-report.json` for recorded task and conversion evidence.
+The dental fit scales to the Tripo mouth registration and applies the donor speech deltas. This provides real oral geometry and deformation controls, but the donor is not topologically matched to Tripo's face. Tripo's painted lips remain on the closed shell and visibly stretch when it opens. Current speech output has visible mouth artifacts and is not certified as convincing.
 
-Rebuild the face conversion without further Tripo API calls:
+Rebuild without further Tripo API calls:
 
 ```powershell
 blender -b --python scripts/build_tripo_photoreal_face_rig.py
 ```
 
-The landmark detector is `scripts/detect_tripo_face_landmarks.py`; it requires MediaPipe and an external Face Landmarker task model. The committed `landmarks.json` is the exact calibration input used for this character.
+The landmark detector is `scripts/detect_tripo_face_landmarks.py`; it requires MediaPipe and an external Face Landmarker task model. `landmarks.json` is the calibration input for this character.
 
-## Verified in Vela
+## Runtime verification
 
-`npm.cmd run test:tripo-photoreal` uploads this exact derivative through the existing Import Character control, confirms all 15 speech visemes and both blink targets, sets geometry weights and captures frames, requests this spoken line through the local HeadTTS service:
+`npm.cmd run test:tripo-photoreal` imports the derivative in terminal-driven Playwright Chromium, requests speech from the local HeadTTS service, checks the returned viseme timeline, samples mouth/blink/expression channels, and captures animation frames. The latest run returned HTTP 200 from `/v1/synthesize`, reported 15/15 speech visemes, 2/2 blink targets, 7 expression targets, an active audio context, and zero browser errors. It rendered in a 412 by 915 emulated phone viewport.
 
-> I am absolutely gorgeous, and apparently I just failed my math test. Mother is going to be furious!
-
-The terminal driven Playwright run returned HTTP 200 from /v1/synthesize and confirmed timed viseme payloads. It captured the canvas atomically while a speech viseme was active, sampled mouth, blink, and expression channels during playback, and reported zero browser page errors. The app rendered to a 412×915 phone viewport. The jaw mask was corrected to deform the lower face while leaving the upper face largely stable.
-
-Captured outputs are in `verification/`, including `vela-photoreal-speaking-canvas.png`, `vela-photoreal-talking-desktop.png`, `vela-photoreal-talking-mobile.png`, and direct-control frames for jaw, viseme, each blink, smile, frown, and brow movement.
+This verifies runtime wiring and morph activity during actual synthesized speech. It does not prove accurate visible phoneme shapes, face landmark accuracy, physical Android performance, or perceptual acceptance. See `verification/tripo-certification.md` for the sequential gate results.
 
 ## Known limitations
 
-- The Tripo face is a closed, single-surface image-to-3D result. Jaw/viseme movement deforms that surface and reveals the generated dark cavity proxy, but cannot create anatomically accurate teeth, tongue, or internal mouth motion.
-- The eyes are part of the same surface and texture. Independent blinks are visible skin deformations; separate eyeball gaze is unavailable because the source has no eye meshes or eye bones.
-- The avatar was generated by Tripo using the account's API. Rights for use follow the account's applicable Tripo terms.
+- The Tripo face is one closed surface with painted lips. The lips stretch as the shell opens and visible edges remain around the transferred mouth anatomy.
+- The eyes are part of the same surface and texture. Blinks are generated skin deformations; independent eyeball gaze is unavailable because the source has no eye meshes or eye bones.
+- Gate 4 fails. Gate 3 and Gates 5 to 9 are not certified.
+- Phone viewport testing used desktop Chromium emulation, not a physical Android device.
+- Rights for the Tripo avatar follow the account's applicable Tripo terms.
+

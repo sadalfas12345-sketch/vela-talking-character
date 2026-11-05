@@ -1,0 +1,14 @@
+{
+  "captures": [
+    "verification\\avaturn-tripo-facefit-preview\\neutral.png",
+    "verification\\avaturn-tripo-facefit-preview\\jaw-open.png",
+    "verification\\avaturn-tripo-facefit-preview\\blink-left.png",
+    "verification\\avaturn-tripo-facefit-preview\\smile-left.png"
+  ],
+  "states": [
+    "neutral",
+    "jaw-open",
+    "blink-left",
+    "smile-left"
+  ]
+}

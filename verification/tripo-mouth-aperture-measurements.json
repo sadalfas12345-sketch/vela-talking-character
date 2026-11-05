@@ -1,0 +1,255 @@
+{
+  "activation": {
+    "selected": "tripo",
+    "compatibility": "vela-fullhead-expanded-prototype.glb: 7 meshes · 7 materials · 11 textures · 65 bones · 72 morph targets. Speech visemes 15/15; blink targets 2/2; expression targets 7.  Ready for speech, blinking, and mapped expressions.",
+    "mesh": "VelaTripoHead",
+    "landmarkMethod": "Avaturn landmark barycentric mapping on fitted full-head topology"
+  },
+  "neutral": {
+    "mouthWidthMeters": 0.05687531594620518,
+    "apertureMeters": 0.00019823839101061223,
+    "apertureRatioW": 0.003485490809371742,
+    "mouthWidthPixels": 73.62402291450482,
+    "aperturePixels": 0.2637598218486137,
+    "screenApertureRatioW": 0.0035825239019457306,
+    "eyeApertureMeters": {
+      "left": 0.01101190790556219,
+      "right": 0.00930877900679443
+    },
+    "anchorVertexDistancesMeters": {
+      "mouth_corner_left": null,
+      "mouth_corner_right": null,
+      "upper_lip": null,
+      "lower_lip": null,
+      "eye_top_left": null,
+      "eye_bottom_left": null,
+      "eye_top_right": null,
+      "eye_bottom_right": null
+    }
+  },
+  "measurements": {
+    "jawOpen": {
+      "mouthWidthMeters": 0.0545096791389437,
+      "apertureMeters": 0.0004309233950562412,
+      "apertureRatioW": 0.007905447286853938,
+      "mouthWidthPixels": 70.27373583338219,
+      "aperturePixels": 0.6026413906969008,
+      "screenApertureRatioW": 0.008575627630296376,
+      "eyeApertureMeters": {
+        "left": 0.01101299450607682,
+        "right": 0.009284632260613658
+      },
+      "anchorVertexDistancesMeters": {
+        "mouth_corner_left": null,
+        "mouth_corner_right": null,
+        "upper_lip": null,
+        "lower_lip": null,
+        "eye_top_left": null,
+        "eye_bottom_left": null,
+        "eye_top_right": null,
+        "eye_bottom_right": null
+      }
+    },
+    "viseme_PP": {
+      "mouthWidthMeters": 0.0570062863645858,
+      "apertureMeters": 0.00019823151015284046,
+      "apertureRatioW": 0.0034773622839601153,
+      "mouthWidthPixels": 73.79316278638989,
+      "aperturePixels": 0.26283424838194347,
+      "screenApertureRatioW": 0.003561769660730947,
+      "eyeApertureMeters": {
+        "left": 0.01101190790556219,
+        "right": 0.00930877900679443
+      },
+      "anchorVertexDistancesMeters": {
+        "mouth_corner_left": null,
+        "mouth_corner_right": null,
+        "upper_lip": null,
+        "lower_lip": null,
+        "eye_top_left": null,
+        "eye_bottom_left": null,
+        "eye_top_right": null,
+        "eye_bottom_right": null
+      }
+    },
+    "viseme_O": {
+      "mouthWidthMeters": 0.04841261266770949,
+      "apertureMeters": 0.0002409543537496261,
+      "apertureRatioW": 0.004977098744979304,
+      "mouthWidthPixels": 62.70225462907423,
+      "aperturePixels": 0.33796595991111844,
+      "screenApertureRatioW": 0.005390012877693364,
+      "eyeApertureMeters": {
+        "left": 0.01101257921715144,
+        "right": 0.00930460862080153
+      },
+      "anchorVertexDistancesMeters": {
+        "mouth_corner_left": null,
+        "mouth_corner_right": null,
+        "upper_lip": null,
+        "lower_lip": null,
+        "eye_top_left": null,
+        "eye_bottom_left": null,
+        "eye_top_right": null,
+        "eye_bottom_right": null
+      }
+    },
+    "viseme_E": {
+      "mouthWidthMeters": 0.06345820780315724,
+      "apertureMeters": 0.00024049618225440976,
+      "apertureRatioW": 0.003789835713615038,
+      "mouthWidthPixels": 82.01603778901062,
+      "aperturePixels": 0.325228527163024,
+      "screenApertureRatioW": 0.0039654259816803965,
+      "eyeApertureMeters": {
+        "left": 0.011012169415536125,
+        "right": 0.009306183689605603
+      },
+      "anchorVertexDistancesMeters": {
+        "mouth_corner_left": null,
+        "mouth_corner_right": null,
+        "upper_lip": null,
+        "lower_lip": null,
+        "eye_top_left": null,
+        "eye_bottom_left": null,
+        "eye_top_right": null,
+        "eye_bottom_right": null
+      }
+    },
+    "viseme_I": {
+      "mouthWidthMeters": 0.05918103106080802,
+      "apertureMeters": 0.00023885699666537509,
+      "apertureRatioW": 0.004036039798291981,
+      "mouthWidthPixels": 76.53932516447664,
+      "aperturePixels": 0.3235085193583398,
+      "screenApertureRatioW": 0.004226696781858828,
+      "eyeApertureMeters": {
+        "left": 0.011012173735358068,
+        "right": 0.00930713036577237
+      },
+      "anchorVertexDistancesMeters": {
+        "mouth_corner_left": null,
+        "mouth_corner_right": null,
+        "upper_lip": null,
+        "lower_lip": null,
+        "eye_top_left": null,
+        "eye_bottom_left": null,
+        "eye_top_right": null,
+        "eye_bottom_right": null
+      }
+    },
+    "viseme_U": {
+      "mouthWidthMeters": 0.046997358122399135,
+      "apertureMeters": 0.00014573472237223626,
+      "apertureRatioW": 0.00310091307670289,
+      "mouthWidthPixels": 60.985660894025216,
+      "aperturePixels": 0.20263137507219864,
+      "screenApertureRatioW": 0.0033226068571153337,
+      "eyeApertureMeters": {
+        "left": 0.011012513682688364,
+        "right": 0.009309956656248362
+      },
+      "anchorVertexDistancesMeters": {
+        "mouth_corner_left": null,
+        "mouth_corner_right": null,
+        "upper_lip": null,
+        "lower_lip": null,
+        "eye_top_left": null,
+        "eye_bottom_left": null,
+        "eye_top_right": null,
+        "eye_bottom_right": null
+      }
+    },
+    "viseme_FF": {
+      "mouthWidthMeters": 0.056472100854750865,
+      "apertureMeters": 0.00022887716392006833,
+      "apertureRatioW": 0.004052924549570984,
+      "mouthWidthPixels": 73.0205870663946,
+      "aperturePixels": 0.3048045412811895,
+      "screenApertureRatioW": 0.004174227481957155,
+      "eyeApertureMeters": {
+        "left": 0.011013539339500292,
+        "right": 0.009308785465022097
+      },
+      "anchorVertexDistancesMeters": {
+        "mouth_corner_left": null,
+        "mouth_corner_right": null,
+        "upper_lip": null,
+        "lower_lip": null,
+        "eye_top_left": null,
+        "eye_bottom_left": null,
+        "eye_top_right": null,
+        "eye_bottom_right": null
+      }
+    },
+    "eyeBlinkLeft": {
+      "mouthWidthMeters": 0.05687531594620518,
+      "apertureMeters": 0.00019823839101061223,
+      "apertureRatioW": 0.003485490809371742,
+      "mouthWidthPixels": 73.62402291450482,
+      "aperturePixels": 0.2637598218486137,
+      "screenApertureRatioW": 0.0035825239019457306,
+      "eyeApertureMeters": {
+        "left": 0.01101190790556219,
+        "right": 0.0026872630625088437
+      },
+      "anchorVertexDistancesMeters": {
+        "mouth_corner_left": null,
+        "mouth_corner_right": null,
+        "upper_lip": null,
+        "lower_lip": null,
+        "eye_top_left": null,
+        "eye_bottom_left": null,
+        "eye_top_right": null,
+        "eye_bottom_right": null
+      },
+      "eyeClosureFraction": 0
+    },
+    "eyeBlinkRight": {
+      "mouthWidthMeters": 0.05687531594620518,
+      "apertureMeters": 0.00019823839101061223,
+      "apertureRatioW": 0.003485490809371742,
+      "mouthWidthPixels": 73.62402291450482,
+      "aperturePixels": 0.2637598218486137,
+      "screenApertureRatioW": 0.0035825239019457306,
+      "eyeApertureMeters": {
+        "left": 0.013070664240899636,
+        "right": 0.00930877900679443
+      },
+      "anchorVertexDistancesMeters": {
+        "mouth_corner_left": null,
+        "mouth_corner_right": null,
+        "upper_lip": null,
+        "lower_lip": null,
+        "eye_top_left": null,
+        "eye_bottom_left": null,
+        "eye_top_right": null,
+        "eye_bottom_right": null
+      },
+      "eyeClosureFraction": 0
+    },
+    "mouthSmileLeft": {
+      "mouthWidthMeters": 0.06000944304237185,
+      "apertureMeters": 0.0001980572864083596,
+      "apertureRatioW": 0.003300435337627014,
+      "mouthWidthPixels": 77.41576447874728,
+      "aperturePixels": 0.2623001458026297,
+      "screenApertureRatioW": 0.0033882006793931256,
+      "eyeApertureMeters": {
+        "left": 0.01101190790556219,
+        "right": 0.009305282824408194
+      },
+      "anchorVertexDistancesMeters": {
+        "mouth_corner_left": null,
+        "mouth_corner_right": null,
+        "upper_lip": null,
+        "lower_lip": null,
+        "eye_top_left": null,
+        "eye_bottom_left": null,
+        "eye_top_right": null,
+        "eye_bottom_right": null
+      },
+      "leftCornerLiftW": 0
+    }
+  }
+}

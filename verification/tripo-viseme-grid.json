@@ -1,0 +1,289 @@
+{
+  "avatar": "assets/tripo/vela-photoreal/vela-photoreal-faced.glb",
+  "method": "Each resolved TalkingHead facial channel was set to influence 1 on every mapped morph mesh, rendered in Chromium, then reset before the next capture.",
+  "activation": {
+    "selected": "tripo",
+    "report": "vela-photoreal-faced.glb: 4 meshes · 4 materials · 7 textures · 65 bones · 30 morph targets. Speech visemes 15/15; blink targets 2/2; expression targets 7.  Ready for speech, blinking, and mapped expressions."
+  },
+  "captures": [
+    {
+      "name": "jawOpen",
+      "available": true,
+      "influence": 1,
+      "meshCount": 4,
+      "targetIndices": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "evidence": "assets/tripo/vela-photoreal/verification/morph-jawOpen.png"
+    },
+    {
+      "name": "mouthOpen",
+      "available": true,
+      "influence": 1,
+      "meshCount": 4,
+      "targetIndices": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "evidence": "assets/tripo/vela-photoreal/verification/morph-mouthOpen.png"
+    },
+    {
+      "name": "viseme_sil",
+      "available": true,
+      "influence": 1,
+      "meshCount": 4,
+      "targetIndices": [
+        8,
+        8,
+        1,
+        1
+      ],
+      "evidence": "assets/tripo/vela-photoreal/verification/morph-viseme_sil.png"
+    },
+    {
+      "name": "viseme_PP",
+      "available": true,
+      "influence": 1,
+      "meshCount": 4,
+      "targetIndices": [
+        7,
+        7,
+        2,
+        2
+      ],
+      "evidence": "assets/tripo/vela-photoreal/verification/morph-viseme_PP.png"
+    },
+    {
+      "name": "viseme_FF",
+      "available": true,
+      "influence": 1,
+      "meshCount": 4,
+      "targetIndices": [
+        10,
+        10,
+        3,
+        3
+      ],
+      "evidence": "assets/tripo/vela-photoreal/verification/morph-viseme_FF.png"
+    },
+    {
+      "name": "viseme_TH",
+      "available": true,
+      "influence": 1,
+      "meshCount": 4,
+      "targetIndices": [
+        11,
+        11,
+        4,
+        4
+      ],
+      "evidence": "assets/tripo/vela-photoreal/verification/morph-viseme_TH.png"
+    },
+    {
+      "name": "viseme_DD",
+      "available": true,
+      "influence": 1,
+      "meshCount": 4,
+      "targetIndices": [
+        12,
+        12,
+        5,
+        5
+      ],
+      "evidence": "assets/tripo/vela-photoreal/verification/morph-viseme_DD.png"
+    },
+    {
+      "name": "viseme_kk",
+      "available": true,
+      "influence": 1,
+      "meshCount": 4,
+      "targetIndices": [
+        13,
+        13,
+        6,
+        6
+      ],
+      "evidence": "assets/tripo/vela-photoreal/verification/morph-viseme_kk.png"
+    },
+    {
+      "name": "viseme_CH",
+      "available": true,
+      "influence": 1,
+      "meshCount": 4,
+      "targetIndices": [
+        14,
+        14,
+        7,
+        7
+      ],
+      "evidence": "assets/tripo/vela-photoreal/verification/morph-viseme_CH.png"
+    },
+    {
+      "name": "viseme_SS",
+      "available": true,
+      "influence": 1,
+      "meshCount": 4,
+      "targetIndices": [
+        15,
+        15,
+        8,
+        8
+      ],
+      "evidence": "assets/tripo/vela-photoreal/verification/morph-viseme_SS.png"
+    },
+    {
+      "name": "viseme_nn",
+      "available": true,
+      "influence": 1,
+      "meshCount": 4,
+      "targetIndices": [
+        16,
+        16,
+        9,
+        9
+      ],
+      "evidence": "assets/tripo/vela-photoreal/verification/morph-viseme_nn.png"
+    },
+    {
+      "name": "viseme_RR",
+      "available": true,
+      "influence": 1,
+      "meshCount": 4,
+      "targetIndices": [
+        17,
+        17,
+        10,
+        10
+      ],
+      "evidence": "assets/tripo/vela-photoreal/verification/morph-viseme_RR.png"
+    },
+    {
+      "name": "viseme_aa",
+      "available": true,
+      "influence": 1,
+      "meshCount": 4,
+      "targetIndices": [
+        2,
+        2,
+        11,
+        11
+      ],
+      "evidence": "assets/tripo/vela-photoreal/verification/morph-viseme_aa.png"
+    },
+    {
+      "name": "viseme_E",
+      "available": true,
+      "influence": 1,
+      "meshCount": 4,
+      "targetIndices": [
+        3,
+        3,
+        12,
+        12
+      ],
+      "evidence": "assets/tripo/vela-photoreal/verification/morph-viseme_E.png"
+    },
+    {
+      "name": "viseme_I",
+      "available": true,
+      "influence": 1,
+      "meshCount": 4,
+      "targetIndices": [
+        4,
+        4,
+        13,
+        13
+      ],
+      "evidence": "assets/tripo/vela-photoreal/verification/morph-viseme_I.png"
+    },
+    {
+      "name": "viseme_O",
+      "available": true,
+      "influence": 1,
+      "meshCount": 4,
+      "targetIndices": [
+        5,
+        5,
+        14,
+        14
+      ],
+      "evidence": "assets/tripo/vela-photoreal/verification/morph-viseme_O.png"
+    },
+    {
+      "name": "viseme_U",
+      "available": true,
+      "influence": 1,
+      "meshCount": 4,
+      "targetIndices": [
+        6,
+        6,
+        15,
+        15
+      ],
+      "evidence": "assets/tripo/vela-photoreal/verification/morph-viseme_U.png"
+    },
+    {
+      "name": "eyeBlinkLeft",
+      "available": true,
+      "influence": 1,
+      "meshCount": 2,
+      "targetIndices": [
+        18,
+        18
+      ],
+      "evidence": "assets/tripo/vela-photoreal/verification/morph-eyeBlinkLeft.png"
+    },
+    {
+      "name": "eyeBlinkRight",
+      "available": true,
+      "influence": 1,
+      "meshCount": 2,
+      "targetIndices": [
+        19,
+        19
+      ],
+      "evidence": "assets/tripo/vela-photoreal/verification/morph-eyeBlinkRight.png"
+    },
+    {
+      "name": "mouthSmileLeft",
+      "available": true,
+      "influence": 1,
+      "meshCount": 2,
+      "targetIndices": [
+        20,
+        20
+      ],
+      "evidence": "assets/tripo/vela-photoreal/verification/morph-mouthSmileLeft.png"
+    },
+    {
+      "name": "mouthFrownLeft",
+      "available": true,
+      "influence": 1,
+      "meshCount": 2,
+      "targetIndices": [
+        21,
+        21
+      ],
+      "evidence": "assets/tripo/vela-photoreal/verification/morph-mouthFrownLeft.png"
+    },
+    {
+      "name": "browInnerUp",
+      "available": true,
+      "influence": 1,
+      "meshCount": 2,
+      "targetIndices": [
+        28,
+        28
+      ],
+      "evidence": "assets/tripo/vela-photoreal/verification/morph-browInnerUp.png"
+    }
+  ],
+  "limitations": [
+    "The image grid documents full-influence appearance; it does not certify quantitative mouth aperture, landmark error, anatomical intersections, or speech synchronization."
+  ]
+}

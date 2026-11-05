@@ -1,0 +1,25 @@
+{
+  "glb": "assets\\tripo\\vela-photoreal\\intermediates\\vela-face-surfacefit-prototype.glb",
+  "captures": [
+    "verification\\tripo-face-surfacefit-render\\neutral.png",
+    "verification\\tripo-face-surfacefit-render\\jawOpen.png",
+    "verification\\tripo-face-surfacefit-render\\viseme_PP.png",
+    "verification\\tripo-face-surfacefit-render\\viseme_O.png",
+    "verification\\tripo-face-surfacefit-render\\viseme_E.png",
+    "verification\\tripo-face-surfacefit-render\\eyeBlinkLeft.png",
+    "verification\\tripo-face-surfacefit-render\\eyeBlinkRight.png",
+    "verification\\tripo-face-surfacefit-render\\mouthSmileLeft.png",
+    "verification\\tripo-face-surfacefit-render\\browInnerUp.png"
+  ],
+  "states": [
+    "neutral",
+    "jawOpen",
+    "viseme_PP",
+    "viseme_O",
+    "viseme_E",
+    "eyeBlinkLeft",
+    "eyeBlinkRight",
+    "mouthSmileLeft",
+    "browInnerUp"
+  ]
+}

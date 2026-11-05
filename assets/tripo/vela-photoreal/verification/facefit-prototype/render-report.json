@@ -1,0 +1,25 @@
+{
+  "glb": "assets\\tripo\\vela-photoreal\\vela-photoreal-facefit-prototype.glb",
+  "captures": [
+    "assets\\tripo\\vela-photoreal\\verification\\facefit-prototype\\neutral.png",
+    "assets\\tripo\\vela-photoreal\\verification\\facefit-prototype\\jawOpen.png",
+    "assets\\tripo\\vela-photoreal\\verification\\facefit-prototype\\viseme_PP.png",
+    "assets\\tripo\\vela-photoreal\\verification\\facefit-prototype\\viseme_O.png",
+    "assets\\tripo\\vela-photoreal\\verification\\facefit-prototype\\viseme_E.png",
+    "assets\\tripo\\vela-photoreal\\verification\\facefit-prototype\\eyeBlinkLeft.png",
+    "assets\\tripo\\vela-photoreal\\verification\\facefit-prototype\\eyeBlinkRight.png",
+    "assets\\tripo\\vela-photoreal\\verification\\facefit-prototype\\mouthSmileLeft.png",
+    "assets\\tripo\\vela-photoreal\\verification\\facefit-prototype\\browInnerUp.png"
+  ],
+  "states": [
+    "neutral",
+    "jawOpen",
+    "viseme_PP",
+    "viseme_O",
+    "viseme_E",
+    "eyeBlinkLeft",
+    "eyeBlinkRight",
+    "mouthSmileLeft",
+    "browInnerUp"
+  ]
+}

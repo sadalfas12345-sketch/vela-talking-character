@@ -4,14 +4,122 @@
   "sourcePreserved": true,
   "derivedMeshDecimationRatio": 0.3,
   "vertices": 318094,
-  "triangles": 583172,
+  "triangles": 583133,
   "landmarksHit": 476,
   "registeredFaceVertices": 11821,
+  "exportedRigLocalLandmarkNodes": {
+    "eye_outer_left": 1.193256480846328e-07,
+    "eye_inner_left": 1.201947465904182e-07,
+    "eye_outer_right": 1.1926748300777466e-07,
+    "eye_inner_right": 1.197356344920355e-07,
+    "eye_top_left": 1.201514409696321e-07,
+    "eye_bottom_left": 1.1926748300777466e-07,
+    "eye_top_right": 1.790078547110254e-07,
+    "eye_bottom_right": 1.197320124506071e-07,
+    "mouth_corner_left": 6.064333243705223e-08,
+    "mouth_corner_right": 1.197356344920355e-07,
+    "upper_lip": 1.7943510137402647e-07,
+    "lower_lip": 5.968144759603276e-08,
+    "brow_left": 1.7943615877483425e-07,
+    "brow_right": 1.1944280098385067e-07,
+    "chin": 1.2065772789744958e-07,
+    "LeftEye": 1.193256480846328e-07,
+    "RightEye": 1.1926748300777466e-07
+  },
   "depthToleranceMeters": 0.023441005099151653,
   "mouthWidthMeters": 0.030834412250956848,
   "eyeWidthMeters": {
     "Left": 0.01820368593310958,
     "Right": 0.01778767079736231
+  },
+  "transferredDentalAnatomy": {
+    "VelaTransplantedTeeth": {
+      "vertices": 909,
+      "triangles": 1526,
+      "morphTargetsCopied": [
+        "mouthOpen",
+        "viseme_sil",
+        "viseme_PP",
+        "viseme_FF",
+        "viseme_TH",
+        "viseme_DD",
+        "viseme_kk",
+        "viseme_CH",
+        "viseme_SS",
+        "viseme_nn",
+        "viseme_RR",
+        "viseme_aa",
+        "viseme_E",
+        "viseme_I",
+        "viseme_O",
+        "viseme_U",
+        "jawOpen"
+      ],
+      "mouthWidthScale": 0.5202568340626704,
+      "dentalVerticalScale": 0.24106038889438455,
+      "uvLayersPreserved": [
+        "UVMap"
+      ],
+      "materialsPreserved": [
+        "Teeth"
+      ],
+      "sourceBoundsMeters": {
+        "min": [
+          -0.029673539102077484,
+          -0.06163834407925606,
+          1.6528843641281128
+        ],
+        "max": [
+          0.02959413453936577,
+          -0.0044418927282094955,
+          1.7014907598495483
+        ]
+      }
+    },
+    "VelaTransplantedTongue": {
+      "vertices": 96,
+      "triangles": 148,
+      "morphTargetsCopied": [
+        "mouthOpen",
+        "viseme_sil",
+        "viseme_PP",
+        "viseme_FF",
+        "viseme_TH",
+        "viseme_DD",
+        "viseme_kk",
+        "viseme_CH",
+        "viseme_SS",
+        "viseme_nn",
+        "viseme_RR",
+        "viseme_aa",
+        "viseme_E",
+        "viseme_I",
+        "viseme_O",
+        "viseme_U",
+        "jawOpen",
+        "tongueOut"
+      ],
+      "mouthWidthScale": 0.5202568340626704,
+      "dentalVerticalScale": 0.24106038889438455,
+      "uvLayersPreserved": [
+        "UVMap"
+      ],
+      "materialsPreserved": [
+        "Teeth.001"
+      ],
+      "sourceBoundsMeters": {
+        "min": [
+          -0.015520020388066769,
+          -0.05680540204048157,
+          1.661725401878357
+        ],
+        "max": [
+          0.015384655445814133,
+          -0.003973161801695824,
+          1.6830949783325195
+        ]
+      }
+    }
   },
   "shapeKeys": [
     "jawOpen",
@@ -46,14 +154,20 @@
   ],
   "shapeKeyCount": 29,
   "generatedMouthSurface": {
-    "geometry": "24-sided shape-keyed inner-mouth surface weighted to Mixamo Head",
+    "geometry": "24-sided shape-keyed dark mouth insert parented in Mixamo Head bind space",
     "visemeDriven": true,
-    "restState": "thin closed-lip seam",
-    "includesTeethOrTongue": false
+    "restState": "thin closed-lip seam behind the neutral lip contour",
+    "openTargetApertureRatio": {
+      "jawOpen": 0.32,
+      "viseme_aa": 0.4
+    },
+    "openTargetForwardOffsetRatio": -0.012,
+    "frontShellFacesRemovedForAperture": 39,
+    "includesTeethOrTongue": true
   },
   "geometryMethod": "measured landmark-space face selection and actual per-vertex surface deltas; Mixamo weights and PBR textures retained",
   "limitations": [
-    "The generated Tripo head is one closed shell with no original oral anatomy or separate eyelids. A small shape-keyed dark inner-mouth surface makes opening visible, but does not provide teeth or tongue; lip motion is still surface deformation.",
+    "The generated Tripo head is one closed shell with no original oral anatomy or separate eyelids. Teeth and tongue are transferred from Vela's compatible Avaturn reference, scaled to registered mouth width, and carry reference speech morphs; actual alignment and live articulation still require certification.",
     "Blinking is a measured skin-surface deformation. Eye gaze has no separate eyeball geometry or eye bones in the source GLB."
   ]
 }

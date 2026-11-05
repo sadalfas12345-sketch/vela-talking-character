@@ -19,6 +19,7 @@ CALIBRATION = json.loads((ASSET / "face-calibration.json").read_text(encoding="u
 SOURCE_FRONT = Vector(CALIBRATION["renderCamera"]["position"]) - Vector(CALIBRATION["renderCamera"]["target"])
 SOURCE_FRONT.normalize()
 YAW = float(CALIBRATION["faceForwardYawRadians"])
+LANDMARKS = CALIBRATION["landmarks3d"]
 
 
 def angle(a, b):
@@ -70,32 +71,42 @@ def measure(path, stage, apply_adapter_yaw=False, rename_bones=False):
     left, right = get("LeftShoulder"), get("RightShoulder")
     up = norm(point(neck, "head") - point(hips, "head"))
     lateral = norm(point(right, "head") - point(left, "head"))
-    torso_front = norm(up.cross(lateral))
+    world_up = Vector((0.0, 0.0, 1.0))
+    torso_front = norm(world_up.cross(lateral))
     front = SOURCE_FRONT.copy()
     if apply_adapter_yaw:
         front.rotate(armature.matrix_world.to_quaternion())
         front = norm(front)
-    hip_axes = [axis(hips, i) for i in range(3)]
-    head_axes = [axis(head, i) for i in range(3)]
-    hip_axis_i = max(range(3), key=lambda i: abs(hip_axes[i].dot(front)))
-    head_axis_i = max(range(3), key=lambda i: abs(head_axes[i].dot(front)))
-    hip_forward = hip_axes[hip_axis_i]
-    head_forward = head_axes[head_axis_i]
+    # Anatomical face-forward comes from independently registered facial
+    # landmarks. A Mixamo Head bone's local axes encode its bind frame, not
+    # necessarily the visible face normal.
+    def landmark(name):
+        p = LANDMARKS[name]
+        return armature.matrix_world @ Vector((p[0], p[1], p[2]))
+    # Eye outer corners lie on different depths along the curved face. Use
+    # centers of the upper/lower eyelid landmarks to estimate the eye line.
+    left_eye_center = (landmark("eye_top_left") + landmark("eye_bottom_left")) * 0.5
+    right_eye_center = (landmark("eye_top_right") + landmark("eye_bottom_right")) * 0.5
+    eye_lateral = norm(right_eye_center - left_eye_center)
+    face_up = norm((landmark("brow_left") + landmark("brow_right")) * 0.5 - landmark("chin"))
+    face_forward = norm(face_up.cross(eye_lateral))
+    if face_forward.dot(front) < 0:
+        face_forward.negate()
+    # Anatomical hip facing is recovered from the pelvis-to-shoulder axis and
+    # the left/right hip-joint line, not a guessed Mixamo local bone axis.
+    left_hip, right_hip = get("LeftUpLeg"), get("RightUpLeg")
+    hip_lateral = norm(point(right_hip, "head") - point(left_hip, "head"))
+    hip_forward = norm(world_up.cross(hip_lateral))
     if hip_forward.dot(front) < 0:
         hip_forward.negate()
-    if head_forward.dot(front) < 0:
-        head_forward.negate()
     shoulder_width = (point(right, "head") - point(left, "head")).length
     shoulder_height_delta = abs(point(right, "head").z - point(left, "head").z)
-    # Compare projected bone-roll axes around the local trunk-up axis.
-    base_x = axis(hips, 0)
-    rolls = {}
-    for name, bone in (("Spine", spine), ("Spine1", spine1), ("Spine2", spine2), ("Neck", neck), ("Head", head)):
-        current_x = axis(bone, 0)
-        base_projected = norm(base_x - up * base_x.dot(up))
-        current_projected = norm(current_x - up * current_x.dot(up))
-        signed = math.degrees(math.atan2(up.dot(base_projected.cross(current_projected)), base_projected.dot(current_projected)))
-        rolls[name] = signed
+    # Compare actual anatomical cross-sections of pelvis and shoulders. This
+    # detects a twisted trunk without assuming that bone local X means left.
+    shoulder_lateral = norm(point(right, "head") - point(left, "head"))
+    pelvis_projected = norm(hip_lateral - world_up * hip_lateral.dot(world_up))
+    shoulder_projected = norm(shoulder_lateral - world_up * shoulder_lateral.dot(world_up))
+    trunk_twist = math.degrees(math.atan2(world_up.dot(pelvis_projected.cross(shoulder_projected)), pelvis_projected.dot(shoulder_projected)))
     meshes = [o for o in bpy.context.scene.objects if o.type == "MESH" and o.data.vertices and o.name != "Icosphere"]
     boxes = []
     for obj in meshes:
@@ -112,12 +123,14 @@ def measure(path, stage, apply_adapter_yaw=False, rename_bones=False):
         "appliedAdapterYawDegrees": math.degrees(YAW) if apply_adapter_yaw else 0.0,
         "boneNamesRenamedOnly": rename_bones,
         "sourceFaceForwardWorld": list(front), "torsoForwardWorld": list(torso_front),
-        "hipLocalForwardAxisIndex": hip_axis_i, "headLocalForwardAxisIndex": head_axis_i,
-        "headToHipForwardDisagreementDegrees": angle(head_forward, hip_forward),
-        "headToTorsoForwardDisagreementDegrees": angle(head_forward, torso_front),
+        "headForwardMethod": "registered brow/chin vertical crossed with left/right eye line",
+        "headAnatomicalForwardWorld": list(face_forward), "hipAnatomicalForwardWorld": list(hip_forward),
+        "headToHipForwardDisagreementDegrees": angle(face_forward, hip_forward),
+        "headToTorsoForwardDisagreementDegrees": angle(face_forward, torso_front),
         "shoulderToHipFacingDisagreementDegrees": angle(torso_front, hip_forward),
-        "spineRollDegrees": rolls,
-        "maxAbsoluteSpineRollDegrees": max(abs(v) for v in rolls.values()),
+        "spineRollMethod": "signed angle between pelvis and shoulder anatomical lateral axes around torso-up",
+        "spineRollDegrees": {"pelvisToShoulders": trunk_twist},
+        "maxAbsoluteSpineRollDegrees": abs(trunk_twist),
         "shoulderHeightDeltaMeters": shoulder_height_delta, "shoulderWidthMeters": shoulder_width,
         "shoulderHeightDeltaRatio": shoulder_height_delta / shoulder_width if shoulder_width else None,
         "worldBoundsMeters": {"min": minimum, "max": maximum, "height": height},
@@ -140,7 +153,11 @@ def main():
         ("D_adapter_minus_90_yaw", ASSET / "vela-photoreal-faced.glb", True, True),
     ]
     records = [measure(path, stage, yaw, rename) for stage, path, yaw, rename in stages]
-    print(json.dumps({"measurements": records}, indent=2))
+    result = {"measurements": records}
+    output = ROOT / "verification" / "tripo-gate2-orientation.json"
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps(result, indent=2))
 
 
 if __name__ == "__main__":

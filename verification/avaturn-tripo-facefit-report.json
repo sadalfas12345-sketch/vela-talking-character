@@ -1,0 +1,86 @@
+{
+  "method": "Global similarity alignment followed by deterministic ARAP surface fitting with barycentric constraints from 478 independent face-landmark rays.",
+  "inputs": {
+    "donorGLB": "TalkingHead/avatars/avaturn.glb",
+    "targetGLB": "assets/tripo/vela-photoreal/generated-rigged.glb"
+  },
+  "landmarks": {
+    "donorValid": 478,
+    "targetValid": 476,
+    "jointlyConstrained": 476,
+    "groups": {
+      "all": {
+        "count": 476,
+        "medianMillimeters": 0.43101191158127417,
+        "p95Millimeters": 3.880193434698027,
+        "maxMillimeters": 25.439736856363165
+      },
+      "face_oval": {
+        "count": 34,
+        "medianMillimeters": 1.79629686177155,
+        "p95Millimeters": 10.239255243747596,
+        "maxMillimeters": 11.89825248922541
+      },
+      "eyes": {
+        "count": 10,
+        "medianMillimeters": 0.5259705695913419,
+        "p95Millimeters": 1.5925857690013332,
+        "maxMillimeters": 1.8362155249396424
+      },
+      "mouth": {
+        "count": 12,
+        "medianMillimeters": 0.3731973169559718,
+        "p95Millimeters": 0.5950069963001087,
+        "maxMillimeters": 0.6045806976852082
+      }
+    }
+  },
+  "similarity": {
+    "scale": 0.4316625897839919,
+    "rotation": [
+      [
+        -0.15011296832306525,
+        0.9883995920034858,
+        0.023072565279600152
+      ],
+      [
+        -0.947096891779262,
+        -0.15045787530072802,
+        0.2834958647706389
+      ],
+      [
+        0.283678646223681,
+        0.020704450906351566,
+        0.9586958596913656
+      ]
+    ],
+    "translation": [
+      -0.16817842880422113,
+      -0.014883557902983189,
+      0.1714773291808358
+    ]
+  },
+  "arap": {
+    "iterations": 30,
+    "uniformEdgeWeights": true,
+    "landmarkConstraintWeight": 10.0,
+    "triangleCount": 7145,
+    "normalTurnOver90Degrees": 591,
+    "normalTurnOver90Fraction": 0.08271518544436669,
+    "triangleAreaRatioPercentiles": [
+      0.7834959596292981,
+      0.9127251367127592,
+      1.2418159624382537,
+      2.6486331073660696,
+      4.347202718420564
+    ],
+    "trianglesBelow10PercentArea": 2
+  },
+  "outputs": {
+    "deformedMeshes": "verification\\avaturn-tripo-facefit-deformed.npz",
+    "preservesMorphTargets": true
+  },
+  "limitations": [
+    "This is a fitting feasibility artifact, not an accepted avatar. Texture projection, face-patch seams, self-intersection, runtime morph behavior, and all acceptance gates remain to be verified."
+  ]
+}

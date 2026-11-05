@@ -1,0 +1,401 @@
+{
+  "source": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\vela-photoreal\\vela-photoreal-faced.glb",
+  "file_bytes": 62143688,
+  "meshes": [
+    {
+      "name": "Generated inner mouth surface",
+      "vertices": 72,
+      "triangles": 24,
+      "uv_layers": [],
+      "vertex_groups": 65,
+      "weighted_vertices": 72,
+      "shape_key_count": 29,
+      "shape_keys": [
+        "jawOpen",
+        "mouthOpen",
+        "viseme_aa",
+        "viseme_E",
+        "viseme_I",
+        "viseme_O",
+        "viseme_U",
+        "viseme_PP",
+        "viseme_sil",
+        "mouthClose",
+        "viseme_FF",
+        "viseme_TH",
+        "viseme_DD",
+        "viseme_kk",
+        "viseme_CH",
+        "viseme_SS",
+        "viseme_nn",
+        "viseme_RR",
+        "eyeBlinkLeft",
+        "eyeBlinkRight",
+        "mouthSmileLeft",
+        "mouthFrownLeft",
+        "mouthSmileRight",
+        "mouthFrownRight",
+        "browOuterUpLeft",
+        "browDownLeft",
+        "browOuterUpRight",
+        "browDownRight",
+        "browInnerUp"
+      ],
+      "world_bounds": [
+        [
+          0.061851002275943756,
+          -0.007985157892107964,
+          0.8527308106422424
+        ],
+        [
+          0.061851002275943756,
+          -0.007985157892107964,
+          0.8531008362770081
+        ],
+        [
+          0.061851002275943756,
+          0.014215621165931225,
+          0.8531008362770081
+        ],
+        [
+          0.061851002275943756,
+          0.014215621165931225,
+          0.8527308106422424
+        ],
+        [
+          0.0624060183763504,
+          -0.007985157892107964,
+          0.8527308106422424
+        ],
+        [
+          0.0624060183763504,
+          -0.007985157892107964,
+          0.8531008362770081
+        ],
+        [
+          0.0624060183763504,
+          0.014215621165931225,
+          0.8531008362770081
+        ],
+        [
+          0.0624060183763504,
+          0.014215621165931225,
+          0.8527308106422424
+        ]
+      ],
+      "modifiers": [
+        {
+          "name": "Armature",
+          "type": "ARMATURE",
+          "target": "Armature"
+        }
+      ],
+      "materials": [
+        "Inner mouth \u00b7 procedural dark cavity"
+      ]
+    },
+    {
+      "name": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "vertices": 318105,
+      "triangles": 583172,
+      "uv_layers": [
+        "UVMap"
+      ],
+      "vertex_groups": 65,
+      "weighted_vertices": 318105,
+      "shape_key_count": 29,
+      "shape_keys": [
+        "jawOpen",
+        "mouthOpen",
+        "viseme_aa",
+        "viseme_E",
+        "viseme_I",
+        "viseme_O",
+        "viseme_U",
+        "viseme_PP",
+        "viseme_sil",
+        "mouthClose",
+        "viseme_FF",
+        "viseme_TH",
+        "viseme_DD",
+        "viseme_kk",
+        "viseme_CH",
+        "viseme_SS",
+        "viseme_nn",
+        "viseme_RR",
+        "eyeBlinkLeft",
+        "eyeBlinkRight",
+        "mouthSmileLeft",
+        "mouthFrownLeft",
+        "mouthSmileRight",
+        "mouthFrownRight",
+        "browOuterUpLeft",
+        "browDownLeft",
+        "browOuterUpRight",
+        "browDownRight",
+        "browInnerUp"
+      ],
+      "world_bounds": [
+        [
+          -0.08417157083749771,
+          -0.16235968470573425,
+          2.7558417059481144e-06
+        ],
+        [
+          -0.08417157083749771,
+          -0.16235968470573425,
+          0.9811943769454956
+        ],
+        [
+          -0.08417157083749771,
+          0.16235491633415222,
+          0.9811943769454956
+        ],
+        [
+          -0.08417157083749771,
+          0.16235491633415222,
+          2.7558417059481144e-06
+        ],
+        [
+          0.08417391777038574,
+          -0.16235968470573425,
+          2.7558417059481144e-06
+        ],
+        [
+          0.08417391777038574,
+          -0.16235968470573425,
+          0.9811943769454956
+        ],
+        [
+          0.08417391777038574,
+          0.16235491633415222,
+          0.9811943769454956
+        ],
+        [
+          0.08417391777038574,
+          0.16235491633415222,
+          2.7558417059481144e-06
+        ]
+      ],
+      "modifiers": [
+        {
+          "name": "Armature",
+          "type": "ARMATURE",
+          "target": "Armature"
+        }
+      ],
+      "materials": [
+        "tripo_material_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f"
+      ]
+    },
+    {
+      "name": "Icosphere",
+      "vertices": 42,
+      "triangles": 80,
+      "uv_layers": [
+        "UVMap"
+      ],
+      "vertex_groups": 0,
+      "weighted_vertices": 0,
+      "shape_key_count": 0,
+      "shape_keys": [],
+      "world_bounds": [
+        [
+          -0.9510578513145447,
+          -0.9999999403953552,
+          -1.0
+        ],
+        [
+          -0.9510578513145447,
+          -0.9999999403953552,
+          1.0
+        ],
+        [
+          -0.9510578513145447,
+          0.9999999403953552,
+          1.0
+        ],
+        [
+          -0.9510578513145447,
+          0.9999999403953552,
+          -1.0
+        ],
+        [
+          0.9510578513145447,
+          -0.9999999403953552,
+          -1.0
+        ],
+        [
+          0.9510578513145447,
+          -0.9999999403953552,
+          1.0
+        ],
+        [
+          0.9510578513145447,
+          0.9999999403953552,
+          1.0
+        ],
+        [
+          0.9510578513145447,
+          0.9999999403953552,
+          -1.0
+        ]
+      ],
+      "modifiers": [],
+      "materials": []
+    }
+  ],
+  "materials": [
+    {
+      "name": "Inner mouth \u00b7 procedural dark cavity",
+      "use_nodes": true,
+      "images": []
+    },
+    {
+      "name": "tripo_material_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "use_nodes": true,
+      "images": [
+        {
+          "node": "Image Texture",
+          "image": "Color_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f"
+        },
+        {
+          "node": "Image Texture.001",
+          "image": "ORM_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f"
+        },
+        {
+          "node": "Image Texture.002",
+          "image": "NormalGL_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f"
+        }
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Color_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "width": 4096,
+      "height": 4096,
+      "channels": 4,
+      "format": "JPEG",
+      "packed": true
+    },
+    {
+      "name": "NormalGL_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "width": 4096,
+      "height": 4096,
+      "channels": 4,
+      "format": "PNG",
+      "packed": true
+    },
+    {
+      "name": "ORM_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "width": 4096,
+      "height": 4096,
+      "channels": 4,
+      "format": "JPEG",
+      "packed": true
+    }
+  ],
+  "armatures": [
+    {
+      "name": "Armature",
+      "bones": [
+        "mixamorig:Hips",
+        "mixamorig:LeftUpLeg",
+        "mixamorig:LeftLeg",
+        "mixamorig:LeftFoot",
+        "mixamorig:LeftToeBase",
+        "mixamorig:LeftToe_End",
+        "mixamorig:RightUpLeg",
+        "mixamorig:RightLeg",
+        "mixamorig:RightFoot",
+        "mixamorig:RightToeBase",
+        "mixamorig:RightToe_End",
+        "mixamorig:Spine",
+        "mixamorig:Spine1",
+        "mixamorig:Spine2",
+        "mixamorig:LeftShoulder",
+        "mixamorig:LeftArm",
+        "mixamorig:LeftForeArm",
+        "mixamorig:LeftHand",
+        "mixamorig:LeftHandIndex1",
+        "mixamorig:LeftHandIndex2",
+        "mixamorig:LeftHandIndex3",
+        "mixamorig:LeftHandIndex4",
+        "mixamorig:LeftHandMiddle1",
+        "mixamorig:LeftHandMiddle2",
+        "mixamorig:LeftHandMiddle3",
+        "mixamorig:LeftHandMiddle4",
+        "mixamorig:LeftHandPinky1",
+        "mixamorig:LeftHandPinky2",
+        "mixamorig:LeftHandPinky3",
+        "mixamorig:LeftHandPinky4",
+        "mixamorig:LeftHandRing1",
+        "mixamorig:LeftHandRing2",
+        "mixamorig:LeftHandRing3",
+        "mixamorig:LeftHandRing4",
+        "mixamorig:LeftHandThumb1",
+        "mixamorig:LeftHandThumb2",
+        "mixamorig:LeftHandThumb3",
+        "mixamorig:LeftHandThumb4",
+        "mixamorig:Neck",
+        "mixamorig:Head",
+        "mixamorig:HeadTop_End",
+        "mixamorig:RightShoulder",
+        "mixamorig:RightArm",
+        "mixamorig:RightForeArm",
+        "mixamorig:RightHand",
+        "mixamorig:RightHandIndex1",
+        "mixamorig:RightHandIndex2",
+        "mixamorig:RightHandIndex3",
+        "mixamorig:RightHandIndex4",
+        "mixamorig:RightHandMiddle1",
+        "mixamorig:RightHandMiddle2",
+        "mixamorig:RightHandMiddle3",
+        "mixamorig:RightHandMiddle4",
+        "mixamorig:RightHandPinky1",
+        "mixamorig:RightHandPinky2",
+        "mixamorig:RightHandPinky3",
+        "mixamorig:RightHandPinky4",
+        "mixamorig:RightHandRing1",
+        "mixamorig:RightHandRing2",
+        "mixamorig:RightHandRing3",
+        "mixamorig:RightHandRing4",
+        "mixamorig:RightHandThumb1",
+        "mixamorig:RightHandThumb2",
+        "mixamorig:RightHandThumb3",
+        "mixamorig:RightHandThumb4"
+      ]
+    }
+  ],
+  "facial_rig": {
+    "shape_key_count": 58,
+    "arkit_names_detected": [
+      "browInnerUp",
+      "eyeBlinkLeft",
+      "eyeBlinkRight",
+      "jawOpen",
+      "mouthClose",
+      "mouthFrownLeft",
+      "mouthSmileLeft"
+    ],
+    "oculus_visemes_detected": [
+      "viseme_CH",
+      "viseme_DD",
+      "viseme_E",
+      "viseme_FF",
+      "viseme_I",
+      "viseme_O",
+      "viseme_PP",
+      "viseme_RR",
+      "viseme_SS",
+      "viseme_TH",
+      "viseme_U",
+      "viseme_aa",
+      "viseme_kk",
+      "viseme_nn",
+      "viseme_sil"
+    ],
+    "eye_bones_detected": []
+  }
+}

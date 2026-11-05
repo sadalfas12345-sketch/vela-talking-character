@@ -1,0 +1,1019 @@
+{
+  "source": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\vela-photoreal\\vela-photoreal-facefit-prototype.glb",
+  "file_bytes": 51255184,
+  "meshes": [
+    {
+      "name": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "vertices": 307349,
+      "triangles": 562810,
+      "uv_layers": [
+        "UVMap"
+      ],
+      "vertex_groups": 65,
+      "weighted_vertices": 307349,
+      "shape_key_count": 0,
+      "shape_keys": [],
+      "world_bounds": [
+        [
+          -0.08417157083749771,
+          -0.16235968470573425,
+          2.7558417059481144e-06
+        ],
+        [
+          -0.08417157083749771,
+          -0.16235968470573425,
+          0.9811943769454956
+        ],
+        [
+          -0.08417157083749771,
+          0.16235491633415222,
+          0.9811943769454956
+        ],
+        [
+          -0.08417157083749771,
+          0.16235491633415222,
+          2.7558417059481144e-06
+        ],
+        [
+          0.08417391777038574,
+          -0.16235968470573425,
+          2.7558417059481144e-06
+        ],
+        [
+          0.08417391777038574,
+          -0.16235968470573425,
+          0.9811943769454956
+        ],
+        [
+          0.08417391777038574,
+          0.16235491633415222,
+          0.9811943769454956
+        ],
+        [
+          0.08417391777038574,
+          0.16235491633415222,
+          2.7558417059481144e-06
+        ]
+      ],
+      "modifiers": [
+        {
+          "name": "Armature",
+          "type": "ARMATURE",
+          "target": "Armature"
+        }
+      ],
+      "materials": [
+        "tripo_material_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f"
+      ]
+    },
+    {
+      "name": "VelaTripoEye",
+      "vertices": 936,
+      "triangles": 312,
+      "uv_layers": [
+        "UVMap"
+      ],
+      "vertex_groups": 0,
+      "weighted_vertices": 0,
+      "shape_key_count": 11,
+      "shape_keys": [
+        "eyeLookDownLeft",
+        "eyeLookDownRight",
+        "eyeLookUpLeft",
+        "eyeLookUpRight",
+        "eyeLookInLeft",
+        "eyeLookInRight",
+        "eyeLookOutLeft",
+        "eyeLookOutRight",
+        "eyesClosed",
+        "eyesLookUp",
+        "eyesLookDown"
+      ],
+      "world_bounds": [
+        [
+          0.04442725330591202,
+          0.03551862761378288,
+          0.8850297331809998
+        ],
+        [
+          0.03219813108444214,
+          -0.018866917118430138,
+          0.8878518342971802
+        ],
+        [
+          0.036816827952861786,
+          -0.01886691525578499,
+          0.9078662395477295
+        ],
+        [
+          0.049045950174331665,
+          0.03551862761378288,
+          0.9050441384315491
+        ],
+        [
+          0.07653303444385529,
+          0.027914874255657196,
+          0.8776207566261292
+        ],
+        [
+          0.0643039122223854,
+          -0.026470668613910675,
+          0.8804428577423096
+        ],
+        [
+          0.06892260909080505,
+          -0.026470668613910675,
+          0.9004572033882141
+        ],
+        [
+          0.08115173131227493,
+          0.027914874255657196,
+          0.8976351022720337
+        ]
+      ],
+      "modifiers": [],
+      "materials": [
+        "Eyes"
+      ]
+    },
+    {
+      "name": "VelaTripoEyeAO",
+      "vertices": 864,
+      "triangles": 288,
+      "uv_layers": [
+        "UVMap"
+      ],
+      "vertex_groups": 0,
+      "weighted_vertices": 0,
+      "shape_key_count": 32,
+      "shape_keys": [
+        "browDownLeft",
+        "browDownRight",
+        "browInnerUp",
+        "browOuterUpLeft",
+        "browOuterUpRight",
+        "eyeSquintLeft",
+        "eyeSquintRight",
+        "noseSneerLeft",
+        "noseSneerRight",
+        "cheekPuff",
+        "cheekSquintLeft",
+        "cheekSquintRight",
+        "mouthSmile",
+        "mouthLeft",
+        "mouthRight",
+        "mouthSmileLeft",
+        "mouthSmileRight",
+        "eyeWideLeft",
+        "eyeWideRight",
+        "eyeLookDownLeft",
+        "eyeLookDownRight",
+        "eyeLookUpLeft",
+        "eyeLookUpRight",
+        "eyeLookInLeft",
+        "eyeLookInRight",
+        "eyeLookOutLeft",
+        "eyeLookOutRight",
+        "eyeBlinkLeft",
+        "eyeBlinkRight",
+        "eyesClosed",
+        "eyesLookUp",
+        "eyesLookDown"
+      ],
+      "world_bounds": [
+        [
+          0.05024132877588272,
+          0.03186057507991791,
+          0.8882445693016052
+        ],
+        [
+          0.039099324494600296,
+          -0.01769033446907997,
+          0.890815794467926
+        ],
+        [
+          0.04068928584456444,
+          -0.01769033446907997,
+          0.8977056741714478
+        ],
+        [
+          0.05183129012584686,
+          0.03186057507991791,
+          0.895134449005127
+        ],
+        [
+          0.07641252130270004,
+          0.025662336498498917,
+          0.882205069065094
+        ],
+        [
+          0.06527051329612732,
+          -0.023888571187853813,
+          0.8847762942314148
+        ],
+        [
+          0.06686047464609146,
+          -0.023888571187853813,
+          0.8916661739349365
+        ],
+        [
+          0.07800248265266418,
+          0.025662336498498917,
+          0.8890949487686157
+        ]
+      ],
+      "modifiers": [],
+      "materials": [
+        "EyeAO"
+      ]
+    },
+    {
+      "name": "VelaTripoEyelash",
+      "vertices": 1080,
+      "triangles": 360,
+      "uv_layers": [
+        "UVMap"
+      ],
+      "vertex_groups": 0,
+      "weighted_vertices": 0,
+      "shape_key_count": 31,
+      "shape_keys": [
+        "browDownLeft",
+        "browDownRight",
+        "browInnerUp",
+        "browOuterUpLeft",
+        "browOuterUpRight",
+        "eyeSquintLeft",
+        "eyeSquintRight",
+        "eyeWideLeft",
+        "eyeWideRight",
+        "noseSneerLeft",
+        "noseSneerRight",
+        "eyeLookDownLeft",
+        "eyeLookDownRight",
+        "eyeLookUpLeft",
+        "eyeLookUpRight",
+        "eyeLookInLeft",
+        "eyeLookInRight",
+        "eyeLookOutLeft",
+        "eyeLookOutRight",
+        "cheekSquintLeft",
+        "cheekSquintRight",
+        "eyeBlinkLeft",
+        "eyeBlinkRight",
+        "eyesClosed",
+        "eyesLookUp",
+        "eyesLookDown",
+        "mouthSmile",
+        "mouthSmileLeft",
+        "mouthSmileRight",
+        "mouthUpperUpLeft",
+        "mouthUpperUpRight"
+      ],
+      "world_bounds": [
+        [
+          0.05100870504975319,
+          0.03885446861386299,
+          0.8857735395431519
+        ],
+        [
+          0.037353210151195526,
+          -0.02187447063624859,
+          0.8889248371124268
+        ],
+        [
+          0.04087786749005318,
+          -0.02187447063624859,
+          0.9041983485221863
+        ],
+        [
+          0.05453336238861084,
+          0.03885447233915329,
+          0.9010471105575562
+        ],
+        [
+          0.08348646759986877,
+          0.031162619590759277,
+          0.8782787322998047
+        ],
+        [
+          0.06983097642660141,
+          -0.029566321521997452,
+          0.8814299702644348
+        ],
+        [
+          0.07335563749074936,
+          -0.029566321521997452,
+          0.8967034816741943
+        ],
+        [
+          0.08701112866401672,
+          0.031162619590759277,
+          0.8935522437095642
+        ]
+      ],
+      "modifiers": [],
+      "materials": [
+        "Eyelash"
+      ]
+    },
+    {
+      "name": "VelaTripoHead",
+      "vertices": 11727,
+      "triangles": 3909,
+      "uv_layers": [
+        "UVMap"
+      ],
+      "vertex_groups": 0,
+      "weighted_vertices": 0,
+      "shape_key_count": 72,
+      "shape_keys": [
+        "mouthOpen",
+        "viseme_sil",
+        "viseme_PP",
+        "viseme_FF",
+        "viseme_TH",
+        "eyeWideLeft",
+        "eyeWideRight",
+        "eyeLookDownLeft",
+        "eyeLookDownRight",
+        "eyeLookUpLeft",
+        "eyeLookUpRight",
+        "eyeLookInLeft",
+        "eyeLookInRight",
+        "eyeLookOutLeft",
+        "eyeLookOutRight",
+        "cheekSquintLeft",
+        "cheekSquintRight",
+        "mouthRollUpper",
+        "eyeBlinkLeft",
+        "eyeBlinkRight",
+        "eyesClosed",
+        "eyesLookUp",
+        "eyesLookDown",
+        "mouthClose",
+        "mouthFrownLeft",
+        "mouthFrownRight",
+        "mouthFunnel",
+        "mouthPressLeft",
+        "mouthPressRight",
+        "mouthStretchLeft",
+        "mouthStretchRight",
+        "tongueOut",
+        "mouthDimpleLeft",
+        "mouthDimpleRight",
+        "jawLeft",
+        "jawRight",
+        "eyeSquintLeft",
+        "eyeSquintRight",
+        "mouthLowerDownLeft",
+        "mouthLowerDownRight",
+        "mouthUpperUpLeft",
+        "mouthUpperUpRight",
+        "mouthSmileLeft",
+        "mouthSmileRight",
+        "mouthLeft",
+        "mouthRight",
+        "mouthPucker",
+        "mouthSmile",
+        "jawForward",
+        "jawOpen",
+        "mouthRollLower",
+        "cheekPuff",
+        "noseSneerRight",
+        "noseSneerLeft",
+        "mouthShrugLower",
+        "mouthShrugUpper",
+        "viseme_DD",
+        "viseme_kk",
+        "viseme_CH",
+        "viseme_SS",
+        "viseme_nn",
+        "viseme_RR",
+        "viseme_aa",
+        "viseme_E",
+        "viseme_I",
+        "viseme_O",
+        "viseme_U",
+        "browDownLeft",
+        "browDownRight",
+        "browInnerUp",
+        "browOuterUpLeft",
+        "browOuterUpRight"
+      ],
+      "world_bounds": [
+        [
+          -0.0031924303621053696,
+          0.05646464228630066,
+          0.8288856744766235
+        ],
+        [
+          -0.021407967433333397,
+          -0.024543792009353638,
+          0.833089292049408
+        ],
+        [
+          0.0019988217391073704,
+          -0.02454379014670849,
+          0.9345187544822693
+        ],
+        [
+          0.02021435834467411,
+          0.05646464601159096,
+          0.9303151369094849
+        ],
+        [
+          0.07155319303274155,
+          0.03876230865716934,
+          0.811636745929718
+        ],
+        [
+          0.05333765596151352,
+          -0.042246125638484955,
+          0.8158403038978577
+        ],
+        [
+          0.076744444668293,
+          -0.042246121913194656,
+          0.917269766330719
+        ],
+        [
+          0.09495998173952103,
+          0.03876231238245964,
+          0.9130662083625793
+        ]
+      ],
+      "modifiers": [],
+      "materials": [
+        "Tripo projected face skin"
+      ]
+    },
+    {
+      "name": "VelaTripoTeeth",
+      "vertices": 4578,
+      "triangles": 1526,
+      "uv_layers": [
+        "UVMap"
+      ],
+      "vertex_groups": 0,
+      "weighted_vertices": 0,
+      "shape_key_count": 20,
+      "shape_keys": [
+        "mouthOpen",
+        "viseme_sil",
+        "viseme_PP",
+        "viseme_FF",
+        "viseme_TH",
+        "viseme_DD",
+        "viseme_kk",
+        "viseme_CH",
+        "viseme_SS",
+        "viseme_nn",
+        "viseme_RR",
+        "viseme_aa",
+        "viseme_E",
+        "viseme_I",
+        "viseme_O",
+        "viseme_U",
+        "jawOpen",
+        "jawForward",
+        "jawLeft",
+        "jawRight"
+      ],
+      "world_bounds": [
+        [
+          0.01974717155098915,
+          0.026587199419736862,
+          0.8489699959754944
+        ],
+        [
+          0.01122359000146389,
+          -0.01131900679320097,
+          0.850937008857727
+        ],
+        [
+          0.017856664955615997,
+          -0.011319005861878395,
+          0.879680335521698
+        ],
+        [
+          0.02638024464249611,
+          0.02658720128238201,
+          0.8777133226394653
+        ],
+        [
+          0.06426670402288437,
+          0.016043443232774734,
+          0.838696300983429
+        ],
+        [
+          0.05574312433600426,
+          -0.021862762048840523,
+          0.8406632542610168
+        ],
+        [
+          0.062376197427511215,
+          -0.021862760186195374,
+          0.8694065809249878
+        ],
+        [
+          0.07089977711439133,
+          0.016043445095419884,
+          0.8674396276473999
+        ]
+      ],
+      "modifiers": [],
+      "materials": [
+        "Teeth"
+      ]
+    },
+    {
+      "name": "VelaTripoTongue",
+      "vertices": 444,
+      "triangles": 148,
+      "uv_layers": [
+        "UVMap"
+      ],
+      "vertex_groups": 0,
+      "weighted_vertices": 0,
+      "shape_key_count": 21,
+      "shape_keys": [
+        "mouthOpen",
+        "viseme_sil",
+        "viseme_PP",
+        "viseme_FF",
+        "viseme_TH",
+        "viseme_DD",
+        "viseme_kk",
+        "viseme_CH",
+        "viseme_SS",
+        "viseme_nn",
+        "viseme_RR",
+        "viseme_aa",
+        "viseme_E",
+        "viseme_I",
+        "viseme_O",
+        "viseme_U",
+        "jawOpen",
+        "jawForward",
+        "jawLeft",
+        "jawRight",
+        "tongueOut"
+      ],
+      "world_bounds": [
+        [
+          0.031608857214450836,
+          0.01636861264705658,
+          0.8496512174606323
+        ],
+        [
+          0.026850255206227303,
+          -0.004793924279510975,
+          0.8507493734359741
+        ],
+        [
+          0.030057882890105247,
+          -0.004793923813849688,
+          0.8646490573883057
+        ],
+        [
+          0.03481648489832878,
+          0.01636861264705658,
+          0.8635509610176086
+        ],
+        [
+          0.060799576342105865,
+          0.009455247782170773,
+          0.842914879322052
+        ],
+        [
+          0.05604097247123718,
+          -0.011707288213074207,
+          0.8440130352973938
+        ],
+        [
+          0.05924860015511513,
+          -0.011707288213074207,
+          0.8579127788543701
+        ],
+        [
+          0.06400720030069351,
+          0.009455248713493347,
+          0.8568146228790283
+        ]
+      ],
+      "modifiers": [],
+      "materials": [
+        "Teeth.001"
+      ]
+    },
+    {
+      "name": "Icosphere",
+      "vertices": 42,
+      "triangles": 80,
+      "uv_layers": [
+        "UVMap"
+      ],
+      "vertex_groups": 0,
+      "weighted_vertices": 0,
+      "shape_key_count": 0,
+      "shape_keys": [],
+      "world_bounds": [
+        [
+          -0.9510578513145447,
+          -0.9999999403953552,
+          -1.0
+        ],
+        [
+          -0.9510578513145447,
+          -0.9999999403953552,
+          1.0
+        ],
+        [
+          -0.9510578513145447,
+          0.9999999403953552,
+          1.0
+        ],
+        [
+          -0.9510578513145447,
+          0.9999999403953552,
+          -1.0
+        ],
+        [
+          0.9510578513145447,
+          -0.9999999403953552,
+          -1.0
+        ],
+        [
+          0.9510578513145447,
+          -0.9999999403953552,
+          1.0
+        ],
+        [
+          0.9510578513145447,
+          0.9999999403953552,
+          1.0
+        ],
+        [
+          0.9510578513145447,
+          0.9999999403953552,
+          -1.0
+        ]
+      ],
+      "modifiers": [],
+      "materials": []
+    }
+  ],
+  "materials": [
+    {
+      "name": "EyeAO",
+      "use_nodes": true,
+      "images": [
+        {
+          "node": "Image Texture",
+          "image": "Image_7"
+        },
+        {
+          "node": "Image Texture.001",
+          "image": "Image_6"
+        },
+        {
+          "node": "Image Texture.002",
+          "image": "Image_8"
+        }
+      ]
+    },
+    {
+      "name": "Eyelash",
+      "use_nodes": true,
+      "images": [
+        {
+          "node": "Image Texture",
+          "image": "Image_7"
+        },
+        {
+          "node": "Image Texture.001",
+          "image": "Image_9"
+        },
+        {
+          "node": "Image Texture.002",
+          "image": "Image_8"
+        }
+      ]
+    },
+    {
+      "name": "Eyes",
+      "use_nodes": true,
+      "images": [
+        {
+          "node": "Image Texture",
+          "image": "Image_4"
+        },
+        {
+          "node": "Image Texture.001",
+          "image": "Image_3"
+        },
+        {
+          "node": "Image Texture.002",
+          "image": "Image_5"
+        }
+      ]
+    },
+    {
+      "name": "Teeth",
+      "use_nodes": true,
+      "images": [
+        {
+          "node": "Image Texture",
+          "image": "Image_14"
+        },
+        {
+          "node": "Image Texture.001",
+          "image": "Image_13"
+        },
+        {
+          "node": "Image Texture.002",
+          "image": "Image_15"
+        },
+        {
+          "node": "Image Texture.003",
+          "image": "Image_13"
+        }
+      ]
+    },
+    {
+      "name": "Teeth.001",
+      "use_nodes": true,
+      "images": [
+        {
+          "node": "Image Texture",
+          "image": "Image_14"
+        },
+        {
+          "node": "Image Texture.001",
+          "image": "Image_16"
+        },
+        {
+          "node": "Image Texture.002",
+          "image": "Image_15"
+        },
+        {
+          "node": "Image Texture.003",
+          "image": "Image_16"
+        }
+      ]
+    },
+    {
+      "name": "Tripo projected face skin",
+      "use_nodes": true,
+      "images": [
+        {
+          "node": "Image Texture",
+          "image": "tripo-facefit-skin-2k"
+        }
+      ]
+    },
+    {
+      "name": "tripo_material_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "use_nodes": true,
+      "images": [
+        {
+          "node": "Image Texture",
+          "image": "Color_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f"
+        },
+        {
+          "node": "Image Texture.001",
+          "image": "ORM_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f"
+        },
+        {
+          "node": "Image Texture.002",
+          "image": "NormalGL_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f"
+        }
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Color_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "width": 4096,
+      "height": 4096,
+      "channels": 4,
+      "format": "JPEG",
+      "packed": true
+    },
+    {
+      "name": "Image_13",
+      "width": 512,
+      "height": 512,
+      "channels": 4,
+      "format": "JPEG",
+      "packed": true
+    },
+    {
+      "name": "Image_14",
+      "width": 256,
+      "height": 256,
+      "channels": 4,
+      "format": "PNG",
+      "packed": true
+    },
+    {
+      "name": "Image_15",
+      "width": 256,
+      "height": 256,
+      "channels": 4,
+      "format": "PNG",
+      "packed": true
+    },
+    {
+      "name": "Image_16",
+      "width": 512,
+      "height": 512,
+      "channels": 4,
+      "format": "JPEG",
+      "packed": true
+    },
+    {
+      "name": "Image_3",
+      "width": 512,
+      "height": 512,
+      "channels": 4,
+      "format": "JPEG",
+      "packed": true
+    },
+    {
+      "name": "Image_4",
+      "width": 1024,
+      "height": 1024,
+      "channels": 4,
+      "format": "JPEG",
+      "packed": true
+    },
+    {
+      "name": "Image_5",
+      "width": 512,
+      "height": 512,
+      "channels": 4,
+      "format": "PNG",
+      "packed": true
+    },
+    {
+      "name": "Image_6",
+      "width": 512,
+      "height": 512,
+      "channels": 4,
+      "format": "JPEG",
+      "packed": true
+    },
+    {
+      "name": "Image_7",
+      "width": 512,
+      "height": 512,
+      "channels": 4,
+      "format": "PNG",
+      "packed": true
+    },
+    {
+      "name": "Image_8",
+      "width": 512,
+      "height": 512,
+      "channels": 4,
+      "format": "PNG",
+      "packed": true
+    },
+    {
+      "name": "Image_9",
+      "width": 512,
+      "height": 512,
+      "channels": 4,
+      "format": "JPEG",
+      "packed": true
+    },
+    {
+      "name": "NormalGL_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "width": 4096,
+      "height": 4096,
+      "channels": 4,
+      "format": "PNG",
+      "packed": true
+    },
+    {
+      "name": "ORM_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+      "width": 4096,
+      "height": 4096,
+      "channels": 4,
+      "format": "JPEG",
+      "packed": true
+    },
+    {
+      "name": "tripo-facefit-skin-2k",
+      "width": 2048,
+      "height": 2048,
+      "channels": 4,
+      "format": "PNG",
+      "packed": true
+    }
+  ],
+  "armatures": [
+    {
+      "name": "Armature",
+      "bones": [
+        "mixamorig:Hips",
+        "mixamorig:LeftUpLeg",
+        "mixamorig:LeftLeg",
+        "mixamorig:LeftFoot",
+        "mixamorig:LeftToeBase",
+        "mixamorig:LeftToe_End",
+        "mixamorig:RightUpLeg",
+        "mixamorig:RightLeg",
+        "mixamorig:RightFoot",
+        "mixamorig:RightToeBase",
+        "mixamorig:RightToe_End",
+        "mixamorig:Spine",
+        "mixamorig:Spine1",
+        "mixamorig:Spine2",
+        "mixamorig:LeftShoulder",
+        "mixamorig:LeftArm",
+        "mixamorig:LeftForeArm",
+        "mixamorig:LeftHand",
+        "mixamorig:LeftHandIndex1",
+        "mixamorig:LeftHandIndex2",
+        "mixamorig:LeftHandIndex3",
+        "mixamorig:LeftHandIndex4",
+        "mixamorig:LeftHandMiddle1",
+        "mixamorig:LeftHandMiddle2",
+        "mixamorig:LeftHandMiddle3",
+        "mixamorig:LeftHandMiddle4",
+        "mixamorig:LeftHandPinky1",
+        "mixamorig:LeftHandPinky2",
+        "mixamorig:LeftHandPinky3",
+        "mixamorig:LeftHandPinky4",
+        "mixamorig:LeftHandRing1",
+        "mixamorig:LeftHandRing2",
+        "mixamorig:LeftHandRing3",
+        "mixamorig:LeftHandRing4",
+        "mixamorig:LeftHandThumb1",
+        "mixamorig:LeftHandThumb2",
+        "mixamorig:LeftHandThumb3",
+        "mixamorig:LeftHandThumb4",
+        "mixamorig:Neck",
+        "mixamorig:Head",
+        "mixamorig:HeadTop_End",
+        "mixamorig:RightShoulder",
+        "mixamorig:RightArm",
+        "mixamorig:RightForeArm",
+        "mixamorig:RightHand",
+        "mixamorig:RightHandIndex1",
+        "mixamorig:RightHandIndex2",
+        "mixamorig:RightHandIndex3",
+        "mixamorig:RightHandIndex4",
+        "mixamorig:RightHandMiddle1",
+        "mixamorig:RightHandMiddle2",
+        "mixamorig:RightHandMiddle3",
+        "mixamorig:RightHandMiddle4",
+        "mixamorig:RightHandPinky1",
+        "mixamorig:RightHandPinky2",
+        "mixamorig:RightHandPinky3",
+        "mixamorig:RightHandPinky4",
+        "mixamorig:RightHandRing1",
+        "mixamorig:RightHandRing2",
+        "mixamorig:RightHandRing3",
+        "mixamorig:RightHandRing4",
+        "mixamorig:RightHandThumb1",
+        "mixamorig:RightHandThumb2",
+        "mixamorig:RightHandThumb3",
+        "mixamorig:RightHandThumb4"
+      ]
+    }
+  ],
+  "facial_rig": {
+    "shape_key_count": 187,
+    "arkit_names_detected": [
+      "browInnerUp",
+      "eyeBlinkLeft",
+      "eyeBlinkRight",
+      "jawOpen",
+      "mouthClose",
+      "mouthFrownLeft",
+      "mouthSmileLeft"
+    ],
+    "oculus_visemes_detected": [
+      "viseme_CH",
+      "viseme_DD",
+      "viseme_E",
+      "viseme_FF",
+      "viseme_I",
+      "viseme_O",
+      "viseme_PP",
+      "viseme_RR",
+      "viseme_SS",
+      "viseme_TH",
+      "viseme_U",
+      "viseme_aa",
+      "viseme_kk",
+      "viseme_nn",
+      "viseme_sil"
+    ],
+    "eye_bones_detected": []
+  }
+}

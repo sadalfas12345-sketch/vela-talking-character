@@ -1,0 +1,758 @@
+{
+  "source": "TalkingHead\\avatars\\avaturn.glb",
+  "meshes": [
+    {
+      "name": "Body_Mesh",
+      "vertices": 1158,
+      "triangles": 1681,
+      "boundsWorld": {
+        "min": [
+          -0.8831449151039124,
+          -0.0673053115606308,
+          0.035154227167367935
+        ],
+        "max": [
+          0.8838348984718323,
+          0.08648648113012314,
+          1.5550763607025146
+        ]
+      },
+      "shapeKeys": [],
+      "materials": [
+        "Body"
+      ],
+      "uvLayers": [
+        "UVMap"
+      ],
+      "vertexGroups": 54,
+      "modifiers": [
+        "ARMATURE"
+      ]
+    },
+    {
+      "name": "Eye_Mesh",
+      "vertices": 196,
+      "triangles": 312,
+      "boundsWorld": {
+        "min": [
+          -0.04796373099088669,
+          -0.04944461211562157,
+          1.7236086130142212
+        ],
+        "max": [
+          0.050099585205316544,
+          -0.019929960370063782,
+          1.757497787475586
+        ]
+      },
+      "shapeKeys": [
+        "Basis",
+        "eyeLookDownLeft",
+        "eyeLookDownRight",
+        "eyeLookUpLeft",
+        "eyeLookUpRight",
+        "eyeLookInLeft",
+        "eyeLookInRight",
+        "eyeLookOutLeft",
+        "eyeLookOutRight",
+        "eyesClosed",
+        "eyesLookUp",
+        "eyesLookDown"
+      ],
+      "materials": [
+        "Eyes"
+      ],
+      "uvLayers": [
+        "UVMap"
+      ],
+      "vertexGroups": 54,
+      "modifiers": [
+        "ARMATURE"
+      ]
+    },
+    {
+      "name": "EyeAO_Mesh",
+      "vertices": 182,
+      "triangles": 288,
+      "boundsWorld": {
+        "min": [
+          -0.04636929929256439,
+          -0.050042301416397095,
+          1.7338935136795044
+        ],
+        "max": [
+          0.0473412461578846,
+          -0.041391123086214066,
+          1.745411992073059
+        ]
+      },
+      "shapeKeys": [
+        "Basis",
+        "browDownLeft",
+        "browDownRight",
+        "browInnerUp",
+        "browOuterUpLeft",
+        "browOuterUpRight",
+        "eyeSquintLeft",
+        "eyeSquintRight",
+        "noseSneerLeft",
+        "noseSneerRight",
+        "cheekPuff",
+        "cheekSquintLeft",
+        "cheekSquintRight",
+        "mouthSmile",
+        "mouthLeft",
+        "mouthRight",
+        "mouthSmileLeft",
+        "mouthSmileRight",
+        "eyeWideLeft",
+        "eyeWideRight",
+        "eyeLookDownLeft",
+        "eyeLookDownRight",
+        "eyeLookUpLeft",
+        "eyeLookUpRight",
+        "eyeLookInLeft",
+        "eyeLookInRight",
+        "eyeLookOutLeft",
+        "eyeLookOutRight",
+        "eyeBlinkLeft",
+        "eyeBlinkRight",
+        "eyesClosed",
+        "eyesLookUp",
+        "eyesLookDown"
+      ],
+      "materials": [
+        "EyeAO"
+      ],
+      "uvLayers": [
+        "UVMap",
+        "UVMap.001"
+      ],
+      "vertexGroups": 54,
+      "modifiers": [
+        "ARMATURE"
+      ]
+    },
+    {
+      "name": "Eyelash_Mesh",
+      "vertices": 242,
+      "triangles": 360,
+      "boundsWorld": {
+        "min": [
+          -0.05756951868534088,
+          -0.05849676951766014,
+          1.7296613454818726
+        ],
+        "max": [
+          0.05853326991200447,
+          -0.04073631763458252,
+          1.753587007522583
+        ]
+      },
+      "shapeKeys": [
+        "Basis",
+        "browDownLeft",
+        "browDownRight",
+        "browInnerUp",
+        "browOuterUpLeft",
+        "browOuterUpRight",
+        "eyeSquintLeft",
+        "eyeSquintRight",
+        "eyeWideLeft",
+        "eyeWideRight",
+        "noseSneerLeft",
+        "noseSneerRight",
+        "eyeLookDownLeft",
+        "eyeLookDownRight",
+        "eyeLookUpLeft",
+        "eyeLookUpRight",
+        "eyeLookInLeft",
+        "eyeLookInRight",
+        "eyeLookOutLeft",
+        "eyeLookOutRight",
+        "cheekSquintLeft",
+        "cheekSquintRight",
+        "eyeBlinkLeft",
+        "eyeBlinkRight",
+        "eyesClosed",
+        "eyesLookUp",
+        "eyesLookDown",
+        "mouthSmile",
+        "mouthSmileLeft",
+        "mouthSmileRight",
+        "mouthUpperUpLeft",
+        "mouthUpperUpRight"
+      ],
+      "materials": [
+        "Eyelash"
+      ],
+      "uvLayers": [
+        "UVMap"
+      ],
+      "vertexGroups": 54,
+      "modifiers": [
+        "ARMATURE"
+      ]
+    },
+    {
+      "name": "Head_Mesh",
+      "vertices": 3663,
+      "triangles": 7145,
+      "boundsWorld": {
+        "min": [
+          -0.09680721908807755,
+          -0.08123907446861267,
+          1.5149343013763428
+        ],
+        "max": [
+          0.09627243876457214,
+          0.14106988906860352,
+          1.8488441705703735
+        ]
+      },
+      "shapeKeys": [
+        "Basis",
+        "mouthOpen",
+        "viseme_sil",
+        "viseme_PP",
+        "viseme_FF",
+        "viseme_TH",
+        "eyeWideLeft",
+        "eyeWideRight",
+        "eyeLookDownLeft",
+        "eyeLookDownRight",
+        "eyeLookUpLeft",
+        "eyeLookUpRight",
+        "eyeLookInLeft",
+        "eyeLookInRight",
+        "eyeLookOutLeft",
+        "eyeLookOutRight",
+        "cheekSquintLeft",
+        "cheekSquintRight",
+        "mouthRollUpper",
+        "eyeBlinkLeft",
+        "eyeBlinkRight",
+        "eyesClosed",
+        "eyesLookUp",
+        "eyesLookDown",
+        "mouthClose",
+        "mouthFrownLeft",
+        "mouthFrownRight",
+        "mouthFunnel",
+        "mouthPressLeft",
+        "mouthPressRight",
+        "mouthStretchLeft",
+        "mouthStretchRight",
+        "tongueOut",
+        "mouthDimpleLeft",
+        "mouthDimpleRight",
+        "jawLeft",
+        "jawRight",
+        "eyeSquintLeft",
+        "eyeSquintRight",
+        "mouthLowerDownLeft",
+        "mouthLowerDownRight",
+        "mouthUpperUpLeft",
+        "mouthUpperUpRight",
+        "mouthSmileLeft",
+        "mouthSmileRight",
+        "mouthLeft",
+        "mouthRight",
+        "mouthPucker",
+        "mouthSmile",
+        "jawForward",
+        "jawOpen",
+        "mouthRollLower",
+        "cheekPuff",
+        "noseSneerRight",
+        "noseSneerLeft",
+        "mouthShrugLower",
+        "mouthShrugUpper",
+        "viseme_DD",
+        "viseme_kk",
+        "viseme_CH",
+        "viseme_SS",
+        "viseme_nn",
+        "viseme_RR",
+        "viseme_aa",
+        "viseme_E",
+        "viseme_I",
+        "viseme_O",
+        "viseme_U",
+        "browDownLeft",
+        "browDownRight",
+        "browInnerUp",
+        "browOuterUpLeft",
+        "browOuterUpRight"
+      ],
+      "materials": [
+        "Head"
+      ],
+      "uvLayers": [
+        "UVMap"
+      ],
+      "vertexGroups": 54,
+      "modifiers": [
+        "ARMATURE"
+      ]
+    },
+    {
+      "name": "Teeth_Mesh",
+      "vertices": 909,
+      "triangles": 1526,
+      "boundsWorld": {
+        "min": [
+          -0.029673539102077484,
+          -0.06163834407925606,
+          1.6528843641281128
+        ],
+        "max": [
+          0.02959413453936577,
+          -0.0044418927282094955,
+          1.7014907598495483
+        ]
+      },
+      "shapeKeys": [
+        "Basis",
+        "mouthOpen",
+        "viseme_sil",
+        "viseme_PP",
+        "viseme_FF",
+        "viseme_TH",
+        "viseme_DD",
+        "viseme_kk",
+        "viseme_CH",
+        "viseme_SS",
+        "viseme_nn",
+        "viseme_RR",
+        "viseme_aa",
+        "viseme_E",
+        "viseme_I",
+        "viseme_O",
+        "viseme_U",
+        "jawOpen",
+        "jawForward",
+        "jawLeft",
+        "jawRight"
+      ],
+      "materials": [
+        "Teeth"
+      ],
+      "uvLayers": [
+        "UVMap"
+      ],
+      "vertexGroups": 54,
+      "modifiers": [
+        "ARMATURE"
+      ]
+    },
+    {
+      "name": "Tongue_Mesh",
+      "vertices": 96,
+      "triangles": 148,
+      "boundsWorld": {
+        "min": [
+          -0.015520020388066769,
+          -0.05680540204048157,
+          1.661725401878357
+        ],
+        "max": [
+          0.015384655445814133,
+          -0.003973161801695824,
+          1.6830949783325195
+        ]
+      },
+      "shapeKeys": [
+        "Basis",
+        "mouthOpen",
+        "viseme_sil",
+        "viseme_PP",
+        "viseme_FF",
+        "viseme_TH",
+        "viseme_DD",
+        "viseme_kk",
+        "viseme_CH",
+        "viseme_SS",
+        "viseme_nn",
+        "viseme_RR",
+        "viseme_aa",
+        "viseme_E",
+        "viseme_I",
+        "viseme_O",
+        "viseme_U",
+        "jawOpen",
+        "jawForward",
+        "jawLeft",
+        "jawRight",
+        "tongueOut"
+      ],
+      "materials": [
+        "Teeth.001"
+      ],
+      "uvLayers": [
+        "UVMap"
+      ],
+      "vertexGroups": 54,
+      "modifiers": [
+        "ARMATURE"
+      ]
+    },
+    {
+      "name": "avaturn_hair_0",
+      "vertices": 2187,
+      "triangles": 2752,
+      "boundsWorld": {
+        "min": [
+          -0.17851334810256958,
+          -0.14207370579242706,
+          1.3696074485778809
+        ],
+        "max": [
+          0.17613932490348816,
+          0.18679051101207733,
+          1.8716293573379517
+        ]
+      },
+      "shapeKeys": [],
+      "materials": [
+        "avaturn_hair_0_material"
+      ],
+      "uvLayers": [
+        "UVMap",
+        "UVMap.001"
+      ],
+      "vertexGroups": 54,
+      "modifiers": [
+        "ARMATURE"
+      ]
+    },
+    {
+      "name": "avaturn_hair_1",
+      "vertices": 2637,
+      "triangles": 3348,
+      "boundsWorld": {
+        "min": [
+          -0.18701376020908356,
+          -0.15155543386936188,
+          1.3814644813537598
+        ],
+        "max": [
+          0.1788541078567505,
+          0.19247998297214508,
+          1.8731718063354492
+        ]
+      },
+      "shapeKeys": [],
+      "materials": [
+        "avaturn_hair_1_material"
+      ],
+      "uvLayers": [
+        "UVMap",
+        "UVMap.001"
+      ],
+      "vertexGroups": 54,
+      "modifiers": [
+        "ARMATURE"
+      ]
+    },
+    {
+      "name": "avaturn_shoes_0",
+      "vertices": 4998,
+      "triangles": 4712,
+      "boundsWorld": {
+        "min": [
+          -0.1487482637166977,
+          -0.23228147625923157,
+          -0.0035084281116724014
+        ],
+        "max": [
+          0.15191955864429474,
+          0.06705295294523239,
+          0.12954886257648468
+        ]
+      },
+      "shapeKeys": [],
+      "materials": [
+        "avaturn_shoes_0_material"
+      ],
+      "uvLayers": [
+        "UVMap"
+      ],
+      "vertexGroups": 54,
+      "modifiers": [
+        "ARMATURE"
+      ]
+    },
+    {
+      "name": "avaturn_look_0",
+      "vertices": 5571,
+      "triangles": 8909,
+      "boundsWorld": {
+        "min": [
+          -0.7277619242668152,
+          -0.17169250547885895,
+          0.10321380198001862
+        ],
+        "max": [
+          0.7232229113578796,
+          0.14162644743919373,
+          1.620657205581665
+        ]
+      },
+      "shapeKeys": [],
+      "materials": [
+        "avaturn_look_0_material"
+      ],
+      "uvLayers": [
+        "UVMap"
+      ],
+      "vertexGroups": 54,
+      "modifiers": [
+        "ARMATURE"
+      ]
+    },
+    {
+      "name": "Icosphere",
+      "vertices": 42,
+      "triangles": 80,
+      "boundsWorld": {
+        "min": [
+          -0.9510578513145447,
+          -0.9999999403953552,
+          -1.0
+        ],
+        "max": [
+          0.9510578513145447,
+          0.9999999403953552,
+          1.0
+        ]
+      },
+      "shapeKeys": [],
+      "materials": [],
+      "uvLayers": [
+        "UVMap"
+      ],
+      "vertexGroups": 0,
+      "modifiers": []
+    }
+  ],
+  "images": [
+    {
+      "name": "Image_0",
+      "size": [
+        512,
+        512
+      ],
+      "packed": true
+    },
+    {
+      "name": "Image_1",
+      "size": [
+        1024,
+        1024
+      ],
+      "packed": true
+    },
+    {
+      "name": "Image_10",
+      "size": [
+        512,
+        512
+      ],
+      "packed": true
+    },
+    {
+      "name": "Image_11",
+      "size": [
+        1024,
+        1024
+      ],
+      "packed": true
+    },
+    {
+      "name": "Image_12",
+      "size": [
+        1024,
+        1024
+      ],
+      "packed": true
+    },
+    {
+      "name": "Image_13",
+      "size": [
+        512,
+        512
+      ],
+      "packed": true
+    },
+    {
+      "name": "Image_14",
+      "size": [
+        256,
+        256
+      ],
+      "packed": true
+    },
+    {
+      "name": "Image_15",
+      "size": [
+        256,
+        256
+      ],
+      "packed": true
+    },
+    {
+      "name": "Image_16",
+      "size": [
+        512,
+        512
+      ],
+      "packed": true
+    },
+    {
+      "name": "Image_17",
+      "size": [
+        1024,
+        1024
+      ],
+      "packed": true
+    },
+    {
+      "name": "Image_18",
+      "size": [
+        1024,
+        1024
+      ],
+      "packed": true
+    },
+    {
+      "name": "Image_19",
+      "size": [
+        1024,
+        1024
+      ],
+      "packed": true
+    },
+    {
+      "name": "Image_2",
+      "size": [
+        1024,
+        1024
+      ],
+      "packed": true
+    },
+    {
+      "name": "Image_20",
+      "size": [
+        1024,
+        1024
+      ],
+      "packed": true
+    },
+    {
+      "name": "Image_21",
+      "size": [
+        1024,
+        1024
+      ],
+      "packed": true
+    },
+    {
+      "name": "Image_22",
+      "size": [
+        512,
+        512
+      ],
+      "packed": true
+    },
+    {
+      "name": "Image_23",
+      "size": [
+        1024,
+        1024
+      ],
+      "packed": true
+    },
+    {
+      "name": "Image_24",
+      "size": [
+        1024,
+        1024
+      ],
+      "packed": true
+    },
+    {
+      "name": "Image_25",
+      "size": [
+        1024,
+        1024
+      ],
+      "packed": true
+    },
+    {
+      "name": "Image_26",
+      "size": [
+        512,
+        512
+      ],
+      "packed": true
+    },
+    {
+      "name": "Image_3",
+      "size": [
+        512,
+        512
+      ],
+      "packed": true
+    },
+    {
+      "name": "Image_4",
+      "size": [
+        1024,
+        1024
+      ],
+      "packed": true
+    },
+    {
+      "name": "Image_5",
+      "size": [
+        512,
+        512
+      ],
+      "packed": true
+    },
+    {
+      "name": "Image_6",
+      "size": [
+        512,
+        512
+      ],
+      "packed": true
+    },
+    {
+      "name": "Image_7",
+      "size": [
+        512,
+        512
+      ],
+      "packed": true
+    },
+    {
+      "name": "Image_8",
+      "size": [
+        512,
+        512
+      ],
+      "packed": true
+    },
+    {
+      "name": "Image_9",
+      "size": [
+        512,
+        512
+      ],
+      "packed": true
+    }
+  ],
+  "referenceRender": "verification\\avaturn-face-fit-reference.png"
+}
