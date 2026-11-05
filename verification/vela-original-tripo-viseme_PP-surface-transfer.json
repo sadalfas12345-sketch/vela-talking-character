@@ -1,0 +1,23 @@
+{
+  "status": "ORIGINAL_TRIPO_SURFACE_TRANSFER_REQUIRES_VISUAL_REVIEW",
+  "architecture": "fitted Avaturn surface motion to original Tripo mesh shape key",
+  "expression": "viseme_PP",
+  "sourceTripo": "assets\\tripo\\vela-photoreal\\generated-rigged.glb",
+  "motionSource": "verification\\avaturn-tripo-facefit-deformed.npz",
+  "originalTripoVertexCount": 999787,
+  "movedOriginalTripoVertices": 32473,
+  "neutralGeometryUnchanged": true,
+  "topologyReplacement": false,
+  "mouthSurgery": false,
+  "solver": {
+    "type": "8-neighbor Gaussian surface displacement transfer",
+    "sigmaMeters": 0.0045,
+    "candidateDistanceCutoffMeters": 0.012
+  },
+  "donorMotionP95Millimeters": 0.697073548730667,
+  "donorMotionMaxMillimeters": 0.925965590058209,
+  "output": "assets\\tripo\\vela-photoreal\\intermediates\\vela-original-tripo-viseme_PP-surface-transfer.glb",
+  "limitations": [
+    "Independent eyelid correspondence and visual closure remain to be reviewed."
+  ]
+}
