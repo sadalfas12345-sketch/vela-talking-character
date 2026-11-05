@@ -1,0 +1,863 @@
+{
+  "status": "UNVERIFIED_MANUAL_REFERENCE_NOT_INDEPENDENTLY_REVIEWED",
+  "referenceMethod": "Manual visual inspection of the untouched high-resolution Tripo frontal render. Coordinates were selected from visible anatomical feature centers and contour extrema before reading detector coordinates.",
+  "referenceReviewStatus": "Assistant visual reference only; not independently reviewed by a second human reviewer.",
+  "selectedLandmarks": 30,
+  "interocularDistancePixels": 286.00174824640493,
+  "medianPixelError": 1.0450932264236028,
+  "p95PixelError": 22.797077578902275,
+  "medianNormalizedInterocularError": 0.0036541497834593735,
+  "p95NormalizedInterocularError": 0.07970957422001995,
+  "withinManualUncertaintyCount": 18,
+  "frontSurfaceCount": 29,
+  "ambiguousNormalCount": 0,
+  "unresolvedCount": 1,
+  "obliqueVisibleCount": 26,
+  "obliqueOccludedOrAmbiguousCount": 3,
+  "independentValidation": "UNVERIFIED: reference selection was performed by one visual reviewer and requires second-person review.",
+  "evidence": {
+    "numberedReference": "verification/goal1-tripo-landmark-evidence/goal1-30-numbered-independent-reference-points.png",
+    "errorVectors": "verification/goal1-tripo-landmark-evidence/goal1-30-detected-vs-reference-error-vectors.png",
+    "lips": "verification/goal1-tripo-landmark-evidence/goal1-30-lips-closeup-reference-vs-detected.png",
+    "eyelids": "verification/goal1-tripo-landmark-evidence/goal1-30-eyelids-closeup-reference-vs-detected.png",
+    "oblique": "verification/goal1-tripo-landmark-evidence/F_original_tripo_projected_landmarks_side.png"
+  },
+  "points": [
+    {
+      "number": 1,
+      "name": "right_eye_outer",
+      "index": 33,
+      "region": "right_eye",
+      "referenceXY": [
+        389,
+        151
+      ],
+      "detectedXY": [
+        389.6812744140625,
+        150.14669799804688
+      ],
+      "pixelError": 1.0919061927626446,
+      "normalizedInterocularError": 0.003817830483406389,
+      "manualUncertaintyPixels": 4,
+      "withinManualUncertainty": true,
+      "frontSurface": true,
+      "frontNormalFacingDot": 0.6849789042025805,
+      "obliqueVisibleFirstSurface": true,
+      "meshXYZ": [
+        0.06886877119541168,
+        -0.02389037236571312,
+        0.8906744718551636
+      ],
+      "triangleIndex": 744304,
+      "surfaceClassification": "FRONT_SURFACE"
+    },
+    {
+      "number": 2,
+      "name": "right_eye_inner",
+      "index": 133,
+      "region": "right_eye",
+      "referenceXY": [
+        480,
+        158
+      ],
+      "detectedXY": [
+        479.75714111328125,
+        158.8297119140625
+      ],
+      "pixelError": 0.8645243196090715,
+      "normalizedInterocularError": 0.003022793828743453,
+      "manualUncertaintyPixels": 4,
+      "withinManualUncertainty": true,
+      "frontSurface": true,
+      "frontNormalFacingDot": 0.814289536094293,
+      "obliqueVisibleFirstSurface": true,
+      "meshXYZ": [
+        0.055532172322273254,
+        -0.006297432351857424,
+        0.8889785408973694
+      ],
+      "triangleIndex": 914219,
+      "surfaceClassification": "FRONT_SURFACE"
+    },
+    {
+      "number": 3,
+      "name": "right_eyelid_upper",
+      "index": 159,
+      "region": "right_eyelid",
+      "referenceXY": [
+        430,
+        134
+      ],
+      "detectedXY": [
+        428.55694580078125,
+        133.81881713867188
+      ],
+      "pixelError": 1.4543839421287332,
+      "normalizedInterocularError": 0.005085227454189225,
+      "manualUncertaintyPixels": 4,
+      "withinManualUncertainty": true,
+      "frontSurface": true,
+      "frontNormalFacingDot": 0.9652252679516096,
+      "obliqueVisibleFirstSurface": false,
+      "meshXYZ": [
+        0.055410221219062805,
+        -0.016297468915581703,
+        0.8938634991645813
+      ],
+      "triangleIndex": 833376,
+      "surfaceClassification": "FRONT_SURFACE"
+    },
+    {
+      "number": 4,
+      "name": "right_eyelid_lower",
+      "index": 145,
+      "region": "right_eyelid",
+      "referenceXY": [
+        431,
+        165
+      ],
+      "detectedXY": [
+        431.00830078125,
+        165.2552947998047
+      ],
+      "pixelError": 0.2554297120083641,
+      "normalizedInterocularError": 0.0008931054218182559,
+      "manualUncertaintyPixels": 4,
+      "withinManualUncertainty": true,
+      "frontSurface": true,
+      "frontNormalFacingDot": 0.9747891728184186,
+      "obliqueVisibleFirstSurface": true,
+      "meshXYZ": [
+        0.05576510727405548,
+        -0.01581868901848793,
+        0.8877235651016235
+      ],
+      "triangleIndex": 833364,
+      "surfaceClassification": "FRONT_SURFACE"
+    },
+    {
+      "number": 5,
+      "name": "right_eyelid_upper_contour",
+      "index": 160,
+      "region": "right_eyelid",
+      "referenceXY": [
+        423,
+        137
+      ],
+      "detectedXY": [
+        412.0269470214844,
+        136.00149536132812
+      ],
+      "pixelError": 11.01838931889593,
+      "normalizedInterocularError": 0.038525601281999965,
+      "manualUncertaintyPixels": 5,
+      "withinManualUncertainty": false,
+      "frontSurface": true,
+      "frontNormalFacingDot": 0.9369191420264542,
+      "obliqueVisibleFirstSurface": false,
+      "meshXYZ": [
+        0.054846182465553284,
+        -0.019525984302163124,
+        0.8934372067451477
+      ],
+      "triangleIndex": 791727,
+      "surfaceClassification": "FRONT_SURFACE"
+    },
+    {
+      "number": 6,
+      "name": "right_eyelid_lower_contour",
+      "index": 144,
+      "region": "right_eyelid",
+      "referenceXY": [
+        438,
+        164
+      ],
+      "detectedXY": [
+        414.5799560546875,
+        164.29275512695312
+      ],
+      "pixelError": 23.421873621995445,
+      "normalizedInterocularError": 0.08189416241545601,
+      "manualUncertaintyPixels": 5,
+      "withinManualUncertainty": false,
+      "frontSurface": true,
+      "frontNormalFacingDot": 0.910238204523921,
+      "obliqueVisibleFirstSurface": false,
+      "meshXYZ": [
+        0.05507422983646393,
+        -0.0190273504704237,
+        0.8879115581512451
+      ],
+      "triangleIndex": 798927,
+      "surfaceClassification": "FRONT_SURFACE"
+    },
+    {
+      "number": 7,
+      "name": "left_eye_outer",
+      "index": 263,
+      "region": "left_eye",
+      "referenceXY": [
+        675,
+        150
+      ],
+      "detectedXY": [
+        674.9916381835938,
+        149.0017547607422
+      ],
+      "pixelError": 0.9982802600845612,
+      "normalizedInterocularError": 0.003490469083512358,
+      "manualUncertaintyPixels": 4,
+      "withinManualUncertainty": true,
+      "frontSurface": true,
+      "frontNormalFacingDot": 0.6476828306913376,
+      "obliqueVisibleFirstSurface": true,
+      "meshXYZ": [
+        0.05064971745014191,
+        0.031834300607442856,
+        0.8908981084823608
+      ],
+      "triangleIndex": 1244617,
+      "surfaceClassification": "FRONT_SURFACE"
+    },
+    {
+      "number": 8,
+      "name": "left_eye_inner",
+      "index": 362,
+      "region": "left_eye",
+      "referenceXY": [
+        582,
+        159
+      ],
+      "detectedXY": [
+        582.3937377929688,
+        158.58621215820312
+      ],
+      "pixelError": 0.5711828320518902,
+      "normalizedInterocularError": 0.001997130561453028,
+      "manualUncertaintyPixels": 4,
+      "withinManualUncertainty": true,
+      "frontSurface": true,
+      "frontNormalFacingDot": 0.8137534358538687,
+      "obliqueVisibleFirstSurface": true,
+      "meshXYZ": [
+        0.055015042424201965,
+        0.013748775236308575,
+        0.8890261054039001
+      ],
+      "triangleIndex": 1077055,
+      "surfaceClassification": "FRONT_SURFACE"
+    },
+    {
+      "number": 9,
+      "name": "left_eyelid_upper",
+      "index": 386,
+      "region": "left_eyelid",
+      "referenceXY": [
+        636,
+        134
+      ],
+      "detectedXY": [
+        636.4449462890625,
+        133.51133728027344
+      ],
+      "pixelError": 0.6608845994582192,
+      "normalizedInterocularError": 0.0023107711876251672,
+      "manualUncertaintyPixels": 4,
+      "withinManualUncertainty": true,
+      "frontSurface": true,
+      "frontNormalFacingDot": 0.9522387250326574,
+      "obliqueVisibleFirstSurface": true,
+      "meshXYZ": [
+        0.05511803925037384,
+        0.02430564910173416,
+        0.8939235210418701
+      ],
+      "triangleIndex": 1172356,
+      "surfaceClassification": "FRONT_SURFACE"
+    },
+    {
+      "number": 10,
+      "name": "left_eyelid_lower",
+      "index": 374,
+      "region": "left_eyelid",
+      "referenceXY": [
+        633,
+        164
+      ],
+      "detectedXY": [
+        632.8838500976562,
+        163.3248291015625
+      ],
+      "pixelError": 0.6850887109793619,
+      "normalizedInterocularError": 0.0023954004308712243,
+      "manualUncertaintyPixels": 4,
+      "withinManualUncertainty": true,
+      "frontSurface": true,
+      "frontNormalFacingDot": 0.9906231948407367,
+      "obliqueVisibleFirstSurface": true,
+      "meshXYZ": [
+        0.05554415285587311,
+        0.023610122501850128,
+        0.8881006240844727
+      ],
+      "triangleIndex": 1159265,
+      "surfaceClassification": "FRONT_SURFACE"
+    },
+    {
+      "number": 11,
+      "name": "left_eyelid_upper_contour",
+      "index": 387,
+      "region": "left_eyelid",
+      "referenceXY": [
+        645,
+        137
+      ],
+      "detectedXY": [
+        652.526611328125,
+        135.595703125
+      ],
+      "pixelError": 7.656495791012644,
+      "normalizedInterocularError": 0.026770800661037174,
+      "manualUncertaintyPixels": 5,
+      "withinManualUncertainty": false,
+      "frontSurface": true,
+      "frontNormalFacingDot": 0.8976570889353752,
+      "obliqueVisibleFirstSurface": true,
+      "meshXYZ": [
+        0.05434794723987579,
+        0.027446599677205086,
+        0.8935164213180542
+      ],
+      "triangleIndex": 1205028,
+      "surfaceClassification": "FRONT_SURFACE"
+    },
+    {
+      "number": 12,
+      "name": "left_eyelid_lower_contour",
+      "index": 373,
+      "region": "left_eyelid",
+      "referenceXY": [
+        641,
+        164
+      ],
+      "detectedXY": [
+        649.0597534179688,
+        162.29698181152344
+      ],
+      "pixelError": 8.237711824817675,
+      "normalizedInterocularError": 0.028803012133060357,
+      "manualUncertaintyPixels": 5,
+      "withinManualUncertainty": false,
+      "frontSurface": true,
+      "frontNormalFacingDot": 0.8539641387760639,
+      "obliqueVisibleFirstSurface": true,
+      "meshXYZ": [
+        0.05477781593799591,
+        0.026769479736685753,
+        0.8883013725280762
+      ],
+      "triangleIndex": 1198299,
+      "surfaceClassification": "FRONT_SURFACE"
+    },
+    {
+      "number": 13,
+      "name": "nose_bridge",
+      "index": 168,
+      "region": "nose_bridge",
+      "referenceXY": [
+        528,
+        144
+      ],
+      "detectedXY": [
+        528.3911743164062,
+        139.35147094726562
+      ],
+      "pixelError": 4.6649587029181125,
+      "normalizedInterocularError": 0.016310944711075737,
+      "manualUncertaintyPixels": 6,
+      "withinManualUncertainty": true,
+      "frontSurface": true,
+      "frontNormalFacingDot": 0.90182310497039,
+      "obliqueVisibleFirstSurface": true,
+      "meshXYZ": [
+        0.06389982998371124,
+        0.003201400861144066,
+        0.8927829265594482
+      ],
+      "triangleIndex": 997659,
+      "surfaceClassification": "FRONT_SURFACE"
+    },
+    {
+      "number": 14,
+      "name": "nose_bridge_lower",
+      "index": 6,
+      "region": "nose_bridge",
+      "referenceXY": [
+        527,
+        191
+      ],
+      "detectedXY": [
+        527.860595703125,
+        162.94900512695312
+      ],
+      "pixelError": 28.06419317087059,
+      "normalizedInterocularError": 0.09812594972913197,
+      "manualUncertaintyPixels": 6,
+      "withinManualUncertainty": false,
+      "frontSurface": true,
+      "frontNormalFacingDot": 0.7713682577159489,
+      "obliqueVisibleFirstSurface": true,
+      "meshXYZ": [
+        0.06678600609302521,
+        0.0030977721326053143,
+        0.8881739974021912
+      ],
+      "triangleIndex": 997482,
+      "surfaceClassification": "FRONT_SURFACE"
+    },
+    {
+      "number": 15,
+      "name": "nose_tip",
+      "index": 1,
+      "region": "nose_tip",
+      "referenceXY": [
+        527,
+        255
+      ],
+      "detectedXY": [
+        526.8638916015625,
+        254.85263061523438
+      ],
+      "pixelError": 0.20060715762758835,
+      "normalizedInterocularError": 0.0007014193404676505,
+      "manualUncertaintyPixels": 5,
+      "withinManualUncertainty": true,
+      "frontSurface": true,
+      "frontNormalFacingDot": 0.7886417312838603,
+      "obliqueVisibleFirstSurface": true,
+      "meshXYZ": [
+        0.07634676992893219,
+        0.002903103595599532,
+        0.8702240586280823
+      ],
+      "triangleIndex": 989646,
+      "surfaceClassification": "FRONT_SURFACE"
+    },
+    {
+      "number": 16,
+      "name": "nose_wing_right",
+      "index": 98,
+      "region": "nose_wing",
+      "referenceXY": [
+        486,
+        275
+      ],
+      "detectedXY": [
+        485.6573791503906,
+        275.1978759765625
+      ],
+      "pixelError": 0.39565635175946945,
+      "normalizedInterocularError": 0.0013834053609301422,
+      "manualUncertaintyPixels": 5,
+      "withinManualUncertainty": true,
+      "frontSurface": true,
+      "frontNormalFacingDot": 0.769921594299376,
+      "obliqueVisibleFirstSurface": true,
+      "meshXYZ": [
+        0.06355144083499908,
+        -0.005145042669028044,
+        0.8662503957748413
+      ],
+      "triangleIndex": 922721,
+      "surfaceClassification": "FRONT_SURFACE"
+    },
+    {
+      "number": 17,
+      "name": "nose_wing_left",
+      "index": 327,
+      "region": "nose_wing",
+      "referenceXY": [
+        573,
+        275
+      ],
+      "detectedXY": [
+        572.5513916015625,
+        275.1597595214844
+      ],
+      "pixelError": 0.4762064676729782,
+      "normalizedInterocularError": 0.001665047401258199,
+      "manualUncertaintyPixels": 5,
+      "withinManualUncertainty": true,
+      "frontSurface": true,
+      "frontNormalFacingDot": 0.7626215405762196,
+      "obliqueVisibleFirstSurface": true,
+      "meshXYZ": [
+        0.06349851191043854,
+        0.011826441623270512,
+        0.8662578463554382
+      ],
+      "triangleIndex": 1057060,
+      "surfaceClassification": "FRONT_SURFACE"
+    },
+    {
+      "number": 18,
+      "name": "mouth_corner_right",
+      "index": 61,
+      "region": "mouth_corner",
+      "referenceXY": [
+        449,
+        343
+      ],
+      "detectedXY": [
+        448.53021240234375,
+        342.7877197265625
+      ],
+      "pixelError": 0.5155223578103383,
+      "normalizedInterocularError": 0.0018025147082883905,
+      "manualUncertaintyPixels": 5,
+      "withinManualUncertainty": true,
+      "frontSurface": true,
+      "frontNormalFacingDot": 0.8608742194483057,
+      "obliqueVisibleFirstSurface": true,
+      "meshXYZ": [
+        0.057616546750068665,
+        -0.012396440841257572,
+        0.8530492782592773
+      ],
+      "triangleIndex": 869766,
+      "surfaceClassification": "FRONT_SURFACE"
+    },
+    {
+      "number": 19,
+      "name": "mouth_corner_left",
+      "index": 291,
+      "region": "mouth_corner",
+      "referenceXY": [
+        608,
+        344
+      ],
+      "detectedXY": [
+        607.7119140625,
+        344.3769226074219
+      ],
+      "pixelError": 0.47440927411988776,
+      "normalizedInterocularError": 0.001658763546127558,
+      "manualUncertaintyPixels": 5,
+      "withinManualUncertainty": true,
+      "frontSurface": true,
+      "frontNormalFacingDot": 0.9361322887707502,
+      "obliqueVisibleFirstSurface": true,
+      "meshXYZ": [
+        0.05739213526248932,
+        0.01869373209774494,
+        0.8527388572692871
+      ],
+      "triangleIndex": 1112925,
+      "surfaceClassification": "FRONT_SURFACE"
+    },
+    {
+      "number": 20,
+      "name": "upper_lip_center",
+      "index": 13,
+      "region": "upper_lip",
+      "referenceXY": [
+        526,
+        340
+      ],
+      "detectedXY": [
+        526.15234375,
+        340.7787780761719
+      ],
+      "pixelError": 0.793538852287668,
+      "normalizedInterocularError": 0.002774594411234138,
+      "manualUncertaintyPixels": 4,
+      "withinManualUncertainty": true,
+      "frontSurface": true,
+      "frontNormalFacingDot": 0.46128021416370757,
+      "obliqueVisibleFirstSurface": true,
+      "meshXYZ": [
+        0.06704463064670563,
+        0.002764129312708974,
+        0.8534416556358337
+      ],
+      "triangleIndex": 990238,
+      "surfaceClassification": "FRONT_SURFACE"
+    },
+    {
+      "number": 21,
+      "name": "lower_lip_center",
+      "index": 14,
+      "region": "lower_lip",
+      "referenceXY": [
+        527,
+        348
+      ],
+      "detectedXY": [
+        526.6640625,
+        342.28692626953125
+      ],
+      "pixelError": 5.722942027810379,
+      "normalizedInterocularError": 0.020010164493399443,
+      "manualUncertaintyPixels": 4,
+      "withinManualUncertainty": false,
+      "frontSurface": true,
+      "frontNormalFacingDot": 0.45359722651483025,
+      "obliqueVisibleFirstSurface": true,
+      "meshXYZ": [
+        0.06643886864185333,
+        0.0028640744276344776,
+        0.8531470894813538
+      ],
+      "triangleIndex": 990239,
+      "surfaceClassification": "FRONT_SURFACE"
+    },
+    {
+      "number": 22,
+      "name": "upper_lip_right_boundary",
+      "index": 78,
+      "region": "upper_lip",
+      "referenceXY": [
+        474,
+        338
+      ],
+      "detectedXY": [
+        456.4384765625,
+        342.587158203125
+      ],
+      "pixelError": 18.150733479018385,
+      "normalizedInterocularError": 0.06346371513568726,
+      "manualUncertaintyPixels": 5,
+      "withinManualUncertainty": false,
+      "frontSurface": true,
+      "frontNormalFacingDot": 0.46995667228475213,
+      "obliqueVisibleFirstSurface": true,
+      "meshXYZ": [
+        0.05807913839817047,
+        -0.010851859115064144,
+        0.8530884385108948
+      ],
+      "triangleIndex": 885174,
+      "surfaceClassification": "FRONT_SURFACE"
+    },
+    {
+      "number": 23,
+      "name": "upper_lip_left_boundary",
+      "index": 308,
+      "region": "upper_lip",
+      "referenceXY": [
+        579,
+        339
+      ],
+      "detectedXY": [
+        600.40087890625,
+        344.24163818359375
+      ],
+      "pixelError": 22.033437970677298,
+      "normalizedInterocularError": 0.0770395219811537,
+      "manualUncertaintyPixels": 5,
+      "withinManualUncertainty": false,
+      "frontSurface": true,
+      "frontNormalFacingDot": 0.34739794582128525,
+      "obliqueVisibleFirstSurface": true,
+      "meshXYZ": [
+        0.05756886303424835,
+        0.017265794798731804,
+        0.8527653217315674
+      ],
+      "triangleIndex": 1101679,
+      "surfaceClassification": "FRONT_SURFACE"
+    },
+    {
+      "number": 24,
+      "name": "lower_lip_right_boundary",
+      "index": 95,
+      "region": "lower_lip",
+      "referenceXY": [
+        477,
+        349
+      ],
+      "detectedXY": [
+        468.4850769042969,
+        342.17169189453125
+      ],
+      "pixelError": 10.914655601939472,
+      "normalizedInterocularError": 0.038162898195069586,
+      "manualUncertaintyPixels": 5,
+      "withinManualUncertainty": false,
+      "frontSurface": true,
+      "frontNormalFacingDot": 0.6162865972146392,
+      "obliqueVisibleFirstSurface": true,
+      "meshXYZ": [
+        0.06062068045139313,
+        -0.008499007672071457,
+        0.8531695604324341
+      ],
+      "triangleIndex": 899651,
+      "surfaceClassification": "FRONT_SURFACE"
+    },
+    {
+      "number": 25,
+      "name": "lower_lip_left_boundary",
+      "index": 324,
+      "region": "lower_lip",
+      "referenceXY": [
+        576,
+        350
+      ],
+      "detectedXY": [
+        587.8106689453125,
+        343.43572998046875
+      ],
+      "pixelError": 13.512273747415195,
+      "normalizedInterocularError": 0.0472454236041022,
+      "manualUncertaintyPixels": 5,
+      "withinManualUncertainty": false,
+      "frontSurface": true,
+      "frontNormalFacingDot": 0.3253022157587111,
+      "obliqueVisibleFirstSurface": true,
+      "meshXYZ": [
+        0.06015594303607941,
+        0.014806769788265228,
+        0.8529226779937744
+      ],
+      "triangleIndex": 1081474,
+      "surfaceClassification": "FRONT_SURFACE"
+    },
+    {
+      "number": 26,
+      "name": "chin",
+      "index": 152,
+      "region": "chin",
+      "referenceXY": [
+        525,
+        477
+      ],
+      "detectedXY": [
+        524.9968872070312,
+        476.873779296875
+      ],
+      "pixelError": 0.12625908037616812,
+      "normalizedInterocularError": 0.0004414626174501198,
+      "manualUncertaintyPixels": 7,
+      "withinManualUncertainty": true,
+      "frontSurface": true,
+      "frontNormalFacingDot": 0.2469046223291116,
+      "obliqueVisibleFirstSurface": true,
+      "meshXYZ": [
+        0.05744452774524689,
+        0.0025384542532265186,
+        0.8268606066703796
+      ],
+      "triangleIndex": 983798,
+      "surfaceClassification": "FRONT_SURFACE"
+    },
+    {
+      "number": 27,
+      "name": "jawline_right",
+      "index": 172,
+      "region": "jawline",
+      "referenceXY": [
+        365,
+        380
+      ],
+      "detectedXY": [
+        364.51422119140625,
+        379.87054443359375
+      ],
+      "pixelError": 0.5027323289309393,
+      "normalizedInterocularError": 0.0017577946009540127,
+      "manualUncertaintyPixels": 8,
+      "withinManualUncertainty": true,
+      "frontSurface": true,
+      "frontNormalFacingDot": 0.8241848670877516,
+      "obliqueVisibleFirstSurface": true,
+      "meshXYZ": [
+        0.04635824263095856,
+        -0.028805812820792198,
+        0.8458065390586853
+      ],
+      "triangleIndex": 679186,
+      "surfaceClassification": "FRONT_SURFACE"
+    },
+    {
+      "number": 28,
+      "name": "jawline_left",
+      "index": 397,
+      "region": "jawline",
+      "referenceXY": [
+        700,
+        378
+      ],
+      "detectedXY": [
+        700.166748046875,
+        377.5323486328125
+      ],
+      "pixelError": 0.496490395042004,
+      "normalizedInterocularError": 0.0017359697906960082,
+      "manualUncertaintyPixels": 8,
+      "withinManualUncertainty": true,
+      "frontSurface": false,
+      "frontNormalFacingDot": null,
+      "obliqueVisibleFirstSurface": null,
+      "meshXYZ": null,
+      "triangleIndex": null,
+      "surfaceClassification": "UNRESOLVED"
+    },
+    {
+      "number": 29,
+      "name": "upper_lip_right_contour",
+      "index": 82,
+      "region": "upper_lip",
+      "referenceXY": [
+        497,
+        337
+      ],
+      "detectedXY": [
+        507.4736022949219,
+        339.83782958984375
+      ],
+      "pixelError": 10.85124978116279,
+      "normalizedInterocularError": 0.03794120087620546,
+      "manualUncertaintyPixels": 5,
+      "withinManualUncertainty": false,
+      "frontSurface": true,
+      "frontNormalFacingDot": 0.607058521680301,
+      "obliqueVisibleFirstSurface": true,
+      "meshXYZ": [
+        0.06590588390827179,
+        -0.0008840619120746851,
+        0.8536254167556763
+      ],
+      "triangleIndex": 954861,
+      "surfaceClassification": "FRONT_SURFACE"
+    },
+    {
+      "number": 30,
+      "name": "lower_lip_left_contour",
+      "index": 317,
+      "region": "lower_lip",
+      "referenceXY": [
+        555,
+        350
+      ],
+      "detectedXY": [
+        545.5093994140625,
+        342.21807861328125
+      ],
+      "pixelError": 12.273133257276557,
+      "normalizedInterocularError": 0.042912791031971716,
+      "manualUncertaintyPixels": 5,
+      "withinManualUncertainty": false,
+      "frontSurface": true,
+      "frontNormalFacingDot": 0.3232604255899787,
+      "obliqueVisibleFirstSurface": true,
+      "meshXYZ": [
+        0.0655192881822586,
+        0.006544803734868765,
+        0.8531605005264282
+      ],
+      "triangleIndex": 1024490,
+      "surfaceClassification": "FRONT_SURFACE"
+    }
+  ]
+}
