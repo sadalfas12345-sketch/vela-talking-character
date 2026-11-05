@@ -2,7 +2,7 @@
 
 ## Result
 
-`FAIL — donor-silhouette cutting is directionally better but is not watertight.`
+`FAILED / ABANDONED — donor-silhouette cutting is directionally better but is not watertight.`
 
 Candidate: `assets/tripo/vela-photoreal/intermediates/vela-facefit-donor-hull-prototype.glb`
 
@@ -34,6 +34,12 @@ This removes the previous dependency on an expanded MediaPipe face oval for the 
 - Surface-conform P95 displacement: `14.801 mm`
 - Surface-conform maximum displacement: `28.678 mm`
 - Vertices displaced over `10 mm`: `454`
+
+## Architecture decision
+
+This experiment is permanently abandoned. It replaces Tripo facial geometry and therefore does
+not satisfy the required architecture. No further donor-boundary, hull, forehead, temple, or neck
+repair work should be based on this candidate.
 
 ## Gate decision
 

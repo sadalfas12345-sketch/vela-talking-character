@@ -21,7 +21,7 @@
 
 The current builder cuts only a front oval from the Tripo shell (`scripts/build_tripo_full_face_transfer.py`) but keeps and projects a full donor head. The remaining Tripo shell intersects or peeks around the fitted donor boundary, producing visible pale fragments. The previous landmark aperture method is invalid for the fitted donor because its mapped donor points do not track visible lip contours.
 
-Next: investigate a topology-aware full head and upper-neck replacement or a watertight transition that retains Tripo hair/body/identity textures. Do not widen the mouth, resize donor teeth, or reuse the invalid aperture measurements. Build one isolated candidate, inspect its render, then measure valid visible contours and runtime deformation before updating certification. Preserve original assets.
+Next: keep the original Tripo facial vertices as the deformation target. Transfer Avaturn neutral-to-expression motion mathematically onto those vertices, independently validate the 3D correspondence, and use the resulting proof to identify the closed-mouth topology failure. If the mouth cannot form a real aperture, perform only localized surgery around the upper/lower lip boundary and recessed oral cavity. Do not replace the face, cut the forehead/temples/neck, widen donor boundaries, resize donor teeth, or reuse invalid donor-patch aperture measurements. Preserve original assets.
 
 ## Current limitations
 
@@ -31,3 +31,4 @@ Next: investigate a topology-aware full head and upper-neck replacement or a wat
 - Gates 5–9 are not certified. No physical Android performance test, three-sample sync test, 10-run stability test, or continuous perceptual review is complete.
 - Do not commit or push until changes are coherent and reviewable. Before any commit, global `AGENTS.md` requires a concise Gmail summary to `indraxulix@gmail.com` immediately after commit; check connected email capability first.
 - Do not spend Tripo credits or regenerate the character.
+- The full-face and donor-hull replacement experiments are FAILED/ABANDONED. They are retained only as negative evidence and are not part of the required architecture.
