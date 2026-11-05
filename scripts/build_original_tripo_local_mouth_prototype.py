@@ -202,9 +202,9 @@ for index in range(ring_count):
     angle = 2.0 * np.pi * index / ring_count
     xy = right * (np.cos(angle) * mouth_width_world * 0.31) + up * (np.sin(angle) * mouth_width_world * 0.045)
     outer_ring.append(center_world + xy)
-    inner_ring.append(center_world + xy * 0.88 - forward * (ipd * 0.02))
-    back_ring.append(center_world + xy * 0.72 - forward * (ipd * 0.04))
-back_center = center_world - forward * (ipd * 0.04)
+    inner_ring.append(center_world + xy * 0.88 - forward * (ipd * 0.06))
+    back_ring.append(center_world + xy * 0.72 - forward * (ipd * 0.09))
+back_center = center_world - forward * (ipd * 0.09)
 ring_world = np.vstack([np.asarray(outer_ring), np.asarray(inner_ring), np.asarray(back_ring), back_center[None]])
 ring_vertical = np.asarray([(point - center_world) @ up for point in ring_world], dtype=np.float64)
 ring_lower_fraction = 1.0 / (1.0 + np.exp(ring_vertical / max(mouth_width_world * 0.055, 1e-6)))
@@ -228,15 +228,15 @@ cavity_obj.parent_type = 'BONE'
 cavity_obj.parent_bone = head_bone.name
 cavity_obj.matrix_world = bone_world
 material = bpy.data.materials.new('Localized original Tripo oral cavity')
-material.diffuse_color = (0.18, 0.008, 0.018, 1.0)
+material.diffuse_color = (0.035, 0.004, 0.008, 1.0)
 material.use_nodes = True
 bsdf = material.node_tree.nodes.get('Principled BSDF')
 if bsdf:
-    bsdf.inputs['Base Color'].default_value = (0.18, 0.008, 0.018, 1.0)
+    bsdf.inputs['Base Color'].default_value = (0.035, 0.004, 0.008, 1.0)
     bsdf.inputs['Roughness'].default_value = 0.92
     if 'Emission Color' in bsdf.inputs:
-        bsdf.inputs['Emission Color'].default_value = (0.08, 0.002, 0.006, 1.0)
-        bsdf.inputs['Emission Strength'].default_value = 1.0
+        bsdf.inputs['Emission Color'].default_value = (0.012, 0.001, 0.002, 1.0)
+        bsdf.inputs['Emission Strength'].default_value = 0.2
 cavity_mesh.materials.append(material)
 cavity_obj.shape_key_add(name='Basis', from_mix=False)
 cavity_key = cavity_obj.shape_key_add(name='xfer_jawOpen_original_tripo', from_mix=False)

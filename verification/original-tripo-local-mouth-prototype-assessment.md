@@ -62,6 +62,12 @@ simple cavity depth alignment is also insufficient. These remain diagnostic
 artifacts; the next repair must create explicit upper and lower lip boundaries
 from the original Tripo local surface.
 
+The v9 outward test proved that the exposed region is the actual hole, while
+the v10 intermediate placement covers it with a dark recessed oval. V10 is the
+best current visual prototype, but it still fails Gate 4 because the lip edge
+is not a valid upper/lower boundary and the interior has no coherent teeth or
+tongue anatomy.
+
 Topology measurement for v3 is recorded in
 `verification/vela-original-tripo-local-mouth-v3-measurements.json`.
 The imported original shell has 55,196 boundary edges and the v3 body has
