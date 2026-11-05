@@ -1,0 +1,13 @@
+{
+  "expression": "browInnerUp",
+  "source": "Avaturn",
+  "target": "original female Tripo vertices",
+  "shapeKey": "xfer_browInnerUp_original_tripo",
+  "eyeWidthMillimeters": 55.84288580934188,
+  "donorMaximumMillimeters": 3.8280450734599745,
+  "targetMaximumMillimeters": 2.3842508024003473,
+  "targetPercentEyeWidth": 4.268,
+  "exportReimport": "PASS",
+  "visualInspection": "PASS",
+  "result": "PASS"
+}

@@ -1,0 +1,14 @@
+{
+  "shapeKey": "xfer_browInnerUp_original_tripo",
+  "originalVertexCount": 999852,
+  "eyeWidthMillimeters": 55.84288580934188,
+  "requiredTenPercentMillimeters": 5.584288580934188,
+  "browRegionVertexCount": 26400,
+  "browMaxDisplacementMillimeters": 2.3842508024003473,
+  "browP95DisplacementMillimeters": 1.1347784821143971,
+  "browMedianDisplacementMillimeters": 0.035511172155990964,
+  "stableEyeNoseChinMaxDisplacementMillimeters": 1.8362505628733925,
+  "outsideBrowMaxDisplacementMillimeters": 0.1015658129623858,
+  "allVerticesMaxDisplacementMillimeters": 2.3842508024003473,
+  "movedVertexCount": 30968
+}

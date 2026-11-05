@@ -1,0 +1,27 @@
+{
+  "status": "ORIGINAL_TRIPO_VERTEX_TRANSFER_PROOF_REQUIRES_REVIEW",
+  "architecture": "Avaturn motion source -> RBF displacement field -> original Tripo mesh shape key",
+  "sourceTripo": "assets\\tripo\\vela-photoreal\\generated-rigged.glb",
+  "sourceDonorMotion": "verification\\avaturn-face-fit-source-meshes.npz",
+  "expression": "browInnerUp",
+  "originalTripoVertexCount": 999787,
+  "movedOriginalTripoVertices": 31094,
+  "neutralGeometryUnchanged": true,
+  "topologyReplacement": false,
+  "mouthSurgery": false,
+  "solver": {
+    "type": "localized Gaussian RBF interpolation",
+    "handleCount": 476,
+    "neighbors": 24,
+    "sigmaMeters": 0.01953417091595971
+  },
+  "donorLandmarkDisplacementMillimeters": {
+    "median": 0.00718783647991907,
+    "p95": 1.2158508058970112,
+    "max": 3.8280450734599745
+  },
+  "output": "assets\\tripo\\vela-photoreal\\intermediates\\vela-original-tripo-browInnerUp-transfer-proof.glb",
+  "limitations": [
+    "This is the first original-Tripo deformation proof; independent held-out correspondence, articulation quality, and runtime gates remain unverified."
+  ]
+}
