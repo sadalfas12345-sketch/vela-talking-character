@@ -1,0 +1,58 @@
+{
+  "model": "assets\\tripo\\generalization-male-20261105\\generated-original.glb",
+  "pipeline": "model-agnostic GLB onboarding audit, no geometry edits",
+  "meshCount": 1,
+  "nodeCount": 1,
+  "materialCount": 1,
+  "animationCount": 0,
+  "boundsWorld": {
+    "minXYZ": [
+      -0.4212241768836975,
+      -0.4903058111667633,
+      -0.44483932852745056
+    ],
+    "maxXYZ": [
+      0.42142611742019653,
+      0.4903619587421417,
+      0.44494861364364624
+    ]
+  },
+  "worldDiagonal": 1.5695513293491294,
+  "meshInventory": [
+    {
+      "nodeIndex": 0,
+      "nodeName": "tripo_node_282c7782-479e-4c50-8808-1a2c3cdb2977",
+      "meshIndex": 0,
+      "meshName": "tripo_mesh_282c7782-479e-4c50-8808-1a2c3cdb2977",
+      "vertexCount": 991219,
+      "minXYZ": [
+        -0.4212241768836975,
+        -0.4903058111667633,
+        -0.44483932852745056
+      ],
+      "maxXYZ": [
+        0.42142611742019653,
+        0.4903619587421417,
+        0.44494861364364624
+      ]
+    }
+  ],
+  "candidateHeadMetadata": [],
+  "cameras": [],
+  "skins": [],
+  "orientationStatus": "UNVERIFIED_NO_MODEL_CAMERA_CALIBRATION",
+  "headDetectionStatus": "AMBIGUOUS_NO_HEAD_METADATA",
+  "detectionStatus": "UNVERIFIED_NO_RENDERED_FACE_INPUT",
+  "landmarksDetected": 0,
+  "validVisibleSurfaceAttachments": null,
+  "anatomicallyPlausibleAttachments": null,
+  "deterministicAttachments": null,
+  "unresolvedOrAmbiguous": null,
+  "independentAccuracy": "UNVERIFIED unless an external anatomical reference and reviewer are supplied",
+  "sourceCodeChangesBetweenModels": false,
+  "limitations": [
+    "A GLB alone does not contain anatomical ground truth or a guaranteed frontal camera.",
+    "Automatic head orientation is not asserted when metadata is absent or ambiguous.",
+    "2D MediaPipe detection requires a calibrated render image; this command does not silently invent one."
+  ]
+}

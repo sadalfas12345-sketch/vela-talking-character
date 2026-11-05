@@ -1,0 +1,43 @@
+{
+  "status": "INCOMPLETE_FIRST_RUN_STOPPED",
+  "baselineCommit": "ca3e9a7982a2fd270e62c745c9509d9fa757e51a7",
+  "generation": {
+    "taskId": "282c7782-479e-4c50-8808-1a2c3cdb2977",
+    "status": "success",
+    "estimatedCredits": 60,
+    "availableBeforeTask": 320,
+    "output": "assets/tripo/generalization-male-20261105/generated-original.glb"
+  },
+  "rubric": {
+    "lips_mouth": 30,
+    "eyes_eyelids": 25,
+    "nose": 15,
+    "jaw_chin": 10,
+    "eyebrows": 10,
+    "remaining": 10
+  },
+  "tolerance": "2D error <= per-point manualUncertaintyPixels, front first-visible surface, oblique visibility, no unresolved or incorrect-region assignment",
+  "female": {
+    "landmarksDetected": 478,
+    "validVisibleSurfaceHits": 476,
+    "deterministicSelectedAttachments": 29,
+    "unresolvedSelected": 1,
+    "provisionalEvaluatedScore": 52.8125,
+    "overallCertifiedScore": null,
+    "lipsMouthPoints": 9.0,
+    "eyesEyelidsPoints": 14.5833333333,
+    "independentAccuracy": "UNVERIFIED_SINGLE_REVIEWER"
+  },
+  "male": {
+    "meshCount": 1,
+    "vertexCount": 991219,
+    "headOrientation": "UNVERIFIED_AMBIGUOUS_NO_HEAD_METADATA",
+    "landmarksDetected": 0,
+    "validVisibleSurfaceHits": null,
+    "deterministicAttachments": null,
+    "weightedScore": null,
+    "firstFailingStage": "automatic head and facial orientation calibration"
+  },
+  "sourceCodeChangesBetweenRuns": false,
+  "nextPrerequisite": "Add a model-agnostic calibrated render and head-orientation stage, then rerun the male model without character-specific coordinates or thresholds."
+}

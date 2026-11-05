@@ -1,0 +1,303 @@
+{
+  "status": "PROVISIONAL_UNVERIFIED_SINGLE_REVIEWER",
+  "rubric": {
+    "lips_mouth": 30,
+    "eyes_eyelids": 25,
+    "nose": 15,
+    "jaw_chin": 10,
+    "eyebrows": 10,
+    "remaining": 10
+  },
+  "correctnessTolerance": "2D error <= each reference point manualUncertaintyPixels; front-surface hit; oblique first-surface visibility; no unresolved or incorrect region assignment",
+  "overallScoreOutOf100": null,
+  "provisionalScoreOnEvaluatedRegionsOutOf100": 52.81249999999999,
+  "evaluatedWeight": 80,
+  "criticalRegionThreshold": 80,
+  "criticalRegionScores": {
+    "lips_mouth": 9.0,
+    "eyes_eyelids": 14.583333333333334
+  },
+  "regions": {
+    "lips_mouth": {
+      "weight": 30,
+      "evaluated": 10,
+      "verifiedCorrect": 3,
+      "incorrect": 7,
+      "occluded": 0,
+      "unresolved": 0,
+      "unreviewed": 0,
+      "points": [
+        {
+          "name": "mouth_corner_right",
+          "status": "provisional_correct",
+          "pixelError": 0.5155223578103383,
+          "normalizedInterocularError": 0.0018025147082883905,
+          "tolerancePixels": 5
+        },
+        {
+          "name": "mouth_corner_left",
+          "status": "provisional_correct",
+          "pixelError": 0.47440927411988776,
+          "normalizedInterocularError": 0.001658763546127558,
+          "tolerancePixels": 5
+        },
+        {
+          "name": "upper_lip_center",
+          "status": "provisional_correct",
+          "pixelError": 0.793538852287668,
+          "normalizedInterocularError": 0.002774594411234138,
+          "tolerancePixels": 4
+        },
+        {
+          "name": "lower_lip_center",
+          "status": "incorrect_or_outside_tolerance",
+          "pixelError": 5.722942027810379,
+          "normalizedInterocularError": 0.020010164493399443,
+          "tolerancePixels": 4
+        },
+        {
+          "name": "upper_lip_right_boundary",
+          "status": "incorrect_or_outside_tolerance",
+          "pixelError": 18.150733479018385,
+          "normalizedInterocularError": 0.06346371513568726,
+          "tolerancePixels": 5
+        },
+        {
+          "name": "upper_lip_left_boundary",
+          "status": "incorrect_or_outside_tolerance",
+          "pixelError": 22.033437970677298,
+          "normalizedInterocularError": 0.0770395219811537,
+          "tolerancePixels": 5
+        },
+        {
+          "name": "lower_lip_right_boundary",
+          "status": "incorrect_or_outside_tolerance",
+          "pixelError": 10.914655601939472,
+          "normalizedInterocularError": 0.038162898195069586,
+          "tolerancePixels": 5
+        },
+        {
+          "name": "lower_lip_left_boundary",
+          "status": "incorrect_or_outside_tolerance",
+          "pixelError": 13.512273747415195,
+          "normalizedInterocularError": 0.0472454236041022,
+          "tolerancePixels": 5
+        },
+        {
+          "name": "upper_lip_right_contour",
+          "status": "incorrect_or_outside_tolerance",
+          "pixelError": 10.85124978116279,
+          "normalizedInterocularError": 0.03794120087620546,
+          "tolerancePixels": 5
+        },
+        {
+          "name": "lower_lip_left_contour",
+          "status": "incorrect_or_outside_tolerance",
+          "pixelError": 12.273133257276557,
+          "normalizedInterocularError": 0.042912791031971716,
+          "tolerancePixels": 5
+        }
+      ],
+      "score": 9.0
+    },
+    "eyes_eyelids": {
+      "weight": 25,
+      "evaluated": 12,
+      "verifiedCorrect": 7,
+      "incorrect": 2,
+      "occluded": 3,
+      "unresolved": 0,
+      "unreviewed": 0,
+      "points": [
+        {
+          "name": "right_eye_outer",
+          "status": "provisional_correct",
+          "pixelError": 1.0919061927626446,
+          "normalizedInterocularError": 0.003817830483406389,
+          "tolerancePixels": 4
+        },
+        {
+          "name": "right_eye_inner",
+          "status": "provisional_correct",
+          "pixelError": 0.8645243196090715,
+          "normalizedInterocularError": 0.003022793828743453,
+          "tolerancePixels": 4
+        },
+        {
+          "name": "right_eyelid_upper",
+          "status": "occluded",
+          "pixelError": 1.4543839421287332,
+          "normalizedInterocularError": 0.005085227454189225,
+          "tolerancePixels": 4
+        },
+        {
+          "name": "right_eyelid_lower",
+          "status": "provisional_correct",
+          "pixelError": 0.2554297120083641,
+          "normalizedInterocularError": 0.0008931054218182559,
+          "tolerancePixels": 4
+        },
+        {
+          "name": "right_eyelid_upper_contour",
+          "status": "occluded",
+          "pixelError": 11.01838931889593,
+          "normalizedInterocularError": 0.038525601281999965,
+          "tolerancePixels": 5
+        },
+        {
+          "name": "right_eyelid_lower_contour",
+          "status": "occluded",
+          "pixelError": 23.421873621995445,
+          "normalizedInterocularError": 0.08189416241545601,
+          "tolerancePixels": 5
+        },
+        {
+          "name": "left_eye_outer",
+          "status": "provisional_correct",
+          "pixelError": 0.9982802600845612,
+          "normalizedInterocularError": 0.003490469083512358,
+          "tolerancePixels": 4
+        },
+        {
+          "name": "left_eye_inner",
+          "status": "provisional_correct",
+          "pixelError": 0.5711828320518902,
+          "normalizedInterocularError": 0.001997130561453028,
+          "tolerancePixels": 4
+        },
+        {
+          "name": "left_eyelid_upper",
+          "status": "provisional_correct",
+          "pixelError": 0.6608845994582192,
+          "normalizedInterocularError": 0.0023107711876251672,
+          "tolerancePixels": 4
+        },
+        {
+          "name": "left_eyelid_lower",
+          "status": "provisional_correct",
+          "pixelError": 0.6850887109793619,
+          "normalizedInterocularError": 0.0023954004308712243,
+          "tolerancePixels": 4
+        },
+        {
+          "name": "left_eyelid_upper_contour",
+          "status": "incorrect_or_outside_tolerance",
+          "pixelError": 7.656495791012644,
+          "normalizedInterocularError": 0.026770800661037174,
+          "tolerancePixels": 5
+        },
+        {
+          "name": "left_eyelid_lower_contour",
+          "status": "incorrect_or_outside_tolerance",
+          "pixelError": 8.237711824817675,
+          "normalizedInterocularError": 0.028803012133060357,
+          "tolerancePixels": 5
+        }
+      ],
+      "score": 14.583333333333334
+    },
+    "nose": {
+      "weight": 15,
+      "evaluated": 5,
+      "verifiedCorrect": 4,
+      "incorrect": 1,
+      "occluded": 0,
+      "unresolved": 0,
+      "unreviewed": 0,
+      "points": [
+        {
+          "name": "nose_bridge",
+          "status": "provisional_correct",
+          "pixelError": 4.6649587029181125,
+          "normalizedInterocularError": 0.016310944711075737,
+          "tolerancePixels": 6
+        },
+        {
+          "name": "nose_bridge_lower",
+          "status": "incorrect_or_outside_tolerance",
+          "pixelError": 28.06419317087059,
+          "normalizedInterocularError": 0.09812594972913197,
+          "tolerancePixels": 6
+        },
+        {
+          "name": "nose_tip",
+          "status": "provisional_correct",
+          "pixelError": 0.20060715762758835,
+          "normalizedInterocularError": 0.0007014193404676505,
+          "tolerancePixels": 5
+        },
+        {
+          "name": "nose_wing_right",
+          "status": "provisional_correct",
+          "pixelError": 0.39565635175946945,
+          "normalizedInterocularError": 0.0013834053609301422,
+          "tolerancePixels": 5
+        },
+        {
+          "name": "nose_wing_left",
+          "status": "provisional_correct",
+          "pixelError": 0.4762064676729782,
+          "normalizedInterocularError": 0.001665047401258199,
+          "tolerancePixels": 5
+        }
+      ],
+      "score": 12.0
+    },
+    "jaw_chin": {
+      "weight": 10,
+      "evaluated": 3,
+      "verifiedCorrect": 2,
+      "incorrect": 0,
+      "occluded": 0,
+      "unresolved": 1,
+      "unreviewed": 0,
+      "points": [
+        {
+          "name": "chin",
+          "status": "provisional_correct",
+          "pixelError": 0.12625908037616812,
+          "normalizedInterocularError": 0.0004414626174501198,
+          "tolerancePixels": 7
+        },
+        {
+          "name": "jawline_right",
+          "status": "provisional_correct",
+          "pixelError": 0.5027323289309393,
+          "normalizedInterocularError": 0.0017577946009540127,
+          "tolerancePixels": 8
+        },
+        {
+          "name": "jawline_left",
+          "status": "unresolved",
+          "pixelError": 0.496490395042004,
+          "normalizedInterocularError": 0.0017359697906960082,
+          "tolerancePixels": 8
+        }
+      ],
+      "score": 6.666666666666667
+    },
+    "eyebrows": {
+      "weight": 10,
+      "evaluated": 0,
+      "verifiedCorrect": 0,
+      "incorrect": 0,
+      "occluded": 0,
+      "unresolved": 0,
+      "unreviewed": 0,
+      "points": [],
+      "score": null
+    },
+    "remaining": {
+      "weight": 10,
+      "evaluated": 0,
+      "verifiedCorrect": 0,
+      "incorrect": 0,
+      "occluded": 0,
+      "unresolved": 0,
+      "unreviewed": 0,
+      "points": [],
+      "score": null
+    }
+  },
+  "independentValidation": "UNVERIFIED: reference selection was performed by one visual reviewer and requires second-person review."
+}
