@@ -1,0 +1,8 @@
+{
+  "glb": "verification\\vela-original-tripo-local-mouth-v15.glb",
+  "renders": [
+    "verification\\vela-original-tripo-local-mouth-v15-forensic-render\\neutral.png",
+    "verification\\vela-original-tripo-local-mouth-v15-forensic-render\\jawOpen_50.png",
+    "verification\\vela-original-tripo-local-mouth-v15-forensic-render\\jawOpen_100.png"
+  ]
+}

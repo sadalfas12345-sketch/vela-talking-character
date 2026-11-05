@@ -1,0 +1,60 @@
+{
+  "glb": "verification\\vela-original-tripo-local-mouth-v15.glb",
+  "mouthWidthMeters": 0.030834808160737845,
+  "objects": {
+    "Original Tripo localized lip boundary": {
+      "vertices": 1324,
+      "edges": 1655,
+      "faces": 662,
+      "boundaryEdges": 1324,
+      "nonmanifoldEdges": 0
+    },
+    "Original Tripo localized lower tongue": {
+      "vertices": 34,
+      "edges": 51,
+      "faces": 20,
+      "boundaryEdges": 42,
+      "nonmanifoldEdges": 0
+    },
+    "Original Tripo localized mouth cavity": {
+      "vertices": 258,
+      "edges": 310,
+      "faces": 120,
+      "boundaryEdges": 260,
+      "nonmanifoldEdges": 0
+    },
+    "Original Tripo localized upper teeth": {
+      "vertices": 44,
+      "edges": 57,
+      "faces": 20,
+      "boundaryEdges": 54,
+      "nonmanifoldEdges": 0
+    }
+  },
+  "states": [
+    {
+      "jawOpen": 0.0,
+      "upperEdge": 4.3109542666730505e-06,
+      "lowerEdge": -1.4469374752024144e-05,
+      "apertureMeters": -1.8780329018697195e-05,
+      "apertureOverWidth": -0.0006090626191282846,
+      "triangleNormalFlips": 0
+    },
+    {
+      "jawOpen": 0.5,
+      "upperEdge": null,
+      "lowerEdge": -0.0007657430817276101,
+      "apertureMeters": null,
+      "apertureOverWidth": null,
+      "triangleNormalFlips": 0
+    },
+    {
+      "jawOpen": 1.0,
+      "upperEdge": null,
+      "lowerEdge": -0.005049283393193327,
+      "apertureMeters": null,
+      "apertureOverWidth": null,
+      "triangleNormalFlips": 2
+    }
+  ]
+}

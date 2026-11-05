@@ -1,0 +1,8 @@
+{
+  "glb": "verification\\vela-original-tripo-local-mouth-v15.glb",
+  "key": "xfer_jawOpen_original_tripo",
+  "captures": [
+    "verification\\vela-original-tripo-local-mouth-v15-render\\neutral.png",
+    "verification\\vela-original-tripo-local-mouth-v15-render\\jawOpenTransfer.png"
+  ]
+}

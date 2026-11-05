@@ -1,0 +1,10 @@
+{
+  "candidate": "verification\\vela-original-tripo-local-mouth-v15.glb",
+  "controls": [
+    "upperLipDown",
+    "lowerLipUp",
+    "upperAndLowerIndependent"
+  ],
+  "upperDisplacementMeters": 0.003,
+  "lowerDisplacementMeters": 0.003
+}

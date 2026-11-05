@@ -139,6 +139,48 @@ for triangle in body.data.loop_triangles:
 if len(selected_keys) < 100:
     raise RuntimeError(f'Localized mouth selection is too small: {len(selected_keys)} faces')
 
+# Keep only the connected front-surface face component whose centroid is
+# closest to the measured mouth center. The previous V12 construction deleted
+# every projected/depth-matching component, including an unrelated 396-edge
+# surface component, so its boundary could not represent anatomical lips.
+mouth_center_screen = landmark_pixels[[61, 291, 13, 14], :2].mean(axis=0)
+selected_list = list(selected_keys)
+edge_faces = {}
+for face_index, face_key in enumerate(selected_list):
+    for index, a in enumerate(face_key):
+        b = face_key[(index + 1) % 3]
+        edge_faces.setdefault(tuple(sorted((a, b))), []).append(face_index)
+face_neighbors = [[] for _ in selected_list]
+for face_ids in edge_faces.values():
+    for face_index in face_ids:
+        face_neighbors[face_index].extend(other for other in face_ids if other != face_index)
+remaining_faces = set(range(len(selected_list)))
+face_components = []
+while remaining_faces:
+    seed = remaining_faces.pop()
+    stack = [seed]
+    component = [seed]
+    while stack:
+        current = stack.pop()
+        for neighbor in face_neighbors[current]:
+            if neighbor in remaining_faces:
+                remaining_faces.remove(neighbor)
+                component.append(neighbor)
+                stack.append(neighbor)
+    centers = np.asarray([world[list(selected_list[index])].mean(axis=0) for index in component])
+    center = centers.mean(axis=0)
+    center_screen = np.asarray((0.5 + (center - camera_location) @ right / 0.20,
+                                0.5 - (center - camera_location) @ up / 0.20))
+    face_components.append({
+        'faces': component,
+        'screenDistance': float(np.linalg.norm(center_screen - mouth_center_screen)),
+        'center': center.tolist(),
+    })
+if not face_components:
+    raise RuntimeError('No connected mouth face component was found')
+face_components.sort(key=lambda item: (item['screenDistance'], -len(item['faces'])))
+selected_keys = {selected_list[index] for index in face_components[0]['faces']}
+
 bm = bmesh.new()
 bm.from_mesh(body.data)
 bm.faces.ensure_lookup_table()
@@ -206,9 +248,9 @@ for index in range(ring_count):
     angle = 2.0 * np.pi * index / ring_count
     xy = right * (np.cos(angle) * mouth_width_world * 0.31) + up * (np.sin(angle) * mouth_width_world * 0.045)
     outer_ring.append(center_world + xy)
-    inner_ring.append(center_world + xy * 0.88 - forward * (ipd * 0.06))
-    back_ring.append(center_world + xy * 0.72 - forward * (ipd * 0.09))
-back_center = center_world - forward * (ipd * 0.09)
+    inner_ring.append(center_world + xy * 0.88 + forward * (ipd * 0.06))
+    back_ring.append(center_world + xy * 0.72 + forward * (ipd * 0.09))
+back_center = center_world + forward * (ipd * 0.09)
 ring_world = np.vstack([np.asarray(outer_ring), np.asarray(inner_ring), np.asarray(back_ring), back_center[None]])
 ring_vertical = np.asarray([(point - center_world) @ up for point in ring_world], dtype=np.float64)
 ring_lower_fraction = 1.0 / (1.0 + np.exp(ring_vertical / max(mouth_width_world * 0.055, 1e-6)))
@@ -249,31 +291,66 @@ cavity_key.value = 0.0
 cavity_mesh.shape_keys.use_relative = True
 cavity_mesh.shape_keys.animation_data_clear()
 
-# Rebuild a minimal upper/lower lip boundary from the original Tripo vertices
-# bordering the cut. This preserves their UVs and material continuity instead
-# of introducing any donor-face surface.
+# Rebuild one ordered lip boundary from the connected cut component. V12
+# collected all nearby boundary vertices and sorted them by angle, producing
+# detached quads rather than a loop. Here the mesh adjacency is authoritative.
 boundary_bm = bmesh.new()
 boundary_bm.from_mesh(body.data)
-boundary_ids = set()
+boundary_edges = []
 for edge in boundary_bm.edges:
     if not edge.is_boundary:
         continue
     ids = [int(v.index) for v in edge.verts]
-    center = world[ids].mean(axis=0)
-    rel = center - camera_location
-    sx = 0.5 + rel @ right / 0.20
-    sy = 0.5 - rel @ up / 0.20
-    distance = ((sx - mouth_center_screen[0]) / (seam_rx * 1.25)) ** 2 + ((sy - mouth_center_screen[1]) / (seam_ry * 2.5)) ** 2
-    if distance <= 1.0:
-        boundary_ids.update(ids)
+    boundary_edges.append(tuple(ids))
+boundary_adjacency = {}
+for a, b in boundary_edges:
+    boundary_adjacency.setdefault(a, set()).add(b)
+    boundary_adjacency.setdefault(b, set()).add(a)
+remaining_boundary = {tuple(sorted(edge)) for edge in boundary_edges}
+boundary_components = []
+while remaining_boundary:
+    first = next(iter(remaining_boundary))
+    stack = [first[0], first[1]]
+    component_ids = set(stack)
+    while stack:
+        current = stack.pop()
+        for neighbor in boundary_adjacency.get(current, ()):
+            pair = tuple(sorted((current, neighbor)))
+            if pair in remaining_boundary:
+                remaining_boundary.remove(pair)
+            if neighbor not in component_ids:
+                component_ids.add(neighbor)
+                stack.append(neighbor)
+    center = world[list(component_ids)].mean(axis=0)
+    center_screen = np.asarray((0.5 + (center - camera_location) @ right / 0.20,
+                                0.5 - (center - camera_location) @ up / 0.20))
+    boundary_components.append({
+        'ids': component_ids,
+        'screenDistance': float(np.linalg.norm(center_screen - mouth_center_screen)),
+        'closed': all(len(boundary_adjacency.get(vertex, ())) == 2 for vertex in component_ids),
+    })
+usable_components = [component for component in boundary_components
+                     if component['closed'] and len(component['ids']) >= 12]
+if not usable_components:
+    raise RuntimeError('No continuous mouth boundary loop was created by the cut')
+usable_components.sort(key=lambda component: (component['screenDistance'], -len(component['ids'])))
+boundary_ids_set = usable_components[0]['ids']
+start = min(boundary_ids_set)
+ordered_boundary = [start]
+previous = None
+current = start
+while True:
+    neighbors = [neighbor for neighbor in boundary_adjacency[current] if neighbor != previous and neighbor in boundary_ids_set]
+    next_vertex = neighbors[0] if neighbors else None
+    if next_vertex == start:
+        break
+    if next_vertex is None or next_vertex in ordered_boundary:
+        raise RuntimeError('Mouth boundary loop ordering is not a single cycle')
+    ordered_boundary.append(next_vertex)
+    previous, current = current, next_vertex
+boundary_ids = ordered_boundary
 boundary_bm.free()
 if len(boundary_ids) >= 8:
-    boundary_ids = sorted(boundary_ids, key=lambda index: np.arctan2(
-        (world[index] - center_world) @ up,
-        (world[index] - center_world) @ right))
-    sample_count = min(64, len(boundary_ids))
-    sample_positions = np.linspace(0, len(boundary_ids) - 1, sample_count).round().astype(int)
-    boundary_ids = [boundary_ids[index] for index in sample_positions]
     rim_outer = world[boundary_ids]
     rim_center = rim_outer.mean(axis=0)
     rim_inner = rim_center + (rim_outer - rim_center) * 0.90 + forward * (ipd * 0.015)
@@ -342,6 +419,9 @@ def add_interior_ellipse(name, center, radius_x, radius_y, delta, color):
     if shader:
         shader.inputs['Base Color'].default_value = (*color, 1.0)
         shader.inputs['Roughness'].default_value = 0.8
+        if 'Emission Color' in shader.inputs:
+            shader.inputs['Emission Color'].default_value = (*color, 1.0)
+            shader.inputs['Emission Strength'].default_value = 0.12
     mesh.materials.append(mat)
     obj.shape_key_add(name='Basis', from_mix=False)
     shape = obj.shape_key_add(name='xfer_jawOpen_original_tripo', from_mix=False)
@@ -356,13 +436,13 @@ def add_interior_ellipse(name, center, radius_x, radius_y, delta, color):
 # boundary and follow the measured upper/lower donor motion.
 add_interior_ellipse(
     'Original Tripo localized upper teeth',
-    center_world + up * (mouth_width_world * 0.035) - forward * (ipd * 0.075),
+    center_world + up * (mouth_width_world * 0.035) + forward * (ipd * 0.075),
     mouth_width_world * 0.18, mouth_width_world * 0.020, upper_mean,
     (0.75, 0.60, 0.45),
 )
 add_interior_ellipse(
     'Original Tripo localized lower tongue',
-    center_world - up * (mouth_width_world * 0.035) - forward * (ipd * 0.075),
+    center_world - up * (mouth_width_world * 0.035) + forward * (ipd * 0.075),
     mouth_width_world * 0.22, mouth_width_world * 0.030, lower_mean,
     (0.22, 0.025, 0.035),
 )
@@ -387,6 +467,10 @@ report = {
     'mouthSurgery': True,
     'cavityVertices': int(len(cavity_vertices)),
     'cavityFaces': int(len(cavity_faces)),
+    'selectedFaceComponentCount': int(len(face_components)),
+    'selectedFaceComponentScreenDistance': float(face_components[0]['screenDistance']),
+    'lipBoundaryLoopVertexCount': int(len(boundary_ids)),
+    'lipBoundaryLoopClosed': True,
     'motionSource': 'Avaturn landmark displacement only',
     'solver': {
         'type': 'localized Gaussian RBF interpolation with constrained upper/lower lip fields',
