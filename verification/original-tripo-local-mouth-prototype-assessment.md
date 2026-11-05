@@ -36,6 +36,14 @@ The subsequent constrained candidate is:
 - Cavity: 73 vertices and 72 faces
 - Motion constraint: explicit upper-lip and lower-lip donor displacement fields
 
+The v3 candidate additionally removes the measured lateral component from the
+jawOpen upper/lower lip fields while retaining vertical and facial-depth motion:
+
+- Output: `assets/tripo/vela-photoreal/intermediates/vela-original-tripo-local-mouth-v3.glb`
+- Render: `verification/vela-original-tripo-local-mouth-v3-render/jawOpenTransfer.png`
+- Result: slightly improved symmetry, but Gate 4 remains failed because the
+  lip boundary and recessed interior are still visibly synthetic.
+
 ## Result
 
 The first prototype removed too much depth and produced a dark block-like

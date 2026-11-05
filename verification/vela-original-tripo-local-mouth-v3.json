@@ -1,0 +1,17 @@
+{
+  "status": "LOCAL_MOUTH_SURGERY_V3_REQUIRES_REPAIR",
+  "sourceTripo": "assets/tripo/vela-photoreal/generated-rigged.glb",
+  "output": "assets/tripo/vela-photoreal/intermediates/vela-original-tripo-local-mouth-v3.glb",
+  "originalTripoVertexCount": 999787,
+  "localizedCutFaces": 954,
+  "cavityVertices": 73,
+  "cavityFaces": 72,
+  "preservesOutsideMouth": true,
+  "donorGeometryImported": false,
+  "topologyReplacement": false,
+  "motionSource": "Avaturn jawOpen landmark displacement only",
+  "constraint": "removed donor-measured lateral component from constrained upper/lower lip jaw fields",
+  "visualReview": "FAIL_REQUIRES_REPAIR",
+  "gate4": "FAILED",
+  "gates5to9": "UNVERIFIED"
+}

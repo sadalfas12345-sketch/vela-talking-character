@@ -159,8 +159,18 @@ lower_ids = np.asarray([291, 375, 321, 405, 314, 17, 84, 181, 91, 146, 61], dtyp
 upper_rows = np.isin(rows, upper_ids)
 lower_rows = np.isin(rows, lower_ids)
 if upper_rows.any() and lower_rows.any():
-    upper_field = rbf_displacement(world, target_handles[upper_rows], landmark_displacements[upper_rows], sigma)
-    lower_field = rbf_displacement(world, target_handles[lower_rows], landmark_displacements[lower_rows], sigma)
+    upper_motion = landmark_displacements[upper_rows]
+    lower_motion = landmark_displacements[lower_rows]
+    if EXPRESSION == 'jawOpen':
+        # Jaw opening should not translate the whole mouth laterally. Remove
+        # only that measured component in the constrained lip fields; retain
+        # donor vertical and facial-depth motion.
+        anatomical_horizontal = target_points[291] - target_points[61]
+        anatomical_horizontal /= max(np.linalg.norm(anatomical_horizontal), 1e-12)
+        upper_motion = upper_motion - (upper_motion @ anatomical_horizontal)[:, None] * anatomical_horizontal
+        lower_motion = lower_motion - (lower_motion @ anatomical_horizontal)[:, None] * anatomical_horizontal
+    upper_field = rbf_displacement(world, target_handles[upper_rows], upper_motion, sigma)
+    lower_field = rbf_displacement(world, target_handles[lower_rows], lower_motion, sigma)
     mouth_cx, mouth_cy = landmark_pixels[[61, 291, 13, 14], :2].mean(axis=0)
     mouth_w = max(float(np.linalg.norm(landmark_pixels[291, :2] - landmark_pixels[61, :2])), 1e-6)
     mouth_region = np.exp(-(((screen[:, 0] - mouth_cx) / (mouth_w * 0.72)) ** 2 + ((screen[:, 1] - mouth_cy) / (mouth_w * 0.52)) ** 2))
