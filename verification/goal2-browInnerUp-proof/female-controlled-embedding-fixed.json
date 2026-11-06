@@ -1,0 +1,48 @@
+{
+  "displacement": "smooth gaussian forehead field along calibrated camera up",
+  "amplitudeAt100Percent": 0.0034340522882713603,
+  "weights": [
+    {
+      "weight": 0,
+      "physicsMaxDisplacement": 0.0,
+      "renderDisplacementMedian": 0.0,
+      "renderDisplacementP95": 0.0,
+      "renderDisplacementMax": 1.3877787807814457e-17,
+      "neutralErrorMax": 1.3877787807814457e-17
+    },
+    {
+      "weight": 0.25,
+      "physicsMaxDisplacement": 0.0008570721688460168,
+      "renderDisplacementMedian": 0.0008074972797166187,
+      "renderDisplacementP95": 0.0008524791146770533,
+      "renderDisplacementMax": 0.0008570575434565102,
+      "neutralErrorMax": 0.0008570575434565102
+    },
+    {
+      "weight": 0.5,
+      "physicsMaxDisplacement": 0.001714144337692036,
+      "renderDisplacementMedian": 0.0016149945384257448,
+      "renderDisplacementP95": 0.001704958232655139,
+      "renderDisplacementMax": 0.0017141150868966054,
+      "neutralErrorMax": 0.0017141150868966054
+    },
+    {
+      "weight": 0.75,
+      "physicsMaxDisplacement": 0.002571216506538159,
+      "renderDisplacementMedian": 0.002422491776280414,
+      "renderDisplacementP95": 0.00255743735394045,
+      "renderDisplacementMax": 0.002571172630320813,
+      "neutralErrorMax": 0.002571172630320813
+    },
+    {
+      "weight": 1,
+      "physicsMaxDisplacement": 0.0034282886753841755,
+      "renderDisplacementMedian": 0.003229988993433152,
+      "renderDisplacementP95": 0.003409916478539754,
+      "renderDisplacementMax": 0.003428230173728729,
+      "neutralErrorMax": 0.003428230173728729
+    }
+  ],
+  "extrapolatingEmbeddings": 0,
+  "validAttachments": 122220
+}

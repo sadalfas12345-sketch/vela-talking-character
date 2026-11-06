@@ -4,7 +4,7 @@ from pathlib import Path
 def embed_rotation_test():
     p=np.array([[0.,0.,0.],[1.,0.,0.],[0.,1.,0.]])
     q=np.array([[0.,0.,0.],[0.,1.,0.],[-1.,0.,0.]])
-    off=np.array([.2,.3,.1]); e0=p[1]-p[0]; f0=p[2]-p[0]; n0=np.cross(e0,f0); n0/=np.linalg.norm(n0); u0=e0/np.linalg.norm(e0);v0=np.cross(n0,u0); e1=q[1]-q[0];f1=q[2]-q[0];n1=np.cross(e1,f1);n1/=np.linalg.norm(n1);u1=e1/np.linalg.norm(e1);v1=np.cross(n1,u1); B0=np.stack([u0,v0,n0]);B1=np.stack([u1,v1,n1]); R=B0.T@B1; got=off@R; expected=np.array([-.3,.2,.1]); return {'passed':bool(np.max(np.abs(got-expected))<1e-12),'got':got.tolist(),'expected':expected.tolist()}
+    off=np.array([.2,.3,.1]); e0=p[1]-p[0]; f0=p[2]-p[0]; n0=np.cross(e0,f0); n0/=np.linalg.norm(n0); e1=q[1]-q[0];f1=q[2]-q[0];n1=np.cross(e1,f1);n1/=np.linalg.norm(n1); C0=np.stack([e0,f0,n0],axis=1);C1=np.stack([e1,f1,n1],axis=1); R=np.linalg.solve(C0.T,C1.T); got=off@R; expected=np.array([-.3,.2,.1]); return {'passed':bool(np.max(np.abs(got-expected))<1e-12),'got':got.tolist(),'expected':expected.tolist()}
 def dihedral_energy(x,theta0):
     p0,p1,p2,p3=x; e=p1-p0; le=np.linalg.norm(e); eh=e/le; n0=np.cross(p1-p0,p2-p0); n0/=np.linalg.norm(n0); n1=np.cross(p3-p0,p1-p0); n1/=np.linalg.norm(n1); th=np.arctan2(np.dot(eh,np.cross(n0,n1)),np.dot(n0,n1)); return .5*(th-theta0)**2
 def finite_difference():
