@@ -53,7 +53,13 @@ def main():
         bary = np.asarray(points['donorBarycentric'][i], float)
         donor_delta[i] = scale * ((bary[:, None] * (expr[tri] - base[tri])).sum(0)) @ rot
     # All radii are proportions of this model's own interocular distance.
-    sigma, radius = eye_width * 0.16, eye_width * 0.55
+    # Smooth support is derived from the model's own Goal-1 brow-to-chin extent,
+    # not from a character-specific dimension. This keeps the deformation field
+    # broad enough for different target proportions and mesh densities.
+    brow_center = np.mean([target[i] for i in BROW], axis=0)
+    face_extent = float(np.linalg.norm(brow_center - target[152]))
+    if face_extent <= 0: raise SystemExit('invalid brow-to-chin extent')
+    sigma, radius = face_extent * 0.25, face_extent * 0.50
     handles = np.asarray([target[i] for i in BROW + ANCHORS])
     motions = np.asarray([donor_delta[i] for i in BROW] + [np.zeros(3) for _ in ANCHORS])
     nearest = np.min(np.linalg.norm(world[:, None] - handles[None], axis=2), axis=1)
@@ -78,6 +84,22 @@ def main():
             residual = desired - (b[:, None] * delta[vi]).sum(0)
             denom = max(float((b*b).sum()), 1e-12)
             delta[vi] += b[:, None] * residual / denom
+    # Prevent geometric inversions without using a character-specific clamp.
+    # Project only vertices participating in invalid triangles toward neutral;
+    # unaffected brow vertices retain their computed donor motion.
+    tris = np.asarray([[v for v in p.vertices] for p in body.data.polygons], int)
+    base_tri = world[tris]
+    base_norm = np.cross(base_tri[:, 1]-base_tri[:, 0], base_tri[:, 2]-base_tri[:, 0])
+    vertex_factor = np.ones(n, float)
+    inversion_iterations = 0
+    for _ in range(24):
+        posed_tri = (world + delta*vertex_factor[:, None])[tris]
+        posed_norm = np.cross(posed_tri[:, 1]-posed_tri[:, 0], posed_tri[:, 2]-posed_tri[:, 0])
+        invalid = np.einsum('ij,ij->i', base_norm, posed_norm) < 0
+        if not bool(invalid.any()): break
+        vertex_factor[np.unique(tris[invalid].ravel())] *= 0.5
+        inversion_iterations += 1
+    delta *= vertex_factor[:, None]
     local_delta = delta @ np.linalg.inv(mw[:3, :3]).T
     body.shape_key_add(name='Basis', from_mix=False)
     key = body.shape_key_add(name='xfer_browInnerUp_model_agnostic', from_mix=False)
@@ -89,7 +111,7 @@ def main():
     bpy.context.view_layer.objects.active = body
     output.parent.mkdir(parents=True, exist_ok=True)
     bpy.ops.export_scene.gltf(filepath=str(output), export_format='GLB', export_morph=True, export_skins=True, export_animations=True, export_apply=False)
-    result = {'architecture':'model-agnostic Goal-1 attachment-driven anchored RBF; Avaturn motion only; original target vertices retained', 'shapeKey':key.name, 'source':str(source), 'goal1Manifest':str(goal1), 'targetMesh':body.name, 'targetVertexCount':n, 'targetHasArmature':any(o.type=='ARMATURE' for o in bpy.context.scene.objects), 'eyeWidthMillimeters':eye_width*1000, 'donorEyeWidthMillimeters':donor_eye_width*1000, 'motionScaleTargetOverDonorEyeWidth':scale, 'sigmaFractionOfEyeWidth':.16, 'radiusFractionOfEyeWidth':.55, 'movedVertexCount':int((np.linalg.norm(delta,axis=1)>1e-7).sum()), 'constraintLandmarks':BROW+ANCHORS, 'output':str(output)}
+    result = {'architecture':'model-agnostic Goal-1 attachment-driven anchored RBF; Avaturn motion only; original target vertices retained', 'shapeKey':key.name, 'source':str(source), 'goal1Manifest':str(goal1), 'targetMesh':body.name, 'targetVertexCount':n, 'targetHasArmature':any(o.type=='ARMATURE' for o in bpy.context.scene.objects), 'eyeWidthMillimeters':eye_width*1000, 'donorEyeWidthMillimeters':donor_eye_width*1000, 'motionScaleTargetOverDonorEyeWidth':scale, 'browToChinExtentMillimeters':face_extent*1000, 'localInversionProjectionIterations':inversion_iterations, 'minimumLocalMotionFactor':float(vertex_factor.min()), 'sigmaFractionOfBrowChinExtent':.25, 'radiusFractionOfBrowChinExtent':.50, 'movedVertexCount':int((np.linalg.norm(delta,axis=1)>1e-7).sum()), 'constraintLandmarks':BROW+ANCHORS, 'output':str(output)}
     report_path.parent.mkdir(parents=True, exist_ok=True); report_path.write_text(json.dumps(result, indent=2)+'\n'); print(json.dumps(result, indent=2))
 
 if __name__ == '__main__': main()

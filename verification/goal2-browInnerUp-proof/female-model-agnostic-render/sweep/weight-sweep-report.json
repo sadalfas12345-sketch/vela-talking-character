@@ -1,0 +1,18 @@
+{
+  "glb": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\vela-photoreal\\intermediates\\goal2-brow-female-model-agnostic.glb",
+  "shapeKey": "xfer_browInnerUp_model_agnostic",
+  "weights": [
+    0,
+    0.25,
+    0.5,
+    0.75,
+    1
+  ],
+  "captures": [
+    "C:\\Users\\USER\\talking-character-demo\\verification\\goal2-browInnerUp-proof\\female-model-agnostic-render\\sweep\\browInnerUp_0.00.png",
+    "C:\\Users\\USER\\talking-character-demo\\verification\\goal2-browInnerUp-proof\\female-model-agnostic-render\\sweep\\browInnerUp_0.25.png",
+    "C:\\Users\\USER\\talking-character-demo\\verification\\goal2-browInnerUp-proof\\female-model-agnostic-render\\sweep\\browInnerUp_0.50.png",
+    "C:\\Users\\USER\\talking-character-demo\\verification\\goal2-browInnerUp-proof\\female-model-agnostic-render\\sweep\\browInnerUp_0.75.png",
+    "C:\\Users\\USER\\talking-character-demo\\verification\\goal2-browInnerUp-proof\\female-model-agnostic-render\\sweep\\browInnerUp_1.00.png"
+  ]
+}

@@ -30,20 +30,33 @@ interocular distance divided by donor interocular distance. It then measures
 the reimported GLB by spatially matching each Goal-1 attachment to the exported
 neutral surface.
 
-## Corrected results after GLB export and reimport
+## Independent verification after GLB export and reimport
 
 | model | rig required | eye width | brow max | eyelid max | visual raise | result |
 |---|---:|---:|---:|---:|---|---|
-| female Tripo | no, present but unused for deformation | 55.843 mm | 5.845 mm | 0.097 mm | visible, both brows raise | PASS |
-| male Tripo | no | 299.743 mm | 22.119 mm | 0.396 mm | visible, both brows raise | PASS |
+| female Tripo | no, present but unused for deformation | 55.843 mm | 0.783 mm | 0.161 mm | too subtle | FAIL |
+| male Tripo | no | 299.743 mm | 1.997 mm | 1.260 mm | eyelid/face distortion and failed sweep frames | FAIL |
 
-The female maximum is 10.47% of target eye width. The male maximum is 7.38% of
-target eye width, consistent with the donor-derived motion after proportional
-scaling rather than arbitrary amplification. Eyelid movement remains below
-0.40 mm in both outputs. The male output is unrigged and required no facial rig.
+The inversion-projection safeguard attenuated the field substantially. The
+female result is only 1.40% of eye width at the largest brow landmark. The male
+result is only 0.67% of eye width at the largest brow landmark, while eyelid
+movement reaches 1.26 mm. The male integrity check still finds 191 winding
+flips, and the intermediate-weight male sweep contains black invalid frames.
 
-These values are measured from the reimported GLBs using the manifest triangles
-and barycentric coordinates, not from arbitrary forehead vertices.
+Corrected side measurements are:
+
+| model | eye width | left brow | right brow | left eyelid | right eyelid | brow/eyelid ratio |
+|---|---:|---:|---:|---:|---:|---:|
+| female | 55.843 mm | 0.316 mm | 0.783 mm | 0.084 mm | 0.161 mm | 4.86 |
+| male | 299.743 mm | 1.505 mm | 1.997 mm | 0.498 mm | 1.260 mm | 1.59 |
+
+The sweep covered weights 0, 0.25, 0.5, 0.75, and 1. Female frames are
+monotonic but visually too subtle. Male nonzero-weight sweep frames are
+invalid black renders in the current output set.
+
+These values are measured from the reimported GLBs by spatially matching each
+Goal-1 attachment position to the exported neutral surface, not by reusing stale
+pre-export vertex indices or arbitrary forehead vertices.
 
 ## Evidence
 
@@ -62,8 +75,10 @@ and barycentric coordinates, not from arbitrary forehead vertices.
 
 ## Decision
 
-Goal 2 eyebrow expression: **PASS for this one expression**.
+Goal 2 eyebrow expression: **FAIL**.
 
-Codex vision inspection of the final before-and-after close-ups found visible
-upward movement of both eyebrow regions on both characters, with no obvious
-eyelid, eye, nose, or skull distortion. This does not authorize Goal 3.
+The independent sweep and reimported geometry checks do not satisfy Goal 2.
+The remaining mechanism failure is a mismatch between sparse Goal-1 surface
+attachments and a stable deformation field on the male mesh. Local inversion
+projection is not sufficient and can still leave invalid male triangles while
+attenuating the brow motion. Goal 3 was not started.

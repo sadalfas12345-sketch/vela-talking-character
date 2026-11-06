@@ -1,0 +1,12 @@
+{
+  "glb": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\generalization-male-20261105\\goal2-brow-model-agnostic.glb",
+  "vertexCount": 1025404,
+  "triangleCount": 1897687,
+  "neutralZeroAreaTriangles": 0,
+  "deformedZeroAreaTriangles": 0,
+  "deformedCollapsedTriangles": 0,
+  "deformedWindingFlips": 191,
+  "nonManifoldOrBoundaryEdges": 134609,
+  "topologyStable": false,
+  "shapeKey": "xfer_browInnerUp_model_agnostic"
+}

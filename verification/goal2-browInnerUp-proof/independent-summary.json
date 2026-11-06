@@ -1,0 +1,50 @@
+{
+  "female": {
+    "interocularMillimeters": 55.84288580934188,
+    "leftEyebrow": {
+      "maxMillimeters": 0.3160332407356493,
+      "medianMillimeters": 0.19597234892284834,
+      "normalizedMax": 0.005659328599432455
+    },
+    "rightEyebrow": {
+      "maxMillimeters": 0.7830664291371429,
+      "medianMillimeters": 0.5128654587115841,
+      "normalizedMax": 0.014022671246086369
+    },
+    "leftEyelid": {
+      "maxMillimeters": 0.08381292029873291,
+      "medianMillimeters": 0.06383360436749791,
+      "normalizedMax": 0.0015008701481668764
+    },
+    "rightEyelid": {
+      "maxMillimeters": 0.16110704724187944,
+      "medianMillimeters": 0.12395150404787822,
+      "normalizedMax": 0.0022196471806824594
+    },
+    "eyebrowToEyelidMaxRatio": 4.860534920992497
+  },
+  "male": {
+    "interocularMillimeters": 299.7431104458742,
+    "leftEyebrow": {
+      "maxMillimeters": 1.5047211955521582,
+      "medianMillimeters": 0.7577704469438772,
+      "normalizedMax": 0.005020035967845445
+    },
+    "rightEyebrow": {
+      "maxMillimeters": 1.9970794269917844,
+      "medianMillimeters": 1.085392355151656,
+      "normalizedMax": 0.006662636629149162
+    },
+    "leftEyelid": {
+      "maxMillimeters": 0.4983033407109267,
+      "medianMillimeters": 0.34576469691136535,
+      "normalizedMax": 0.0016624346760453976
+    },
+    "rightEyelid": {
+      "maxMillimeters": 1.2596559295206817,
+      "medianMillimeters": 0.7657099511709089,
+      "normalizedMax": 0.002554553964666274
+    },
+    "eyebrowToEyelidMaxRatio": 1.5854166047959648
+  }
+}
