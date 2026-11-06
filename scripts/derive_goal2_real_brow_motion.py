@@ -10,19 +10,19 @@ def arg(name):
     return Path(a[a.index(name) + 1]).resolve()
 
 def frame(points):
-    x = points[263] - points[33]
+    left_eye = (points[33] + points[133] + points[159] + points[145]) / 4.0
+    right_eye = (points[263] + points[362] + points[386] + points[374]) / 4.0
+    eye_mid = (left_eye + right_eye) * .5
+    x = right_eye - left_eye
     x /= np.linalg.norm(x)
-    eye = (points[33] + points[263]) * .5
-    up = points[eye_idx] - points[152]
-    up -= x * np.dot(up, x)
-    up /= np.linalg.norm(up)
-    forward = np.cross(x, up)
+    forward = points[1] - eye_mid
+    forward -= x * np.dot(forward, x)
     forward /= np.linalg.norm(forward)
-    nose = points[1] - eye
-    if np.dot(forward, nose) < 0:
-        forward *= -1
-        up = np.cross(forward, x)
-        up /= np.linalg.norm(up)
+    up = eye_mid - points[152]
+    up -= x * np.dot(up, x) + forward * np.dot(up, forward)
+    up /= np.linalg.norm(up)
+    if np.dot(up, eye_mid - points[152]) < 0:
+        up *= -1
     return np.column_stack((x, up, forward))
 
 eye_idx = 33
