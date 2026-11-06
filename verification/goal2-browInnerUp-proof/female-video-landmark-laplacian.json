@@ -1,0 +1,81 @@
+{
+  "architecture": "Blender built-in Laplacian Deform modifier; Goal-1 barycentric controls converted to mesh anchors; original render mesh retained",
+  "source": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\vela-photoreal\\generated-rigged.glb",
+  "goal1Manifest": "C:\\Users\\USER\\talking-character-demo\\verification\\goal1-generalization-run\\cross-character-accuracy\\female\\refined\\raycast-report.json",
+  "markerManifest": "C:\\Users\\USER\\talking-character-demo\\verification\\goal2-browInnerUp-proof\\step4-tripo-transfer\\female\\landmark_markers.json",
+  "output": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\vela-photoreal\\intermediates\\goal2-video-landmark-laplacian-female.glb",
+  "targetMesh": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+  "targetVertexCount": 999787,
+  "targetHasArmature": true,
+  "requiredLandmarkCount": 468,
+  "missingLandmarkIds": [],
+  "controlLandmarkIds": [
+    70,
+    63,
+    105,
+    336,
+    293,
+    334,
+    159,
+    145,
+    386,
+    374,
+    33,
+    133,
+    263,
+    362,
+    168,
+    6,
+    1,
+    98,
+    327,
+    234,
+    454,
+    152,
+    10,
+    127,
+    356
+  ],
+  "proxyVertexCount": 43717,
+  "proxyTriangleCount": 84313,
+  "discardedDegenerateProxyTriangles": 0,
+  "discardedDuplicateProxyTriangles": 0,
+  "anchorVertexCount": 1087,
+  "solveComponentCount": 10,
+  "faceRadiusWorldUnits": 0.07020152015649084,
+  "modifier": {
+    "type": "LAPLACIANDEFORM",
+    "iterations": 30,
+    "blenderVersion": "5.2.3"
+  },
+  "samples": {
+    "25": {
+      "requestedAnchorResidualBeforeModifierMax": 4.336808689942018e-19,
+      "barycentricControlRank": 25,
+      "maxBarycentricErrorAfterModifier": 1.1991815259519122e-06,
+      "meanBarycentricErrorAfterModifier": 4.973931726731264e-07,
+      "shapeKey": "video_landmark_25"
+    },
+    "50": {
+      "requestedAnchorResidualBeforeModifierMax": 4.336808689942018e-19,
+      "barycentricControlRank": 25,
+      "maxBarycentricErrorAfterModifier": 1.1974267946785227e-06,
+      "meanBarycentricErrorAfterModifier": 4.973958283963638e-07,
+      "shapeKey": "video_landmark_50"
+    },
+    "75": {
+      "requestedAnchorResidualBeforeModifierMax": 1.734723475976807e-18,
+      "barycentricControlRank": 25,
+      "maxBarycentricErrorAfterModifier": 1.1996522242572221e-06,
+      "meanBarycentricErrorAfterModifier": 4.967457866848086e-07,
+      "shapeKey": "video_landmark_75"
+    },
+    "100": {
+      "requestedAnchorResidualBeforeModifierMax": 8.673617379884035e-19,
+      "barycentricControlRank": 25,
+      "maxBarycentricErrorAfterModifier": 1.1994778499189273e-06,
+      "meanBarycentricErrorAfterModifier": 4.995120950508253e-07,
+      "shapeKey": "video_landmark_100"
+    }
+  }
+}
