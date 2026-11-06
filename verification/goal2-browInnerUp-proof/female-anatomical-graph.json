@@ -1,0 +1,149 @@
+{
+  "glb": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\vela-photoreal\\generated-rigged.glb",
+  "problem": "C:\\Users\\USER\\talking-character-demo\\verification\\goal2-browInnerUp-proof\\female-continuity-problem.npz",
+  "acceptedPairs": 2637,
+  "rejectedPairs": 6,
+  "rejectionCounts": {
+    "accepted": 2637,
+    "normal_mismatch": 6
+  },
+  "regions": {
+    "brow": [
+      70,
+      63,
+      105,
+      336,
+      293,
+      334
+    ],
+    "eyelid": [
+      159,
+      145,
+      386,
+      374
+    ],
+    "eye": [
+      33,
+      133,
+      263,
+      362
+    ],
+    "nose": [
+      168,
+      6,
+      1,
+      98,
+      327
+    ],
+    "mouth": [
+      61,
+      291,
+      13,
+      14
+    ],
+    "jaw": [
+      152,
+      234,
+      454
+    ]
+  },
+  "method": "coincident position + transformed normal dot >= .985 + landmark-derived region agreement + 2.25 interocular envelope",
+  "rejected": [
+    {
+      "pair": [
+        21704,
+        21705
+      ],
+      "reason": "normal_mismatch",
+      "regions": [
+        "mouth",
+        "mouth"
+      ],
+      "normalDot": 0.23401749178839013,
+      "normalizedDistances": [
+        0.7155986890348285,
+        0.7155986890348285
+      ]
+    },
+    {
+      "pair": [
+        21725,
+        21726
+      ],
+      "reason": "normal_mismatch",
+      "regions": [
+        "mouth",
+        "mouth"
+      ],
+      "normalDot": -0.44149827835473154,
+      "normalizedDistances": [
+        0.7178645326088203,
+        0.7178645326088203
+      ]
+    },
+    {
+      "pair": [
+        31666,
+        31669
+      ],
+      "reason": "normal_mismatch",
+      "regions": [
+        "brow",
+        "brow"
+      ],
+      "normalDot": -0.47209255458428634,
+      "normalizedDistances": [
+        0.653247593830873,
+        0.653247593830873
+      ]
+    },
+    {
+      "pair": [
+        31666,
+        31670
+      ],
+      "reason": "normal_mismatch",
+      "regions": [
+        "brow",
+        "brow"
+      ],
+      "normalDot": -0.4720145440938468,
+      "normalizedDistances": [
+        0.653247593830873,
+        0.653247593830873
+      ]
+    },
+    {
+      "pair": [
+        32340,
+        32341
+      ],
+      "reason": "normal_mismatch",
+      "regions": [
+        "brow",
+        "brow"
+      ],
+      "normalDot": -0.295537677725474,
+      "normalizedDistances": [
+        0.6499550852525667,
+        0.6499550852525667
+      ]
+    },
+    {
+      "pair": [
+        32340,
+        32342
+      ],
+      "reason": "normal_mismatch",
+      "regions": [
+        "brow",
+        "brow"
+      ],
+      "normalDot": -0.29529838109272544,
+      "normalizedDistances": [
+        0.6499550852525667,
+        0.6499550852525667
+      ]
+    }
+  ]
+}
