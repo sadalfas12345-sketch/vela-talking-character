@@ -1,0 +1,251 @@
+{
+  "glb": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\vela-photoreal\\intermediates\\goal2-brow-female-quality-qp.glb",
+  "shapeKey": "real_browInnerUp_quality_qp",
+  "measurement": "spatial nearest-vertex match against exported neutral mesh",
+  "regions": {
+    "brows": {
+      "landmarks": 6,
+      "maxMillimeters": 5.1340332220398865,
+      "p95Millimeters": 4.225497182913745,
+      "medianMillimeters": 0.6197681568252726
+    },
+    "eyelids": {
+      "landmarks": 4,
+      "maxMillimeters": 0.0,
+      "p95Millimeters": 0.0,
+      "medianMillimeters": 0.0
+    },
+    "eyes": {
+      "landmarks": 4,
+      "maxMillimeters": 0.0,
+      "p95Millimeters": 0.0,
+      "medianMillimeters": 0.0
+    },
+    "nose": {
+      "landmarks": 5,
+      "maxMillimeters": 0.0,
+      "p95Millimeters": 0.0,
+      "medianMillimeters": 0.0
+    },
+    "cheeks": {
+      "landmarks": 2,
+      "maxMillimeters": 0.0,
+      "p95Millimeters": 0.0,
+      "medianMillimeters": 0.0
+    },
+    "chin": {
+      "landmarks": 1,
+      "maxMillimeters": 0.0,
+      "p95Millimeters": 0.0,
+      "medianMillimeters": 0.0
+    },
+    "skull": {
+      "landmarks": 3,
+      "maxMillimeters": 0.0,
+      "p95Millimeters": 0.0,
+      "medianMillimeters": 0.0
+    }
+  },
+  "landmarkDisplacements": {
+    "70": {
+      "magnitudeMillimeters": 0.012177859457242661,
+      "deltaMillimeters": [
+        0.007465481758117676,
+        0.0077784061431884766,
+        0.005662441253662109
+      ]
+    },
+    "63": {
+      "magnitudeMillimeters": 0.2714472017711504,
+      "deltaMillimeters": [
+        -0.019125640392303467,
+        0.1272391527891159,
+        0.2390146255493164
+      ]
+    },
+    "105": {
+      "magnitudeMillimeters": 1.4998890655353234,
+      "deltaMillimeters": [
+        -0.49858540296554565,
+        -0.03889016807079315,
+        1.4140605926513672
+      ]
+    },
+    "336": {
+      "magnitudeMillimeters": 5.1340332220398865,
+      "deltaMillimeters": [
+        -0.04636496305465698,
+        -0.6204210221767426,
+        5.096197128295898
+      ]
+    },
+    "293": {
+      "magnitudeMillimeters": 0.1101073458753419,
+      "deltaMillimeters": [
+        0.0729784369468689,
+        -0.08244439959526062,
+        -0.0008344650268554688
+      ]
+    },
+    "334": {
+      "magnitudeMillimeters": 0.968089111879395,
+      "deltaMillimeters": [
+        -0.3410018980503082,
+        -0.06558932363986969,
+        0.9036660194396973
+      ]
+    },
+    "159": {
+      "magnitudeMillimeters": 0.0,
+      "deltaMillimeters": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "145": {
+      "magnitudeMillimeters": 0.0,
+      "deltaMillimeters": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "386": {
+      "magnitudeMillimeters": 0.0,
+      "deltaMillimeters": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "374": {
+      "magnitudeMillimeters": 0.0,
+      "deltaMillimeters": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "33": {
+      "magnitudeMillimeters": 0.0,
+      "deltaMillimeters": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "133": {
+      "magnitudeMillimeters": 0.0,
+      "deltaMillimeters": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "263": {
+      "magnitudeMillimeters": 0.0,
+      "deltaMillimeters": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "362": {
+      "magnitudeMillimeters": 0.0,
+      "deltaMillimeters": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "168": {
+      "magnitudeMillimeters": 0.0,
+      "deltaMillimeters": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "6": {
+      "magnitudeMillimeters": 0.0,
+      "deltaMillimeters": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "1": {
+      "magnitudeMillimeters": 0.0,
+      "deltaMillimeters": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "98": {
+      "magnitudeMillimeters": 0.0,
+      "deltaMillimeters": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "327": {
+      "magnitudeMillimeters": 0.0,
+      "deltaMillimeters": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "234": {
+      "magnitudeMillimeters": 0.0,
+      "deltaMillimeters": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "454": {
+      "magnitudeMillimeters": 0.0,
+      "deltaMillimeters": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "152": {
+      "magnitudeMillimeters": 0.0,
+      "deltaMillimeters": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "10": {
+      "magnitudeMillimeters": 0.0,
+      "deltaMillimeters": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "127": {
+      "magnitudeMillimeters": 0.0,
+      "deltaMillimeters": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "356": {
+      "magnitudeMillimeters": 0.0,
+      "deltaMillimeters": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  }
+}

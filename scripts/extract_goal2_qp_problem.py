@@ -24,10 +24,15 @@ def main():
  for tri in tris:
   if not (mask[tri[0]] and mask[tri[1]] and mask[tri[2]]): continue
   c=world[tri].mean(axis=0)
-  if np.min(np.linalg.norm(brow_world-c,axis=1)) > .02*eye: continue
+  c=world[tri].mean(axis=0)
+  if np.min(np.linalg.norm(c[None]-brow_world,axis=1)) > .05*eye: continue
   p=world[tri]; n=np.cross(p[1]-p[0],p[2]-p[0]); ln=np.linalg.norm(n)
   if ln < 1e-12: continue
   local_tris.append([inv[int(v)] for v in tri]); ori_q.append(float(np.dot(n/ln,n))); ori_n.append(n/ln)
- np.savez_compressed(out,source=str(source),local_indices=ids,local_coords=local[ids],world_coords=world[ids],edges=edges,edge_lengths=edge_lengths,constraint_vertices=np.asarray(cvi),constraint_bary=np.asarray(cb),desired=desired,eye_width=eye,up=up,matrix_world=mw,orientation_triangles=np.asarray(local_tris),orientation_normals=np.asarray(ori_n),orientation_q0=np.asarray(ori_q))
+ local_world=world[ids]; e0=local_world[edges[:,0]]; e1=local_world[edges[:,1]]
+ d0=np.min(np.linalg.norm(e0[:,None]-brow_world[None],axis=2),axis=1); d1=np.min(np.linalg.norm(e1[:,None]-brow_world[None],axis=2),axis=1)
+ quality_edges=edges[(d0<=.012*eye)&(d1<=.012*eye)]
+ quality_lengths=np.linalg.norm(world[ids][quality_edges[:,0]]-world[ids][quality_edges[:,1]],axis=1)
+ np.savez_compressed(out,source=str(source),local_indices=ids,local_coords=local[ids],world_coords=world[ids],edges=edges,edge_lengths=edge_lengths,quality_edges=quality_edges,quality_edge_lengths=quality_lengths,constraint_vertices=np.asarray(cvi),constraint_bary=np.asarray(cb),desired=desired,eye_width=eye,up=up,matrix_world=mw,orientation_triangles=np.asarray(local_tris),orientation_normals=np.asarray(ori_n),orientation_q0=np.asarray(ori_q))
  print(json.dumps({'source':str(source),'localVertices':len(ids),'edges':len(edges),'orientationTriangles':len(local_tris),'eyeWidthMillimeters':eye*1000,'requestedBrowMillimeters':(np.linalg.norm(desired_brow,axis=1)*1000).tolist(),'problem':str(out)}))
 if __name__=='__main__': main()

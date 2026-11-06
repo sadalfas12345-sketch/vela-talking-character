@@ -1,0 +1,638 @@
+{
+  "glb": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\vela-photoreal\\intermediates\\goal2-brow-female-quality-qp.glb",
+  "shapeKey": "real_browInnerUp_quality_qp",
+  "maxVertexMotionMillimeters": 5.13403345814914,
+  "maxNormalChangeDegrees": 179.6192804396721,
+  "topTriangles": [
+    {
+      "triangle": 1019549,
+      "vertices": [
+        456004,
+        456658,
+        456645
+      ],
+      "maxVertexMotionMillimeters": 5.13403345814914,
+      "normalChangeDegrees": 0.0007682330986745788,
+      "material": 0,
+      "edgeStretchRatios": [
+        1.0000003509162323,
+        1.0000000428661753,
+        1.0000002051498358
+      ],
+      "centroid": [
+        0.06371118625005086,
+        0.00657659179220597,
+        0.9040520985921224
+      ]
+    },
+    {
+      "triangle": 1009748,
+      "vertices": [
+        456645,
+        456658,
+        457003
+      ],
+      "maxVertexMotionMillimeters": 5.13403345814914,
+      "normalChangeDegrees": 0.0007698070333312426,
+      "material": 0,
+      "edgeStretchRatios": [
+        1.0000000428661753,
+        0.9999995163370126,
+        0.9999996556199032
+      ],
+      "centroid": [
+        0.06376653412977855,
+        0.005197117105126381,
+        0.9042704701423645
+      ]
+    },
+    {
+      "triangle": 1096280,
+      "vertices": [
+        449383,
+        447443,
+        448259
+      ],
+      "maxVertexMotionMillimeters": 5.134033447131129,
+      "normalChangeDegrees": 167.11793169888907,
+      "material": 0,
+      "edgeStretchRatios": [
+        4.0730197149306875,
+        1.0,
+        3.66809212534769
+      ],
+      "centroid": [
+        0.062351529796918236,
+        0.016675924882292747,
+        0.9076796174049377
+      ]
+    },
+    {
+      "triangle": 1096249,
+      "vertices": [
+        449332,
+        447443,
+        449383
+      ],
+      "maxVertexMotionMillimeters": 5.134033447131129,
+      "normalChangeDegrees": 157.6076833835475,
+      "material": 0,
+      "edgeStretchRatios": [
+        3.3375445544918896,
+        4.0730197149306875,
+        1.0000011422088806
+      ],
+      "centroid": [
+        0.062403821696837745,
+        0.01699514811237653,
+        0.9070479273796082
+      ]
+    },
+    {
+      "triangle": 1086020,
+      "vertices": [
+        450879,
+        449383,
+        450612
+      ],
+      "maxVertexMotionMillimeters": 5.134033447131129,
+      "normalChangeDegrees": 1.9224131335124367e-05,
+      "material": 0,
+      "edgeStretchRatios": [
+        0.9999988371864037,
+        0.99999887289588,
+        1.0
+      ],
+      "centroid": [
+        0.06266863644123077,
+        0.015599722042679787,
+        0.9071171681086222
+      ]
+    },
+    {
+      "triangle": 1086021,
+      "vertices": [
+        449383,
+        449193,
+        450612
+      ],
+      "maxVertexMotionMillimeters": 5.134033447131129,
+      "normalChangeDegrees": 169.54354832650344,
+      "material": 0,
+      "edgeStretchRatios": [
+        2.3521535331950107,
+        4.445404509564688,
+        0.99999887289588
+      ],
+      "centroid": [
+        0.06257066130638123,
+        0.015511121911307177,
+        0.9077973167101542
+      ]
+    },
+    {
+      "triangle": 1091067,
+      "vertices": [
+        449383,
+        448259,
+        449193
+      ],
+      "maxVertexMotionMillimeters": 5.134033447131129,
+      "normalChangeDegrees": 168.96425592546294,
+      "material": 0,
+      "edgeStretchRatios": [
+        3.66809212534769,
+        1.0,
+        2.3521535331950107
+      ],
+      "centroid": [
+        0.062445602069298424,
+        0.01595387204239766,
+        0.9080042441685995
+      ]
+    },
+    {
+      "triangle": 1091066,
+      "vertices": [
+        449332,
+        449383,
+        450879
+      ],
+      "maxVertexMotionMillimeters": 5.134033447131129,
+      "normalChangeDegrees": 2.4373704946366044e-05,
+      "material": 0,
+      "edgeStretchRatios": [
+        1.0000011422088806,
+        0.9999988371864037,
+        1.0
+      ],
+      "centroid": [
+        0.06259586910406749,
+        0.016361695403854053,
+        0.9066924055417379
+      ]
+    },
+    {
+      "triangle": 1076525,
+      "vertices": [
+        453566,
+        453204,
+        453714
+      ],
+      "maxVertexMotionMillimeters": 5.13403340187631,
+      "normalChangeDegrees": 4.517745487845102e-06,
+      "material": 0,
+      "edgeStretchRatios": [
+        1.0000005412506707,
+        1.0,
+        0.9999984437662554
+      ],
+      "centroid": [
+        0.06320395072301228,
+        0.014576309981445471,
+        0.9037083188692728
+      ]
+    },
+    {
+      "triangle": 1076488,
+      "vertices": [
+        454517,
+        453566,
+        453757
+      ],
+      "maxVertexMotionMillimeters": 5.13403340187631,
+      "normalChangeDegrees": 1.4183953086968166e-05,
+      "material": 0,
+      "edgeStretchRatios": [
+        1.0000006144899225,
+        0.9999987649551567,
+        1.0
+      ],
+      "centroid": [
+        0.06327637533346812,
+        0.01452325222392877,
+        0.9033688306808472
+      ]
+    },
+    {
+      "triangle": 1081213,
+      "vertices": [
+        454517,
+        453675,
+        453566
+      ],
+      "maxVertexMotionMillimeters": 5.13403340187631,
+      "normalChangeDegrees": 1.3713635377634418e-05,
+      "material": 0,
+      "edgeStretchRatios": [
+        1.0,
+        1.0000016692775315,
+        1.0000006144899225
+      ],
+      "centroid": [
+        0.06327220300833385,
+        0.014927639936407408,
+        0.9034752448399862
+      ]
+    },
+    {
+      "triangle": 1076490,
+      "vertices": [
+        453757,
+        453566,
+        453714
+      ],
+      "maxVertexMotionMillimeters": 5.13403340187631,
+      "normalChangeDegrees": 4.182619578303747e-06,
+      "material": 0,
+      "edgeStretchRatios": [
+        0.9999987649551567,
+        0.9999984437662554,
+        1.0
+      ],
+      "centroid": [
+        0.06323352952798207,
+        0.014294627122581005,
+        0.9034558137257894
+      ]
+    },
+    {
+      "triangle": 1081214,
+      "vertices": [
+        453675,
+        453119,
+        453566
+      ],
+      "maxVertexMotionMillimeters": 5.13403340187631,
+      "normalChangeDegrees": 1.210433051621537e-05,
+      "material": 0,
+      "edgeStretchRatios": [
+        1.0,
+        1.0000011290315196,
+        1.0000016692775315
+      ],
+      "centroid": [
+        0.06319782137870789,
+        0.015126178661982218,
+        0.9036871790885925
+      ]
+    },
+    {
+      "triangle": 1052309,
+      "vertices": [
+        452135,
+        452142,
+        453033
+      ],
+      "maxVertexMotionMillimeters": 5.13403340187631,
+      "normalChangeDegrees": 0.0007037669164821551,
+      "material": 0,
+      "edgeStretchRatios": [
+        1.000000993697698,
+        1.0000017123944167,
+        1.0000010873978054
+      ],
+      "centroid": [
+        0.06304944803317387,
+        0.010872570487360159,
+        0.9095168113708496
+      ]
+    },
+    {
+      "triangle": 1081255,
+      "vertices": [
+        453566,
+        452700,
+        453204
+      ],
+      "maxVertexMotionMillimeters": 5.13403340187631,
+      "normalChangeDegrees": 1.1454575462498553e-05,
+      "material": 0,
+      "edgeStretchRatios": [
+        1.0000007441241572,
+        1.0,
+        1.0000005412506707
+      ],
+      "centroid": [
+        0.06315153340498607,
+        0.01504712738096714,
+        0.9039287169774374
+      ]
+    },
+    {
+      "triangle": 1081254,
+      "vertices": [
+        453119,
+        452700,
+        453566
+      ],
+      "maxVertexMotionMillimeters": 5.13403340187631,
+      "normalChangeDegrees": 0.0,
+      "material": 0,
+      "edgeStretchRatios": [
+        1.0,
+        1.0000007441241572,
+        1.0000011290315196
+      ],
+      "centroid": [
+        0.0631474107503891,
+        0.015220100991427898,
+        0.9038525223731995
+      ]
+    },
+    {
+      "triangle": 1052348,
+      "vertices": [
+        452135,
+        450693,
+        452142
+      ],
+      "maxVertexMotionMillimeters": 5.13403340187631,
+      "normalChangeDegrees": 0.0006031383599144919,
+      "material": 0,
+      "edgeStretchRatios": [
+        1.0000007201828338,
+        1.0000002994036485,
+        1.000000993697698
+      ],
+      "centroid": [
+        0.06291842460632324,
+        0.011140144430100918,
+        0.9101462562878927
+      ]
+    },
+    {
+      "triangle": 1052349,
+      "vertices": [
+        452142,
+        450693,
+        451703
+      ],
+      "maxVertexMotionMillimeters": 5.13403340187631,
+      "normalChangeDegrees": 161.51036105004593,
+      "material": 0,
+      "edgeStretchRatios": [
+        1.0000002994036485,
+        4.960500512604821,
+        4.994491367542606
+      ],
+      "centroid": [
+        0.0628920669356982,
+        0.010816169902682304,
+        0.9105504949887594
+      ]
+    },
+    {
+      "triangle": 1047554,
+      "vertices": [
+        452738,
+        452142,
+        451703
+      ],
+      "maxVertexMotionMillimeters": 5.13403340187631,
+      "normalChangeDegrees": 170.42026919800648,
+      "material": 0,
+      "edgeStretchRatios": [
+        0.9999990572699797,
+        4.994491367542606,
+        5.607453219752639
+      ],
+      "centroid": [
+        0.06300840526819229,
+        0.010296828423937162,
+        0.9102038343747457
+      ]
+    },
+    {
+      "triangle": 1019548,
+      "vertices": [
+        456004,
+        455909,
+        456658
+      ],
+      "maxVertexMotionMillimeters": 5.13403340187631,
+      "normalChangeDegrees": 0.0007026873506142368,
+      "material": 0,
+      "edgeStretchRatios": [
+        1.0000005702830523,
+        1.0000004967505407,
+        1.0000003509162323
+      ],
+      "centroid": [
+        0.0636681318283081,
+        0.007527671288698912,
+        0.9042288064956665
+      ]
+    },
+    {
+      "triangle": 1047544,
+      "vertices": [
+        455134,
+        455909,
+        456004
+      ],
+      "maxVertexMotionMillimeters": 5.13403340187631,
+      "normalChangeDegrees": 0.0007051271007627411,
+      "material": 0,
+      "edgeStretchRatios": [
+        1.0000001554018452,
+        1.0000005702830523,
+        1.0000003036353786
+      ],
+      "centroid": [
+        0.06357932090759277,
+        0.009285706405838331,
+        0.9040137926737467
+      ]
+    },
+    {
+      "triangle": 1047555,
+      "vertices": [
+        452142,
+        452738,
+        453033
+      ],
+      "maxVertexMotionMillimeters": 5.13403340187631,
+      "normalChangeDegrees": 0.0005815007115010823,
+      "material": 0,
+      "edgeStretchRatios": [
+        0.9999990572699797,
+        0.9999997096529853,
+        1.0000017123944167
+      ],
+      "centroid": [
+        0.06307566165924072,
+        0.010366744982699553,
+        0.9097201426823934
+      ]
+    },
+    {
+      "triangle": 1019555,
+      "vertices": [
+        455919,
+        455886,
+        456198
+      ],
+      "maxVertexMotionMillimeters": 5.134033390858256,
+      "normalChangeDegrees": 5.122641877509565e-06,
+      "material": 0,
+      "edgeStretchRatios": [
+        0.9999993094927911,
+        1.0000003644866038,
+        0.9999997566312182
+      ],
+      "centroid": [
+        0.06363721191883087,
+        0.006867250582824151,
+        0.906823456287384
+      ]
+    },
+    {
+      "triangle": 1019554,
+      "vertices": [
+        455731,
+        455919,
+        456501
+      ],
+      "maxVertexMotionMillimeters": 5.134033390858256,
+      "normalChangeDegrees": 3.818191820832846e-06,
+      "material": 0,
+      "edgeStretchRatios": [
+        1.00000087790388,
+        1.0,
+        1.0000004767002615
+      ],
+      "centroid": [
+        0.06364398698012035,
+        0.007394186065842708,
+        0.905997614065806
+      ]
+    },
+    {
+      "triangle": 1038484,
+      "vertices": [
+        455731,
+        455248,
+        455919
+      ],
+      "maxVertexMotionMillimeters": 5.134033390858256,
+      "normalChangeDegrees": 3.52019892386405e-06,
+      "material": 0,
+      "edgeStretchRatios": [
+        1.0,
+        1.0000006260376961,
+        1.00000087790388
+      ],
+      "centroid": [
+        0.0635698636372884,
+        0.00870493333786726,
+        0.9061880310376486
+      ]
+    },
+    {
+      "triangle": 1038485,
+      "vertices": [
+        455248,
+        455324,
+        455919
+      ],
+      "maxVertexMotionMillimeters": 5.134033390858256,
+      "normalChangeDegrees": 3.1945284701301985e-06,
+      "material": 0,
+      "edgeStretchRatios": [
+        1.0,
+        1.0000008510543286,
+        1.0000006260376961
+      ],
+      "centroid": [
+        0.06354623039563496,
+        0.008763162108759085,
+        0.9066089590390524
+      ]
+    },
+    {
+      "triangle": 1019553,
+      "vertices": [
+        456527,
+        455731,
+        456501
+      ],
+      "maxVertexMotionMillimeters": 5.134033390858256,
+      "normalChangeDegrees": 1.4787793334710982e-06,
+      "material": 0,
+      "edgeStretchRatios": [
+        1.000000342303436,
+        1.0000004767002615,
+        1.000000234449695
+      ],
+      "centroid": [
+        0.06368019183476765,
+        0.0069498515998323756,
+        0.9055538177490234
+      ]
+    },
+    {
+      "triangle": 1019551,
+      "vertices": [
+        456658,
+        455895,
+        456527
+      ],
+      "maxVertexMotionMillimeters": 5.134033390858256,
+      "normalChangeDegrees": 1.9090959104164224e-06,
+      "material": 0,
+      "edgeStretchRatios": [
+        1.000000484998362,
+        1.0000003938552373,
+        1.0000003227414656
+      ],
+      "centroid": [
+        0.06369786461194356,
+        0.00688864104449749,
+        0.9048642118771871
+      ]
+    },
+    {
+      "triangle": 1009751,
+      "vertices": [
+        456501,
+        456717,
+        456815
+      ],
+      "maxVertexMotionMillimeters": 5.134033390858256,
+      "normalChangeDegrees": 1.2074182697257333e-06,
+      "material": 0,
+      "edgeStretchRatios": [
+        0.9999994409185153,
+        0.9999998170966178,
+        0.9999996470038869
+      ],
+      "centroid": [
+        0.06375227371851604,
+        0.0049230726435780525,
+        0.9059775471687317
+      ]
+    },
+    {
+      "triangle": 1014660,
+      "vertices": [
+        456658,
+        456527,
+        456887
+      ],
+      "maxVertexMotionMillimeters": 5.134033390858256,
+      "normalChangeDegrees": 1.4787793334710982e-06,
+      "material": 0,
+      "edgeStretchRatios": [
+        1.0000003227414656,
+        1.0,
+        0.9999997129498628
+      ],
+      "centroid": [
+        0.06375446915626526,
+        0.005548875158031781,
+        0.9048746625582377
+      ]
+    }
+  ]
+}
