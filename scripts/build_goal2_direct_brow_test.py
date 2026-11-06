@@ -20,9 +20,14 @@ def main():
     local=np.empty((n,3),float); body.data.vertices.foreach_get('co',local.ravel()); mw=np.asarray(body.matrix_world,float); world=local@mw[:3,:3].T+mw[:3,3]
     # Normalized, connected forehead field. The lower mask suppresses eyelids and eyes.
     d=np.min(np.linalg.norm(world[:,None,:]-brow[None,:,:],axis=2),axis=1)
+    eyelid=np.asarray([lm[i] for i in [159,145,386,374]])
+    de=np.min(np.linalg.norm(world[:,None,:]-eyelid[None,:,:],axis=2),axis=1)
     vertical=(world-center)@up; front=(world-center)@forward
-    sigma=.55*eye_width; radius=1.65*eye_width
-    w=np.exp(-.5*(d/max(sigma,1e-12))**2)*np.clip((vertical+.10*eye_width)/(.65*eye_width),0,1)*np.clip((radius-d)/(.35*eye_width),0,1)
+    radius=2.35*eye_width
+    radial=np.clip(1-(d/max(radius,1e-12))**2,0,1)**2
+    upper=np.clip((vertical+.25*eye_width)/(.75*eye_width),0,1)
+    eye_guard=np.clip((de-.08*eye_width)/(.22*eye_width),0,1)
+    w=radial*upper*eye_guard
     w[(d>radius)|(front<-.35*eye_width)]=0
     # Coincident render vertices share one displacement exactly.
     buckets={}
