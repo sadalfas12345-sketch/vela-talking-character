@@ -17,18 +17,30 @@ of that model's interocular distance, anchors stable semantic landmarks, and
 exports a shape key named `xfer_browInnerUp_model_agnostic`. The target mesh is
 the largest mesh discovered in the GLB. An armature is optional.
 
-## Results after GLB export and reimport
+## Forensic diagnosis
+
+The first report used the Goal-1 triangle vertex indices directly after GLB
+export. Blender's glTF exporter reordered primitive vertices, so those indices
+no longer identified the same surface points. That made real brow motion appear
+near zero and falsely attributed unrelated motion to the male eyelids.
+
+The original transfer also reused the female fit's absolute similarity scale for
+the male. The corrected implementation derives motion scale as target
+interocular distance divided by donor interocular distance. It then measures
+the reimported GLB by spatially matching each Goal-1 attachment to the exported
+neutral surface.
+
+## Corrected results after GLB export and reimport
 
 | model | rig required | eye width | brow max | eyelid max | visual raise | result |
 |---|---:|---:|---:|---:|---|---|
-| female Tripo | no, present but unused for deformation | 55.843 mm | 0.248 mm | 0.00002 mm | not convincingly visible | FAIL |
-| male Tripo | no | 299.743 mm | 0.00003 mm | 0.230 mm | not visible | FAIL |
+| female Tripo | no, present but unused for deformation | 55.843 mm | 5.845 mm | 0.097 mm | visible, both brows raise | PASS |
+| male Tripo | no | 299.743 mm | 22.119 mm | 0.396 mm | visible, both brows raise | PASS |
 
-The female output retained its original neutral mesh and exported the shape key,
-but the requested brow movement was not preserved at the verified Goal-1 brow
-attachments. The male output proves that the same source code can process an
-unrigged model, but its brow attachments are effectively stationary. The male
-eyelid spill is an additional deformation-field defect.
+The female maximum is 10.47% of target eye width. The male maximum is 7.38% of
+target eye width, consistent with the donor-derived motion after proportional
+scaling rather than arbitrary amplification. Eyelid movement remains below
+0.40 mm in both outputs. The male output is unrigged and required no facial rig.
 
 These values are measured from the reimported GLBs using the manifest triangles
 and barycentric coordinates, not from arbitrary forehead vertices.
@@ -45,13 +57,13 @@ and barycentric coordinates, not from arbitrary forehead vertices.
 - `male-model-agnostic-transfer.json`
 - `female-model-agnostic-measurements.json`
 - `male-model-agnostic-measurements.json`
+- `female-export-diagnosis.json`
+- `male-export-diagnosis.json`
 
 ## Decision
 
-Goal 2 eyebrow expression: **FAIL**.
+Goal 2 eyebrow expression: **PASS for this one expression**.
 
-The model-agnostic onboarding and unrigged export path are demonstrated, but
-the expression itself does not meet the visual or displacement acceptance
-criteria. Do not proceed to Goal 3. The next repair must diagnose the mismatch
-between the Goal-1 attachment coordinate frame and exported target mesh shape
-key coordinates before retesting.
+Codex vision inspection of the final before-and-after close-ups found visible
+upward movement of both eyebrow regions on both characters, with no obvious
+eyelid, eye, nose, or skull distortion. This does not authorize Goal 3.

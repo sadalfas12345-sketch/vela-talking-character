@@ -7,9 +7,11 @@
   "targetVertexCount": 999787,
   "targetHasArmature": true,
   "eyeWidthMillimeters": 55.84288580934188,
+  "donorEyeWidthMillimeters": 91.31379558222632,
+  "motionScaleTargetOverDonorEyeWidth": 0.6115492785430919,
   "sigmaFractionOfEyeWidth": 0.16,
   "radiusFractionOfEyeWidth": 0.55,
-  "movedVertexCount": 45465,
+  "movedVertexCount": 46042,
   "constraintLandmarks": [
     70,
     63,

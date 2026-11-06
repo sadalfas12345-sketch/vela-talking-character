@@ -32,13 +32,7 @@ def main():
     donor = np.load(donor_npz)
     base, expr = donor['Head_Mesh__Basis'].astype(float), donor['Head_Mesh__Key__browInnerUp'].astype(float)
     faces = donor['Head_Mesh__Triangles'].astype(int)
-    scale = float(fit['similarity']['scale']); rot = np.asarray(fit['similarity']['rotation'], float)
-    donor_delta = {}
-    for i in BROW:
-        tri = faces[int(points['donorFaceIds'][i])]
-        bary = np.asarray(points['donorBarycentric'][i], float)
-        donor_delta[i] = scale * ((bary[:, None] * (expr[tri] - base[tri])).sum(0)) @ rot
-
+    rot = np.asarray(fit['similarity']['rotation'], float)
     bpy.ops.wm.read_factory_settings(use_empty=True)
     bpy.ops.import_scene.gltf(filepath=str(source))
     meshes = [o for o in bpy.context.scene.objects if o.type == 'MESH']
@@ -50,6 +44,14 @@ def main():
     target = {i: np.asarray(records[i]['meshXYZ'], float) for i in records}
     eye_width = float(np.linalg.norm(target[33] - target[263]))
     if eye_width <= 0: raise SystemExit('invalid interocular scale in Goal-1 manifest')
+    donor_eye_width = float(np.linalg.norm(np.asarray(points['donorPoints'][33]) - np.asarray(points['donorPoints'][263])))
+    if donor_eye_width <= 0: raise SystemExit('invalid donor interocular scale')
+    scale = eye_width / donor_eye_width
+    donor_delta = {}
+    for i in BROW:
+        tri = faces[int(points['donorFaceIds'][i])]
+        bary = np.asarray(points['donorBarycentric'][i], float)
+        donor_delta[i] = scale * ((bary[:, None] * (expr[tri] - base[tri])).sum(0)) @ rot
     # All radii are proportions of this model's own interocular distance.
     sigma, radius = eye_width * 0.16, eye_width * 0.55
     handles = np.asarray([target[i] for i in BROW + ANCHORS])
@@ -87,7 +89,7 @@ def main():
     bpy.context.view_layer.objects.active = body
     output.parent.mkdir(parents=True, exist_ok=True)
     bpy.ops.export_scene.gltf(filepath=str(output), export_format='GLB', export_morph=True, export_skins=True, export_animations=True, export_apply=False)
-    result = {'architecture':'model-agnostic Goal-1 attachment-driven anchored RBF; Avaturn motion only; original target vertices retained', 'shapeKey':key.name, 'source':str(source), 'goal1Manifest':str(goal1), 'targetMesh':body.name, 'targetVertexCount':n, 'targetHasArmature':any(o.type=='ARMATURE' for o in bpy.context.scene.objects), 'eyeWidthMillimeters':eye_width*1000, 'sigmaFractionOfEyeWidth':.16, 'radiusFractionOfEyeWidth':.55, 'movedVertexCount':int((np.linalg.norm(delta,axis=1)>1e-7).sum()), 'constraintLandmarks':BROW+ANCHORS, 'output':str(output)}
+    result = {'architecture':'model-agnostic Goal-1 attachment-driven anchored RBF; Avaturn motion only; original target vertices retained', 'shapeKey':key.name, 'source':str(source), 'goal1Manifest':str(goal1), 'targetMesh':body.name, 'targetVertexCount':n, 'targetHasArmature':any(o.type=='ARMATURE' for o in bpy.context.scene.objects), 'eyeWidthMillimeters':eye_width*1000, 'donorEyeWidthMillimeters':donor_eye_width*1000, 'motionScaleTargetOverDonorEyeWidth':scale, 'sigmaFractionOfEyeWidth':.16, 'radiusFractionOfEyeWidth':.55, 'movedVertexCount':int((np.linalg.norm(delta,axis=1)>1e-7).sum()), 'constraintLandmarks':BROW+ANCHORS, 'output':str(output)}
     report_path.parent.mkdir(parents=True, exist_ok=True); report_path.write_text(json.dumps(result, indent=2)+'\n'); print(json.dumps(result, indent=2))
 
 if __name__ == '__main__': main()

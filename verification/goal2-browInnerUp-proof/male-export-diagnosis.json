@@ -1,0 +1,333 @@
+{
+  "glb": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\generalization-male-20261105\\goal2-brow-model-agnostic.glb",
+  "shapeKey": "xfer_browInnerUp_model_agnostic",
+  "spatiallyMatchedLandmarks": [
+    {
+      "group": "brows",
+      "landmark": 70,
+      "nearestVertex": 823318,
+      "nearestDistanceMillimeters": 0.6781474221497774,
+      "deltaMillimeters": [
+        0.038757920265197754,
+        0.023424625396728516,
+        -0.07572770118713379
+      ],
+      "magnitudeMillimeters": 0.08823590077371178,
+      "upwardMillimeters": -0.08068674893208835
+    },
+    {
+      "group": "brows",
+      "landmark": 63,
+      "nearestVertex": 803981,
+      "nearestDistanceMillimeters": 0.27097860584035516,
+      "deltaMillimeters": [
+        0.17054378986358643,
+        0.7815062999725342,
+        1.1097192764282227
+      ],
+      "magnitudeMillimeters": 1.367959850885315,
+      "upwardMillimeters": 0.9877899895166788
+    },
+    {
+      "group": "brows",
+      "landmark": 105,
+      "nearestVertex": 311412,
+      "nearestDistanceMillimeters": 0.19965818501077592,
+      "deltaMillimeters": [
+        -0.47957897186279297,
+        -0.4427284002304077,
+        8.614137768745422
+      ],
+      "magnitudeMillimeters": 8.638829430284517,
+      "upwardMillimeters": 8.613685943219506
+    },
+    {
+      "group": "brows",
+      "landmark": 336,
+      "nearestVertex": 829501,
+      "nearestDistanceMillimeters": 0.9884635219350457,
+      "deltaMillimeters": [
+        6.183147430419922,
+        -1.9804053008556366,
+        21.144315600395203
+      ],
+      "magnitudeMillimeters": 22.11866631402268,
+      "upwardMillimeters": 20.71831110342769
+    },
+    {
+      "group": "brows",
+      "landmark": 293,
+      "nearestVertex": 353216,
+      "nearestDistanceMillimeters": 0.4431895795278251,
+      "deltaMillimeters": [
+        0.18870830535888672,
+        -0.29815733432769775,
+        0.9114891290664673
+      ],
+      "magnitudeMillimeters": 0.9774052654509123,
+      "upwardMillimeters": 0.9254274105184992
+    },
+    {
+      "group": "brows",
+      "landmark": 334,
+      "nearestVertex": 424012,
+      "nearestDistanceMillimeters": 0.9373308857902884,
+      "deltaMillimeters": [
+        -0.490039587020874,
+        -0.5269050598144531,
+        5.815774202346802
+      ],
+      "magnitudeMillimeters": 5.860119223325429,
+      "upwardMillimeters": 5.856123168661716
+    },
+    {
+      "group": "eyelids",
+      "landmark": 159,
+      "nearestVertex": 806828,
+      "nearestDistanceMillimeters": 0.44550656457431614,
+      "deltaMillimeters": [
+        -0.005364418029785156,
+        -0.0018030405044555664,
+        0.1253187656402588
+      ],
+      "magnitudeMillimeters": 0.1254464864293022,
+      "upwardMillimeters": 0.12461426323291282
+    },
+    {
+      "group": "eyelids",
+      "landmark": 145,
+      "nearestVertex": 366793,
+      "nearestDistanceMillimeters": 0.4591855686157942,
+      "deltaMillimeters": [
+        -0.005662441253662109,
+        2.9802322387695312e-05,
+        0.14963746070861816
+      ],
+      "magnitudeMillimeters": 0.14974456175919326,
+      "upwardMillimeters": 0.14846893527920962
+    },
+    {
+      "group": "eyelids",
+      "landmark": 386,
+      "nearestVertex": 670235,
+      "nearestDistanceMillimeters": 0.41662424337118864,
+      "deltaMillimeters": [
+        -0.032514333724975586,
+        0.027567148208618164,
+        -0.2364814281463623
+      ],
+      "magnitudeMillimeters": 0.24029272859593176,
+      "upwardMillimeters": -0.2350666603274524
+    },
+    {
+      "group": "eyelids",
+      "landmark": 374,
+      "nearestVertex": 714236,
+      "nearestDistanceMillimeters": 1.2256571790203452,
+      "deltaMillimeters": [
+        0.06589293479919434,
+        -0.04320591688156128,
+        0.3882497549057007
+      ],
+      "magnitudeMillimeters": 0.39616474135688035,
+      "upwardMillimeters": 0.38475773198560054
+    },
+    {
+      "group": "eyes",
+      "landmark": 33,
+      "nearestVertex": 755913,
+      "nearestDistanceMillimeters": 0.3019891446456313,
+      "deltaMillimeters": [
+        0.0019073486328125,
+        -0.0133514404296875,
+        -0.14325231313705444
+      ],
+      "magnitudeMillimeters": 0.14388580249444796,
+      "upwardMillimeters": -0.14021029996017598
+    },
+    {
+      "group": "eyes",
+      "landmark": 133,
+      "nearestVertex": 813330,
+      "nearestDistanceMillimeters": 0.4805581702385098,
+      "deltaMillimeters": [
+        -0.008463859558105469,
+        0.005561858415603638,
+        -0.12049078941345215
+      ],
+      "magnitudeMillimeters": 0.12091567938498063,
+      "upwardMillimeters": -0.11929916819074252
+    },
+    {
+      "group": "eyes",
+      "landmark": 263,
+      "nearestVertex": 405012,
+      "nearestDistanceMillimeters": 0.2688444801606238,
+      "deltaMillimeters": [
+        -0.0059157609939575195,
+        0.01138448715209961,
+        -0.049427151679992676
+      ],
+      "magnitudeMillimeters": 0.05106511626395217,
+      "upwardMillimeters": -0.04989920982999328
+    },
+    {
+      "group": "eyes",
+      "landmark": 362,
+      "nearestVertex": 187265,
+      "nearestDistanceMillimeters": 0.9314080234616995,
+      "deltaMillimeters": [
+        0.22265315055847168,
+        -0.08097290992736816,
+        0.845789909362793
+      ],
+      "magnitudeMillimeters": 0.878345950281346,
+      "upwardMillimeters": 0.830768539374043
+    },
+    {
+      "group": "nose",
+      "landmark": 168,
+      "nearestVertex": 1009354,
+      "nearestDistanceMillimeters": 0.4082932136952877,
+      "deltaMillimeters": [
+        -0.2110302448272705,
+        0.06736139766871929,
+        -0.720292329788208
+      ],
+      "magnitudeMillimeters": 0.7535863337929275,
+      "upwardMillimeters": -0.705738450843066
+    },
+    {
+      "group": "nose",
+      "landmark": 6,
+      "nearestVertex": 878975,
+      "nearestDistanceMillimeters": 0.49343472346663475,
+      "deltaMillimeters": [
+        -0.17833709716796875,
+        0.05682581104338169,
+        -0.6068497896194458
+      ],
+      "magnitudeMillimeters": 0.6350590210273382,
+      "upwardMillimeters": -0.5945576710589081
+    },
+    {
+      "group": "nose",
+      "landmark": 1,
+      "nearestVertex": 165741,
+      "nearestDistanceMillimeters": 0.5842505488544703,
+      "deltaMillimeters": [
+        -5.9604644775390625e-05,
+        1.6996636986732483e-05,
+        -0.0001825392246246338
+      ],
+      "magnitudeMillimeters": 0.00019277491505437572,
+      "upwardMillimeters": -0.00017839501114312115
+    },
+    {
+      "group": "nose",
+      "landmark": 98,
+      "nearestVertex": 969655,
+      "nearestDistanceMillimeters": 0.9728075820021331,
+      "deltaMillimeters": [
+        0.0,
+        0.0,
+        -7.450580596923828e-06
+      ],
+      "magnitudeMillimeters": 7.450580596923828e-06,
+      "upwardMillimeters": -7.372025074849872e-06
+    },
+    {
+      "group": "nose",
+      "landmark": 327,
+      "nearestVertex": 914191,
+      "nearestDistanceMillimeters": 0.4727823834400624,
+      "deltaMillimeters": [
+        0.0,
+        7.450580596923828e-06,
+        -4.470348358154297e-05
+      ],
+      "magnitudeMillimeters": 4.5320112483935204e-05,
+      "upwardMillimeters": -4.516446775920099e-05
+    },
+    {
+      "group": "cheeks",
+      "landmark": 234,
+      "nearestVertex": 110130,
+      "nearestDistanceMillimeters": 0.7318159332498908,
+      "deltaMillimeters": [
+        2.9802322387695312e-05,
+        2.9802322387695312e-05,
+        1.30385160446167e-05
+      ],
+      "magnitudeMillimeters": 4.4117567249860654e-05,
+      "upwardMillimeters": 6.998548613395076e-06
+    },
+    {
+      "group": "cheeks",
+      "landmark": 454,
+      "nearestVertex": 345810,
+      "nearestDistanceMillimeters": 0.5674049607478082,
+      "deltaMillimeters": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "magnitudeMillimeters": 0.0,
+      "upwardMillimeters": 0.0
+    },
+    {
+      "group": "chin",
+      "landmark": 152,
+      "nearestVertex": 980237,
+      "nearestDistanceMillimeters": 0.19599295046646148,
+      "deltaMillimeters": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "magnitudeMillimeters": 0.0,
+      "upwardMillimeters": 0.0
+    },
+    {
+      "group": "skull",
+      "landmark": 10,
+      "nearestVertex": 894224,
+      "nearestDistanceMillimeters": 0.8109817863442004,
+      "deltaMillimeters": [
+        -0.03269314765930176,
+        0.01057737972587347,
+        -0.11345744132995605
+      ],
+      "magnitudeMillimeters": 0.11854667375712677,
+      "upwardMillimeters": -0.11120075355171885
+    },
+    {
+      "group": "skull",
+      "landmark": 127,
+      "nearestVertex": 163109,
+      "nearestDistanceMillimeters": 0.9045990882441401,
+      "deltaMillimeters": [
+        0.0005550682544708252,
+        0.0006854534149169922,
+        0.00028312206268310547
+      ],
+      "magnitudeMillimeters": 0.0009263397074079202,
+      "upwardMillimeters": 0.00015388742555860963
+    },
+    {
+      "group": "skull",
+      "landmark": 356,
+      "nearestVertex": 303080,
+      "nearestDistanceMillimeters": 0.9669819264672697,
+      "deltaMillimeters": [
+        3.725290298461914e-06,
+        0.0,
+        0.0
+      ],
+      "magnitudeMillimeters": 3.725290298461914e-06,
+      "upwardMillimeters": -2.716532533981464e-07
+    }
+  ],
+  "rawShapeKeyMaxMillimeters": 31.703878704418653,
+  "rawShapeKeyP95Millimeters": 0.7579270107370782
+}

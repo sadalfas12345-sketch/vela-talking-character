@@ -2,6 +2,7 @@
 import json, sys
 from pathlib import Path
 import bpy, numpy as np
+from mathutils.kdtree import KDTree
 
 def arg(name):
     a=sys.argv[sys.argv.index('--')+1:]
@@ -16,13 +17,19 @@ def main():
     key=next((k for k in keys if k.name=='xfer_browInnerUp_model_agnostic'),None)
     if key is None: raise SystemExit('model-agnostic shape key missing after reimport')
     base=np.empty((len(body.data.vertices),3),float); posed=np.empty_like(base); body.data.vertices.foreach_get('co',base.ravel()); key.data.foreach_get('co',posed.ravel())
-    mw=np.asarray(body.matrix_world,float); delta=(posed-base)@mw[:3,:3].T
+    mw=np.asarray(body.matrix_world,float); world=base@mw[:3,:3].T+mw[:3,3]; delta=(posed-base)@mw[:3,:3].T
+    tree=KDTree(len(world))
+    for j,p in enumerate(world): tree.insert(tuple(p),j)
+    tree.balance()
+    # GLB export is allowed to reorder primitive vertices. Reattach each Goal-1
+    # landmark by spatial position on the exported neutral mesh, never by stale
+    # pre-export vertex ids.
     def point(i):
-        r=rec[i]; ids=np.asarray(r['triangleVertexIndices'],int); b=np.asarray(r['barycentricCoordinates'],float); return (delta[ids]*b[:,None]).sum(0)
+        _,j,_=tree.find(tuple(np.asarray(rec[i]['meshXYZ'],float))); return delta[j]
     per={str(i):{'magnitudeMillimeters':float(np.linalg.norm(point(i))*1000),'deltaMillimeters':(point(i)*1000).tolist()} for i in sum(groups.values(),[]) if i in rec}
     regional={}
     for name,ids in groups.items():
         vals=[np.linalg.norm(point(i))*1000 for i in ids if i in rec]
         regional[name]={'landmarks':len(vals),'maxMillimeters':float(max(vals)) if vals else None,'p95Millimeters':float(np.percentile(vals,95)) if vals else None,'medianMillimeters':float(np.median(vals)) if vals else None}
-    out.parent.mkdir(parents=True,exist_ok=True); out.write_text(json.dumps({'glb':str(glb),'shapeKey':key.name,'regions':regional,'landmarkDisplacements':per},indent=2)+'\n'); print(json.dumps({'regions':regional},indent=2))
+    out.parent.mkdir(parents=True,exist_ok=True); out.write_text(json.dumps({'glb':str(glb),'shapeKey':key.name,'measurement':'spatial nearest-vertex match against exported neutral mesh','regions':regional,'landmarkDisplacements':per},indent=2)+'\n'); print(json.dumps({'regions':regional},indent=2))
 if __name__=='__main__': main()
