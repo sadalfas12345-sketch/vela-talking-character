@@ -1,0 +1,27 @@
+{
+  "sharedEntryPoint": true,
+  "characterSpecificMotionParameters": false,
+  "trajectoryMaxDifferences": {
+    "0": 0.0,
+    "25": 1.8821749714348357e-15,
+    "50": 1.904726376622534e-15,
+    "75": 1.8943180357666733e-15,
+    "100": 1.835337437583462e-15
+  },
+  "maxCrossCharacterNormalizedDifference": 1.904726376622534e-15,
+  "criteria": {
+    "sharedImplementation": {
+      "pass": true
+    },
+    "zeroCharacterSpecificMotionParameters": {
+      "pass": true
+    },
+    "crossCharacterTrajectory": {
+      "value": 1.904726376622534e-15,
+      "threshold": 0.001,
+      "pass": true
+    }
+  },
+  "score": 15,
+  "pass": true
+}

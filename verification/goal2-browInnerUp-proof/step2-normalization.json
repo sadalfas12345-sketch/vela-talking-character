@@ -1,0 +1,49 @@
+{
+  "neutralRmsJitterNormalized": 0.0031671500405226873,
+  "tests": {
+    "translation": {
+      "maxErrorNormalized": 7.553412194283663e-08,
+      "pass": true
+    },
+    "rotation": {
+      "maxErrorNormalized": 1.3952844807341093e-07,
+      "pass": true
+    },
+    "scale": {
+      "maxErrorNormalized": 6.576323535932331e-08,
+      "pass": true
+    },
+    "combined": {
+      "maxErrorNormalized": 8.616299966853711e-08,
+      "pass": true
+    },
+    "expressionPreservation": {
+      "maxErrorNormalized": 9.925415590988244e-08,
+      "medianErrorNormalized": 6.137906460668578e-08,
+      "pass": true
+    }
+  },
+  "criteria": {
+    "neutral": {
+      "value": 0.0031671500405226873,
+      "threshold": 0.005,
+      "pass": true
+    },
+    "translation": {
+      "maxErrorNormalized": 7.553412194283663e-08,
+      "pass": true
+    },
+    "rotationAndScale": {
+      "maxErrorNormalized": 1.3952844807341093e-07,
+      "threshold": 0.001,
+      "pass": true
+    },
+    "expressionPreservation": {
+      "maxErrorNormalized": 9.925415590988244e-08,
+      "medianErrorNormalized": 6.137906460668578e-08,
+      "pass": true
+    }
+  },
+  "score": 20,
+  "pass": true
+}
