@@ -1,0 +1,9 @@
+"""Bake the nonlinear physics full-activation embedded target onto the original mesh."""
+import json,sys
+from pathlib import Path
+import bpy,numpy as np
+def arg(n):
+ a=sys.argv[sys.argv.index('--')+1:];return Path(a[a.index(n)+1]).resolve()
+def main():
+ src,sol,out,report=arg('--source'),arg('--solution'),arg('--output'),arg('--report');z=np.load(sol);bpy.ops.wm.read_factory_settings(use_empty=True);bpy.ops.import_scene.gltf(filepath=str(src));body=max([o for o in bpy.context.scene.objects if o.type=='MESH'],key=lambda o:len(o.data.vertices));n=len(body.data.vertices);base=np.empty((n,3),float);body.data.vertices.foreach_get('co',base.ravel());mw=np.asarray(body.matrix_world,float);inv=np.linalg.inv(mw[:3,:3]);target=np.asarray(z['render_targets'][-1]);local_target=(target-mw[:3,3])@inv[:3,:3].T;body.shape_key_add(name='Basis',from_mix=False);key=body.shape_key_add(name='anatomical_browInnerUp',from_mix=False);key.data.foreach_set('co',local_target.astype(np.float32).ravel());key.value=0;bpy.ops.object.select_all(action='DESELECT');[o.select_set(True) for o in bpy.context.scene.objects if o.type in {'MESH','ARMATURE','EMPTY'}];bpy.context.view_layer.objects.active=body;out.parent.mkdir(parents=True,exist_ok=True);bpy.ops.export_scene.gltf(filepath=str(out),export_format='GLB',export_morph=True,export_skins=True,export_animations=True,export_apply=False);report.parent.mkdir(parents=True,exist_ok=True);report.write_text(json.dumps({'shapeKey':key.name,'source':str(src),'solution':str(sol)},indent=2)+'\n')
+if __name__=='__main__':main()

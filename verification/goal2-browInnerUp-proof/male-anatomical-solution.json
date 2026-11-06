@@ -1,0 +1,39 @@
+{
+  "physics": "C:\\Users\\USER\\talking-character-demo\\verification\\goal2-browInnerUp-proof\\male-face-physics.npz",
+  "donor": "C:\\Users\\USER\\talking-character-demo\\verification\\goal2-browInnerUp-proof\\male-real-brow-motion.json",
+  "activationRatio": 0.023861350390786445,
+  "contraction": 0.011930675195393222,
+  "weights": [
+    {
+      "activation": 0,
+      "iterations": 1,
+      "maxPhysicsDisplacement": 0.0,
+      "minTriangleAreaRatio": 1.0
+    },
+    {
+      "activation": 0.25,
+      "iterations": 500,
+      "maxPhysicsDisplacement": 0.00034815815870542705,
+      "minTriangleAreaRatio": 0.8043268474028882
+    },
+    {
+      "activation": 0.5,
+      "iterations": 500,
+      "maxPhysicsDisplacement": 0.0005881637927184866,
+      "minTriangleAreaRatio": 0.6477130215211562
+    },
+    {
+      "activation": 0.75,
+      "iterations": 500,
+      "maxPhysicsDisplacement": 0.0008683908810777186,
+      "minTriangleAreaRatio": 0.5165620707499713
+    },
+    {
+      "activation": 1,
+      "iterations": 500,
+      "maxPhysicsDisplacement": 0.0011485136643505495,
+      "minTriangleAreaRatio": 0.3286235569366392
+    }
+  ],
+  "runtimeSeconds": 41.71735501289368
+}

@@ -1,0 +1,39 @@
+{
+  "physics": "C:\\Users\\USER\\talking-character-demo\\verification\\goal2-browInnerUp-proof\\female-face-physics.npz",
+  "donor": "C:\\Users\\USER\\talking-character-demo\\verification\\goal2-browInnerUp-proof\\female-real-brow-motion.json",
+  "activationRatio": 0.023861350390786445,
+  "contraction": 0.011930675195393222,
+  "weights": [
+    {
+      "activation": 0,
+      "iterations": 1,
+      "maxPhysicsDisplacement": 0.0,
+      "minTriangleAreaRatio": 1.0
+    },
+    {
+      "activation": 0.25,
+      "iterations": 36,
+      "maxPhysicsDisplacement": 0.0007077453392032691,
+      "minTriangleAreaRatio": 0.016131963270552926
+    },
+    {
+      "activation": 0.5,
+      "iterations": 36,
+      "maxPhysicsDisplacement": 0.0007079206777537954,
+      "minTriangleAreaRatio": 0.015892522053097668
+    },
+    {
+      "activation": 0.75,
+      "iterations": 36,
+      "maxPhysicsDisplacement": 0.0005311544360296343,
+      "minTriangleAreaRatio": 0.26191110925500616
+    },
+    {
+      "activation": 1,
+      "iterations": 36,
+      "maxPhysicsDisplacement": 0.0007082713548043706,
+      "minTriangleAreaRatio": 0.015413640197286518
+    }
+  ],
+  "runtimeSeconds": 16.38435173034668
+}

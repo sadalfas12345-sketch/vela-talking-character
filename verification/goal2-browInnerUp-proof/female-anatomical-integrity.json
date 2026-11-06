@@ -1,0 +1,67 @@
+{
+  "glb": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\vela-photoreal\\intermediates\\goal2-brow-female-anatomical-physics.glb",
+  "vertexCount": 999852,
+  "triangleCount": 1943912,
+  "neutralZeroAreaTriangles": 0,
+  "deformedZeroAreaTriangles": 0,
+  "deformedCollapsedTriangles": 0,
+  "deformedWindingFlips": 2,
+  "flippedTriangleIndices": [
+    840476,
+    840478
+  ],
+  "flippedTriangleVertexIndices": [
+    [
+      392412,
+      390740,
+      391287
+    ],
+    [
+      390741,
+      387732,
+      391288
+    ]
+  ],
+  "flippedTriangleCentroids": [
+    [
+      0.05370500932137171,
+      -0.014735356904566288,
+      0.9299546678860983
+    ],
+    [
+      0.05346207693219185,
+      -0.014604145040114721,
+      0.9300407369931539
+    ]
+  ],
+  "byWeight": {
+    "0.0": {
+      "zeroAreaTriangles": 0,
+      "collapsedTriangles": 0,
+      "windingFlips": 0
+    },
+    "0.25": {
+      "zeroAreaTriangles": 0,
+      "collapsedTriangles": 0,
+      "windingFlips": 0
+    },
+    "0.5": {
+      "zeroAreaTriangles": 0,
+      "collapsedTriangles": 0,
+      "windingFlips": 0
+    },
+    "0.75": {
+      "zeroAreaTriangles": 0,
+      "collapsedTriangles": 0,
+      "windingFlips": 0
+    },
+    "1.0": {
+      "zeroAreaTriangles": 0,
+      "collapsedTriangles": 0,
+      "windingFlips": 2
+    }
+  },
+  "nonManifoldOrBoundaryEdges": 55312,
+  "topologyStable": false,
+  "shapeKey": "anatomical_browInnerUp"
+}

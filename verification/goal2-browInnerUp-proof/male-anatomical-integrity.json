@@ -1,0 +1,67 @@
+{
+  "glb": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\generalization-male-20261105\\goal2-brow-male-anatomical-physics.glb",
+  "vertexCount": 1025404,
+  "triangleCount": 1897687,
+  "neutralZeroAreaTriangles": 0,
+  "deformedZeroAreaTriangles": 0,
+  "deformedCollapsedTriangles": 0,
+  "deformedWindingFlips": 2,
+  "flippedTriangleIndices": [
+    571272,
+    573118
+  ],
+  "flippedTriangleVertexIndices": [
+    [
+      591490,
+      991123,
+      5524
+    ],
+    [
+      209403,
+      61799,
+      5525
+    ]
+  ],
+  "flippedTriangleCentroids": [
+    [
+      0.2223398337761561,
+      -0.16764743626117706,
+      0.2376315693060557
+    ],
+    [
+      0.222060297926267,
+      -0.16764817635218301,
+      0.2355861266454061
+    ]
+  ],
+  "byWeight": {
+    "0.0": {
+      "zeroAreaTriangles": 0,
+      "collapsedTriangles": 0,
+      "windingFlips": 0
+    },
+    "0.25": {
+      "zeroAreaTriangles": 0,
+      "collapsedTriangles": 0,
+      "windingFlips": 0
+    },
+    "0.5": {
+      "zeroAreaTriangles": 0,
+      "collapsedTriangles": 0,
+      "windingFlips": 0
+    },
+    "0.75": {
+      "zeroAreaTriangles": 0,
+      "collapsedTriangles": 0,
+      "windingFlips": 0
+    },
+    "1.0": {
+      "zeroAreaTriangles": 0,
+      "collapsedTriangles": 0,
+      "windingFlips": 2
+    }
+  },
+  "nonManifoldOrBoundaryEdges": 134609,
+  "topologyStable": false,
+  "shapeKey": "anatomical_browInnerUp"
+}

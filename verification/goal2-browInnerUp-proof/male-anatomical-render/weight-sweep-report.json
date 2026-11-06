@@ -1,0 +1,18 @@
+{
+  "glb": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\generalization-male-20261105\\goal2-brow-male-anatomical-physics.glb",
+  "shapeKey": "anatomical_browInnerUp",
+  "weights": [
+    0,
+    0.25,
+    0.5,
+    0.75,
+    1
+  ],
+  "captures": [
+    "C:\\Users\\USER\\talking-character-demo\\verification\\goal2-browInnerUp-proof\\male-anatomical-render\\browInnerUp_0.00.png",
+    "C:\\Users\\USER\\talking-character-demo\\verification\\goal2-browInnerUp-proof\\male-anatomical-render\\browInnerUp_0.25.png",
+    "C:\\Users\\USER\\talking-character-demo\\verification\\goal2-browInnerUp-proof\\male-anatomical-render\\browInnerUp_0.50.png",
+    "C:\\Users\\USER\\talking-character-demo\\verification\\goal2-browInnerUp-proof\\male-anatomical-render\\browInnerUp_0.75.png",
+    "C:\\Users\\USER\\talking-character-demo\\verification\\goal2-browInnerUp-proof\\male-anatomical-render\\browInnerUp_1.00.png"
+  ]
+}
