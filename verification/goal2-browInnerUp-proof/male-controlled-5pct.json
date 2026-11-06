@@ -1,0 +1,39 @@
+{
+  "architecture": "controlled 5% anatomical-up constrained surface test",
+  "shapeKey": "controlled_brow_5pct",
+  "eyeWidthMillimeters": 299.7431104458742,
+  "requestedMillimeters": 14.987155522293712,
+  "requestedVector": [
+    -1.0928838374008145,
+    -1.875395392459832,
+    14.829137793186339
+  ],
+  "browBeforeCorrectionMillimeters": [
+    14.98715552229371,
+    14.987155522293712,
+    14.987155522293712,
+    14.987155522293712,
+    14.987155522293714,
+    14.98715552229371
+  ],
+  "browAfterInversionCorrectionMillimeters": [
+    1.1107041630296774,
+    0.936697220143357,
+    0.936697220143357,
+    0.555101633266747,
+    0.5077621677155517,
+    0.9472828010033995
+  ],
+  "browAfterHardConstraintReenforcementMillimeters": [
+    14.987155522293714,
+    14.98715552229371,
+    14.98715552229371,
+    14.987155522293712,
+    14.987155522293712,
+    14.987155522293714
+  ],
+  "inversionsBeforeExport": 35,
+  "inversionProjectionIterations": 8,
+  "minimumLocalFactor": 0.015625,
+  "output": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\generalization-male-20261105\\goal2-brow-male-controlled-5pct.glb"
+}

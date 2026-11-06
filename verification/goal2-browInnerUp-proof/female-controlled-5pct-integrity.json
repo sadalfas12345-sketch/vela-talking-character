@@ -1,0 +1,12 @@
+{
+  "glb": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\vela-photoreal\\intermediates\\goal2-brow-female-controlled-5pct.glb",
+  "vertexCount": 999852,
+  "triangleCount": 1943912,
+  "neutralZeroAreaTriangles": 0,
+  "deformedZeroAreaTriangles": 0,
+  "deformedCollapsedTriangles": 0,
+  "deformedWindingFlips": 27,
+  "nonManifoldOrBoundaryEdges": 55312,
+  "topologyStable": false,
+  "shapeKey": "controlled_brow_5pct"
+}

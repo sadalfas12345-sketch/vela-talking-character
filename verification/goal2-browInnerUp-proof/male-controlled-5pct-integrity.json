@@ -1,0 +1,12 @@
+{
+  "glb": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\generalization-male-20261105\\goal2-brow-male-controlled-5pct.glb",
+  "vertexCount": 1025404,
+  "triangleCount": 1897687,
+  "neutralZeroAreaTriangles": 0,
+  "deformedZeroAreaTriangles": 0,
+  "deformedCollapsedTriangles": 0,
+  "deformedWindingFlips": 35,
+  "nonManifoldOrBoundaryEdges": 134609,
+  "topologyStable": false,
+  "shapeKey": "controlled_brow_5pct"
+}

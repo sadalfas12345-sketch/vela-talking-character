@@ -1,0 +1,39 @@
+{
+  "architecture": "controlled 5% anatomical-up constrained surface test",
+  "shapeKey": "controlled_brow_5pct",
+  "eyeWidthMillimeters": 55.84288580934188,
+  "requestedMillimeters": 2.7921442904670943,
+  "requestedVector": [
+    0.6417070175461672,
+    1.177974606607064,
+    2.448807397205613
+  ],
+  "browBeforeCorrectionMillimeters": [
+    2.7921442904670943,
+    2.7921442904670943,
+    2.7921442904670943,
+    2.7921442904670943,
+    2.792144290467094,
+    2.792144290467094
+  ],
+  "browAfterInversionCorrectionMillimeters": [
+    0.26085949438289213,
+    1.649052781253984,
+    0.477762818622436,
+    1.3960721452335472,
+    0.2432568614606333,
+    0.6079961754324579
+  ],
+  "browAfterHardConstraintReenforcementMillimeters": [
+    2.7921442904670943,
+    2.7921442904670943,
+    2.7921442904670943,
+    2.7921442904670943,
+    2.7921442904670943,
+    2.792144290467095
+  ],
+  "inversionsBeforeExport": 27,
+  "inversionProjectionIterations": 4,
+  "minimumLocalFactor": 0.0625,
+  "output": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\vela-photoreal\\intermediates\\goal2-brow-female-controlled-5pct.glb"
+}
