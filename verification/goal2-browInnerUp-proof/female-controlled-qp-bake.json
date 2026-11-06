@@ -1,0 +1,10 @@
+{
+  "shapeKey": "controlled_brow_5pct_qp",
+  "source": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\vela-photoreal\\generated-rigged.glb",
+  "solution": "C:\\Users\\USER\\talking-character-demo\\verification\\goal2-browInnerUp-proof\\female-controlled-qp-solution.npz",
+  "constraintResidual": [
+    8.076254414346409e-13,
+    2.4449643380552646e-12,
+    3.5810915098066548e-12
+  ]
+}

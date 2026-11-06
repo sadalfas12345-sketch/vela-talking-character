@@ -14,7 +14,7 @@ def main():
     focus=Vector(c['target']); s=float(c['orthoScale'])
     for name,loc,energy,size in [('key',focus+Vector((s*1.4,-s*1.4,s*1.4)),300,s*.9),('fill',focus+Vector((-s*1.1,-s*.5,s*.7)),150,s),('rim',focus+Vector((0,s,s*1.1)),220,s*.8)]:
         ld=bpy.data.lights.new(name,'AREA'); ld.energy=energy; ld.shape='DISK'; ld.size=size; ob=bpy.data.objects.new(name,ld); scene.collection.objects.link(ob); ob.location=loc; ob.rotation_euler=(focus-ob.location).to_track_quat('-Z','Y').to_euler()
-    keyname='xfer_browInnerUp_model_agnostic'; captures=[]
+    keyname=os.environ.get('VELA_GOAL2_BROW_KEY','xfer_browInnerUp_model_agnostic'); captures=[]
     for weight in [0,.25,.5,.75,1]:
         for ob in scene.objects:
             if ob.type=='MESH' and ob.data.shape_keys:
