@@ -33,6 +33,10 @@ def main():
  d0=np.min(np.linalg.norm(e0[:,None]-brow_world[None],axis=2),axis=1); d1=np.min(np.linalg.norm(e1[:,None]-brow_world[None],axis=2),axis=1)
  quality_edges=edges[(d0<=.012*eye)&(d1<=.012*eye)]
  quality_lengths=np.linalg.norm(world[ids][quality_edges[:,0]]-world[ids][quality_edges[:,1]],axis=1)
- np.savez_compressed(out,source=str(source),local_indices=ids,local_coords=local[ids],world_coords=world[ids],edges=edges,edge_lengths=edge_lengths,quality_edges=quality_edges,quality_edge_lengths=quality_lengths,constraint_vertices=np.asarray(cvi),constraint_bary=np.asarray(cb),desired=desired,eye_width=eye,up=up,matrix_world=mw,orientation_triangles=np.asarray(local_tris),orientation_normals=np.asarray(ori_n),orientation_q0=np.asarray(ori_q))
+ keys=np.round(world[ids],8); _,dup_inv,dup_counts=np.unique(keys,axis=0,return_inverse=True,return_counts=True); duplicate_pairs=[]
+ for g,cnt in enumerate(dup_counts):
+  members=np.flatnonzero(dup_inv==g)
+  for j in range(1,len(members)): duplicate_pairs.append((int(members[0]),int(members[j])))
+ np.savez_compressed(out,source=str(source),local_indices=ids,local_coords=local[ids],world_coords=world[ids],edges=edges,edge_lengths=edge_lengths,quality_edges=quality_edges,quality_edge_lengths=quality_lengths,duplicate_pairs=np.asarray(duplicate_pairs,dtype=int),constraint_vertices=np.asarray(cvi),constraint_bary=np.asarray(cb),desired=desired,eye_width=eye,up=up,matrix_world=mw,orientation_triangles=np.asarray(local_tris),orientation_normals=np.asarray(ori_n),orientation_q0=np.asarray(ori_q))
  print(json.dumps({'source':str(source),'localVertices':len(ids),'edges':len(edges),'orientationTriangles':len(local_tris),'eyeWidthMillimeters':eye*1000,'requestedBrowMillimeters':(np.linalg.norm(desired_brow,axis=1)*1000).tolist(),'problem':str(out)}))
 if __name__=='__main__': main()
