@@ -1,0 +1,20 @@
+{
+  "embedding90Degree": {
+    "passed": true,
+    "got": [
+      -0.3,
+      0.2,
+      0.1
+    ],
+    "expected": [
+      -0.3,
+      0.2,
+      0.1
+    ]
+  },
+  "dihedralFiniteDifference": {
+    "passed": true,
+    "gradientNormAtNeutral": 3.4324934947113327e-13,
+    "energyAtNeutral": 0.0
+  }
+}

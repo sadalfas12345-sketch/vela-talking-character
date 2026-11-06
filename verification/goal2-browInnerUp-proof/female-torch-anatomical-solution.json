@@ -1,0 +1,74 @@
+{
+  "targetRatio": 0.023861350390786445,
+  "trialContraction": 0.1,
+  "trialObservedBrow": 0.00025215974124598696,
+  "calibratedContraction": 0.1,
+  "weights": [
+    {
+      "stretch": 0.0,
+      "bend": 0.0,
+      "anchor": 0.0,
+      "muscle": 0.0,
+      "quality": 0.0,
+      "minArea": 0.9999999999999996,
+      "gradientResidual": 0.0,
+      "energy": 0.0,
+      "activation": 0,
+      "browObservedPhysicsMean": 0.0,
+      "browTargetMean": 0.0013324866651293827
+    },
+    {
+      "stretch": 6.370808814367876e-06,
+      "bend": 1.240125895883857e-06,
+      "anchor": 5.8622542127274374e-09,
+      "muscle": 1.5941480862755047e-06,
+      "quality": 0.0,
+      "minArea": 0.2500063782746488,
+      "gradientResidual": 0.008908047840255324,
+      "energy": 9.210945050739964e-06,
+      "activation": 0.25,
+      "browObservedPhysicsMean": 8.065341435732017e-05,
+      "browTargetMean": 0.0013324866651293827
+    },
+    {
+      "stretch": 2.4466062704633152e-05,
+      "bend": 4.756047636931519e-06,
+      "anchor": 2.1563655128222494e-08,
+      "muscle": 6.917980633033022e-06,
+      "quality": 1.0118651951112651e-12,
+      "minArea": 0.2499901353623577,
+      "gradientResidual": 0.015820420526171587,
+      "energy": 3.616165564159111e-05,
+      "activation": 0.5,
+      "browObservedPhysicsMean": 0.00016056843174481434,
+      "browTargetMean": 0.0013324866651293827
+    },
+    {
+      "stretch": 5.464589411515942e-05,
+      "bend": 1.119294276569764e-05,
+      "anchor": 4.59812027136188e-08,
+      "muscle": 1.593975255990125e-05,
+      "quality": 0.0,
+      "minArea": 0.2514541081343743,
+      "gradientResidual": 0.020392004100216923,
+      "energy": 8.182457064347194e-05,
+      "activation": 0.75,
+      "browObservedPhysicsMean": 0.00024045170588727285,
+      "browTargetMean": 0.0013324866651293827
+    },
+    {
+      "stretch": 9.222592255850669e-05,
+      "bend": 1.9817906297523557e-05,
+      "anchor": 8.404067258985983e-08,
+      "muscle": 2.6004970056827017e-05,
+      "quality": 0.0,
+      "minArea": 0.2531065568018199,
+      "gradientResidual": 0.04104842631761623,
+      "energy": 0.0001381328395854471,
+      "activation": 1,
+      "browObservedPhysicsMean": 0.0003397043377310978,
+      "browTargetMean": 0.0013324866651293827
+    }
+  ],
+  "runtimeSeconds": 42.95215678215027
+}
