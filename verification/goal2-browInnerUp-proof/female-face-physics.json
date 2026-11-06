@@ -1,0 +1,22 @@
+{
+  "glb": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\vela-photoreal\\generated-rigged.glb",
+  "faceRenderVertices": 135183,
+  "renderVertices": 999787,
+  "physicsNodes": 7229,
+  "physicsTriangles": 9617,
+  "stretchSprings": 16766,
+  "bendEdges": 12085,
+  "anchors": 2909,
+  "frontalisFibers": 2006,
+  "embeddingCoverageOnFace": 0.999866847162735,
+  "neutralErrorMaxOnFace": 1.3552527156068805e-20,
+  "neutralErrorP95OnFace": 0.0,
+  "regionCounts": {
+    "brow": 2006,
+    "eye": 887,
+    "eyelid": 191,
+    "jaw": 2216,
+    "mouth": 1602,
+    "nose": 327
+  }
+}

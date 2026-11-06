@@ -1,0 +1,22 @@
+{
+  "glb": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\generalization-male-20261105\\generated-original.glb",
+  "faceRenderVertices": 481671,
+  "renderVertices": 991219,
+  "physicsNodes": 9416,
+  "physicsTriangles": 9506,
+  "stretchSprings": 18168,
+  "bendEdges": 10350,
+  "anchors": 3262,
+  "frontalisFibers": 2695,
+  "embeddingCoverageOnFace": 0.9975024446146852,
+  "neutralErrorMaxOnFace": 2.710505431213761e-20,
+  "neutralErrorP95OnFace": 0.0,
+  "regionCounts": {
+    "brow": 2695,
+    "eye": 419,
+    "eyelid": 236,
+    "jaw": 2931,
+    "mouth": 2804,
+    "nose": 331
+  }
+}
