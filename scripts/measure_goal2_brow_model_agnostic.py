@@ -1,5 +1,5 @@
 """Measure Goal-2 brow motion from an exported target and its Goal-1 manifest."""
-import json, sys
+import json, sys, os
 from pathlib import Path
 import bpy, numpy as np
 from mathutils.kdtree import KDTree
@@ -14,7 +14,7 @@ def main():
     groups={'brows':[70,63,105,336,293,334],'eyelids':[159,145,386,374],'eyes':[33,133,263,362],'nose':[168,6,1,98,327],'cheeks':[234,454],'chin':[152],'skull':[10,127,356]}
     bpy.ops.wm.read_factory_settings(use_empty=True); bpy.ops.import_scene.gltf(filepath=str(glb))
     body=max([o for o in bpy.context.scene.objects if o.type=='MESH'],key=lambda o:len(o.data.vertices)); keys=body.data.shape_keys.key_blocks if body.data.shape_keys else []
-    key=next((k for k in keys if k.name=='xfer_browInnerUp_model_agnostic'),None)
+    key=next((k for k in keys if k.name==os.environ.get('VELA_GOAL2_BROW_KEY','xfer_browInnerUp_model_agnostic')),None)
     if key is None: raise SystemExit('model-agnostic shape key missing after reimport')
     base=np.empty((len(body.data.vertices),3),float); posed=np.empty_like(base); body.data.vertices.foreach_get('co',base.ravel()); key.data.foreach_get('co',posed.ravel())
     mw=np.asarray(body.matrix_world,float); world=base@mw[:3,:3].T+mw[:3,3]; delta=(posed-base)@mw[:3,:3].T

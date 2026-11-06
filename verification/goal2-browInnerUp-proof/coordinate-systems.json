@@ -1,0 +1,130 @@
+{
+  "female": {
+    "glb": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\vela-photoreal\\generated-rigged.glb",
+    "mesh": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+    "vertexCount": 999787,
+    "localBoundsMin": [
+      -0.08424435555934906,
+      -0.16185691952705383,
+      0.0003778485406655818
+    ],
+    "localBoundsMax": [
+      0.08409644663333893,
+      0.16284134984016418,
+      0.9815706610679626
+    ],
+    "worldBoundsMin": [
+      -0.08417043089866638,
+      -0.1623491421341896,
+      -4.4907210394740105e-08
+    ],
+    "worldBoundsMax": [
+      0.0841703712940216,
+      0.1623491272330284,
+      0.9811927676200867
+    ],
+    "worldExtentsMillimeters": [
+      168.340802192688,
+      324.698269367218,
+      981.1928125272971
+    ],
+    "matrixWorld": [
+      [
+        1.0,
+        0.0,
+        0.0,
+        7.392466068267822e-05
+      ],
+      [
+        0.0,
+        1.0,
+        0.0,
+        -0.0004922226071357727
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        -0.00037789344787597656
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "objectScale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "armaturePresent": true,
+    "sceneUnitScale": 1.0,
+    "goal1InterocularMillimeters": 55.84288580934188
+  },
+  "male": {
+    "glb": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\generalization-male-20261105\\generated-original.glb",
+    "mesh": "tripo_node_282c7782-479e-4c50-8808-1a2c3cdb2977",
+    "vertexCount": 991219,
+    "localBoundsMin": [
+      -0.4212241768836975,
+      -0.44494861364364624,
+      -0.4903058111667633
+    ],
+    "localBoundsMax": [
+      0.42142611742019653,
+      0.44483932852745056,
+      0.4903619587421417
+    ],
+    "worldBoundsMin": [
+      -0.4212241768836975,
+      -0.44494861364364624,
+      -0.4903058111667633
+    ],
+    "worldBoundsMax": [
+      0.42142611742019653,
+      0.44483932852745056,
+      0.4903619587421417
+    ],
+    "worldExtentsMillimeters": [
+      842.650294303894,
+      889.7879421710968,
+      980.667769908905
+    ],
+    "matrixWorld": [
+      [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "objectScale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "armaturePresent": false,
+    "sceneUnitScale": 1.0,
+    "goal1InterocularMillimeters": 299.7431104458742
+  }
+}

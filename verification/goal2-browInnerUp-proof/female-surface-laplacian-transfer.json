@@ -1,0 +1,17 @@
+{
+  "architecture": "constrained surface Laplacian deformation on local target mesh adjacency; donor motion only; original target vertices retained",
+  "shapeKey": "xfer_browInnerUp_surface_laplacian",
+  "source": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\vela-photoreal\\generated-rigged.glb",
+  "goal1Manifest": "C:\\Users\\USER\\talking-character-demo\\verification\\goal1-generalization-run\\cross-character-accuracy\\female\\refined\\raycast-report.json",
+  "targetVertexCount": 999787,
+  "targetHasArmature": true,
+  "eyeWidthMillimeters": 55.84288580934188,
+  "donorEyeWidthMillimeters": 91.31379558222632,
+  "motionScaleTargetOverDonorEyeWidth": 0.6115492785430919,
+  "localSubmeshVertexCount": 80436,
+  "surfaceEdgeCount": 464532,
+  "laplacianIterations": 24,
+  "inversionProjectionIterations": 5,
+  "minimumLocalMotionFactor": 0.0625,
+  "output": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\vela-photoreal\\intermediates\\goal2-brow-female-surface-laplacian.glb"
+}
