@@ -1,0 +1,9 @@
+{
+  "glb": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\generalization-male-20261105\\goal2-brow-model-agnostic.glb",
+  "shapeKey": "xfer_browInnerUp_model_agnostic",
+  "captures": [
+    "C:\\Users\\USER\\talking-character-demo\\verification\\goal2-browInnerUp-proof\\male-model-agnostic-render\\neutral.png",
+    "C:\\Users\\USER\\talking-character-demo\\verification\\goal2-browInnerUp-proof\\male-model-agnostic-render\\browInnerUp_50.png",
+    "C:\\Users\\USER\\talking-character-demo\\verification\\goal2-browInnerUp-proof\\male-model-agnostic-render\\browInnerUp_100.png"
+  ]
+}
