@@ -1,0 +1,8 @@
+{
+  "input": "verification\\goal2-browInnerUp-proof\\male-real-qp-solution.npz",
+  "scale": 0.33495020083501004,
+  "edgeCount": 418134,
+  "edgeRatioMin": 0.8044507756692707,
+  "edgeRatioMax": 1.2499999999971194,
+  "minSignedArea": 1.9280592579428072e-07
+}

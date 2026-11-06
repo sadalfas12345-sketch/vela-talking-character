@@ -1,0 +1,8 @@
+{
+  "input": "verification\\goal2-browInnerUp-proof\\female-real-qp-solution.npz",
+  "scale": 0.31163501807895955,
+  "edgeCount": 106863,
+  "edgeRatioMin": 0.8000000000024272,
+  "edgeRatioMax": 1.153050736729311,
+  "minSignedArea": 4.028762183378802e-08
+}

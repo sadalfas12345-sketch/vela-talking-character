@@ -1,0 +1,42 @@
+{
+  "glb": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\vela-photoreal\\intermediates\\goal2-brow-female-real-qp.glb",
+  "vertexCount": 999852,
+  "triangleCount": 1943912,
+  "neutralZeroAreaTriangles": 0,
+  "deformedZeroAreaTriangles": 0,
+  "deformedCollapsedTriangles": 0,
+  "deformedWindingFlips": 0,
+  "flippedTriangleIndices": [],
+  "flippedTriangleVertexIndices": [],
+  "flippedTriangleCentroids": [],
+  "byWeight": {
+    "0.0": {
+      "zeroAreaTriangles": 0,
+      "collapsedTriangles": 0,
+      "windingFlips": 0
+    },
+    "0.25": {
+      "zeroAreaTriangles": 0,
+      "collapsedTriangles": 0,
+      "windingFlips": 0
+    },
+    "0.5": {
+      "zeroAreaTriangles": 0,
+      "collapsedTriangles": 0,
+      "windingFlips": 0
+    },
+    "0.75": {
+      "zeroAreaTriangles": 0,
+      "collapsedTriangles": 0,
+      "windingFlips": 0
+    },
+    "1.0": {
+      "zeroAreaTriangles": 0,
+      "collapsedTriangles": 0,
+      "windingFlips": 0
+    }
+  },
+  "nonManifoldOrBoundaryEdges": 55312,
+  "topologyStable": false,
+  "shapeKey": "real_browInnerUp_qp"
+}
