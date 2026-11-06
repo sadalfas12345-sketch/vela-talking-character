@@ -1,0 +1,10 @@
+{
+  "shapeKey": "real_browInnerUp_qp",
+  "source": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\generalization-male-20261105\\generated-original.glb",
+  "solution": "C:\\Users\\USER\\talking-character-demo\\verification\\goal2-browInnerUp-proof\\male-real-qp-solution.npz",
+  "constraintResidual": [
+    5.5752156363775285e-12,
+    2.64916723540648e-13,
+    6.133652613593554e-12
+  ]
+}

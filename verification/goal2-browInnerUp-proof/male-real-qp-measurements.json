@@ -1,0 +1,251 @@
+{
+  "glb": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\generalization-male-20261105\\goal2-brow-male-real-qp.glb",
+  "shapeKey": "real_browInnerUp_qp",
+  "measurement": "spatial nearest-vertex match against exported neutral mesh",
+  "regions": {
+    "brows": {
+      "landmarks": 6,
+      "maxMillimeters": 27.155613845429194,
+      "p95Millimeters": 22.342279681557166,
+      "medianMillimeters": 3.352126520577141
+    },
+    "eyelids": {
+      "landmarks": 4,
+      "maxMillimeters": 0.0015746304585188748,
+      "p95Millimeters": 0.0013893075898345258,
+      "medianMillimeters": 0.00016957233364494207
+    },
+    "eyes": {
+      "landmarks": 4,
+      "maxMillimeters": 0.003453245648299409,
+      "p95Millimeters": 0.0031685991026561386,
+      "medianMillimeters": 0.0007778010053388049
+    },
+    "nose": {
+      "landmarks": 5,
+      "maxMillimeters": 0.0002888266011435306,
+      "p95Millimeters": 0.00028718913402653984,
+      "medianMillimeters": 0.0001659233240226628
+    },
+    "cheeks": {
+      "landmarks": 2,
+      "maxMillimeters": 0.0,
+      "p95Millimeters": 0.0,
+      "medianMillimeters": 0.0
+    },
+    "chin": {
+      "landmarks": 1,
+      "maxMillimeters": 0.0,
+      "p95Millimeters": 0.0,
+      "medianMillimeters": 0.0
+    },
+    "skull": {
+      "landmarks": 3,
+      "maxMillimeters": 0.004514867417657495,
+      "p95Millimeters": 0.0040633806758917455,
+      "medianMillimeters": 0.0
+    }
+  },
+  "landmarkDisplacements": {
+    "70": {
+      "magnitudeMillimeters": 0.056163978891832354,
+      "deltaMillimeters": [
+        0.038236379623413086,
+        0.03316998481750488,
+        0.024333596229553223
+      ]
+    },
+    "63": {
+      "magnitudeMillimeters": 1.5079314631518745,
+      "deltaMillimeters": [
+        -0.4474073648452759,
+        0.6959885358810425,
+        1.2606680393218994
+      ]
+    },
+    "105": {
+      "magnitudeMillimeters": 7.902277189941087,
+      "deltaMillimeters": [
+        -4.530042409896851,
+        -0.26097893714904785,
+        6.469666957855225
+      ]
+    },
+    "336": {
+      "magnitudeMillimeters": 27.155613845429194,
+      "deltaMillimeters": [
+        -7.365375757217407,
+        -3.396686166524887,
+        25.91603994369507
+      ]
+    },
+    "293": {
+      "magnitudeMillimeters": 0.5910207973522714,
+      "deltaMillimeters": [
+        0.377461314201355,
+        -0.4450082778930664,
+        0.09378790855407715
+      ]
+    },
+    "334": {
+      "magnitudeMillimeters": 5.196321578002408,
+      "deltaMillimeters": [
+        -3.037065267562866,
+        -0.38148462772369385,
+        4.199102520942688
+      ]
+    },
+    "159": {
+      "magnitudeMillimeters": 0.00033914466728988415,
+      "deltaMillimeters": [
+        8.940696716308594e-05,
+        -0.00016391277313232422,
+        -0.00028312206268310547
+      ]
+    },
+    "145": {
+      "magnitudeMillimeters": 0.0015746304585188748,
+      "deltaMillimeters": [
+        0.0004172325134277344,
+        -0.0007525086402893066,
+        -0.0013187527656555176
+      ]
+    },
+    "386": {
+      "magnitudeMillimeters": 0.0,
+      "deltaMillimeters": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "374": {
+      "magnitudeMillimeters": 0.0,
+      "deltaMillimeters": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "33": {
+      "magnitudeMillimeters": 0.003453245648299409,
+      "deltaMillimeters": [
+        0.0009387731552124023,
+        -0.0016391277313232422,
+        -0.0028908252716064453
+      ]
+    },
+    "133": {
+      "magnitudeMillimeters": 0.0015556020106776097,
+      "deltaMillimeters": [
+        0.00043213367462158203,
+        -0.0007301568984985352,
+        -0.00130385160446167
+      ]
+    },
+    "263": {
+      "magnitudeMillimeters": 0.0,
+      "deltaMillimeters": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "362": {
+      "magnitudeMillimeters": 0.0,
+      "deltaMillimeters": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "168": {
+      "magnitudeMillimeters": 0.0002888266011435306,
+      "deltaMillimeters": [
+        8.940696716308594e-05,
+        -0.00013632234185934067,
+        -0.0002384185791015625
+      ]
+    },
+    "6": {
+      "magnitudeMillimeters": 0.00028063926555857704,
+      "deltaMillimeters": [
+        5.9604644775390625e-05,
+        -0.00013550743460655212,
+        -0.0002384185791015625
+      ]
+    },
+    "1": {
+      "magnitudeMillimeters": 0.0001659233240226628,
+      "deltaMillimeters": [
+        2.9802322387695312e-05,
+        -8.12578946352005e-05,
+        -0.00014156103134155273
+      ]
+    },
+    "98": {
+      "magnitudeMillimeters": 0.0,
+      "deltaMillimeters": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "327": {
+      "magnitudeMillimeters": 0.0,
+      "deltaMillimeters": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "234": {
+      "magnitudeMillimeters": 0.0,
+      "deltaMillimeters": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "454": {
+      "magnitudeMillimeters": 0.0,
+      "deltaMillimeters": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "152": {
+      "magnitudeMillimeters": 0.0,
+      "deltaMillimeters": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "10": {
+      "magnitudeMillimeters": 0.0,
+      "deltaMillimeters": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "127": {
+      "magnitudeMillimeters": 0.004514867417657495,
+      "deltaMillimeters": [
+        -0.0010356307029724121,
+        0.0022202730178833008,
+        0.0037923455238342285
+      ]
+    },
+    "356": {
+      "magnitudeMillimeters": 0.0,
+      "deltaMillimeters": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  }
+}
