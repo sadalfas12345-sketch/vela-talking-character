@@ -1,0 +1,56 @@
+{
+  "source": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\generalization-male-20261105\\generated-original.glb",
+  "shapeKey": "direct_browInnerUp_test",
+  "eyeWidth": 0.2997431104458742,
+  "upAxis": [
+    -0.3709268282473393,
+    -0.008118341242886623,
+    0.92862660990402
+  ],
+  "browLandmarks": [
+    70,
+    63,
+    105,
+    336,
+    293,
+    334
+  ],
+  "candidateMovedVertices": 47469,
+  "requestedBrowDisplacementMeters": 0.001,
+  "chosenBrowDisplacementMeters": 0.0005,
+  "achievedWeightedMeanMeters": 0.00021686973093972025,
+  "weights": {
+    "0": {
+      "inversions": 0,
+      "collapsed": 0,
+      "zeroArea": 0,
+      "minAreaRatio": 1.0
+    },
+    "0.25": {
+      "inversions": 0,
+      "collapsed": 0,
+      "zeroArea": 0,
+      "minAreaRatio": 0.7964896586374263
+    },
+    "0.5": {
+      "inversions": 0,
+      "collapsed": 0,
+      "zeroArea": 0,
+      "minAreaRatio": 0.5934839294406021
+    },
+    "0.75": {
+      "inversions": 0,
+      "collapsed": 0,
+      "zeroArea": 0,
+      "minAreaRatio": 0.39176803667996346
+    },
+    "1": {
+      "inversions": 0,
+      "collapsed": 0,
+      "zeroArea": 0,
+      "minAreaRatio": 0.19537870020969172
+    }
+  },
+  "neutralTopologyTriangleCount": 1897687,
+  "neutralVertexCount": 991219
+}

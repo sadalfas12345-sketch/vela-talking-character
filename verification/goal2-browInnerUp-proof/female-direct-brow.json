@@ -1,0 +1,56 @@
+{
+  "source": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\vela-photoreal\\vela-photoreal-faced.glb",
+  "shapeKey": "direct_browInnerUp_test",
+  "eyeWidth": 0.05584288580934188,
+  "upAxis": [
+    -0.11503594690908842,
+    -0.0008066881963845777,
+    0.9933610019388135
+  ],
+  "browLandmarks": [
+    70,
+    63,
+    105,
+    336,
+    293,
+    334
+  ],
+  "candidateMovedVertices": 9794,
+  "requestedBrowDisplacementMeters": 0.001,
+  "chosenBrowDisplacementMeters": 0.00025,
+  "achievedWeightedMeanMeters": 0.0001144639046382188,
+  "weights": {
+    "0": {
+      "inversions": 0,
+      "collapsed": 0,
+      "zeroArea": 0,
+      "minAreaRatio": 1.0
+    },
+    "0.25": {
+      "inversions": 0,
+      "collapsed": 0,
+      "zeroArea": 0,
+      "minAreaRatio": 0.8454187000612896
+    },
+    "0.5": {
+      "inversions": 0,
+      "collapsed": 0,
+      "zeroArea": 0,
+      "minAreaRatio": 0.6912407342178852
+    },
+    "0.75": {
+      "inversions": 0,
+      "collapsed": 0,
+      "zeroArea": 0,
+      "minAreaRatio": 0.5378130927079406
+    },
+    "1": {
+      "inversions": 0,
+      "collapsed": 0,
+      "zeroArea": 0,
+      "minAreaRatio": 0.3860314605701361
+    }
+  },
+  "neutralTopologyTriangleCount": 583133,
+  "neutralVertexCount": 318097
+}
