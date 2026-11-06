@@ -21,6 +21,7 @@ def main():
         n0=np.cross(b[:,1]-b[:,0],b[:,2]-b[:,0]); nx=np.cross(x[:,1]-x[:,0],x[:,2]-x[:,0])
         by_weight[str(weight)]={'zeroAreaTriangles':int(np.count_nonzero(ax<=1e-12)),'collapsedTriangles':int(np.count_nonzero(ax < ab*1e-4)),'windingFlips':int(np.count_nonzero(np.einsum('ij,ij->i',n0,nx)<0))}
     full=by_weight['1.0']
-    result={'glb':str(glb),'vertexCount':len(mesh.vertices),'triangleCount':len(faces),'neutralZeroAreaTriangles':int(np.count_nonzero(ab<=1e-12)),'deformedZeroAreaTriangles':full['zeroAreaTriangles'],'deformedCollapsedTriangles':full['collapsedTriangles'],'deformedWindingFlips':full['windingFlips'],'byWeight':by_weight,'nonManifoldOrBoundaryEdges':nonmanifold,'topologyStable':len(mesh.vertices)==len(key) and nonmanifold==0,'shapeKey':key_name}
+    flip_ids=np.flatnonzero(np.einsum('ij,ij->i',n0,np.cross(k[:,1]-k[:,0],k[:,2]-k[:,0]))<0)
+    result={'glb':str(glb),'vertexCount':len(mesh.vertices),'triangleCount':len(faces),'neutralZeroAreaTriangles':int(np.count_nonzero(ab<=1e-12)),'deformedZeroAreaTriangles':full['zeroAreaTriangles'],'deformedCollapsedTriangles':full['collapsedTriangles'],'deformedWindingFlips':full['windingFlips'],'flippedTriangleIndices':flip_ids.astype(int).tolist(),'flippedTriangleVertexIndices':faces[flip_ids].astype(int).tolist(),'flippedTriangleCentroids':(((base[faces[flip_ids].astype(int)][:,0]+base[faces[flip_ids].astype(int)][:,1]+base[faces[flip_ids].astype(int)][:,2])/3).tolist() if len(flip_ids) else []),'byWeight':by_weight,'nonManifoldOrBoundaryEdges':nonmanifold,'topologyStable':len(mesh.vertices)==len(key) and nonmanifold==0,'shapeKey':key_name}
     out.write_text(json.dumps(result,indent=2)+'\n'); print(json.dumps(result,indent=2))
 if __name__=='__main__': main()

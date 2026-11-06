@@ -1,0 +1,42 @@
+{
+  "glb": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\generalization-male-20261105\\goal2-brow-male-orientation-qp.glb",
+  "vertexCount": 1025404,
+  "triangleCount": 1897687,
+  "neutralZeroAreaTriangles": 0,
+  "deformedZeroAreaTriangles": 0,
+  "deformedCollapsedTriangles": 0,
+  "deformedWindingFlips": 0,
+  "flippedTriangleIndices": [],
+  "flippedTriangleVertexIndices": [],
+  "flippedTriangleCentroids": [],
+  "byWeight": {
+    "0.0": {
+      "zeroAreaTriangles": 0,
+      "collapsedTriangles": 0,
+      "windingFlips": 0
+    },
+    "0.25": {
+      "zeroAreaTriangles": 0,
+      "collapsedTriangles": 0,
+      "windingFlips": 0
+    },
+    "0.5": {
+      "zeroAreaTriangles": 0,
+      "collapsedTriangles": 0,
+      "windingFlips": 0
+    },
+    "0.75": {
+      "zeroAreaTriangles": 0,
+      "collapsedTriangles": 0,
+      "windingFlips": 0
+    },
+    "1.0": {
+      "zeroAreaTriangles": 0,
+      "collapsedTriangles": 0,
+      "windingFlips": 0
+    }
+  },
+  "nonManifoldOrBoundaryEdges": 134609,
+  "topologyStable": false,
+  "shapeKey": "controlled_brow_5pct_qp"
+}

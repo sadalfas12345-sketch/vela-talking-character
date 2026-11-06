@@ -1,0 +1,10 @@
+{
+  "shapeKey": "controlled_brow_5pct_qp",
+  "source": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\generalization-male-20261105\\generated-original.glb",
+  "solution": "C:\\Users\\USER\\talking-character-demo\\verification\\goal2-browInnerUp-proof\\male-orientation-qp-solution.npz",
+  "constraintResidual": [
+    3.4000651397968205e-12,
+    3.3140102376150117e-12,
+    2.2639594409248898e-11
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "glb": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\generalization-male-20261105\\goal2-brow-male-orientation-qp.glb",
+  "shapeKey": "controlled_brow_5pct_qp",
+  "weights": [
+    0,
+    0.25,
+    0.5,
+    0.75,
+    1
+  ],
+  "captures": [
+    "C:\\Users\\USER\\talking-character-demo\\verification\\goal2-browInnerUp-proof\\male-orientation-qp-render\\sweep\\browInnerUp_0.00.png",
+    "C:\\Users\\USER\\talking-character-demo\\verification\\goal2-browInnerUp-proof\\male-orientation-qp-render\\sweep\\browInnerUp_0.25.png",
+    "C:\\Users\\USER\\talking-character-demo\\verification\\goal2-browInnerUp-proof\\male-orientation-qp-render\\sweep\\browInnerUp_0.50.png",
+    "C:\\Users\\USER\\talking-character-demo\\verification\\goal2-browInnerUp-proof\\male-orientation-qp-render\\sweep\\browInnerUp_0.75.png",
+    "C:\\Users\\USER\\talking-character-demo\\verification\\goal2-browInnerUp-proof\\male-orientation-qp-render\\sweep\\browInnerUp_1.00.png"
+  ]
+}

@@ -12,6 +12,17 @@ def main():
   r=rec[i]; cvi.append([inv[int(v)] for v in r['triangleVertexIndices']]); cb.append(r['barycentricCoordinates'])
  desired=np.tile(.05*eye*up,(len(BROW),1)); desired=np.vstack([desired,np.zeros((len(ANCHORS),3))]);
  edge_lengths=np.linalg.norm(world[ids][edges[:,0]]-world[ids][edges[:,1]],axis=1)
- np.savez_compressed(out,source=str(source),local_indices=ids,local_coords=local[ids],world_coords=world[ids],edges=edges,edge_lengths=edge_lengths,constraint_vertices=np.asarray(cvi),constraint_bary=np.asarray(cb),desired=desired,eye_width=eye,up=up,matrix_world=mw)
- print(json.dumps({'source':str(source),'localVertices':len(ids),'edges':len(edges),'eyeWidthMillimeters':eye*1000,'requestedMillimeters':.05*eye*1000,'problem':str(out)}))
+ # Select a scale-derived local ring around the brow anchors. These are
+ # linearized signed-area inequalities, solved inside the QP active set.
+ local_tris=[]; ori_q=[]; ori_n=[]
+ brow_world=np.asarray([target[i] for i in BROW])
+ for tri in tris:
+  if not (mask[tri[0]] and mask[tri[1]] and mask[tri[2]]): continue
+  c=world[tri].mean(axis=0)
+  if np.min(np.linalg.norm(brow_world-c,axis=1)) > .02*eye: continue
+  p=world[tri]; n=np.cross(p[1]-p[0],p[2]-p[0]); ln=np.linalg.norm(n)
+  if ln < 1e-12: continue
+  local_tris.append([inv[int(v)] for v in tri]); ori_q.append(float(np.dot(n/ln,n))); ori_n.append(n/ln)
+ np.savez_compressed(out,source=str(source),local_indices=ids,local_coords=local[ids],world_coords=world[ids],edges=edges,edge_lengths=edge_lengths,constraint_vertices=np.asarray(cvi),constraint_bary=np.asarray(cb),desired=desired,eye_width=eye,up=up,matrix_world=mw,orientation_triangles=np.asarray(local_tris),orientation_normals=np.asarray(ori_n),orientation_q0=np.asarray(ori_q))
+ print(json.dumps({'source':str(source),'localVertices':len(ids),'edges':len(edges),'orientationTriangles':len(local_tris),'eyeWidthMillimeters':eye*1000,'requestedMillimeters':.05*eye*1000,'problem':str(out)}))
 if __name__=='__main__': main()
