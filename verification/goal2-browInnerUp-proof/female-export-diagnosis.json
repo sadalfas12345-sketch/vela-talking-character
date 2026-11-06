@@ -8,12 +8,12 @@
       "nearestVertex": 481142,
       "nearestDistanceMillimeters": 0.333066942403093,
       "deltaMillimeters": [
-        0.007644295692443848,
-        -0.0014379620552062988,
-        -0.05167722702026367
+        0.00095367431640625,
+        -0.00018067657947540283,
+        -0.0064373016357421875
       ],
-      "magnitudeMillimeters": 0.05225934159563818,
-      "upwardMillimeters": -0.044172523895576
+      "magnitudeMillimeters": 0.00651006843878564,
+      "upwardMillimeters": -0.005502783232745524
     },
     {
       "group": "brows",
@@ -21,12 +21,12 @@
       "nearestVertex": 481534,
       "nearestDistanceMillimeters": 0.4011265409644693,
       "deltaMillimeters": [
-        0.01668184995651245,
-        0.09509362280368805,
-        0.2568364143371582
+        0.002086162567138672,
+        0.011887401342391968,
+        0.03212690353393555
       ],
-      "magnitudeMillimeters": 0.27438298953373563,
-      "upwardMillimeters": 0.2692073067150175
+      "magnitudeMillimeters": 0.034319095495225875,
+      "upwardMillimeters": 0.03367102532027256
     },
     {
       "group": "brows",
@@ -34,12 +34,12 @@
       "nearestVertex": 433081,
       "nearestDistanceMillimeters": 0.3011637309100479,
       "deltaMillimeters": [
-        -0.031091272830963135,
-        -0.013150274753570557,
-        0.708460807800293
+        -0.0038854777812957764,
+        -0.001644715666770935,
+        0.08857250213623047
       ],
-      "magnitudeMillimeters": 0.7092646284437054,
-      "upwardMillimeters": 0.6086511699571373
+      "magnitudeMillimeters": 0.08867293928750765,
+      "upwardMillimeters": 0.07609428620730262
     },
     {
       "group": "brows",
@@ -47,12 +47,12 @@
       "nearestVertex": 455106,
       "nearestDistanceMillimeters": 0.3295040223747492,
       "deltaMillimeters": [
-        1.647956669330597,
-        -0.5226796492934227,
-        5.5838823318481445
+        0.20599365234375,
+        -0.06533507257699966,
+        0.6979703903198242
       ],
-      "magnitudeMillimeters": 5.845399652350776,
-      "upwardMillimeters": 5.055488863026341
+      "magnitudeMillimeters": 0.7306604699022435,
+      "upwardMillimeters": 0.6319227758866723
     },
     {
       "group": "brows",
@@ -60,12 +60,12 @@
       "nearestVertex": 450754,
       "nearestDistanceMillimeters": 0.1677064865361899,
       "deltaMillimeters": [
-        0.0975877046585083,
-        -0.0720396637916565,
-        -0.12373924255371094
+        0.012196600437164307,
+        -0.009004026651382446,
+        -0.015497207641601562
       ],
-      "magnitudeMillimeters": 0.17327571499635272,
-      "upwardMillimeters": -0.11648816048300645
+      "magnitudeMillimeters": 0.021679322010836867,
+      "upwardMillimeters": -0.014587192900327667
     },
     {
       "group": "brows",
@@ -73,12 +73,12 @@
       "nearestVertex": 424785,
       "nearestDistanceMillimeters": 0.17910459428094327,
       "deltaMillimeters": [
-        -0.10277330875396729,
-        -0.09320676326751709,
-        1.0364055633544922
+        -0.01284480094909668,
+        -0.011650845408439636,
+        0.12958049774169922
       ],
-      "magnitudeMillimeters": 1.045651158591233,
-      "upwardMillimeters": 0.8460207677574316
+      "magnitudeMillimeters": 0.13073575067723361,
+      "upwardMillimeters": 0.10577916172426177
     },
     {
       "group": "eyelids",
@@ -86,12 +86,12 @@
       "nearestVertex": 402146,
       "nearestDistanceMillimeters": 0.19492251158226281,
       "deltaMillimeters": [
-        -0.003252178430557251,
-        -0.0006221234798431396,
-        0.0768899917602539
+        -0.00040605664253234863,
+        -7.82310962677002e-05,
+        0.00959634780883789
       ],
-      "magnitudeMillimeters": 0.0769612534660154,
-      "upwardMillimeters": 0.06642528820741261
+      "magnitudeMillimeters": 0.009605253425576842,
+      "upwardMillimeters": 0.008290002754364553
     },
     {
       "group": "eyelids",
@@ -99,12 +99,12 @@
       "nearestVertex": 404481,
       "nearestDistanceMillimeters": 0.17792481230571866,
       "deltaMillimeters": [
-        0.0004991888999938965,
-        -0.0004544854164123535,
-        -0.016570091247558594
+        6.332993507385254e-05,
+        -5.587935447692871e-05,
+        -0.002086162567138672
       ],
-      "magnitudeMillimeters": 0.016583837628969558,
-      "upwardMillimeters": -0.014609560622660079
+      "magnitudeMillimeters": 0.00208787150932806,
+      "upwardMillimeters": -0.001838656956433146
     },
     {
       "group": "eyelids",
@@ -112,12 +112,12 @@
       "nearestVertex": 400621,
       "nearestDistanceMillimeters": 0.3455686673987657,
       "deltaMillimeters": [
-        -0.020254403352737427,
-        0.009637326002120972,
-        -0.09441375732421875
+        -0.0025331974029541016,
+        0.0012051314115524292,
+        -0.011801719665527344
       ],
-      "magnitudeMillimeters": 0.09704162240875308,
-      "upwardMillimeters": -0.0833932456822064
+      "magnitudeMillimeters": 0.012130540707863709,
+      "upwardMillimeters": -0.010424280316005185
     },
     {
       "group": "eyelids",
@@ -125,12 +125,12 @@
       "nearestVertex": 402512,
       "nearestDistanceMillimeters": 0.19315686949994415,
       "deltaMillimeters": [
-        -0.009834766387939453,
-        0.004597008228302002,
-        -0.04369020462036133
+        -0.0012293457984924316,
+        0.0005755573511123657,
+        -0.0054836273193359375
       ],
-      "magnitudeMillimeters": 0.045018763802724106,
-      "upwardMillimeters": -0.0386386822041651
+      "magnitudeMillimeters": 0.005649134972193347,
+      "upwardMillimeters": -0.004849045613781931
     },
     {
       "group": "eyes",
@@ -138,12 +138,12 @@
       "nearestVertex": 377550,
       "nearestDistanceMillimeters": 0.23853035236243159,
       "deltaMillimeters": [
-        0.0011883676052093506,
-        0.0003688037395477295,
-        -0.027477741241455078
+        0.00014901161193847656,
+        4.6566128730773926e-05,
+        -0.0034570693969726562
       ],
-      "magnitudeMillimeters": 0.027505899321705093,
-      "upwardMillimeters": -0.02367022039818164
+      "magnitudeMillimeters": 0.0034605926776091925,
+      "upwardMillimeters": -0.0029780773243345215
     },
     {
       "group": "eyes",
@@ -151,12 +151,12 @@
       "nearestVertex": 394690,
       "nearestDistanceMillimeters": 0.02264512295369059,
       "deltaMillimeters": [
-        6.705522537231445e-05,
         7.450580596923828e-06,
-        -0.0016689300537109375
+        1.862645149230957e-06,
+        -0.00017881393432617188
       ],
-      "magnitudeMillimeters": 0.0016702932193422076,
-      "upwardMillimeters": -0.0014451552060867426
+      "magnitudeMillimeters": 0.00017897878004776913,
+      "upwardMillimeters": -0.00015432785763680196
     },
     {
       "group": "eyes",
@@ -164,12 +164,12 @@
       "nearestVertex": 376259,
       "nearestDistanceMillimeters": 0.28698769165202975,
       "deltaMillimeters": [
-        -0.0029206275939941406,
-        0.004019588232040405,
-        -0.02658367156982422
+        -0.0003650784492492676,
+        0.0005029141902923584,
+        -0.003337860107421875
       ],
-      "magnitudeMillimeters": 0.027044015035313045,
-      "upwardMillimeters": -0.022290218365112965
+      "magnitudeMillimeters": 0.003395219441158707,
+      "upwardMillimeters": -0.0027991496735851424
     },
     {
       "group": "eyes",
@@ -177,12 +177,12 @@
       "nearestVertex": 397692,
       "nearestDistanceMillimeters": 0.2955653762910515,
       "deltaMillimeters": [
-        -0.033196061849594116,
-        0.011241994798183441,
-        -0.11914968490600586
+        -0.004149973392486572,
+        0.001405365765094757,
+        -0.014901161193847656
       ],
-      "magnitudeMillimeters": 0.12419745723067337,
-      "upwardMillimeters": -0.10738484835477417
+      "magnitudeMillimeters": 0.015531965008236342,
+      "upwardMillimeters": -0.013429698368663607
     },
     {
       "group": "nose",
@@ -190,12 +190,12 @@
       "nearestVertex": 457568,
       "nearestDistanceMillimeters": 0.040219420043285936,
       "deltaMillimeters": [
-        -0.010758638381958008,
-        0.0033779069781303406,
-        -0.036656856536865234
+        -0.0013485550880432129,
+        0.0004223547875881195,
+        -0.004589557647705078
       ],
-      "magnitudeMillimeters": 0.03835210146199242,
-      "upwardMillimeters": -0.03319684690632522
+      "magnitudeMillimeters": 0.004802189479153651,
+      "upwardMillimeters": -0.004156947334712166
     },
     {
       "group": "nose",
@@ -203,12 +203,12 @@
       "nearestVertex": 469916,
       "nearestDistanceMillimeters": 0.2945534361060709,
       "deltaMillimeters": [
-        -0.011473894119262695,
-        0.003655441105365753,
-        -0.03904104232788086
+        -0.001430511474609375,
+        0.0004568137228488922,
+        -0.004887580871582031
       ],
-      "magnitudeMillimeters": 0.04085603360560388,
-      "upwardMillimeters": -0.035335156267110854
+      "magnitudeMillimeters": 0.0051130703723522835,
+      "upwardMillimeters": -0.0044226218972288405
     },
     {
       "group": "nose",
@@ -216,12 +216,12 @@
       "nearestVertex": 496010,
       "nearestDistanceMillimeters": 0.29563356656581163,
       "deltaMillimeters": [
-        -0.00011920928955078125,
-        4.6566128730773926e-05,
-        -0.0004172325134277344
+        -1.4901161193847656e-05,
+        5.820766091346741e-06,
+        -5.9604644775390625e-05
       ],
-      "magnitudeMillimeters": 0.00043641978566673345,
-      "upwardMillimeters": -0.000373679035602621
+      "magnitudeMillimeters": 6.171417666643301e-05,
+      "upwardMillimeters": -5.3244297081076746e-05
     },
     {
       "group": "nose",
@@ -242,12 +242,12 @@
       "nearestVertex": 453373,
       "nearestDistanceMillimeters": 0.08366293332073838,
       "deltaMillimeters": [
-        -5.21540641784668e-05,
-        1.6763806343078613e-05,
-        -0.00017881393432617188
+        -7.450580596923828e-06,
+        1.862645149230957e-06,
+        0.0
       ],
-      "magnitudeMillimeters": 0.00018701736476232464,
-      "upwardMillimeters": -0.00016173991345571574
+      "magnitudeMillimeters": 7.679882693323606e-06,
+      "upwardMillimeters": -9.265069773642226e-07
     },
     {
       "group": "cheeks",
@@ -255,12 +255,12 @@
       "nearestVertex": 392682,
       "nearestDistanceMillimeters": 0.41653058724477887,
       "deltaMillimeters": [
-        -1.1175870895385742e-05,
-        -2.60770320892334e-05,
-        -5.9604644775390625e-05
+        0.0,
+        -3.725290298461914e-06,
+        0.0
       ],
-      "magnitudeMillimeters": 6.601231227319445e-05,
-      "upwardMillimeters": -6.584545507158834e-05
+      "magnitudeMillimeters": 3.725290298461914e-06,
+      "upwardMillimeters": -1.5716585238127765e-06
     },
     {
       "group": "cheeks",
@@ -268,12 +268,12 @@
       "nearestVertex": 356584,
       "nearestDistanceMillimeters": 0.1784770138328895,
       "deltaMillimeters": [
-        -3.725290298461914e-06,
-        3.725290298461914e-06,
+        0.0,
+        0.0,
         0.0
       ],
-      "magnitudeMillimeters": 5.268356063861754e-06,
-      "upwardMillimeters": 7.154904041774711e-07
+      "magnitudeMillimeters": 0.0,
+      "upwardMillimeters": 0.0
     },
     {
       "group": "chin",
@@ -294,12 +294,12 @@
       "nearestVertex": 446813,
       "nearestDistanceMillimeters": 0.42319149360992014,
       "deltaMillimeters": [
-        -0.11328235268592834,
-        0.03677979111671448,
-        -0.39577484130859375
+        -0.014159828424453735,
+        0.00459747388958931,
+        -0.04947185516357422
       ],
-      "magnitudeMillimeters": 0.41330783863543014,
-      "upwardMillimeters": -0.3576264962897799
+      "magnitudeMillimeters": 0.051663352199611365,
+      "upwardMillimeters": -0.04470320501520753
     },
     {
       "group": "skull",
@@ -307,12 +307,12 @@
       "nearestVertex": 376991,
       "nearestDistanceMillimeters": 0.4190480394754559,
       "deltaMillimeters": [
-        7.450580596923828e-06,
-        -6.51925802230835e-05,
-        -0.0008940696716308594
+        0.0,
+        -7.450580596923828e-06,
+        -0.00011920928955078125
       ],
-      "magnitudeMillimeters": 0.0008964742948894224,
-      "upwardMillimeters": -0.0008099218036173477
+      "magnitudeMillimeters": 0.00011944189326376765,
+      "upwardMillimeters": -0.00010769399913961153
     },
     {
       "group": "skull",
@@ -320,14 +320,14 @@
       "nearestVertex": 350758,
       "nearestDistanceMillimeters": 0.2913271018769592,
       "deltaMillimeters": [
-        -3.725290298461914e-06,
-        3.725290298461914e-06,
+        0.0,
+        0.0,
         0.0
       ],
-      "magnitudeMillimeters": 5.268356063861754e-06,
-      "upwardMillimeters": 7.154904041774711e-07
+      "magnitudeMillimeters": 0.0,
+      "upwardMillimeters": 0.0
     }
   ],
-  "rawShapeKeyMaxMillimeters": 5.845399652350776,
-  "rawShapeKeyP95Millimeters": 5.268356063861754e-06
+  "rawShapeKeyMaxMillimeters": 0.7306604699022435,
+  "rawShapeKeyP95Millimeters": 0.0
 }
