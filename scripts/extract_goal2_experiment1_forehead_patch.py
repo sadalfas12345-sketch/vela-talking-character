@@ -10,10 +10,11 @@ def arg(name):
 
 def main():
     source, goal, out = arg('--source'), arg('--goal1'), arg('--output')
+    landmark_id = int(sys.argv[sys.argv.index('--')+1:][sys.argv[sys.argv.index('--')+1:].index('--landmark-id')+1]) if '--landmark-id' in sys.argv else 336
     hop_radius = int(sys.argv[sys.argv.index('--')+1:][sys.argv[sys.argv.index('--')+1:].index('--hop-radius')+1]) if '--hop-radius' in sys.argv else 16
     report=json.loads(goal.read_text())
     records={int(x['index']):x for x in report['records']}
-    rec=records[336]
+    rec=records[landmark_id]
     bpy.ops.wm.read_factory_settings(use_empty=True)
     bpy.ops.import_scene.gltf(filepath=str(source))
     body=max([o for o in bpy.context.scene.objects if o.type=='MESH'], key=lambda o:len(o.data.vertices))
@@ -53,5 +54,5 @@ def main():
     xaxis=np.asarray(markers.get('xAxis',[1,0,0]),float); xaxis/=max(float(np.linalg.norm(xaxis)),1e-20)
     out.parent.mkdir(parents=True,exist_ok=True)
     np.savez_compressed(out.with_suffix('.npz'),V=PV,F=F,originalIndices=np.asarray(used),moved=np.int64(moved),stationary=np.asarray([s1,s2],dtype=np.int64),seedPoint=p,eyeWidth=np.float64(eye),upAxis=up,xAxis=xaxis)
-    out.write_text(json.dumps({'source':str(source),'meshObject':body.name,'seedLandmark':336,'seedTriangle':seed_face,'vertices':len(PV),'triangles':len(F),'movedLocalIndex':moved,'stationaryLocalIndices':[s1,s2],'eyeWidth':eye,'upAxis':up.tolist(),'hopRadius':hop_radius},indent=2)+'\n')
+    out.write_text(json.dumps({'source':str(source),'meshObject':body.name,'seedLandmark':landmark_id,'seedTriangle':seed_face,'triangleVertexIndices':rec['triangleVertexIndices'],'vertices':len(PV),'triangles':len(F),'movedLocalIndex':moved,'stationaryLocalIndices':[s1,s2],'eyeWidth':eye,'upAxis':up.tolist(),'hopRadius':hop_radius},indent=2)+'\n')
 if __name__=='__main__': main()
