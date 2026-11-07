@@ -27,8 +27,22 @@ def solve(model, patch_path, goal_path, marker_path, ids, out):
         bary=np.asarray(records[lid]['barycentricCoordinates'],float)
         for v,w in zip(tri_local[lid],bary): A[row,cidx[int(v)]]=w
         desired.append(target[lid]-neutral[lid])
-    desired=np.asarray(desired); rank=int(np.linalg.matrix_rank(A)); d=A.T@np.linalg.solve(A@A.T,desired)
-    stationary=np.asarray([v for v in boundary_vertices(F) if v not in set(controls)],dtype=np.int32); anchors=np.r_[controls,stationary].astype(np.int32); bc=np.vstack((V[controls]+d,V[stationary]))
+    desired=np.asarray(desired); rank=int(np.linalg.matrix_rank(A))
+    stationary=np.asarray([v for v in boundary_vertices(F) if v not in set(controls)],dtype=np.int32)
+    # Experiment 4's validated single-landmark baseline distributes the target
+    # over the containing triangle's one-ring support. Restore that support
+    # only for Case A so the baseline is genuinely comparable.
+    if len(ids)==1:
+        nbr=[set() for _ in range(len(V))]
+        for f in F:
+            for a,b in ((f[0],f[1]),(f[1],f[2]),(f[2],f[0])): nbr[int(a)].add(int(b)); nbr[int(b)].add(int(a))
+        support=set(map(int,tri_local[ids[0]]))
+        support.update(x for v in list(support) for x in nbr[v])
+        controls=np.asarray(sorted(support-set(map(int,stationary))),dtype=np.int32)
+        d=np.repeat(desired[:1],len(controls),axis=0)
+    else:
+        d=A.T@np.linalg.solve(A@A.T,desired)
+    anchors=np.r_[controls,stationary].astype(np.int32); bc=np.vstack((V[controls]+d,V[stationary]))
     data=igl.ARAPData(); data.energy=igl.ARAP_ENERGY_TYPE_ELEMENTS; data.max_iter=100; t=time.perf_counter(); igl.arap_precomputation(V,F,3,anchors,data); U=igl.arap_solve(bc,data,V.copy()); runtime=time.perf_counter()-t
     # Apply the existing automatic shared-edge correction only to detected fold pairs.
     candidates=[]

@@ -1,0 +1,242 @@
+{
+  "solver": "official libigl ARAP with barycentric controls and existing automatic local-fold correction",
+  "landmarkIds": [
+    70
+  ],
+  "models": [
+    {
+      "model": "female",
+      "landmarkIds": [
+        70
+      ],
+      "patchVertices": 8689,
+      "patchTriangles": 16728,
+      "controlVertices": 3,
+      "stationaryBoundaryVertices": 646,
+      "constraintRank": 1,
+      "runtimeSeconds": 2.528375399997458,
+      "measurements": [
+        {
+          "id": 70,
+          "requested": [
+            0.0001286129260050367,
+            -0.00040476439599533565,
+            -0.0011186368735971453
+          ],
+          "achieved": [
+            0.00012360666251953756,
+            -0.00038230976835902306,
+            -0.0011093952030568621
+          ],
+          "relativeError": 0.020720269887914148
+        }
+      ],
+      "candidateFoldPairs": 8,
+      "corrections": [
+        {
+          "triangles": [
+            4553,
+            5095
+          ],
+          "edge": [
+            5632,
+            5722
+          ],
+          "vertex": 5551,
+          "displacement": [
+            8.461372244848167e-08,
+            1.0075007712282945e-05,
+            4.693849016385981e-06
+          ]
+        },
+        {
+          "triangles": [
+            5091,
+            5093
+          ],
+          "edge": [
+            5448,
+            5551
+          ],
+          "vertex": 5512,
+          "displacement": [
+            -8.90115909424081e-07,
+            1.9049926604137437e-05,
+            1.7517578949854256e-05
+          ]
+        },
+        {
+          "triangles": [
+            5092,
+            5095
+          ],
+          "edge": [
+            5551,
+            5632
+          ],
+          "vertex": 5722,
+          "displacement": [
+            -2.52674540741991e-05,
+            0.00011333228348741499,
+            4.664426605228701e-05
+          ]
+        },
+        {
+          "triangles": [
+            5101,
+            5104
+          ],
+          "edge": [
+            5341,
+            5448
+          ],
+          "vertex": 5404,
+          "displacement": [
+            -5.651706114127017e-05,
+            9.051166026227666e-05,
+            -1.1382564760043971e-05
+          ]
+        }
+      ],
+      "newInvertedTriangles": 3,
+      "collapsedTriangles": 0,
+      "minimumAreaRatio": 0.32598470085202025,
+      "maximumEdgeStrain": 0.6196401749621006,
+      "finite": true
+    },
+    {
+      "model": "male",
+      "landmarkIds": [
+        70
+      ],
+      "patchVertices": 24126,
+      "patchTriangles": 47155,
+      "controlVertices": 3,
+      "stationaryBoundaryVertices": 1094,
+      "constraintRank": 1,
+      "runtimeSeconds": 7.3143255999311805,
+      "measurements": [
+        {
+          "id": 70,
+          "requested": [
+            0.002228481958591738,
+            -0.0021258172524216967,
+            -0.00563600781579221
+          ],
+          "achieved": [
+            0.0017036333893103162,
+            -0.0021172648931186144,
+            -0.005310278701058435
+          ],
+          "relativeError": 0.09618672899794439
+        }
+      ],
+      "candidateFoldPairs": 13,
+      "corrections": [
+        {
+          "triangles": [
+            17786,
+            18037
+          ],
+          "edge": [
+            8612,
+            14832
+          ],
+          "vertex": 18349,
+          "displacement": [
+            -0.00015152462333656384,
+            8.035196387444344e-05,
+            0.0007185713889235836
+          ]
+        },
+        {
+          "triangles": [
+            17993,
+            17994
+          ],
+          "edge": [
+            730,
+            15798
+          ],
+          "vertex": 4846,
+          "displacement": [
+            0.0003749425362801795,
+            -7.505012727135407e-05,
+            -0.0007919085651008031
+          ]
+        },
+        {
+          "triangles": [
+            17993,
+            18001
+          ],
+          "edge": [
+            730,
+            4846
+          ],
+          "vertex": 20838,
+          "displacement": [
+            9.026608576272029e-07,
+            -1.8067891010564983e-07,
+            -1.9064787609234661e-06
+          ]
+        },
+        {
+          "triangles": [
+            17994,
+            18010
+          ],
+          "edge": [
+            7670,
+            15798
+          ],
+          "vertex": 19384,
+          "displacement": [
+            -0.0007125051277021274,
+            1.161020571276384e-05,
+            0.0004421916683653531
+          ]
+        },
+        {
+          "triangles": [
+            18029,
+            18030
+          ],
+          "edge": [
+            15709,
+            15986
+          ],
+          "vertex": 8803,
+          "displacement": [
+            -0.000771587465821287,
+            -0.00015420125492000516,
+            -5.1710014510869595e-05
+          ]
+        },
+        {
+          "triangles": [
+            18227,
+            18235
+          ],
+          "edge": [
+            15709,
+            16309
+          ],
+          "vertex": 8803,
+          "displacement": [
+            -9.329575402914183e-05,
+            2.465778035692985e-05,
+            0.0006847735632262169
+          ]
+        }
+      ],
+      "newInvertedTriangles": 2,
+      "collapsedTriangles": 0,
+      "minimumAreaRatio": 0.4363251495079984,
+      "maximumEdgeStrain": 3.245786219406683,
+      "finite": true
+    }
+  ],
+  "sameAlgorithm": true,
+  "sourceGeometryModified": false
+}
