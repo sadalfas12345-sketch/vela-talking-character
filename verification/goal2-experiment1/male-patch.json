@@ -1,0 +1,20 @@
+{
+  "source": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\generalization-male-20261105\\generated-original.glb",
+  "meshObject": "tripo_node_282c7782-479e-4c50-8808-1a2c3cdb2977",
+  "seedLandmark": 336,
+  "seedTriangle": 1085998,
+  "vertices": 286,
+  "triangles": 484,
+  "movedLocalIndex": 217,
+  "stationaryLocalIndices": [
+    135,
+    155
+  ],
+  "eyeWidth": 0.2997431104458742,
+  "upAxis": [
+    0.370885638107077,
+    0.002304353447157533,
+    -0.9286756879562945
+  ],
+  "hopRadius": 16
+}

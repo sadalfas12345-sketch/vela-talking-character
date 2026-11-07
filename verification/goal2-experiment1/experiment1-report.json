@@ -1,0 +1,50 @@
+{
+  "solver": "official libigl arap_precomputation/arap_solve",
+  "request": "1% of each target eye width upward using existing anatomical up axis",
+  "models": [
+    {
+      "model": "female",
+      "vertices": 160,
+      "triangles": 266,
+      "movedVertex": 125,
+      "stationaryVertices": [
+        122,
+        3
+      ],
+      "eyeWidth": 0.05584288580934188,
+      "requestedMovement": 0.0005584288580934188,
+      "achievedMovement": 0.0005584288580934498,
+      "achievementRatio": 1.0000000000000555,
+      "maxNeighborMovement": 0.0005479625202179745,
+      "neighborCount": 6,
+      "newInvertedTriangles": 0,
+      "newCollapsedTriangles": 0,
+      "minimumAreaRatio": 0.9849189875171168,
+      "maxEdgeStrain": 0.17173498739123594,
+      "runtimeSeconds": 0.03290690016001463,
+      "status": "SOLVED"
+    },
+    {
+      "model": "male",
+      "vertices": 286,
+      "triangles": 484,
+      "movedVertex": 217,
+      "stationaryVertices": [
+        135,
+        155
+      ],
+      "eyeWidth": 0.2997431104458742,
+      "requestedMovement": 0.002997431104458742,
+      "achievedMovement": 0.002997431104458746,
+      "achievementRatio": 1.0000000000000013,
+      "maxNeighborMovement": 0.0027888355595019195,
+      "neighborCount": 6,
+      "newInvertedTriangles": 0,
+      "newCollapsedTriangles": 0,
+      "minimumAreaRatio": 0.9856804946823198,
+      "maxEdgeStrain": 0.6248253152190615,
+      "runtimeSeconds": 0.06392650003544986,
+      "status": "SOLVED"
+    }
+  ]
+}
