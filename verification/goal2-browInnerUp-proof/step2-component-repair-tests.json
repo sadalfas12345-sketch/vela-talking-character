@@ -1,0 +1,139 @@
+{
+  "source": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\vela-photoreal\\generated-rigged.glb",
+  "goal1": "C:\\Users\\USER\\talking-character-demo\\verification\\goal1-generalization-run\\cross-character-accuracy\\female\\refined\\raycast-report.json",
+  "componentNumber": 30,
+  "componentVertices": 1152,
+  "componentTriangles": 2122,
+  "componentOpenBoundaryEdges": 180,
+  "componentNonmanifoldEdgesGT2": 0,
+  "componentControlAnchorCount": 3,
+  "variants": [
+    {
+      "variant": "baseline_raw_component",
+      "vertices": 1152,
+      "triangles": 2122,
+      "openBoundaryEdges": 180,
+      "nonmanifoldEdgesGT2": 0,
+      "zeroAreaTriangles": 0,
+      "duplicateTriangles": 0,
+      "anchorCount": 6,
+      "freeVertices": 1146,
+      "modifier": {
+        "bind": true,
+        "bindError": null,
+        "evaluation": "evaluated_no_free_motion",
+        "freeVertexMaxMotion": 0.0,
+        "evaluationError": null
+      }
+    },
+    {
+      "variant": "remove_isolated_vertices_noop",
+      "vertices": 1152,
+      "triangles": 2122,
+      "openBoundaryEdges": 180,
+      "nonmanifoldEdgesGT2": 0,
+      "zeroAreaTriangles": 0,
+      "duplicateTriangles": 0,
+      "anchorCount": 6,
+      "freeVertices": 1146,
+      "modifier": {
+        "bind": true,
+        "bindError": null,
+        "evaluation": "evaluated_no_free_motion",
+        "freeVertexMaxMotion": 0.0,
+        "evaluationError": null
+      }
+    },
+    {
+      "variant": "remove_degenerate_duplicate_triangles_noop",
+      "vertices": 1152,
+      "triangles": 2122,
+      "openBoundaryEdges": 180,
+      "nonmanifoldEdgesGT2": 0,
+      "zeroAreaTriangles": 0,
+      "duplicateTriangles": 0,
+      "anchorCount": 6,
+      "freeVertices": 1146,
+      "modifier": {
+        "bind": true,
+        "bindError": null,
+        "evaluation": "evaluated_no_free_motion",
+        "freeVertexMaxMotion": 0.0,
+        "evaluationError": null
+      }
+    },
+    {
+      "variant": "separate_unrelated_components_noop",
+      "vertices": 1152,
+      "triangles": 2122,
+      "openBoundaryEdges": 180,
+      "nonmanifoldEdgesGT2": 0,
+      "zeroAreaTriangles": 0,
+      "duplicateTriangles": 0,
+      "anchorCount": 6,
+      "freeVertices": 1146,
+      "modifier": {
+        "bind": true,
+        "bindError": null,
+        "evaluation": "evaluated_no_free_motion",
+        "freeVertexMaxMotion": 0.0,
+        "evaluationError": null
+      }
+    },
+    {
+      "variant": "weld_coincident_vertices_noop",
+      "vertices": 1152,
+      "triangles": 2122,
+      "openBoundaryEdges": 180,
+      "nonmanifoldEdgesGT2": 0,
+      "zeroAreaTriangles": 0,
+      "duplicateTriangles": 0,
+      "anchorCount": 6,
+      "freeVertices": 1146,
+      "modifier": {
+        "bind": true,
+        "bindError": null,
+        "evaluation": "evaluated_no_free_motion",
+        "freeVertexMaxMotion": 0.0,
+        "evaluationError": null
+      }
+    },
+    {
+      "variant": "consistent_triangle_orientation",
+      "vertices": 1152,
+      "triangles": 2122,
+      "openBoundaryEdges": 180,
+      "nonmanifoldEdgesGT2": 0,
+      "zeroAreaTriangles": 0,
+      "duplicateTriangles": 0,
+      "anchorCount": 6,
+      "freeVertices": 1146,
+      "modifier": {
+        "bind": true,
+        "bindError": null,
+        "evaluation": "evaluated_no_free_motion",
+        "freeVertexMaxMotion": 0.0,
+        "evaluationError": null
+      }
+    },
+    {
+      "variant": "add_all_open_boundary_vertices_as_anchors",
+      "vertices": 1152,
+      "triangles": 2122,
+      "openBoundaryEdges": 180,
+      "nonmanifoldEdgesGT2": 0,
+      "zeroAreaTriangles": 0,
+      "duplicateTriangles": 0,
+      "anchorCount": 185,
+      "freeVertices": 967,
+      "modifier": {
+        "bind": true,
+        "bindError": null,
+        "evaluation": "evaluated_no_free_motion",
+        "freeVertexMaxMotion": 0.0,
+        "evaluationError": null
+      }
+    }
+  ],
+  "step2Pass": false
+}
