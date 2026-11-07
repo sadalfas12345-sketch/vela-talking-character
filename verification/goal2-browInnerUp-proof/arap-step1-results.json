@@ -1,0 +1,52 @@
+{
+  "libiglVersion": "2.6.3",
+  "api": "arap_precomputation/arap_solve",
+  "components": [
+    {
+      "component": 30,
+      "vertices": 1152,
+      "triangles": 2122,
+      "bboxDiagonal": 0.0473989757106823,
+      "handles": [
+        0,
+        1010,
+        1044
+      ],
+      "requestedHandleMotion": 0.000473989757106823,
+      "achievedHandleMotion": 0.00047398975710682273,
+      "handleRatio": 0.9999999999999994,
+      "maxFreeMotion": 0.00035425954991028874,
+      "rmsFreeMotion": 0.00026880738467885006,
+      "newInversions": 0,
+      "collapsedTriangles": 0,
+      "minAreaRatio": 0.99780624840806,
+      "runtimeSeconds": 0.2859153999015689,
+      "peakRssDeltaBytes": 2895872,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "component": 1,
+      "vertices": 5385,
+      "triangles": 10413,
+      "bboxDiagonal": 0.09490227045968558,
+      "handles": [
+        0,
+        5372,
+        1237
+      ],
+      "requestedHandleMotion": 0.0009490227045968558,
+      "achievedHandleMotion": 0.0009490227045968573,
+      "handleRatio": 1.0000000000000016,
+      "maxFreeMotion": 0.000621906709665697,
+      "rmsFreeMotion": 0.00014804252017672914,
+      "newInversions": 0,
+      "collapsedTriangles": 0,
+      "minAreaRatio": 0.9964307755102463,
+      "runtimeSeconds": 1.5673261999618262,
+      "peakRssDeltaBytes": 7004160,
+      "status": "ok",
+      "error": null
+    }
+  ]
+}

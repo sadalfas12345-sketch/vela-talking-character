@@ -1,0 +1,67 @@
+{
+  "goal1AttachmentCount": 468,
+  "components": [
+    {
+      "component": 30,
+      "vertices": 1152,
+      "browAndEyelidIds": [
+        70,
+        63,
+        105,
+        336,
+        293,
+        334,
+        159,
+        145,
+        386,
+        374
+      ],
+      "fullyRepresentedIds": [],
+      "partialBoundaryIds": [],
+      "outsideIds": [
+        70,
+        63,
+        105,
+        336,
+        293,
+        334,
+        159,
+        145,
+        386,
+        374
+      ],
+      "adapterReadyForAllSelectedControls": false
+    },
+    {
+      "component": 1,
+      "vertices": 5385,
+      "browAndEyelidIds": [
+        70,
+        63,
+        105,
+        336,
+        293,
+        334,
+        159,
+        145,
+        386,
+        374
+      ],
+      "fullyRepresentedIds": [],
+      "partialBoundaryIds": [],
+      "outsideIds": [
+        70,
+        63,
+        105,
+        336,
+        293,
+        334,
+        159,
+        145,
+        386,
+        374
+      ],
+      "adapterReadyForAllSelectedControls": false
+    }
+  ]
+}

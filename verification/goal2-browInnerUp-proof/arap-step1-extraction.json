@@ -1,0 +1,18 @@
+{
+  "source": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\vela-photoreal\\generated-rigged.glb",
+  "proxyVertices": 78517,
+  "proxyTriangles": 149749,
+  "components": [
+    {
+      "component": 30,
+      "vertices": 1152,
+      "triangles": 2122
+    },
+    {
+      "component": 1,
+      "vertices": 5385,
+      "triangles": 10413
+    }
+  ],
+  "worldSpace": true
+}
