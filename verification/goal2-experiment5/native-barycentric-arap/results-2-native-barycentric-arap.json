@@ -1,0 +1,163 @@
+{
+  "landmarkIds": [
+    70,
+    105
+  ],
+  "models": [
+    {
+      "model": "female",
+      "solver": "official libigl ARAP with native sparse barycentric equality constraints",
+      "landmarkIds": [
+        70,
+        105
+      ],
+      "patchVertices": 8689,
+      "patchTriangles": 16728,
+      "stationaryBoundaryVertices": 646,
+      "runtimeSeconds": 1.5614842001814395,
+      "measurements": [
+        {
+          "id": 70,
+          "requested": [
+            0.0001286129260050367,
+            -0.00040476439599533565,
+            -0.0011186368735971453
+          ],
+          "achievedFromOriginalBarycentric": [
+            0.00012861292600502283,
+            -0.0004047643959953287,
+            -0.0011186368735972563
+          ],
+          "relativeError": 9.368732844749872e-14,
+          "constraintResidual": 1.1210126175528405e-16
+        },
+        {
+          "id": 105,
+          "requested": [
+            0.00015764428523152435,
+            0.0006938922966734616,
+            -0.0013475704264487298
+          ],
+          "achievedFromOriginalBarycentric": [
+            0.00015764428523148966,
+            0.0006938922966734547,
+            -0.0013475704264485078
+          ],
+          "relativeError": 1.4754591981572395e-13,
+          "constraintResidual": 2.2484586062492886e-16
+        }
+      ],
+      "newInvertedTriangles": 2,
+      "invertedTriangleIds": [
+        7760,
+        7761
+      ],
+      "collapsedTriangles": 0,
+      "collapsedTriangleIds": [],
+      "maximumEdgeStrain": 0.39309005212236614,
+      "p95EdgeStrain": 0.017433864674730196,
+      "minimumAreaRatio": 0.9025554857254535,
+      "finite": true
+    },
+    {
+      "model": "male",
+      "solver": "official libigl ARAP with native sparse barycentric equality constraints",
+      "landmarkIds": [
+        70,
+        105
+      ],
+      "patchVertices": 24126,
+      "patchTriangles": 47155,
+      "stationaryBoundaryVertices": 1094,
+      "runtimeSeconds": 4.9010326999705285,
+      "measurements": [
+        {
+          "id": 70,
+          "requested": [
+            0.002228481958591738,
+            -0.0021258172524216967,
+            -0.00563600781579221
+          ],
+          "achievedFromOriginalBarycentric": [
+            0.0022284819585917937,
+            -0.0021258172524217522,
+            -0.005636007815792404
+          ],
+          "relativeError": 3.2626964027218364e-14,
+          "constraintResidual": 2.0955000055363631e-16
+        },
+        {
+          "id": 105,
+          "requested": [
+            0.00272420328357309,
+            0.0037804687141890225,
+            -0.006722706329286843
+          ],
+          "achievedFromOriginalBarycentric": [
+            0.00272420328357309,
+            0.0037804687141888837,
+            -0.006722706329286926
+          ],
+          "relativeError": 1.9785664844646954e-14,
+          "constraintResidual": 1.6184142622847344e-16
+        }
+      ],
+      "newInvertedTriangles": 44,
+      "invertedTriangleIds": [
+        17993,
+        18016,
+        18017,
+        30219,
+        30462,
+        30657,
+        30763,
+        30868,
+        30869,
+        30980,
+        30994,
+        31087,
+        31095,
+        31096,
+        31103,
+        31104,
+        31203,
+        31210,
+        31216,
+        31217,
+        31218,
+        31321,
+        31324,
+        31325,
+        31342,
+        31348,
+        31349,
+        31422,
+        31427,
+        31439,
+        31526,
+        31527,
+        31622,
+        31626,
+        31632,
+        31633,
+        31634,
+        31635,
+        31636,
+        31637,
+        31722,
+        31729,
+        31730,
+        31744
+      ],
+      "collapsedTriangles": 0,
+      "collapsedTriangleIds": [],
+      "maximumEdgeStrain": 0.7128912773979816,
+      "p95EdgeStrain": 0.0145113038568449,
+      "minimumAreaRatio": 0.9361714060765297,
+      "finite": true
+    }
+  ],
+  "sameImplementation": true,
+  "sourceGeometryModified": false,
+  "originalVertexOrderPreserved": true
+}

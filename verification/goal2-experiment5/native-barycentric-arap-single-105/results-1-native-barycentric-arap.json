@@ -1,0 +1,127 @@
+{
+  "landmarkIds": [
+    105
+  ],
+  "models": [
+    {
+      "model": "female",
+      "solver": "official libigl ARAP with native sparse barycentric equality constraints",
+      "landmarkIds": [
+        105
+      ],
+      "patchVertices": 8689,
+      "patchTriangles": 16728,
+      "stationaryBoundaryVertices": 646,
+      "runtimeSeconds": 1.6230013999156654,
+      "measurements": [
+        {
+          "id": 105,
+          "requested": [
+            0.00015764428523152435,
+            0.0006938922966734616,
+            -0.0013475704264487298
+          ],
+          "achievedFromOriginalBarycentric": [
+            0.00015764428523148966,
+            0.0006938922966734547,
+            -0.0013475704264485078
+          ],
+          "relativeError": 1.4754591981572395e-13,
+          "constraintResidual": 2.2484586062492886e-16
+        }
+      ],
+      "newInvertedTriangles": 2,
+      "invertedTriangleIds": [
+        7760,
+        7761
+      ],
+      "collapsedTriangles": 0,
+      "collapsedTriangleIds": [],
+      "maximumEdgeStrain": 0.39309005212236614,
+      "p95EdgeStrain": 0.0071004529489827875,
+      "minimumAreaRatio": 0.9866772019057954,
+      "finite": true
+    },
+    {
+      "model": "male",
+      "solver": "official libigl ARAP with native sparse barycentric equality constraints",
+      "landmarkIds": [
+        105
+      ],
+      "patchVertices": 24126,
+      "patchTriangles": 47155,
+      "stationaryBoundaryVertices": 1094,
+      "runtimeSeconds": 5.022962999995798,
+      "measurements": [
+        {
+          "id": 105,
+          "requested": [
+            0.00272420328357309,
+            0.0037804687141890225,
+            -0.006722706329286843
+          ],
+          "achievedFromOriginalBarycentric": [
+            0.002724203283573201,
+            0.003780468714189078,
+            -0.006722706329286898
+          ],
+          "relativeError": 1.6623283458727364e-14,
+          "constraintResidual": 1.3597399555105182e-16
+        }
+      ],
+      "newInvertedTriangles": 41,
+      "invertedTriangleIds": [
+        30219,
+        30462,
+        30657,
+        30763,
+        30868,
+        30869,
+        30980,
+        30994,
+        31087,
+        31095,
+        31096,
+        31103,
+        31104,
+        31203,
+        31210,
+        31216,
+        31217,
+        31218,
+        31321,
+        31324,
+        31325,
+        31342,
+        31348,
+        31349,
+        31422,
+        31427,
+        31439,
+        31526,
+        31527,
+        31622,
+        31626,
+        31632,
+        31633,
+        31634,
+        31635,
+        31636,
+        31637,
+        31722,
+        31729,
+        31730,
+        31744
+      ],
+      "collapsedTriangles": 0,
+      "collapsedTriangleIds": [],
+      "maximumEdgeStrain": 0.7128912338570541,
+      "p95EdgeStrain": 0.006484423784675721,
+      "minimumAreaRatio": 0.9361716592488941,
+      "finite": true
+    }
+  ],
+  "sameImplementation": true,
+  "sourceGeometryModified": false,
+  "originalVertexOrderPreserved": true
+}
