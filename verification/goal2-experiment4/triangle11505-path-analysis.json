@@ -1,0 +1,485 @@
+{
+  "triangleLocalId": 11505,
+  "originalVertexIds": [
+    300778,
+    80827,
+    674898
+  ],
+  "neighborTriangleIds": [
+    11501
+  ],
+  "neighborCount": 1,
+  "sharedEdge": [
+    2540,
+    9608
+  ],
+  "oppositeVertices": [
+    21726,
+    17573
+  ],
+  "neutralSharedEdgeSides": [
+    -1.7662216835871098e-06,
+    1.482527576192348e-06
+  ],
+  "neutralArea": 8.831108417935548e-07,
+  "neutralVertices": [
+    [
+      0.056140922009944916,
+      -0.2249121218919754,
+      -0.033436454832553864
+    ],
+    [
+      0.055316079407930374,
+      -0.22468158602714539,
+      -0.032620638608932495
+    ],
+    [
+      0.05470115691423416,
+      -0.22503627836704254,
+      -0.03408713638782501
+    ]
+  ],
+  "finalVertices": [
+    [
+      0.05575192994584485,
+      -0.22518147099463107,
+      -0.03540114738190699
+    ],
+    [
+      0.05518756721556481,
+      -0.224141104477275,
+      -0.03546409565216559
+    ],
+    [
+      0.05470115691423416,
+      -0.22503627836704254,
+      -0.03408713638782501
+    ]
+  ],
+  "vertexDisplacements": [
+    [
+      -0.00038899206410006326,
+      -0.0002693491026556638,
+      -0.0019646925493531295
+    ],
+    [
+      -0.00012851219236556521,
+      0.0005404815498703808,
+      -0.0028434570432330983
+    ],
+    [
+      0.0,
+      0.0,
+      0.0
+    ]
+  ],
+  "samples": [
+    {
+      "alpha": 0.0,
+      "area": 8.831108417935548e-07,
+      "areaRatio": 1.0,
+      "normalDotNeutral": 1.0,
+      "normalRotationDegrees": 0.0,
+      "neighborDihedralDegrees": [
+        1.4542042174251888
+      ],
+      "neighborDihedralMin": 1.4542042174251888,
+      "neighborDihedralMax": 1.4542042174251888,
+      "sharedEdgeSides": [
+        -1.7662216835871098e-06,
+        1.482527576192348e-06
+      ],
+      "sharedEdgeOppositeSideProduct": -2.618472351586766e-12,
+      "orientationAgainstNeutral": 3.119539035573284e-12,
+      "finite": true
+    },
+    {
+      "alpha": 0.05,
+      "area": 8.086979575448801e-07,
+      "areaRatio": 0.9157377752292727,
+      "normalDotNeutral": 0.9986955294575658,
+      "normalRotationDegrees": 2.9268602739907696,
+      "neighborDihedralDegrees": [
+        1.486884250568473
+      ],
+      "neighborDihedralMin": 1.486884250568473,
+      "neighborDihedralMax": 1.486884250568473,
+      "sharedEdgeSides": [
+        -1.615286069763072e-06,
+        1.4249710663144449e-06
+      ],
+      "sharedEdgeOppositeSideProduct": -2.3017359132331538e-12,
+      "orientationAgainstNeutral": 2.8529532816117384e-12,
+      "finite": true
+    },
+    {
+      "alpha": 0.1,
+      "area": 7.383683059498664e-07,
+      "areaRatio": 0.8360992425936891,
+      "normalDotNeutral": 0.9940381772420724,
+      "normalRotationDegrees": 6.259550712709254,
+      "neighborDihedralDegrees": [
+        1.8392737890908735
+      ],
+      "neighborDihedralMin": 1.8392737890908735,
+      "neighborDihedralMax": 1.8392737890908735,
+      "sharedEdgeSides": [
+        -1.4679325699594438e-06,
+        1.3675203677882591e-06
+      ],
+      "sharedEdgeOppositeSideProduct": -2.007427687959303e-12,
+      "orientationAgainstNeutral": 2.5926943351061215e-12,
+      "finite": true
+    },
+    {
+      "alpha": 0.15000000000000002,
+      "area": 6.725117051403793e-07,
+      "areaRatio": 0.7615258168210698,
+      "normalDotNeutral": 0.9844893211931764,
+      "normalRotationDegrees": 10.104526934094013,
+      "neighborDihedralDegrees": [
+        2.623333558444244
+      ],
+      "neighborDihedralMin": 2.623333558444244,
+      "neighborDihedralMax": 2.623333558444244,
+      "sharedEdgeSides": [
+        -1.3241611841762353e-06,
+        1.3101754806138047e-06
+      ],
+      "sharedEdgeOppositeSideProduct": -1.7348835158882439e-12,
+      "orientationAgainstNeutral": 2.3387621960564512e-12,
+      "finite": true
+    },
+    {
+      "alpha": 0.2,
+      "area": 6.117197713767661e-07,
+      "areaRatio": 0.6926874209067497,
+      "normalDotNeutral": 0.9677404326401938,
+      "normalRotationDegrees": 14.592892367550592,
+      "neighborDihedralDegrees": [
+        3.979653283374018
+      ],
+      "neighborDihedralMin": 3.979653283374018,
+      "neighborDihedralMax": 3.979653283374018,
+      "sharedEdgeSides": [
+        -1.1839719124134243e-06,
+        1.252936404791058e-06
+      ],
+      "sharedEdgeOppositeSideProduct": -1.4834415113128693e-12,
+      "orientationAgainstNeutral": 2.0911568644626883e-12,
+      "finite": true
+    },
+    {
+      "alpha": 0.25,
+      "area": 5.56853514380399e-07,
+      "areaRatio": 0.6305590284108128,
+      "normalDotNeutral": 0.9404311256223346,
+      "normalRotationDegrees": 19.87591518925848,
+      "neighborDihedralDegrees": [
+        6.074272911358156
+      ],
+      "neighborDihedralMin": 6.074272911358156,
+      "neighborDihedralMax": 6.074272911358156,
+      "sharedEdgeSides": [
+        -1.0473647546710229e-06,
+        1.1958031403200239e-06
+      ],
+      "sharedEdgeOppositeSideProduct": -1.2524420626961206e-12,
+      "orientationAgainstNeutral": 1.849878340324854e-12,
+      "finite": true
+    },
+    {
+      "alpha": 0.30000000000000004,
+      "area": 5.09108968046771e-07,
+      "areaRatio": 0.5764949810974981,
+      "normalDotNeutral": 0.8979803620990546,
+      "normalRotationDegrees": 26.106148230250223,
+      "neighborDihedralDegrees": [
+        9.081050882407165
+      ],
+      "neighborDihedralMin": 9.081050882407165,
+      "neighborDihedralMax": 9.081050882407165,
+      "sharedEdgeSides": [
+        -9.143397109490308e-07,
+        1.138775687200711e-06
+      ],
+      "sharedEdgeOppositeSideProduct": -1.041227832670882e-12,
+      "orientationAgainstNeutral": 1.6149266236429487e-12,
+      "finite": true
+    },
+    {
+      "alpha": 0.35000000000000003,
+      "area": 4.70042462294447e-07,
+      "areaRatio": 0.5322576057834527,
+      "normalDotNeutral": 0.83492114458775,
+      "normalRotationDegrees": 33.392371877461606,
+      "neighborDihedralDegrees": [
+        13.137492747004528
+      ],
+      "neighborDihedralMin": 13.137492747004528,
+      "neighborDihedralMax": 13.137492747004528,
+      "sharedEdgeSides": [
+        -7.848967812474481e-07,
+        1.0818540454331106e-06
+      ],
+      "sharedEdgeOppositeSideProduct": -8.491437580399791e-13,
+      "orientationAgainstNeutral": 1.386301714416971e-12,
+      "finite": true
+    },
+    {
+      "alpha": 0.4,
+      "area": 4.4148061475597025e-07,
+      "areaRatio": 0.4999152924669623,
+      "normalDotNeutral": 0.7463928692889057,
+      "normalRotationDegrees": 41.721124249781326,
+      "neighborDihedralDegrees": [
+        18.26642332979481
+      ],
+      "neighborDihedralMin": 18.26642332979481,
+      "neighborDihedralMax": 18.26642332979481,
+      "sharedEdgeSides": [
+        -6.590359655662773e-07,
+        1.0250382150172398e-06
+      ],
+      "sharedEdgeOppositeSideProduct": -6.7553704977622e-13,
+      "orientationAgainstNeutral": 1.1640036126469265e-12,
+      "finite": true
+    },
+    {
+      "alpha": 0.45,
+      "area": 4.252267773658382e-07,
+      "areaRatio": 0.48151008598447675,
+      "normalDotNeutral": 0.6311423603548372,
+      "normalRotationDegrees": 50.86554581249074,
+      "neighborDihedralDegrees": [
+        24.283877172738777
+      ],
+      "neighborDihedralMin": 24.283877172738777,
+      "neighborDihedralMax": 24.283877172738777,
+      "sharedEdgeSides": [
+        -5.36757263905512e-07,
+        9.683281959530739e-07
+      ],
+      "sharedEdgeOppositeSideProduct": -5.197571930223324e-13,
+      "orientationAgainstNeutral": 9.480323183328036e-13,
+      "finite": true
+    },
+    {
+      "alpha": 0.5,
+      "area": 4.22567180741076e-07,
+      "areaRatio": 0.4784984633218439,
+      "normalDotNeutral": 0.49466770648395275,
+      "normalRotationDegrees": 60.35215908471985,
+      "neighborDihedralDegrees": [
+        30.76365614931519
+      ],
+      "neighborDihedralMin": 30.76365614931519,
+      "neighborDihedralMax": 30.76365614931519,
+      "sharedEdgeSides": [
+        -4.18060676265156e-07,
+        9.117239882406303e-07
+      ],
+      "sharedEdgeOppositeSideProduct": -3.81155947091043e-13,
+      "orientationAgainstNeutral": 7.383878314746094e-13,
+      "finite": true
+    },
+    {
+      "alpha": 0.55,
+      "area": 4.337979724566806e-07,
+      "areaRatio": 0.491215770350705,
+      "normalDotNeutral": 0.3491789057122232,
+      "normalRotationDegrees": 69.56289845046044,
+      "neighborDihedralDegrees": [
+        37.13601703334492
+      ],
+      "neighborDihedralMin": 37.13601703334492,
+      "neighborDihedralMax": 37.13601703334492,
+      "sharedEdgeSides": [
+        -3.0294620264520975e-07,
+        8.552255918798986e-07
+      ],
+      "sharedEdgeOppositeSideProduct": -2.590873454650172e-13,
+      "orientationAgainstNeutral": 5.350701520723441e-13,
+      "finite": true
+    },
+    {
+      "alpha": 0.6000000000000001,
+      "area": 4.5811085379600317e-07,
+      "areaRatio": 0.5187467213805262,
+      "normalDotNeutral": 0.20891651164731984,
+      "normalRotationDegrees": 77.94113537704969,
+      "neighborDihedralDegrees": [
+        42.889738878758884
+      ],
+      "neighborDihedralMin": 42.889738878758884,
+      "neighborDihedralMax": 42.889738878758884,
+      "sharedEdgeSides": [
+        -1.9141384304567258e-07,
+        7.988330068708847e-07
+      ],
+      "sharedEdgeOppositeSideProduct": -1.529076957968862e-13,
+      "orientationAgainstNeutral": 3.380792801260067e-13,
+      "finite": true
+    },
+    {
+      "alpha": 0.65,
+      "area": 4.939304175776527e-07,
+      "areaRatio": 0.5593073872522097,
+      "normalDotNeutral": 0.08448922610988782,
+      "normalRotationDegrees": 85.15334597449359,
+      "neighborDihedralDegrees": [
+        47.72995893043371
+      ],
+      "neighborDihedralMin": 47.72995893043371,
+      "neighborDihedralMax": 47.72995893043371,
+      "sharedEdgeSides": [
+        -8.346359746653927e-08,
+        7.425462332135967e-07
+      ],
+      "sharedEdgeOppositeSideProduct": -6.197557990923463e-14,
+      "orientationAgainstNeutral": 1.4741521563558766e-13,
+      "finite": true
+    },
+    {
+      "alpha": 0.7000000000000001,
+      "area": 5.394351244144816e-07,
+      "areaRatio": 0.6108351283729179,
+      "normalDotNeutral": -0.019376318991892877,
+      "normalRotationDegrees": 91.11025078053993,
+      "neighborDihedralDegrees": [
+        51.59634446733813
+      ],
+      "neighborDihedralMin": 51.59634446733813,
+      "neighborDihedralMax": 51.59634446733813,
+      "sharedEdgeSides": [
+        2.0904534092172846e-08,
+        6.86365270908022e-07
+      ],
+      "sharedEdgeOppositeSideProduct": 1.4348146205380198e-14,
+      "orientationAgainstNeutral": -3.692204139888166e-14,
+      "finite": true
+    },
+    {
+      "alpha": 0.75,
+      "area": 5.929535011574125e-07,
+      "areaRatio": 0.6714372342583327,
+      "normalDotNeutral": -0.10261390766135756,
+      "normalRotationDegrees": 95.8897108966363,
+      "neighborDihedralDegrees": [
+        54.584372424188025
+      ],
+      "neighborDihedralMin": 54.584372424188025,
+      "neighborDihedralMax": 54.584372424188025,
+      "sharedEdgeSides": [
+        1.2169055163049068e-07,
+        6.302901199541578e-07
+      ],
+      "sharedEdgeOppositeSideProduct": 7.67003523844696e-14,
+      "orientationAgainstNeutral": -2.1493249097744942e-13,
+      "finite": true
+    },
+    {
+      "alpha": 0.8,
+      "area": 6.531402769060606e-07,
+      "areaRatio": 0.739590373026748,
+      "normalDotNeutral": -0.1675707829452039,
+      "normalRotationDegrees": 99.64660917069565,
+      "neighborDihedralDegrees": [
+        56.85505621087369
+      ],
+      "neighborDihedralMin": 56.85505621087369,
+      "neighborDihedralMax": 56.85505621087369,
+      "sharedEdgeSides": [
+        2.1889445514839174e-07,
+        5.743207803520125e-07
+      ],
+      "sharedEdgeOppositeSideProduct": 1.2571563429555294e-13,
+      "orientationAgainstNeutral": -3.8661613310007553e-13,
+      "finite": true
+    },
+    {
+      "alpha": 0.8500000000000001,
+      "area": 7.189953846029704e-07,
+      "areaRatio": 0.8141621080573828,
+      "normalDotNeutral": -0.21732840803870737,
+      "normalRotationDegrees": 102.55216583639246,
+      "neighborDihedralDegrees": [
+        58.57533747493758
+      ],
+      "neighborDihedralMin": 58.57533747493758,
+      "neighborDihedralMax": 58.57533747493758,
+      "sharedEdgeSides": [
+        3.125162446458834e-07,
+        5.184572521015845e-07
+      ],
+      "sharedEdgeOppositeSideProduct": 1.6202631343621122e-13,
+      "orientationAgainstNeutral": -5.519729677667732e-13,
+      "finite": true
+    },
+    {
+      "alpha": 0.9,
+      "area": 7.898127232003384e-07,
+      "areaRatio": 0.8943528782822635,
+      "normalDotNeutral": -0.2548426407286869,
+      "normalRotationDegrees": 104.76426107819199,
+      "neighborDihedralDegrees": [
+        59.89028706920704
+      ],
+      "neighborDihedralMin": 59.89028706920704,
+      "neighborDihedralMax": 59.89028706920704,
+      "sharedEdgeSides": [
+        4.0255592012297923e-07,
+        4.626995352028835e-07
+      ],
+      "sharedEdgeOppositeSideProduct": 1.8626243713407158e-13,
+      "orientationAgainstNeutral": -7.110029949775665e-13,
+      "finite": true
+    },
+    {
+      "alpha": 0.9500000000000001,
+      "area": 8.651128549437966e-07,
+      "areaRatio": 0.9796197872362148,
+      "normalDotNeutral": -0.28262987816278734,
+      "normalRotationDegrees": 106.41722695201432,
+      "neighborDihedralDegrees": [
+        60.91511869206899
+      ],
+      "neighborDihedralMin": 60.91511869206899,
+      "neighborDihedralMax": 60.91511869206899,
+      "sharedEdgeSides": [
+        4.890134815796528e-07,
+        4.07047629655889e-07
+      ],
+      "sharedEdgeOppositeSideProduct": 1.9905177854677142e-13,
+      "orientationAgainstNeutral": -8.637062147324084e-13,
+      "finite": true
+    },
+    {
+      "alpha": 1.0,
+      "area": 9.445825852765966e-07,
+      "areaRatio": 1.0696081857156183,
+      "normalDotNeutral": -0.30272044918574,
+      "normalRotationDegrees": 107.62107310920973,
+      "neighborDihedralDegrees": [
+        61.73660684310163
+      ],
+      "neighborDihedralMin": 61.73660684310163,
+      "neighborDihedralMax": 61.73660684310163,
+      "sharedEdgeSides": [
+        5.718889290159178e-07,
+        3.515015354606123e-07
+      ],
+      "sharedEdgeOppositeSideProduct": 2.0101983666202022e-13,
+      "orientationAgainstNeutral": -1.0100826270313233e-12,
+      "finite": true
+    }
+  ],
+  "classificationEvidence": {
+    "allAreasPositive": true,
+    "allFinite": true,
+    "neighborDihedralsRemainDefined": true,
+    "normalDotNegativeSamples": 7,
+    "sharedEdgeSideCrossingDetected": true,
+    "firstSampleAtOrAfterCrossing": 0.7000000000000001
+  }
+}
