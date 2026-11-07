@@ -1,0 +1,274 @@
+{
+  "solver": "official libigl arap_precomputation/arap_solve",
+  "controlCounts": [
+    2,
+    4,
+    8,
+    16
+  ],
+  "stoppedOnFailure": false,
+  "models": [
+    {
+      "model": "female",
+      "movingControls": 2,
+      "patchVertices": 443,
+      "patchTriangles": 784,
+      "requestedDisplacement": 0.0005584288580934188,
+      "achievedMin": 0.000558428858093449,
+      "achievedMax": 0.000558428858093449,
+      "maxControlRelativeError": 5.417888360170764e-14,
+      "minDirectionRatio": 1.0000000000000542,
+      "maxDirectionRatio": 1.0000000000000542,
+      "neighborCandidates": 8,
+      "maxNeighborMovement": 0.0005518316868942608,
+      "neighborRatio": 0.9881861922005929,
+      "newInvertedTriangles": 0,
+      "newCollapsedTriangles": 0,
+      "runtimeSeconds": 0.11657830001786351,
+      "movingLocalIndices": [
+        263,
+        196
+      ],
+      "stationaryLocalIndices": [
+        148,
+        0
+      ],
+      "pass": true
+    },
+    {
+      "model": "female",
+      "movingControls": 4,
+      "patchVertices": 443,
+      "patchTriangles": 784,
+      "requestedDisplacement": 0.0005584288580934188,
+      "achievedMin": 0.000558428858093449,
+      "achievedMax": 0.0005584288580934498,
+      "maxControlRelativeError": 5.551115123125783e-14,
+      "minDirectionRatio": 1.0000000000000542,
+      "maxDirectionRatio": 1.0000000000000555,
+      "neighborCandidates": 14,
+      "maxNeighborMovement": 0.0005709034521233789,
+      "neighborRatio": 1.0223387345570762,
+      "newInvertedTriangles": 0,
+      "newCollapsedTriangles": 0,
+      "runtimeSeconds": 0.09553349995985627,
+      "movingLocalIndices": [
+        263,
+        196,
+        442,
+        55
+      ],
+      "stationaryLocalIndices": [
+        148,
+        0
+      ],
+      "pass": true
+    },
+    {
+      "model": "female",
+      "movingControls": 8,
+      "patchVertices": 443,
+      "patchTriangles": 784,
+      "requestedDisplacement": 0.0005584288580934188,
+      "achievedMin": 0.000558428858093449,
+      "achievedMax": 0.0005584288580934498,
+      "maxControlRelativeError": 5.551115123125783e-14,
+      "minDirectionRatio": 1.0000000000000542,
+      "maxDirectionRatio": 1.0000000000000555,
+      "neighborCandidates": 29,
+      "maxNeighborMovement": 0.0005928291895908885,
+      "neighborRatio": 1.0616019945941169,
+      "newInvertedTriangles": 0,
+      "newCollapsedTriangles": 0,
+      "runtimeSeconds": 0.09346870006993413,
+      "movingLocalIndices": [
+        263,
+        196,
+        442,
+        55,
+        1,
+        71,
+        312,
+        409
+      ],
+      "stationaryLocalIndices": [
+        148,
+        0
+      ],
+      "pass": true
+    },
+    {
+      "model": "female",
+      "movingControls": 16,
+      "patchVertices": 443,
+      "patchTriangles": 784,
+      "requestedDisplacement": 0.0005584288580934188,
+      "achievedMin": 0.000558428858093449,
+      "achievedMax": 0.0005584288580934498,
+      "maxControlRelativeError": 5.551115123125783e-14,
+      "minDirectionRatio": 1.0000000000000542,
+      "maxDirectionRatio": 1.0000000000000555,
+      "neighborCandidates": 74,
+      "maxNeighborMovement": 0.000600349548309764,
+      "neighborRatio": 1.0750689897357208,
+      "newInvertedTriangles": 0,
+      "newCollapsedTriangles": 0,
+      "runtimeSeconds": 0.09921630006283522,
+      "movingLocalIndices": [
+        263,
+        196,
+        442,
+        55,
+        1,
+        71,
+        312,
+        409,
+        343,
+        103,
+        90,
+        210,
+        2,
+        421,
+        199,
+        405
+      ],
+      "stationaryLocalIndices": [
+        148,
+        0
+      ],
+      "pass": true
+    },
+    {
+      "model": "male",
+      "movingControls": 2,
+      "patchVertices": 1142,
+      "patchTriangles": 2117,
+      "requestedDisplacement": 0.002997431104458742,
+      "achievedMin": 0.002997431104458746,
+      "achievedMax": 0.002997431104458746,
+      "maxControlRelativeError": 1.3322676295501878e-15,
+      "minDirectionRatio": 1.0000000000000013,
+      "maxDirectionRatio": 1.0000000000000013,
+      "neighborCandidates": 6,
+      "maxNeighborMovement": 0.0028767031999705405,
+      "neighborRatio": 0.9597228759291194,
+      "newInvertedTriangles": 0,
+      "newCollapsedTriangles": 0,
+      "runtimeSeconds": 0.3081928000319749,
+      "movingLocalIndices": [
+        765,
+        262
+      ],
+      "stationaryLocalIndices": [
+        195,
+        1084
+      ],
+      "pass": true
+    },
+    {
+      "model": "male",
+      "movingControls": 4,
+      "patchVertices": 1142,
+      "patchTriangles": 2117,
+      "requestedDisplacement": 0.002997431104458742,
+      "achievedMin": 0.002997431104458746,
+      "achievedMax": 0.002997431104458746,
+      "maxControlRelativeError": 1.3322676295501878e-15,
+      "minDirectionRatio": 1.0000000000000013,
+      "maxDirectionRatio": 1.0000000000000013,
+      "neighborCandidates": 11,
+      "maxNeighborMovement": 0.0029069478381571123,
+      "neighborRatio": 0.9698130622028196,
+      "newInvertedTriangles": 0,
+      "newCollapsedTriangles": 0,
+      "runtimeSeconds": 0.2792148001026362,
+      "movingLocalIndices": [
+        765,
+        262,
+        581,
+        16
+      ],
+      "stationaryLocalIndices": [
+        195,
+        1084
+      ],
+      "pass": true
+    },
+    {
+      "model": "male",
+      "movingControls": 8,
+      "patchVertices": 1142,
+      "patchTriangles": 2117,
+      "requestedDisplacement": 0.002997431104458742,
+      "achievedMin": 0.002997431104458746,
+      "achievedMax": 0.002997431104458746,
+      "maxControlRelativeError": 1.3322676295501878e-15,
+      "minDirectionRatio": 1.0000000000000013,
+      "maxDirectionRatio": 1.0000000000000013,
+      "neighborCandidates": 24,
+      "maxNeighborMovement": 0.0032438746446999587,
+      "neighborRatio": 1.0822182501124469,
+      "newInvertedTriangles": 0,
+      "newCollapsedTriangles": 0,
+      "runtimeSeconds": 0.29912799992598593,
+      "movingLocalIndices": [
+        765,
+        262,
+        581,
+        16,
+        574,
+        174,
+        890,
+        642
+      ],
+      "stationaryLocalIndices": [
+        195,
+        1084
+      ],
+      "pass": true
+    },
+    {
+      "model": "male",
+      "movingControls": 16,
+      "patchVertices": 1142,
+      "patchTriangles": 2117,
+      "requestedDisplacement": 0.002997431104458742,
+      "achievedMin": 0.002997431104458746,
+      "achievedMax": 0.002997431104458746,
+      "maxControlRelativeError": 1.3322676295501878e-15,
+      "minDirectionRatio": 1.0000000000000013,
+      "maxDirectionRatio": 1.0000000000000013,
+      "neighborCandidates": 60,
+      "maxNeighborMovement": 0.0030399148620884027,
+      "neighborRatio": 1.014173389195323,
+      "newInvertedTriangles": 0,
+      "newCollapsedTriangles": 0,
+      "runtimeSeconds": 0.29216370009817183,
+      "movingLocalIndices": [
+        765,
+        262,
+        581,
+        16,
+        574,
+        174,
+        890,
+        642,
+        1119,
+        702,
+        1002,
+        143,
+        974,
+        545,
+        871,
+        384
+      ],
+      "stationaryLocalIndices": [
+        195,
+        1084
+      ],
+      "pass": true
+    }
+  ],
+  "sameAlgorithm": true,
+  "sourceGeometryModified": false
+}
