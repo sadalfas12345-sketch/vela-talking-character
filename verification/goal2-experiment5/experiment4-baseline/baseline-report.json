@@ -1,0 +1,166 @@
+{
+  "experiment": "Experiment 5 baseline regression",
+  "sourceExperiment": "Experiment 4",
+  "models": [
+    {
+      "model": "female",
+      "landmarkId": 70,
+      "triangleVertexIds": [
+        480918,
+        481139,
+        481619
+      ],
+      "localTriangleIndices": [
+        1688,
+        1714,
+        1774
+      ],
+      "barycentricWeights": [
+        0.1981309027344369,
+        0.494773583765463,
+        0.3070955135001001
+      ],
+      "neutralLandmark": [
+        0.07083751261234283,
+        -0.024009831249713898,
+        0.8942515850067139
+      ],
+      "requestedTarget": [
+        0.07096612553834787,
+        -0.024414595645709233,
+        0.8931329481331167
+      ],
+      "requestedDisplacement": [
+        0.0001286129260050367,
+        -0.00040476439599533565,
+        -0.0011186368735971453
+      ],
+      "requestedMagnitude": 0.0011965466793954348,
+      "achievedDisplacement": [
+        0.0001286129260050506,
+        -0.00040476439599533565,
+        -0.0011186368735972563
+      ],
+      "achievedMagnitude": 0.00119654667939554,
+      "landmarkRelativeError": 9.350767856321888e-14,
+      "maxNeighborMovement": 0.0011965466793954348,
+      "neighborCount": 9,
+      "newInvertedTriangles": 0,
+      "newCollapsedTriangles": 0,
+      "finiteCoordinates": true,
+      "patchVertices": 4340,
+      "patchTriangles": 8387,
+      "supportControlCount": 12,
+      "supportControlIndices": [
+        1537,
+        1610,
+        1621,
+        1663,
+        1688,
+        1714,
+        1762,
+        1774,
+        1775,
+        1786,
+        1867,
+        1873
+      ],
+      "runtimeSeconds": 1.2479683998972178,
+      "pass": true,
+      "baselineImplementation": "run_goal2_experiment4_landmark70_arap.solve",
+      "correctedGeometry": {
+        "model": "female",
+        "candidateFoldPairs": 0,
+        "correctionCount": 0,
+        "newGenuineFoldsAfterCorrection": 0,
+        "newInvertedTriangles": 0,
+        "collapsedTriangles": 0,
+        "minimumAreaRatio": 0.9704470817121831,
+        "maximumEdgeStrain": 0.11410564444154048,
+        "finite": true
+      }
+    },
+    {
+      "model": "male",
+      "landmarkId": 70,
+      "triangleVertexIds": [
+        144461,
+        645786,
+        795958
+      ],
+      "localTriangleIndices": [
+        4556,
+        20783,
+        25674
+      ],
+      "barycentricWeights": [
+        0.2436460076462451,
+        0.019729722751562553,
+        0.7366242696021923
+      ],
+      "neutralLandmark": [
+        0.1488966941833496,
+        -0.19386473298072815,
+        0.14452937245368958
+      ],
+      "requestedTarget": [
+        0.15112517614194135,
+        -0.19599055023314985,
+        0.13889336463789737
+      ],
+      "requestedDisplacement": [
+        0.002228481958591738,
+        -0.0021258172524216967,
+        -0.00563600781579221
+      ],
+      "requestedMagnitude": 0.006422601881646836,
+      "achievedDisplacement": [
+        0.002228481958591738,
+        -0.0021258172524217245,
+        -0.00563600781579221
+      ],
+      "achievedMagnitude": 0.006422601881646846,
+      "landmarkRelativeError": 4.321546956684794e-15,
+      "maxNeighborMovement": 0.006422601881646836,
+      "neighborCount": 11,
+      "newInvertedTriangles": 1,
+      "newCollapsedTriangles": 0,
+      "finiteCoordinates": true,
+      "patchVertices": 31845,
+      "patchTriangles": 62878,
+      "supportControlCount": 14,
+      "supportControlIndices": [
+        4556,
+        10048,
+        10186,
+        11456,
+        11698,
+        13079,
+        16425,
+        20783,
+        20888,
+        21126,
+        21522,
+        22437,
+        24305,
+        25674
+      ],
+      "runtimeSeconds": 10.04636859986931,
+      "pass": true,
+      "baselineImplementation": "run_goal2_experiment4_landmark70_arap.solve",
+      "correctedGeometry": {
+        "model": "male",
+        "candidateFoldPairs": 1,
+        "correctionCount": 1,
+        "newGenuineFoldsAfterCorrection": 0,
+        "newInvertedTriangles": 0,
+        "collapsedTriangles": 0,
+        "minimumAreaRatio": 0.8482663918496589,
+        "maximumEdgeStrain": 0.13389094358645925,
+        "finite": true
+      }
+    }
+  ],
+  "sameImplementation": true,
+  "sourceGeometryModified": false
+}
