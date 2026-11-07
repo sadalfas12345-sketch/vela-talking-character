@@ -1,0 +1,161 @@
+{
+  "baselineFive": [
+    {
+      "localTriangleId": 28820,
+      "originalVertexIds": [
+        649592,
+        317854,
+        795958
+      ],
+      "neutralArea": 1.1713363435733997e-06,
+      "deformedArea": 1.1713363435733997e-06,
+      "centroidNeutral": [
+        0.14922859768072763,
+        -0.19393880168596903,
+        0.14351710180441538
+      ],
+      "centroidDeformed": [
+        0.1514570796393194,
+        -0.19606461893839075,
+        0.13788109398862317
+      ],
+      "distanceToPatchBoundary": 4.589770838427246,
+      "sharesWithBaseline": [
+        28827
+      ]
+    },
+    {
+      "localTriangleId": 28827,
+      "originalVertexIds": [
+        356310,
+        649592,
+        795958
+      ],
+      "neutralArea": 1.7350389370622874e-06,
+      "deformedArea": 1.7350389370622874e-06,
+      "centroidNeutral": [
+        0.14837870498498282,
+        -0.19412543872992197,
+        0.14258074760437012
+      ],
+      "centroidDeformed": [
+        0.15060718694357456,
+        -0.1962512559823437,
+        0.1369447397885779
+      ],
+      "distanceToPatchBoundary": 4.581917538332064,
+      "sharesWithBaseline": [
+        28820
+      ]
+    },
+    {
+      "localTriangleId": 28839,
+      "originalVertexIds": [
+        645786,
+        657177,
+        407009
+      ],
+      "neutralArea": 1.2496801363761578e-06,
+      "deformedArea": 1.2496801363761578e-06,
+      "centroidNeutral": [
+        0.1476024587949117,
+        -0.19404181838035583,
+        0.14542226493358612
+      ],
+      "centroidDeformed": [
+        0.14983094075350345,
+        -0.19616763563277753,
+        0.1397862571177939
+      ],
+      "distanceToPatchBoundary": 4.604896101323696,
+      "sharesWithBaseline": [
+        28840
+      ]
+    },
+    {
+      "localTriangleId": 28840,
+      "originalVertexIds": [
+        645786,
+        364169,
+        657177
+      ],
+      "neutralArea": 1.5610495368116838e-06,
+      "deformedArea": 1.5610495368116838e-06,
+      "centroidNeutral": [
+        0.14802533884843191,
+        -0.19392487406730652,
+        0.1465104470650355
+      ],
+      "centroidDeformed": [
+        0.15025382080702365,
+        -0.19605069131972822,
+        0.14087443924924328
+      ],
+      "distanceToPatchBoundary": 4.613893548881918,
+      "sharesWithBaseline": [
+        28839,
+        29125
+      ]
+    },
+    {
+      "localTriangleId": 29125,
+      "originalVertexIds": [
+        645786,
+        669053,
+        364169
+      ],
+      "neutralArea": 1.425132153466681e-06,
+      "deformedArea": 1.425132153466681e-06,
+      "centroidNeutral": [
+        0.14879450698693594,
+        -0.19372259577115378,
+        0.1473646859327952
+      ],
+      "centroidDeformed": [
+        0.15102298894552768,
+        -0.19584841302357547,
+        0.141728678117003
+      ],
+      "distanceToPatchBoundary": 4.613893548881918,
+      "sharesWithBaseline": [
+        28840
+      ]
+    }
+  ],
+  "postCorrectionInversions": [
+    {
+      "localTriangleId": 11505,
+      "originalVertexIds": [
+        300778,
+        80827,
+        674898
+      ],
+      "neutralArea": 8.831108417935548e-07,
+      "deformedArea": 9.445825852765966e-07,
+      "centroidNeutral": [
+        0.05538605277736982,
+        -0.22487666209538779,
+        -0.03338140994310379
+      ],
+      "centroidDeformed": [
+        0.05521355135854794,
+        -0.2247862846129829,
+        -0.034984126473965864
+      ],
+      "distanceToPatchBoundary": 6.648812538232285,
+      "sharesWithBaseline": []
+    }
+  ],
+  "baselineInversionIds": [
+    28820,
+    28827,
+    28839,
+    28840,
+    29125
+  ],
+  "postCorrectionInversionIds": [
+    11505
+  ],
+  "patchBoundaryVertexCount": 811,
+  "confirmedPattern": "baseline triangles cluster around the landmark control triangle and share control-region vertices"
+}

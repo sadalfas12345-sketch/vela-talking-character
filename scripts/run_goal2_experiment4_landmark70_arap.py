@@ -14,8 +14,19 @@ def solve(name, patch_path, goal_path, marker_path, render_path, camera_path, ou
     tri_global=np.asarray(rec['triangleVertexIndices'],np.int64); local={int(v):i for i,v in enumerate(original)}; tri=np.asarray([local[int(v)] for v in tri_global],np.int32); bary=np.asarray(rec['barycentricCoordinates'],float)
     markers=json.loads(marker_path.read_text()); neutral=np.asarray(markers['neutral'][70],float); target=np.asarray(markers['samples']['100'][70],float); requested=target-neutral
     # Minimum-norm vertex displacement satisfying the actual barycentric constraint.
-    vertex_delta=np.outer(bary,requested)/max(float(bary@bary),1e-20)
-    b=np.r_[tri,stationary].astype(np.int32); bc=V[b].copy(); bc[:3]+=vertex_delta
+    # Targeted correction: use a connected one-ring support around the
+    # containing triangle. Every support control receives the same target
+    # vector, so the original barycentric point remains exactly constrained
+    # while the local motion is distributed instead of concentrated on three
+    # vertices.
+    adjacency=[set() for _ in range(len(V))]
+    for face in F:
+        for i,j in ((face[0],face[1]),(face[1],face[2]),(face[2],face[0])):
+            adjacency[int(i)].add(int(j)); adjacency[int(j)].add(int(i))
+    support=set(int(x) for x in tri)
+    for i in list(support): support.update(adjacency[i])
+    support=np.asarray(sorted(support-set(int(x) for x in stationary)),dtype=np.int32)
+    b=np.r_[support,stationary].astype(np.int32); bc=V[b].copy(); bc[:len(support)]+=requested
     data=igl.ARAPData(); data.energy=igl.ARAP_ENERGY_TYPE_ELEMENTS; data.max_iter=100; t=time.perf_counter(); igl.arap_precomputation(V,F,3,b,data); U=igl.arap_solve(bc,data,V.copy()); runtime=time.perf_counter()-t
     achieved=(bary[:,None]*U[tri]).sum(0)-(bary[:,None]*V[tri]).sum(0); error=float(np.linalg.norm(achieved-requested)/max(np.linalg.norm(requested),1e-20)); delta=U-V
     tri_set=set(int(x) for x in tri); neighbors=set()
@@ -23,7 +34,7 @@ def solve(name, patch_path, goal_path, marker_path, render_path, camera_path, ou
         if tri_set.intersection(int(x) for x in face): neighbors.update(int(x) for x in face)
     neighbors-=tri_set; neighbors-=set(int(x) for x in stationary); max_neighbor=max((float(np.linalg.norm(delta[i])) for i in neighbors),default=0.0)
     base=np.cross(V[F[:,1]]-V[F[:,0]],V[F[:,2]]-V[F[:,0]]); new=np.cross(U[F[:,1]]-U[F[:,0]],U[F[:,2]]-U[F[:,0]]); a0=np.linalg.norm(base,axis=1); a1=np.linalg.norm(new,axis=1); dots=np.einsum('ij,ij->i',base,new); inv=int(np.sum(dots<0)); collapsed=int(np.sum(a1<a0*1e-4)); finite=bool(np.isfinite(U).all())
-    row={'model':name,'landmarkId':70,'triangleVertexIds':tri_global.tolist(),'localTriangleIndices':tri.tolist(),'barycentricWeights':bary.tolist(),'neutralLandmark':neutral.tolist(),'requestedTarget':target.tolist(),'requestedDisplacement':requested.tolist(),'requestedMagnitude':float(np.linalg.norm(requested)),'achievedDisplacement':achieved.tolist(),'achievedMagnitude':float(np.linalg.norm(achieved)),'landmarkRelativeError':error,'maxNeighborMovement':max_neighbor,'neighborCount':len(neighbors),'newInvertedTriangles':inv,'newCollapsedTriangles':collapsed,'finiteCoordinates':finite,'patchVertices':len(V),'patchTriangles':len(F),'runtimeSeconds':runtime,'pass':bool(error<=.05 and max_neighbor>=.1*float(np.linalg.norm(requested)) and inv==0 and collapsed==0 and finite)}
+    row={'model':name,'landmarkId':70,'triangleVertexIds':tri_global.tolist(),'localTriangleIndices':tri.tolist(),'barycentricWeights':bary.tolist(),'neutralLandmark':neutral.tolist(),'requestedTarget':target.tolist(),'requestedDisplacement':requested.tolist(),'requestedMagnitude':float(np.linalg.norm(requested)),'achievedDisplacement':achieved.tolist(),'achievedMagnitude':float(np.linalg.norm(achieved)),'landmarkRelativeError':error,'maxNeighborMovement':max_neighbor,'neighborCount':len(neighbors),'newInvertedTriangles':inv,'newCollapsedTriangles':collapsed,'finiteCoordinates':finite,'patchVertices':len(V),'patchTriangles':len(F),'supportControlCount':len(support),'supportControlIndices':support.tolist(),'runtimeSeconds':runtime,'pass':bool(error<=.05 and max_neighbor>=.1*float(np.linalg.norm(requested)) and inv==0 and collapsed==0 and finite)}
     np.savez_compressed(out/f'{name}-landmark70-solution.npz',V=V,U=U,F=F,triangle=tri,bary=bary)
     cam=json.loads(camera_path.read_text()); img=Image.open(render_path).convert('RGB'); loc=np.asarray(cam['cameraLocation']); right=np.asarray(cam['cameraBasis']['right']); up=np.asarray(cam['cameraBasis']['up']); scale=float(cam['orthoScale']); w,h=img.size
     def proj(P):
