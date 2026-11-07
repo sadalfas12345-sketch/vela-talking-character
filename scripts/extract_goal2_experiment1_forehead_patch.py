@@ -50,7 +50,8 @@ def main():
     manifest_path=root / 'verification' / 'goal2-browInnerUp-proof' / 'step4-tripo-transfer' / ('female' if 'vela-photoreal' in str(source) else 'male') / 'landmark_markers.json'
     markers=json.loads(manifest_path.read_text()) if manifest_path.exists() else {}
     up=np.asarray(markers.get('upAxis',[0,1,0]),float); up/=max(float(np.linalg.norm(up)),1e-20)
+    xaxis=np.asarray(markers.get('xAxis',[1,0,0]),float); xaxis/=max(float(np.linalg.norm(xaxis)),1e-20)
     out.parent.mkdir(parents=True,exist_ok=True)
-    np.savez_compressed(out.with_suffix('.npz'),V=PV,F=F,originalIndices=np.asarray(used),moved=np.int64(moved),stationary=np.asarray([s1,s2],dtype=np.int64),seedPoint=p,eyeWidth=np.float64(eye),upAxis=up)
+    np.savez_compressed(out.with_suffix('.npz'),V=PV,F=F,originalIndices=np.asarray(used),moved=np.int64(moved),stationary=np.asarray([s1,s2],dtype=np.int64),seedPoint=p,eyeWidth=np.float64(eye),upAxis=up,xAxis=xaxis)
     out.write_text(json.dumps({'source':str(source),'meshObject':body.name,'seedLandmark':336,'seedTriangle':seed_face,'vertices':len(PV),'triangles':len(F),'movedLocalIndex':moved,'stationaryLocalIndices':[s1,s2],'eyeWidth':eye,'upAxis':up.tolist(),'hopRadius':hop_radius},indent=2)+'\n')
 if __name__=='__main__': main()

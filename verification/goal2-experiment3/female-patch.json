@@ -1,0 +1,20 @@
+{
+  "source": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\vela-photoreal\\generated-rigged.glb",
+  "meshObject": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+  "seedLandmark": 336,
+  "seedTriangle": 1057079,
+  "vertices": 2156,
+  "triangles": 4118,
+  "movedLocalIndex": 2121,
+  "stationaryLocalIndices": [
+    76,
+    885
+  ],
+  "eyeWidth": 0.05584288580934188,
+  "upAxis": [
+    0.11502022106412355,
+    -0.005412842122809087,
+    -0.9933484030724133
+  ],
+  "hopRadius": 128
+}
