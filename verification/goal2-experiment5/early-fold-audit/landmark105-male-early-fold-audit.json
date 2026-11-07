@@ -1,0 +1,500 @@
+{
+  "models": [
+    {
+      "model": "female",
+      "landmark105": {
+        "fiveHopVertices": 129,
+        "fiveHopEdges": 349,
+        "averageLocalEdgeLength": 0.000642133886714677,
+        "minimumLocalEdgeLength": 0.0001187503912696775,
+        "localRegionDiameter": 0.00765805858711249,
+        "landmarkToBoundaryDistance": 0.0062841921148682565,
+        "interocularWidth": 0.05584288580934188,
+        "requestedDisplacement": [
+          0.00015764428523152435,
+          0.0006938922966734616,
+          -0.0013475704264487298
+        ],
+        "requestedMagnitude": 0.0015239042930211008,
+        "movementOverAverageLocalEdge": 2.3731877799157886,
+        "movementOverMinimumLocalEdge": 12.832835974075856,
+        "movementOverRegionDiameter": 0.19899355374293326,
+        "boundaryDistanceOverEyeWidth": 0.11253344134691876
+      },
+      "attachment": {
+        "vertexOriginalIds": [
+          434514,
+          434274,
+          433401
+        ],
+        "edgeLengths": [
+          0.0007944422532672919,
+          0.0010751069460541688,
+          0.0005351671947262696
+        ]
+      },
+      "firstFoldOnsetPercent": 83,
+      "preOnsetPercent": 82,
+      "preOnsetTargetAccuracy": 1.778431335240208e-16,
+      "foldedTriangles": [
+        {
+          "localTriangleId": 7761,
+          "originalVertexIds": [
+            435201,
+            433401,
+            433077
+          ],
+          "distanceFromLandmark": 0.0009787083305396235,
+          "preOnset": {
+            "triangle": 7761,
+            "neutral": {
+              "vertexLocalIds": [
+                2527,
+                2455,
+                2437
+              ],
+              "edgeLengths": [
+                0.0005446605195648426,
+                0.0006113253846013884,
+                0.0005809736359637648
+              ],
+              "area": 1.4419550090619647e-07,
+              "normal": [
+                0.6879145371001556,
+                -0.7153008721786256,
+                0.12295630080144833
+              ]
+            },
+            "onset": {
+              "vertexLocalIds": [
+                2527,
+                2455,
+                2437
+              ],
+              "edgeLengths": [
+                0.0005543304811441029,
+                0.0006417706043808824,
+                0.0006154581456352149
+              ],
+              "area": 1.5620375247848787e-07,
+              "normal": [
+                -0.39778647104894965,
+                -0.24543669525174383,
+                0.8840400172358295
+              ]
+            },
+            "vertexDisplacements": [
+              0.0006773142799778243,
+              0.0010526905694806458,
+              0.0008222028573106563
+            ],
+            "triangleNormalDot": 0.01061627636163548,
+            "neighborDihedral": [
+              {
+                "neighborTriangle": 7760,
+                "neutralNormalDot": 0.9451873622336797,
+                "onsetNormalDot": 0.9935963224104387
+              },
+              {
+                "neighborTriangle": 7772,
+                "neutralNormalDot": 0.9553342720726579,
+                "onsetNormalDot": 0.7472929268728536
+              },
+              {
+                "neighborTriangle": 8197,
+                "neutralNormalDot": 0.7686727472575186,
+                "onsetNormalDot": -0.4048475571775025
+              }
+            ]
+          },
+          "onset": {
+            "triangle": 7761,
+            "neutral": {
+              "vertexLocalIds": [
+                2527,
+                2455,
+                2437
+              ],
+              "edgeLengths": [
+                0.0005446605195648426,
+                0.0006113253846013884,
+                0.0005809736359637648
+              ],
+              "area": 1.4419550090619647e-07,
+              "normal": [
+                0.6879145371001556,
+                -0.7153008721786256,
+                0.12295630080144833
+              ]
+            },
+            "onset": {
+              "vertexLocalIds": [
+                2527,
+                2455,
+                2437
+              ],
+              "edgeLengths": [
+                0.0005543865928750343,
+                0.0006427673429762384,
+                0.0006152362083175487
+              ],
+              "area": 1.563185577292513e-07,
+              "normal": [
+                -0.4093901095556887,
+                -0.23807664351958124,
+                0.8807492549008664
+              ]
+            },
+            "vertexDisplacements": [
+              0.0006794169295056082,
+              0.001065606083235094,
+              0.0008251762281079825
+            ],
+            "triangleNormalDot": -0.0030353066372249687,
+            "neighborDihedral": [
+              {
+                "neighborTriangle": 7760,
+                "neutralNormalDot": 0.9451873622336797,
+                "onsetNormalDot": 0.9935180802757577
+              },
+              {
+                "neighborTriangle": 7772,
+                "neutralNormalDot": 0.9553342720726579,
+                "onsetNormalDot": 0.7442688457808841
+              },
+              {
+                "neighborTriangle": 8197,
+                "neutralNormalDot": 0.7686727472575186,
+                "onsetNormalDot": -0.4102739987857834
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "model": "male",
+      "landmark105": {
+        "fiveHopVertices": 121,
+        "fiveHopEdges": 325,
+        "averageLocalEdgeLength": 0.001487712389930768,
+        "minimumLocalEdgeLength": 0.00030741742143935926,
+        "localRegionDiameter": 0.020248075238485874,
+        "landmarkToBoundaryDistance": 0.012777034817357704,
+        "interocularWidth": 0.2997431104458742,
+        "requestedDisplacement": [
+          0.00272420328357309,
+          0.0037804687141890225,
+          -0.006722706329286843
+        ],
+        "requestedMagnitude": 0.008179731512649165,
+        "movementOverAverageLocalEdge": 5.498194118709878,
+        "movementOverMinimumLocalEdge": 26.607898388942438,
+        "movementOverRegionDiameter": 0.40397575652533163,
+        "boundaryDistanceOverEyeWidth": 0.04262661716678524
+      },
+      "attachment": {
+        "vertexOriginalIds": [
+          301183,
+          813988,
+          906120
+        ],
+        "edgeLengths": [
+          0.0010325363808830453,
+          0.002262378723884614,
+          0.0013198971344401255
+        ]
+      },
+      "firstFoldOnsetPercent": 25,
+      "preOnsetPercent": 24,
+      "preOnsetTargetAccuracy": 2.5477652986696187e-16,
+      "foldedTriangles": [
+        {
+          "localTriangleId": 31087,
+          "originalVertexIds": [
+            940970,
+            813988,
+            301183
+          ],
+          "distanceFromLandmark": 0.000909877544466255,
+          "preOnset": {
+            "triangle": 31087,
+            "neutral": {
+              "vertexLocalIds": [
+                22867,
+                19833,
+                7269
+              ],
+              "edgeLengths": [
+                0.0010660841263651084,
+                0.0010325363808830453,
+                0.0018341836119968478
+              ],
+              "area": 4.675438458146105e-07,
+              "normal": [
+                0.7521488324324564,
+                -0.6515813135157741,
+                0.09855924993399133
+              ]
+            },
+            "onset": {
+              "vertexLocalIds": [
+                22867,
+                19833,
+                7269
+              ],
+              "edgeLengths": [
+                0.0008353593116720009,
+                0.001054184203879576,
+                0.0015870091983546932
+              ],
+              "area": 4.0300734966988953e-07,
+              "normal": [
+                0.3904920167098802,
+                -0.06547313276708258,
+                0.9182751514505413
+              ]
+            },
+            "vertexDisplacements": [
+              0.0016522287970121069,
+              0.0021312990585976624,
+              0.001959778075498565
+            ],
+            "triangleNormalDot": 0.42687369445088763,
+            "neighborDihedral": [
+              {
+                "neighborTriangle": 31088,
+                "neutralNormalDot": 0.9991872820570361,
+                "onsetNormalDot": 0.9419610163367145
+              },
+              {
+                "neighborTriangle": 31203,
+                "neutralNormalDot": 0.7464268166538401,
+                "onsetNormalDot": -0.5871521205350372
+              },
+              {
+                "neighborTriangle": 31321,
+                "neutralNormalDot": 0.9998647970297894,
+                "onsetNormalDot": 0.9793801167123976
+              }
+            ]
+          },
+          "onset": {
+            "triangle": 31087,
+            "neutral": {
+              "vertexLocalIds": [
+                22867,
+                19833,
+                7269
+              ],
+              "edgeLengths": [
+                0.0010660841263651084,
+                0.0010325363808830453,
+                0.0018341836119968478
+              ],
+              "area": 4.675438458146105e-07,
+              "normal": [
+                0.7521488324324564,
+                -0.6515813135157741,
+                0.09855924993399133
+              ]
+            },
+            "onset": {
+              "vertexLocalIds": [
+                22867,
+                19833,
+                7269
+              ],
+              "edgeLengths": [
+                0.0008608197633162966,
+                0.00109005451852898,
+                0.0016622527007062755
+              ],
+              "area": 4.203137225130703e-07,
+              "normal": [
+                -0.3559003693714325,
+                0.09063942089024411,
+                0.9301179615844214
+              ]
+            },
+            "vertexDisplacements": [
+              0.0014487783884885692,
+              0.002273670908935343,
+              0.00203180710183551
+            ],
+            "triangleNormalDot": -0.2350772715610838,
+            "neighborDihedral": [
+              {
+                "neighborTriangle": 31088,
+                "neutralNormalDot": 0.9991872820570361,
+                "onsetNormalDot": 0.5006917429453366
+              },
+              {
+                "neighborTriangle": 31203,
+                "neutralNormalDot": 0.7464268166538401,
+                "onsetNormalDot": -0.994127156743193
+              },
+              {
+                "neighborTriangle": 31321,
+                "neutralNormalDot": 0.9998647970297894,
+                "onsetNormalDot": 0.9704969346780961
+              }
+            ]
+          }
+        },
+        {
+          "localTriangleId": 31321,
+          "originalVertexIds": [
+            940970,
+            748962,
+            813988
+          ],
+          "distanceFromLandmark": 0.0016009114385121274,
+          "preOnset": {
+            "triangle": 31321,
+            "neutral": {
+              "vertexLocalIds": [
+                22867,
+                18213,
+                19833
+              ],
+              "edgeLengths": [
+                0.0007207906108062396,
+                0.001153215478773874,
+                0.0010660841263651084
+              ],
+              "area": 3.7545908178354037e-07,
+              "normal": [
+                0.7588840877505556,
+                -0.6418695681500525,
+                0.10999272176772565
+              ]
+            },
+            "onset": {
+              "vertexLocalIds": [
+                22867,
+                18213,
+                19833
+              ],
+              "edgeLengths": [
+                0.0007098239530725439,
+                0.0010917762100695328,
+                0.0008353593116720009
+              ],
+              "area": 2.964691069600181e-07,
+              "normal": [
+                0.4297025515969527,
+                -0.2575969210782845,
+                0.8654475971438457
+              ]
+            },
+            "vertexDisplacements": [
+              0.0016522287970121069,
+              0.002041355316203015,
+              0.0021312990585976624
+            ],
+            "triangleNormalDot": 0.5866309901192309,
+            "neighborDihedral": [
+              {
+                "neighborTriangle": 31087,
+                "neutralNormalDot": 0.9998647970297894,
+                "onsetNormalDot": 0.9793801167123976
+              },
+              {
+                "neighborTriangle": 31327,
+                "neutralNormalDot": 0.9953189020422833,
+                "onsetNormalDot": 0.7962382375915105
+              },
+              {
+                "neighborTriangle": 31422,
+                "neutralNormalDot": 0.999785598416063,
+                "onsetNormalDot": 0.9986869114706773
+              }
+            ]
+          },
+          "onset": {
+            "triangle": 31321,
+            "neutral": {
+              "vertexLocalIds": [
+                22867,
+                18213,
+                19833
+              ],
+              "edgeLengths": [
+                0.0007207906108062396,
+                0.001153215478773874,
+                0.0010660841263651084
+              ],
+              "area": 3.7545908178354037e-07,
+              "normal": [
+                0.7588840877505556,
+                -0.6418695681500525,
+                0.10999272176772565
+              ]
+            },
+            "onset": {
+              "vertexLocalIds": [
+                22867,
+                18213,
+                19833
+              ],
+              "edgeLengths": [
+                0.0006816975911529634,
+                0.0011123231817338868,
+                0.0008608197633162966
+              ],
+              "area": 2.933034068131474e-07,
+              "normal": [
+                -0.4241140239180857,
+                0.3099156859849692,
+                0.8509286470065957
+              ]
+            },
+            "vertexDisplacements": [
+              0.0014487783884885692,
+              0.0021918593435823496,
+              0.002273670908935343
+            ],
+            "triangleNormalDot": -0.4271828737550095,
+            "neighborDihedral": [
+              {
+                "neighborTriangle": 31087,
+                "neutralNormalDot": 0.9998647970297894,
+                "onsetNormalDot": 0.9704969346780961
+              },
+              {
+                "neighborTriangle": 31327,
+                "neutralNormalDot": 0.9953189020422833,
+                "onsetNormalDot": -0.13681510683122694
+              },
+              {
+                "neighborTriangle": 31422,
+                "neutralNormalDot": 0.999785598416063,
+                "onsetNormalDot": 0.6380421983069108
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "hypothesisTest": "The male has a larger displacement relative to local edge scale; a temporary male target is tested at the female movement/local-edge ratio.",
+  "sameSolver": true,
+  "controlledHypothesisTest": {
+    "maleIntensityPercent": 25,
+    "scaleFactorAppliedToMaleTarget": 0.43163040967215693,
+    "temporaryTargetDisplacement": [
+      0.0002940146556946541,
+      0.00040789509430898393,
+      -0.0007254214133413285
+    ],
+    "originalTargetDisplacementAt25Percent": [
+      0.0006811722462232717,
+      0.0009450100946752082,
+      -0.0016806540899014025
+    ],
+    "foldCount": 0,
+    "foldTriangleIds": [],
+    "supportsHypothesis": true
+  }
+}
