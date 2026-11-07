@@ -55,22 +55,45 @@ static bool solve_barycentric(
     const Matrix& Aeq,
     const Matrix& Beq,
     Matrix& U,
-    const int max_iter)
+    const int max_iter,
+    const double boundary_penalty = 0.0,
+    const Matrix& boundary_reference = Matrix())
 {
     if (V.cols() != 3 || F.cols() != 3 || Aeq.cols() != V.rows() || Beq.rows() != Aeq.rows() || Beq.cols() != 3)
         throw std::runtime_error("invalid dimensions");
+    if (boundary_penalty > 0.0 && (boundary_reference.cols() != 3 || boundary_reference.rows() == 0))
+        throw std::runtime_error("soft boundary reference is missing");
 
     igl::ARAPData data;
     data.energy = igl::ARAP_ENERGY_TYPE_ELEMENTS;
     data.max_iter = max_iter;
-    if (!igl::arap_precomputation(V, F, 3, b, data)) return false;
+    // Soft-boundary mode still needs one neutral gauge vertex for the ARAP
+    // precomputation to remove rigid translation nullspace. All other boundary
+    // vertices remain soft-penalized rather than hard-fixed.
+    Eigen::VectorXi fixed;
+    if (boundary_penalty > 0.0 && b.size() > 0)
+    {
+        // Three deterministic boundary gauges are required by libigl's ARAP
+        // precomputation to remove rigid translation/rotation null modes.
+        // The remaining boundary vertices are handled only by the penalty.
+        const int ng = std::min<int>(3, b.size());
+        fixed.resize(ng);
+        for (int i = 0; i < ng; ++i) fixed(i) = b((i * (b.size() - 1)) / std::max(1, ng - 1));
+    }
+    else fixed = b;
+    if (!igl::arap_precomputation(V, F, 3, fixed, data)) throw std::runtime_error("libigl ARAP precomputation failed");
 
     // This is the same quadratic matrix assembled by official arap_precomputation.
     Eigen::SparseMatrix<double> L;
     igl::cotmatrix(V, F, L);
     Eigen::SparseMatrix<double> Q = (-L).eval();
+    if (boundary_penalty > 0.0)
+    {
+        for (int i = 0; i < b.size(); ++i) Q.coeffRef(b(i), b(i)) += boundary_penalty;
+        Q.makeCompressed();
+    }
     Eigen::SparseMatrix<double> Aeq_sparse = Aeq.sparseView();
-    if (!igl::min_quad_with_fixed_precompute(Q, b, Aeq_sparse, true, data.solver_data)) return false;
+    if (!igl::min_quad_with_fixed_precompute(Q, fixed, Aeq_sparse, true, data.solver_data)) throw std::runtime_error("libigl constrained QP precomputation failed");
 
     const int n = data.n;
     Matrix U_prev = U;
@@ -78,7 +101,7 @@ static bool solve_barycentric(
     while (iter < data.max_iter)
     {
         U_prev = U;
-        for (int bi = 0; bi < b.size(); ++bi) U.row(b(bi)) = U_prev.row(b(bi));
+        for (int bi = 0; bi < fixed.size(); ++bi) U.row(fixed(bi)) = U_prev.row(fixed(bi));
 
         const auto Udim = U.replicate(data.dim, 1);
         Matrix S = data.CSM * Udim;
@@ -102,11 +125,13 @@ static bool solve_barycentric(
         for (int c = 0; c < data.dim; ++c)
         {
             Vector Bc = Bcol.block(c * n, 0, n, 1);
-            Vector bcc = Vector::Zero(b.size());
-            for (int i = 0; i < b.size(); ++i) bcc(i) = U(b(i), c);
+            Vector bcc = Vector::Zero(fixed.size());
+            for (int i = 0; i < fixed.size(); ++i) bcc(i) = U(fixed(i), c);
+            if (boundary_penalty > 0.0)
+                for (int i = 0; i < b.size(); ++i) Bc(b(i)) -= boundary_penalty * boundary_reference(i, c);
             Vector beqc = Beq.col(c);
             Vector Uc;
-            if (!igl::min_quad_with_fixed_solve(data.solver_data, Bc, bcc, beqc, Uc)) return false;
+            if (!igl::min_quad_with_fixed_solve(data.solver_data, Bc, bcc, beqc, Uc)) throw std::runtime_error("libigl constrained QP solve failed");
             U.col(c) = Uc;
         }
         ++iter;
@@ -116,20 +141,24 @@ static bool solve_barycentric(
 
 PYBIND11_MODULE(libigl_barycentric_bridge, m)
 {
-    m.def("solve", [](py::array_t<double, py::array::c_style | py::array::forcecast> v,
+    auto convert = [](py::array_t<double, py::array::c_style | py::array::forcecast> v,
                        py::array_t<int, py::array::c_style | py::array::forcecast> f,
                        py::array_t<int, py::array::c_style | py::array::forcecast> b,
                        py::array_t<double, py::array::c_style | py::array::forcecast> aeq,
                        py::array_t<double, py::array::c_style | py::array::forcecast> beq,
                        py::array_t<double, py::array::c_style | py::array::forcecast> initial,
-                       int max_iter) {
+                       int max_iter,
+                       double boundary_penalty,
+                       py::array_t<double, py::array::c_style | py::array::forcecast> boundary_reference) {
         Matrix V = copy_matrix(v);
         IntMatrix F = copy_int_matrix(f);
         Eigen::VectorXi B = copy_int_vector(b);
         Matrix A = copy_matrix(aeq);
         Matrix C = copy_matrix(beq);
         Matrix U = copy_matrix(initial);
-        if (!solve_barycentric(V, F, B, A, C, U, max_iter)) throw std::runtime_error("libigl constrained ARAP failed");
+        Matrix R;
+        if (boundary_penalty > 0.0) R = copy_matrix(boundary_reference);
+        if (!solve_barycentric(V, F, B, A, C, U, max_iter, boundary_penalty, R)) throw std::runtime_error("libigl constrained ARAP failed");
         py::array_t<double> out({static_cast<py::ssize_t>(U.rows()), static_cast<py::ssize_t>(U.cols())});
         auto ob = out.request();
         auto* dst = static_cast<double*>(ob.ptr);
@@ -137,7 +166,8 @@ PYBIND11_MODULE(libigl_barycentric_bridge, m)
             for (py::ssize_t c = 0; c < U.cols(); ++c)
                 dst[r * U.cols() + c] = U(r, c);
         return out;
-    }, py::arg("V"), py::arg("F"), py::arg("b"), py::arg("Aeq"), py::arg("Beq"), py::arg("initial"), py::arg("max_iter") = 50);
+    };
+    m.def("solve", convert, py::arg("V"), py::arg("F"), py::arg("b"), py::arg("Aeq"), py::arg("Beq"), py::arg("initial"), py::arg("max_iter"), py::arg("boundary_penalty"), py::arg("boundary_reference"));
 }
 
 

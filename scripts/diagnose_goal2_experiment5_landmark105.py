@@ -51,7 +51,7 @@ def solve_case(bridge, v, f, recs, targets, neutral_markers, case: str) -> tuple
     beq = (neutral + displacement)[None, :]
     b = boundary_vertices(f)
     t0 = time.perf_counter()
-    solved = bridge.solve(v, f, b, aeq, beq, v.copy(), 100)
+    solved = bridge.solve(v, f, b, aeq, beq, v.copy(), 100, 0.0, np.empty((0, 3), dtype=float))
     runtime = time.perf_counter() - t0
 
     base_n = np.cross(v[f[:, 1]] - v[f[:, 0]], v[f[:, 2]] - v[f[:, 0]])

@@ -73,7 +73,7 @@ def solve_model(model: str, patch_path: Path, goal_path: Path, marker_path: Path
         return found
 
     t0 = time.perf_counter()
-    solved = bridge.solve(v, f, b, aeq, beq, v.copy(), 100)
+    solved = bridge.solve(v, f, b, aeq, beq, v.copy(), 100, 0.0, np.empty((0, 3), dtype=float))
     correction_rounds = []
     # Use the existing model-agnostic side-of-edge correction only as an
     # initializer, then re-solve the exact barycentric system. This preserves
@@ -88,7 +88,7 @@ def solve_model(model: str, patch_path: Path, goal_path: Path, marker_path: Path
         correction_rounds.append({"candidatePairs": len(candidates), "corrections": changes})
         if not changes:
             break
-        solved = bridge.solve(v, f, b, aeq, beq, corrected, 100)
+        solved = bridge.solve(v, f, b, aeq, beq, corrected, 100, 0.0, np.empty((0, 3), dtype=float))
     runtime = time.perf_counter() - t0
 
     base_normals = np.cross(v[f[:, 1]] - v[f[:, 0]], v[f[:, 2]] - v[f[:, 0]])
