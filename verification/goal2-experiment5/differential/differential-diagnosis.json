@@ -1,0 +1,74 @@
+{
+  "models": [
+    {
+      "model": "female",
+      "eyeWidth": 0.05584288580934188,
+      "movementMagnitude": 0.0015239042930211008,
+      "movementOverAverageLocalEdge": 2.3731877799157886,
+      "movementOverRegionDiameter": 0.19899355374293326,
+      "boundaryDistanceOverEyeWidth": 0.11253344134691876,
+      "normalComponentMagnitude": null,
+      "tangentialComponentMagnitude": null,
+      "firstFold": 83,
+      "peakFolds": 2,
+      "isolatedFirstFold": 83,
+      "isolatedPeakFolds": 2,
+      "localAspectInfo": "see geometry audit"
+    },
+    {
+      "model": "male",
+      "eyeWidth": 0.2997431104458742,
+      "movementMagnitude": 0.008179731512649165,
+      "movementOverAverageLocalEdge": 5.498194118709878,
+      "movementOverRegionDiameter": 0.40397575652533163,
+      "boundaryDistanceOverEyeWidth": 0.04262661716678524,
+      "normalComponentMagnitude": null,
+      "tangentialComponentMagnitude": null,
+      "firstFold": 25,
+      "peakFolds": 41,
+      "isolatedFirstFold": 25,
+      "isolatedPeakFolds": 41,
+      "localAspectInfo": "see geometry audit"
+    }
+  ],
+  "H5SyntheticExactBarycentricConstraint": {
+    "rank": 1,
+    "residual": 1.5700924586837752e-16,
+    "freeVertexMovement": 0.3605551275463989,
+    "runtimeSeconds": 0.001342100091278553,
+    "passed": true
+  },
+  "hypotheses": {
+    "H1": {
+      "classification": "INCONCLUSIVE",
+      "evidence": "Male displacement/local-edge ratio 5.498 versus female 2.373; ratio-matched male diagnostic at 25% changed 2 folds to 0. This supports excessive target magnitude relative to local geometry, but tangential-only motion was not independently solved."
+    },
+    "H2": {
+      "classification": "INCONCLUSIVE",
+      "evidence": "Monocular video does not establish metric depth; the stored target contains a normal component, but direction-only surface solves were not completed."
+    },
+    "H3": {
+      "classification": "INCONCLUSIVE",
+      "evidence": "Male local aspect P95 3.601 versus female 2.742; male first-fold triangles fold relative to neighbors while remaining nonzero-area. A conditioning experiment was not run."
+    },
+    "H4": {
+      "classification": "SUPPORTED",
+      "evidence": "Peak strain is highly localized: female 39.309% max versus 0.710% P95; male 71.289% max versus 0.648% P95. Folding occurs near landmark 105."
+    },
+    "H5": {
+      "classification": "REJECTED",
+      "evidence": "Exact barycentric residuals are numerical-zero in real runs; synthetic rank-1 constraint test passed with residual below 1e-8 and nonzero free-vertex response."
+    },
+    "H6": {
+      "classification": "INCONCLUSIVE",
+      "evidence": "Male landmark is closer to fixed boundary normalized by eye width, 0.04263 versus female 0.11253, but prior boundary softening did not remove folds and no single-fixed-constraint ablation was performed."
+    },
+    "H7": {
+      "classification": "INCONCLUSIVE",
+      "evidence": "Existing frontal/oblique audit found the attachment plausible, but it did not provide independent anatomical ground truth for ID 105."
+    }
+  },
+  "constraintFeasibility": "INCONCLUSIVE: no independent alternative deformation energy was run.",
+  "sameOriginalTargets": true,
+  "sameSolverForExistingResults": true
+}
