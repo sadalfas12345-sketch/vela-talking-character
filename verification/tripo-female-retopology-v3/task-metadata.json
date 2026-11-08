@@ -1,0 +1,11 @@
+{
+  "task_id": "78907f52-1f15-42ff-81a8-faf3a8aaacf5",
+  "settings": {
+    "model": "v3.0",
+    "quad": true,
+    "smart_uv": true,
+    "bake": true,
+    "face_limit": 10000
+  },
+  "input": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\vela-photoreal\\generated-original.glb"
+}
