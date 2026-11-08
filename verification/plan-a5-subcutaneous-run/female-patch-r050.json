@@ -1,0 +1,99 @@
+{
+  "mesh": "verification\\plan-a-hookean-run\\female-full.npz",
+  "goal1": "verification\\plan-a5-subcutaneous-run\\female-corrected-attachments.json",
+  "interocularWidth": 0.05744088140365605,
+  "radiusEyeWidth": 0.5,
+  "radiusModelUnits": 0.028720440701828026,
+  "sourceVertices": 999787,
+  "sourceTriangles": 1943912,
+  "solverVertices": 41747,
+  "solverTriangles": 79627,
+  "connectedComponents": [
+    {
+      "component": 0,
+      "vertices": 3539,
+      "triangles": 6783
+    },
+    {
+      "component": 1,
+      "vertices": 4758,
+      "triangles": 9215
+    },
+    {
+      "component": 2,
+      "vertices": 1718,
+      "triangles": 3238
+    },
+    {
+      "component": 3,
+      "vertices": 1503,
+      "triangles": 2857
+    },
+    {
+      "component": 4,
+      "vertices": 765,
+      "triangles": 1401
+    },
+    {
+      "component": 5,
+      "vertices": 4282,
+      "triangles": 8277
+    },
+    {
+      "component": 6,
+      "vertices": 2991,
+      "triangles": 5675
+    },
+    {
+      "component": 7,
+      "vertices": 1878,
+      "triangles": 3516
+    },
+    {
+      "component": 8,
+      "vertices": 2375,
+      "triangles": 4467
+    },
+    {
+      "component": 9,
+      "vertices": 3165,
+      "triangles": 6058
+    },
+    {
+      "component": 10,
+      "vertices": 2733,
+      "triangles": 5199
+    },
+    {
+      "component": 11,
+      "vertices": 3850,
+      "triangles": 7433
+    },
+    {
+      "component": 12,
+      "vertices": 862,
+      "triangles": 1564
+    },
+    {
+      "component": 13,
+      "vertices": 1960,
+      "triangles": 3707
+    },
+    {
+      "component": 14,
+      "vertices": 2721,
+      "triangles": 5204
+    },
+    {
+      "component": 15,
+      "vertices": 2647,
+      "triangles": 5033
+    }
+  ],
+  "boundaryVertices": 3835,
+  "attachmentCoverage": 478,
+  "attachmentObjects": {
+    "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f": 478
+  },
+  "selection": "multi-source Dijkstra over original edge graph; faces selected when incident to a vertex within the normalized radius"
+}

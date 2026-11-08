@@ -1,0 +1,46 @@
+{
+  "sourceMesh": "verification\\plan-a-hookean-run\\male-full.npz",
+  "sourceGoal1": "verification\\plan-a2-hookean-run\\male-original-attachments.json",
+  "landmarkCount": 478,
+  "eyeWidth": 0.30409862043906033,
+  "marginEyeWidths": 0.06,
+  "faceFrameOrigin": [
+    0.28138261659374797,
+    -0.03383457872658095,
+    0.05626468391598019
+  ],
+  "rightAxis": [
+    0.28271036597030175,
+    0.9589407709130435,
+    0.022526581046307743
+  ],
+  "upAxis": [
+    -0.32869663875817035,
+    0.07478861664250475,
+    0.9414696928153244
+  ],
+  "frontAxis": [
+    0.9011289411854548,
+    -0.2735676528784028,
+    0.3363441253487012
+  ],
+  "landmarkEnvelopeMin": [
+    -1.141943587999306,
+    -1.0516601011766566,
+    -1.3555263225926812
+  ],
+  "landmarkEnvelopeMax": [
+    0.7115295448703995,
+    0.9904451262615794,
+    0.3782016227462993
+  ],
+  "sourceVertices": 991219,
+  "sourceTriangles": 1897687,
+  "candidateVertices": 342362,
+  "candidateTriangles": 647430,
+  "candidateTriangleFraction": 0.3411679586781171,
+  "attachmentTrianglesOutsideEnvelopeBeforeForcedRetention": 0,
+  "topologyChanged": false,
+  "selectionRule": "vertices inside landmark-derived normalized facial envelope; source triangles retained only when all vertices are inside; attachment triangles are forcibly retained for exact barycentric readback",
+  "requiresVisualReview": true
+}

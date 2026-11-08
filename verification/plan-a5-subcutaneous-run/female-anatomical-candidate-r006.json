@@ -1,0 +1,46 @@
+{
+  "sourceMesh": "verification\\plan-a-hookean-run\\female-full.npz",
+  "sourceGoal1": "verification\\plan-a5-subcutaneous-run\\female-corrected-attachments.json",
+  "landmarkCount": 478,
+  "eyeWidth": 0.057440716560191105,
+  "marginEyeWidths": 0.06,
+  "faceFrameOrigin": [
+    0.06053703301683629,
+    0.0034902204280119063,
+    0.3851214361739458
+  ],
+  "rightAxis": [
+    -0.3682242683071718,
+    0.8718642627171903,
+    -0.32289873896665827
+  ],
+  "upAxis": [
+    0.03185714652431612,
+    0.35892894423101285,
+    0.9328210628027964
+  ],
+  "frontAxis": [
+    0.9291910516384541,
+    0.33320072087230035,
+    -0.15994145543042676
+  ],
+  "landmarkEnvelopeMin": [
+    -0.9657849258616087,
+    -1.4137341450602108,
+    -0.8835788763294601
+  ],
+  "landmarkEnvelopeMax": [
+    1.2789568714596684,
+    1.1059162348879714,
+    0.3510592894947125
+  ],
+  "sourceVertices": 999787,
+  "sourceTriangles": 1943912,
+  "candidateVertices": 101575,
+  "candidateTriangles": 194051,
+  "candidateTriangleFraction": 0.09982499207783069,
+  "attachmentTrianglesOutsideEnvelopeBeforeForcedRetention": 0,
+  "topologyChanged": false,
+  "selectionRule": "vertices inside landmark-derived normalized facial envelope; source triangles retained only when all vertices are inside; attachment triangles are forcibly retained for exact barycentric readback",
+  "requiresVisualReview": true
+}
