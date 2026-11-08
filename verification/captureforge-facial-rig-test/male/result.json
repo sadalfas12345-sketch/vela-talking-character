@@ -1,0 +1,145 @@
+{
+  "character": "male",
+  "source_glb": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\generalization-male-20261105\\generated-original.glb",
+  "vertex_count": 991219,
+  "rig_bones": 26,
+  "face_weighted_vertices": 923042,
+  "goal1_landmarks": 478,
+  "canonical_interocular": 0.29974311044587426,
+  "fit_preview": "C:\\Users\\USER\\talking-character-demo\\verification\\captureforge-facial-rig-test\\male\\captureforge-fit-preview.png",
+  "neutral_render": "C:\\Users\\USER\\talking-character-demo\\verification\\captureforge-facial-rig-test\\male\\neutral.png",
+  "raised_render": "C:\\Users\\USER\\talking-character-demo\\verification\\captureforge-facial-rig-test\\male\\raised.png",
+  "captureforge_render_detection": false,
+  "pose_angle_radians": 0.25,
+  "direction_candidates": [
+    [
+      -7.922164996405912e-08,
+      -0.25
+    ],
+    [
+      5.7544921031396634e-08,
+      0.25
+    ]
+  ],
+  "landmarks": [
+    {
+      "id": 70,
+      "neutral": [
+        -0.19622621539213986,
+        0.05764249971657071,
+        0.04496251560601907
+      ],
+      "raised": [
+        -0.19622621629637335,
+        0.057643216030713186,
+        0.04496391067801889
+      ],
+      "delta": [
+        -9.042334936371077e-10,
+        7.163141424737507e-07,
+        1.395071999817088e-06
+      ],
+      "delta_mm_or_units": 1.568225957258636e-06
+    },
+    {
+      "id": 105,
+      "neutral": [
+        -0.14490035035032994,
+        -0.05717665831974661,
+        0.061810648749686906
+      ],
+      "raised": [
+        -0.14490036141053042,
+        -0.05717653004536975,
+        0.061810632339252686
+      ],
+      "delta": [
+        -1.106020047769718e-08,
+        1.2827437685658527e-07,
+        -1.6410434219849e-08
+      ],
+      "delta_mm_or_units": 1.2979193404767533e-07
+    },
+    {
+      "id": 334,
+      "neutral": [
+        0.14406297022015996,
+        -0.058469916978615186,
+        0.06061905949048127
+      ],
+      "raised": [
+        0.14406297273500485,
+        -0.05847095859880377,
+        0.060618018880074835
+      ],
+      "delta": [
+        2.514844887890888e-09,
+        -1.0416201885812826e-06,
+        -1.0406104064344945e-06
+      ],
+      "delta_mm_or_units": 1.4723616945861778e-06
+    },
+    {
+      "id": 336,
+      "neutral": [
+        0.04878043604720801,
+        -0.11165197350783952,
+        0.049581743988671295
+      ],
+      "raised": [
+        0.048780435213424476,
+        -0.11165205823342794,
+        0.04958163611719626
+      ],
+      "delta": [
+        -8.337835352700829e-10,
+        -8.472558842009814e-08,
+        -1.0787147503715788e-07
+      ],
+      "delta_mm_or_units": 1.37169149792538e-07
+    },
+    {
+      "id": 293,
+      "neutral": [
+        0.17808127976452365,
+        -0.021166679238450038,
+        0.05328997928705381
+      ],
+      "raised": [
+        0.17808127976452365,
+        -0.021166679238450038,
+        0.05328997928705381
+      ],
+      "delta": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "delta_mm_or_units": 0.0
+    },
+    {
+      "id": 63,
+      "neutral": [
+        -0.17807628987631774,
+        -0.017190301742415672,
+        0.054883366451129414
+      ],
+      "raised": [
+        -0.17807628987631774,
+        -0.017190301742415672,
+        0.054883366451129414
+      ],
+      "delta": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "delta_mm_or_units": 0.0
+    }
+  ],
+  "min_area_ratio": 0.8768784998201622,
+  "collapsed_triangles": 0,
+  "invalid_coordinates": 0,
+  "captureforge_version": "local checkout; FaceForge auto-rig fit",
+  "expression_driver": "browInnerUp test pose on fitted brow bones"
+}

@@ -1,0 +1,11 @@
+{
+  "character": "female",
+  "status": "FAILED",
+  "failure_stage": "dynamic face-surface isolation",
+  "failure": "No original-GLB vertices intersect the Goal 1 attachment-derived face slab and landmark components.",
+  "goal1_source_glb": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\vela-photoreal\\generated-rigged.glb",
+  "tested_source_glb": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\vela-photoreal\\generated-original.glb",
+  "diagnosis": "Goal 1 source is C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\vela-photoreal\\generated-rigged.glb; tested source is C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\vela-photoreal\\generated-original.glb. The attachment-derived surface does not intersect this input mesh.",
+  "captureforge_render_detection": false,
+  "fit_preview": "C:\\Users\\USER\\talking-character-demo\\verification\\captureforge-facial-rig-test\\female\\captureforge-fit-preview.png"
+}

@@ -1,0 +1,540 @@
+{
+  "source": "verification\\captureforge-facial-rig-test\\worried-reference.csv",
+  "frames": 121,
+  "coefficient_count": 51,
+  "coefficients": {
+    "eyeBlinkLeft": {
+      "min": 0.0,
+      "max": 0.63937,
+      "range": 0.63937,
+      "mean": 0.018663801652892567,
+      "min_frame": 0,
+      "max_frame": 45,
+      "nonzero_frames": 13
+    },
+    "eyeLookDownLeft": {
+      "min": 0.0,
+      "max": 0.60355,
+      "range": 0.60355,
+      "mean": 0.051226280991735526,
+      "min_frame": 0,
+      "max_frame": 46,
+      "nonzero_frames": 83
+    },
+    "eyeLookInLeft": {
+      "min": 0.0,
+      "max": 0.23642,
+      "range": 0.23642,
+      "mean": 0.0341398347107438,
+      "min_frame": 13,
+      "max_frame": 47,
+      "nonzero_frames": 89
+    },
+    "eyeLookOutLeft": {
+      "min": 0.0,
+      "max": 0.22392,
+      "range": 0.22392,
+      "mean": 0.05317487603305785,
+      "min_frame": 0,
+      "max_frame": 15,
+      "nonzero_frames": 44
+    },
+    "eyeLookUpLeft": {
+      "min": 0.0,
+      "max": 0.02393,
+      "range": 0.02393,
+      "mean": 0.0019937190082644635,
+      "min_frame": 15,
+      "max_frame": 6,
+      "nonzero_frames": 42
+    },
+    "eyeSquintLeft": {
+      "min": 0.0,
+      "max": 0.46989,
+      "range": 0.46989,
+      "mean": 0.0169496694214876,
+      "min_frame": 14,
+      "max_frame": 46,
+      "nonzero_frames": 28
+    },
+    "eyeWideLeft": {
+      "min": 0.0,
+      "max": 0.33937,
+      "range": 0.33937,
+      "mean": 0.12179842975206613,
+      "min_frame": 0,
+      "max_frame": 99,
+      "nonzero_frames": 109
+    },
+    "eyeBlinkRight": {
+      "min": 0.0,
+      "max": 0.63933,
+      "range": 0.63933,
+      "mean": 0.01848876033057851,
+      "min_frame": 0,
+      "max_frame": 45,
+      "nonzero_frames": 13
+    },
+    "eyeLookDownRight": {
+      "min": 0.0,
+      "max": 0.60602,
+      "range": 0.60602,
+      "mean": 0.04742520661157026,
+      "min_frame": 0,
+      "max_frame": 46,
+      "nonzero_frames": 74
+    },
+    "eyeLookInRight": {
+      "min": 0.0,
+      "max": 0.2279,
+      "range": 0.2279,
+      "mean": 0.05332479338842975,
+      "min_frame": 0,
+      "max_frame": 15,
+      "nonzero_frames": 44
+    },
+    "eyeLookOutRight": {
+      "min": 0.0,
+      "max": 0.25674,
+      "range": 0.25674,
+      "mean": 0.024285371900826434,
+      "min_frame": 12,
+      "max_frame": 47,
+      "nonzero_frames": 89
+    },
+    "eyeLookUpRight": {
+      "min": 0.0,
+      "max": 0.03646,
+      "range": 0.03646,
+      "mean": 0.002164462809917356,
+      "min_frame": 16,
+      "max_frame": 6,
+      "nonzero_frames": 24
+    },
+    "eyeSquintRight": {
+      "min": 0.0,
+      "max": 0.38811,
+      "range": 0.38811,
+      "mean": 0.014142066115702479,
+      "min_frame": 13,
+      "max_frame": 46,
+      "nonzero_frames": 28
+    },
+    "eyeWideRight": {
+      "min": 0.0,
+      "max": 0.4897,
+      "range": 0.4897,
+      "mean": 0.20928165289256193,
+      "min_frame": 0,
+      "max_frame": 111,
+      "nonzero_frames": 106
+    },
+    "jawForward": {
+      "min": 0.0,
+      "max": 1e-05,
+      "range": 1e-05,
+      "mean": 1.9008264462809918e-06,
+      "min_frame": 0,
+      "max_frame": 7,
+      "nonzero_frames": 23
+    },
+    "jawLeft": {
+      "min": 0.0,
+      "max": 0.01442,
+      "range": 0.01442,
+      "mean": 0.003806033057851239,
+      "min_frame": 0,
+      "max_frame": 104,
+      "nonzero_frames": 92
+    },
+    "jawRight": {
+      "min": 0.0,
+      "max": 0.00081,
+      "range": 0.00081,
+      "mean": 0.00019892561983471076,
+      "min_frame": 0,
+      "max_frame": 99,
+      "nonzero_frames": 80
+    },
+    "jawOpen": {
+      "min": 0.0,
+      "max": 0.29488,
+      "range": 0.29488,
+      "mean": 0.06749975206611572,
+      "min_frame": 0,
+      "max_frame": 100,
+      "nonzero_frames": 83
+    },
+    "mouthClose": {
+      "min": 0.0,
+      "max": 0.01919,
+      "range": 0.01919,
+      "mean": 0.0063409090909090915,
+      "min_frame": 0,
+      "max_frame": 95,
+      "nonzero_frames": 81
+    },
+    "mouthFunnel": {
+      "min": 0.0,
+      "max": 0.09069,
+      "range": 0.09069,
+      "mean": 0.03259628099173554,
+      "min_frame": 0,
+      "max_frame": 94,
+      "nonzero_frames": 81
+    },
+    "mouthPucker": {
+      "min": 0.0,
+      "max": 0.59251,
+      "range": 0.59251,
+      "mean": 0.37280181818181823,
+      "min_frame": 0,
+      "max_frame": 51,
+      "nonzero_frames": 98
+    },
+    "mouthLeft": {
+      "min": 0.0,
+      "max": 0.01338,
+      "range": 0.01338,
+      "mean": 0.0008041322314049586,
+      "min_frame": 0,
+      "max_frame": 46,
+      "nonzero_frames": 52
+    },
+    "mouthRight": {
+      "min": 0.0,
+      "max": 0.00466,
+      "range": 0.00466,
+      "mean": 0.0014134710743801651,
+      "min_frame": 11,
+      "max_frame": 52,
+      "nonzero_frames": 76
+    },
+    "mouthSmileLeft": {
+      "min": 0.0,
+      "max": 0.00212,
+      "range": 0.00212,
+      "mean": 0.00012727272727272725,
+      "min_frame": 15,
+      "max_frame": 3,
+      "nonzero_frames": 15
+    },
+    "mouthSmileRight": {
+      "min": 0.0,
+      "max": 0.00317,
+      "range": 0.00317,
+      "mean": 0.00019231404958677684,
+      "min_frame": 15,
+      "max_frame": 3,
+      "nonzero_frames": 15
+    },
+    "mouthFrownLeft": {
+      "min": 0.0,
+      "max": 0.00013,
+      "range": 0.00013,
+      "mean": 1.6198347107438017e-05,
+      "min_frame": 0,
+      "max_frame": 21,
+      "nonzero_frames": 41
+    },
+    "mouthFrownRight": {
+      "min": 0.0,
+      "max": 0.00027,
+      "range": 0.00027,
+      "mean": 2.314049586776861e-05,
+      "min_frame": 0,
+      "max_frame": 21,
+      "nonzero_frames": 38
+    },
+    "mouthDimpleLeft": {
+      "min": 0.0,
+      "max": 0.01218,
+      "range": 0.01218,
+      "mean": 0.0009031404958677686,
+      "min_frame": 21,
+      "max_frame": 7,
+      "nonzero_frames": 21
+    },
+    "mouthDimpleRight": {
+      "min": 0.0,
+      "max": 0.00199,
+      "range": 0.00199,
+      "mean": 0.0002139669421487603,
+      "min_frame": 21,
+      "max_frame": 0,
+      "nonzero_frames": 31
+    },
+    "mouthStretchLeft": {
+      "min": 0.0,
+      "max": 0.00022,
+      "range": 0.00022,
+      "mean": 1.9090909090909097e-05,
+      "min_frame": 20,
+      "max_frame": 2,
+      "nonzero_frames": 21
+    },
+    "mouthStretchRight": {
+      "min": 0.0,
+      "max": 0.00284,
+      "range": 0.00284,
+      "mean": 0.0003054545454545454,
+      "min_frame": 25,
+      "max_frame": 10,
+      "nonzero_frames": 25
+    },
+    "mouthRollLower": {
+      "min": 0.0,
+      "max": 0.08826,
+      "range": 0.08826,
+      "mean": 0.0269704958677686,
+      "min_frame": 0,
+      "max_frame": 115,
+      "nonzero_frames": 98
+    },
+    "mouthRollUpper": {
+      "min": 0.0,
+      "max": 0.07826,
+      "range": 0.07826,
+      "mean": 0.03095082644628099,
+      "min_frame": 0,
+      "max_frame": 63,
+      "nonzero_frames": 85
+    },
+    "mouthShrugLower": {
+      "min": 0.0,
+      "max": 0.08187,
+      "range": 0.08187,
+      "mean": 0.010438016528925622,
+      "min_frame": 0,
+      "max_frame": 26,
+      "nonzero_frames": 28
+    },
+    "mouthShrugUpper": {
+      "min": 0.0,
+      "max": 0.04076,
+      "range": 0.04076,
+      "mean": 0.007359917355371899,
+      "min_frame": 0,
+      "max_frame": 104,
+      "nonzero_frames": 60
+    },
+    "mouthPressLeft": {
+      "min": 0.0,
+      "max": 0.04947,
+      "range": 0.04947,
+      "mean": 0.003839669421487604,
+      "min_frame": 22,
+      "max_frame": 3,
+      "nonzero_frames": 22
+    },
+    "mouthPressRight": {
+      "min": 0.0,
+      "max": 0.02875,
+      "range": 0.02875,
+      "mean": 0.0027415702479338857,
+      "min_frame": 24,
+      "max_frame": 0,
+      "nonzero_frames": 24
+    },
+    "mouthLowerDownLeft": {
+      "min": 0.0,
+      "max": 0.00124,
+      "range": 0.00124,
+      "mean": 0.0004926446280991735,
+      "min_frame": 0,
+      "max_frame": 120,
+      "nonzero_frames": 86
+    },
+    "mouthLowerDownRight": {
+      "min": 0.0,
+      "max": 0.00123,
+      "range": 0.00123,
+      "mean": 0.00046462809917355383,
+      "min_frame": 0,
+      "max_frame": 101,
+      "nonzero_frames": 89
+    },
+    "mouthUpperUpLeft": {
+      "min": 0.0,
+      "max": 0.00084,
+      "range": 0.00084,
+      "mean": 0.00011834710743801653,
+      "min_frame": 0,
+      "max_frame": 102,
+      "nonzero_frames": 51
+    },
+    "mouthUpperUpRight": {
+      "min": 0.0,
+      "max": 0.00106,
+      "range": 0.00106,
+      "mean": 0.0001574380165289256,
+      "min_frame": 0,
+      "max_frame": 102,
+      "nonzero_frames": 55
+    },
+    "browDownLeft": {
+      "min": 0.0,
+      "max": 0.00463,
+      "range": 0.00463,
+      "mean": 0.0016730578512396694,
+      "min_frame": 11,
+      "max_frame": 66,
+      "nonzero_frames": 92
+    },
+    "browDownRight": {
+      "min": 0.0,
+      "max": 0.00377,
+      "range": 0.00377,
+      "mean": 0.0013340495867768597,
+      "min_frame": 10,
+      "max_frame": 68,
+      "nonzero_frames": 93
+    },
+    "browInnerUp": {
+      "min": 0.0,
+      "max": 0.19959,
+      "range": 0.19959,
+      "mean": 0.06713322314049584,
+      "min_frame": 0,
+      "max_frame": 11,
+      "nonzero_frames": 101
+    },
+    "browOuterUpLeft": {
+      "min": 0.0,
+      "max": 0.14766,
+      "range": 0.14766,
+      "mean": 0.022672148760330576,
+      "min_frame": 0,
+      "max_frame": 11,
+      "nonzero_frames": 38
+    },
+    "browOuterUpRight": {
+      "min": 0.0,
+      "max": 0.15589,
+      "range": 0.15589,
+      "mean": 0.019990661157024803,
+      "min_frame": 0,
+      "max_frame": 12,
+      "nonzero_frames": 28
+    },
+    "cheekPuff": {
+      "min": 0.0,
+      "max": 1e-05,
+      "range": 1e-05,
+      "mean": 7.438016528925621e-07,
+      "min_frame": 0,
+      "max_frame": 96,
+      "nonzero_frames": 9
+    },
+    "cheekSquintLeft": {
+      "min": 0.0,
+      "max": 0.0,
+      "range": 0.0,
+      "mean": 0.0,
+      "min_frame": 0,
+      "max_frame": 0,
+      "nonzero_frames": 0
+    },
+    "cheekSquintRight": {
+      "min": 0.0,
+      "max": 0.0,
+      "range": 0.0,
+      "mean": 0.0,
+      "min_frame": 0,
+      "max_frame": 0,
+      "nonzero_frames": 0
+    },
+    "noseSneerLeft": {
+      "min": 0.0,
+      "max": 0.0,
+      "range": 0.0,
+      "mean": 0.0,
+      "min_frame": 0,
+      "max_frame": 0,
+      "nonzero_frames": 0
+    },
+    "noseSneerRight": {
+      "min": 0.0,
+      "max": 0.0,
+      "range": 0.0,
+      "mean": 0.0,
+      "min_frame": 0,
+      "max_frame": 0,
+      "nonzero_frames": 0
+    }
+  },
+  "selected": {
+    "browInnerUp": {
+      "min": 0.0,
+      "max": 0.19959,
+      "range": 0.19959,
+      "mean": 0.06713322314049584,
+      "min_frame": 0,
+      "max_frame": 11,
+      "nonzero_frames": 101
+    },
+    "browDownLeft": {
+      "min": 0.0,
+      "max": 0.00463,
+      "range": 0.00463,
+      "mean": 0.0016730578512396694,
+      "min_frame": 11,
+      "max_frame": 66,
+      "nonzero_frames": 92
+    },
+    "browDownRight": {
+      "min": 0.0,
+      "max": 0.00377,
+      "range": 0.00377,
+      "mean": 0.0013340495867768597,
+      "min_frame": 10,
+      "max_frame": 68,
+      "nonzero_frames": 93
+    },
+    "eyeBlinkLeft": {
+      "min": 0.0,
+      "max": 0.63937,
+      "range": 0.63937,
+      "mean": 0.018663801652892567,
+      "min_frame": 0,
+      "max_frame": 45,
+      "nonzero_frames": 13
+    },
+    "eyeBlinkRight": {
+      "min": 0.0,
+      "max": 0.63933,
+      "range": 0.63933,
+      "mean": 0.01848876033057851,
+      "min_frame": 0,
+      "max_frame": 45,
+      "nonzero_frames": 13
+    },
+    "jawOpen": {
+      "min": 0.0,
+      "max": 0.29488,
+      "range": 0.29488,
+      "mean": 0.06749975206611572,
+      "min_frame": 0,
+      "max_frame": 100,
+      "nonzero_frames": 83
+    },
+    "mouthSmileLeft": {
+      "min": 0.0,
+      "max": 0.00212,
+      "range": 0.00212,
+      "mean": 0.00012727272727272725,
+      "min_frame": 15,
+      "max_frame": 3,
+      "nonzero_frames": 15
+    },
+    "mouthSmileRight": {
+      "min": 0.0,
+      "max": 0.00317,
+      "range": 0.00317,
+      "mean": 0.00019231404958677684,
+      "min_frame": 15,
+      "max_frame": 3,
+      "nonzero_frames": 15
+    }
+  }
+}
