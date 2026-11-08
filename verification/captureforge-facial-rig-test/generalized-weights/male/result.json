@@ -1,0 +1,41 @@
+{
+  "character": "male",
+  "algorithm": "CaptureForge bone architecture plus surface-geodesic diffusion weights",
+  "source_translation": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "mapped_landmarks": 478,
+  "surface_distance_median": 1.5595682612001838e-07,
+  "eye_width": 0.29974316785339844,
+  "region_vertices": 437678,
+  "region_triangles": 828237,
+  "region_edges": 1265454,
+  "weights_nonzero": {
+    "brow.in.L": 11097,
+    "brow.mid.L": 1789,
+    "brow.out.L": 7976,
+    "brow.in.R": 12930,
+    "brow.mid.R": 8441,
+    "brow.out.R": 18213
+  },
+  "landmark105_requested": [
+    0.003763911531958184,
+    -0.001425292374887936,
+    -0.007121061665559727
+  ],
+  "landmark105_achieved": [
+    0.003707719076465027,
+    -0.001404012617074804,
+    -0.007014744150723395
+  ],
+  "landmark105_error_percent": 1.4929855525856919,
+  "min_area_ratio": 0.7976186956503788,
+  "collapsed_triangles": 0,
+  "max_edge_strain": 0.10533000233424983,
+  "p95_edge_strain": 1.399719895545104e-09,
+  "neutral_render": "C:\\Users\\USER\\talking-character-demo\\verification\\captureforge-facial-rig-test\\generalized-weights\\male\\neutral.png",
+  "full_target_render": "C:\\Users\\USER\\talking-character-demo\\verification\\captureforge-facial-rig-test\\generalized-weights\\male\\full-target.png",
+  "visual_pass": false
+}

@@ -1,0 +1,41 @@
+{
+  "character": "female",
+  "algorithm": "CaptureForge bone architecture plus surface-geodesic diffusion weights",
+  "source_translation": [
+    -7.392093539237976e-05,
+    0.0004921779036521912,
+    -0.49021828909462783
+  ],
+  "mapped_landmarks": 478,
+  "surface_distance_median": 3.4009752880592714e-07,
+  "eye_width": 0.05584184727701896,
+  "region_vertices": 101443,
+  "region_triangles": 195008,
+  "region_edges": 296371,
+  "weights_nonzero": {
+    "brow.in.L": 2258,
+    "brow.mid.L": 1497,
+    "brow.out.L": 2890,
+    "brow.in.R": 2336,
+    "brow.mid.R": 2453,
+    "brow.out.R": 2803
+  },
+  "landmark105_requested": [
+    0.0007012258495305892,
+    -0.00020509604465856487,
+    -0.001337348950238365
+  ],
+  "landmark105_achieved": [
+    0.0005442795627501711,
+    -0.0001591916995730136,
+    -0.001038027726395531
+  ],
+  "landmark105_error_percent": 22.381691968421084,
+  "min_area_ratio": 0.8341534650771681,
+  "collapsed_triangles": 0,
+  "max_edge_strain": 0.11582379860638248,
+  "p95_edge_strain": 2.573924962057106e-09,
+  "neutral_render": "C:\\Users\\USER\\talking-character-demo\\verification\\captureforge-facial-rig-test\\generalized-weights\\female\\neutral.png",
+  "full_target_render": "C:\\Users\\USER\\talking-character-demo\\verification\\captureforge-facial-rig-test\\generalized-weights\\female\\full-target.png",
+  "visual_pass": false
+}
