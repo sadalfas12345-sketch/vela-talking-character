@@ -64,10 +64,16 @@ The actual fitted neutral meshes were rendered in clay and wireframe:
 - [Female fitted clay](female/wrapped-clay.png)
 - [Female original wireframe](female/original-wireframe.png)
 - [Female fitted wireframe](female/wrapped-wireframe.png)
+- [Female original side clay](female/original-side-clay.png)
+- [Female fitted side clay](female/wrapped-side-clay.png)
+- [Female fitted side wireframe](female/wrapped-side-wireframe.png)
 - [Male original clay](male/original-clay.png)
 - [Male fitted clay](male/wrapped-clay.png)
 - [Male original wireframe](male/original-wireframe.png)
 - [Male fitted wireframe](male/wrapped-wireframe.png)
+- [Male original side clay](male/original-side-clay.png)
+- [Male fitted side clay](male/wrapped-side-clay.png)
+- [Male fitted side wireframe](male/wrapped-side-wireframe.png)
 
 Codex vision inspection found severe spike-like and folded regions in the
 fitted outputs, especially across the forehead, brow, and surrounding facial
