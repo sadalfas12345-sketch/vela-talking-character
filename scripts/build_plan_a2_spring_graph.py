@@ -46,18 +46,27 @@ def main():
     V = V_all[kept_old]
     component_labels = labels[kept_old]
 
-    # Original edge springs, deduplicated and with neutral rest lengths.
-    edges = np.vstack((F[:, [0, 1]], F[:, [1, 2]], F[:, [2, 0]]))
-    edges = np.sort(edges, axis=1)
-    edges = np.unique(edges, axis=0)
+    # Build the undirected triangle-edge multiset before deduplication.  The
+    # multiplicity is topology information: one use means an open boundary,
+    # two uses means an ordinary interior edge, and more than two uses means a
+    # non-manifold edge.  Counting after np.unique would incorrectly turn
+    # every edge into a boundary edge.
+    edge_multiset = np.vstack((F[:, [0, 1]], F[:, [1, 2]], F[:, [2, 0]]))
+    edge_multiset = np.sort(edge_multiset, axis=1)
+    edge_counts = Counter(tuple(x) for x in edge_multiset.tolist())
+    edges = np.asarray(list(edge_counts), dtype=np.int64)
+    if edges.size == 0:
+        edges = np.empty((0, 2), dtype=np.int64)
+    else:
+        edges = edges.reshape(-1, 2)
     rest = np.linalg.norm(V[edges[:, 0]] - V[edges[:, 1]], axis=1)
 
     # Boundary vertex normals are used only to reject cross-layer connections.
     face_normals = np.cross(V[F[:, 1]] - V[F[:, 0]], V[F[:, 2]] - V[F[:, 0]])
     norm = np.linalg.norm(face_normals, axis=1)
     face_normals /= np.maximum(norm[:, None], 1e-30)
-    edge_counts = Counter(tuple(x) for x in edges.tolist())
     boundary = sorted({v for edge, count in edge_counts.items() if count == 1 for v in edge})
+    nonmanifold = sorted({v for edge, count in edge_counts.items() if count > 2 for v in edge})
     vertex_normal = np.zeros_like(V)
     for tri, n in zip(F, face_normals):
         vertex_normal[tri] += n
@@ -149,6 +158,11 @@ def main():
         "virtualSpringGapLimit": gap_limit,
         "virtualSpringZeroRestCount": int(np.sum(virtual_rest < 1e-12)),
         "virtualSpringNormalDotMin": float(virtual_normal_dot.min()) if len(virtual_normal_dot) else None,
+        "ordinaryInteriorEdges": int(sum(count == 2 for count in edge_counts.values())),
+        "openBoundaryEdges": int(sum(count == 1 for count in edge_counts.values())),
+        "nonmanifoldEdges": int(sum(count > 2 for count in edge_counts.values())),
+        "openBoundaryVertices": int(len(boundary)),
+        "nonmanifoldVertices": int(len(nonmanifold)),
         "sourceComponents": int(component_count),
         "retainedComponents": int(len(attached_components)),
         "simulationComponentsAfterVirtualSprings": int(sim_components),

@@ -1,0 +1,694 @@
+{
+  "mesh": "verification\\plan-a-hookean-run\\male-full.npz",
+  "goal1": "verification\\plan-a2-hookean-run\\male-original-attachments.json",
+  "interocularWidth": 0.30409851126227233,
+  "radiusEyeWidth": 0.1,
+  "radiusModelUnits": 0.030409851126227235,
+  "sourceVertices": 991219,
+  "sourceTriangles": 1897687,
+  "solverVertices": 90599,
+  "solverTriangles": 165684,
+  "connectedComponents": [
+    {
+      "component": 0,
+      "vertices": 13831,
+      "triangles": 26447
+    },
+    {
+      "component": 1,
+      "vertices": 19695,
+      "triangles": 37391
+    },
+    {
+      "component": 2,
+      "vertices": 1616,
+      "triangles": 3016
+    },
+    {
+      "component": 3,
+      "vertices": 246,
+      "triangles": 430
+    },
+    {
+      "component": 4,
+      "vertices": 604,
+      "triangles": 1075
+    },
+    {
+      "component": 5,
+      "vertices": 283,
+      "triangles": 502
+    },
+    {
+      "component": 6,
+      "vertices": 275,
+      "triangles": 491
+    },
+    {
+      "component": 7,
+      "vertices": 320,
+      "triangles": 573
+    },
+    {
+      "component": 8,
+      "vertices": 483,
+      "triangles": 873
+    },
+    {
+      "component": 9,
+      "vertices": 635,
+      "triangles": 1166
+    },
+    {
+      "component": 10,
+      "vertices": 401,
+      "triangles": 703
+    },
+    {
+      "component": 11,
+      "vertices": 291,
+      "triangles": 514
+    },
+    {
+      "component": 12,
+      "vertices": 754,
+      "triangles": 1349
+    },
+    {
+      "component": 13,
+      "vertices": 1241,
+      "triangles": 2233
+    },
+    {
+      "component": 14,
+      "vertices": 226,
+      "triangles": 393
+    },
+    {
+      "component": 15,
+      "vertices": 834,
+      "triangles": 1488
+    },
+    {
+      "component": 16,
+      "vertices": 267,
+      "triangles": 468
+    },
+    {
+      "component": 17,
+      "vertices": 251,
+      "triangles": 436
+    },
+    {
+      "component": 18,
+      "vertices": 267,
+      "triangles": 454
+    },
+    {
+      "component": 19,
+      "vertices": 430,
+      "triangles": 763
+    },
+    {
+      "component": 20,
+      "vertices": 354,
+      "triangles": 625
+    },
+    {
+      "component": 21,
+      "vertices": 475,
+      "triangles": 828
+    },
+    {
+      "component": 22,
+      "vertices": 518,
+      "triangles": 953
+    },
+    {
+      "component": 23,
+      "vertices": 317,
+      "triangles": 556
+    },
+    {
+      "component": 24,
+      "vertices": 252,
+      "triangles": 447
+    },
+    {
+      "component": 25,
+      "vertices": 244,
+      "triangles": 422
+    },
+    {
+      "component": 26,
+      "vertices": 330,
+      "triangles": 585
+    },
+    {
+      "component": 27,
+      "vertices": 332,
+      "triangles": 584
+    },
+    {
+      "component": 28,
+      "vertices": 599,
+      "triangles": 1051
+    },
+    {
+      "component": 29,
+      "vertices": 504,
+      "triangles": 914
+    },
+    {
+      "component": 30,
+      "vertices": 360,
+      "triangles": 638
+    },
+    {
+      "component": 31,
+      "vertices": 363,
+      "triangles": 656
+    },
+    {
+      "component": 32,
+      "vertices": 722,
+      "triangles": 1283
+    },
+    {
+      "component": 33,
+      "vertices": 539,
+      "triangles": 976
+    },
+    {
+      "component": 34,
+      "vertices": 486,
+      "triangles": 877
+    },
+    {
+      "component": 35,
+      "vertices": 389,
+      "triangles": 655
+    },
+    {
+      "component": 36,
+      "vertices": 1452,
+      "triangles": 2719
+    },
+    {
+      "component": 37,
+      "vertices": 707,
+      "triangles": 1279
+    },
+    {
+      "component": 38,
+      "vertices": 244,
+      "triangles": 413
+    },
+    {
+      "component": 39,
+      "vertices": 227,
+      "triangles": 389
+    },
+    {
+      "component": 40,
+      "vertices": 412,
+      "triangles": 750
+    },
+    {
+      "component": 41,
+      "vertices": 483,
+      "triangles": 869
+    },
+    {
+      "component": 42,
+      "vertices": 1014,
+      "triangles": 1866
+    },
+    {
+      "component": 43,
+      "vertices": 206,
+      "triangles": 353
+    },
+    {
+      "component": 44,
+      "vertices": 293,
+      "triangles": 511
+    },
+    {
+      "component": 45,
+      "vertices": 260,
+      "triangles": 424
+    },
+    {
+      "component": 46,
+      "vertices": 365,
+      "triangles": 656
+    },
+    {
+      "component": 47,
+      "vertices": 450,
+      "triangles": 776
+    },
+    {
+      "component": 48,
+      "vertices": 163,
+      "triangles": 279
+    },
+    {
+      "component": 49,
+      "vertices": 476,
+      "triangles": 880
+    },
+    {
+      "component": 50,
+      "vertices": 336,
+      "triangles": 594
+    },
+    {
+      "component": 51,
+      "vertices": 658,
+      "triangles": 1177
+    },
+    {
+      "component": 52,
+      "vertices": 256,
+      "triangles": 434
+    },
+    {
+      "component": 53,
+      "vertices": 724,
+      "triangles": 1329
+    },
+    {
+      "component": 54,
+      "vertices": 581,
+      "triangles": 1022
+    },
+    {
+      "component": 55,
+      "vertices": 219,
+      "triangles": 380
+    },
+    {
+      "component": 56,
+      "vertices": 1287,
+      "triangles": 2335
+    },
+    {
+      "component": 57,
+      "vertices": 1256,
+      "triangles": 2333
+    },
+    {
+      "component": 58,
+      "vertices": 292,
+      "triangles": 497
+    },
+    {
+      "component": 59,
+      "vertices": 235,
+      "triangles": 396
+    },
+    {
+      "component": 60,
+      "vertices": 174,
+      "triangles": 294
+    },
+    {
+      "component": 61,
+      "vertices": 223,
+      "triangles": 389
+    },
+    {
+      "component": 62,
+      "vertices": 322,
+      "triangles": 579
+    },
+    {
+      "component": 63,
+      "vertices": 534,
+      "triangles": 980
+    },
+    {
+      "component": 64,
+      "vertices": 680,
+      "triangles": 1224
+    },
+    {
+      "component": 65,
+      "vertices": 177,
+      "triangles": 294
+    },
+    {
+      "component": 66,
+      "vertices": 353,
+      "triangles": 637
+    },
+    {
+      "component": 67,
+      "vertices": 622,
+      "triangles": 1139
+    },
+    {
+      "component": 68,
+      "vertices": 600,
+      "triangles": 1099
+    },
+    {
+      "component": 69,
+      "vertices": 245,
+      "triangles": 417
+    },
+    {
+      "component": 70,
+      "vertices": 332,
+      "triangles": 575
+    },
+    {
+      "component": 71,
+      "vertices": 242,
+      "triangles": 426
+    },
+    {
+      "component": 72,
+      "vertices": 663,
+      "triangles": 1185
+    },
+    {
+      "component": 73,
+      "vertices": 841,
+      "triangles": 1516
+    },
+    {
+      "component": 74,
+      "vertices": 480,
+      "triangles": 878
+    },
+    {
+      "component": 75,
+      "vertices": 719,
+      "triangles": 1290
+    },
+    {
+      "component": 76,
+      "vertices": 219,
+      "triangles": 364
+    },
+    {
+      "component": 77,
+      "vertices": 446,
+      "triangles": 814
+    },
+    {
+      "component": 78,
+      "vertices": 246,
+      "triangles": 431
+    },
+    {
+      "component": 79,
+      "vertices": 1126,
+      "triangles": 2037
+    },
+    {
+      "component": 80,
+      "vertices": 568,
+      "triangles": 1027
+    },
+    {
+      "component": 81,
+      "vertices": 429,
+      "triangles": 758
+    },
+    {
+      "component": 82,
+      "vertices": 456,
+      "triangles": 806
+    },
+    {
+      "component": 83,
+      "vertices": 213,
+      "triangles": 373
+    },
+    {
+      "component": 84,
+      "vertices": 383,
+      "triangles": 691
+    },
+    {
+      "component": 85,
+      "vertices": 601,
+      "triangles": 1091
+    },
+    {
+      "component": 86,
+      "vertices": 918,
+      "triangles": 1659
+    },
+    {
+      "component": 87,
+      "vertices": 309,
+      "triangles": 530
+    },
+    {
+      "component": 88,
+      "vertices": 339,
+      "triangles": 616
+    },
+    {
+      "component": 89,
+      "vertices": 147,
+      "triangles": 248
+    },
+    {
+      "component": 90,
+      "vertices": 177,
+      "triangles": 306
+    },
+    {
+      "component": 91,
+      "vertices": 698,
+      "triangles": 1247
+    },
+    {
+      "component": 92,
+      "vertices": 681,
+      "triangles": 1227
+    },
+    {
+      "component": 93,
+      "vertices": 416,
+      "triangles": 746
+    },
+    {
+      "component": 94,
+      "vertices": 325,
+      "triangles": 577
+    },
+    {
+      "component": 95,
+      "vertices": 516,
+      "triangles": 916
+    },
+    {
+      "component": 96,
+      "vertices": 315,
+      "triangles": 562
+    },
+    {
+      "component": 97,
+      "vertices": 342,
+      "triangles": 601
+    },
+    {
+      "component": 98,
+      "vertices": 192,
+      "triangles": 317
+    },
+    {
+      "component": 99,
+      "vertices": 259,
+      "triangles": 453
+    },
+    {
+      "component": 100,
+      "vertices": 229,
+      "triangles": 405
+    },
+    {
+      "component": 101,
+      "vertices": 381,
+      "triangles": 683
+    },
+    {
+      "component": 102,
+      "vertices": 243,
+      "triangles": 420
+    },
+    {
+      "component": 103,
+      "vertices": 357,
+      "triangles": 636
+    },
+    {
+      "component": 104,
+      "vertices": 317,
+      "triangles": 562
+    },
+    {
+      "component": 105,
+      "vertices": 176,
+      "triangles": 297
+    },
+    {
+      "component": 106,
+      "vertices": 354,
+      "triangles": 632
+    },
+    {
+      "component": 107,
+      "vertices": 189,
+      "triangles": 318
+    },
+    {
+      "component": 108,
+      "vertices": 150,
+      "triangles": 246
+    },
+    {
+      "component": 109,
+      "vertices": 480,
+      "triangles": 877
+    },
+    {
+      "component": 110,
+      "vertices": 171,
+      "triangles": 283
+    },
+    {
+      "component": 111,
+      "vertices": 754,
+      "triangles": 1328
+    },
+    {
+      "component": 112,
+      "vertices": 217,
+      "triangles": 372
+    },
+    {
+      "component": 113,
+      "vertices": 283,
+      "triangles": 495
+    },
+    {
+      "component": 114,
+      "vertices": 225,
+      "triangles": 389
+    },
+    {
+      "component": 115,
+      "vertices": 227,
+      "triangles": 393
+    },
+    {
+      "component": 116,
+      "vertices": 320,
+      "triangles": 563
+    },
+    {
+      "component": 117,
+      "vertices": 267,
+      "triangles": 461
+    },
+    {
+      "component": 118,
+      "vertices": 144,
+      "triangles": 241
+    },
+    {
+      "component": 119,
+      "vertices": 279,
+      "triangles": 481
+    },
+    {
+      "component": 120,
+      "vertices": 376,
+      "triangles": 677
+    },
+    {
+      "component": 121,
+      "vertices": 162,
+      "triangles": 271
+    },
+    {
+      "component": 122,
+      "vertices": 439,
+      "triangles": 788
+    },
+    {
+      "component": 123,
+      "vertices": 359,
+      "triangles": 630
+    },
+    {
+      "component": 124,
+      "vertices": 324,
+      "triangles": 560
+    },
+    {
+      "component": 125,
+      "vertices": 295,
+      "triangles": 520
+    },
+    {
+      "component": 126,
+      "vertices": 194,
+      "triangles": 319
+    },
+    {
+      "component": 127,
+      "vertices": 573,
+      "triangles": 1050
+    },
+    {
+      "component": 128,
+      "vertices": 855,
+      "triangles": 1586
+    },
+    {
+      "component": 129,
+      "vertices": 334,
+      "triangles": 582
+    },
+    {
+      "component": 130,
+      "vertices": 260,
+      "triangles": 448
+    },
+    {
+      "component": 131,
+      "vertices": 200,
+      "triangles": 344
+    },
+    {
+      "component": 132,
+      "vertices": 220,
+      "triangles": 380
+    },
+    {
+      "component": 133,
+      "vertices": 247,
+      "triangles": 427
+    },
+    {
+      "component": 134,
+      "vertices": 140,
+      "triangles": 225
+    }
+  ],
+  "boundaryVertices": 15309,
+  "attachmentCoverage": 478,
+  "attachmentObjects": {
+    "tripo_node_282c7782-479e-4c50-8808-1a2c3cdb2977": 478
+  },
+  "selection": "multi-source Dijkstra over original edge graph; faces selected when incident to a vertex within the normalized radius"
+}

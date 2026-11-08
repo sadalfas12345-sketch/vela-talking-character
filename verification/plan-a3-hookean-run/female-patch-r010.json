@@ -1,0 +1,54 @@
+{
+  "mesh": "verification\\plan-a-hookean-run\\female-full.npz",
+  "goal1": "verification\\plan-a2-hookean-run\\female-original-attachments.json",
+  "interocularWidth": 0.057560167629433764,
+  "radiusEyeWidth": 0.1,
+  "radiusModelUnits": 0.005756016762943377,
+  "sourceVertices": 999787,
+  "sourceTriangles": 1943912,
+  "solverVertices": 10318,
+  "solverTriangles": 18540,
+  "connectedComponents": [
+    {
+      "component": 0,
+      "vertices": 1051,
+      "triangles": 1805
+    },
+    {
+      "component": 1,
+      "vertices": 755,
+      "triangles": 1318
+    },
+    {
+      "component": 2,
+      "vertices": 831,
+      "triangles": 1404
+    },
+    {
+      "component": 3,
+      "vertices": 5934,
+      "triangles": 10919
+    },
+    {
+      "component": 4,
+      "vertices": 1132,
+      "triangles": 2060
+    },
+    {
+      "component": 5,
+      "vertices": 357,
+      "triangles": 609
+    },
+    {
+      "component": 6,
+      "vertices": 258,
+      "triangles": 425
+    }
+  ],
+  "boundaryVertices": 2173,
+  "attachmentCoverage": 478,
+  "attachmentObjects": {
+    "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f": 478
+  },
+  "selection": "multi-source Dijkstra over original edge graph; faces selected when incident to a vertex within the normalized radius"
+}

@@ -1,0 +1,764 @@
+{
+  "sourceTable": "verification\\goal2-browInnerUp-proof\\worried-expression-table.json",
+  "sourceGoal1": "verification\\plan-a2-hookean-run\\male-original-attachments.json",
+  "sourceGraph": "verification\\plan-a3-hookean-run\\male-spring-graph-r010.npz",
+  "frameCount": 121,
+  "landmarkCount": 478,
+  "rawValidatedTrajectoryIds": "0-467",
+  "tableDerivedTrajectoryIds": "468-477 and stabilized table values for 0-467",
+  "neutralFrames": [
+    0,
+    7
+  ],
+  "neutralBaselineMethod": "mean of existing stabilized rows in the requested neutral interval",
+  "targetCoordinateFrame": {
+    "right": [
+      0.28270992016494256,
+      0.958940892061876,
+      0.022527018708766028
+    ],
+    "up": [
+      -0.3070961999673025,
+      0.06823762024937419,
+      0.9492289245215533
+    ],
+    "depth": [
+      0.9087172415036343,
+      -0.2752743953117971,
+      0.3137785561184036
+    ]
+  },
+  "targetEyeWidth": 0.30409851126227233,
+  "assumedDepthChannels": 57838,
+  "depthAssumption": "No independently measured donor depth is available; every target keeps its own Tripo neutral 3D depth and adds dz=0 along the target facial-depth axis.",
+  "provenance": "2D head-stabilized normalized table; IDs 0-467 trace to raw validated tracking, IDs 468-477 are table-derived and are not relabeled raw validated.",
+  "frames": [
+    {
+      "frame": 0,
+      "timeSeconds": 0.0,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 1,
+      "timeSeconds": 0.041666666666666664,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 2,
+      "timeSeconds": 0.08333333333333333,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 3,
+      "timeSeconds": 0.125,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 4,
+      "timeSeconds": 0.16666666666666666,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 5,
+      "timeSeconds": 0.20833333333333334,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 6,
+      "timeSeconds": 0.25,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 7,
+      "timeSeconds": 0.2916666666666667,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 8,
+      "timeSeconds": 0.3333333333333333,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 9,
+      "timeSeconds": 0.375,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 10,
+      "timeSeconds": 0.4166666666666667,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 11,
+      "timeSeconds": 0.4583333333333333,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 12,
+      "timeSeconds": 0.5,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 13,
+      "timeSeconds": 0.5416666666666666,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 14,
+      "timeSeconds": 0.5833333333333334,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 15,
+      "timeSeconds": 0.625,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 16,
+      "timeSeconds": 0.6666666666666666,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 17,
+      "timeSeconds": 0.7083333333333334,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 18,
+      "timeSeconds": 0.75,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 19,
+      "timeSeconds": 0.7916666666666666,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 20,
+      "timeSeconds": 0.8333333333333334,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 21,
+      "timeSeconds": 0.875,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 22,
+      "timeSeconds": 0.9166666666666666,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 23,
+      "timeSeconds": 0.9583333333333334,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 24,
+      "timeSeconds": 1.0,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 25,
+      "timeSeconds": 1.0416666666666667,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 26,
+      "timeSeconds": 1.0833333333333333,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 27,
+      "timeSeconds": 1.125,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 28,
+      "timeSeconds": 1.1666666666666667,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 29,
+      "timeSeconds": 1.2083333333333333,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 30,
+      "timeSeconds": 1.25,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 31,
+      "timeSeconds": 1.2916666666666667,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 32,
+      "timeSeconds": 1.3333333333333333,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 33,
+      "timeSeconds": 1.375,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 34,
+      "timeSeconds": 1.4166666666666667,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 35,
+      "timeSeconds": 1.4583333333333333,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 36,
+      "timeSeconds": 1.5,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 37,
+      "timeSeconds": 1.5416666666666667,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 38,
+      "timeSeconds": 1.5833333333333333,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 39,
+      "timeSeconds": 1.625,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 40,
+      "timeSeconds": 1.6666666666666667,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 41,
+      "timeSeconds": 1.7083333333333333,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 42,
+      "timeSeconds": 1.75,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 43,
+      "timeSeconds": 1.7916666666666667,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 44,
+      "timeSeconds": 1.8333333333333333,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 45,
+      "timeSeconds": 1.875,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 46,
+      "timeSeconds": 1.9166666666666667,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 47,
+      "timeSeconds": 1.9583333333333333,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 48,
+      "timeSeconds": 2.0,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 49,
+      "timeSeconds": 2.0416666666666665,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 50,
+      "timeSeconds": 2.0833333333333335,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 51,
+      "timeSeconds": 2.125,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 52,
+      "timeSeconds": 2.1666666666666665,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 53,
+      "timeSeconds": 2.2083333333333335,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 54,
+      "timeSeconds": 2.25,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 55,
+      "timeSeconds": 2.2916666666666665,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 56,
+      "timeSeconds": 2.3333333333333335,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 57,
+      "timeSeconds": 2.375,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 58,
+      "timeSeconds": 2.4166666666666665,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 59,
+      "timeSeconds": 2.4583333333333335,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 60,
+      "timeSeconds": 2.5,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 61,
+      "timeSeconds": 2.5416666666666665,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 62,
+      "timeSeconds": 2.5833333333333335,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 63,
+      "timeSeconds": 2.625,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 64,
+      "timeSeconds": 2.6666666666666665,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 65,
+      "timeSeconds": 2.7083333333333335,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 66,
+      "timeSeconds": 2.75,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 67,
+      "timeSeconds": 2.7916666666666665,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 68,
+      "timeSeconds": 2.8333333333333335,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 69,
+      "timeSeconds": 2.875,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 70,
+      "timeSeconds": 2.9166666666666665,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 71,
+      "timeSeconds": 2.9583333333333335,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 72,
+      "timeSeconds": 3.0,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 73,
+      "timeSeconds": 3.0416666666666665,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 74,
+      "timeSeconds": 3.0833333333333335,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 75,
+      "timeSeconds": 3.125,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 76,
+      "timeSeconds": 3.1666666666666665,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 77,
+      "timeSeconds": 3.2083333333333335,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 78,
+      "timeSeconds": 3.25,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 79,
+      "timeSeconds": 3.2916666666666665,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 80,
+      "timeSeconds": 3.3333333333333335,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 81,
+      "timeSeconds": 3.375,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 82,
+      "timeSeconds": 3.4166666666666665,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 83,
+      "timeSeconds": 3.4583333333333335,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 84,
+      "timeSeconds": 3.5,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 85,
+      "timeSeconds": 3.5416666666666665,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 86,
+      "timeSeconds": 3.5833333333333335,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 87,
+      "timeSeconds": 3.625,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 88,
+      "timeSeconds": 3.6666666666666665,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 89,
+      "timeSeconds": 3.7083333333333335,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 90,
+      "timeSeconds": 3.75,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 91,
+      "timeSeconds": 3.7916666666666665,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 92,
+      "timeSeconds": 3.8333333333333335,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 93,
+      "timeSeconds": 3.875,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 94,
+      "timeSeconds": 3.9166666666666665,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 95,
+      "timeSeconds": 3.9583333333333335,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 96,
+      "timeSeconds": 4.0,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 97,
+      "timeSeconds": 4.041666666666667,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 98,
+      "timeSeconds": 4.083333333333333,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 99,
+      "timeSeconds": 4.125,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 100,
+      "timeSeconds": 4.166666666666667,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 101,
+      "timeSeconds": 4.208333333333333,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 102,
+      "timeSeconds": 4.25,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 103,
+      "timeSeconds": 4.291666666666667,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 104,
+      "timeSeconds": 4.333333333333333,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 105,
+      "timeSeconds": 4.375,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 106,
+      "timeSeconds": 4.416666666666667,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 107,
+      "timeSeconds": 4.458333333333333,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 108,
+      "timeSeconds": 4.5,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 109,
+      "timeSeconds": 4.541666666666667,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 110,
+      "timeSeconds": 4.583333333333333,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 111,
+      "timeSeconds": 4.625,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 112,
+      "timeSeconds": 4.666666666666667,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 113,
+      "timeSeconds": 4.708333333333333,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 114,
+      "timeSeconds": 4.75,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 115,
+      "timeSeconds": 4.791666666666667,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 116,
+      "timeSeconds": 4.833333333333333,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 117,
+      "timeSeconds": 4.875,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 118,
+      "timeSeconds": 4.916666666666667,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 119,
+      "timeSeconds": 4.958333333333333,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    },
+    {
+      "frame": 120,
+      "timeSeconds": 5.0,
+      "source": "existing_stabilized_2d_expression_table",
+      "depthAssumption": "dz=0 in target-character facial-depth axis"
+    }
+  ],
+  "outputNPZ": "verification\\plan-a3-hookean-run\\male-targets-r010.npz"
+}
