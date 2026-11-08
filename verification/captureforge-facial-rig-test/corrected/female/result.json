@@ -1,0 +1,252 @@
+{
+  "character": "female",
+  "status": "CONTROLLED_TEST_COMPLETE",
+  "source_glb": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\vela-photoreal\\generated-original.glb",
+  "goal1_source": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\vela-photoreal\\generated-rigged.glb",
+  "automatic_source_translation": [
+    -7.392093539237976e-05,
+    0.0004921779036521912,
+    -0.49021828909462783
+  ],
+  "source_vertex_count": 999787,
+  "mapped_landmarks": 478,
+  "missing_ids": [],
+  "nearest_surface_distance": {
+    "median": 3.4009752880592714e-07,
+    "p95": 1.1006326531060037e-06,
+    "max": 1.6645045661789482e-06
+  },
+  "eye_width": 0.05584184727701896,
+  "rig_bones": 26,
+  "brow_bone_names": [
+    "brow.in.L",
+    "brow.mid.L",
+    "brow.out.L",
+    "brow.in.R",
+    "brow.mid.R",
+    "brow.out.R"
+  ],
+  "weight_groups": 25,
+  "armature_modifiers": [
+    {
+      "name": "Armature",
+      "type": "ARMATURE",
+      "object": "female_CaptureForgeFaceRigCorrected"
+    }
+  ],
+  "brow_weight_stats": {
+    "brow.mid.L": {
+      "vertices_with_weight": 497,
+      "max_weight": 0.9962077736854553
+    },
+    "brow.out.R": {
+      "vertices_with_weight": 476,
+      "max_weight": 0.9870854020118713
+    },
+    "brow.in.R": {
+      "vertices_with_weight": 252,
+      "max_weight": 0.9685166478157043
+    },
+    "brow.out.L": {
+      "vertices_with_weight": 510,
+      "max_weight": 0.9937359690666199
+    },
+    "brow.mid.R": {
+      "vertices_with_weight": 417,
+      "max_weight": 0.9894003868103027
+    },
+    "brow.in.L": {
+      "vertices_with_weight": 252,
+      "max_weight": 0.9873369336128235
+    }
+  },
+  "evaluated_brow_bone_transforms": [
+    {
+      "name": "brow.in.L",
+      "rotation_euler": [
+        0.25,
+        0.0,
+        0.0
+      ],
+      "matrix_translation": [
+        0.00793211068958044,
+        -0.011531618423759937,
+        0.013167105615139008
+      ]
+    },
+    {
+      "name": "brow.mid.L",
+      "rotation_euler": [
+        0.25,
+        0.0,
+        0.0
+      ],
+      "matrix_translation": [
+        0.024716658517718315,
+        -0.006522877607494593,
+        0.01553693413734436
+      ]
+    },
+    {
+      "name": "brow.out.L",
+      "rotation_euler": [
+        0.25,
+        0.0,
+        0.0
+      ],
+      "matrix_translation": [
+        0.038501299917697906,
+        -0.011632617563009262,
+        0.006227456033229828
+      ]
+    },
+    {
+      "name": "brow.in.R",
+      "rotation_euler": [
+        0.25,
+        0.0,
+        0.0
+      ],
+      "matrix_translation": [
+        -0.00869577843695879,
+        -0.011661142110824585,
+        0.012994490563869476
+      ]
+    },
+    {
+      "name": "brow.mid.R",
+      "rotation_euler": [
+        0.25,
+        0.0,
+        0.0
+      ],
+      "matrix_translation": [
+        -0.023265814408659935,
+        -0.008174716494977474,
+        0.014719761908054352
+      ]
+    },
+    {
+      "name": "brow.out.R",
+      "rotation_euler": [
+        0.25,
+        0.0,
+        0.0
+      ],
+      "matrix_translation": [
+        -0.027194207534193993,
+        -0.019310638308525085,
+        0.0031996145844459534
+      ]
+    }
+  ],
+  "controlled_axis": 0,
+  "controlled_sign": 1,
+  "axis_tests": [
+    {
+      "axis": 0,
+      "sign": -1,
+      "mean_region_up": -6.056183424531629e-07,
+      "max_region_motion": 0.0003237209351818235,
+      "nonzero_vertices": 2403
+    },
+    {
+      "axis": 0,
+      "sign": 1,
+      "mean_region_up": 7.268780255111834e-07,
+      "max_region_motion": 0.0003237214592251138,
+      "nonzero_vertices": 2403
+    },
+    {
+      "axis": 1,
+      "sign": -1,
+      "mean_region_up": 0.0,
+      "max_region_motion": 0.00032378308773290705,
+      "nonzero_vertices": 2404
+    },
+    {
+      "axis": 1,
+      "sign": 1,
+      "mean_region_up": 0.0,
+      "max_region_motion": 0.00032378354589153164,
+      "nonzero_vertices": 2404
+    },
+    {
+      "axis": 2,
+      "sign": -1,
+      "mean_region_up": 2.485433663939164e-08,
+      "max_region_motion": 0.0003243700070038358,
+      "nonzero_vertices": 2404
+    },
+    {
+      "axis": 2,
+      "sign": 1,
+      "mean_region_up": 9.640604975535836e-08,
+      "max_region_motion": 0.00032436928050569145,
+      "nonzero_vertices": 2404
+    }
+  ],
+  "brow_landmark_motion": [
+    {
+      "id": 70,
+      "delta": [
+        0.0,
+        -8.213904950128692e-07,
+        -2.4943122972978515e-07
+      ],
+      "distance": 8.584277975823006e-07
+    },
+    {
+      "id": 105,
+      "delta": [
+        0.0,
+        -1.3993264936663224e-06,
+        -3.656974202070895e-07
+      ],
+      "distance": 1.4463226607581744e-06
+    },
+    {
+      "id": 334,
+      "delta": [
+        0.0,
+        -4.812463146675397e-07,
+        1.1590987656316665e-07
+      ],
+      "distance": 4.950081967664547e-07
+    },
+    {
+      "id": 336,
+      "delta": [
+        0.0,
+        1.157704430630041e-06,
+        2.7008643630616058e-08
+      ],
+      "distance": 1.1580194365947374e-06
+    },
+    {
+      "id": 293,
+      "delta": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "distance": 0.0
+    },
+    {
+      "id": 63,
+      "delta": [
+        0.0,
+        -2.8412939404438148e-05,
+        -3.2914443617027e-06
+      ],
+      "distance": 2.8602949700799364e-05
+    }
+  ],
+  "nonzero_vertices": 2403,
+  "min_area_ratio": 0.912878445343631,
+  "collapsed_triangles": 0,
+  "neutral_render": "C:\\Users\\USER\\talking-character-demo\\verification\\captureforge-facial-rig-test\\corrected\\female\\neutral.png",
+  "controlled_render": "C:\\Users\\USER\\talking-character-demo\\verification\\captureforge-facial-rig-test\\corrected\\female\\controlled-brow.png",
+  "controlled_bone_test_pass": true,
+  "visible_expression_pass": false
+}
