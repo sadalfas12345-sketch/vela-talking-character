@@ -1,0 +1,234 @@
+{
+  "character": "male",
+  "source_translation": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "mapped_landmarks": 478,
+  "surface_distance": {
+    "median": 1.5595682612001838e-07,
+    "p95": 5.411182911529976e-07,
+    "max": 8.552604526812502e-07
+  },
+  "eye_width": 0.29974316785339844,
+  "landmark105_neutral": [
+    -0.14490040145616176,
+    -0.05717677997117896,
+    0.06181053358163581
+  ],
+  "landmark105_triangle": [
+    301183,
+    813988,
+    906120
+  ],
+  "landmark105_vertex_brow_weights": [
+    {
+      "vertex": 301183,
+      "groups": {
+        "brow.mid.R": 0.999841570854187
+      }
+    },
+    {
+      "vertex": 813988,
+      "groups": {
+        "brow.mid.R": 0.9964720010757446
+      }
+    },
+    {
+      "vertex": 906120,
+      "groups": {
+        "brow.mid.R": 0.9931433200836182
+      }
+    }
+  ],
+  "bone_audit": [
+    {
+      "name": "brow.mid.R",
+      "head": [
+        -0.14490041136741638,
+        -0.05717679485678673,
+        0.06181053817272186
+      ],
+      "tail": [
+        -0.14490041136741638,
+        -0.05717679485678673,
+        0.08605369925498962
+      ],
+      "length": 0.02424316108226776,
+      "rotation_mode": "QUATERNION",
+      "parent": "head"
+    },
+    {
+      "name": "brow.in.R",
+      "head": [
+        -0.050395842641592026,
+        -0.11019071191549301,
+        0.05031931400299072
+      ],
+      "tail": [
+        -0.050395842641592026,
+        -0.11019071191549301,
+        0.07456247508525848
+      ],
+      "length": 0.02424316108226776,
+      "rotation_mode": "QUATERNION",
+      "parent": "head"
+    },
+    {
+      "name": "brow.mid.L",
+      "head": [
+        0.14406293630599976,
+        -0.05847039818763733,
+        0.06061863899230957
+      ],
+      "tail": [
+        0.14406293630599976,
+        -0.05847039818763733,
+        0.08486180007457733
+      ],
+      "length": 0.02424316108226776,
+      "rotation_mode": "QUATERNION",
+      "parent": "head"
+    }
+  ],
+  "armature_modifiers": [
+    {
+      "name": "Armature",
+      "object": "male_CaptureForgeEyebrowRig"
+    }
+  ],
+  "rotation_025": {
+    "landmark105_delta": [
+      0.0,
+      1.4182683714253352e-07,
+      -1.2753328139381015e-07
+    ],
+    "landmark105_magnitude": 1.9073434299288497e-07,
+    "max_vertex_displacement": 0.001783812405738445
+  },
+  "translation_1pct_eye_width": {
+    "requested": [
+      0.0,
+      0.0,
+      0.0029974316785339843
+    ],
+    "landmark105_delta": [
+      0.0,
+      1.4182683714253352e-07,
+      0.002988174804114757
+    ],
+    "landmark105_magnitude": 0.0029881748074804993,
+    "max_vertex_displacement": 0.003740944016998875
+  },
+  "full_target": [
+    {
+      "id": 70,
+      "requested": [
+        -0.002139886233199727,
+        -0.0011884678958934873,
+        -0.0059378654329250566
+      ],
+      "achieved": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "error": 0.006422601881646836,
+      "requested_magnitude": 0.006422601881646836,
+      "error_percent": 100.0
+    },
+    {
+      "id": 105,
+      "requested": [
+        0.003763911531958184,
+        -0.001425292374887936,
+        -0.007121061665559727
+      ],
+      "achieved": [
+        0.0037524748791303297,
+        -0.0014209598737246545,
+        -0.007099419818553901
+      ],
+      "error": 2.4858341377861067e-05,
+      "requested_magnitude": 0.008179731512649164,
+      "error_percent": 0.3039016786727052
+    },
+    {
+      "id": 334,
+      "requested": [
+        -0.0029890960250898682,
+        -0.0025458375696771006,
+        -0.01271959519300941
+      ],
+      "achieved": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "error": 0.013311802502006087,
+      "requested_magnitude": 0.013311802502006087,
+      "error_percent": 100.0
+    },
+    {
+      "id": 336,
+      "requested": [
+        0.0049456811058302234,
+        -0.0034195710512383115,
+        -0.01708492138121618
+      ],
+      "achieved": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "error": 0.018112088956754018,
+      "requested_magnitude": 0.018112088956754018,
+      "error_percent": 100.0
+    },
+    {
+      "id": 293,
+      "requested": [
+        -0.008554505969124016,
+        -0.0023755466534012737,
+        -0.011868813798896566
+      ],
+      "achieved": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "error": 0.014821994982833517,
+      "requested_magnitude": 0.014821994982833517,
+      "error_percent": 100.0
+    },
+    {
+      "id": 63,
+      "requested": [
+        0.0021167889425447164,
+        -0.001307489581679711,
+        -0.006532501343566854
+      ],
+      "achieved": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "error": 0.006990271685505744,
+      "requested_magnitude": 0.006990271685505744,
+      "error_percent": 100.0
+    }
+  ],
+  "geometry": {
+    "min_area_ratio": 0.5969083961261671,
+    "collapsed_triangles": 0,
+    "max_edge_strain": 0.4055655365640898,
+    "p95_edge_strain": 1.3424632516745305e-09,
+    "invalid_coordinates": 0
+  },
+  "neutral_render": "C:\\Users\\USER\\talking-character-demo\\verification\\captureforge-facial-rig-test\\eyebrow-control\\male\\neutral.png",
+  "full_target_render": "C:\\Users\\USER\\talking-character-demo\\verification\\captureforge-facial-rig-test\\eyebrow-control\\male\\full-target.png",
+  "neutral_wireframe": "C:\\Users\\USER\\talking-character-demo\\verification\\captureforge-facial-rig-test\\eyebrow-control\\male\\neutral-wireframe.png",
+  "full_target_wireframe": "C:\\Users\\USER\\talking-character-demo\\verification\\captureforge-facial-rig-test\\eyebrow-control\\male\\full-target-wireframe.png",
+  "visual_pass": false
+}
