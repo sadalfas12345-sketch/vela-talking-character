@@ -1,0 +1,71 @@
+{
+  "status": "PLAN_A_INPUT_AUDIT_FAILED_PRECONDITION",
+  "sourceMotion": {
+    "decodedFrames": 121,
+    "validFrames": 121,
+    "rawValidatedLandmarkIds": 468,
+    "rawValidatedIdRange": [
+      0,
+      467
+    ],
+    "rawValidatedPerFrameCoordinates": 468,
+    "normalizedExpressionFrames": 121,
+    "normalizedExpressionLandmarksPerFrame": 478,
+    "normalizedExpressionIdRange": [
+      0,
+      477
+    ],
+    "irisIdsInExpressionTable": [
+      468,
+      469,
+      470,
+      471,
+      472,
+      473,
+      474,
+      475,
+      476,
+      477
+    ],
+    "irisRawValidated": false,
+    "neutralMotionRmsInTableUnits": 0.0037597443499380366,
+    "trajectoryDimensionality": "2D head-stabilized; no validated per-frame depth trajectory",
+    "fullyMeasured3DTrajectories": 0,
+    "embedded3DConstraintsIfDepthSetZero": 57838
+  },
+  "models": {
+    "female": {
+      "goal1NeutralAttachments": 478,
+      "missingGoal1Ids": [],
+      "interocularWidth": 0.05584288580934188,
+      "solverVertices": 672835,
+      "solverTriangles": 1276197,
+      "solverConnectedComponents": 251,
+      "solverBoundaryVertices": 69230,
+      "largestComponentVertices": 26023,
+      "largestComponentTriangles": 50919
+    },
+    "male": {
+      "goal1NeutralAttachments": 478,
+      "missingGoal1Ids": [],
+      "interocularWidth": 0.2997431104458742,
+      "solverVertices": 221695,
+      "solverTriangles": 426574,
+      "solverConnectedComponents": 78,
+      "solverBoundaryVertices": 16663,
+      "largestComponentVertices": 41165,
+      "largestComponentTriangles": 81332
+    }
+  },
+  "hardBlockers": [
+    "No validated head-stabilized per-frame depth trajectory exists for the 478-landmark expression table.",
+    "The original-topology geodesic facial selections are disconnected, so they are not one connected Hookean skin network."
+  ],
+  "notRun": [
+    "Hookean equilibrium",
+    "intermediate substeps",
+    "per-frame landmark residuals",
+    "deformed renders"
+  ],
+  "depthPolicy": "No depth values were fabricated. Setting dz=0 would be an unmeasured embedding, not observed 3D motion."
+}
