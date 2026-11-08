@@ -1,0 +1,570 @@
+{
+  "status": "COMPLETE",
+  "character": "male",
+  "source_glb": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\generalization-male-20261105\\generated-original.glb",
+  "goal1_source": "C:\\Users\\USER\\talking-character-demo\\assets\\tripo\\generalization-male-20261105\\generated-original.glb",
+  "coefficient_source": "C:\\Users\\USER\\talking-character-demo\\verification\\captureforge-facial-rig-test\\worried-reference.capture.npz",
+  "coefficient_count": 52,
+  "frame_count": 121,
+  "mapped_landmarks": 478,
+  "surface_distance_median": 1.5595682612001838e-07,
+  "source_translation": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "eye_width": 0.29974316785339844,
+  "rig_bones": 26,
+  "command_axis": "pose-bone local Euler X",
+  "command_scale_radians": 0.25,
+  "neutral_reconstruction_max_error": 4.677134629109414e-08,
+  "attachment_vertex_count": 1386,
+  "audit_region_vertex_count": 932255,
+  "audit_region_triangle_count": 1782642,
+  "peak_frame": 99,
+  "peak_commands_rad": {
+    "brow.mid.L": 0.17898047404014505,
+    "brow.mid.R": 0.1790697589458432,
+    "brow.out.L": 0.06115333052002825,
+    "brow.out.R": 0.03352024927153252,
+    "brow.in.L": -0.00037546022213064134,
+    "brow.in.R": -0.00028617531643249094,
+    "lid.T.L": 0.00015808446914888918,
+    "lid.B.L": -0.00015808446914888918,
+    "lid.T.R": 7.216901576612145e-05,
+    "lid.B.R": -7.216901576612145e-05,
+    "cheek.L": 1.8794391110077413e-07,
+    "cheek.R": 4.3818698713948834e-07,
+    "mouth.corner.L": -1.1380763282886619e-05,
+    "mouth.corner.R": -1.646941026933746e-05,
+    "lip.T": 0.0001983674883376807,
+    "lip.B": -0.00029016248299740255,
+    "jaw": 0.07514167577028275
+  },
+  "peak_bone_transforms": [
+    {
+      "name": "head",
+      "rotation_euler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "matrix_translation": [
+        0.00010097026824951172,
+        -5.4642558097839355e-05,
+        -0.4188510477542877
+      ]
+    },
+    {
+      "name": "jaw",
+      "rotation_euler": [
+        0.07514167577028275,
+        0.0,
+        0.0
+      ],
+      "matrix_translation": [
+        0.00010097026824951172,
+        -5.4642558097839355e-05,
+        -0.15158802270889282
+      ]
+    },
+    {
+      "name": "lip.B.L",
+      "rotation_euler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "matrix_translation": [
+        0.04778748378157616,
+        -0.0851055234670639,
+        -0.2738535404205322
+      ]
+    },
+    {
+      "name": "lip.B.R",
+      "rotation_euler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "matrix_translation": [
+        -0.0393514484167099,
+        -0.09000789374113083,
+        -0.27591976523399353
+      ]
+    },
+    {
+      "name": "lip.B",
+      "rotation_euler": [
+        -0.00029016248299740255,
+        0.0,
+        0.0
+      ],
+      "matrix_translation": [
+        0.005143153481185436,
+        -0.10018573701381683,
+        -0.28061118721961975
+      ]
+    },
+    {
+      "name": "tongue",
+      "rotation_euler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "matrix_translation": [
+        0.003565944265574217,
+        -0.020477058365941048,
+        -0.2655676603317261
+      ]
+    },
+    {
+      "name": "tongue.tip",
+      "rotation_euler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "matrix_translation": [
+        0.0036113907117396593,
+        -0.07121555507183075,
+        -0.26938700675964355
+      ]
+    },
+    {
+      "name": "eye.L",
+      "rotation_euler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "matrix_translation": [
+        0.10989663004875183,
+        -0.00012299418449401855,
+        0.003882288932800293
+      ]
+    },
+    {
+      "name": "lid.T.L",
+      "rotation_euler": [
+        0.00015808446914888918,
+        0.0,
+        0.0
+      ],
+      "matrix_translation": [
+        0.10989663004875183,
+        -0.00012299418449401855,
+        0.003882288932800293
+      ]
+    },
+    {
+      "name": "lid.B.L",
+      "rotation_euler": [
+        -0.00015808446914888918,
+        0.0,
+        0.0
+      ],
+      "matrix_translation": [
+        0.10989663004875183,
+        -0.00012299418449401855,
+        0.003882288932800293
+      ]
+    },
+    {
+      "name": "brow.in.L",
+      "rotation_euler": [
+        -0.00037546022213064134,
+        0.0,
+        0.0
+      ],
+      "matrix_translation": [
+        0.04878031834959984,
+        -0.11165233701467514,
+        0.049581319093704224
+      ]
+    },
+    {
+      "name": "brow.mid.L",
+      "rotation_euler": [
+        0.17898046970367432,
+        0.0,
+        0.0
+      ],
+      "matrix_translation": [
+        0.14406293630599976,
+        -0.05847039446234703,
+        0.06061860918998718
+      ]
+    },
+    {
+      "name": "brow.out.L",
+      "rotation_euler": [
+        0.06115332990884781,
+        0.0,
+        0.0
+      ],
+      "matrix_translation": [
+        0.20432019233703613,
+        0.07530984282493591,
+        0.046171873807907104
+      ]
+    },
+    {
+      "name": "mouth.corner.L",
+      "rotation_euler": [
+        -1.1380763680790551e-05,
+        0.0,
+        0.0
+      ],
+      "matrix_translation": [
+        0.08588176965713501,
+        -0.0716795027256012,
+        -0.25433164834976196
+      ]
+    },
+    {
+      "name": "lip.T.L",
+      "rotation_euler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "matrix_translation": [
+        0.04963720217347145,
+        -0.11131826788187027,
+        -0.23934276401996613
+      ]
+    },
+    {
+      "name": "cheek.L",
+      "rotation_euler": [
+        1.8794391110077413e-07,
+        0.0,
+        0.0
+      ],
+      "matrix_translation": [
+        0.14165757596492767,
+        -0.031119180843234062,
+        -0.15052375197410583
+      ]
+    },
+    {
+      "name": "eye.R",
+      "rotation_euler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "matrix_translation": [
+        -0.1034480631351471,
+        -0.0015399231342598796,
+        0.0039351582527160645
+      ]
+    },
+    {
+      "name": "lid.T.R",
+      "rotation_euler": [
+        7.216901576612145e-05,
+        0.0,
+        0.0
+      ],
+      "matrix_translation": [
+        -0.1034480631351471,
+        -0.0015399231342598796,
+        0.0039351582527160645
+      ]
+    },
+    {
+      "name": "lid.B.R",
+      "rotation_euler": [
+        -7.216901576612145e-05,
+        0.0,
+        0.0
+      ],
+      "matrix_translation": [
+        -0.1034480631351471,
+        -0.0015399231342598796,
+        0.0039351582527160645
+      ]
+    },
+    {
+      "name": "brow.in.R",
+      "rotation_euler": [
+        -0.00028617531643249094,
+        0.0,
+        0.0
+      ],
+      "matrix_translation": [
+        -0.050395842641592026,
+        -0.11019070446491241,
+        0.05031925439834595
+      ]
+    },
+    {
+      "name": "brow.mid.R",
+      "rotation_euler": [
+        0.17906975746154785,
+        0.0,
+        0.0
+      ],
+      "matrix_translation": [
+        -0.14490041136741638,
+        -0.05717679113149643,
+        0.06181049346923828
+      ]
+    },
+    {
+      "name": "brow.out.R",
+      "rotation_euler": [
+        0.03352024778723717,
+        0.0,
+        0.0
+      ],
+      "matrix_translation": [
+        -0.19622613489627838,
+        0.05764247477054596,
+        0.04496258497238159
+      ]
+    },
+    {
+      "name": "mouth.corner.R",
+      "rotation_euler": [
+        -1.646941018407233e-05,
+        0.0,
+        0.0
+      ],
+      "matrix_translation": [
+        -0.08369074016809464,
+        -0.0685138925909996,
+        -0.25561273097991943
+      ]
+    },
+    {
+      "name": "lip.T.R",
+      "rotation_euler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "matrix_translation": [
+        -0.04571721702814102,
+        -0.1114744022488594,
+        -0.24069274961948395
+      ]
+    },
+    {
+      "name": "cheek.R",
+      "rotation_euler": [
+        4.3818698713948834e-07,
+        0.0,
+        0.0
+      ],
+      "matrix_translation": [
+        -0.13872653245925903,
+        -0.03354977071285248,
+        -0.150504469871521
+      ]
+    },
+    {
+      "name": "lip.T",
+      "rotation_euler": [
+        0.0001983674883376807,
+        0.0,
+        0.0
+      ],
+      "matrix_translation": [
+        0.003349610138684511,
+        -0.1213684231042862,
+        -0.24059100449085236
+      ]
+    }
+  ],
+  "regions": {
+    "eyebrows": [
+      70,
+      63,
+      105,
+      336,
+      293,
+      334,
+      107,
+      300,
+      65,
+      52,
+      53,
+      46,
+      285,
+      295,
+      282,
+      283,
+      276
+    ],
+    "eyelids": [
+      33,
+      133,
+      159,
+      145,
+      160,
+      144,
+      153,
+      154,
+      155,
+      263,
+      362,
+      386,
+      374,
+      385,
+      380,
+      373,
+      390,
+      249
+    ],
+    "cheeks": [
+      50,
+      101,
+      118,
+      123,
+      187,
+      205,
+      36,
+      206,
+      216,
+      215,
+      214,
+      280,
+      330,
+      347,
+      352,
+      411,
+      425,
+      266,
+      426,
+      436,
+      435,
+      434
+    ],
+    "lips": [
+      0,
+      13,
+      14,
+      17,
+      39,
+      61,
+      84,
+      87,
+      88,
+      91,
+      95,
+      146,
+      178,
+      181,
+      269,
+      291,
+      308,
+      314,
+      317,
+      318,
+      321,
+      324,
+      375,
+      402,
+      405
+    ],
+    "mouth_corners": [
+      61,
+      291,
+      40,
+      270,
+      185,
+      409
+    ],
+    "jaw": [
+      152,
+      148,
+      176,
+      149,
+      150,
+      136,
+      365,
+      377,
+      400,
+      378,
+      379,
+      394,
+      172,
+      132,
+      361
+    ]
+  },
+  "region_metrics": {
+    "lips": {
+      "frames": 3025,
+      "mean_error_norm": 0.03941948250418115,
+      "p95_error_norm": 0.08238058673694197,
+      "mean_expected_magnitude_norm": 0.037106737642630026,
+      "mean_actual_magnitude_norm": 0.004615696102977703
+    },
+    "other": {
+      "frames": 44407,
+      "mean_error_norm": 0.024182297714069614,
+      "p95_error_norm": 0.060293276760765825,
+      "mean_expected_magnitude_norm": 0.02337071508467763,
+      "mean_actual_magnitude_norm": 0.0016475242106139755
+    },
+    "eyelids": {
+      "frames": 2178,
+      "mean_error_norm": 0.015157170842348406,
+      "p95_error_norm": 0.03124072316712473,
+      "mean_expected_magnitude_norm": 0.015075755233643922,
+      "mean_actual_magnitude_norm": 0.0003060358941591536
+    },
+    "cheeks": {
+      "frames": 2662,
+      "mean_error_norm": 0.0248638115031452,
+      "p95_error_norm": 0.05248862024714813,
+      "mean_expected_magnitude_norm": 0.02485807359211382,
+      "mean_actual_magnitude_norm": 0.00011259679437664018
+    },
+    "mouth_corners": {
+      "frames": 484,
+      "mean_error_norm": 0.027258802253930636,
+      "p95_error_norm": 0.04975731517368139,
+      "mean_expected_magnitude_norm": 0.02588019232465235,
+      "mean_actual_magnitude_norm": 0.0027244365425737214
+    },
+    "eyebrows": {
+      "frames": 2057,
+      "mean_error_norm": 0.025863546171401526,
+      "p95_error_norm": 0.04628955789636571,
+      "mean_expected_magnitude_norm": 0.025855354422242113,
+      "mean_actual_magnitude_norm": 0.00021985846533284086
+    },
+    "jaw": {
+      "frames": 1815,
+      "mean_error_norm": 0.030276632511741394,
+      "p95_error_norm": 0.07874834762710518,
+      "mean_expected_magnitude_norm": 0.025006787851996885,
+      "mean_actual_magnitude_norm": 0.009955273094341398
+    }
+  },
+  "geometry_at_peak": {
+    "frame": 99,
+    "max_edge_strain": 0.2491757081894077,
+    "p95_edge_strain": 0.039134767149743066,
+    "min_area_ratio": 0.7492419622844028,
+    "collapsed_triangles": 0,
+    "invalid_coordinates": 0
+  },
+  "geometry_over_sequence": {
+    "max_edge_strain": 0.2521696593141639,
+    "min_area_ratio": 0.7462282290313627,
+    "collapsed_triangles_total_frames": 0,
+    "invalid_coordinate_total_frames": 0
+  },
+  "neutral_render": "C:\\Users\\USER\\talking-character-demo\\verification\\captureforge-facial-rig-test\\video-motion-audit\\male\\neutral.png",
+  "peak_render": "C:\\Users\\USER\\talking-character-demo\\verification\\captureforge-facial-rig-test\\video-motion-audit\\male\\peak.png",
+  "runtime_seconds": 112.67051160009578,
+  "visual_expression_pass": false
+}
