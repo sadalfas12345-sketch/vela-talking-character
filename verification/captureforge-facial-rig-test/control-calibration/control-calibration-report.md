@@ -56,6 +56,8 @@ The 95th-percentile normalized landmark errors are saved in both `validation-rep
 - Female: eyebrows `0.042280`, eyelids `0.028040`, cheeks `0.050082`, lips `0.061394`, mouth corners `0.037972`, jaw `0.056838`.
 - Male: eyebrows `0.038867`, eyelids `0.024535`, cheeks `0.045964`, lips `0.041193`, mouth corners `0.015375`, jaw `0.052632`.
 
+Across all 478 landmarks and 121 frames, the actual-error median and P95 from `actual-frame-measurements.csv` were female `0.019047` and `0.054225`, and male `0.015924` and `0.043598`, in interocular units. Region medians were female eyebrows `0.024529`, eyelids `0.013559`, cheeks `0.021319`, lips `0.032530`, mouth corners `0.018599`, jaw `0.011573`; male eyebrows `0.023130`, eyelids `0.013265`, cheeks `0.021407`, lips `0.022288`, mouth corners `0.007374`, jaw `0.013641`.
+
 The fitted control bounds were active on zero frames for both characters. That means the reported miss is not caused by the chosen transform limits being reached. It is the best fit under the measured response map and regularization.
 
 ## Geometry and evaluated surface
