@@ -1,0 +1,233 @@
+{
+  "solver": "sparse affine hard-constraint projection plus projected nonlinear Hookean energy optimization",
+  "physicalTerms": [
+    "original edge stretching",
+    "virtual seam edge stretching"
+  ],
+  "excludedTerms": [
+    "bending",
+    "volume",
+    "support stiffness",
+    "ARAP",
+    "gravity",
+    "inertia",
+    "damping"
+  ],
+  "frame": 30,
+  "vertices": 90599,
+  "triangles": 165684,
+  "edges": 256311,
+  "landmarks": 478,
+  "simulationComponents": 41,
+  "componentsSolved": 1,
+  "failure": {
+    "component": 0,
+    "substep": 1,
+    "fraction": 1.0,
+    "status": "max_iterations",
+    "iterations": 5,
+    "constraintRank": 1233,
+    "constraintRows": 1233,
+    "constraintGramCondition": 31.159084714053993,
+    "rigidConstraintRank": 6,
+    "gaugeRows": 0,
+    "initialProjectionStep": 0.0477413549916053,
+    "finalConstraintError": 1.1102230246251565e-16,
+    "projectedForceResidual": 251.88593064591885,
+    "forceScale": 0.0029453172580775747,
+    "springEnergy": 0.06876785841207647,
+    "maxStep": 0.0477413549916053,
+    "minEdgeLength": 3.7492554730887594e-07,
+    "acceptedAlphas": [
+      0.25,
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "runtimeSeconds": 14.804008000064641,
+    "history": [
+      {
+        "iteration": 0,
+        "type": "feasible_projection",
+        "maxStep": 0.0477413549916053,
+        "constraintResidual": 2.583210929970574e-17
+      },
+      {
+        "iteration": 1,
+        "energy": 0.11205632439270659,
+        "relativeEnergyChange": 0.21625352935336212,
+        "hardConstraintError": 1.1102230246251565e-16,
+        "projectedForceResidual": 227.373794184136,
+        "maxStep": 0.014432090884497411,
+        "acceptedAlpha": 0.25,
+        "innerLsqrInfo": {
+          "stop": 7,
+          "iterations": 50
+        }
+      },
+      {
+        "iteration": 2,
+        "energy": 0.09174076000573364,
+        "relativeEnergyChange": 0.1812977937396564,
+        "hardConstraintError": 1.1102230246251565e-16,
+        "projectedForceResidual": 222.96631059377793,
+        "maxStep": 0.020660389420274053,
+        "acceptedAlpha": 0.5,
+        "innerLsqrInfo": {
+          "stop": 7,
+          "iterations": 50
+        }
+      },
+      {
+        "iteration": 3,
+        "energy": 0.09166954874361619,
+        "relativeEnergyChange": 0.0007762227183751665,
+        "hardConstraintError": 1.1102230246251565e-16,
+        "projectedForceResidual": 255.54545816489068,
+        "maxStep": 0.01857163136017603,
+        "acceptedAlpha": 0.5,
+        "innerLsqrInfo": {
+          "stop": 7,
+          "iterations": 50
+        }
+      },
+      {
+        "iteration": 4,
+        "energy": 0.08318972078163861,
+        "relativeEnergyChange": 0.09250430571764003,
+        "hardConstraintError": 1.1102230246251565e-16,
+        "projectedForceResidual": 278.97170085810666,
+        "maxStep": 0.02435183442076152,
+        "acceptedAlpha": 0.5,
+        "innerLsqrInfo": {
+          "stop": 7,
+          "iterations": 50
+        }
+      },
+      {
+        "iteration": 5,
+        "energy": 0.06876785841207647,
+        "relativeEnergyChange": 0.1733611104119163,
+        "hardConstraintError": 1.1102230246251565e-16,
+        "projectedForceResidual": 276.1156296579265,
+        "maxStep": 0.020022450063733873,
+        "acceptedAlpha": 0.5,
+        "innerLsqrInfo": {
+          "stop": 7,
+          "iterations": 50
+        }
+      }
+    ]
+  },
+  "runtimeSeconds": 16.528932800050825,
+  "componentReports": [
+    {
+      "component": 0,
+      "vertices": 70916,
+      "landmarks": 411,
+      "substeps": [
+        {
+          "substep": 1,
+          "fraction": 1.0,
+          "status": "max_iterations",
+          "iterations": 5,
+          "constraintRank": 1233,
+          "constraintRows": 1233,
+          "constraintGramCondition": 31.159084714053993,
+          "rigidConstraintRank": 6,
+          "gaugeRows": 0,
+          "initialProjectionStep": 0.0477413549916053,
+          "finalConstraintError": 1.1102230246251565e-16,
+          "projectedForceResidual": 251.88593064591885,
+          "forceScale": 0.0029453172580775747,
+          "springEnergy": 0.06876785841207647,
+          "maxStep": 0.0477413549916053,
+          "minEdgeLength": 3.7492554730887594e-07,
+          "acceptedAlphas": [
+            0.25,
+            0.5,
+            0.5,
+            0.5,
+            0.5
+          ],
+          "runtimeSeconds": 14.804008000064641,
+          "history": [
+            {
+              "iteration": 0,
+              "type": "feasible_projection",
+              "maxStep": 0.0477413549916053,
+              "constraintResidual": 2.583210929970574e-17
+            },
+            {
+              "iteration": 1,
+              "energy": 0.11205632439270659,
+              "relativeEnergyChange": 0.21625352935336212,
+              "hardConstraintError": 1.1102230246251565e-16,
+              "projectedForceResidual": 227.373794184136,
+              "maxStep": 0.014432090884497411,
+              "acceptedAlpha": 0.25,
+              "innerLsqrInfo": {
+                "stop": 7,
+                "iterations": 50
+              }
+            },
+            {
+              "iteration": 2,
+              "energy": 0.09174076000573364,
+              "relativeEnergyChange": 0.1812977937396564,
+              "hardConstraintError": 1.1102230246251565e-16,
+              "projectedForceResidual": 222.96631059377793,
+              "maxStep": 0.020660389420274053,
+              "acceptedAlpha": 0.5,
+              "innerLsqrInfo": {
+                "stop": 7,
+                "iterations": 50
+              }
+            },
+            {
+              "iteration": 3,
+              "energy": 0.09166954874361619,
+              "relativeEnergyChange": 0.0007762227183751665,
+              "hardConstraintError": 1.1102230246251565e-16,
+              "projectedForceResidual": 255.54545816489068,
+              "maxStep": 0.01857163136017603,
+              "acceptedAlpha": 0.5,
+              "innerLsqrInfo": {
+                "stop": 7,
+                "iterations": 50
+              }
+            },
+            {
+              "iteration": 4,
+              "energy": 0.08318972078163861,
+              "relativeEnergyChange": 0.09250430571764003,
+              "hardConstraintError": 1.1102230246251565e-16,
+              "projectedForceResidual": 278.97170085810666,
+              "maxStep": 0.02435183442076152,
+              "acceptedAlpha": 0.5,
+              "innerLsqrInfo": {
+                "stop": 7,
+                "iterations": 50
+              }
+            },
+            {
+              "iteration": 5,
+              "energy": 0.06876785841207647,
+              "relativeEnergyChange": 0.1733611104119163,
+              "hardConstraintError": 1.1102230246251565e-16,
+              "projectedForceResidual": 276.1156296579265,
+              "maxStep": 0.020022450063733873,
+              "acceptedAlpha": 0.5,
+              "innerLsqrInfo": {
+                "stop": 7,
+                "iterations": 50
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "finalPositionsOutput": "verification\\plan-a4-hookean-run\\male-frame30-partial-positions.npz"
+}

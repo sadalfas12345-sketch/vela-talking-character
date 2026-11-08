@@ -1,0 +1,15 @@
+{
+  "vertices": 10318,
+  "triangles": 18540,
+  "landmarks": 478,
+  "maxLandmarkError": 8.384297404680616e-17,
+  "maxLandmarkErrorNormalized": 1.501436181767011e-15,
+  "rmsLandmarkErrorNormalized": 2.5751235730258873e-16,
+  "worstLandmarkIndex": 306,
+  "maxEdgeExtension": 15.293140332188408,
+  "maxEdgeCompression": -0.8587696736664541,
+  "p95AbsEdgeStrain": 0.8473809424958919,
+  "invertedTriangles": 1118,
+  "collapsedTriangles": 0,
+  "invalidCoordinates": 0
+}
