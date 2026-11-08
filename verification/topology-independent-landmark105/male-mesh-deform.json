@@ -1,0 +1,29 @@
+{
+  "method": "Blender native Mesh Deform modifier with automatically bounded closed box cage",
+  "source": "assets\\tripo\\generalization-male-20261105\\generated-original.glb",
+  "patchVertices": 8498,
+  "requestedDisplacement": [
+    0.00272420328357309,
+    0.0037804687141890225,
+    -0.006722706329286843
+  ],
+  "requestedMagnitude": 0.008179731512649165,
+  "bindError": null,
+  "bindState": true,
+  "runtimeSeconds": 8.087961100041866,
+  "status": "EVALUATED",
+  "achievedDisplacement": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "targetError": 0.008179731512649165,
+  "targetErrorPercent": 100.0,
+  "foldovers": 0,
+  "collapsedTriangles": 0,
+  "maxEdgeStrain": 0.0,
+  "p95EdgeStrain": 0.0,
+  "boundarySeamDisplacement": 0.0,
+  "selfIntersections": "NOT_TESTED_BY_THIS_STAGE",
+  "output": "verification\\topology-independent-landmark105\\male-mesh-deform.glb"
+}

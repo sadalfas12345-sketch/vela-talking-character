@@ -1,0 +1,29 @@
+{
+  "method": "Blender native Mesh Deform modifier with automatically bounded closed box cage",
+  "source": "assets\\tripo\\vela-photoreal\\generated-original.glb",
+  "patchVertices": 4349,
+  "requestedDisplacement": [
+    0.00015764428523152435,
+    0.0006938922966734616,
+    -0.0013475704264487298
+  ],
+  "requestedMagnitude": 0.0015239042930211008,
+  "bindError": null,
+  "bindState": true,
+  "runtimeSeconds": 8.27526479982771,
+  "status": "EVALUATED",
+  "achievedDisplacement": [
+    -0.08293564201967117,
+    -0.01291507047406865,
+    -0.9316538690246524
+  ],
+  "targetError": 0.9341089376021054,
+  "targetErrorPercent": 61297.08682362582,
+  "foldovers": 0,
+  "collapsedTriangles": 0,
+  "maxEdgeStrain": 0.0,
+  "p95EdgeStrain": 0.0,
+  "boundarySeamDisplacement": 0.0,
+  "selfIntersections": "NOT_TESTED_BY_THIS_STAGE",
+  "output": "verification\\topology-independent-landmark105\\female-mesh-deform.glb"
+}

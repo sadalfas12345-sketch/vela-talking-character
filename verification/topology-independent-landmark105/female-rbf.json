@@ -1,0 +1,35 @@
+{
+  "method": "scipy.interpolate.RBFInterpolator thin_plate_spline exact barycentric landmark control plus stationary patch boundary controls",
+  "source": "assets\\tripo\\vela-photoreal\\generated-original.glb",
+  "patchVertices": 4349,
+  "boundaryControls": 119,
+  "landmarkId": 105,
+  "neutralLandmark": [
+    0.06014585477079674,
+    -0.019989619954648003,
+    0.9061540961721126
+  ],
+  "requestedDisplacement": [
+    0.00015764428523152435,
+    0.0006938922966734616,
+    -0.0013475704264487298
+  ],
+  "requestedMagnitude": 0.0015239042930211008,
+  "achievedDisplacement": [
+    0.00015668477676114567,
+    0.0006896688924743002,
+    -0.0013393683832425562
+  ],
+  "targetError": 9.275306587394312e-06,
+  "targetErrorPercent": 0.6086541411997899,
+  "foldovers": 0,
+  "collapsedTriangles": 0,
+  "maxEdgeStrain": 0.13490244813544217,
+  "p95EdgeStrain": 0.0617431427824028,
+  "minAreaRatio": 0.9011036428647965,
+  "finite": true,
+  "seamDisplacementDisagreement": 0.0,
+  "selfIntersections": "NOT_TESTED_BY_THIS_STAGE",
+  "runtimeSeconds": 19.572104699909687,
+  "output": "verification\\topology-independent-landmark105\\female-rbf.glb"
+}

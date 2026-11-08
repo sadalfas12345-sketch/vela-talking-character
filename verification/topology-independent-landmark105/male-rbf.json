@@ -1,0 +1,35 @@
+{
+  "method": "scipy.interpolate.RBFInterpolator thin_plate_spline exact barycentric landmark control plus stationary patch boundary controls",
+  "source": "assets\\tripo\\generalization-male-20261105\\generated-original.glb",
+  "patchVertices": 8498,
+  "boundaryControls": 98,
+  "landmarkId": 105,
+  "neutralLandmark": [
+    0.2591690928509261,
+    -0.1436528750492927,
+    0.18221771660800126
+  ],
+  "requestedDisplacement": [
+    0.00272420328357309,
+    0.0037804687141890225,
+    -0.006722706329286843
+  ],
+  "requestedMagnitude": 0.008179731512649165,
+  "achievedDisplacement": [
+    0.0027138884035146082,
+    0.0037661544074754916,
+    -0.0066972515807834365
+  ],
+  "targetError": 3.097160552314918e-05,
+  "targetErrorPercent": 0.3786384122174986,
+  "foldovers": 0,
+  "collapsedTriangles": 0,
+  "maxEdgeStrain": 0.46577715391201635,
+  "p95EdgeStrain": 0.14905588094711172,
+  "minAreaRatio": 0.5715776684631034,
+  "finite": true,
+  "seamDisplacementDisagreement": 0.0,
+  "selfIntersections": "NOT_TESTED_BY_THIS_STAGE",
+  "runtimeSeconds": 18.465397800086066,
+  "output": "verification\\topology-independent-landmark105\\male-rbf.glb"
+}
