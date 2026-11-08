@@ -1,0 +1,1608 @@
+{
+  "solver": "uniform Hookean stretch/compression on original and recorded virtual seam edges; sparse Gauss-Newton equality-constrained KKT",
+  "physicalTerms": [
+    "original edge stretching",
+    "virtual seam edge stretching"
+  ],
+  "excludedTerms": [
+    "bending",
+    "volume",
+    "support stiffness",
+    "ARAP",
+    "gravity",
+    "inertia",
+    "damping"
+  ],
+  "numericalGauge": "1e-12 median diagonal added only to select rigidly equivalent equilibrium; not a physical energy",
+  "vertices": 4149,
+  "triangles": 5072,
+  "landmarks": 478,
+  "simulationComponents": 69,
+  "framesRequested": 121,
+  "framesSolved": 121,
+  "substepsPerTransition": 1,
+  "runtimeSeconds": 105.62008539983071,
+  "failure": null,
+  "frameMetrics": [
+    {
+      "frame": 0,
+      "substep": 1,
+      "elapsedSeconds": 0.8607435000594705,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 1.3877787807814457e-17,
+      "maxGradientResidual": 8.489718802906622e-18,
+      "maxProjectedGradientResidual": 3.101594880650806e-18,
+      "maxIterations": 1,
+      "statuses": [
+        "converged"
+      ]
+    },
+    {
+      "frame": 1,
+      "substep": 1,
+      "elapsedSeconds": 1.265207099961117,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 1.5917822615563182e-14,
+      "maxGradientResidual": 20.85341068506165,
+      "maxProjectedGradientResidual": 20.756286484346134,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 2,
+      "substep": 1,
+      "elapsedSeconds": 0.8401039999444038,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 9.788003740851536e-14,
+      "maxGradientResidual": 48.44381891063842,
+      "maxProjectedGradientResidual": 47.9244339494081,
+      "maxIterations": 2,
+      "statuses": [
+        "converged",
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 3,
+      "substep": 1,
+      "elapsedSeconds": 0.8568722000345588,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 1.291119988700018e-13,
+      "maxGradientResidual": 88.65126566358114,
+      "maxProjectedGradientResidual": 85.28785780132591,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 4,
+      "substep": 1,
+      "elapsedSeconds": 0.8327625999227166,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 1.6901063881746836e-13,
+      "maxGradientResidual": 65.85255732037108,
+      "maxProjectedGradientResidual": 63.78586562313269,
+      "maxIterations": 2,
+      "statuses": [
+        "converged",
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 5,
+      "substep": 1,
+      "elapsedSeconds": 0.8625237999949604,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 1.4131751324697461e-13,
+      "maxGradientResidual": 56.401423681435,
+      "maxProjectedGradientResidual": 55.30122632513778,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 6,
+      "substep": 1,
+      "elapsedSeconds": 0.8643143998924643,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 9.402756351306607e-13,
+      "maxGradientResidual": 71.42632348019131,
+      "maxProjectedGradientResidual": 69.95600887663903,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 7,
+      "substep": 1,
+      "elapsedSeconds": 0.8936506998725235,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 8.216448355025108e-13,
+      "maxGradientResidual": 100.06835601105507,
+      "maxProjectedGradientResidual": 98.00787204865455,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 8,
+      "substep": 1,
+      "elapsedSeconds": 0.9306568000465631,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 7.900277654293575e-13,
+      "maxGradientResidual": 104.65380817970829,
+      "maxProjectedGradientResidual": 101.70243425818742,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 9,
+      "substep": 1,
+      "elapsedSeconds": 0.8300280999392271,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 1.0726974863928262e-12,
+      "maxGradientResidual": 100.10184136394918,
+      "maxProjectedGradientResidual": 97.82427888222605,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 10,
+      "substep": 1,
+      "elapsedSeconds": 0.8884111000224948,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 7.364595044911937e-13,
+      "maxGradientResidual": 133.37533204110477,
+      "maxProjectedGradientResidual": 130.66687597604883,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 11,
+      "substep": 1,
+      "elapsedSeconds": 0.9324705998878926,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 1.1071699113074374e-12,
+      "maxGradientResidual": 112.31468612746383,
+      "maxProjectedGradientResidual": 109.51719248112255,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 12,
+      "substep": 1,
+      "elapsedSeconds": 0.9808486998081207,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 5.520445212070513e-13,
+      "maxGradientResidual": 108.60593314052342,
+      "maxProjectedGradientResidual": 106.08764909223889,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 13,
+      "substep": 1,
+      "elapsedSeconds": 0.9179911001119763,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 1.4677564719178804e-12,
+      "maxGradientResidual": 109.3044918325084,
+      "maxProjectedGradientResidual": 106.7964179600956,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 14,
+      "substep": 1,
+      "elapsedSeconds": 0.872811800101772,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 1.7339719070308401e-12,
+      "maxGradientResidual": 119.66724914705712,
+      "maxProjectedGradientResidual": 117.38636438470937,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 15,
+      "substep": 1,
+      "elapsedSeconds": 0.8561609000898898,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 9.019729407810928e-13,
+      "maxGradientResidual": 143.75579732813372,
+      "maxProjectedGradientResidual": 141.3118539856208,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 16,
+      "substep": 1,
+      "elapsedSeconds": 0.8524197998922318,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 1.7587736822477495e-12,
+      "maxGradientResidual": 118.2130974382697,
+      "maxProjectedGradientResidual": 115.72837740949038,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 17,
+      "substep": 1,
+      "elapsedSeconds": 0.8509272001683712,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 1.6534685946811845e-12,
+      "maxGradientResidual": 145.13614847878142,
+      "maxProjectedGradientResidual": 142.23730284041147,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 18,
+      "substep": 1,
+      "elapsedSeconds": 0.828185599995777,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 5.294931160193528e-13,
+      "maxGradientResidual": 113.98900500473557,
+      "maxProjectedGradientResidual": 111.37922231628049,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 19,
+      "substep": 1,
+      "elapsedSeconds": 0.7897488998714834,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 1.1027428969967445e-12,
+      "maxGradientResidual": 112.83556289241737,
+      "maxProjectedGradientResidual": 110.16073635148393,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 20,
+      "substep": 1,
+      "elapsedSeconds": 0.8477388001047075,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 7.717160244169463e-13,
+      "maxGradientResidual": 172.66379035384006,
+      "maxProjectedGradientResidual": 169.5685401960022,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 21,
+      "substep": 1,
+      "elapsedSeconds": 0.8221446999814361,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 4.602498937522626e-13,
+      "maxGradientResidual": 119.11573403734167,
+      "maxProjectedGradientResidual": 116.03259214875618,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 22,
+      "substep": 1,
+      "elapsedSeconds": 0.8306515000294894,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 4.649596679895396e-13,
+      "maxGradientResidual": 128.75171577799605,
+      "maxProjectedGradientResidual": 126.55325346649136,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 23,
+      "substep": 1,
+      "elapsedSeconds": 0.8346418000292033,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 9.011680290882396e-13,
+      "maxGradientResidual": 177.9843784981512,
+      "maxProjectedGradientResidual": 175.279543877657,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 24,
+      "substep": 1,
+      "elapsedSeconds": 0.8678330001421273,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 3.4524466618890415e-13,
+      "maxGradientResidual": 198.46776351454807,
+      "maxProjectedGradientResidual": 195.51390773878842,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 25,
+      "substep": 1,
+      "elapsedSeconds": 0.8099295999854803,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 3.122321845516751e-12,
+      "maxGradientResidual": 192.13996161245532,
+      "maxProjectedGradientResidual": 189.55041133357406,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 26,
+      "substep": 1,
+      "elapsedSeconds": 0.9108039001002908,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 6.052840520465175e-13,
+      "maxGradientResidual": 195.4706354980359,
+      "maxProjectedGradientResidual": 193.310156566011,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 27,
+      "substep": 1,
+      "elapsedSeconds": 0.8835128999780864,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 3.6603012287805825e-12,
+      "maxGradientResidual": 185.10826212182613,
+      "maxProjectedGradientResidual": 182.90835757605575,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 28,
+      "substep": 1,
+      "elapsedSeconds": 0.82686259993352,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 1.1077111450319421e-12,
+      "maxGradientResidual": 180.71171190081702,
+      "maxProjectedGradientResidual": 178.73454966659736,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 29,
+      "substep": 1,
+      "elapsedSeconds": 0.9374984998721629,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 5.073164111024653e-13,
+      "maxGradientResidual": 195.48244066172902,
+      "maxProjectedGradientResidual": 193.63512704771435,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 30,
+      "substep": 1,
+      "elapsedSeconds": 0.9302374001126736,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 1.890071432697482e-12,
+      "maxGradientResidual": 206.0683024999157,
+      "maxProjectedGradientResidual": 204.1997613544418,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 31,
+      "substep": 1,
+      "elapsedSeconds": 0.9409401000011712,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 1.9201029655135926e-12,
+      "maxGradientResidual": 186.92471861089538,
+      "maxProjectedGradientResidual": 184.99411966506307,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 32,
+      "substep": 1,
+      "elapsedSeconds": 0.8288323001470417,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 1.2221751388707958e-12,
+      "maxGradientResidual": 193.61386187135378,
+      "maxProjectedGradientResidual": 191.3926644919912,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 33,
+      "substep": 1,
+      "elapsedSeconds": 0.8430717000737786,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 1.712074926274454e-12,
+      "maxGradientResidual": 217.75400453258803,
+      "maxProjectedGradientResidual": 215.50533508728796,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 34,
+      "substep": 1,
+      "elapsedSeconds": 0.7882087000180036,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 1.9303655895974714e-12,
+      "maxGradientResidual": 217.69797351586257,
+      "maxProjectedGradientResidual": 215.53807455241414,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 35,
+      "substep": 1,
+      "elapsedSeconds": 0.8864122999366373,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 1.461053500406706e-12,
+      "maxGradientResidual": 224.0323987762565,
+      "maxProjectedGradientResidual": 221.72092551804073,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 36,
+      "substep": 1,
+      "elapsedSeconds": 0.8846094000618905,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 7.279697677997632e-13,
+      "maxGradientResidual": 208.80626856340893,
+      "maxProjectedGradientResidual": 206.67765833293552,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 37,
+      "substep": 1,
+      "elapsedSeconds": 0.8325930000282824,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 9.581502258271257e-13,
+      "maxGradientResidual": 206.10577241673658,
+      "maxProjectedGradientResidual": 203.60884340687252,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 38,
+      "substep": 1,
+      "elapsedSeconds": 0.9199019998777658,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 2.0735912986680205e-12,
+      "maxGradientResidual": 205.1252160809911,
+      "maxProjectedGradientResidual": 202.56253153570847,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 39,
+      "substep": 1,
+      "elapsedSeconds": 0.8401133001316339,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 1.2967682483377985e-12,
+      "maxGradientResidual": 205.82252314423528,
+      "maxProjectedGradientResidual": 203.1181944365746,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 40,
+      "substep": 1,
+      "elapsedSeconds": 0.8557329999748617,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 1.9400731021690376e-12,
+      "maxGradientResidual": 206.90364493503733,
+      "maxProjectedGradientResidual": 204.27912622989936,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 41,
+      "substep": 1,
+      "elapsedSeconds": 0.9538168001454324,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 2.0718010640408124e-12,
+      "maxGradientResidual": 224.5353176146801,
+      "maxProjectedGradientResidual": 222.09605800097074,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 42,
+      "substep": 1,
+      "elapsedSeconds": 0.8652310001198202,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 1.5027267624700968e-12,
+      "maxGradientResidual": 202.33964112304457,
+      "maxProjectedGradientResidual": 199.93850284339234,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 43,
+      "substep": 1,
+      "elapsedSeconds": 0.8344060000963509,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 1.3058304437763013e-12,
+      "maxGradientResidual": 211.2510850122566,
+      "maxProjectedGradientResidual": 208.7550706167165,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 44,
+      "substep": 1,
+      "elapsedSeconds": 0.9183143998961896,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 2.3641089086368083e-12,
+      "maxGradientResidual": 217.80713196091895,
+      "maxProjectedGradientResidual": 215.2343538937977,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 45,
+      "substep": 1,
+      "elapsedSeconds": 0.8578637999016792,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 3.701344786222194e-13,
+      "maxGradientResidual": 216.42610879790132,
+      "maxProjectedGradientResidual": 213.63861529489512,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 46,
+      "substep": 1,
+      "elapsedSeconds": 1.128616299945861,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 6.795120022218271e-13,
+      "maxGradientResidual": 198.8229646791892,
+      "maxProjectedGradientResidual": 195.93510498404535,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 47,
+      "substep": 1,
+      "elapsedSeconds": 0.8951576000545174,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 5.431280425405305e-13,
+      "maxGradientResidual": 170.7567081403721,
+      "maxProjectedGradientResidual": 167.68217146526393,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 48,
+      "substep": 1,
+      "elapsedSeconds": 1.0147971999831498,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 5.434680483418219e-13,
+      "maxGradientResidual": 172.34956606474785,
+      "maxProjectedGradientResidual": 169.2852107270488,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 49,
+      "substep": 1,
+      "elapsedSeconds": 0.9482791998889297,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 6.938616348151072e-13,
+      "maxGradientResidual": 177.38148961429675,
+      "maxProjectedGradientResidual": 173.9746660000081,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 50,
+      "substep": 1,
+      "elapsedSeconds": 0.921606499934569,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 5.109107581446892e-13,
+      "maxGradientResidual": 169.96002484080338,
+      "maxProjectedGradientResidual": 166.28827321237878,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 51,
+      "substep": 1,
+      "elapsedSeconds": 1.0135969000402838,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 5.318965753953186e-13,
+      "maxGradientResidual": 149.11763160608882,
+      "maxProjectedGradientResidual": 145.4314372184666,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 52,
+      "substep": 1,
+      "elapsedSeconds": 0.8388047001790255,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 3.3183438635786544e-13,
+      "maxGradientResidual": 112.32368825927021,
+      "maxProjectedGradientResidual": 108.69025825214361,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 53,
+      "substep": 1,
+      "elapsedSeconds": 1.0068265001755208,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 1.0048628595882292e-12,
+      "maxGradientResidual": 113.96208815801444,
+      "maxProjectedGradientResidual": 109.98586387152616,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 54,
+      "substep": 1,
+      "elapsedSeconds": 0.8394116000272334,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 6.572103972146692e-13,
+      "maxGradientResidual": 137.50623087709758,
+      "maxProjectedGradientResidual": 135.14417088144782,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 55,
+      "substep": 1,
+      "elapsedSeconds": 0.88264079997316,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 3.5238739010123865e-13,
+      "maxGradientResidual": 153.66685867058374,
+      "maxProjectedGradientResidual": 151.71861595504313,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 56,
+      "substep": 1,
+      "elapsedSeconds": 0.867704699980095,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 5.058453655948369e-13,
+      "maxGradientResidual": 117.7662390590451,
+      "maxProjectedGradientResidual": 115.92765910710173,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 57,
+      "substep": 1,
+      "elapsedSeconds": 0.8051708000712097,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 1.0905998326649069e-12,
+      "maxGradientResidual": 114.38954427932438,
+      "maxProjectedGradientResidual": 112.48655626006651,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 58,
+      "substep": 1,
+      "elapsedSeconds": 0.869308500085026,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 4.936676067934798e-13,
+      "maxGradientResidual": 104.40240194168508,
+      "maxProjectedGradientResidual": 102.6710694084302,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 59,
+      "substep": 1,
+      "elapsedSeconds": 0.9265431000385433,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 3.8342939934210563e-13,
+      "maxGradientResidual": 131.4643140226391,
+      "maxProjectedGradientResidual": 129.96702723450503,
+      "maxIterations": 2,
+      "statuses": [
+        "converged",
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 60,
+      "substep": 1,
+      "elapsedSeconds": 0.8808408998884261,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 1.1796535970276523e-12,
+      "maxGradientResidual": 133.21655598699564,
+      "maxProjectedGradientResidual": 131.81513767737167,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 61,
+      "substep": 1,
+      "elapsedSeconds": 0.8391990000382066,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 3.966549311229528e-13,
+      "maxGradientResidual": 133.06867082373492,
+      "maxProjectedGradientResidual": 131.80290687510768,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 62,
+      "substep": 1,
+      "elapsedSeconds": 0.8862618999555707,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 1.8447049443537367e-12,
+      "maxGradientResidual": 113.60047105343449,
+      "maxProjectedGradientResidual": 112.11403879970136,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 63,
+      "substep": 1,
+      "elapsedSeconds": 0.8359586000442505,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 7.532585666325531e-13,
+      "maxGradientResidual": 114.43025594617946,
+      "maxProjectedGradientResidual": 112.79117469484414,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 64,
+      "substep": 1,
+      "elapsedSeconds": 0.8223301998805255,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 2.114378117035187e-12,
+      "maxGradientResidual": 114.79067893073066,
+      "maxProjectedGradientResidual": 113.18612846546723,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 65,
+      "substep": 1,
+      "elapsedSeconds": 0.8715884000994265,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 6.661338147750939e-13,
+      "maxGradientResidual": 117.29933999066873,
+      "maxProjectedGradientResidual": 115.35542194465195,
+      "maxIterations": 2,
+      "statuses": [
+        "converged",
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 66,
+      "substep": 1,
+      "elapsedSeconds": 0.8663298999890685,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 2.676261989797979e-13,
+      "maxGradientResidual": 124.28163826513968,
+      "maxProjectedGradientResidual": 122.02502460244052,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 67,
+      "substep": 1,
+      "elapsedSeconds": 0.8850080999545753,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 4.832384492559072e-13,
+      "maxGradientResidual": 113.28437581613791,
+      "maxProjectedGradientResidual": 111.71092317226251,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 68,
+      "substep": 1,
+      "elapsedSeconds": 0.7697938999626786,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 2.207877977666861e-13,
+      "maxGradientResidual": 122.03744936902973,
+      "maxProjectedGradientResidual": 120.40681990122508,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 69,
+      "substep": 1,
+      "elapsedSeconds": 0.9172570998780429,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 5.946895536776409e-13,
+      "maxGradientResidual": 119.81106965470926,
+      "maxProjectedGradientResidual": 116.42071184743045,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 70,
+      "substep": 1,
+      "elapsedSeconds": 0.8229666999541223,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 8.191262338558269e-13,
+      "maxGradientResidual": 124.6700056702868,
+      "maxProjectedGradientResidual": 121.7146919584338,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 71,
+      "substep": 1,
+      "elapsedSeconds": 0.86125239985995,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 2.6914026562963045e-12,
+      "maxGradientResidual": 119.32555293992822,
+      "maxProjectedGradientResidual": 117.37540492816835,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 72,
+      "substep": 1,
+      "elapsedSeconds": 0.8336581999901682,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 1.6429357874159223e-12,
+      "maxGradientResidual": 116.59120548346534,
+      "maxProjectedGradientResidual": 114.66555819789174,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 73,
+      "substep": 1,
+      "elapsedSeconds": 0.7878363998606801,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 1.5176193635113577e-12,
+      "maxGradientResidual": 113.94402195165652,
+      "maxProjectedGradientResidual": 112.36735043951748,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 74,
+      "substep": 1,
+      "elapsedSeconds": 0.8679978000000119,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 3.9966641107724854e-13,
+      "maxGradientResidual": 120.90014313518294,
+      "maxProjectedGradientResidual": 118.7969903797267,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 75,
+      "substep": 1,
+      "elapsedSeconds": 0.9298350000753999,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 6.960867971438078e-13,
+      "maxGradientResidual": 99.34811309479207,
+      "maxProjectedGradientResidual": 98.01301237494738,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 76,
+      "substep": 1,
+      "elapsedSeconds": 0.8331430999096483,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 1.3721662694976544e-12,
+      "maxGradientResidual": 95.84470585890423,
+      "maxProjectedGradientResidual": 94.65181324533155,
+      "maxIterations": 2,
+      "statuses": [
+        "converged",
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 77,
+      "substep": 1,
+      "elapsedSeconds": 0.9060408000368625,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 7.972095206199015e-13,
+      "maxGradientResidual": 108.51908166202983,
+      "maxProjectedGradientResidual": 106.92262517127159,
+      "maxIterations": 2,
+      "statuses": [
+        "converged",
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 78,
+      "substep": 1,
+      "elapsedSeconds": 0.8257460000459105,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 5.006568076781903e-13,
+      "maxGradientResidual": 93.15310043215221,
+      "maxProjectedGradientResidual": 91.88307940280171,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 79,
+      "substep": 1,
+      "elapsedSeconds": 0.8233714001253247,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 1.2849582509133484e-12,
+      "maxGradientResidual": 100.16103624406571,
+      "maxProjectedGradientResidual": 98.64959898510986,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 80,
+      "substep": 1,
+      "elapsedSeconds": 0.8719013000372797,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 6.476902347785085e-13,
+      "maxGradientResidual": 94.84920746140757,
+      "maxProjectedGradientResidual": 93.44719881506163,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 81,
+      "substep": 1,
+      "elapsedSeconds": 0.8093065000139177,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 2.8317070910333086e-12,
+      "maxGradientResidual": 101.77872544281189,
+      "maxProjectedGradientResidual": 100.37935600958143,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 82,
+      "substep": 1,
+      "elapsedSeconds": 0.9019947999622673,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 9.37416810842251e-13,
+      "maxGradientResidual": 105.1107238852819,
+      "maxProjectedGradientResidual": 103.72434896127241,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 83,
+      "substep": 1,
+      "elapsedSeconds": 0.8761288998648524,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 5.391520563335916e-13,
+      "maxGradientResidual": 103.01969776425881,
+      "maxProjectedGradientResidual": 101.3349550678677,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 84,
+      "substep": 1,
+      "elapsedSeconds": 0.8423274999950081,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 2.1615625955817563e-12,
+      "maxGradientResidual": 111.29149843540155,
+      "maxProjectedGradientResidual": 109.62256339352378,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 85,
+      "substep": 1,
+      "elapsedSeconds": 0.8902950000483543,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 1.0909190217844866e-12,
+      "maxGradientResidual": 110.18593562549732,
+      "maxProjectedGradientResidual": 108.57332818972205,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 86,
+      "substep": 1,
+      "elapsedSeconds": 0.9117787999566644,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 1.4215850718812817e-12,
+      "maxGradientResidual": 119.42715770495435,
+      "maxProjectedGradientResidual": 117.73673467462469,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 87,
+      "substep": 1,
+      "elapsedSeconds": 0.8286023000255227,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 9.169331960379168e-13,
+      "maxGradientResidual": 119.04593299827027,
+      "maxProjectedGradientResidual": 117.26309848816562,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 88,
+      "substep": 1,
+      "elapsedSeconds": 0.8623479998204857,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 2.921898833996295e-13,
+      "maxGradientResidual": 112.60073272517067,
+      "maxProjectedGradientResidual": 110.96682290236551,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 89,
+      "substep": 1,
+      "elapsedSeconds": 0.905351199908182,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 4.831829381046759e-13,
+      "maxGradientResidual": 123.96645211123155,
+      "maxProjectedGradientResidual": 122.24821817150486,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 90,
+      "substep": 1,
+      "elapsedSeconds": 0.8252026999834925,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 1.0453859999870474e-12,
+      "maxGradientResidual": 121.2898965684263,
+      "maxProjectedGradientResidual": 119.39439755597965,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 91,
+      "substep": 1,
+      "elapsedSeconds": 0.8599676999729127,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 6.655787032627813e-13,
+      "maxGradientResidual": 138.20289234001166,
+      "maxProjectedGradientResidual": 136.5066470140752,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 92,
+      "substep": 1,
+      "elapsedSeconds": 0.8628680999390781,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 2.305572399663447e-12,
+      "maxGradientResidual": 133.78071383925302,
+      "maxProjectedGradientResidual": 131.3724219638956,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 93,
+      "substep": 1,
+      "elapsedSeconds": 0.8954328999388963,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 8.065475370910846e-13,
+      "maxGradientResidual": 108.8966632248224,
+      "maxProjectedGradientResidual": 106.32483775547739,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 94,
+      "substep": 1,
+      "elapsedSeconds": 0.7754267000127584,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 1.4126200209574336e-12,
+      "maxGradientResidual": 117.7789883981187,
+      "maxProjectedGradientResidual": 115.92501545191826,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 95,
+      "substep": 1,
+      "elapsedSeconds": 0.922557899961248,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 8.548994845369862e-13,
+      "maxGradientResidual": 127.04016939897207,
+      "maxProjectedGradientResidual": 124.09480776520407,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 96,
+      "substep": 1,
+      "elapsedSeconds": 0.8024089999962598,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 5.002942504717112e-13,
+      "maxGradientResidual": 121.86640999504718,
+      "maxProjectedGradientResidual": 119.87258870719606,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 97,
+      "substep": 1,
+      "elapsedSeconds": 0.853447400033474,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 4.194734837259517e-13,
+      "maxGradientResidual": 119.28840115081243,
+      "maxProjectedGradientResidual": 116.2149480862231,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 98,
+      "substep": 1,
+      "elapsedSeconds": 0.845933899981901,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 5.651937251549555e-13,
+      "maxGradientResidual": 128.90859861410323,
+      "maxProjectedGradientResidual": 126.86362726785495,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 99,
+      "substep": 1,
+      "elapsedSeconds": 0.861363000003621,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 3.928628256044675e-13,
+      "maxGradientResidual": 138.30682680191646,
+      "maxProjectedGradientResidual": 136.21030265448772,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 100,
+      "substep": 1,
+      "elapsedSeconds": 0.8585610999725759,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 7.586205968967974e-13,
+      "maxGradientResidual": 155.04559512766463,
+      "maxProjectedGradientResidual": 152.46270457924945,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 101,
+      "substep": 1,
+      "elapsedSeconds": 0.8907643998973072,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 5.110981082800947e-13,
+      "maxGradientResidual": 164.0733180488486,
+      "maxProjectedGradientResidual": 161.1694620762085,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 102,
+      "substep": 1,
+      "elapsedSeconds": 0.9793010000139475,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 4.2312334191940693e-13,
+      "maxGradientResidual": 170.6267475883212,
+      "maxProjectedGradientResidual": 167.65457734481055,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 103,
+      "substep": 1,
+      "elapsedSeconds": 0.8305201998446137,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 2.916347718873169e-13,
+      "maxGradientResidual": 179.9461018633767,
+      "maxProjectedGradientResidual": 176.75810240621672,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 104,
+      "substep": 1,
+      "elapsedSeconds": 0.896688099950552,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 1.0799139360528898e-12,
+      "maxGradientResidual": 186.9115619161294,
+      "maxProjectedGradientResidual": 183.96265846740172,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 105,
+      "substep": 1,
+      "elapsedSeconds": 0.8571548999752849,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 3.730106501453889e-13,
+      "maxGradientResidual": 180.30248094269052,
+      "maxProjectedGradientResidual": 177.26900902011224,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 106,
+      "substep": 1,
+      "elapsedSeconds": 0.8901134999468923,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 3.115910307549541e-13,
+      "maxGradientResidual": 181.25361168793918,
+      "maxProjectedGradientResidual": 177.96691874248447,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 107,
+      "substep": 1,
+      "elapsedSeconds": 0.8653545000124723,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 5.741518371848997e-13,
+      "maxGradientResidual": 188.4391978178499,
+      "maxProjectedGradientResidual": 184.97774504552146,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 108,
+      "substep": 1,
+      "elapsedSeconds": 0.7757650001440197,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 3.8384573297634006e-13,
+      "maxGradientResidual": 199.30822532459683,
+      "maxProjectedGradientResidual": 195.3433238911069,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 109,
+      "substep": 1,
+      "elapsedSeconds": 0.8535800999961793,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 6.98663349396611e-13,
+      "maxGradientResidual": 184.71995755509187,
+      "maxProjectedGradientResidual": 181.3041321788869,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 110,
+      "substep": 1,
+      "elapsedSeconds": 0.8388734001200646,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 8.758826997024016e-13,
+      "maxGradientResidual": 182.92272727522706,
+      "maxProjectedGradientResidual": 179.57660203299724,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 111,
+      "substep": 1,
+      "elapsedSeconds": 0.8956098998896778,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 1.1475403960403696e-12,
+      "maxGradientResidual": 184.5245189142424,
+      "maxProjectedGradientResidual": 181.0314377223825,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 112,
+      "substep": 1,
+      "elapsedSeconds": 0.8025573000777513,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 7.457923167919489e-13,
+      "maxGradientResidual": 199.21051146407106,
+      "maxProjectedGradientResidual": 195.4501567202577,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 113,
+      "substep": 1,
+      "elapsedSeconds": 0.8839690999593586,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 1.7004314623036976e-12,
+      "maxGradientResidual": 205.96962841060406,
+      "maxProjectedGradientResidual": 201.94084458298153,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 114,
+      "substep": 1,
+      "elapsedSeconds": 0.774722500005737,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 7.59323159904568e-13,
+      "maxGradientResidual": 194.48187030242303,
+      "maxProjectedGradientResidual": 190.8778528041141,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 115,
+      "substep": 1,
+      "elapsedSeconds": 0.9126214999705553,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 9.598294381518713e-13,
+      "maxGradientResidual": 167.09144942410472,
+      "maxProjectedGradientResidual": 163.91081741048987,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 116,
+      "substep": 1,
+      "elapsedSeconds": 0.8370601001661271,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 9.88653603428702e-13,
+      "maxGradientResidual": 177.97096679122245,
+      "maxProjectedGradientResidual": 174.58594485888503,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 117,
+      "substep": 1,
+      "elapsedSeconds": 0.8582087999675423,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 3.892441924335799e-13,
+      "maxGradientResidual": 176.4464199531231,
+      "maxProjectedGradientResidual": 173.05454287404936,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 118,
+      "substep": 1,
+      "elapsedSeconds": 0.8304177999962121,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 4.1783243531767766e-13,
+      "maxGradientResidual": 185.19153105434947,
+      "maxProjectedGradientResidual": 181.55890645294278,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 119,
+      "substep": 1,
+      "elapsedSeconds": 0.8387106999289244,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 1.8297724446725283e-12,
+      "maxGradientResidual": 182.81186275075612,
+      "maxProjectedGradientResidual": 179.11238652270038,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 120,
+      "substep": 1,
+      "elapsedSeconds": 0.8477561001200229,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 1.834435381375954e-12,
+      "maxGradientResidual": 184.48567233819855,
+      "maxProjectedGradientResidual": 180.65744921021786,
+      "maxIterations": 2,
+      "statuses": [
+        "max_iterations"
+      ]
+    }
+  ],
+  "finalPositionsOutput": "verification\\plan-a2-hookean-run\\female-full-run-positions.npz"
+}

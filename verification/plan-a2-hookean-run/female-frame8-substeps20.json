@@ -1,0 +1,70 @@
+{
+  "solver": "uniform Hookean stretch/compression on original and recorded virtual seam edges; sparse Gauss-Newton equality-constrained KKT",
+  "physicalTerms": [
+    "original edge stretching",
+    "virtual seam edge stretching"
+  ],
+  "excludedTerms": [
+    "bending",
+    "volume",
+    "support stiffness",
+    "ARAP",
+    "gravity",
+    "inertia",
+    "damping"
+  ],
+  "numericalGauge": "1e-12 median diagonal added only to select rigidly equivalent equilibrium; not a physical energy",
+  "vertices": 4149,
+  "triangles": 5072,
+  "landmarks": 478,
+  "simulationComponents": 69,
+  "framesRequested": 9,
+  "framesSolved": 2,
+  "substepsPerTransition": 20,
+  "runtimeSeconds": 156.83987689996138,
+  "failure": {
+    "frame": 2,
+    "substep": 10,
+    "component": 7,
+    "status": "max_iterations",
+    "iterations": 4,
+    "initialConstraintResidual": 6.766137438121711e-06,
+    "finalConstraintResidual": 1.0759757657085376e-09,
+    "springEnergy": 3150840.0901407436,
+    "maxGradientResidual": 130.01067363003526,
+    "projectedGradientResidual": 124.84321708479702,
+    "maxStep": 238.10094044420515,
+    "minEdgeLength": 0.00031118503629735814,
+    "warnings": []
+  },
+  "frameMetrics": [
+    {
+      "frame": 0,
+      "substep": 1,
+      "elapsedSeconds": 2.0032882001250982,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 1.3877787807814457e-17,
+      "maxGradientResidual": 8.631283399777004e-18,
+      "maxProjectedGradientResidual": 6.366480717071761e-18,
+      "maxIterations": 1,
+      "statuses": [
+        "converged"
+      ]
+    },
+    {
+      "frame": 1,
+      "substep": 20,
+      "elapsedSeconds": 4.382732800208032,
+      "simulationComponents": 69,
+      "maxConstraintResidual": 5.452484413689194e-10,
+      "maxGradientResidual": 105.17782956838994,
+      "maxProjectedGradientResidual": 101.00417802662383,
+      "maxIterations": 4,
+      "statuses": [
+        "converged",
+        "max_iterations"
+      ]
+    }
+  ],
+  "finalPositionsOutput": null
+}

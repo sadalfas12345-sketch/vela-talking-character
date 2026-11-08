@@ -1,0 +1,1854 @@
+{
+  "framesValidated": 121,
+  "landmarksPerFrame": 478,
+  "eyeWidth": 0.057560167629433764,
+  "landmarkErrorMax": 3.662131771456466e-12,
+  "landmarkErrorMaxNormalizedEyeWidth": 6.36226738433578e-11,
+  "worstLandmarkFrame": {
+    "landmarkId": 158,
+    "frame": 27,
+    "error": 3.662131771456466e-12,
+    "errorNormalizedEyeWidth": 6.36226738433578e-11
+  },
+  "landmarkErrorMedian": 1.962615573354719e-17,
+  "landmarkErrorP95": 5.664059109671631e-14,
+  "hardConstraintsWithin1e-8": 57838,
+  "hardConstraintCount": 57838,
+  "edgeStrainWorst": {
+    "maxExtension": 7.199593202125534e+32,
+    "maxCompression": -1.0,
+    "maxAbsStrain": 7.199593202125534e+32,
+    "p95AbsStrainWorstFrame": 61605.476441684965,
+    "frameOfMaxAbsStrain": 113
+  },
+  "triangleIntegrity": {
+    "maxInversionsAnyFrame": 1858,
+    "totalInvertedFrameCounts": 199751,
+    "maxCollapsesAnyFrame": 0,
+    "totalCollapsedFrameCounts": 0,
+    "minimumAreaRatioAnyFrame": 0.013508656461417256,
+    "frameOfMaxInversions": 96
+  },
+  "coincidentPatchVertexPairs": 35,
+  "maximumSeamPositionDisagreement": 719.9593202125534,
+  "selfIntersectionTest": "NOT COMPUTED: no robust triangle-triangle broadphase library is installed; this must be treated as unverified, not zero",
+  "frameEdgeRows": [
+    {
+      "frame": 0,
+      "maxExtension": 867527158335.7045,
+      "maxCompression": -1.0,
+      "maxAbsStrain": 867527158335.7045,
+      "p95AbsStrain": 4.3298697960381105e-15,
+      "zeroRestSpringMaxLength": 8.675271583367045e-19
+    },
+    {
+      "frame": 1,
+      "maxExtension": 4.385111406929777e+28,
+      "maxCompression": -0.36323913652799955,
+      "maxAbsStrain": 4.385111406929777e+28,
+      "p95AbsStrain": 675.1979708234846,
+      "zeroRestSpringMaxLength": 0.04385111406929777
+    },
+    {
+      "frame": 2,
+      "maxExtension": 1.1359523325915983e+31,
+      "maxCompression": -0.15043787441587986,
+      "maxAbsStrain": 1.1359523325915983e+31,
+      "p95AbsStrain": 6313.300195278773,
+      "zeroRestSpringMaxLength": 11.359523325915983
+    },
+    {
+      "frame": 3,
+      "maxExtension": 2.7260266732336913e+31,
+      "maxCompression": -0.2584726068025899,
+      "maxAbsStrain": 2.7260266732336913e+31,
+      "p95AbsStrain": 11879.634575796725,
+      "zeroRestSpringMaxLength": 27.260266732336916
+    },
+    {
+      "frame": 4,
+      "maxExtension": 9.081148257835621e+30,
+      "maxCompression": -0.573287884234037,
+      "maxAbsStrain": 9.081148257835621e+30,
+      "p95AbsStrain": 10224.244696161257,
+      "zeroRestSpringMaxLength": 9.081148257835622
+    },
+    {
+      "frame": 5,
+      "maxExtension": 1.1787182585261273e+31,
+      "maxCompression": -0.294526910184298,
+      "maxAbsStrain": 1.1787182585261273e+31,
+      "p95AbsStrain": 19009.260408189617,
+      "zeroRestSpringMaxLength": 11.787182585261274
+    },
+    {
+      "frame": 6,
+      "maxExtension": 7.190705984971173e+30,
+      "maxCompression": -0.3312931488378378,
+      "maxAbsStrain": 7.190705984971173e+30,
+      "p95AbsStrain": 19475.908493817573,
+      "zeroRestSpringMaxLength": 7.190705984971173
+    },
+    {
+      "frame": 7,
+      "maxExtension": 1.2378560575603888e+31,
+      "maxCompression": -0.4016244695904898,
+      "maxAbsStrain": 1.2378560575603888e+31,
+      "p95AbsStrain": 34186.857751800635,
+      "zeroRestSpringMaxLength": 12.37856057560389
+    },
+    {
+      "frame": 8,
+      "maxExtension": 9.14000185244699e+30,
+      "maxCompression": -0.3431895243755382,
+      "maxAbsStrain": 9.14000185244699e+30,
+      "p95AbsStrain": 28251.868168668327,
+      "zeroRestSpringMaxLength": 9.140001852446991
+    },
+    {
+      "frame": 9,
+      "maxExtension": 7.052380198530174e+30,
+      "maxCompression": -0.30901282107032135,
+      "maxAbsStrain": 7.052380198530174e+30,
+      "p95AbsStrain": 32283.324481233198,
+      "zeroRestSpringMaxLength": 7.052380198530174
+    },
+    {
+      "frame": 10,
+      "maxExtension": 7.621794696789993e+30,
+      "maxCompression": -0.3648357168690167,
+      "maxAbsStrain": 7.621794696789993e+30,
+      "p95AbsStrain": 33526.56710917936,
+      "zeroRestSpringMaxLength": 7.621794696789993
+    },
+    {
+      "frame": 11,
+      "maxExtension": 9.686406046110407e+30,
+      "maxCompression": -0.4362622655194589,
+      "maxAbsStrain": 9.686406046110407e+30,
+      "p95AbsStrain": 30093.361479163952,
+      "zeroRestSpringMaxLength": 9.686406046110408
+    },
+    {
+      "frame": 12,
+      "maxExtension": 9.914228253671395e+30,
+      "maxCompression": -0.4132977813368498,
+      "maxAbsStrain": 9.914228253671395e+30,
+      "p95AbsStrain": 27600.710003136246,
+      "zeroRestSpringMaxLength": 9.914228253671396
+    },
+    {
+      "frame": 13,
+      "maxExtension": 7.051941926621475e+30,
+      "maxCompression": -0.3952272493514777,
+      "maxAbsStrain": 7.051941926621475e+30,
+      "p95AbsStrain": 33467.21311370702,
+      "zeroRestSpringMaxLength": 7.051941926621475
+    },
+    {
+      "frame": 14,
+      "maxExtension": 1.464445201905576e+31,
+      "maxCompression": -0.49336079193064686,
+      "maxAbsStrain": 1.464445201905576e+31,
+      "p95AbsStrain": 31857.177029200157,
+      "zeroRestSpringMaxLength": 14.644452019055763
+    },
+    {
+      "frame": 15,
+      "maxExtension": 7.166361022317561e+30,
+      "maxCompression": -0.4718105844829097,
+      "maxAbsStrain": 7.166361022317561e+30,
+      "p95AbsStrain": 35895.53120898433,
+      "zeroRestSpringMaxLength": 7.166361022317561
+    },
+    {
+      "frame": 16,
+      "maxExtension": 2.0968935558990963e+31,
+      "maxCompression": -0.3204238823406925,
+      "maxAbsStrain": 2.0968935558990963e+31,
+      "p95AbsStrain": 38854.27245668705,
+      "zeroRestSpringMaxLength": 20.968935558990967
+    },
+    {
+      "frame": 17,
+      "maxExtension": 2.053445394864186e+31,
+      "maxCompression": -0.7661041873219177,
+      "maxAbsStrain": 2.053445394864186e+31,
+      "p95AbsStrain": 38676.097227749095,
+      "zeroRestSpringMaxLength": 20.53445394864186
+    },
+    {
+      "frame": 18,
+      "maxExtension": 2.564965262526208e+31,
+      "maxCompression": -0.754714400065267,
+      "maxAbsStrain": 2.564965262526208e+31,
+      "p95AbsStrain": 37899.50339355037,
+      "zeroRestSpringMaxLength": 25.649652625262085
+    },
+    {
+      "frame": 19,
+      "maxExtension": 1.4126358657720038e+31,
+      "maxCompression": -0.43015863285649747,
+      "maxAbsStrain": 1.4126358657720038e+31,
+      "p95AbsStrain": 44655.53568873732,
+      "zeroRestSpringMaxLength": 14.12635865772004
+    },
+    {
+      "frame": 20,
+      "maxExtension": 7.168339493367269e+31,
+      "maxCompression": -0.33028742920876264,
+      "maxAbsStrain": 7.168339493367269e+31,
+      "p95AbsStrain": 40885.56959899914,
+      "zeroRestSpringMaxLength": 71.6833949336727
+    },
+    {
+      "frame": 21,
+      "maxExtension": 5.983644898616897e+31,
+      "maxCompression": -0.4166699534353131,
+      "maxAbsStrain": 5.983644898616897e+31,
+      "p95AbsStrain": 39926.09921385109,
+      "zeroRestSpringMaxLength": 59.83644898616898
+    },
+    {
+      "frame": 22,
+      "maxExtension": 7.724882595096123e+31,
+      "maxCompression": -0.4612445117064845,
+      "maxAbsStrain": 7.724882595096123e+31,
+      "p95AbsStrain": 39549.92621050053,
+      "zeroRestSpringMaxLength": 77.24882595096123
+    },
+    {
+      "frame": 23,
+      "maxExtension": 6.8393478576767815e+31,
+      "maxCompression": -0.5869747797348963,
+      "maxAbsStrain": 6.8393478576767815e+31,
+      "p95AbsStrain": 46171.216812087194,
+      "zeroRestSpringMaxLength": 68.39347857676782
+    },
+    {
+      "frame": 24,
+      "maxExtension": 2.628514814128326e+31,
+      "maxCompression": -0.620358238073814,
+      "maxAbsStrain": 2.628514814128326e+31,
+      "p95AbsStrain": 44231.56385660419,
+      "zeroRestSpringMaxLength": 26.285148141283262
+    },
+    {
+      "frame": 25,
+      "maxExtension": 1.3605572708390154e+32,
+      "maxCompression": -0.49501207847298756,
+      "maxAbsStrain": 1.3605572708390154e+32,
+      "p95AbsStrain": 48894.528975992675,
+      "zeroRestSpringMaxLength": 136.05572708390156
+    },
+    {
+      "frame": 26,
+      "maxExtension": 1.6407296346479137e+32,
+      "maxCompression": -0.5019114169402192,
+      "maxAbsStrain": 1.6407296346479137e+32,
+      "p95AbsStrain": 50617.86480713115,
+      "zeroRestSpringMaxLength": 164.0729634647914
+    },
+    {
+      "frame": 27,
+      "maxExtension": 1.3021230085007379e+32,
+      "maxCompression": -0.5331739609238195,
+      "maxAbsStrain": 1.3021230085007379e+32,
+      "p95AbsStrain": 52361.284907880705,
+      "zeroRestSpringMaxLength": 130.2123008500738
+    },
+    {
+      "frame": 28,
+      "maxExtension": 2.186574737610904e+32,
+      "maxCompression": -0.5408911475084395,
+      "maxAbsStrain": 2.186574737610904e+32,
+      "p95AbsStrain": 56318.85538113471,
+      "zeroRestSpringMaxLength": 218.65747376109042
+    },
+    {
+      "frame": 29,
+      "maxExtension": 1.0541691869410075e+32,
+      "maxCompression": -0.4021759977260926,
+      "maxAbsStrain": 1.0541691869410075e+32,
+      "p95AbsStrain": 58814.89811959955,
+      "zeroRestSpringMaxLength": 105.41691869410076
+    },
+    {
+      "frame": 30,
+      "maxExtension": 2.600014395786691e+31,
+      "maxCompression": -0.6231931011700549,
+      "maxAbsStrain": 2.600014395786691e+31,
+      "p95AbsStrain": 58874.605875790134,
+      "zeroRestSpringMaxLength": 26.00014395786691
+    },
+    {
+      "frame": 31,
+      "maxExtension": 4.079532259078836e+31,
+      "maxCompression": -0.636704187528946,
+      "maxAbsStrain": 4.079532259078836e+31,
+      "p95AbsStrain": 60257.97409968391,
+      "zeroRestSpringMaxLength": 40.795322590788366
+    },
+    {
+      "frame": 32,
+      "maxExtension": 3.553447975033318e+31,
+      "maxCompression": -0.4844534273455797,
+      "maxAbsStrain": 3.553447975033318e+31,
+      "p95AbsStrain": 52664.43671590652,
+      "zeroRestSpringMaxLength": 35.53447975033318
+    },
+    {
+      "frame": 33,
+      "maxExtension": 4.412414602105467e+31,
+      "maxCompression": -0.43755210637812947,
+      "maxAbsStrain": 4.412414602105467e+31,
+      "p95AbsStrain": 55193.672806472954,
+      "zeroRestSpringMaxLength": 44.12414602105467
+    },
+    {
+      "frame": 34,
+      "maxExtension": 4.322564189538188e+31,
+      "maxCompression": -0.4154167008736629,
+      "maxAbsStrain": 4.322564189538188e+31,
+      "p95AbsStrain": 52210.021337125785,
+      "zeroRestSpringMaxLength": 43.225641895381884
+    },
+    {
+      "frame": 35,
+      "maxExtension": 4.886161763691099e+31,
+      "maxCompression": -0.4430214990639345,
+      "maxAbsStrain": 4.886161763691099e+31,
+      "p95AbsStrain": 49102.42557015547,
+      "zeroRestSpringMaxLength": 48.86161763691099
+    },
+    {
+      "frame": 36,
+      "maxExtension": 5.018188047375764e+31,
+      "maxCompression": -0.4662546003322168,
+      "maxAbsStrain": 5.018188047375764e+31,
+      "p95AbsStrain": 48850.35356050887,
+      "zeroRestSpringMaxLength": 50.181880473757644
+    },
+    {
+      "frame": 37,
+      "maxExtension": 5.323754921641876e+31,
+      "maxCompression": -0.5198202313244273,
+      "maxAbsStrain": 5.323754921641876e+31,
+      "p95AbsStrain": 50555.35820325129,
+      "zeroRestSpringMaxLength": 53.23754921641876
+    },
+    {
+      "frame": 38,
+      "maxExtension": 4.92651459907264e+31,
+      "maxCompression": -0.671815348158417,
+      "maxAbsStrain": 4.92651459907264e+31,
+      "p95AbsStrain": 55157.177867603845,
+      "zeroRestSpringMaxLength": 49.2651459907264
+    },
+    {
+      "frame": 39,
+      "maxExtension": 4.543089118233706e+31,
+      "maxCompression": -0.7714910158787651,
+      "maxAbsStrain": 4.543089118233706e+31,
+      "p95AbsStrain": 47815.76359278195,
+      "zeroRestSpringMaxLength": 45.430891182337064
+    },
+    {
+      "frame": 40,
+      "maxExtension": 3.85589979420871e+31,
+      "maxCompression": -0.8130717756033424,
+      "maxAbsStrain": 3.85589979420871e+31,
+      "p95AbsStrain": 49748.819944614304,
+      "zeroRestSpringMaxLength": 38.5589979420871
+    },
+    {
+      "frame": 41,
+      "maxExtension": 3.257191634589196e+31,
+      "maxCompression": -0.7831078694160524,
+      "maxAbsStrain": 3.257191634589196e+31,
+      "p95AbsStrain": 50565.5517887311,
+      "zeroRestSpringMaxLength": 32.571916345891964
+    },
+    {
+      "frame": 42,
+      "maxExtension": 3.8692528305082613e+31,
+      "maxCompression": -0.669474075409007,
+      "maxAbsStrain": 3.8692528305082613e+31,
+      "p95AbsStrain": 48201.9913156167,
+      "zeroRestSpringMaxLength": 38.69252830508262
+    },
+    {
+      "frame": 43,
+      "maxExtension": 3.4993078421288535e+31,
+      "maxCompression": -0.8706574385209455,
+      "maxAbsStrain": 3.4993078421288535e+31,
+      "p95AbsStrain": 52010.75302984705,
+      "zeroRestSpringMaxLength": 34.99307842128854
+    },
+    {
+      "frame": 44,
+      "maxExtension": 2.3046829869075205e+31,
+      "maxCompression": -0.7210147716188124,
+      "maxAbsStrain": 2.3046829869075205e+31,
+      "p95AbsStrain": 55192.13972936784,
+      "zeroRestSpringMaxLength": 23.046829869075207
+    },
+    {
+      "frame": 45,
+      "maxExtension": 2.2082489184700697e+31,
+      "maxCompression": -0.7315729296404618,
+      "maxAbsStrain": 2.2082489184700697e+31,
+      "p95AbsStrain": 57037.82173874695,
+      "zeroRestSpringMaxLength": 22.082489184700698
+    },
+    {
+      "frame": 46,
+      "maxExtension": 2.9850830634816855e+31,
+      "maxCompression": -0.605987304829692,
+      "maxAbsStrain": 2.9850830634816855e+31,
+      "p95AbsStrain": 60949.74637631824,
+      "zeroRestSpringMaxLength": 29.85083063481686
+    },
+    {
+      "frame": 47,
+      "maxExtension": 1.6937592879339823e+32,
+      "maxCompression": -0.7328982042281429,
+      "maxAbsStrain": 1.6937592879339823e+32,
+      "p95AbsStrain": 59007.32350772843,
+      "zeroRestSpringMaxLength": 169.37592879339823
+    },
+    {
+      "frame": 48,
+      "maxExtension": 1.9037023838740368e+31,
+      "maxCompression": -0.7816329224757963,
+      "maxAbsStrain": 1.9037023838740368e+31,
+      "p95AbsStrain": 47334.664975275664,
+      "zeroRestSpringMaxLength": 19.03702383874037
+    },
+    {
+      "frame": 49,
+      "maxExtension": 2.654284886179466e+31,
+      "maxCompression": -0.7875384337421435,
+      "maxAbsStrain": 2.654284886179466e+31,
+      "p95AbsStrain": 50907.85392285503,
+      "zeroRestSpringMaxLength": 26.542848861794663
+    },
+    {
+      "frame": 50,
+      "maxExtension": 1.1330369820441756e+32,
+      "maxCompression": -0.9336547116566323,
+      "maxAbsStrain": 1.1330369820441756e+32,
+      "p95AbsStrain": 52116.35772440909,
+      "zeroRestSpringMaxLength": 113.30369820441757
+    },
+    {
+      "frame": 51,
+      "maxExtension": 4.0435197823423235e+31,
+      "maxCompression": -0.8713344783886483,
+      "maxAbsStrain": 4.0435197823423235e+31,
+      "p95AbsStrain": 50158.29710441588,
+      "zeroRestSpringMaxLength": 40.43519782342324
+    },
+    {
+      "frame": 52,
+      "maxExtension": 6.815801275187795e+31,
+      "maxCompression": -0.9130991120475497,
+      "maxAbsStrain": 6.815801275187795e+31,
+      "p95AbsStrain": 45388.022273203154,
+      "zeroRestSpringMaxLength": 68.15801275187796
+    },
+    {
+      "frame": 53,
+      "maxExtension": 5.787370946215397e+31,
+      "maxCompression": -0.8807096118246439,
+      "maxAbsStrain": 5.787370946215397e+31,
+      "p95AbsStrain": 46505.07185822047,
+      "zeroRestSpringMaxLength": 57.873709462153975
+    },
+    {
+      "frame": 54,
+      "maxExtension": 5.584530581435891e+31,
+      "maxCompression": -0.8662013453209086,
+      "maxAbsStrain": 5.584530581435891e+31,
+      "p95AbsStrain": 55800.16567858625,
+      "zeroRestSpringMaxLength": 55.845305814358916
+    },
+    {
+      "frame": 55,
+      "maxExtension": 6.428892118833957e+31,
+      "maxCompression": -0.8106009259972335,
+      "maxAbsStrain": 6.428892118833957e+31,
+      "p95AbsStrain": 48711.91441430547,
+      "zeroRestSpringMaxLength": 64.28892118833957
+    },
+    {
+      "frame": 56,
+      "maxExtension": 4.568785484738433e+31,
+      "maxCompression": -0.8806130530895278,
+      "maxAbsStrain": 4.568785484738433e+31,
+      "p95AbsStrain": 42206.58408195366,
+      "zeroRestSpringMaxLength": 45.68785484738433
+    },
+    {
+      "frame": 57,
+      "maxExtension": 5.1031736522937165e+32,
+      "maxCompression": -0.8605983082224705,
+      "maxAbsStrain": 5.1031736522937165e+32,
+      "p95AbsStrain": 38107.628469963245,
+      "zeroRestSpringMaxLength": 510.3173652293717
+    },
+    {
+      "frame": 58,
+      "maxExtension": 4.3221735967715345e+32,
+      "maxCompression": -0.8667450344871034,
+      "maxAbsStrain": 4.3221735967715345e+32,
+      "p95AbsStrain": 35528.208304168,
+      "zeroRestSpringMaxLength": 432.2173596771535
+    },
+    {
+      "frame": 59,
+      "maxExtension": 2.6033254560921266e+32,
+      "maxCompression": -0.8560733902807476,
+      "maxAbsStrain": 2.6033254560921266e+32,
+      "p95AbsStrain": 46279.93525959509,
+      "zeroRestSpringMaxLength": 260.3325456092127
+    },
+    {
+      "frame": 60,
+      "maxExtension": 1.878072892570193e+32,
+      "maxCompression": -0.8785908654079941,
+      "maxAbsStrain": 1.878072892570193e+32,
+      "p95AbsStrain": 39980.47281555503,
+      "zeroRestSpringMaxLength": 187.8072892570193
+    },
+    {
+      "frame": 61,
+      "maxExtension": 7.425095528144415e+31,
+      "maxCompression": -0.9056898640816139,
+      "maxAbsStrain": 7.425095528144415e+31,
+      "p95AbsStrain": 39463.079583412175,
+      "zeroRestSpringMaxLength": 74.25095528144416
+    },
+    {
+      "frame": 62,
+      "maxExtension": 9.476593012321584e+31,
+      "maxCompression": -0.9051082782963331,
+      "maxAbsStrain": 9.476593012321584e+31,
+      "p95AbsStrain": 41581.18357210251,
+      "zeroRestSpringMaxLength": 94.76593012321584
+    },
+    {
+      "frame": 63,
+      "maxExtension": 2.489435218741297e+32,
+      "maxCompression": -0.9203409994734761,
+      "maxAbsStrain": 2.489435218741297e+32,
+      "p95AbsStrain": 38518.32461127179,
+      "zeroRestSpringMaxLength": 248.94352187412971
+    },
+    {
+      "frame": 64,
+      "maxExtension": 8.286793200865778e+31,
+      "maxCompression": -0.8934677998373632,
+      "maxAbsStrain": 8.286793200865778e+31,
+      "p95AbsStrain": 32141.859764152377,
+      "zeroRestSpringMaxLength": 82.86793200865779
+    },
+    {
+      "frame": 65,
+      "maxExtension": 1.8853145248732414e+32,
+      "maxCompression": -0.8792985309476189,
+      "maxAbsStrain": 1.8853145248732414e+32,
+      "p95AbsStrain": 47442.676128832674,
+      "zeroRestSpringMaxLength": 188.53145248732417
+    },
+    {
+      "frame": 66,
+      "maxExtension": 1.6768992834675753e+32,
+      "maxCompression": -0.8459370260374575,
+      "maxAbsStrain": 1.6768992834675753e+32,
+      "p95AbsStrain": 39819.035887021186,
+      "zeroRestSpringMaxLength": 167.68992834675754
+    },
+    {
+      "frame": 67,
+      "maxExtension": 1.2488770039161544e+32,
+      "maxCompression": -0.8508858980291603,
+      "maxAbsStrain": 1.2488770039161544e+32,
+      "p95AbsStrain": 38667.59950399605,
+      "zeroRestSpringMaxLength": 124.88770039161545
+    },
+    {
+      "frame": 68,
+      "maxExtension": 9.13871065311753e+31,
+      "maxCompression": -0.8518995857428341,
+      "maxAbsStrain": 9.13871065311753e+31,
+      "p95AbsStrain": 38159.24056179772,
+      "zeroRestSpringMaxLength": 91.3871065311753
+    },
+    {
+      "frame": 69,
+      "maxExtension": 3.2237890741148564e+32,
+      "maxCompression": -0.8674871172201191,
+      "maxAbsStrain": 3.2237890741148564e+32,
+      "p95AbsStrain": 37376.20919232242,
+      "zeroRestSpringMaxLength": 322.37890741148567
+    },
+    {
+      "frame": 70,
+      "maxExtension": 2.542535690565202e+32,
+      "maxCompression": -0.8531308762666221,
+      "maxAbsStrain": 2.542535690565202e+32,
+      "p95AbsStrain": 36266.594328225874,
+      "zeroRestSpringMaxLength": 254.25356905652023
+    },
+    {
+      "frame": 71,
+      "maxExtension": 2.7391487291054083e+32,
+      "maxCompression": -0.8695580763294308,
+      "maxAbsStrain": 2.7391487291054083e+32,
+      "p95AbsStrain": 38931.64735377687,
+      "zeroRestSpringMaxLength": 273.91487291054085
+    },
+    {
+      "frame": 72,
+      "maxExtension": 3.1108991123236323e+32,
+      "maxCompression": -0.8256470900300713,
+      "maxAbsStrain": 3.1108991123236323e+32,
+      "p95AbsStrain": 39995.205868832374,
+      "zeroRestSpringMaxLength": 311.08991123236325
+    },
+    {
+      "frame": 73,
+      "maxExtension": 2.2417196201695845e+32,
+      "maxCompression": -0.796706289623667,
+      "maxAbsStrain": 2.2417196201695845e+32,
+      "p95AbsStrain": 42255.8935926407,
+      "zeroRestSpringMaxLength": 224.17196201695847
+    },
+    {
+      "frame": 74,
+      "maxExtension": 5.2759060535376e+32,
+      "maxCompression": -0.841600754864892,
+      "maxAbsStrain": 5.2759060535376e+32,
+      "p95AbsStrain": 38512.30701052372,
+      "zeroRestSpringMaxLength": 527.59060535376
+    },
+    {
+      "frame": 75,
+      "maxExtension": 1.0933856416416032e+32,
+      "maxCompression": -0.7933268777283384,
+      "maxAbsStrain": 1.0933856416416032e+32,
+      "p95AbsStrain": 37263.3606796959,
+      "zeroRestSpringMaxLength": 109.33856416416033
+    },
+    {
+      "frame": 76,
+      "maxExtension": 1.375536660788873e+32,
+      "maxCompression": -0.7952913888756259,
+      "maxAbsStrain": 1.375536660788873e+32,
+      "p95AbsStrain": 37657.42375637677,
+      "zeroRestSpringMaxLength": 137.55366607888732
+    },
+    {
+      "frame": 77,
+      "maxExtension": 4.662752878979348e+32,
+      "maxCompression": -0.7666478055134749,
+      "maxAbsStrain": 4.662752878979348e+32,
+      "p95AbsStrain": 36830.1759559702,
+      "zeroRestSpringMaxLength": 466.2752878979348
+    },
+    {
+      "frame": 78,
+      "maxExtension": 6.961212502319992e+31,
+      "maxCompression": -0.7505219754603643,
+      "maxAbsStrain": 6.961212502319992e+31,
+      "p95AbsStrain": 38238.92089076726,
+      "zeroRestSpringMaxLength": 69.61212502319992
+    },
+    {
+      "frame": 79,
+      "maxExtension": 6.803303167732131e+31,
+      "maxCompression": -0.7438501219174676,
+      "maxAbsStrain": 6.803303167732131e+31,
+      "p95AbsStrain": 40214.443865076544,
+      "zeroRestSpringMaxLength": 68.03303167732132
+    },
+    {
+      "frame": 80,
+      "maxExtension": 6.647924197188461e+31,
+      "maxCompression": -0.8307088599070802,
+      "maxAbsStrain": 6.647924197188461e+31,
+      "p95AbsStrain": 37468.942041075396,
+      "zeroRestSpringMaxLength": 66.47924197188462
+    },
+    {
+      "frame": 81,
+      "maxExtension": 7.610064588787246e+31,
+      "maxCompression": -0.7863308147994025,
+      "maxAbsStrain": 7.610064588787246e+31,
+      "p95AbsStrain": 37823.19636802988,
+      "zeroRestSpringMaxLength": 76.10064588787246
+    },
+    {
+      "frame": 82,
+      "maxExtension": 8.761197827814389e+31,
+      "maxCompression": -0.7979794316101629,
+      "maxAbsStrain": 8.761197827814389e+31,
+      "p95AbsStrain": 39758.49381782592,
+      "zeroRestSpringMaxLength": 87.6119782781439
+    },
+    {
+      "frame": 83,
+      "maxExtension": 7.32290616962928e+31,
+      "maxCompression": -0.7863168563156798,
+      "maxAbsStrain": 7.32290616962928e+31,
+      "p95AbsStrain": 44778.57464846598,
+      "zeroRestSpringMaxLength": 73.2290616962928
+    },
+    {
+      "frame": 84,
+      "maxExtension": 2.32661898989848e+32,
+      "maxCompression": -0.7231103454946912,
+      "maxAbsStrain": 2.32661898989848e+32,
+      "p95AbsStrain": 42076.55387989905,
+      "zeroRestSpringMaxLength": 232.661898989848
+    },
+    {
+      "frame": 85,
+      "maxExtension": 3.176184950235594e+32,
+      "maxCompression": -0.7572105864770562,
+      "maxAbsStrain": 3.176184950235594e+32,
+      "p95AbsStrain": 37469.60533693318,
+      "zeroRestSpringMaxLength": 317.61849502355943
+    },
+    {
+      "frame": 86,
+      "maxExtension": 4.212365601437704e+32,
+      "maxCompression": -0.7896736807597903,
+      "maxAbsStrain": 4.212365601437704e+32,
+      "p95AbsStrain": 41062.19497124344,
+      "zeroRestSpringMaxLength": 421.2365601437704
+    },
+    {
+      "frame": 87,
+      "maxExtension": 2.137966681983812e+32,
+      "maxCompression": -0.8787142289115702,
+      "maxAbsStrain": 2.137966681983812e+32,
+      "p95AbsStrain": 42337.63700083967,
+      "zeroRestSpringMaxLength": 213.7966681983812
+    },
+    {
+      "frame": 88,
+      "maxExtension": 1.974191510929481e+32,
+      "maxCompression": -0.9204830371453844,
+      "maxAbsStrain": 1.974191510929481e+32,
+      "p95AbsStrain": 41189.5654039767,
+      "zeroRestSpringMaxLength": 197.4191510929481
+    },
+    {
+      "frame": 89,
+      "maxExtension": 2.9707207326711564e+32,
+      "maxCompression": -0.8572773504085458,
+      "maxAbsStrain": 2.9707207326711564e+32,
+      "p95AbsStrain": 45136.528926660394,
+      "zeroRestSpringMaxLength": 297.0720732671157
+    },
+    {
+      "frame": 90,
+      "maxExtension": 9.966242912550949e+31,
+      "maxCompression": -0.8909298208834774,
+      "maxAbsStrain": 9.966242912550949e+31,
+      "p95AbsStrain": 52839.081603913895,
+      "zeroRestSpringMaxLength": 99.6624291255095
+    },
+    {
+      "frame": 91,
+      "maxExtension": 5.115081726593576e+32,
+      "maxCompression": -0.9253636487825382,
+      "maxAbsStrain": 5.115081726593576e+32,
+      "p95AbsStrain": 49106.128750505195,
+      "zeroRestSpringMaxLength": 511.5081726593576
+    },
+    {
+      "frame": 92,
+      "maxExtension": 6.923524107269359e+32,
+      "maxCompression": -0.8685542199788209,
+      "maxAbsStrain": 6.923524107269359e+32,
+      "p95AbsStrain": 41423.40765457418,
+      "zeroRestSpringMaxLength": 692.3524107269359
+    },
+    {
+      "frame": 93,
+      "maxExtension": 3.4601025808484936e+32,
+      "maxCompression": -0.7331674789702805,
+      "maxAbsStrain": 3.4601025808484936e+32,
+      "p95AbsStrain": 40299.356066307766,
+      "zeroRestSpringMaxLength": 346.0102580848494
+    },
+    {
+      "frame": 94,
+      "maxExtension": 2.921163658284339e+32,
+      "maxCompression": -0.8735131387745043,
+      "maxAbsStrain": 2.921163658284339e+32,
+      "p95AbsStrain": 40580.679577547286,
+      "zeroRestSpringMaxLength": 292.1163658284339
+    },
+    {
+      "frame": 95,
+      "maxExtension": 4.170702716266854e+32,
+      "maxCompression": -0.7250854050491926,
+      "maxAbsStrain": 4.170702716266854e+32,
+      "p95AbsStrain": 52307.428271333105,
+      "zeroRestSpringMaxLength": 417.0702716266854
+    },
+    {
+      "frame": 96,
+      "maxExtension": 2.3235185595263522e+32,
+      "maxCompression": -0.69977876858652,
+      "maxAbsStrain": 2.3235185595263522e+32,
+      "p95AbsStrain": 48427.652692342395,
+      "zeroRestSpringMaxLength": 232.35185595263525
+    },
+    {
+      "frame": 97,
+      "maxExtension": 1.7663579565919823e+32,
+      "maxCompression": -0.6530588383421989,
+      "maxAbsStrain": 1.7663579565919823e+32,
+      "p95AbsStrain": 46105.0337433413,
+      "zeroRestSpringMaxLength": 176.63579565919827
+    },
+    {
+      "frame": 98,
+      "maxExtension": 1.7802315056418075e+32,
+      "maxCompression": -0.614286707450356,
+      "maxAbsStrain": 1.7802315056418075e+32,
+      "p95AbsStrain": 54074.472141375074,
+      "zeroRestSpringMaxLength": 178.02315056418075
+    },
+    {
+      "frame": 99,
+      "maxExtension": 1.793396845614991e+32,
+      "maxCompression": -0.6713158748317927,
+      "maxAbsStrain": 1.793396845614991e+32,
+      "p95AbsStrain": 56888.09260868208,
+      "zeroRestSpringMaxLength": 179.33968456149913
+    },
+    {
+      "frame": 100,
+      "maxExtension": 1.7070452700434967e+32,
+      "maxCompression": -0.7437324668545269,
+      "maxAbsStrain": 1.7070452700434967e+32,
+      "p95AbsStrain": 58985.38192331075,
+      "zeroRestSpringMaxLength": 170.70452700434967
+    },
+    {
+      "frame": 101,
+      "maxExtension": 3.0776564521256008e+32,
+      "maxCompression": -0.8782196155402662,
+      "maxAbsStrain": 3.0776564521256008e+32,
+      "p95AbsStrain": 54002.23072388861,
+      "zeroRestSpringMaxLength": 307.7656452125601
+    },
+    {
+      "frame": 102,
+      "maxExtension": 2.1419647225058575e+32,
+      "maxCompression": -0.9067635045039273,
+      "maxAbsStrain": 2.1419647225058575e+32,
+      "p95AbsStrain": 52737.14412347004,
+      "zeroRestSpringMaxLength": 214.19647225058577
+    },
+    {
+      "frame": 103,
+      "maxExtension": 2.068926290631748e+32,
+      "maxCompression": -0.8342658250015647,
+      "maxAbsStrain": 2.068926290631748e+32,
+      "p95AbsStrain": 51876.8212641896,
+      "zeroRestSpringMaxLength": 206.8926290631748
+    },
+    {
+      "frame": 104,
+      "maxExtension": 2.0128696165293306e+32,
+      "maxCompression": -0.7699496316413041,
+      "maxAbsStrain": 2.0128696165293306e+32,
+      "p95AbsStrain": 59245.33526045304,
+      "zeroRestSpringMaxLength": 201.28696165293306
+    },
+    {
+      "frame": 105,
+      "maxExtension": 3.297847077737071e+32,
+      "maxCompression": -0.8462367541509108,
+      "maxAbsStrain": 3.297847077737071e+32,
+      "p95AbsStrain": 57901.21327276468,
+      "zeroRestSpringMaxLength": 329.7847077737071
+    },
+    {
+      "frame": 106,
+      "maxExtension": 1.9844020541156384e+32,
+      "maxCompression": -0.7970826975088682,
+      "maxAbsStrain": 1.9844020541156384e+32,
+      "p95AbsStrain": 47533.7267803082,
+      "zeroRestSpringMaxLength": 198.44020541156385
+    },
+    {
+      "frame": 107,
+      "maxExtension": 1.880351910691603e+32,
+      "maxCompression": -0.9205680019135337,
+      "maxAbsStrain": 1.880351910691603e+32,
+      "p95AbsStrain": 58150.21224861543,
+      "zeroRestSpringMaxLength": 188.0351910691603
+    },
+    {
+      "frame": 108,
+      "maxExtension": 6.575956921289927e+32,
+      "maxCompression": -0.9033801906175705,
+      "maxAbsStrain": 6.575956921289927e+32,
+      "p95AbsStrain": 59896.07021364873,
+      "zeroRestSpringMaxLength": 657.5956921289928
+    },
+    {
+      "frame": 109,
+      "maxExtension": 8.485919590777665e+31,
+      "maxCompression": -0.9186700883164236,
+      "maxAbsStrain": 8.485919590777665e+31,
+      "p95AbsStrain": 56347.6191767418,
+      "zeroRestSpringMaxLength": 84.85919590777667
+    },
+    {
+      "frame": 110,
+      "maxExtension": 1.3232641025718506e+32,
+      "maxCompression": -0.9218855135406556,
+      "maxAbsStrain": 1.3232641025718506e+32,
+      "p95AbsStrain": 56690.265956502335,
+      "zeroRestSpringMaxLength": 132.32641025718507
+    },
+    {
+      "frame": 111,
+      "maxExtension": 2.4941927061275655e+32,
+      "maxCompression": -0.9021046642821379,
+      "maxAbsStrain": 2.4941927061275655e+32,
+      "p95AbsStrain": 56920.259603116705,
+      "zeroRestSpringMaxLength": 249.41927061275658
+    },
+    {
+      "frame": 112,
+      "maxExtension": 2.5267374070058352e+32,
+      "maxCompression": -0.9111086106891827,
+      "maxAbsStrain": 2.5267374070058352e+32,
+      "p95AbsStrain": 61605.476441684965,
+      "zeroRestSpringMaxLength": 252.67374070058355
+    },
+    {
+      "frame": 113,
+      "maxExtension": 7.199593202125534e+32,
+      "maxCompression": -0.9247874632102578,
+      "maxAbsStrain": 7.199593202125534e+32,
+      "p95AbsStrain": 56621.28804267264,
+      "zeroRestSpringMaxLength": 719.9593202125534
+    },
+    {
+      "frame": 114,
+      "maxExtension": 1.7075154775742524e+32,
+      "maxCompression": -0.8852829921876029,
+      "maxAbsStrain": 1.7075154775742524e+32,
+      "p95AbsStrain": 55068.13523415486,
+      "zeroRestSpringMaxLength": 170.75154775742527
+    },
+    {
+      "frame": 115,
+      "maxExtension": 6.663957734224251e+31,
+      "maxCompression": -0.8861535801601642,
+      "maxAbsStrain": 6.663957734224251e+31,
+      "p95AbsStrain": 57455.48372273723,
+      "zeroRestSpringMaxLength": 66.63957734224252
+    },
+    {
+      "frame": 116,
+      "maxExtension": 7.858255160273132e+31,
+      "maxCompression": -0.8891577345999675,
+      "maxAbsStrain": 7.858255160273132e+31,
+      "p95AbsStrain": 53473.87194474684,
+      "zeroRestSpringMaxLength": 78.58255160273133
+    },
+    {
+      "frame": 117,
+      "maxExtension": 5.958770001953823e+31,
+      "maxCompression": -0.9121349947567906,
+      "maxAbsStrain": 5.958770001953823e+31,
+      "p95AbsStrain": 53753.978735310884,
+      "zeroRestSpringMaxLength": 59.58770001953823
+    },
+    {
+      "frame": 118,
+      "maxExtension": 6.974605741012156e+31,
+      "maxCompression": -0.8873068875019003,
+      "maxAbsStrain": 6.974605741012156e+31,
+      "p95AbsStrain": 50973.329973408574,
+      "zeroRestSpringMaxLength": 69.74605741012157
+    },
+    {
+      "frame": 119,
+      "maxExtension": 1.6471405191647398e+32,
+      "maxCompression": -0.894624961171441,
+      "maxAbsStrain": 1.6471405191647398e+32,
+      "p95AbsStrain": 52815.91502560542,
+      "zeroRestSpringMaxLength": 164.71405191647398
+    },
+    {
+      "frame": 120,
+      "maxExtension": 2.7093301992790977e+32,
+      "maxCompression": -0.9056177364183067,
+      "maxAbsStrain": 2.7093301992790977e+32,
+      "p95AbsStrain": 50257.55340103359,
+      "zeroRestSpringMaxLength": 270.9330199279098
+    }
+  ],
+  "frameTriangleRows": [
+    {
+      "frame": 0,
+      "inversions": 0,
+      "collapses": 0,
+      "minAreaRatio": 0.9999999999995829,
+      "normalDotMin": 0.9999999999999996
+    },
+    {
+      "frame": 1,
+      "inversions": 1170,
+      "collapses": 0,
+      "minAreaRatio": 0.5314188055125763,
+      "normalDotMin": -0.9999937401835258
+    },
+    {
+      "frame": 2,
+      "inversions": 1229,
+      "collapses": 0,
+      "minAreaRatio": 0.4883375763312722,
+      "normalDotMin": -0.9999971261740482
+    },
+    {
+      "frame": 3,
+      "inversions": 1265,
+      "collapses": 0,
+      "minAreaRatio": 0.6551937422724513,
+      "normalDotMin": -0.9999035732031032
+    },
+    {
+      "frame": 4,
+      "inversions": 1276,
+      "collapses": 0,
+      "minAreaRatio": 0.4263757977791961,
+      "normalDotMin": -0.9999486433869272
+    },
+    {
+      "frame": 5,
+      "inversions": 1274,
+      "collapses": 0,
+      "minAreaRatio": 0.27923595551030117,
+      "normalDotMin": -0.999698052144745
+    },
+    {
+      "frame": 6,
+      "inversions": 1254,
+      "collapses": 0,
+      "minAreaRatio": 0.24582897016984187,
+      "normalDotMin": -0.9999408203530593
+    },
+    {
+      "frame": 7,
+      "inversions": 1292,
+      "collapses": 0,
+      "minAreaRatio": 0.2976637087224186,
+      "normalDotMin": -0.9992152899340311
+    },
+    {
+      "frame": 8,
+      "inversions": 1306,
+      "collapses": 0,
+      "minAreaRatio": 0.1348677625518979,
+      "normalDotMin": -0.9997377883293247
+    },
+    {
+      "frame": 9,
+      "inversions": 1370,
+      "collapses": 0,
+      "minAreaRatio": 0.030464402303225897,
+      "normalDotMin": -0.9998195168651592
+    },
+    {
+      "frame": 10,
+      "inversions": 1385,
+      "collapses": 0,
+      "minAreaRatio": 0.013508656461417256,
+      "normalDotMin": -0.999958052681038
+    },
+    {
+      "frame": 11,
+      "inversions": 1367,
+      "collapses": 0,
+      "minAreaRatio": 0.10806119800525679,
+      "normalDotMin": -0.9995468699041054
+    },
+    {
+      "frame": 12,
+      "inversions": 1381,
+      "collapses": 0,
+      "minAreaRatio": 0.017144310666237228,
+      "normalDotMin": -0.9990988270366585
+    },
+    {
+      "frame": 13,
+      "inversions": 1357,
+      "collapses": 0,
+      "minAreaRatio": 0.15621441081025433,
+      "normalDotMin": -0.9999415950687749
+    },
+    {
+      "frame": 14,
+      "inversions": 1388,
+      "collapses": 0,
+      "minAreaRatio": 0.06032550813180214,
+      "normalDotMin": -0.9997282470510785
+    },
+    {
+      "frame": 15,
+      "inversions": 1398,
+      "collapses": 0,
+      "minAreaRatio": 0.06704248330842034,
+      "normalDotMin": -0.9999958571350285
+    },
+    {
+      "frame": 16,
+      "inversions": 1407,
+      "collapses": 0,
+      "minAreaRatio": 0.05924509874984116,
+      "normalDotMin": -0.9995963502786576
+    },
+    {
+      "frame": 17,
+      "inversions": 1403,
+      "collapses": 0,
+      "minAreaRatio": 0.04739574986416125,
+      "normalDotMin": -0.9991389818209157
+    },
+    {
+      "frame": 18,
+      "inversions": 1411,
+      "collapses": 0,
+      "minAreaRatio": 0.05477331297367054,
+      "normalDotMin": -0.9997185624534582
+    },
+    {
+      "frame": 19,
+      "inversions": 1438,
+      "collapses": 0,
+      "minAreaRatio": 0.06574986444992487,
+      "normalDotMin": -0.999694142342179
+    },
+    {
+      "frame": 20,
+      "inversions": 1429,
+      "collapses": 0,
+      "minAreaRatio": 0.11975243260299512,
+      "normalDotMin": -0.9999281904609708
+    },
+    {
+      "frame": 21,
+      "inversions": 1441,
+      "collapses": 0,
+      "minAreaRatio": 0.41751271998261336,
+      "normalDotMin": -0.9999807320419022
+    },
+    {
+      "frame": 22,
+      "inversions": 1513,
+      "collapses": 0,
+      "minAreaRatio": 0.39105913639919143,
+      "normalDotMin": -0.999801929598295
+    },
+    {
+      "frame": 23,
+      "inversions": 1564,
+      "collapses": 0,
+      "minAreaRatio": 0.2741087141270159,
+      "normalDotMin": -0.9994968773289041
+    },
+    {
+      "frame": 24,
+      "inversions": 1603,
+      "collapses": 0,
+      "minAreaRatio": 0.24558148931978496,
+      "normalDotMin": -0.9999011445261653
+    },
+    {
+      "frame": 25,
+      "inversions": 1649,
+      "collapses": 0,
+      "minAreaRatio": 0.27326936411174174,
+      "normalDotMin": -0.999350052525324
+    },
+    {
+      "frame": 26,
+      "inversions": 1628,
+      "collapses": 0,
+      "minAreaRatio": 0.19472166611409072,
+      "normalDotMin": -0.9983147666418614
+    },
+    {
+      "frame": 27,
+      "inversions": 1621,
+      "collapses": 0,
+      "minAreaRatio": 0.28193238709000285,
+      "normalDotMin": -0.9999586416723621
+    },
+    {
+      "frame": 28,
+      "inversions": 1664,
+      "collapses": 0,
+      "minAreaRatio": 0.2728224546062288,
+      "normalDotMin": -0.9999281055932828
+    },
+    {
+      "frame": 29,
+      "inversions": 1688,
+      "collapses": 0,
+      "minAreaRatio": 0.28496143168166616,
+      "normalDotMin": -0.9999613592829678
+    },
+    {
+      "frame": 30,
+      "inversions": 1723,
+      "collapses": 0,
+      "minAreaRatio": 0.04941847249011889,
+      "normalDotMin": -0.9999004863119226
+    },
+    {
+      "frame": 31,
+      "inversions": 1704,
+      "collapses": 0,
+      "minAreaRatio": 0.22007715229091757,
+      "normalDotMin": -0.9993347320511505
+    },
+    {
+      "frame": 32,
+      "inversions": 1678,
+      "collapses": 0,
+      "minAreaRatio": 0.23511038990869082,
+      "normalDotMin": -0.9986896117780891
+    },
+    {
+      "frame": 33,
+      "inversions": 1708,
+      "collapses": 0,
+      "minAreaRatio": 0.2916114690314299,
+      "normalDotMin": -0.9996349170100709
+    },
+    {
+      "frame": 34,
+      "inversions": 1677,
+      "collapses": 0,
+      "minAreaRatio": 0.2792990779180417,
+      "normalDotMin": -0.9995519763346327
+    },
+    {
+      "frame": 35,
+      "inversions": 1678,
+      "collapses": 0,
+      "minAreaRatio": 0.25465496206873567,
+      "normalDotMin": -0.9993224898290315
+    },
+    {
+      "frame": 36,
+      "inversions": 1696,
+      "collapses": 0,
+      "minAreaRatio": 0.23731808903593643,
+      "normalDotMin": -0.9998211752027061
+    },
+    {
+      "frame": 37,
+      "inversions": 1686,
+      "collapses": 0,
+      "minAreaRatio": 0.20330025898345278,
+      "normalDotMin": -0.999924584357051
+    },
+    {
+      "frame": 38,
+      "inversions": 1702,
+      "collapses": 0,
+      "minAreaRatio": 0.1433336914395415,
+      "normalDotMin": -0.9998115338547207
+    },
+    {
+      "frame": 39,
+      "inversions": 1715,
+      "collapses": 0,
+      "minAreaRatio": 0.16183213455016732,
+      "normalDotMin": -0.9999694030660744
+    },
+    {
+      "frame": 40,
+      "inversions": 1722,
+      "collapses": 0,
+      "minAreaRatio": 0.20634955250988124,
+      "normalDotMin": -0.9999569780616023
+    },
+    {
+      "frame": 41,
+      "inversions": 1755,
+      "collapses": 0,
+      "minAreaRatio": 0.2662654627050389,
+      "normalDotMin": -0.9999016269307844
+    },
+    {
+      "frame": 42,
+      "inversions": 1733,
+      "collapses": 0,
+      "minAreaRatio": 0.20426489096468708,
+      "normalDotMin": -0.9999405880716049
+    },
+    {
+      "frame": 43,
+      "inversions": 1733,
+      "collapses": 0,
+      "minAreaRatio": 0.09000873836888347,
+      "normalDotMin": -0.9997298267888685
+    },
+    {
+      "frame": 44,
+      "inversions": 1783,
+      "collapses": 0,
+      "minAreaRatio": 0.21760782911000887,
+      "normalDotMin": -0.9996029071030356
+    },
+    {
+      "frame": 45,
+      "inversions": 1782,
+      "collapses": 0,
+      "minAreaRatio": 0.21136756542694865,
+      "normalDotMin": -0.9997116151389009
+    },
+    {
+      "frame": 46,
+      "inversions": 1740,
+      "collapses": 0,
+      "minAreaRatio": 0.13868779011031984,
+      "normalDotMin": -0.999995746681969
+    },
+    {
+      "frame": 47,
+      "inversions": 1754,
+      "collapses": 0,
+      "minAreaRatio": 0.10573032463663311,
+      "normalDotMin": -0.9999534701636958
+    },
+    {
+      "frame": 48,
+      "inversions": 1814,
+      "collapses": 0,
+      "minAreaRatio": 0.13876093192766575,
+      "normalDotMin": -0.9989133162759799
+    },
+    {
+      "frame": 49,
+      "inversions": 1778,
+      "collapses": 0,
+      "minAreaRatio": 0.11899028218527817,
+      "normalDotMin": -0.9993267836873746
+    },
+    {
+      "frame": 50,
+      "inversions": 1728,
+      "collapses": 0,
+      "minAreaRatio": 0.09390240016658521,
+      "normalDotMin": -0.9991099522297183
+    },
+    {
+      "frame": 51,
+      "inversions": 1686,
+      "collapses": 0,
+      "minAreaRatio": 0.1138058187068704,
+      "normalDotMin": -0.999484013308787
+    },
+    {
+      "frame": 52,
+      "inversions": 1703,
+      "collapses": 0,
+      "minAreaRatio": 0.04270195141594499,
+      "normalDotMin": -0.9991599578477355
+    },
+    {
+      "frame": 53,
+      "inversions": 1733,
+      "collapses": 0,
+      "minAreaRatio": 0.15050229311415458,
+      "normalDotMin": -0.9997169942428189
+    },
+    {
+      "frame": 54,
+      "inversions": 1690,
+      "collapses": 0,
+      "minAreaRatio": 0.07920331808299877,
+      "normalDotMin": -0.9994026607868975
+    },
+    {
+      "frame": 55,
+      "inversions": 1716,
+      "collapses": 0,
+      "minAreaRatio": 0.07519096984906365,
+      "normalDotMin": -0.9999883736279274
+    },
+    {
+      "frame": 56,
+      "inversions": 1728,
+      "collapses": 0,
+      "minAreaRatio": 0.0907128023509516,
+      "normalDotMin": -0.9994480938415905
+    },
+    {
+      "frame": 57,
+      "inversions": 1734,
+      "collapses": 0,
+      "minAreaRatio": 0.08034567655726584,
+      "normalDotMin": -0.9999362248202276
+    },
+    {
+      "frame": 58,
+      "inversions": 1752,
+      "collapses": 0,
+      "minAreaRatio": 0.05594005274422133,
+      "normalDotMin": -0.9995287300390943
+    },
+    {
+      "frame": 59,
+      "inversions": 1792,
+      "collapses": 0,
+      "minAreaRatio": 0.08679640015039432,
+      "normalDotMin": -0.9991179979499397
+    },
+    {
+      "frame": 60,
+      "inversions": 1730,
+      "collapses": 0,
+      "minAreaRatio": 0.11401458749832445,
+      "normalDotMin": -0.9994740309707201
+    },
+    {
+      "frame": 61,
+      "inversions": 1753,
+      "collapses": 0,
+      "minAreaRatio": 0.11840056291523243,
+      "normalDotMin": -0.9998938615217351
+    },
+    {
+      "frame": 62,
+      "inversions": 1759,
+      "collapses": 0,
+      "minAreaRatio": 0.09254562428435895,
+      "normalDotMin": -0.9995200930256359
+    },
+    {
+      "frame": 63,
+      "inversions": 1769,
+      "collapses": 0,
+      "minAreaRatio": 0.047693712193946414,
+      "normalDotMin": -0.9996175148556382
+    },
+    {
+      "frame": 64,
+      "inversions": 1770,
+      "collapses": 0,
+      "minAreaRatio": 0.12432612631273407,
+      "normalDotMin": -0.9998247288710379
+    },
+    {
+      "frame": 65,
+      "inversions": 1735,
+      "collapses": 0,
+      "minAreaRatio": 0.10663256509037852,
+      "normalDotMin": -0.999758637274254
+    },
+    {
+      "frame": 66,
+      "inversions": 1702,
+      "collapses": 0,
+      "minAreaRatio": 0.12702887579986563,
+      "normalDotMin": -0.9998562347702464
+    },
+    {
+      "frame": 67,
+      "inversions": 1698,
+      "collapses": 0,
+      "minAreaRatio": 0.1394393307467089,
+      "normalDotMin": -0.9996310522115807
+    },
+    {
+      "frame": 68,
+      "inversions": 1684,
+      "collapses": 0,
+      "minAreaRatio": 0.13507061446273727,
+      "normalDotMin": -0.9997020179233771
+    },
+    {
+      "frame": 69,
+      "inversions": 1703,
+      "collapses": 0,
+      "minAreaRatio": 0.1574644222647294,
+      "normalDotMin": -0.9999429546618024
+    },
+    {
+      "frame": 70,
+      "inversions": 1717,
+      "collapses": 0,
+      "minAreaRatio": 0.15653037806196024,
+      "normalDotMin": -0.9995876259225686
+    },
+    {
+      "frame": 71,
+      "inversions": 1686,
+      "collapses": 0,
+      "minAreaRatio": 0.14035902216869564,
+      "normalDotMin": -0.9998434133909312
+    },
+    {
+      "frame": 72,
+      "inversions": 1672,
+      "collapses": 0,
+      "minAreaRatio": 0.14401574925858296,
+      "normalDotMin": -0.9999613952300561
+    },
+    {
+      "frame": 73,
+      "inversions": 1675,
+      "collapses": 0,
+      "minAreaRatio": 0.12355255032667192,
+      "normalDotMin": -0.99999739654451
+    },
+    {
+      "frame": 74,
+      "inversions": 1719,
+      "collapses": 0,
+      "minAreaRatio": 0.13110053283700146,
+      "normalDotMin": -0.9996102441452275
+    },
+    {
+      "frame": 75,
+      "inversions": 1717,
+      "collapses": 0,
+      "minAreaRatio": 0.12682292141585044,
+      "normalDotMin": -0.9996299936919611
+    },
+    {
+      "frame": 76,
+      "inversions": 1722,
+      "collapses": 0,
+      "minAreaRatio": 0.12811346836964754,
+      "normalDotMin": -0.999189454385102
+    },
+    {
+      "frame": 77,
+      "inversions": 1710,
+      "collapses": 0,
+      "minAreaRatio": 0.12480504523845937,
+      "normalDotMin": -0.9999920112522067
+    },
+    {
+      "frame": 78,
+      "inversions": 1726,
+      "collapses": 0,
+      "minAreaRatio": 0.11805188226586884,
+      "normalDotMin": -0.9993721232679028
+    },
+    {
+      "frame": 79,
+      "inversions": 1701,
+      "collapses": 0,
+      "minAreaRatio": 0.11806486510021202,
+      "normalDotMin": -0.9996093680700558
+    },
+    {
+      "frame": 80,
+      "inversions": 1670,
+      "collapses": 0,
+      "minAreaRatio": 0.12288676006898973,
+      "normalDotMin": -0.9997321402986034
+    },
+    {
+      "frame": 81,
+      "inversions": 1691,
+      "collapses": 0,
+      "minAreaRatio": 0.13675522429190834,
+      "normalDotMin": -0.9997265062249675
+    },
+    {
+      "frame": 82,
+      "inversions": 1689,
+      "collapses": 0,
+      "minAreaRatio": 0.11898314828624412,
+      "normalDotMin": -0.9997499189389998
+    },
+    {
+      "frame": 83,
+      "inversions": 1708,
+      "collapses": 0,
+      "minAreaRatio": 0.11949910324087146,
+      "normalDotMin": -0.9997324529503211
+    },
+    {
+      "frame": 84,
+      "inversions": 1733,
+      "collapses": 0,
+      "minAreaRatio": 0.1336659672181026,
+      "normalDotMin": -0.999251324504413
+    },
+    {
+      "frame": 85,
+      "inversions": 1716,
+      "collapses": 0,
+      "minAreaRatio": 0.13478674247211225,
+      "normalDotMin": -0.9999592691428754
+    },
+    {
+      "frame": 86,
+      "inversions": 1730,
+      "collapses": 0,
+      "minAreaRatio": 0.16110535415805516,
+      "normalDotMin": -0.9997452764766501
+    },
+    {
+      "frame": 87,
+      "inversions": 1684,
+      "collapses": 0,
+      "minAreaRatio": 0.12435736126011161,
+      "normalDotMin": -0.9997129519471449
+    },
+    {
+      "frame": 88,
+      "inversions": 1734,
+      "collapses": 0,
+      "minAreaRatio": 0.09533750917346585,
+      "normalDotMin": -0.9998609682337622
+    },
+    {
+      "frame": 89,
+      "inversions": 1762,
+      "collapses": 0,
+      "minAreaRatio": 0.12823563600842533,
+      "normalDotMin": -0.9996407870504895
+    },
+    {
+      "frame": 90,
+      "inversions": 1756,
+      "collapses": 0,
+      "minAreaRatio": 0.1311227212777803,
+      "normalDotMin": -0.9995107890297553
+    },
+    {
+      "frame": 91,
+      "inversions": 1740,
+      "collapses": 0,
+      "minAreaRatio": 0.1121964342663171,
+      "normalDotMin": -0.9999265590674203
+    },
+    {
+      "frame": 92,
+      "inversions": 1721,
+      "collapses": 0,
+      "minAreaRatio": 0.013730185888749724,
+      "normalDotMin": -0.9997980380300654
+    },
+    {
+      "frame": 93,
+      "inversions": 1746,
+      "collapses": 0,
+      "minAreaRatio": 0.07479873112909344,
+      "normalDotMin": -0.9999482118262044
+    },
+    {
+      "frame": 94,
+      "inversions": 1771,
+      "collapses": 0,
+      "minAreaRatio": 0.16170058312497548,
+      "normalDotMin": -0.9998087455358401
+    },
+    {
+      "frame": 95,
+      "inversions": 1812,
+      "collapses": 0,
+      "minAreaRatio": 0.06153308858050123,
+      "normalDotMin": -0.9997182389559975
+    },
+    {
+      "frame": 96,
+      "inversions": 1858,
+      "collapses": 0,
+      "minAreaRatio": 0.10805157576642078,
+      "normalDotMin": -0.9999833052750091
+    },
+    {
+      "frame": 97,
+      "inversions": 1824,
+      "collapses": 0,
+      "minAreaRatio": 0.10984160640012233,
+      "normalDotMin": -0.9998922083986026
+    },
+    {
+      "frame": 98,
+      "inversions": 1811,
+      "collapses": 0,
+      "minAreaRatio": 0.06238011947655654,
+      "normalDotMin": -0.9999963172302053
+    },
+    {
+      "frame": 99,
+      "inversions": 1817,
+      "collapses": 0,
+      "minAreaRatio": 0.1296869633154654,
+      "normalDotMin": -0.9988181219303542
+    },
+    {
+      "frame": 100,
+      "inversions": 1793,
+      "collapses": 0,
+      "minAreaRatio": 0.09599663705265887,
+      "normalDotMin": -0.9998160748463885
+    },
+    {
+      "frame": 101,
+      "inversions": 1813,
+      "collapses": 0,
+      "minAreaRatio": 0.07641235501264214,
+      "normalDotMin": -0.9990098855603871
+    },
+    {
+      "frame": 102,
+      "inversions": 1852,
+      "collapses": 0,
+      "minAreaRatio": 0.10501509614079302,
+      "normalDotMin": -0.9991298332461053
+    },
+    {
+      "frame": 103,
+      "inversions": 1794,
+      "collapses": 0,
+      "minAreaRatio": 0.08741962323211805,
+      "normalDotMin": -0.999965859801864
+    },
+    {
+      "frame": 104,
+      "inversions": 1732,
+      "collapses": 0,
+      "minAreaRatio": 0.10882538966841794,
+      "normalDotMin": -0.9994305689506794
+    },
+    {
+      "frame": 105,
+      "inversions": 1769,
+      "collapses": 0,
+      "minAreaRatio": 0.0743229277384332,
+      "normalDotMin": -0.9993811557102805
+    },
+    {
+      "frame": 106,
+      "inversions": 1756,
+      "collapses": 0,
+      "minAreaRatio": 0.029938392843032,
+      "normalDotMin": -0.9997019148555701
+    },
+    {
+      "frame": 107,
+      "inversions": 1732,
+      "collapses": 0,
+      "minAreaRatio": 0.06150112289100542,
+      "normalDotMin": -0.9998829089206235
+    },
+    {
+      "frame": 108,
+      "inversions": 1788,
+      "collapses": 0,
+      "minAreaRatio": 0.015659900386723914,
+      "normalDotMin": -0.9999497606386865
+    },
+    {
+      "frame": 109,
+      "inversions": 1776,
+      "collapses": 0,
+      "minAreaRatio": 0.09102272865031089,
+      "normalDotMin": -0.9995212601839553
+    },
+    {
+      "frame": 110,
+      "inversions": 1768,
+      "collapses": 0,
+      "minAreaRatio": 0.08483445701259226,
+      "normalDotMin": -0.9998156770133383
+    },
+    {
+      "frame": 111,
+      "inversions": 1775,
+      "collapses": 0,
+      "minAreaRatio": 0.08175543401227726,
+      "normalDotMin": -0.999572598252703
+    },
+    {
+      "frame": 112,
+      "inversions": 1775,
+      "collapses": 0,
+      "minAreaRatio": 0.0969988419509681,
+      "normalDotMin": -0.9998573420225219
+    },
+    {
+      "frame": 113,
+      "inversions": 1758,
+      "collapses": 0,
+      "minAreaRatio": 0.1221460250398819,
+      "normalDotMin": -0.9997176744814046
+    },
+    {
+      "frame": 114,
+      "inversions": 1768,
+      "collapses": 0,
+      "minAreaRatio": 0.11655673330063554,
+      "normalDotMin": -0.9999478905380265
+    },
+    {
+      "frame": 115,
+      "inversions": 1796,
+      "collapses": 0,
+      "minAreaRatio": 0.13554688593785347,
+      "normalDotMin": -0.9998553218127807
+    },
+    {
+      "frame": 116,
+      "inversions": 1804,
+      "collapses": 0,
+      "minAreaRatio": 0.12314389698635264,
+      "normalDotMin": -0.9996037287735738
+    },
+    {
+      "frame": 117,
+      "inversions": 1781,
+      "collapses": 0,
+      "minAreaRatio": 0.13137315578975256,
+      "normalDotMin": -0.9995811687005047
+    },
+    {
+      "frame": 118,
+      "inversions": 1826,
+      "collapses": 0,
+      "minAreaRatio": 0.08397330054425539,
+      "normalDotMin": -0.9997964120202094
+    },
+    {
+      "frame": 119,
+      "inversions": 1788,
+      "collapses": 0,
+      "minAreaRatio": 0.07248887026044996,
+      "normalDotMin": -0.9995459844148629
+    },
+    {
+      "frame": 120,
+      "inversions": 1792,
+      "collapses": 0,
+      "minAreaRatio": 0.08646812590666042,
+      "normalDotMin": -0.9995491431549177
+    }
+  ]
+}

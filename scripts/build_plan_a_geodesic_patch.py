@@ -27,8 +27,12 @@ def main():
         raise RuntimeError(f"Goal 1 coverage is {len(records)}/478")
     attachment_triangles = np.asarray([records[i]["triangleVertexIndices"] for i in range(478)], dtype=np.int64)
     bary = np.asarray([records[i]["barycentricCoordinates"] for i in range(478)], dtype=np.float64)
-    landmark_xyz = np.asarray([records[i]["meshXYZ"] for i in range(478)], dtype=np.float64)
-    eye_width = float(np.linalg.norm(landmark_xyz[263] - landmark_xyz[33]))
+    # Reconstruct neutral positions from the actual input mesh.  The female
+    # Goal-1 report was produced on generated-rigged.glb, while Plan A2 uses
+    # generated-original.glb; its stored world-space meshXYZ must therefore
+    # not be reused as a scale or target coordinate.
+    neutral_landmarks = np.asarray([(bary[i][:, None] * vertices[attachment_triangles[i]]).sum(axis=0) for i in range(478)], dtype=np.float64)
+    eye_width = float(np.linalg.norm(neutral_landmarks[263] - neutral_landmarks[33]))
     seeds = np.unique(attachment_triangles.reshape(-1))
 
     # The graph is the original edge graph. Duplicate edges are harmless in
@@ -42,6 +46,11 @@ def main():
     limit = float(a.radius_eye_width * eye_width)
     distances = dijkstra(graph, directed=False, indices=seeds, limit=limit, min_only=True)
     selected_vertex_mask = np.isfinite(distances)
+    # Keep every original face incident to the geodesic region.  Include all
+    # three vertices of every attachment triangle, including attachments whose
+    # source polygon is not represented as the same triangle by Blender's
+    # loop-triangle tessellation.
+    selected_vertex_mask[seeds] = True
     selected_face_mask = selected_vertex_mask[faces].any(axis=1)
     selected_faces_global = faces[selected_face_mask]
     selected_vertices_global = np.unique(selected_faces_global.reshape(-1))
@@ -67,6 +76,7 @@ def main():
         constraintTriangles=np.asarray([c["triangle"] for c in constraints], dtype=np.int64),
         constraintBary=bary,
         constraintIds=np.arange(478, dtype=np.int64),
+        neutralLandmarks=neutral_landmarks,
     )
     components = []
     for ci in range(component_count):

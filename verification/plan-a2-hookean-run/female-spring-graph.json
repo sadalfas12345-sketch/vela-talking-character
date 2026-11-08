@@ -1,0 +1,1758 @@
+{
+  "sourcePatch": "verification\\plan-a2-hookean-run\\female-patch.npz",
+  "sourceGoal1": "verification\\plan-a2-hookean-run\\female-original-attachments.json",
+  "originalPatchVertices": 4149,
+  "simulationVertices": 4149,
+  "originalPatchTriangles": 5072,
+  "simulationTriangles": 5072,
+  "originalEdgeSprings": 9070,
+  "virtualSeamSprings": 140,
+  "virtualSpringGapLimit": 0.0017268050288830128,
+  "virtualSpringZeroRestCount": 11,
+  "virtualSpringNormalDotMin": 0.6579929554537485,
+  "sourceComponents": 180,
+  "retainedComponents": 180,
+  "simulationComponentsAfterVirtualSprings": 69,
+  "componentRecords": [
+    {
+      "component": 0,
+      "vertices": 119,
+      "landmarks": [
+        7,
+        22,
+        23,
+        24,
+        25,
+        26,
+        35,
+        110,
+        144,
+        145,
+        153,
+        154,
+        162,
+        163,
+        226,
+        472
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 1,
+      "vertices": 123,
+      "landmarks": [
+        249,
+        253,
+        254,
+        255,
+        263,
+        339,
+        359,
+        373,
+        374,
+        390,
+        446,
+        450,
+        466,
+        473,
+        474,
+        477
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 2,
+      "vertices": 12,
+      "landmarks": [
+        334
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 3,
+      "vertices": 12,
+      "landmarks": [
+        297
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 4,
+      "vertices": 22,
+      "landmarks": [
+        251,
+        301
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 5,
+      "vertices": 14,
+      "landmarks": [
+        337
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 6,
+      "vertices": 25,
+      "landmarks": [
+        31,
+        143
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 7,
+      "vertices": 21,
+      "landmarks": [
+        283,
+        293
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 8,
+      "vertices": 33,
+      "landmarks": [
+        228,
+        229,
+        230
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 9,
+      "vertices": 14,
+      "landmarks": [
+        282
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 10,
+      "vertices": 24,
+      "landmarks": [
+        442,
+        443
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 11,
+      "vertices": 10,
+      "landmarks": [
+        10
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 12,
+      "vertices": 12,
+      "landmarks": [
+        55
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 13,
+      "vertices": 320,
+      "landmarks": [
+        1,
+        2,
+        19,
+        20,
+        44,
+        48,
+        49,
+        59,
+        60,
+        64,
+        75,
+        79,
+        94,
+        97,
+        98,
+        99,
+        102,
+        115,
+        125,
+        126,
+        129,
+        131,
+        141,
+        142,
+        164,
+        166,
+        167,
+        198,
+        209,
+        218,
+        219,
+        220,
+        235,
+        237,
+        238,
+        239,
+        240,
+        241,
+        242,
+        250,
+        274,
+        278,
+        279,
+        289,
+        290,
+        294,
+        305,
+        309,
+        326,
+        327,
+        328,
+        331,
+        344,
+        354,
+        358,
+        370,
+        371,
+        392,
+        393,
+        429,
+        438,
+        439,
+        455,
+        457,
+        458,
+        459,
+        460,
+        461,
+        462
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 14,
+      "vertices": 17,
+      "landmarks": [
+        169,
+        172
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 15,
+      "vertices": 14,
+      "landmarks": [
+        266
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 16,
+      "vertices": 10,
+      "landmarks": [
+        376
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 17,
+      "vertices": 27,
+      "landmarks": [
+        58,
+        138,
+        210
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 18,
+      "vertices": 12,
+      "landmarks": [
+        369
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 19,
+      "vertices": 14,
+      "landmarks": [
+        422
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 20,
+      "vertices": 88,
+      "landmarks": [
+        33,
+        113,
+        124,
+        130,
+        156,
+        161,
+        246,
+        247,
+        468,
+        469,
+        471
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 21,
+      "vertices": 12,
+      "landmarks": [
+        417
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 22,
+      "vertices": 11,
+      "landmarks": [
+        388
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 23,
+      "vertices": 81,
+      "landmarks": [
+        21,
+        27,
+        29,
+        30,
+        46,
+        70,
+        71,
+        224,
+        225
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 24,
+      "vertices": 25,
+      "landmarks": [
+        259,
+        444
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 25,
+      "vertices": 10,
+      "landmarks": [
+        383
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 26,
+      "vertices": 14,
+      "landmarks": [
+        338
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 27,
+      "vertices": 35,
+      "landmarks": [
+        66,
+        67,
+        69
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 28,
+      "vertices": 11,
+      "landmarks": [
+        352
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 29,
+      "vertices": 12,
+      "landmarks": [
+        401
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 30,
+      "vertices": 29,
+      "landmarks": [
+        194,
+        200,
+        201
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 31,
+      "vertices": 13,
+      "landmarks": [
+        397
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 32,
+      "vertices": 319,
+      "landmarks": [
+        13,
+        14,
+        15,
+        16,
+        17,
+        40,
+        41,
+        42,
+        43,
+        61,
+        62,
+        74,
+        76,
+        77,
+        78,
+        80,
+        81,
+        82,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        95,
+        96,
+        146,
+        178,
+        179,
+        180,
+        181,
+        183,
+        184,
+        185,
+        191,
+        270,
+        271,
+        272,
+        287,
+        291,
+        292,
+        304,
+        306,
+        307,
+        308,
+        310,
+        311,
+        312,
+        314,
+        315,
+        316,
+        317,
+        318,
+        319,
+        320,
+        321,
+        324,
+        325,
+        375,
+        402,
+        403,
+        404,
+        405,
+        407,
+        408,
+        409,
+        415,
+        432
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 33,
+      "vertices": 31,
+      "landmarks": [
+        103,
+        104,
+        105
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 34,
+      "vertices": 99,
+      "landmarks": [
+        6,
+        122,
+        133,
+        168,
+        173,
+        189,
+        190,
+        193,
+        197,
+        243,
+        244,
+        245,
+        351
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 35,
+      "vertices": 36,
+      "landmarks": [
+        329,
+        355,
+        360
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 36,
+      "vertices": 14,
+      "landmarks": [
+        356
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 37,
+      "vertices": 22,
+      "landmarks": [
+        222,
+        223
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 38,
+      "vertices": 14,
+      "landmarks": [
+        288
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 39,
+      "vertices": 11,
+      "landmarks": [
+        416
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 40,
+      "vertices": 13,
+      "landmarks": [
+        377
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 41,
+      "vertices": 13,
+      "landmarks": [
+        108
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 42,
+      "vertices": 16,
+      "landmarks": [
+        451
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 43,
+      "vertices": 14,
+      "landmarks": [
+        275
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 44,
+      "vertices": 13,
+      "landmarks": [
+        445
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 45,
+      "vertices": 29,
+      "landmarks": [
+        11,
+        39,
+        72
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 46,
+      "vertices": 14,
+      "landmarks": [
+        426
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 47,
+      "vertices": 12,
+      "landmarks": [
+        425
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 48,
+      "vertices": 12,
+      "landmarks": [
+        92
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 49,
+      "vertices": 13,
+      "landmarks": [
+        8
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 50,
+      "vertices": 14,
+      "landmarks": [
+        323
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 51,
+      "vertices": 13,
+      "landmarks": [
+        427
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 52,
+      "vertices": 38,
+      "landmarks": [
+        418,
+        421,
+        424
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 53,
+      "vertices": 29,
+      "landmarks": [
+        313,
+        406
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 54,
+      "vertices": 21,
+      "landmarks": [
+        214,
+        215
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 55,
+      "vertices": 27,
+      "landmarks": [
+        132,
+        192,
+        212
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 56,
+      "vertices": 228,
+      "landmarks": [
+        3,
+        5,
+        51,
+        112,
+        114,
+        128,
+        155,
+        174,
+        188,
+        195,
+        196,
+        233,
+        236,
+        248,
+        252,
+        256,
+        281,
+        341,
+        343,
+        350,
+        357,
+        362,
+        380,
+        381,
+        382,
+        399,
+        412,
+        419,
+        452,
+        453,
+        456,
+        463,
+        464
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 57,
+      "vertices": 53,
+      "landmarks": [
+        4,
+        45,
+        47,
+        134,
+        217
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 58,
+      "vertices": 11,
+      "landmarks": [
+        342
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 59,
+      "vertices": 12,
+      "landmarks": [
+        449
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 60,
+      "vertices": 40,
+      "landmarks": [
+        93,
+        147,
+        187,
+        207
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 61,
+      "vertices": 16,
+      "landmarks": [
+        100
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 62,
+      "vertices": 14,
+      "landmarks": [
+        433
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 63,
+      "vertices": 13,
+      "landmarks": [
+        364
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 64,
+      "vertices": 13,
+      "landmarks": [
+        365
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 65,
+      "vertices": 11,
+      "landmarks": [
+        9
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 66,
+      "vertices": 39,
+      "landmarks": [
+        385,
+        386,
+        475,
+        476
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 67,
+      "vertices": 13,
+      "landmarks": [
+        441
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 68,
+      "vertices": 14,
+      "landmarks": [
+        109
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 69,
+      "vertices": 13,
+      "landmarks": [
+        52
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 70,
+      "vertices": 14,
+      "landmarks": [
+        203
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 71,
+      "vertices": 11,
+      "landmarks": [
+        366
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 72,
+      "vertices": 34,
+      "landmarks": [
+        32,
+        199,
+        208
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 73,
+      "vertices": 15,
+      "landmarks": [
+        171
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 74,
+      "vertices": 12,
+      "landmarks": [
+        430
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 75,
+      "vertices": 13,
+      "landmarks": [
+        284
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 76,
+      "vertices": 12,
+      "landmarks": [
+        353
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 77,
+      "vertices": 32,
+      "landmarks": [
+        12,
+        38,
+        73
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 78,
+      "vertices": 12,
+      "landmarks": [
+        170
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 79,
+      "vertices": 12,
+      "landmarks": [
+        434
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 80,
+      "vertices": 14,
+      "landmarks": [
+        107
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 81,
+      "vertices": 13,
+      "landmarks": [
+        28
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 82,
+      "vertices": 23,
+      "landmarks": [
+        340,
+        346
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 83,
+      "vertices": 22,
+      "landmarks": [
+        149,
+        176
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 84,
+      "vertices": 13,
+      "landmarks": [
+        150
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 85,
+      "vertices": 21,
+      "landmarks": [
+        378,
+        400
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 86,
+      "vertices": 12,
+      "landmarks": [
+        437
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 87,
+      "vertices": 13,
+      "landmarks": [
+        56
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 88,
+      "vertices": 14,
+      "landmarks": [
+        347
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 89,
+      "vertices": 10,
+      "landmarks": [
+        135
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 90,
+      "vertices": 13,
+      "landmarks": [
+        396
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 91,
+      "vertices": 13,
+      "landmarks": [
+        57
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 92,
+      "vertices": 10,
+      "landmarks": [
+        465
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 93,
+      "vertices": 13,
+      "landmarks": [
+        420
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 94,
+      "vertices": 52,
+      "landmarks": [
+        50,
+        123,
+        205,
+        227,
+        234
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 95,
+      "vertices": 16,
+      "landmarks": [
+        280
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 96,
+      "vertices": 13,
+      "landmarks": [
+        65
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 97,
+      "vertices": 14,
+      "landmarks": [
+        286
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 98,
+      "vertices": 11,
+      "landmarks": [
+        165
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 99,
+      "vertices": 30,
+      "landmarks": [
+        0,
+        37,
+        267
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 100,
+      "vertices": 11,
+      "landmarks": [
+        269
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 101,
+      "vertices": 12,
+      "landmarks": [
+        322
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 102,
+      "vertices": 35,
+      "landmarks": [
+        116,
+        117,
+        118,
+        127
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 103,
+      "vertices": 11,
+      "landmarks": [
+        428
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 104,
+      "vertices": 12,
+      "landmarks": [
+        204
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 105,
+      "vertices": 24,
+      "landmarks": [
+        413,
+        414
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 106,
+      "vertices": 22,
+      "landmarks": [
+        276,
+        300
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 107,
+      "vertices": 24,
+      "landmarks": [
+        261,
+        448
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 108,
+      "vertices": 38,
+      "landmarks": [
+        18,
+        83,
+        106,
+        182
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 109,
+      "vertices": 13,
+      "landmarks": [
+        349
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 110,
+      "vertices": 26,
+      "landmarks": [
+        53,
+        54,
+        63,
+        68
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 111,
+      "vertices": 14,
+      "landmarks": [
+        216
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 112,
+      "vertices": 18,
+      "landmarks": [
+        384,
+        398
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 113,
+      "vertices": 19,
+      "landmarks": [
+        158,
+        159,
+        470
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 114,
+      "vertices": 13,
+      "landmarks": [
+        336
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 115,
+      "vertices": 12,
+      "landmarks": [
+        257
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 116,
+      "vertices": 15,
+      "landmarks": [
+        345
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 117,
+      "vertices": 12,
+      "landmarks": [
+        140
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 118,
+      "vertices": 14,
+      "landmarks": [
+        157
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 119,
+      "vertices": 13,
+      "landmarks": [
+        348
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 120,
+      "vertices": 12,
+      "landmarks": [
+        423
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 121,
+      "vertices": 14,
+      "landmarks": [
+        410
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 122,
+      "vertices": 16,
+      "landmarks": [
+        395
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 123,
+      "vertices": 16,
+      "landmarks": [
+        260,
+        467
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 124,
+      "vertices": 11,
+      "landmarks": [
+        213
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 125,
+      "vertices": 11,
+      "landmarks": [
+        264
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 126,
+      "vertices": 12,
+      "landmarks": [
+        206
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 127,
+      "vertices": 12,
+      "landmarks": [
+        436
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 128,
+      "vertices": 11,
+      "landmarks": [
+        120
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 129,
+      "vertices": 12,
+      "landmarks": [
+        36
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 130,
+      "vertices": 10,
+      "landmarks": [
+        186
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 131,
+      "vertices": 12,
+      "landmarks": [
+        121
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 132,
+      "vertices": 16,
+      "landmarks": [
+        34,
+        111
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 133,
+      "vertices": 14,
+      "landmarks": [
+        302
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 134,
+      "vertices": 13,
+      "landmarks": [
+        361
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 135,
+      "vertices": 12,
+      "landmarks": [
+        372
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 136,
+      "vertices": 12,
+      "landmarks": [
+        232
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 137,
+      "vertices": 12,
+      "landmarks": [
+        231
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 138,
+      "vertices": 12,
+      "landmarks": [
+        333
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 139,
+      "vertices": 12,
+      "landmarks": [
+        387
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 140,
+      "vertices": 11,
+      "landmarks": [
+        295
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 141,
+      "vertices": 11,
+      "landmarks": [
+        298
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 142,
+      "vertices": 10,
+      "landmarks": [
+        265
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 143,
+      "vertices": 13,
+      "landmarks": [
+        330
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 144,
+      "vertices": 13,
+      "landmarks": [
+        175
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 145,
+      "vertices": 11,
+      "landmarks": [
+        394
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 146,
+      "vertices": 12,
+      "landmarks": [
+        211
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 147,
+      "vertices": 12,
+      "landmarks": [
+        363
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 148,
+      "vertices": 13,
+      "landmarks": [
+        285
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 149,
+      "vertices": 25,
+      "landmarks": [
+        262,
+        431
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 150,
+      "vertices": 10,
+      "landmarks": [
+        160
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 151,
+      "vertices": 14,
+      "landmarks": [
+        454
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 152,
+      "vertices": 12,
+      "landmarks": [
+        332
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 153,
+      "vertices": 14,
+      "landmarks": [
+        440
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 154,
+      "vertices": 14,
+      "landmarks": [
+        447
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 155,
+      "vertices": 12,
+      "landmarks": [
+        221
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 156,
+      "vertices": 12,
+      "landmarks": [
+        367
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 157,
+      "vertices": 13,
+      "landmarks": [
+        277
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 158,
+      "vertices": 12,
+      "landmarks": [
+        258
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 159,
+      "vertices": 13,
+      "landmarks": [
+        268
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 160,
+      "vertices": 16,
+      "landmarks": [
+        151
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 161,
+      "vertices": 11,
+      "landmarks": [
+        136
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 162,
+      "vertices": 14,
+      "landmarks": [
+        389
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 163,
+      "vertices": 12,
+      "landmarks": [
+        273
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 164,
+      "vertices": 11,
+      "landmarks": [
+        411
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 165,
+      "vertices": 13,
+      "landmarks": [
+        137
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 166,
+      "vertices": 11,
+      "landmarks": [
+        368
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 167,
+      "vertices": 14,
+      "landmarks": [
+        391
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 168,
+      "vertices": 9,
+      "landmarks": [
+        202
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 169,
+      "vertices": 11,
+      "landmarks": [
+        299
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 170,
+      "vertices": 12,
+      "landmarks": [
+        101
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 171,
+      "vertices": 12,
+      "landmarks": [
+        435
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 172,
+      "vertices": 11,
+      "landmarks": [
+        335
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 173,
+      "vertices": 13,
+      "landmarks": [
+        379
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 174,
+      "vertices": 12,
+      "landmarks": [
+        119
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 175,
+      "vertices": 22,
+      "landmarks": [
+        148,
+        152
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 176,
+      "vertices": 10,
+      "landmarks": [
+        139
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 177,
+      "vertices": 12,
+      "landmarks": [
+        303
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 178,
+      "vertices": 13,
+      "landmarks": [
+        296
+      ],
+      "classification": "facial_skin_candidate"
+    },
+    {
+      "component": 179,
+      "vertices": 13,
+      "landmarks": [
+        177
+      ],
+      "classification": "facial_skin_candidate"
+    }
+  ],
+  "classificationRule": "retain components with Goal 1 attachments; exclude components carrying only canonical eyeball/iris IDs from seam links; inspect 8 nearest boundary candidates per vertex, then require boundary gap <= 0.03 eye widths and normal dot >= 0.65",
+  "topologyChanged": false
+}

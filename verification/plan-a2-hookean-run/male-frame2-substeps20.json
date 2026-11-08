@@ -1,0 +1,70 @@
+{
+  "solver": "uniform Hookean stretch/compression on original and recorded virtual seam edges; sparse Gauss-Newton equality-constrained KKT",
+  "physicalTerms": [
+    "original edge stretching",
+    "virtual seam edge stretching"
+  ],
+  "excludedTerms": [
+    "bending",
+    "volume",
+    "support stiffness",
+    "ARAP",
+    "gravity",
+    "inertia",
+    "damping"
+  ],
+  "numericalGauge": "1e-12 median diagonal added only to select rigidly equivalent equilibrium; not a physical energy",
+  "vertices": 8670,
+  "triangles": 10787,
+  "landmarks": 478,
+  "simulationComponents": 320,
+  "framesRequested": 3,
+  "framesSolved": 3,
+  "substepsPerTransition": 20,
+  "runtimeSeconds": 182.81010239990428,
+  "failure": null,
+  "frameMetrics": [
+    {
+      "frame": 0,
+      "substep": 1,
+      "elapsedSeconds": 1.8387169998604804,
+      "simulationComponents": 320,
+      "maxConstraintResidual": 1.1102230246251565e-16,
+      "maxGradientResidual": 3.8823061867377156e-17,
+      "maxProjectedGradientResidual": 3.855896928582384e-17,
+      "maxIterations": 1,
+      "statuses": [
+        "converged"
+      ]
+    },
+    {
+      "frame": 1,
+      "substep": 20,
+      "elapsedSeconds": 4.426682099932805,
+      "simulationComponents": 320,
+      "maxConstraintResidual": 4.558309285584983e-11,
+      "maxGradientResidual": 172.73684908139415,
+      "maxProjectedGradientResidual": 169.86515829882188,
+      "maxIterations": 4,
+      "statuses": [
+        "converged",
+        "max_iterations"
+      ]
+    },
+    {
+      "frame": 2,
+      "substep": 20,
+      "elapsedSeconds": 4.453614300116897,
+      "simulationComponents": 320,
+      "maxConstraintResidual": 4.6060932845648495e-12,
+      "maxGradientResidual": 80.69167884126297,
+      "maxProjectedGradientResidual": 79.60282341813256,
+      "maxIterations": 4,
+      "statuses": [
+        "converged",
+        "max_iterations"
+      ]
+    }
+  ],
+  "finalPositionsOutput": null
+}

@@ -1,0 +1,110 @@
+{
+  "vertices": 4149,
+  "triangles": 5072,
+  "components": 69,
+  "componentsWithLandmarks": 69,
+  "largest": [
+    {
+      "component": 0,
+      "vertices": 1590,
+      "landmarks": 175
+    },
+    {
+      "component": 7,
+      "vertices": 753,
+      "landmarks": 110
+    },
+    {
+      "component": 6,
+      "vertices": 473,
+      "landmarks": 83
+    },
+    {
+      "component": 19,
+      "vertices": 91,
+      "landmarks": 8
+    },
+    {
+      "component": 27,
+      "vertices": 77,
+      "landmarks": 7
+    },
+    {
+      "component": 21,
+      "vertices": 73,
+      "landmarks": 7
+    },
+    {
+      "component": 43,
+      "vertices": 64,
+      "landmarks": 6
+    },
+    {
+      "component": 35,
+      "vertices": 40,
+      "landmarks": 3
+    },
+    {
+      "component": 1,
+      "vertices": 36,
+      "landmarks": 3
+    },
+    {
+      "component": 48,
+      "vertices": 36,
+      "landmarks": 3
+    },
+    {
+      "component": 11,
+      "vertices": 35,
+      "landmarks": 3
+    },
+    {
+      "component": 34,
+      "vertices": 34,
+      "landmarks": 3
+    },
+    {
+      "component": 15,
+      "vertices": 31,
+      "landmarks": 3
+    },
+    {
+      "component": 20,
+      "vertices": 27,
+      "landmarks": 2
+    },
+    {
+      "component": 42,
+      "vertices": 27,
+      "landmarks": 2
+    },
+    {
+      "component": 4,
+      "vertices": 26,
+      "landmarks": 2
+    },
+    {
+      "component": 5,
+      "vertices": 25,
+      "landmarks": 2
+    },
+    {
+      "component": 14,
+      "vertices": 25,
+      "landmarks": 2
+    },
+    {
+      "component": 16,
+      "vertices": 25,
+      "landmarks": 2
+    },
+    {
+      "component": 62,
+      "vertices": 25,
+      "landmarks": 2
+    }
+  ],
+  "singletonLandmarkComponents": 0,
+  "oneLandmarkComponents": 48
+}

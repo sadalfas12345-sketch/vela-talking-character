@@ -1,0 +1,1854 @@
+{
+  "framesValidated": 121,
+  "landmarksPerFrame": 478,
+  "eyeWidth": 0.30409851126227233,
+  "landmarkErrorMax": 2.413469907288835e-12,
+  "landmarkErrorMaxNormalizedEyeWidth": 7.936473931657355e-12,
+  "worstLandmarkFrame": {
+    "landmarkId": 82,
+    "frame": 95,
+    "error": 2.413469907288835e-12,
+    "errorNormalizedEyeWidth": 7.936473931657355e-12
+  },
+  "landmarkErrorMedian": 2.7755575615628914e-17,
+  "landmarkErrorP95": 1.3738309013483032e-16,
+  "hardConstraintsWithin1e-8": 57838,
+  "hardConstraintCount": 57838,
+  "edgeStrainWorst": {
+    "maxExtension": 5.557097475866487e+31,
+    "maxCompression": -1.0,
+    "maxAbsStrain": 5.557097475866487e+31,
+    "p95AbsStrainWorstFrame": 169.50289764136107,
+    "frameOfMaxAbsStrain": 71
+  },
+  "triangleIntegrity": {
+    "maxInversionsAnyFrame": 4801,
+    "totalInvertedFrameCounts": 441114,
+    "maxCollapsesAnyFrame": 0,
+    "totalCollapsedFrameCounts": 0,
+    "minimumAreaRatioAnyFrame": 0.26784536655189056,
+    "frameOfMaxInversions": 95
+  },
+  "coincidentPatchVertexPairs": 18,
+  "maximumSeamPositionDisagreement": 110.41464674415647,
+  "selfIntersectionTest": "NOT COMPUTED: no robust triangle-triangle broadphase library is installed; this must be treated as unverified, not zero",
+  "frameEdgeRows": [
+    {
+      "frame": 0,
+      "maxExtension": 8.326672684688674e-14,
+      "maxCompression": -1.0,
+      "maxAbsStrain": 1.0,
+      "p95AbsStrain": 8.298917109073045e-15,
+      "zeroRestSpringMaxLength": 0.0
+    },
+    {
+      "frame": 1,
+      "maxExtension": 4.5133838091906675e+17,
+      "maxCompression": -0.03478021739134751,
+      "maxAbsStrain": 4.5133838091906675e+17,
+      "p95AbsStrain": 2.127630585368224,
+      "zeroRestSpringMaxLength": 4.5133838091906676e-13
+    },
+    {
+      "frame": 2,
+      "maxExtension": 7.55295971894231e+28,
+      "maxCompression": -0.23404892573995495,
+      "maxAbsStrain": 7.55295971894231e+28,
+      "p95AbsStrain": 2.449649768495787,
+      "zeroRestSpringMaxLength": 0.0755295971894231
+    },
+    {
+      "frame": 3,
+      "maxExtension": 4.489579531878923e+28,
+      "maxCompression": -0.0059681275380065735,
+      "maxAbsStrain": 4.489579531878923e+28,
+      "p95AbsStrain": 5.113157639770614,
+      "zeroRestSpringMaxLength": 0.04489579531878923
+    },
+    {
+      "frame": 4,
+      "maxExtension": 3.7431086553167997e+28,
+      "maxCompression": 7.256417688950023e-13,
+      "maxAbsStrain": 3.7431086553167997e+28,
+      "p95AbsStrain": 4.628859978650036,
+      "zeroRestSpringMaxLength": 0.037431086553168
+    },
+    {
+      "frame": 5,
+      "maxExtension": 1.9577078684566305e+30,
+      "maxCompression": -0.10871248651315213,
+      "maxAbsStrain": 1.9577078684566305e+30,
+      "p95AbsStrain": 3.9293937719787495,
+      "zeroRestSpringMaxLength": 1.9577078684566307
+    },
+    {
+      "frame": 6,
+      "maxExtension": 1.1394229213334374e+30,
+      "maxCompression": 5.6634696932178485e-12,
+      "maxAbsStrain": 1.1394229213334374e+30,
+      "p95AbsStrain": 10.386956060149117,
+      "zeroRestSpringMaxLength": 1.1394229213334375
+    },
+    {
+      "frame": 7,
+      "maxExtension": 1.078625240147854e+30,
+      "maxCompression": 3.0201241507654686e-10,
+      "maxAbsStrain": 1.078625240147854e+30,
+      "p95AbsStrain": 10.774298420942216,
+      "zeroRestSpringMaxLength": 1.078625240147854
+    },
+    {
+      "frame": 8,
+      "maxExtension": 8.460587741220846e+28,
+      "maxCompression": -0.0040509222688442925,
+      "maxAbsStrain": 8.460587741220846e+28,
+      "p95AbsStrain": 9.46161234956827,
+      "zeroRestSpringMaxLength": 0.08460587741220846
+    },
+    {
+      "frame": 9,
+      "maxExtension": 1.345014795749231e+29,
+      "maxCompression": -0.009150083402264642,
+      "maxAbsStrain": 1.345014795749231e+29,
+      "p95AbsStrain": 10.87701361731839,
+      "zeroRestSpringMaxLength": 0.13450147957492312
+    },
+    {
+      "frame": 10,
+      "maxExtension": 9.356460197222438e+28,
+      "maxCompression": -0.0023462263684235207,
+      "maxAbsStrain": 9.356460197222438e+28,
+      "p95AbsStrain": 9.340894194832304,
+      "zeroRestSpringMaxLength": 0.09356460197222438
+    },
+    {
+      "frame": 11,
+      "maxExtension": 1.9798843025148226e+28,
+      "maxCompression": -0.050009506263083314,
+      "maxAbsStrain": 1.9798843025148226e+28,
+      "p95AbsStrain": 10.716283664118276,
+      "zeroRestSpringMaxLength": 0.019798843025148227
+    },
+    {
+      "frame": 12,
+      "maxExtension": 2.7789272127403987e+28,
+      "maxCompression": 1.0954792628581345e-11,
+      "maxAbsStrain": 2.7789272127403987e+28,
+      "p95AbsStrain": 7.377074883723427,
+      "zeroRestSpringMaxLength": 0.02778927212740399
+    },
+    {
+      "frame": 13,
+      "maxExtension": 7.9943776646251e+28,
+      "maxCompression": -0.026446539492849364,
+      "maxAbsStrain": 7.9943776646251e+28,
+      "p95AbsStrain": 11.006474598929106,
+      "zeroRestSpringMaxLength": 0.07994377664625099
+    },
+    {
+      "frame": 14,
+      "maxExtension": 3.3029243751450634e+28,
+      "maxCompression": 4.60964599824365e-13,
+      "maxAbsStrain": 3.3029243751450634e+28,
+      "p95AbsStrain": 11.841755374492323,
+      "zeroRestSpringMaxLength": 0.03302924375145064
+    },
+    {
+      "frame": 15,
+      "maxExtension": 4.79205576765616e+28,
+      "maxCompression": -0.02616954768595725,
+      "maxAbsStrain": 4.79205576765616e+28,
+      "p95AbsStrain": 7.448794714170793,
+      "zeroRestSpringMaxLength": 0.0479205576765616
+    },
+    {
+      "frame": 16,
+      "maxExtension": 2.7211239258369674e+28,
+      "maxCompression": -0.10034473805771227,
+      "maxAbsStrain": 2.7211239258369674e+28,
+      "p95AbsStrain": 6.682832911847896,
+      "zeroRestSpringMaxLength": 0.027211239258369678
+    },
+    {
+      "frame": 17,
+      "maxExtension": 3.333348651266291e+28,
+      "maxCompression": -0.029089556293319885,
+      "maxAbsStrain": 3.333348651266291e+28,
+      "p95AbsStrain": 13.476970813143911,
+      "zeroRestSpringMaxLength": 0.033333486512662915
+    },
+    {
+      "frame": 18,
+      "maxExtension": 2.998513072985855e+29,
+      "maxCompression": 6.775024985472555e-12,
+      "maxAbsStrain": 2.998513072985855e+29,
+      "p95AbsStrain": 8.752796517468273,
+      "zeroRestSpringMaxLength": 0.2998513072985855
+    },
+    {
+      "frame": 19,
+      "maxExtension": 2.1943870386616954e+29,
+      "maxCompression": -0.08593015242917512,
+      "maxAbsStrain": 2.1943870386616954e+29,
+      "p95AbsStrain": 10.489456614266885,
+      "zeroRestSpringMaxLength": 0.21943870386616957
+    },
+    {
+      "frame": 20,
+      "maxExtension": 4.0055690164356845e+29,
+      "maxCompression": 1.7662959983510973e-10,
+      "maxAbsStrain": 4.0055690164356845e+29,
+      "p95AbsStrain": 14.459025489193799,
+      "zeroRestSpringMaxLength": 0.4005569016435685
+    },
+    {
+      "frame": 21,
+      "maxExtension": 8.921212082385034e+29,
+      "maxCompression": -0.04302967755957665,
+      "maxAbsStrain": 8.921212082385034e+29,
+      "p95AbsStrain": 15.822384370408034,
+      "zeroRestSpringMaxLength": 0.8921212082385035
+    },
+    {
+      "frame": 22,
+      "maxExtension": 7.10679619886951e+29,
+      "maxCompression": 7.535772006406205e-10,
+      "maxAbsStrain": 7.10679619886951e+29,
+      "p95AbsStrain": 12.112630580711754,
+      "zeroRestSpringMaxLength": 0.710679619886951
+    },
+    {
+      "frame": 23,
+      "maxExtension": 7.782617942544708e+30,
+      "maxCompression": 7.951463931732405e-10,
+      "maxAbsStrain": 7.782617942544708e+30,
+      "p95AbsStrain": 10.15580707149348,
+      "zeroRestSpringMaxLength": 7.782617942544709
+    },
+    {
+      "frame": 24,
+      "maxExtension": 1.815504200837258e+30,
+      "maxCompression": 3.693723105158142e-10,
+      "maxAbsStrain": 1.815504200837258e+30,
+      "p95AbsStrain": 9.350175098913828,
+      "zeroRestSpringMaxLength": 1.815504200837258
+    },
+    {
+      "frame": 25,
+      "maxExtension": 5.3246880514107735e+29,
+      "maxCompression": 1.1100009800202315e-12,
+      "maxAbsStrain": 5.3246880514107735e+29,
+      "p95AbsStrain": 9.96376609446964,
+      "zeroRestSpringMaxLength": 0.5324688051410774
+    },
+    {
+      "frame": 26,
+      "maxExtension": 5.137616045957849e+28,
+      "maxCompression": 5.543188130729959e-11,
+      "maxAbsStrain": 5.137616045957849e+28,
+      "p95AbsStrain": 14.348213893505726,
+      "zeroRestSpringMaxLength": 0.0513761604595785
+    },
+    {
+      "frame": 27,
+      "maxExtension": 4.723773965592825e+28,
+      "maxCompression": -0.04412045626690664,
+      "maxAbsStrain": 4.723773965592825e+28,
+      "p95AbsStrain": 14.930605615102385,
+      "zeroRestSpringMaxLength": 0.04723773965592825
+    },
+    {
+      "frame": 28,
+      "maxExtension": 3.6862212622706585e+29,
+      "maxCompression": 2.4646951146678475e-14,
+      "maxAbsStrain": 3.6862212622706585e+29,
+      "p95AbsStrain": 9.045364255990146,
+      "zeroRestSpringMaxLength": 0.36862212622706586
+    },
+    {
+      "frame": 29,
+      "maxExtension": 1.8857251405540017e+30,
+      "maxCompression": 2.0383694732117874e-13,
+      "maxAbsStrain": 1.8857251405540017e+30,
+      "p95AbsStrain": 8.351954548251639,
+      "zeroRestSpringMaxLength": 1.8857251405540019
+    },
+    {
+      "frame": 30,
+      "maxExtension": 2.013793737834373e+30,
+      "maxCompression": -0.10589614278341153,
+      "maxAbsStrain": 2.013793737834373e+30,
+      "p95AbsStrain": 5.463289569734195,
+      "zeroRestSpringMaxLength": 2.0137937378343733
+    },
+    {
+      "frame": 31,
+      "maxExtension": 5.717548837528454e+30,
+      "maxCompression": -0.01750690920061193,
+      "maxAbsStrain": 5.717548837528454e+30,
+      "p95AbsStrain": 18.632346640867265,
+      "zeroRestSpringMaxLength": 5.7175488375284536
+    },
+    {
+      "frame": 32,
+      "maxExtension": 4.007745143864085e+30,
+      "maxCompression": -0.020051711111846005,
+      "maxAbsStrain": 4.007745143864085e+30,
+      "p95AbsStrain": 15.019098472617602,
+      "zeroRestSpringMaxLength": 4.007745143864085
+    },
+    {
+      "frame": 33,
+      "maxExtension": 9.059042449323152e+29,
+      "maxCompression": -0.012464581250666407,
+      "maxAbsStrain": 9.059042449323152e+29,
+      "p95AbsStrain": 18.719996380112587,
+      "zeroRestSpringMaxLength": 0.9059042449323153
+    },
+    {
+      "frame": 34,
+      "maxExtension": 1.5778013355776144e+30,
+      "maxCompression": -0.0008519764564406396,
+      "maxAbsStrain": 1.5778013355776144e+30,
+      "p95AbsStrain": 12.324365533074921,
+      "zeroRestSpringMaxLength": 1.5778013355776146
+    },
+    {
+      "frame": 35,
+      "maxExtension": 8.057358338962895e+29,
+      "maxCompression": -0.01459656449296498,
+      "maxAbsStrain": 8.057358338962895e+29,
+      "p95AbsStrain": 9.31868363664385,
+      "zeroRestSpringMaxLength": 0.8057358338962896
+    },
+    {
+      "frame": 36,
+      "maxExtension": 2.2532392218072156e+30,
+      "maxCompression": -0.10892201624388387,
+      "maxAbsStrain": 2.2532392218072156e+30,
+      "p95AbsStrain": 6.200524101897306,
+      "zeroRestSpringMaxLength": 2.253239221807216
+    },
+    {
+      "frame": 37,
+      "maxExtension": 6.448842456928695e+30,
+      "maxCompression": -0.08572457672678002,
+      "maxAbsStrain": 6.448842456928695e+30,
+      "p95AbsStrain": 8.637502544410635,
+      "zeroRestSpringMaxLength": 6.448842456928696
+    },
+    {
+      "frame": 38,
+      "maxExtension": 1.3826342190827794e+30,
+      "maxCompression": 7.901763843243259e-07,
+      "maxAbsStrain": 1.3826342190827794e+30,
+      "p95AbsStrain": 10.374471556888833,
+      "zeroRestSpringMaxLength": 1.3826342190827794
+    },
+    {
+      "frame": 39,
+      "maxExtension": 5.496838298032198e+29,
+      "maxCompression": 1.7298418253375303e-09,
+      "maxAbsStrain": 5.496838298032198e+29,
+      "p95AbsStrain": 7.556026056214911,
+      "zeroRestSpringMaxLength": 0.5496838298032198
+    },
+    {
+      "frame": 40,
+      "maxExtension": 1.389163763354138e+30,
+      "maxCompression": 2.1053603305176694e-11,
+      "maxAbsStrain": 1.389163763354138e+30,
+      "p95AbsStrain": 11.956256129903092,
+      "zeroRestSpringMaxLength": 1.389163763354138
+    },
+    {
+      "frame": 41,
+      "maxExtension": 5.4828811444545936e+29,
+      "maxCompression": 2.918603956292287e-07,
+      "maxAbsStrain": 5.4828811444545936e+29,
+      "p95AbsStrain": 19.791845347377677,
+      "zeroRestSpringMaxLength": 0.5482881144454594
+    },
+    {
+      "frame": 42,
+      "maxExtension": 1.7032154926798935e+30,
+      "maxCompression": 3.5395020248074616e-10,
+      "maxAbsStrain": 1.7032154926798935e+30,
+      "p95AbsStrain": 25.023589218676918,
+      "zeroRestSpringMaxLength": 1.7032154926798937
+    },
+    {
+      "frame": 43,
+      "maxExtension": 3.5603422973668233e+30,
+      "maxCompression": 1.943923511049661e-08,
+      "maxAbsStrain": 3.5603422973668233e+30,
+      "p95AbsStrain": 72.88799196960953,
+      "zeroRestSpringMaxLength": 3.5603422973668235
+    },
+    {
+      "frame": 44,
+      "maxExtension": 7.193414990145658e+30,
+      "maxCompression": 3.1934478106343533e-07,
+      "maxAbsStrain": 7.193414990145658e+30,
+      "p95AbsStrain": 56.80852547336439,
+      "zeroRestSpringMaxLength": 7.193414990145658
+    },
+    {
+      "frame": 45,
+      "maxExtension": 7.008740014458218e+30,
+      "maxCompression": 1.55263737422473e-08,
+      "maxAbsStrain": 7.008740014458218e+30,
+      "p95AbsStrain": 56.59504681749477,
+      "zeroRestSpringMaxLength": 7.008740014458219
+    },
+    {
+      "frame": 46,
+      "maxExtension": 1.1106784483628573e+30,
+      "maxCompression": 4.4619720140914865e-08,
+      "maxAbsStrain": 1.1106784483628573e+30,
+      "p95AbsStrain": 70.27210608076194,
+      "zeroRestSpringMaxLength": 1.1106784483628573
+    },
+    {
+      "frame": 47,
+      "maxExtension": 1.0198063370941865e+30,
+      "maxCompression": 2.7743945141267545e-08,
+      "maxAbsStrain": 1.0198063370941865e+30,
+      "p95AbsStrain": 51.91833633196062,
+      "zeroRestSpringMaxLength": 1.0198063370941866
+    },
+    {
+      "frame": 48,
+      "maxExtension": 7.083482001663084e+29,
+      "maxCompression": 4.0020187164202525e-10,
+      "maxAbsStrain": 7.083482001663084e+29,
+      "p95AbsStrain": 55.379060642807936,
+      "zeroRestSpringMaxLength": 0.7083482001663084
+    },
+    {
+      "frame": 49,
+      "maxExtension": 9.006652566395648e+29,
+      "maxCompression": 1.5051133672727701e-09,
+      "maxAbsStrain": 9.006652566395648e+29,
+      "p95AbsStrain": 46.53556428237468,
+      "zeroRestSpringMaxLength": 0.9006652566395649
+    },
+    {
+      "frame": 50,
+      "maxExtension": 2.4103176847233622e+30,
+      "maxCompression": 2.0190293881228172e-11,
+      "maxAbsStrain": 2.4103176847233622e+30,
+      "p95AbsStrain": 81.61669669897377,
+      "zeroRestSpringMaxLength": 2.4103176847233625
+    },
+    {
+      "frame": 51,
+      "maxExtension": 1.7147635870189895e+30,
+      "maxCompression": 5.322837510757239e-07,
+      "maxAbsStrain": 1.7147635870189895e+30,
+      "p95AbsStrain": 73.18280459591712,
+      "zeroRestSpringMaxLength": 1.7147635870189897
+    },
+    {
+      "frame": 52,
+      "maxExtension": 1.4461756757208997e+30,
+      "maxCompression": 2.605593901527925e-06,
+      "maxAbsStrain": 1.4461756757208997e+30,
+      "p95AbsStrain": 75.61248533050627,
+      "zeroRestSpringMaxLength": 1.4461756757209
+    },
+    {
+      "frame": 53,
+      "maxExtension": 9.266013958462666e+29,
+      "maxCompression": 2.8293418719016472e-09,
+      "maxAbsStrain": 9.266013958462666e+29,
+      "p95AbsStrain": 79.71920789845652,
+      "zeroRestSpringMaxLength": 0.9266013958462667
+    },
+    {
+      "frame": 54,
+      "maxExtension": 8.971515680533386e+29,
+      "maxCompression": 1.9673151996357774e-12,
+      "maxAbsStrain": 8.971515680533386e+29,
+      "p95AbsStrain": 92.0971960122175,
+      "zeroRestSpringMaxLength": 0.8971515680533386
+    },
+    {
+      "frame": 55,
+      "maxExtension": 2.0808266223927515e+30,
+      "maxCompression": 2.4225221828544363e-10,
+      "maxAbsStrain": 2.0808266223927515e+30,
+      "p95AbsStrain": 94.8462881012641,
+      "zeroRestSpringMaxLength": 2.0808266223927516
+    },
+    {
+      "frame": 56,
+      "maxExtension": 3.9567433745423956e+29,
+      "maxCompression": 1.851852005074761e-13,
+      "maxAbsStrain": 3.9567433745423956e+29,
+      "p95AbsStrain": 106.97995550920916,
+      "zeroRestSpringMaxLength": 0.3956743374542396
+    },
+    {
+      "frame": 57,
+      "maxExtension": 6.364745413216138e+29,
+      "maxCompression": 2.013278432855259e-12,
+      "maxAbsStrain": 6.364745413216138e+29,
+      "p95AbsStrain": 65.89241733346572,
+      "zeroRestSpringMaxLength": 0.6364745413216139
+    },
+    {
+      "frame": 58,
+      "maxExtension": 1.3056348940442777e+30,
+      "maxCompression": 2.966094037049061e-11,
+      "maxAbsStrain": 1.3056348940442777e+30,
+      "p95AbsStrain": 71.67230951631316,
+      "zeroRestSpringMaxLength": 1.305634894044278
+    },
+    {
+      "frame": 59,
+      "maxExtension": 6.252481366464195e+29,
+      "maxCompression": 4.0323300254385686e-13,
+      "maxAbsStrain": 6.252481366464195e+29,
+      "p95AbsStrain": 67.00176544081815,
+      "zeroRestSpringMaxLength": 0.6252481366464195
+    },
+    {
+      "frame": 60,
+      "maxExtension": 2.933664324848388e+29,
+      "maxCompression": 1.1259881915748338e-12,
+      "maxAbsStrain": 2.933664324848388e+29,
+      "p95AbsStrain": 54.30699075594877,
+      "zeroRestSpringMaxLength": 0.2933664324848388
+    },
+    {
+      "frame": 61,
+      "maxExtension": 5.76840984697009e+29,
+      "maxCompression": 4.270139797313277e-12,
+      "maxAbsStrain": 5.76840984697009e+29,
+      "p95AbsStrain": 61.80792061598739,
+      "zeroRestSpringMaxLength": 0.5768409846970091
+    },
+    {
+      "frame": 62,
+      "maxExtension": 1.841817751807078e+30,
+      "maxCompression": 1.0050626997326617e-11,
+      "maxAbsStrain": 1.841817751807078e+30,
+      "p95AbsStrain": 77.99145355025114,
+      "zeroRestSpringMaxLength": 1.8418177518070782
+    },
+    {
+      "frame": 63,
+      "maxExtension": 5.030361576741699e+29,
+      "maxCompression": 4.8959947207549703e-11,
+      "maxAbsStrain": 5.030361576741699e+29,
+      "p95AbsStrain": 53.782823492279455,
+      "zeroRestSpringMaxLength": 0.50303615767417
+    },
+    {
+      "frame": 64,
+      "maxExtension": 1.414128448178357e+30,
+      "maxCompression": 3.1175062531474396e-13,
+      "maxAbsStrain": 1.414128448178357e+30,
+      "p95AbsStrain": 90.10064033799478,
+      "zeroRestSpringMaxLength": 1.4141284481783571
+    },
+    {
+      "frame": 65,
+      "maxExtension": 5.226396765370326e+29,
+      "maxCompression": 4.1096015479524795e-12,
+      "maxAbsStrain": 5.226396765370326e+29,
+      "p95AbsStrain": 72.44767266395702,
+      "zeroRestSpringMaxLength": 0.5226396765370327
+    },
+    {
+      "frame": 66,
+      "maxExtension": 9.794485439248493e+29,
+      "maxCompression": 7.298162074675929e-12,
+      "maxAbsStrain": 9.794485439248493e+29,
+      "p95AbsStrain": 68.77189999884556,
+      "zeroRestSpringMaxLength": 0.9794485439248494
+    },
+    {
+      "frame": 67,
+      "maxExtension": 1.3166806248783072e+30,
+      "maxCompression": 3.414135640866789e-11,
+      "maxAbsStrain": 1.3166806248783072e+30,
+      "p95AbsStrain": 81.57418604788124,
+      "zeroRestSpringMaxLength": 1.3166806248783072
+    },
+    {
+      "frame": 68,
+      "maxExtension": 8.850636551272857e+29,
+      "maxCompression": -0.010266848408209017,
+      "maxAbsStrain": 8.850636551272857e+29,
+      "p95AbsStrain": 88.78342679045497,
+      "zeroRestSpringMaxLength": 0.8850636551272858
+    },
+    {
+      "frame": 69,
+      "maxExtension": 7.069272738586115e+29,
+      "maxCompression": 1.48991929904696e-13,
+      "maxAbsStrain": 7.069272738586115e+29,
+      "p95AbsStrain": 81.27467904982429,
+      "zeroRestSpringMaxLength": 0.7069272738586115
+    },
+    {
+      "frame": 70,
+      "maxExtension": 1.7661679964741605e+30,
+      "maxCompression": 1.1857181902996672e-13,
+      "maxAbsStrain": 1.7661679964741605e+30,
+      "p95AbsStrain": 73.64595240502452,
+      "zeroRestSpringMaxLength": 1.7661679964741606
+    },
+    {
+      "frame": 71,
+      "maxExtension": 5.557097475866487e+31,
+      "maxCompression": 2.8921309791485328e-12,
+      "maxAbsStrain": 5.557097475866487e+31,
+      "p95AbsStrain": 78.58459876145034,
+      "zeroRestSpringMaxLength": 55.570974758664875
+    },
+    {
+      "frame": 72,
+      "maxExtension": 8.478616490777084e+30,
+      "maxCompression": 5.284661597215745e-14,
+      "maxAbsStrain": 8.478616490777084e+30,
+      "p95AbsStrain": 99.0356114216594,
+      "zeroRestSpringMaxLength": 8.478616490777085
+    },
+    {
+      "frame": 73,
+      "maxExtension": 5.083702319443137e+30,
+      "maxCompression": 3.952393967665557e-14,
+      "maxAbsStrain": 5.083702319443137e+30,
+      "p95AbsStrain": 73.80279878607953,
+      "zeroRestSpringMaxLength": 5.083702319443138
+    },
+    {
+      "frame": 74,
+      "maxExtension": 4.628569329824834e+30,
+      "maxCompression": 1.496802681799636e-11,
+      "maxAbsStrain": 4.628569329824834e+30,
+      "p95AbsStrain": 69.16581332969939,
+      "zeroRestSpringMaxLength": 4.628569329824835
+    },
+    {
+      "frame": 75,
+      "maxExtension": 2.024865186748715e+29,
+      "maxCompression": 7.575184923780398e-11,
+      "maxAbsStrain": 2.024865186748715e+29,
+      "p95AbsStrain": 50.22881536189443,
+      "zeroRestSpringMaxLength": 0.2024865186748715
+    },
+    {
+      "frame": 76,
+      "maxExtension": 1.1792065180731381e+31,
+      "maxCompression": 8.282263763703668e-14,
+      "maxAbsStrain": 1.1792065180731381e+31,
+      "p95AbsStrain": 69.26346980728063,
+      "zeroRestSpringMaxLength": 11.792065180731383
+    },
+    {
+      "frame": 77,
+      "maxExtension": 5.316613900287905e+30,
+      "maxCompression": 1.8467449791614854e-12,
+      "maxAbsStrain": 5.316613900287905e+30,
+      "p95AbsStrain": 59.549672556185975,
+      "zeroRestSpringMaxLength": 5.316613900287906
+    },
+    {
+      "frame": 78,
+      "maxExtension": 3.9999546948423246e+29,
+      "maxCompression": 2.049471703458039e-13,
+      "maxAbsStrain": 3.9999546948423246e+29,
+      "p95AbsStrain": 40.653224678440736,
+      "zeroRestSpringMaxLength": 0.3999954694842325
+    },
+    {
+      "frame": 79,
+      "maxExtension": 6.144209565689776e+30,
+      "maxCompression": 7.86792853091356e-12,
+      "maxAbsStrain": 6.144209565689776e+30,
+      "p95AbsStrain": 34.83770634711051,
+      "zeroRestSpringMaxLength": 6.144209565689776
+    },
+    {
+      "frame": 80,
+      "maxExtension": 7.586398219630608e+30,
+      "maxCompression": 6.752820524980052e-12,
+      "maxAbsStrain": 7.586398219630608e+30,
+      "p95AbsStrain": 30.808477061408677,
+      "zeroRestSpringMaxLength": 7.586398219630609
+    },
+    {
+      "frame": 81,
+      "maxExtension": 4.405431600815597e+30,
+      "maxCompression": 4.6624926142158074e-12,
+      "maxAbsStrain": 4.405431600815597e+30,
+      "p95AbsStrain": 70.09768828002748,
+      "zeroRestSpringMaxLength": 4.405431600815597
+    },
+    {
+      "frame": 82,
+      "maxExtension": 1.5659085579958225e+30,
+      "maxCompression": 2.9125590828016357e-12,
+      "maxAbsStrain": 1.5659085579958225e+30,
+      "p95AbsStrain": 69.46691172778242,
+      "zeroRestSpringMaxLength": 1.5659085579958227
+    },
+    {
+      "frame": 83,
+      "maxExtension": 1.3144609863300824e+30,
+      "maxCompression": 5.595524044110789e-13,
+      "maxAbsStrain": 1.3144609863300824e+30,
+      "p95AbsStrain": 42.1419808754372,
+      "zeroRestSpringMaxLength": 1.3144609863300825
+    },
+    {
+      "frame": 84,
+      "maxExtension": 1.4844022476990062e+29,
+      "maxCompression": 2.479683125500287e-11,
+      "maxAbsStrain": 1.4844022476990062e+29,
+      "p95AbsStrain": 34.98273840928475,
+      "zeroRestSpringMaxLength": 0.14844022476990062
+    },
+    {
+      "frame": 85,
+      "maxExtension": 4.6750011185508975e+30,
+      "maxCompression": 3.703704010149522e-13,
+      "maxAbsStrain": 4.6750011185508975e+30,
+      "p95AbsStrain": 45.38568329694227,
+      "zeroRestSpringMaxLength": 4.675001118550898
+    },
+    {
+      "frame": 86,
+      "maxExtension": 4.52855118532139e+30,
+      "maxCompression": 1.5313994516930052e-10,
+      "maxAbsStrain": 4.52855118532139e+30,
+      "p95AbsStrain": 60.33025436004105,
+      "zeroRestSpringMaxLength": 4.5285511853213904
+    },
+    {
+      "frame": 87,
+      "maxExtension": 3.2687824740744094e+30,
+      "maxCompression": 4.798605957034852e-12,
+      "maxAbsStrain": 3.2687824740744094e+30,
+      "p95AbsStrain": 53.03371709523908,
+      "zeroRestSpringMaxLength": 3.26878247407441
+    },
+    {
+      "frame": 88,
+      "maxExtension": 6.210096692422505e+30,
+      "maxCompression": 2.992939229784497e-12,
+      "maxAbsStrain": 6.210096692422505e+30,
+      "p95AbsStrain": 52.69754499644545,
+      "zeroRestSpringMaxLength": 6.210096692422505
+    },
+    {
+      "frame": 89,
+      "maxExtension": 3.235868375379519e+30,
+      "maxCompression": 2.403810483997404e-11,
+      "maxAbsStrain": 3.235868375379519e+30,
+      "p95AbsStrain": 105.8076363828879,
+      "zeroRestSpringMaxLength": 3.2358683753795194
+    },
+    {
+      "frame": 90,
+      "maxExtension": 7.016454353833451e+30,
+      "maxCompression": 1.056044141023449e-12,
+      "maxAbsStrain": 7.016454353833451e+30,
+      "p95AbsStrain": 76.0601814439297,
+      "zeroRestSpringMaxLength": 7.016454353833452
+    },
+    {
+      "frame": 91,
+      "maxExtension": 1.0225387387757577e+31,
+      "maxCompression": 1.2387202374952722e-11,
+      "maxAbsStrain": 1.0225387387757577e+31,
+      "p95AbsStrain": 64.9765978270627,
+      "zeroRestSpringMaxLength": 10.225387387757577
+    },
+    {
+      "frame": 92,
+      "maxExtension": 3.3473112171059354e+30,
+      "maxCompression": 2.4327728720408004e-09,
+      "maxAbsStrain": 3.3473112171059354e+30,
+      "p95AbsStrain": 73.14606345268696,
+      "zeroRestSpringMaxLength": 3.347311217105936
+    },
+    {
+      "frame": 93,
+      "maxExtension": 7.087591742328372e+30,
+      "maxCompression": 1.9833943376568186e-09,
+      "maxAbsStrain": 7.087591742328372e+30,
+      "p95AbsStrain": 84.88337287355546,
+      "zeroRestSpringMaxLength": 7.087591742328373
+    },
+    {
+      "frame": 94,
+      "maxExtension": 1.5437645947560329e+30,
+      "maxCompression": 1.1342999872709925e-09,
+      "maxAbsStrain": 1.5437645947560329e+30,
+      "p95AbsStrain": 76.56870887158033,
+      "zeroRestSpringMaxLength": 1.543764594756033
+    },
+    {
+      "frame": 95,
+      "maxExtension": 7.377969079507253e+30,
+      "maxCompression": 7.519431743929772e-10,
+      "maxAbsStrain": 7.377969079507253e+30,
+      "p95AbsStrain": 89.36745783455845,
+      "zeroRestSpringMaxLength": 7.377969079507254
+    },
+    {
+      "frame": 96,
+      "maxExtension": 6.777429926166024e+30,
+      "maxCompression": 1.8142154445399683e-10,
+      "maxAbsStrain": 6.777429926166024e+30,
+      "p95AbsStrain": 85.46476182793685,
+      "zeroRestSpringMaxLength": 6.7774299261660245
+    },
+    {
+      "frame": 97,
+      "maxExtension": 1.0746765917129594e+31,
+      "maxCompression": 1.8708146143353588e-11,
+      "maxAbsStrain": 1.0746765917129594e+31,
+      "p95AbsStrain": 73.7818313981824,
+      "zeroRestSpringMaxLength": 10.746765917129595
+    },
+    {
+      "frame": 98,
+      "maxExtension": 2.1640974244942108e+31,
+      "maxCompression": 2.7921664980112837e-11,
+      "maxAbsStrain": 2.1640974244942108e+31,
+      "p95AbsStrain": 73.09016397386202,
+      "zeroRestSpringMaxLength": 21.64097424494211
+    },
+    {
+      "frame": 99,
+      "maxExtension": 1.8361466294633408e+31,
+      "maxCompression": 4.0878411766698264e-13,
+      "maxAbsStrain": 1.8361466294633408e+31,
+      "p95AbsStrain": 84.73121774709858,
+      "zeroRestSpringMaxLength": 18.36146629463341
+    },
+    {
+      "frame": 100,
+      "maxExtension": 8.164188878659027e+30,
+      "maxCompression": 3.3206770666538432e-12,
+      "maxAbsStrain": 8.164188878659027e+30,
+      "p95AbsStrain": 94.61989430070724,
+      "zeroRestSpringMaxLength": 8.164188878659028
+    },
+    {
+      "frame": 101,
+      "maxExtension": 6.814914836376742e+30,
+      "maxCompression": 5.134559444286424e-12,
+      "maxAbsStrain": 6.814914836376742e+30,
+      "p95AbsStrain": 77.58390221761947,
+      "zeroRestSpringMaxLength": 6.814914836376742
+    },
+    {
+      "frame": 102,
+      "maxExtension": 3.3546914279999775e+30,
+      "maxCompression": 1.272915106653727e-11,
+      "maxAbsStrain": 3.3546914279999775e+30,
+      "p95AbsStrain": 67.8526891524966,
+      "zeroRestSpringMaxLength": 3.354691427999978
+    },
+    {
+      "frame": 103,
+      "maxExtension": 5.246456043540304e+30,
+      "maxCompression": 2.6755042625836722e-11,
+      "maxAbsStrain": 5.246456043540304e+30,
+      "p95AbsStrain": 70.94705505147233,
+      "zeroRestSpringMaxLength": 5.246456043540305
+    },
+    {
+      "frame": 104,
+      "maxExtension": 4.709314748669005e+30,
+      "maxCompression": 1.3501946227734152e-09,
+      "maxAbsStrain": 4.709314748669005e+30,
+      "p95AbsStrain": 61.22914220157297,
+      "zeroRestSpringMaxLength": 4.709314748669006
+    },
+    {
+      "frame": 105,
+      "maxExtension": 4.805709347498947e+30,
+      "maxCompression": 5.590374829722577e-10,
+      "maxAbsStrain": 4.805709347498947e+30,
+      "p95AbsStrain": 60.55519813303174,
+      "zeroRestSpringMaxLength": 4.805709347498947
+    },
+    {
+      "frame": 106,
+      "maxExtension": 5.543367612960133e+30,
+      "maxCompression": 4.912092954612035e-11,
+      "maxAbsStrain": 5.543367612960133e+30,
+      "p95AbsStrain": 53.9831245364157,
+      "zeroRestSpringMaxLength": 5.543367612960133
+    },
+    {
+      "frame": 107,
+      "maxExtension": 7.268558158412641e+30,
+      "maxCompression": 1.5498713423767185e-13,
+      "maxAbsStrain": 7.268558158412641e+30,
+      "p95AbsStrain": 69.30139216422286,
+      "zeroRestSpringMaxLength": 7.268558158412642
+    },
+    {
+      "frame": 108,
+      "maxExtension": 1.2120069763519871e+31,
+      "maxCompression": 1.4592549391068133e-11,
+      "maxAbsStrain": 1.2120069763519871e+31,
+      "p95AbsStrain": 82.18785486529138,
+      "zeroRestSpringMaxLength": 12.120069763519872
+    },
+    {
+      "frame": 109,
+      "maxExtension": 6.873814574624732e+30,
+      "maxCompression": 6.439293542825908e-15,
+      "maxAbsStrain": 6.873814574624732e+30,
+      "p95AbsStrain": 90.53160597443834,
+      "zeroRestSpringMaxLength": 6.873814574624732
+    },
+    {
+      "frame": 110,
+      "maxExtension": 4.3263805249246653e+30,
+      "maxCompression": 1.7319479184152442e-14,
+      "maxAbsStrain": 4.3263805249246653e+30,
+      "p95AbsStrain": 96.79875224607413,
+      "zeroRestSpringMaxLength": 4.326380524924666
+    },
+    {
+      "frame": 111,
+      "maxExtension": 5.503604480814755e+30,
+      "maxCompression": 2.283284672444097e-12,
+      "maxAbsStrain": 5.503604480814755e+30,
+      "p95AbsStrain": 96.09330391060254,
+      "zeroRestSpringMaxLength": 5.503604480814755
+    },
+    {
+      "frame": 112,
+      "maxExtension": 4.580388376546684e+30,
+      "maxCompression": 6.20281603858075e-11,
+      "maxAbsStrain": 4.580388376546684e+30,
+      "p95AbsStrain": 84.80619851945322,
+      "zeroRestSpringMaxLength": 4.580388376546685
+    },
+    {
+      "frame": 113,
+      "maxExtension": 6.472488165541346e+29,
+      "maxCompression": 1.0050849041931542e-11,
+      "maxAbsStrain": 6.472488165541346e+29,
+      "p95AbsStrain": 84.96216919291143,
+      "zeroRestSpringMaxLength": 0.6472488165541346
+    },
+    {
+      "frame": 114,
+      "maxExtension": 3.577886203913215e+29,
+      "maxCompression": 4.4564352208453784e-13,
+      "maxAbsStrain": 3.577886203913215e+29,
+      "p95AbsStrain": 169.50289764136107,
+      "zeroRestSpringMaxLength": 0.35778862039132153
+    },
+    {
+      "frame": 115,
+      "maxExtension": 7.210678849626277e+30,
+      "maxCompression": 1.6030836842428897e-06,
+      "maxAbsStrain": 7.210678849626277e+30,
+      "p95AbsStrain": 116.18838837622363,
+      "zeroRestSpringMaxLength": 7.210678849626278
+    },
+    {
+      "frame": 116,
+      "maxExtension": 6.743400221698293e+30,
+      "maxCompression": 4.94844831777641e-10,
+      "maxAbsStrain": 6.743400221698293e+30,
+      "p95AbsStrain": 99.4670601937334,
+      "zeroRestSpringMaxLength": 6.743400221698294
+    },
+    {
+      "frame": 117,
+      "maxExtension": 4.1560979964781315e+30,
+      "maxCompression": 5.9967586452103205e-12,
+      "maxAbsStrain": 4.1560979964781315e+30,
+      "p95AbsStrain": 81.83804108097344,
+      "zeroRestSpringMaxLength": 4.156097996478132
+    },
+    {
+      "frame": 118,
+      "maxExtension": 4.2492122909068164e+30,
+      "maxCompression": 2.095716467032105e-08,
+      "maxAbsStrain": 4.2492122909068164e+30,
+      "p95AbsStrain": 99.30185728052251,
+      "zeroRestSpringMaxLength": 4.249212290906817
+    },
+    {
+      "frame": 119,
+      "maxExtension": 9.96210555555222e+30,
+      "maxCompression": 2.1708008723919647e-09,
+      "maxAbsStrain": 9.96210555555222e+30,
+      "p95AbsStrain": 114.15371733782379,
+      "zeroRestSpringMaxLength": 9.96210555555222
+    },
+    {
+      "frame": 120,
+      "maxExtension": 5.035717169612946e+30,
+      "maxCompression": 1.3148371280635729e-11,
+      "maxAbsStrain": 5.035717169612946e+30,
+      "p95AbsStrain": 98.91406140748441,
+      "zeroRestSpringMaxLength": 5.035717169612947
+    }
+  ],
+  "frameTriangleRows": [
+    {
+      "frame": 0,
+      "inversions": 0,
+      "collapses": 0,
+      "minAreaRatio": 0.9999999999998409,
+      "normalDotMin": 0.9999999999999996
+    },
+    {
+      "frame": 1,
+      "inversions": 345,
+      "collapses": 0,
+      "minAreaRatio": 0.7914825859716451,
+      "normalDotMin": -0.9998651408299505
+    },
+    {
+      "frame": 2,
+      "inversions": 417,
+      "collapses": 0,
+      "minAreaRatio": 0.5632005346151691,
+      "normalDotMin": -0.9993180897609854
+    },
+    {
+      "frame": 3,
+      "inversions": 440,
+      "collapses": 0,
+      "minAreaRatio": 0.9965234766159661,
+      "normalDotMin": -0.9996500836991437
+    },
+    {
+      "frame": 4,
+      "inversions": 436,
+      "collapses": 0,
+      "minAreaRatio": 0.8334483934521005,
+      "normalDotMin": -0.9998881977733621
+    },
+    {
+      "frame": 5,
+      "inversions": 463,
+      "collapses": 0,
+      "minAreaRatio": 0.593156868943126,
+      "normalDotMin": -0.9998187579104024
+    },
+    {
+      "frame": 6,
+      "inversions": 551,
+      "collapses": 0,
+      "minAreaRatio": 0.952347016889314,
+      "normalDotMin": -0.9992373310082322
+    },
+    {
+      "frame": 7,
+      "inversions": 810,
+      "collapses": 0,
+      "minAreaRatio": 0.8534842209323734,
+      "normalDotMin": -0.9987133583172184
+    },
+    {
+      "frame": 8,
+      "inversions": 1003,
+      "collapses": 0,
+      "minAreaRatio": 0.8605327020082518,
+      "normalDotMin": -0.9980470945423632
+    },
+    {
+      "frame": 9,
+      "inversions": 1096,
+      "collapses": 0,
+      "minAreaRatio": 0.6073786831339274,
+      "normalDotMin": -0.999285557495423
+    },
+    {
+      "frame": 10,
+      "inversions": 1153,
+      "collapses": 0,
+      "minAreaRatio": 0.9994166730518548,
+      "normalDotMin": -0.997157119183417
+    },
+    {
+      "frame": 11,
+      "inversions": 1171,
+      "collapses": 0,
+      "minAreaRatio": 0.9951981275112592,
+      "normalDotMin": -0.9993432627309898
+    },
+    {
+      "frame": 12,
+      "inversions": 1133,
+      "collapses": 0,
+      "minAreaRatio": 0.9284251417979773,
+      "normalDotMin": -0.9996779744763356
+    },
+    {
+      "frame": 13,
+      "inversions": 1168,
+      "collapses": 0,
+      "minAreaRatio": 0.8904947736799435,
+      "normalDotMin": -0.9990003574606452
+    },
+    {
+      "frame": 14,
+      "inversions": 1200,
+      "collapses": 0,
+      "minAreaRatio": 0.3670657643262771,
+      "normalDotMin": -0.9996604742572157
+    },
+    {
+      "frame": 15,
+      "inversions": 1249,
+      "collapses": 0,
+      "minAreaRatio": 0.6364872064787227,
+      "normalDotMin": -0.999652712131912
+    },
+    {
+      "frame": 16,
+      "inversions": 1292,
+      "collapses": 0,
+      "minAreaRatio": 0.7683559437067821,
+      "normalDotMin": -0.9998228370831588
+    },
+    {
+      "frame": 17,
+      "inversions": 1456,
+      "collapses": 0,
+      "minAreaRatio": 0.9640266292330751,
+      "normalDotMin": -0.9992598118531628
+    },
+    {
+      "frame": 18,
+      "inversions": 1536,
+      "collapses": 0,
+      "minAreaRatio": 0.7888993117628306,
+      "normalDotMin": -0.999856291177951
+    },
+    {
+      "frame": 19,
+      "inversions": 1764,
+      "collapses": 0,
+      "minAreaRatio": 0.7912518941731798,
+      "normalDotMin": -0.999945555581498
+    },
+    {
+      "frame": 20,
+      "inversions": 1973,
+      "collapses": 0,
+      "minAreaRatio": 0.9853783337319405,
+      "normalDotMin": -0.9995075350769687
+    },
+    {
+      "frame": 21,
+      "inversions": 2302,
+      "collapses": 0,
+      "minAreaRatio": 0.845773007188424,
+      "normalDotMin": -0.9999772486538333
+    },
+    {
+      "frame": 22,
+      "inversions": 2396,
+      "collapses": 0,
+      "minAreaRatio": 0.9011890940805989,
+      "normalDotMin": -0.999657977863586
+    },
+    {
+      "frame": 23,
+      "inversions": 2680,
+      "collapses": 0,
+      "minAreaRatio": 0.9020073088091911,
+      "normalDotMin": -0.9985203843361652
+    },
+    {
+      "frame": 24,
+      "inversions": 2813,
+      "collapses": 0,
+      "minAreaRatio": 0.7949886553360669,
+      "normalDotMin": -0.999362657775555
+    },
+    {
+      "frame": 25,
+      "inversions": 2878,
+      "collapses": 0,
+      "minAreaRatio": 0.9227950336213572,
+      "normalDotMin": -0.9987115345098102
+    },
+    {
+      "frame": 26,
+      "inversions": 3009,
+      "collapses": 0,
+      "minAreaRatio": 0.9700010712446442,
+      "normalDotMin": -0.9999226233716816
+    },
+    {
+      "frame": 27,
+      "inversions": 2985,
+      "collapses": 0,
+      "minAreaRatio": 0.9514904467590494,
+      "normalDotMin": -0.9996284110286883
+    },
+    {
+      "frame": 28,
+      "inversions": 2986,
+      "collapses": 0,
+      "minAreaRatio": 0.8074869478481751,
+      "normalDotMin": -0.999330571501285
+    },
+    {
+      "frame": 29,
+      "inversions": 3069,
+      "collapses": 0,
+      "minAreaRatio": 0.713296750388313,
+      "normalDotMin": -0.9999352006545683
+    },
+    {
+      "frame": 30,
+      "inversions": 3162,
+      "collapses": 0,
+      "minAreaRatio": 0.9728831281365677,
+      "normalDotMin": -0.999928874362065
+    },
+    {
+      "frame": 31,
+      "inversions": 3089,
+      "collapses": 0,
+      "minAreaRatio": 0.8452424754015052,
+      "normalDotMin": -0.9999223054340025
+    },
+    {
+      "frame": 32,
+      "inversions": 3082,
+      "collapses": 0,
+      "minAreaRatio": 0.9670167055965673,
+      "normalDotMin": -0.9998743109307576
+    },
+    {
+      "frame": 33,
+      "inversions": 3099,
+      "collapses": 0,
+      "minAreaRatio": 0.8732027132545398,
+      "normalDotMin": -0.9999071454784698
+    },
+    {
+      "frame": 34,
+      "inversions": 3014,
+      "collapses": 0,
+      "minAreaRatio": 0.9730515473294115,
+      "normalDotMin": -0.99974710185908
+    },
+    {
+      "frame": 35,
+      "inversions": 3455,
+      "collapses": 0,
+      "minAreaRatio": 0.26784536655189056,
+      "normalDotMin": -0.9998342146543666
+    },
+    {
+      "frame": 36,
+      "inversions": 3422,
+      "collapses": 0,
+      "minAreaRatio": 0.7846852217134843,
+      "normalDotMin": -0.9994808806956191
+    },
+    {
+      "frame": 37,
+      "inversions": 3328,
+      "collapses": 0,
+      "minAreaRatio": 0.8608179144425141,
+      "normalDotMin": -0.9999659643091215
+    },
+    {
+      "frame": 38,
+      "inversions": 3508,
+      "collapses": 0,
+      "minAreaRatio": 0.6410524620140147,
+      "normalDotMin": -0.9996563005200197
+    },
+    {
+      "frame": 39,
+      "inversions": 3456,
+      "collapses": 0,
+      "minAreaRatio": 0.7958574979844886,
+      "normalDotMin": -0.9997295479053738
+    },
+    {
+      "frame": 40,
+      "inversions": 3524,
+      "collapses": 0,
+      "minAreaRatio": 0.9362110302686938,
+      "normalDotMin": -0.9998722357850403
+    },
+    {
+      "frame": 41,
+      "inversions": 3591,
+      "collapses": 0,
+      "minAreaRatio": 0.6701115627637,
+      "normalDotMin": -0.9995437444537226
+    },
+    {
+      "frame": 42,
+      "inversions": 3615,
+      "collapses": 0,
+      "minAreaRatio": 0.9425344033971073,
+      "normalDotMin": -0.99955914202747
+    },
+    {
+      "frame": 43,
+      "inversions": 3727,
+      "collapses": 0,
+      "minAreaRatio": 0.905622537352401,
+      "normalDotMin": -0.9999681750946181
+    },
+    {
+      "frame": 44,
+      "inversions": 4104,
+      "collapses": 0,
+      "minAreaRatio": 0.7373855069190886,
+      "normalDotMin": -0.9999930670424753
+    },
+    {
+      "frame": 45,
+      "inversions": 4107,
+      "collapses": 0,
+      "minAreaRatio": 0.9529992927383063,
+      "normalDotMin": -0.9995540275194146
+    },
+    {
+      "frame": 46,
+      "inversions": 4182,
+      "collapses": 0,
+      "minAreaRatio": 0.5207543516570358,
+      "normalDotMin": -0.9996675839762104
+    },
+    {
+      "frame": 47,
+      "inversions": 4289,
+      "collapses": 0,
+      "minAreaRatio": 0.9570872376936017,
+      "normalDotMin": -0.9985862881861783
+    },
+    {
+      "frame": 48,
+      "inversions": 4295,
+      "collapses": 0,
+      "minAreaRatio": 0.869593299572354,
+      "normalDotMin": -0.9998053346487183
+    },
+    {
+      "frame": 49,
+      "inversions": 4320,
+      "collapses": 0,
+      "minAreaRatio": 0.9708148183254531,
+      "normalDotMin": -0.9998188781357613
+    },
+    {
+      "frame": 50,
+      "inversions": 4345,
+      "collapses": 0,
+      "minAreaRatio": 0.9693074502608512,
+      "normalDotMin": -0.9995901528189836
+    },
+    {
+      "frame": 51,
+      "inversions": 4246,
+      "collapses": 0,
+      "minAreaRatio": 0.9037432719495442,
+      "normalDotMin": -0.9997545599673312
+    },
+    {
+      "frame": 52,
+      "inversions": 4368,
+      "collapses": 0,
+      "minAreaRatio": 0.5685702150832631,
+      "normalDotMin": -0.9995814004045154
+    },
+    {
+      "frame": 53,
+      "inversions": 4423,
+      "collapses": 0,
+      "minAreaRatio": 0.6737549890707158,
+      "normalDotMin": -0.9999550281018688
+    },
+    {
+      "frame": 54,
+      "inversions": 4478,
+      "collapses": 0,
+      "minAreaRatio": 0.9955389337105953,
+      "normalDotMin": -0.9998665824701638
+    },
+    {
+      "frame": 55,
+      "inversions": 4498,
+      "collapses": 0,
+      "minAreaRatio": 0.9972496948145696,
+      "normalDotMin": -0.99984106481895
+    },
+    {
+      "frame": 56,
+      "inversions": 4469,
+      "collapses": 0,
+      "minAreaRatio": 0.9941629613187893,
+      "normalDotMin": -0.9999833304115185
+    },
+    {
+      "frame": 57,
+      "inversions": 4465,
+      "collapses": 0,
+      "minAreaRatio": 0.9906785298288547,
+      "normalDotMin": -0.9995666870560264
+    },
+    {
+      "frame": 58,
+      "inversions": 4479,
+      "collapses": 0,
+      "minAreaRatio": 0.7203894784249603,
+      "normalDotMin": -0.9998005306045104
+    },
+    {
+      "frame": 59,
+      "inversions": 4487,
+      "collapses": 0,
+      "minAreaRatio": 0.9972781594946821,
+      "normalDotMin": -0.999614306239432
+    },
+    {
+      "frame": 60,
+      "inversions": 4470,
+      "collapses": 0,
+      "minAreaRatio": 0.999983294517086,
+      "normalDotMin": -0.9995193209846189
+    },
+    {
+      "frame": 61,
+      "inversions": 4519,
+      "collapses": 0,
+      "minAreaRatio": 0.9403085288020712,
+      "normalDotMin": -0.9999937353436161
+    },
+    {
+      "frame": 62,
+      "inversions": 4578,
+      "collapses": 0,
+      "minAreaRatio": 0.9878840007890296,
+      "normalDotMin": -0.9995292442260206
+    },
+    {
+      "frame": 63,
+      "inversions": 4589,
+      "collapses": 0,
+      "minAreaRatio": 0.9736826091886132,
+      "normalDotMin": -0.9999830560863805
+    },
+    {
+      "frame": 64,
+      "inversions": 4530,
+      "collapses": 0,
+      "minAreaRatio": 0.6169245135583384,
+      "normalDotMin": -0.9999819265170251
+    },
+    {
+      "frame": 65,
+      "inversions": 4514,
+      "collapses": 0,
+      "minAreaRatio": 0.9961354981258828,
+      "normalDotMin": -0.999855366769398
+    },
+    {
+      "frame": 66,
+      "inversions": 4533,
+      "collapses": 0,
+      "minAreaRatio": 0.9944153137621621,
+      "normalDotMin": -0.9999699839084862
+    },
+    {
+      "frame": 67,
+      "inversions": 4447,
+      "collapses": 0,
+      "minAreaRatio": 0.8377697202558965,
+      "normalDotMin": -0.9995461696319207
+    },
+    {
+      "frame": 68,
+      "inversions": 4442,
+      "collapses": 0,
+      "minAreaRatio": 0.9154365776786971,
+      "normalDotMin": -0.999990289963873
+    },
+    {
+      "frame": 69,
+      "inversions": 4420,
+      "collapses": 0,
+      "minAreaRatio": 0.9975630527011589,
+      "normalDotMin": -0.999699592924469
+    },
+    {
+      "frame": 70,
+      "inversions": 4427,
+      "collapses": 0,
+      "minAreaRatio": 0.9725448009411831,
+      "normalDotMin": -0.9994859948615836
+    },
+    {
+      "frame": 71,
+      "inversions": 4481,
+      "collapses": 0,
+      "minAreaRatio": 0.999647176405461,
+      "normalDotMin": -0.9999358909601249
+    },
+    {
+      "frame": 72,
+      "inversions": 4467,
+      "collapses": 0,
+      "minAreaRatio": 0.9784748648061028,
+      "normalDotMin": -0.999956234324103
+    },
+    {
+      "frame": 73,
+      "inversions": 4460,
+      "collapses": 0,
+      "minAreaRatio": 0.9758588583498177,
+      "normalDotMin": -0.9999880380966341
+    },
+    {
+      "frame": 74,
+      "inversions": 4467,
+      "collapses": 0,
+      "minAreaRatio": 0.9846853113257557,
+      "normalDotMin": -0.9998724628594504
+    },
+    {
+      "frame": 75,
+      "inversions": 4448,
+      "collapses": 0,
+      "minAreaRatio": 0.5798703660739386,
+      "normalDotMin": -0.9998429552553889
+    },
+    {
+      "frame": 76,
+      "inversions": 4451,
+      "collapses": 0,
+      "minAreaRatio": 0.9810132732759788,
+      "normalDotMin": -0.9999624686852107
+    },
+    {
+      "frame": 77,
+      "inversions": 4479,
+      "collapses": 0,
+      "minAreaRatio": 0.9814547711033141,
+      "normalDotMin": -0.9997746364140289
+    },
+    {
+      "frame": 78,
+      "inversions": 4444,
+      "collapses": 0,
+      "minAreaRatio": 0.4692016651217439,
+      "normalDotMin": -0.9996194095463615
+    },
+    {
+      "frame": 79,
+      "inversions": 4437,
+      "collapses": 0,
+      "minAreaRatio": 0.9968335745550597,
+      "normalDotMin": -0.9997950342941972
+    },
+    {
+      "frame": 80,
+      "inversions": 4430,
+      "collapses": 0,
+      "minAreaRatio": 0.9958821922192902,
+      "normalDotMin": -0.9989990954515555
+    },
+    {
+      "frame": 81,
+      "inversions": 4417,
+      "collapses": 0,
+      "minAreaRatio": 0.9999394433254347,
+      "normalDotMin": -0.9999543225166182
+    },
+    {
+      "frame": 82,
+      "inversions": 4383,
+      "collapses": 0,
+      "minAreaRatio": 0.9783611798561964,
+      "normalDotMin": -0.9997992174252607
+    },
+    {
+      "frame": 83,
+      "inversions": 4379,
+      "collapses": 0,
+      "minAreaRatio": 0.9999350848962733,
+      "normalDotMin": -0.9994839401724915
+    },
+    {
+      "frame": 84,
+      "inversions": 4446,
+      "collapses": 0,
+      "minAreaRatio": 0.9581402589438057,
+      "normalDotMin": -0.9999756288889369
+    },
+    {
+      "frame": 85,
+      "inversions": 4439,
+      "collapses": 0,
+      "minAreaRatio": 0.981102453198001,
+      "normalDotMin": -0.9999962380152113
+    },
+    {
+      "frame": 86,
+      "inversions": 4487,
+      "collapses": 0,
+      "minAreaRatio": 0.9902213699202731,
+      "normalDotMin": -0.9997176526188989
+    },
+    {
+      "frame": 87,
+      "inversions": 4473,
+      "collapses": 0,
+      "minAreaRatio": 0.6583761118113172,
+      "normalDotMin": -0.9999792197533314
+    },
+    {
+      "frame": 88,
+      "inversions": 4502,
+      "collapses": 0,
+      "minAreaRatio": 0.9991475039013703,
+      "normalDotMin": -0.9999977945788219
+    },
+    {
+      "frame": 89,
+      "inversions": 4560,
+      "collapses": 0,
+      "minAreaRatio": 0.9953587736560326,
+      "normalDotMin": -0.9999011426175715
+    },
+    {
+      "frame": 90,
+      "inversions": 4524,
+      "collapses": 0,
+      "minAreaRatio": 0.4871101490981535,
+      "normalDotMin": -0.999781044796221
+    },
+    {
+      "frame": 91,
+      "inversions": 4509,
+      "collapses": 0,
+      "minAreaRatio": 0.986156243474734,
+      "normalDotMin": -0.9999508482147935
+    },
+    {
+      "frame": 92,
+      "inversions": 4540,
+      "collapses": 0,
+      "minAreaRatio": 0.969601080647725,
+      "normalDotMin": -0.9998299147239853
+    },
+    {
+      "frame": 93,
+      "inversions": 4622,
+      "collapses": 0,
+      "minAreaRatio": 0.8942462158962944,
+      "normalDotMin": -0.999528172039421
+    },
+    {
+      "frame": 94,
+      "inversions": 4651,
+      "collapses": 0,
+      "minAreaRatio": 0.9214768908922094,
+      "normalDotMin": -0.9995251184940386
+    },
+    {
+      "frame": 95,
+      "inversions": 4801,
+      "collapses": 0,
+      "minAreaRatio": 0.714410743985878,
+      "normalDotMin": -0.9997185603462614
+    },
+    {
+      "frame": 96,
+      "inversions": 4745,
+      "collapses": 0,
+      "minAreaRatio": 0.9981588972882429,
+      "normalDotMin": -0.9997114616592025
+    },
+    {
+      "frame": 97,
+      "inversions": 4737,
+      "collapses": 0,
+      "minAreaRatio": 0.9986269592605163,
+      "normalDotMin": -0.9996630385986851
+    },
+    {
+      "frame": 98,
+      "inversions": 4793,
+      "collapses": 0,
+      "minAreaRatio": 0.9961515754748455,
+      "normalDotMin": -0.9998259686486747
+    },
+    {
+      "frame": 99,
+      "inversions": 4770,
+      "collapses": 0,
+      "minAreaRatio": 0.7719352902417453,
+      "normalDotMin": -0.9999670035010432
+    },
+    {
+      "frame": 100,
+      "inversions": 4753,
+      "collapses": 0,
+      "minAreaRatio": 0.9164527255186903,
+      "normalDotMin": -0.9998319121606829
+    },
+    {
+      "frame": 101,
+      "inversions": 4712,
+      "collapses": 0,
+      "minAreaRatio": 0.9929592573442401,
+      "normalDotMin": -0.9999955916882306
+    },
+    {
+      "frame": 102,
+      "inversions": 4678,
+      "collapses": 0,
+      "minAreaRatio": 0.920420592309073,
+      "normalDotMin": -0.9994844617303114
+    },
+    {
+      "frame": 103,
+      "inversions": 4641,
+      "collapses": 0,
+      "minAreaRatio": 0.9365343471832192,
+      "normalDotMin": -0.9998504005268211
+    },
+    {
+      "frame": 104,
+      "inversions": 4654,
+      "collapses": 0,
+      "minAreaRatio": 0.6115196897781027,
+      "normalDotMin": -0.999821711681737
+    },
+    {
+      "frame": 105,
+      "inversions": 4597,
+      "collapses": 0,
+      "minAreaRatio": 0.8010264437069424,
+      "normalDotMin": -0.9999163981557606
+    },
+    {
+      "frame": 106,
+      "inversions": 4615,
+      "collapses": 0,
+      "minAreaRatio": 0.9488655000322563,
+      "normalDotMin": -0.9997268779718217
+    },
+    {
+      "frame": 107,
+      "inversions": 4630,
+      "collapses": 0,
+      "minAreaRatio": 0.9984940141661988,
+      "normalDotMin": -0.9999738955851344
+    },
+    {
+      "frame": 108,
+      "inversions": 4654,
+      "collapses": 0,
+      "minAreaRatio": 0.983834134368189,
+      "normalDotMin": -0.9998554509282216
+    },
+    {
+      "frame": 109,
+      "inversions": 4583,
+      "collapses": 0,
+      "minAreaRatio": 0.8860433647193927,
+      "normalDotMin": -0.9997248085937861
+    },
+    {
+      "frame": 110,
+      "inversions": 4582,
+      "collapses": 0,
+      "minAreaRatio": 0.9995713232399366,
+      "normalDotMin": -0.9998039840448176
+    },
+    {
+      "frame": 111,
+      "inversions": 4632,
+      "collapses": 0,
+      "minAreaRatio": 0.9155704977803716,
+      "normalDotMin": -0.999873819319346
+    },
+    {
+      "frame": 112,
+      "inversions": 4692,
+      "collapses": 0,
+      "minAreaRatio": 0.7037522417765729,
+      "normalDotMin": -0.9999630206302113
+    },
+    {
+      "frame": 113,
+      "inversions": 4641,
+      "collapses": 0,
+      "minAreaRatio": 0.8527090369531135,
+      "normalDotMin": -0.9997844857222223
+    },
+    {
+      "frame": 114,
+      "inversions": 4671,
+      "collapses": 0,
+      "minAreaRatio": 0.8189079845795645,
+      "normalDotMin": -0.9999068396416414
+    },
+    {
+      "frame": 115,
+      "inversions": 4749,
+      "collapses": 0,
+      "minAreaRatio": 0.3844853510033799,
+      "normalDotMin": -0.9998874272944097
+    },
+    {
+      "frame": 116,
+      "inversions": 4682,
+      "collapses": 0,
+      "minAreaRatio": 0.749813677931248,
+      "normalDotMin": -0.9998106635632326
+    },
+    {
+      "frame": 117,
+      "inversions": 4664,
+      "collapses": 0,
+      "minAreaRatio": 0.8752100465857653,
+      "normalDotMin": -0.9998467059571191
+    },
+    {
+      "frame": 118,
+      "inversions": 4719,
+      "collapses": 0,
+      "minAreaRatio": 0.821348694355889,
+      "normalDotMin": -0.9999522779113852
+    },
+    {
+      "frame": 119,
+      "inversions": 4671,
+      "collapses": 0,
+      "minAreaRatio": 0.9792410441584517,
+      "normalDotMin": -0.9997295731274838
+    },
+    {
+      "frame": 120,
+      "inversions": 4682,
+      "collapses": 0,
+      "minAreaRatio": 0.9948158708638676,
+      "normalDotMin": -0.9999269894422124
+    }
+  ]
+}
