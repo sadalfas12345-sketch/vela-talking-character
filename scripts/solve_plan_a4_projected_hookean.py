@@ -19,7 +19,7 @@ import numpy as np
 from scipy import linalg
 from scipy import sparse
 from scipy.sparse.csgraph import connected_components
-from scipy.sparse.linalg import LinearOperator, cg, lsqr, splu
+from scipy.sparse.linalg import LinearOperator, lsqr, splu
 
 
 def load_base():
@@ -138,10 +138,6 @@ def solve_component_projected(base, x0, edges, rest, triangles, bary, target, ma
         # vertex-space KKT factorization are formed.  LSQR solves the
         # linearized spring residual directly and is robust to the floppy
         # stretching modes that made the old KKT update explode.
-        def hess_vec(v):
-            tangent = projector.project(v)
-            return projector.project(np.asarray(J.T @ (J @ tangent)).reshape(-1)) + 1e-8 * tangent
-
         def tangent_forward(v):
             return J @ projector.project(v)
 

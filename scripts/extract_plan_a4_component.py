@@ -24,9 +24,9 @@ def main():
     B = src["constraintBary"].astype(float)
     edges = np.vstack((src["edgeSprings"], src["virtualSprings"])).astype(np.int64)
     rest = np.concatenate((src["edgeRestLengths"], src["virtualRestLengths"])).astype(float)
-    graph_edges = np.vstack((F[:, [0, 1]], F[:, [1, 2]], F[:, [2, 0]], src["virtualSprings"])).T
-    graph_edges = graph_edges.T if graph_edges.shape[0] == 2 else graph_edges
-    conn = sparse.coo_matrix((np.ones(len(graph_edges)), (graph_edges[:, 0], graph_edges[:, 1])), shape=(len(V), len(V))).tocsr()
+    # Component identity is defined by the complete spring graph, including
+    # original mesh springs and virtual seams, not by triangle edges alone.
+    conn = sparse.coo_matrix((np.ones(len(edges)), (edges[:, 0], edges[:, 1])), shape=(len(V), len(V))).tocsr()
     count, labels = connected_components(conn, directed=False)
     if a.component < 0 or a.component >= count:
         raise SystemExit(f"component {a.component} out of range 0..{count - 1}")
