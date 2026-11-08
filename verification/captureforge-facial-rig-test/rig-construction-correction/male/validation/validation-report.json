@@ -1,0 +1,202 @@
+{
+  "character": "male",
+  "status": "COMPLETE",
+  "frames": 121,
+  "dofs": 156,
+  "mapped_landmarks": 478,
+  "eye_width": 0.29974316785339844,
+  "region_metrics": {
+    "eyebrows": {
+      "landmark_count": 17,
+      "mean_expected_magnitude_norm": 0.025855354422242117,
+      "mean_predicted_magnitude_norm": 0.011913020104640596,
+      "mean_actual_magnitude_norm": 0.011859473122520454,
+      "predicted_mean_error_norm": 0.023014020049365022,
+      "predicted_p95_error_norm": 0.03779246251186084,
+      "actual_mean_error_norm": 0.02303031604552438,
+      "actual_p95_error_norm": 0.03825548963064447
+    },
+    "eyelids": {
+      "landmark_count": 18,
+      "mean_expected_magnitude_norm": 0.015075755233643922,
+      "mean_predicted_magnitude_norm": 0.009631164546314654,
+      "mean_actual_magnitude_norm": 0.009536886294663038,
+      "predicted_mean_error_norm": 0.014084777468962782,
+      "predicted_p95_error_norm": 0.025153773698889877,
+      "actual_mean_error_norm": 0.014107272648161985,
+      "actual_p95_error_norm": 0.025177798103520603
+    },
+    "cheeks": {
+      "landmark_count": 22,
+      "mean_expected_magnitude_norm": 0.02485807359211382,
+      "mean_predicted_magnitude_norm": 0.012345292846152746,
+      "mean_actual_magnitude_norm": 0.012253976851197487,
+      "predicted_mean_error_norm": 0.02371310902403469,
+      "predicted_p95_error_norm": 0.04820859557555026,
+      "actual_mean_error_norm": 0.023708154521221082,
+      "actual_p95_error_norm": 0.04830607640610966
+    },
+    "lips": {
+      "landmark_count": 25,
+      "mean_expected_magnitude_norm": 0.037106737642630026,
+      "mean_predicted_magnitude_norm": 0.019813770812938877,
+      "mean_actual_magnitude_norm": 0.019639322155996782,
+      "predicted_mean_error_norm": 0.021140007241079777,
+      "predicted_p95_error_norm": 0.04405785863792311,
+      "actual_mean_error_norm": 0.021211970544000834,
+      "actual_p95_error_norm": 0.04429154316510592
+    },
+    "mouth_corners": {
+      "landmark_count": 6,
+      "mean_expected_magnitude_norm": 0.02588019232465235,
+      "mean_predicted_magnitude_norm": 0.021824580182346474,
+      "mean_actual_magnitude_norm": 0.021624353837239606,
+      "predicted_mean_error_norm": 0.010088078982524588,
+      "predicted_p95_error_norm": 0.025544518787109557,
+      "actual_mean_error_norm": 0.009923315033807792,
+      "actual_p95_error_norm": 0.02550627141139149
+    },
+    "jaw": {
+      "landmark_count": 15,
+      "mean_expected_magnitude_norm": 0.025006787851996885,
+      "mean_predicted_magnitude_norm": 0.021369474850108792,
+      "mean_actual_magnitude_norm": 0.021192975352197795,
+      "predicted_mean_error_norm": 0.018148829880469914,
+      "predicted_p95_error_norm": 0.053794353173023855,
+      "actual_mean_error_norm": 0.018153524034921438,
+      "actual_p95_error_norm": 0.05422200035587395
+    },
+    "other": {
+      "landmark_count": 0,
+      "mean_expected_magnitude_norm": 0.02367653852904101,
+      "mean_predicted_magnitude_norm": 0.012942749852444889,
+      "mean_actual_magnitude_norm": 0.01289695309960198,
+      "predicted_mean_error_norm": 0.018841977900319953,
+      "predicted_p95_error_norm": 0.04543033280600568,
+      "actual_mean_error_norm": 0.018815638406408743,
+      "actual_p95_error_norm": 0.04545817302035876
+    }
+  },
+  "geometry_sampled_frames": [
+    {
+      "frame": 0,
+      "max_edge_strain": 0.013275566264465244,
+      "p95_edge_strain": 0.00042733916633720307,
+      "min_area_ratio": 0.9900571780921327,
+      "collapsed_triangles": 0,
+      "invalid_coordinates": 0
+    },
+    {
+      "frame": 10,
+      "max_edge_strain": 0.23841777436109468,
+      "p95_edge_strain": 0.0030775249442108877,
+      "min_area_ratio": 0.7729464268647135,
+      "collapsed_triangles": 0,
+      "invalid_coordinates": 0
+    },
+    {
+      "frame": 20,
+      "max_edge_strain": 0.23480005599845888,
+      "p95_edge_strain": 0.005450836531308094,
+      "min_area_ratio": 0.7635248990242789,
+      "collapsed_triangles": 0,
+      "invalid_coordinates": 0
+    },
+    {
+      "frame": 30,
+      "max_edge_strain": 0.30059406103036157,
+      "p95_edge_strain": 0.013574065267268965,
+      "min_area_ratio": 0.7079060472854596,
+      "collapsed_triangles": 0,
+      "invalid_coordinates": 0
+    },
+    {
+      "frame": 40,
+      "max_edge_strain": 0.3130370775802357,
+      "p95_edge_strain": 0.013199602017777305,
+      "min_area_ratio": 0.6955804587621722,
+      "collapsed_triangles": 0,
+      "invalid_coordinates": 0
+    },
+    {
+      "frame": 50,
+      "max_edge_strain": 0.3986010945699705,
+      "p95_edge_strain": 0.018358393153701018,
+      "min_area_ratio": 0.5794284456972689,
+      "collapsed_triangles": 0,
+      "invalid_coordinates": 0
+    },
+    {
+      "frame": 60,
+      "max_edge_strain": 0.3885169556042244,
+      "p95_edge_strain": 0.01630938533010825,
+      "min_area_ratio": 0.6235206331421171,
+      "collapsed_triangles": 0,
+      "invalid_coordinates": 0
+    },
+    {
+      "frame": 70,
+      "max_edge_strain": 0.35543645349957353,
+      "p95_edge_strain": 0.014879023341099204,
+      "min_area_ratio": 0.6483012300530199,
+      "collapsed_triangles": 0,
+      "invalid_coordinates": 0
+    },
+    {
+      "frame": 80,
+      "max_edge_strain": 0.3420446215526568,
+      "p95_edge_strain": 0.0154619941630953,
+      "min_area_ratio": 0.6587603292551011,
+      "collapsed_triangles": 0,
+      "invalid_coordinates": 0
+    },
+    {
+      "frame": 90,
+      "max_edge_strain": 0.4068190917750504,
+      "p95_edge_strain": 0.01857980882708329,
+      "min_area_ratio": 0.5926015887227493,
+      "collapsed_triangles": 0,
+      "invalid_coordinates": 0
+    },
+    {
+      "frame": 100,
+      "max_edge_strain": 0.6264832951563417,
+      "p95_edge_strain": 0.0298848961058891,
+      "min_area_ratio": 0.3776016046721098,
+      "collapsed_triangles": 0,
+      "invalid_coordinates": 0
+    },
+    {
+      "frame": 110,
+      "max_edge_strain": 0.5060404071459441,
+      "p95_edge_strain": 0.02419766476759311,
+      "min_area_ratio": 0.49491358774299754,
+      "collapsed_triangles": 0,
+      "invalid_coordinates": 0
+    },
+    {
+      "frame": 120,
+      "max_edge_strain": 0.4476183191134372,
+      "p95_edge_strain": 0.020482476068507095,
+      "min_area_ratio": 0.5619305468766821,
+      "collapsed_triangles": 0,
+      "invalid_coordinates": 0
+    }
+  ],
+  "geometry_summary": {
+    "max_edge_strain": 0.6264832951563417,
+    "p95_edge_strain_max": 0.0298848961058891,
+    "min_area_ratio": 0.3776016046721098,
+    "collapsed_triangles": 0,
+    "invalid_coordinates": 0
+  },
+  "representative_frames": {
+    "neutral": -1,
+    "eyeBlinkLeft": 45,
+    "jawOpen": 100,
+    "mouthSmileLeft": 3,
+    "browInnerUp": 11
+  },
+  "runtime_seconds": 68.46588869998232,
+  "visual_expression_pass": false
+}

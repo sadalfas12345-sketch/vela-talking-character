@@ -1,0 +1,1322 @@
+{
+  "bones": [
+    "head",
+    "jaw",
+    "lip.B.L",
+    "lip.B.R",
+    "lip.B",
+    "tongue",
+    "tongue.tip",
+    "eye.L",
+    "lid.T.L",
+    "lid.B.L",
+    "brow.in.L",
+    "brow.mid.L",
+    "brow.out.L",
+    "mouth.corner.L",
+    "lip.T.L",
+    "cheek.L",
+    "eye.R",
+    "lid.T.R",
+    "lid.B.R",
+    "brow.in.R",
+    "brow.mid.R",
+    "brow.out.R",
+    "mouth.corner.R",
+    "lip.T.R",
+    "cheek.R",
+    "lip.T"
+  ],
+  "dofs": [
+    {
+      "name": "head.t0",
+      "bone": "head",
+      "kind": "translation",
+      "axis": 0,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "head.t1",
+      "bone": "head",
+      "kind": "translation",
+      "axis": 1,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "head.t2",
+      "bone": "head",
+      "kind": "translation",
+      "axis": 2,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "head.r0",
+      "bone": "head",
+      "kind": "rotation",
+      "axis": 0,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "head.r1",
+      "bone": "head",
+      "kind": "rotation",
+      "axis": 1,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "head.r2",
+      "bone": "head",
+      "kind": "rotation",
+      "axis": 2,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "jaw.t0",
+      "bone": "jaw",
+      "kind": "translation",
+      "axis": 0,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "jaw.t1",
+      "bone": "jaw",
+      "kind": "translation",
+      "axis": 1,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "jaw.t2",
+      "bone": "jaw",
+      "kind": "translation",
+      "axis": 2,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "jaw.r0",
+      "bone": "jaw",
+      "kind": "rotation",
+      "axis": 0,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "jaw.r1",
+      "bone": "jaw",
+      "kind": "rotation",
+      "axis": 1,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "jaw.r2",
+      "bone": "jaw",
+      "kind": "rotation",
+      "axis": 2,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "lip.B.L.t0",
+      "bone": "lip.B.L",
+      "kind": "translation",
+      "axis": 0,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "lip.B.L.t1",
+      "bone": "lip.B.L",
+      "kind": "translation",
+      "axis": 1,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "lip.B.L.t2",
+      "bone": "lip.B.L",
+      "kind": "translation",
+      "axis": 2,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "lip.B.L.r0",
+      "bone": "lip.B.L",
+      "kind": "rotation",
+      "axis": 0,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "lip.B.L.r1",
+      "bone": "lip.B.L",
+      "kind": "rotation",
+      "axis": 1,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "lip.B.L.r2",
+      "bone": "lip.B.L",
+      "kind": "rotation",
+      "axis": 2,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "lip.B.R.t0",
+      "bone": "lip.B.R",
+      "kind": "translation",
+      "axis": 0,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "lip.B.R.t1",
+      "bone": "lip.B.R",
+      "kind": "translation",
+      "axis": 1,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "lip.B.R.t2",
+      "bone": "lip.B.R",
+      "kind": "translation",
+      "axis": 2,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "lip.B.R.r0",
+      "bone": "lip.B.R",
+      "kind": "rotation",
+      "axis": 0,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "lip.B.R.r1",
+      "bone": "lip.B.R",
+      "kind": "rotation",
+      "axis": 1,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "lip.B.R.r2",
+      "bone": "lip.B.R",
+      "kind": "rotation",
+      "axis": 2,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "lip.B.t0",
+      "bone": "lip.B",
+      "kind": "translation",
+      "axis": 0,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "lip.B.t1",
+      "bone": "lip.B",
+      "kind": "translation",
+      "axis": 1,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "lip.B.t2",
+      "bone": "lip.B",
+      "kind": "translation",
+      "axis": 2,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "lip.B.r0",
+      "bone": "lip.B",
+      "kind": "rotation",
+      "axis": 0,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "lip.B.r1",
+      "bone": "lip.B",
+      "kind": "rotation",
+      "axis": 1,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "lip.B.r2",
+      "bone": "lip.B",
+      "kind": "rotation",
+      "axis": 2,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "tongue.t0",
+      "bone": "tongue",
+      "kind": "translation",
+      "axis": 0,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "tongue.t1",
+      "bone": "tongue",
+      "kind": "translation",
+      "axis": 1,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "tongue.t2",
+      "bone": "tongue",
+      "kind": "translation",
+      "axis": 2,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "tongue.r0",
+      "bone": "tongue",
+      "kind": "rotation",
+      "axis": 0,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "tongue.r1",
+      "bone": "tongue",
+      "kind": "rotation",
+      "axis": 1,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "tongue.r2",
+      "bone": "tongue",
+      "kind": "rotation",
+      "axis": 2,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "tongue.tip.t0",
+      "bone": "tongue.tip",
+      "kind": "translation",
+      "axis": 0,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "tongue.tip.t1",
+      "bone": "tongue.tip",
+      "kind": "translation",
+      "axis": 1,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "tongue.tip.t2",
+      "bone": "tongue.tip",
+      "kind": "translation",
+      "axis": 2,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "tongue.tip.r0",
+      "bone": "tongue.tip",
+      "kind": "rotation",
+      "axis": 0,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "tongue.tip.r1",
+      "bone": "tongue.tip",
+      "kind": "rotation",
+      "axis": 1,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "tongue.tip.r2",
+      "bone": "tongue.tip",
+      "kind": "rotation",
+      "axis": 2,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "eye.L.t0",
+      "bone": "eye.L",
+      "kind": "translation",
+      "axis": 0,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "eye.L.t1",
+      "bone": "eye.L",
+      "kind": "translation",
+      "axis": 1,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "eye.L.t2",
+      "bone": "eye.L",
+      "kind": "translation",
+      "axis": 2,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "eye.L.r0",
+      "bone": "eye.L",
+      "kind": "rotation",
+      "axis": 0,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "eye.L.r1",
+      "bone": "eye.L",
+      "kind": "rotation",
+      "axis": 1,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "eye.L.r2",
+      "bone": "eye.L",
+      "kind": "rotation",
+      "axis": 2,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "lid.T.L.t0",
+      "bone": "lid.T.L",
+      "kind": "translation",
+      "axis": 0,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "lid.T.L.t1",
+      "bone": "lid.T.L",
+      "kind": "translation",
+      "axis": 1,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "lid.T.L.t2",
+      "bone": "lid.T.L",
+      "kind": "translation",
+      "axis": 2,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "lid.T.L.r0",
+      "bone": "lid.T.L",
+      "kind": "rotation",
+      "axis": 0,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "lid.T.L.r1",
+      "bone": "lid.T.L",
+      "kind": "rotation",
+      "axis": 1,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "lid.T.L.r2",
+      "bone": "lid.T.L",
+      "kind": "rotation",
+      "axis": 2,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "lid.B.L.t0",
+      "bone": "lid.B.L",
+      "kind": "translation",
+      "axis": 0,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "lid.B.L.t1",
+      "bone": "lid.B.L",
+      "kind": "translation",
+      "axis": 1,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "lid.B.L.t2",
+      "bone": "lid.B.L",
+      "kind": "translation",
+      "axis": 2,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "lid.B.L.r0",
+      "bone": "lid.B.L",
+      "kind": "rotation",
+      "axis": 0,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "lid.B.L.r1",
+      "bone": "lid.B.L",
+      "kind": "rotation",
+      "axis": 1,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "lid.B.L.r2",
+      "bone": "lid.B.L",
+      "kind": "rotation",
+      "axis": 2,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "brow.in.L.t0",
+      "bone": "brow.in.L",
+      "kind": "translation",
+      "axis": 0,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "brow.in.L.t1",
+      "bone": "brow.in.L",
+      "kind": "translation",
+      "axis": 1,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "brow.in.L.t2",
+      "bone": "brow.in.L",
+      "kind": "translation",
+      "axis": 2,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "brow.in.L.r0",
+      "bone": "brow.in.L",
+      "kind": "rotation",
+      "axis": 0,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "brow.in.L.r1",
+      "bone": "brow.in.L",
+      "kind": "rotation",
+      "axis": 1,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "brow.in.L.r2",
+      "bone": "brow.in.L",
+      "kind": "rotation",
+      "axis": 2,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "brow.mid.L.t0",
+      "bone": "brow.mid.L",
+      "kind": "translation",
+      "axis": 0,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "brow.mid.L.t1",
+      "bone": "brow.mid.L",
+      "kind": "translation",
+      "axis": 1,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "brow.mid.L.t2",
+      "bone": "brow.mid.L",
+      "kind": "translation",
+      "axis": 2,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "brow.mid.L.r0",
+      "bone": "brow.mid.L",
+      "kind": "rotation",
+      "axis": 0,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "brow.mid.L.r1",
+      "bone": "brow.mid.L",
+      "kind": "rotation",
+      "axis": 1,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "brow.mid.L.r2",
+      "bone": "brow.mid.L",
+      "kind": "rotation",
+      "axis": 2,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "brow.out.L.t0",
+      "bone": "brow.out.L",
+      "kind": "translation",
+      "axis": 0,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "brow.out.L.t1",
+      "bone": "brow.out.L",
+      "kind": "translation",
+      "axis": 1,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "brow.out.L.t2",
+      "bone": "brow.out.L",
+      "kind": "translation",
+      "axis": 2,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "brow.out.L.r0",
+      "bone": "brow.out.L",
+      "kind": "rotation",
+      "axis": 0,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "brow.out.L.r1",
+      "bone": "brow.out.L",
+      "kind": "rotation",
+      "axis": 1,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "brow.out.L.r2",
+      "bone": "brow.out.L",
+      "kind": "rotation",
+      "axis": 2,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "mouth.corner.L.t0",
+      "bone": "mouth.corner.L",
+      "kind": "translation",
+      "axis": 0,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "mouth.corner.L.t1",
+      "bone": "mouth.corner.L",
+      "kind": "translation",
+      "axis": 1,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "mouth.corner.L.t2",
+      "bone": "mouth.corner.L",
+      "kind": "translation",
+      "axis": 2,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "mouth.corner.L.r0",
+      "bone": "mouth.corner.L",
+      "kind": "rotation",
+      "axis": 0,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "mouth.corner.L.r1",
+      "bone": "mouth.corner.L",
+      "kind": "rotation",
+      "axis": 1,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "mouth.corner.L.r2",
+      "bone": "mouth.corner.L",
+      "kind": "rotation",
+      "axis": 2,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "lip.T.L.t0",
+      "bone": "lip.T.L",
+      "kind": "translation",
+      "axis": 0,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "lip.T.L.t1",
+      "bone": "lip.T.L",
+      "kind": "translation",
+      "axis": 1,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "lip.T.L.t2",
+      "bone": "lip.T.L",
+      "kind": "translation",
+      "axis": 2,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "lip.T.L.r0",
+      "bone": "lip.T.L",
+      "kind": "rotation",
+      "axis": 0,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "lip.T.L.r1",
+      "bone": "lip.T.L",
+      "kind": "rotation",
+      "axis": 1,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "lip.T.L.r2",
+      "bone": "lip.T.L",
+      "kind": "rotation",
+      "axis": 2,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "cheek.L.t0",
+      "bone": "cheek.L",
+      "kind": "translation",
+      "axis": 0,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "cheek.L.t1",
+      "bone": "cheek.L",
+      "kind": "translation",
+      "axis": 1,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "cheek.L.t2",
+      "bone": "cheek.L",
+      "kind": "translation",
+      "axis": 2,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "cheek.L.r0",
+      "bone": "cheek.L",
+      "kind": "rotation",
+      "axis": 0,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "cheek.L.r1",
+      "bone": "cheek.L",
+      "kind": "rotation",
+      "axis": 1,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "cheek.L.r2",
+      "bone": "cheek.L",
+      "kind": "rotation",
+      "axis": 2,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "eye.R.t0",
+      "bone": "eye.R",
+      "kind": "translation",
+      "axis": 0,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "eye.R.t1",
+      "bone": "eye.R",
+      "kind": "translation",
+      "axis": 1,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "eye.R.t2",
+      "bone": "eye.R",
+      "kind": "translation",
+      "axis": 2,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "eye.R.r0",
+      "bone": "eye.R",
+      "kind": "rotation",
+      "axis": 0,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "eye.R.r1",
+      "bone": "eye.R",
+      "kind": "rotation",
+      "axis": 1,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "eye.R.r2",
+      "bone": "eye.R",
+      "kind": "rotation",
+      "axis": 2,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "lid.T.R.t0",
+      "bone": "lid.T.R",
+      "kind": "translation",
+      "axis": 0,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "lid.T.R.t1",
+      "bone": "lid.T.R",
+      "kind": "translation",
+      "axis": 1,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "lid.T.R.t2",
+      "bone": "lid.T.R",
+      "kind": "translation",
+      "axis": 2,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "lid.T.R.r0",
+      "bone": "lid.T.R",
+      "kind": "rotation",
+      "axis": 0,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "lid.T.R.r1",
+      "bone": "lid.T.R",
+      "kind": "rotation",
+      "axis": 1,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "lid.T.R.r2",
+      "bone": "lid.T.R",
+      "kind": "rotation",
+      "axis": 2,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "lid.B.R.t0",
+      "bone": "lid.B.R",
+      "kind": "translation",
+      "axis": 0,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "lid.B.R.t1",
+      "bone": "lid.B.R",
+      "kind": "translation",
+      "axis": 1,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "lid.B.R.t2",
+      "bone": "lid.B.R",
+      "kind": "translation",
+      "axis": 2,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "lid.B.R.r0",
+      "bone": "lid.B.R",
+      "kind": "rotation",
+      "axis": 0,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "lid.B.R.r1",
+      "bone": "lid.B.R",
+      "kind": "rotation",
+      "axis": 1,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "lid.B.R.r2",
+      "bone": "lid.B.R",
+      "kind": "rotation",
+      "axis": 2,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "brow.in.R.t0",
+      "bone": "brow.in.R",
+      "kind": "translation",
+      "axis": 0,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "brow.in.R.t1",
+      "bone": "brow.in.R",
+      "kind": "translation",
+      "axis": 1,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "brow.in.R.t2",
+      "bone": "brow.in.R",
+      "kind": "translation",
+      "axis": 2,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "brow.in.R.r0",
+      "bone": "brow.in.R",
+      "kind": "rotation",
+      "axis": 0,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "brow.in.R.r1",
+      "bone": "brow.in.R",
+      "kind": "rotation",
+      "axis": 1,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "brow.in.R.r2",
+      "bone": "brow.in.R",
+      "kind": "rotation",
+      "axis": 2,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "brow.mid.R.t0",
+      "bone": "brow.mid.R",
+      "kind": "translation",
+      "axis": 0,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "brow.mid.R.t1",
+      "bone": "brow.mid.R",
+      "kind": "translation",
+      "axis": 1,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "brow.mid.R.t2",
+      "bone": "brow.mid.R",
+      "kind": "translation",
+      "axis": 2,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "brow.mid.R.r0",
+      "bone": "brow.mid.R",
+      "kind": "rotation",
+      "axis": 0,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "brow.mid.R.r1",
+      "bone": "brow.mid.R",
+      "kind": "rotation",
+      "axis": 1,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "brow.mid.R.r2",
+      "bone": "brow.mid.R",
+      "kind": "rotation",
+      "axis": 2,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "brow.out.R.t0",
+      "bone": "brow.out.R",
+      "kind": "translation",
+      "axis": 0,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "brow.out.R.t1",
+      "bone": "brow.out.R",
+      "kind": "translation",
+      "axis": 1,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "brow.out.R.t2",
+      "bone": "brow.out.R",
+      "kind": "translation",
+      "axis": 2,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "brow.out.R.r0",
+      "bone": "brow.out.R",
+      "kind": "rotation",
+      "axis": 0,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "brow.out.R.r1",
+      "bone": "brow.out.R",
+      "kind": "rotation",
+      "axis": 1,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "brow.out.R.r2",
+      "bone": "brow.out.R",
+      "kind": "rotation",
+      "axis": 2,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "mouth.corner.R.t0",
+      "bone": "mouth.corner.R",
+      "kind": "translation",
+      "axis": 0,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "mouth.corner.R.t1",
+      "bone": "mouth.corner.R",
+      "kind": "translation",
+      "axis": 1,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "mouth.corner.R.t2",
+      "bone": "mouth.corner.R",
+      "kind": "translation",
+      "axis": 2,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "mouth.corner.R.r0",
+      "bone": "mouth.corner.R",
+      "kind": "rotation",
+      "axis": 0,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "mouth.corner.R.r1",
+      "bone": "mouth.corner.R",
+      "kind": "rotation",
+      "axis": 1,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "mouth.corner.R.r2",
+      "bone": "mouth.corner.R",
+      "kind": "rotation",
+      "axis": 2,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "lip.T.R.t0",
+      "bone": "lip.T.R",
+      "kind": "translation",
+      "axis": 0,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "lip.T.R.t1",
+      "bone": "lip.T.R",
+      "kind": "translation",
+      "axis": 1,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "lip.T.R.t2",
+      "bone": "lip.T.R",
+      "kind": "translation",
+      "axis": 2,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "lip.T.R.r0",
+      "bone": "lip.T.R",
+      "kind": "rotation",
+      "axis": 0,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "lip.T.R.r1",
+      "bone": "lip.T.R",
+      "kind": "rotation",
+      "axis": 1,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "lip.T.R.r2",
+      "bone": "lip.T.R",
+      "kind": "rotation",
+      "axis": 2,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "cheek.R.t0",
+      "bone": "cheek.R",
+      "kind": "translation",
+      "axis": 0,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "cheek.R.t1",
+      "bone": "cheek.R",
+      "kind": "translation",
+      "axis": 1,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "cheek.R.t2",
+      "bone": "cheek.R",
+      "kind": "translation",
+      "axis": 2,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "cheek.R.r0",
+      "bone": "cheek.R",
+      "kind": "rotation",
+      "axis": 0,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "cheek.R.r1",
+      "bone": "cheek.R",
+      "kind": "rotation",
+      "axis": 1,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "cheek.R.r2",
+      "bone": "cheek.R",
+      "kind": "rotation",
+      "axis": 2,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "lip.T.t0",
+      "bone": "lip.T",
+      "kind": "translation",
+      "axis": 0,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "lip.T.t1",
+      "bone": "lip.T",
+      "kind": "translation",
+      "axis": 1,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "lip.T.t2",
+      "bone": "lip.T",
+      "kind": "translation",
+      "axis": 2,
+      "small": 0.00029974316785339844,
+      "large": 0.0029974316785339843
+    },
+    {
+      "name": "lip.T.r0",
+      "bone": "lip.T",
+      "kind": "rotation",
+      "axis": 0,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "lip.T.r1",
+      "bone": "lip.T",
+      "kind": "rotation",
+      "axis": 1,
+      "small": 0.01,
+      "large": 0.1
+    },
+    {
+      "name": "lip.T.r2",
+      "bone": "lip.T",
+      "kind": "rotation",
+      "axis": 2,
+      "small": 0.01,
+      "large": 0.1
+    }
+  ],
+  "small_rotation_rad": 0.01,
+  "large_rotation_rad": 0.1,
+  "small_translation_fraction_eye_width": 0.001,
+  "large_translation_fraction_eye_width": 0.01,
+  "mapped_landmarks": 478,
+  "surface_distance_median": 1.5595682612001838e-07,
+  "eye_width": 0.29974316785339844,
+  "source_translation": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "neutral_reconstruction_max_error": 0.00011434863472405323,
+  "weight_group_counts": {
+    "head": 981539,
+    "jaw": 214034,
+    "lip.B.L": 5366,
+    "lip.B.R": 1507,
+    "lip.B": 5723,
+    "tongue": 2753,
+    "tongue.tip": 0,
+    "eye.L": 31,
+    "lid.T.L": 1160,
+    "lid.B.L": 1862,
+    "brow.in.L": 4213,
+    "brow.mid.L": 1789,
+    "brow.out.L": 3141,
+    "mouth.corner.L": 2164,
+    "lip.T.L": 2164,
+    "cheek.L": 2672,
+    "eye.R": 30,
+    "lid.T.R": 2077,
+    "lid.B.R": 3260,
+    "brow.in.R": 4555,
+    "brow.mid.R": 3047,
+    "brow.out.R": 3393,
+    "mouth.corner.R": 2646,
+    "lip.T.R": 1507,
+    "cheek.R": 626,
+    "lip.T": 1354
+  },
+  "runtime_seconds": 92.97582080005668
+}

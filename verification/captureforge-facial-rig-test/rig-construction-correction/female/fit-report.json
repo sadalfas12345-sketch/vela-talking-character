@@ -1,0 +1,57 @@
+{
+  "character": "female",
+  "frames": 121,
+  "dofs": 156,
+  "regularization": 0.001,
+  "limits": {
+    "translation_eye_width_fraction": 0.05,
+    "rotation_radians": 0.25
+  },
+  "region_prediction_metrics": {
+    "eyebrows": {
+      "landmark_count": 17,
+      "mean_error_norm": 0.024720678384766805,
+      "p95_error_norm": 0.042085798213318946,
+      "mean_expected_magnitude_norm": 0.025855354422242117,
+      "mean_predicted_magnitude_norm": 0.006623994547007489
+    },
+    "eyelids": {
+      "landmark_count": 18,
+      "mean_error_norm": 0.014432291147630626,
+      "p95_error_norm": 0.027865583664299087,
+      "mean_expected_magnitude_norm": 0.015075755233643922,
+      "mean_predicted_magnitude_norm": 0.006174565723535378
+    },
+    "cheeks": {
+      "landmark_count": 22,
+      "mean_error_norm": 0.023401437775342152,
+      "p95_error_norm": 0.050229157239731086,
+      "mean_expected_magnitude_norm": 0.024858073592113825,
+      "mean_predicted_magnitude_norm": 0.006833982597268399
+    },
+    "lips": {
+      "landmark_count": 25,
+      "mean_error_norm": 0.03053746647491715,
+      "p95_error_norm": 0.06083415028422498,
+      "mean_expected_magnitude_norm": 0.037106737642630026,
+      "mean_predicted_magnitude_norm": 0.010136312364139444
+    },
+    "mouth_corners": {
+      "landmark_count": 6,
+      "mean_error_norm": 0.029104304127583226,
+      "p95_error_norm": 0.06156607193129708,
+      "mean_expected_magnitude_norm": 0.034655946003685184,
+      "mean_predicted_magnitude_norm": 0.00838390651110919
+    },
+    "jaw": {
+      "landmark_count": 15,
+      "mean_error_norm": 0.018129400146690493,
+      "p95_error_norm": 0.05742623455047467,
+      "mean_expected_magnitude_norm": 0.02500678785199689,
+      "mean_predicted_magnitude_norm": 0.014437287344652511
+    }
+  },
+  "fit_rms_mean": 0.0008354422204783031,
+  "fit_max_error_norm_mean": 0.07270897065195898,
+  "bounded_frames": 0
+}
