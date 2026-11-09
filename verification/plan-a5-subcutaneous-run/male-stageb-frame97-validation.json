@@ -1,0 +1,52 @@
+{
+  "frame": 97,
+  "vertices": 208351,
+  "triangles": 401474,
+  "landmarks": 478,
+  "allVertexCoordinatesFinite": true,
+  "allLandmarkTargetsFinite": true,
+  "maxLandmarkError": 0.013608775442746196,
+  "rmsLandmarkError": 0.0008891052246145005,
+  "maxVertexDisplacement": 0.05905496393788926,
+  "maxEdgeStrain": 86.41812367858677,
+  "p95AbsEdgeStrain": 0.1359803481507106,
+  "collapsedTrianglesAreaBelow1e-6Relative": 0,
+  "normalReversalsRelativeToNeutral": 3767,
+  "solverFailure": {
+    "component": 0,
+    "status": "max_iterations",
+    "iterations": 1,
+    "constraintRank": 1425,
+    "constraintRows": 1425,
+    "rigidConstraintRank": 6,
+    "finalConstraintError": 1.1102230246251565e-16,
+    "projectedForceResidual": 0.0007813565889895487,
+    "objective": 0.28296983891052807,
+    "maxStep": 0.057832097086250846,
+    "runtimeSeconds": 24.486440199892968,
+    "history": [
+      {
+        "iteration": 0,
+        "type": "feasible_projection",
+        "maxStep": 0.057832097086250846
+      },
+      {
+        "iteration": 1,
+        "objective": 0.28296983891052807,
+        "hardConstraintError": 5.551115123125783e-17,
+        "projectedForceResidual": 0.0009048394137243695,
+        "maxStep": 0.020184592967495914,
+        "acceptedAlpha": 0.5,
+        "lsqrStop": 7,
+        "lsqrIterations": 10
+      }
+    ]
+  },
+  "solverRuntimeSeconds": 28.960193800274283,
+  "solverHardConstraintError": 1.1102230246251565e-16,
+  "solverStatus": [
+    "max_iterations"
+  ],
+  "originalNeutralPreserved": true,
+  "visualReviewRequired": true
+}

@@ -1,0 +1,75 @@
+{
+  "solver": "A4 sparse projected nonlinear Hookean solver plus fixed abstract-anchor springs",
+  "frame": 99,
+  "supportRatio": 0.1,
+  "vertices": 208351,
+  "triangles": 401474,
+  "landmarks": 478,
+  "components": 3,
+  "failure": {
+    "component": 0,
+    "status": "max_iterations",
+    "iterations": 1,
+    "constraintRank": 1425,
+    "constraintRows": 1425,
+    "rigidConstraintRank": 6,
+    "finalConstraintError": 1.1102230246251565e-16,
+    "projectedForceResidual": 0.0007921127485628327,
+    "objective": 0.28961228528214955,
+    "maxStep": 0.05701211009118555,
+    "runtimeSeconds": 26.652973299846053,
+    "history": [
+      {
+        "iteration": 0,
+        "type": "feasible_projection",
+        "maxStep": 0.05701211009118555
+      },
+      {
+        "iteration": 1,
+        "objective": 0.28961228528214955,
+        "hardConstraintError": 1.1102230246251565e-16,
+        "projectedForceResidual": 0.0009160640611818563,
+        "maxStep": 0.01982842802138223,
+        "acceptedAlpha": 0.5,
+        "lsqrStop": 7,
+        "lsqrIterations": 10
+      }
+    ]
+  },
+  "runtimeSeconds": 31.259151599835604,
+  "componentReports": [
+    {
+      "component": 0,
+      "vertices": 205605,
+      "landmarks": 475,
+      "status": "max_iterations",
+      "iterations": 1,
+      "constraintRank": 1425,
+      "constraintRows": 1425,
+      "rigidConstraintRank": 6,
+      "finalConstraintError": 1.1102230246251565e-16,
+      "projectedForceResidual": 0.0007921127485628327,
+      "objective": 0.28961228528214955,
+      "maxStep": 0.05701211009118555,
+      "runtimeSeconds": 26.652973299846053,
+      "history": [
+        {
+          "iteration": 0,
+          "type": "feasible_projection",
+          "maxStep": 0.05701211009118555
+        },
+        {
+          "iteration": 1,
+          "objective": 0.28961228528214955,
+          "hardConstraintError": 1.1102230246251565e-16,
+          "projectedForceResidual": 0.0009160640611818563,
+          "maxStep": 0.01982842802138223,
+          "acceptedAlpha": 0.5,
+          "lsqrStop": 7,
+          "lsqrIterations": 10
+        }
+      ]
+    }
+  ],
+  "topologyChanged": false
+}

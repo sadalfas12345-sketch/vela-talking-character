@@ -1,0 +1,72 @@
+{
+  "solver": "A4 sparse projected nonlinear Hookean solver plus fixed abstract-anchor springs",
+  "frame": 0,
+  "supportRatio": 0.1,
+  "vertices": 41747,
+  "triangles": 79627,
+  "landmarks": 478,
+  "components": 2,
+  "failure": null,
+  "runtimeSeconds": 6.166167700197548,
+  "componentReports": [
+    {
+      "component": 0,
+      "vertices": 37494,
+      "landmarks": 455,
+      "status": "converged",
+      "iterations": 1,
+      "constraintRank": 1365,
+      "constraintRows": 1365,
+      "rigidConstraintRank": 6,
+      "finalConstraintError": 5.551115123125783e-17,
+      "projectedForceResidual": 2.6744488786411612e-18,
+      "objective": 7.0723200688662145e-31,
+      "maxStep": 2.56869084765494e-16,
+      "runtimeSeconds": 4.145752400159836,
+      "history": [
+        {
+          "iteration": 0,
+          "type": "feasible_projection",
+          "maxStep": 2.56869084765494e-16
+        },
+        {
+          "iteration": 0,
+          "objective": 7.0723200688662145e-31,
+          "hardConstraintError": 5.551115123125783e-17,
+          "projectedForceResidual": 2.6744488786411612e-18,
+          "maxStep": 0.0
+        }
+      ]
+    },
+    {
+      "component": 1,
+      "vertices": 4253,
+      "landmarks": 23,
+      "status": "converged",
+      "iterations": 1,
+      "constraintRank": 69,
+      "constraintRows": 69,
+      "rigidConstraintRank": 6,
+      "finalConstraintError": 5.551115123125783e-17,
+      "projectedForceResidual": 7.590827502221522e-19,
+      "objective": 8.455518724155654e-33,
+      "maxStep": 6.745545752726071e-17,
+      "runtimeSeconds": 0.5104562998749316,
+      "history": [
+        {
+          "iteration": 0,
+          "type": "feasible_projection",
+          "maxStep": 6.745545752726071e-17
+        },
+        {
+          "iteration": 0,
+          "objective": 8.455518724155654e-33,
+          "hardConstraintError": 5.551115123125783e-17,
+          "projectedForceResidual": 7.590827502221522e-19,
+          "maxStep": 0.0
+        }
+      ]
+    }
+  ],
+  "topologyChanged": false
+}

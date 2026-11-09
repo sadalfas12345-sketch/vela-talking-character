@@ -1,0 +1,115 @@
+{
+  "solver": "A4 sparse projected nonlinear Hookean solver plus fixed abstract-anchor springs",
+  "frame": 99,
+  "supportRatio": 0.1,
+  "vertices": 41747,
+  "triangles": 79627,
+  "landmarks": 478,
+  "components": 2,
+  "failure": {
+    "component": 0,
+    "status": "max_iterations",
+    "iterations": 3,
+    "constraintRank": 1365,
+    "constraintRows": 1365,
+    "rigidConstraintRank": 6,
+    "finalConstraintError": 1.1102230246251565e-16,
+    "projectedForceResidual": 0.0003073130974259108,
+    "objective": 0.006928501320140046,
+    "maxStep": 0.00785619076642748,
+    "runtimeSeconds": 9.874803099781275,
+    "history": [
+      {
+        "iteration": 0,
+        "type": "feasible_projection",
+        "maxStep": 0.00785619076642748
+      },
+      {
+        "iteration": 1,
+        "objective": 0.009345522044835098,
+        "hardConstraintError": 1.1102230246251565e-16,
+        "projectedForceResidual": 0.00035296999704328595,
+        "maxStep": 0.007042779714232018,
+        "acceptedAlpha": 0.5,
+        "lsqrStop": 7,
+        "lsqrIterations": 30
+      },
+      {
+        "iteration": 2,
+        "objective": 0.007660581249751688,
+        "hardConstraintError": 1.6653345369377348e-16,
+        "projectedForceResidual": 0.00044117048197064407,
+        "maxStep": 0.0037030992831226872,
+        "acceptedAlpha": 0.25,
+        "lsqrStop": 7,
+        "lsqrIterations": 30
+      },
+      {
+        "iteration": 3,
+        "objective": 0.006928501320140046,
+        "hardConstraintError": 1.1102230246251565e-16,
+        "projectedForceResidual": 0.0003489353733742305,
+        "maxStep": 0.004009634133499434,
+        "acceptedAlpha": 0.25,
+        "lsqrStop": 7,
+        "lsqrIterations": 30
+      }
+    ]
+  },
+  "runtimeSeconds": 11.122416500002146,
+  "componentReports": [
+    {
+      "component": 0,
+      "vertices": 37494,
+      "landmarks": 455,
+      "status": "max_iterations",
+      "iterations": 3,
+      "constraintRank": 1365,
+      "constraintRows": 1365,
+      "rigidConstraintRank": 6,
+      "finalConstraintError": 1.1102230246251565e-16,
+      "projectedForceResidual": 0.0003073130974259108,
+      "objective": 0.006928501320140046,
+      "maxStep": 0.00785619076642748,
+      "runtimeSeconds": 9.874803099781275,
+      "history": [
+        {
+          "iteration": 0,
+          "type": "feasible_projection",
+          "maxStep": 0.00785619076642748
+        },
+        {
+          "iteration": 1,
+          "objective": 0.009345522044835098,
+          "hardConstraintError": 1.1102230246251565e-16,
+          "projectedForceResidual": 0.00035296999704328595,
+          "maxStep": 0.007042779714232018,
+          "acceptedAlpha": 0.5,
+          "lsqrStop": 7,
+          "lsqrIterations": 30
+        },
+        {
+          "iteration": 2,
+          "objective": 0.007660581249751688,
+          "hardConstraintError": 1.6653345369377348e-16,
+          "projectedForceResidual": 0.00044117048197064407,
+          "maxStep": 0.0037030992831226872,
+          "acceptedAlpha": 0.25,
+          "lsqrStop": 7,
+          "lsqrIterations": 30
+        },
+        {
+          "iteration": 3,
+          "objective": 0.006928501320140046,
+          "hardConstraintError": 1.1102230246251565e-16,
+          "projectedForceResidual": 0.0003489353733742305,
+          "maxStep": 0.004009634133499434,
+          "acceptedAlpha": 0.25,
+          "lsqrStop": 7,
+          "lsqrIterations": 30
+        }
+      ]
+    }
+  ],
+  "topologyChanged": false
+}

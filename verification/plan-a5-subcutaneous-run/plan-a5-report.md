@@ -1,162 +1,171 @@
-# VELA Plan A5 — Subcutaneous-anchor facial spring experiment
+# VELA Plan A5 — revised Stage B functional gate
 
-Status: **STOPPED at Stage B**
+Status: **Stage B functional gate FAILED; dependent full animation stages not started**
 
 Branch: `wip/tripo-face-repair`
 
-Starting commit: `1e9840144273bef0793f0159604b7e0d3e776c80`
+The Stage B rule was revised as requested. Anatomical purity is not a gate.
+Hair, beard, neck, disconnected components, and the visible placement of the
+abstract layer are allowed. The original GLBs and all source vertices remain
+unchanged.
 
-## Scope and stop rule
+## Revised acceptance gates
 
-This run follows the Plan A5 Google Doc.  The A5 ablation requires an
-anatomically clean facial-skin domain before either the no-anchor or supported
-Hookean solve is run.  Stage B did not pass the required surface inspection, so
-the dependent physics stages C–E were not started.  No original GLB was edited,
-and no landmark trajectory was changed.
+Stage B now checks only:
 
-## Inputs
+1. Existing landmark correspondence is present for IDs `0–477`.
+2. Barycentric triangles and weights are finite and reconstruct neutral points.
+3. Abstract fixed-anchor positions and support rest lengths are finite.
+4. Neutral solve preserves the original coordinates and topology.
+5. Expression probes produce finite geometry and a stable numerical state.
+6. Visual artifacts are reported separately from the objective numerical gates.
 
-| Character | Original GLB | Existing/full mesh | Goal 1 attachment input |
-|---|---|---|---|
-| Female | `assets/tripo/vela-photoreal/generated-original.glb` | `verification/plan-a-hookean-run/female-full.npz` | `verification/plan-a5-subcutaneous-run/female-corrected-attachments.json` |
-| Male | `assets/tripo/generalization-male-20261105/generated-original.glb` | `verification/plan-a-hookean-run/male-full.npz` | `verification/plan-a2-hookean-run/male-original-attachments.json` |
+Hair, beard, neck, and component count are descriptive observations only.
 
-The female attachment audit found a source/target world-frame offset.  The
-source-to-original alignment translation applied by the diagnostic raycast was
-`[0.0000739358, -0.0004922152, 0.4902183712]` model units.  After this
-correction, 478/478 female attachment records had finite front-surface hits.
-This correction is an A5 diagnostic output; it does not modify Goal 1 or the
-source GLB.
+## Inputs and abstract layer
 
-The male run reused the existing 478/478 attachment records without altering
-them.
+| Character | Solver graph | Vertices | Triangles | Original springs | Virtual seams | Abstract anchors |
+|---|---|---:|---:|---:|---:|---:|
+| Female | `female-subcutaneous-r050.npz` | 41,747 | 79,627 | 121,358 | 24 | 41,747 |
+| Male | `male-subcutaneous-r050.npz` | 208,351 | 401,474 | 609,759 | 146 | 208,351 |
 
-## Stage A — anchor mechanics and numerical unit tests
+The support layer uses the same deterministic rule on both models:
 
-Commands:
+- one non-rendered fixed anchor per selected vertex;
+- inward depth `0.25 × local median incident edge length`;
+- one own-anchor spring plus three adjacent-anchor springs per surface vertex;
+- no source topology, vertex IDs, or GLB data are changed.
 
-```powershell
-python scripts/test_plan_a4_solver.py
-python scripts/test_plan_a5_subcutaneous_mechanics.py
-```
+| Character | Support springs | Anchor depth min / median / max | Finite anchors | Finite rest lengths |
+|---|---:|---:|---|---|
+| Female | 166,796 | `5.09e-05 / 1.76e-04 / 8.70e-04` | YES | YES |
+| Male | 832,561 | `9.93e-05 / 4.38e-04 / 1.51e-03` | YES | YES |
 
-Results:
+This layer is explicitly abstract. It is not claimed to be anatomically
+subcutaneous tissue.
 
-- A4 baseline tests: **PASS**, including interior barycentric constraint,
-  sparse redundant-row reduction, and zero-rest spring residual.
-- A5 support-mechanics tests: **PASS**.
-- Fixed inward-anchor finite-difference gradient maximum absolute error:
-  `1.0256819699128172e-11`.
-- Zero support-ratio energy contribution: `0.0`.
-- Barycentric constraint rank test: rank `1`.
+## Correspondence and neutral preservation
 
-This establishes the small mechanics bookkeeping, not a facial solve.
+Both characters retain `478/478` landmark attachments. All triangle indices,
+weights, and neutral target arrays are finite. Weight sums differ from one by
+at most `2.22e-16`.
 
-## Stage B — anatomical surface inspection
+The male data contains one row with a small negative barycentric weight
+`-1.42485e-04`; it is finite and preserved as supplied rather than silently
+clamped. This is recorded as an attachment-quality warning, not relabeled as
+an anatomical-domain failure.
 
-The existing A3/A4 geodesic candidate was built at `0.50` interocular widths
-for this inspection.  It preserves original vertex IDs and triangles but
-retains disconnected surface pieces touched by the landmark region.
+Neutral supported solves:
 
-| Candidate | Vertices | Triangles | Topology components | Visual result |
-|---|---:|---:|---:|---|
-| Female `.50 IPD` patch | 41,747 | 79,627 | 16 | Face plus hair strands and neck surface |
-| Male `.50 IPD` patch | 208,351 | 401,474 | 67 | Face plus beard/hair and neck/collar-adjacent surface |
-
-The candidate-domain renders show the selected region in red over the original
-textured render:
-
-- `female-r050-domain.png`
-- `male-r050-domain.png`
-
-The rendered evidence is not an acceptable A5 skin segmentation.  The female
-selection visibly includes front hair locks, loose side strands, and neck
-surface.  The male selection visibly includes beard/hair structures and neck
-surface.  A single GLB mesh/material prevents material-name filtering from
-separating those structures.
-
-An automatic normalized landmark-envelope candidate was also tested using the
-same rule on both characters:
-
-```powershell
-python scripts/build_plan_a5_anatomical_domain.py `
-  --mesh verification/plan-a-hookean-run/female-full.npz `
-  --goal1 verification/plan-a5-subcutaneous-run/female-corrected-attachments.json `
-  --output verification/plan-a5-subcutaneous-run/female-anatomical-candidate-r006.json
-
-python scripts/build_plan_a5_anatomical_domain.py `
-  --mesh verification/plan-a-hookean-run/male-full.npz `
-  --goal1 verification/plan-a2-hookean-run/male-original-attachments.json `
-  --output verification/plan-a5-subcutaneous-run/male-anatomical-candidate-r006.json
-```
-
-That candidate retained all attachment triangles, but did not solve the
-classification problem:
-
-| Candidate | Vertices | Triangles | Topology components | Attachment triangles forced outside envelope |
+| Character | Max neutral vertex displacement | Max landmark error | Collapsed triangles | Normal reversals |
 |---|---:|---:|---:|---:|
-| Female normalized envelope | 101,575 | 194,051 | 56 | 0 |
-| Male normalized envelope | 342,362 | 647,430 | 343 | 0 |
+| Female | `2.78e-16` | `5.72e-17` | 0 | 0 |
+| Male | `6.36e-17` | `5.59e-17` | 0 | 0 |
 
-The corresponding visual checks are:
+Neutral geometry and connectivity were preserved to floating-point precision.
 
-- `female-anatomical-candidate-r006.png`
-- `male-anatomical-candidate-r006.png`
+## Expression and head-motion probes
 
-They still visibly include non-skin surfaces.  The female render contains
-hair/side strands and neck; the male render contains beard/hair and neck/collar
-regions.  The envelope also fragments the source surface into 56 and 343
-components, respectively, so it is not a valid continuous facial-skin domain
-for the required distributed seam graph.
+The source table is head-stabilized. It does not contain an independent rigid
+head-motion target. Therefore the head test is reported separately as a
+synthetic rigid transport check, not misrepresented as measured facial motion.
 
-### Stage B result
+The expression frame labels below are signal-based observations from the
+existing table. The performance is mixed, so `mouth/smile-like` does not claim
+an isolated psychological smile.
 
-**FAIL.** The required anatomical domain is not established.  The failure is
-not a numerical solver failure and no spring solve was run after this gate.
-Adding virtual springs at this point would connect surfaces that the visual
-inspection has shown are not all facial skin, which would violate the A5
-requirements.
+| Probe | Source-frame basis |
+|---|---|
+| Neutral | frame 0 |
+| Blink/eyelid peak | frame 45, maximum selected eyelid signal |
+| Mouth/smile-like peak 1 | frame 97, maximum selected mouth signal |
+| Mouth/smile-like peak 2 | frame 99, adjacent high mouth/brow signal |
+| Head motion | synthetic 5° in-plane rotation + 0.03 IPD translation |
 
-## Dependent stages
+The same supported solver was run independently on both characters. The solver
+uses the existing sparse projected Hookean update and exact barycentric
+constraints. The probe output is intentionally bounded; a `max_iterations`
+status is reported as a numerical failure, not silently accepted as equilibrium.
 
-| Stage | Result | Reason |
+| Character / frame | Max target readback error | Max edge strain | P95 abs edge strain | Area collapses | Normal reversals | Solver status |
+|---|---:|---:|---:|---:|---:|---|
+| Female 45 | `4.585e-03` | `15.753` | `0.280` | 0 | 1,819 | FAILED: max iterations |
+| Female 97 | `3.318e-03` | `21.190` | `0.547` | 0 | 2,228 | FAILED: max iterations |
+| Female 99 | `3.440e-03` | `21.066` | `0.563` | 0 | 2,272 | FAILED: max iterations |
+| Male 45 | `2.109e-02` | `37.023` | `0.107` | 0 | 4,549 | FAILED: max iterations |
+| Male 97 | `1.361e-02` | `86.418` | `0.136` | 0 | 3,767 | FAILED: max iterations |
+| Male 99 | `1.501e-02` | `85.232` | `0.140` | 0 | 3,853 | FAILED: max iterations |
+
+The component-local hard residuals were approximately machine precision for
+the components actually solved, but the full readback errors remain nonzero
+because the solver stopped after the first component at the bounded iteration
+limit. Exact landmark placement alone is therefore not treated as success.
+
+Head transport passed on both characters:
+
+| Character | Max barycentric transport error |
+|---|---:|
+| Female | `1.12e-16` |
+| Male | `1.15e-16` |
+
+This verifies the character-relative correspondence under rigid transport. It
+does not prove that the current elastic solver can animate head motion.
+
+## Visual review, separate from objective gates
+
+The neutral renders preserve the original faces. The supported expression
+renders show severe visible deformation artifacts, including large spikes and
+surface foldovers in hair and facial regions. Allowing hair and beard to move
+does not make these artifacts acceptable.
+
+- [Female neutral](female-stageb-frame45-neutral.png)
+- [Female supported probe](female-stageb-frame45-supported.png)
+- [Male neutral](male-stageb-frame45-neutral.png)
+- [Male supported probe](male-stageb-frame45-supported.png)
+
+The earlier red-domain images remain diagnostic only and are not failures by
+themselves:
+
+- [Female domain](female-r050-domain.png)
+- [Male domain](male-r050-domain.png)
+
+## Stage B decision
+
+| Gate | Result | Evidence |
 |---|---|---|
-| C — short contiguous sequence | NOT RUN | Stage B failed |
-| D — frame 30 | NOT RUN | Stage B failed |
-| E — all 121 frames | NOT RUN | Stage B failed |
+| Landmark correspondence | PASS | 478/478 finite attachments on both |
+| Anchor weights/positions finite | PASS with warning | finite; one male slightly negative barycentric weight preserved |
+| Neutral preservation | PASS | max displacement below `3e-16` |
+| Rigid head transport | PASS | max error below `1.2e-16` on both |
+| Stable expression deformation | FAIL | all tested non-neutral probes stopped at max iterations |
+| Visual artifact review | FAIL | spikes/foldovers visible in supported renders |
 
-No A5-control or A5-supported render, hard-constraint physics result, or full
-animation result is claimed.
+Because the functional deformation gate fails, the later A5 stages were not
+started:
 
-## Reproducibility
+- Stage C short contiguous sequence: **NOT RUN**
+- Stage D frame 30: **NOT RUN**
+- Stage E complete 121-frame animation: **NOT RUN**
+
+This revision removes anatomical purity and component count as blockers, but it
+does not waive numerical stability or visible geometry failures.
+
+## Reproduction
 
 ```powershell
 cd C:\Users\USER\talking-character-demo
-python scripts/audit_plan_a5_components.py `
-  --female verification/plan-a5-subcutaneous-run/female-patch-r050.npz `
-  --male verification/plan-a5-subcutaneous-run/male-patch-r050.npz `
-  --output verification/plan-a5-subcutaneous-run/corrected-component-audit.json
-
-python scripts/render_plan_a5_domain_audit.py `
-  --glb assets/tripo/vela-photoreal/generated-original.glb `
-  --graph verification/plan-a5-subcutaneous-run/female-patch-r050.npz `
-  --camera verification/goal1-generalization-run/female-camera/discovered-camera.json `
-  --output verification/plan-a5-subcutaneous-run/female-r050-domain.png
+python scripts/build_plan_a5_subcutaneous_graph.py --graph verification/plan-a5-subcutaneous-run/female-spring-graph-r050.npz --output verification/plan-a5-subcutaneous-run/female-subcutaneous-r050.json
+python scripts/build_plan_a5_subcutaneous_graph.py --graph verification/plan-a5-subcutaneous-run/male-spring-graph-r050.npz --output verification/plan-a5-subcutaneous-run/male-subcutaneous-r050.json
+python scripts/solve_plan_a5_subcutaneous.py --graph verification/plan-a5-subcutaneous-run/female-subcutaneous-r050.npz --targets verification/plan-a5-subcutaneous-run/female-targets-r050.npz --output verification/plan-a5-subcutaneous-run/female-stageb-frame45-supported.json --frame 45 --support-ratio 0.1 --max-iterations 20 --inner-iterations 60
+python scripts/solve_plan_a5_subcutaneous.py --graph verification/plan-a5-subcutaneous-run/male-subcutaneous-r050.npz --targets verification/plan-a5-subcutaneous-run/male-targets-r050.npz --output verification/plan-a5-subcutaneous-run/male-stageb-frame45-supported.json --frame 45 --support-ratio 0.1 --max-iterations 2 --inner-iterations 20
+python scripts/test_plan_a5_head_motion_transport.py --graph verification/plan-a5-subcutaneous-run/female-subcutaneous-r050.npz --output verification/plan-a5-subcutaneous-run/female-head-motion-transport.json
 ```
 
-The equivalent male command substitutes the male GLB, patch, camera, and
-output path.  The candidate-envelope commands are listed above.
-
-## Recommendation before physics
-
-Do not tune the A5 subcutaneous stiffness ratio yet.  First create and visually
-verify a deterministic surface classifier that separates outer facial skin
-from hair, beard, eyes/eyelashes, and neck on both original meshes while
-retaining every required attachment triangle.  Only after that gate passes is
-it valid to build the distributed virtual seam graph and run the A5
-no-anchor-versus-supported ablation.
+The equivalent male head-transport command substitutes the male graph/output.
 
 OVERALL STEP RESULT: **FAILED**
 
-Failure gate: Stage B anatomical facial-surface domain was not established;
-Stages C–E were correctly not run.
+Failure mechanism: correspondence and abstract-anchor construction are
+functional, but the first non-neutral supported Hookean probes do not reach a
+stable converged deformation and produce severe visible artifacts. No full
+animation claim is made.

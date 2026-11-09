@@ -1,0 +1,20 @@
+{
+  "sourceGraph": "verification\\plan-a5-subcutaneous-run\\female-spring-graph-r050.npz",
+  "vertices": 41747,
+  "triangles": 79627,
+  "originalSprings": 121358,
+  "virtualSeamSprings": 24,
+  "abstractAnchors": 41747,
+  "supportSprings": 166796,
+  "ownSupportSprings": 41747,
+  "neighborSupportSprings": 125049,
+  "anchorDepthFractionOfLocalMedianEdge": 0.25,
+  "neighborAnchorCount": 3,
+  "anchorDepthMin": 5.089974116914784e-05,
+  "anchorDepthMedian": 0.00017554234738496557,
+  "anchorDepthMax": 0.0008698735202192229,
+  "finiteAnchors": true,
+  "finiteRestLengths": true,
+  "topologyChanged": false,
+  "layerInterpretation": "abstract fixed solver control layer; not classified as anatomical subcutaneous tissue"
+}

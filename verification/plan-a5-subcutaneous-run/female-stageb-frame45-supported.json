@@ -1,0 +1,455 @@
+{
+  "solver": "A4 sparse projected nonlinear Hookean solver plus fixed abstract-anchor springs",
+  "frame": 45,
+  "supportRatio": 0.1,
+  "vertices": 41747,
+  "triangles": 79627,
+  "landmarks": 478,
+  "components": 2,
+  "failure": {
+    "component": 0,
+    "status": "max_iterations",
+    "iterations": 20,
+    "constraintRank": 1365,
+    "constraintRows": 1365,
+    "rigidConstraintRank": 6,
+    "finalConstraintError": 2.220446049250313e-16,
+    "projectedForceResidual": 0.000134983241059436,
+    "objective": 0.0031613402911098345,
+    "maxStep": 0.008329964711412147,
+    "runtimeSeconds": 60.84310550009832,
+    "history": [
+      {
+        "iteration": 0,
+        "type": "feasible_projection",
+        "maxStep": 0.008329964711412147
+      },
+      {
+        "iteration": 1,
+        "objective": 0.005937861332054645,
+        "hardConstraintError": 1.1102230246251565e-16,
+        "projectedForceResidual": 0.0002903608896347371,
+        "maxStep": 0.006335077706047597,
+        "acceptedAlpha": 0.25,
+        "lsqrStop": 7,
+        "lsqrIterations": 60
+      },
+      {
+        "iteration": 2,
+        "objective": 0.005586024438217645,
+        "hardConstraintError": 1.1102230246251565e-16,
+        "projectedForceResidual": 0.0002926097450980516,
+        "maxStep": 0.008003631981353315,
+        "acceptedAlpha": 0.25,
+        "lsqrStop": 7,
+        "lsqrIterations": 60
+      },
+      {
+        "iteration": 3,
+        "objective": 0.005164909245719286,
+        "hardConstraintError": 1.1102230246251565e-16,
+        "projectedForceResidual": 0.00031162006136296487,
+        "maxStep": 0.005602074874001995,
+        "acceptedAlpha": 0.25,
+        "lsqrStop": 7,
+        "lsqrIterations": 60
+      },
+      {
+        "iteration": 4,
+        "objective": 0.004551795452750985,
+        "hardConstraintError": 1.1102230246251565e-16,
+        "projectedForceResidual": 0.000298415281002436,
+        "maxStep": 0.0038982003691957747,
+        "acceptedAlpha": 0.25,
+        "lsqrStop": 7,
+        "lsqrIterations": 60
+      },
+      {
+        "iteration": 5,
+        "objective": 0.004269107141044781,
+        "hardConstraintError": 1.1102230246251565e-16,
+        "projectedForceResidual": 0.0002553362780735471,
+        "maxStep": 0.0034490287729024766,
+        "acceptedAlpha": 0.125,
+        "lsqrStop": 7,
+        "lsqrIterations": 60
+      },
+      {
+        "iteration": 6,
+        "objective": 0.004044780328346162,
+        "hardConstraintError": 1.1102230246251565e-16,
+        "projectedForceResidual": 0.00023518708127670461,
+        "maxStep": 0.004249799024653677,
+        "acceptedAlpha": 0.125,
+        "lsqrStop": 7,
+        "lsqrIterations": 60
+      },
+      {
+        "iteration": 7,
+        "objective": 0.0038580711644484785,
+        "hardConstraintError": 1.1102230246251565e-16,
+        "projectedForceResidual": 0.00021695282932259534,
+        "maxStep": 0.002507299398090641,
+        "acceptedAlpha": 0.125,
+        "lsqrStop": 7,
+        "lsqrIterations": 60
+      },
+      {
+        "iteration": 8,
+        "objective": 0.0037476333884641283,
+        "hardConstraintError": 1.6653345369377348e-16,
+        "projectedForceResidual": 0.00020138759609470062,
+        "maxStep": 0.0025145611131958483,
+        "acceptedAlpha": 0.125,
+        "lsqrStop": 7,
+        "lsqrIterations": 60
+      },
+      {
+        "iteration": 9,
+        "objective": 0.0037020211948169414,
+        "hardConstraintError": 1.1102230246251565e-16,
+        "projectedForceResidual": 0.00019213837560513452,
+        "maxStep": 0.003572933026785325,
+        "acceptedAlpha": 0.125,
+        "lsqrStop": 7,
+        "lsqrIterations": 60
+      },
+      {
+        "iteration": 10,
+        "objective": 0.0036569591750674757,
+        "hardConstraintError": 1.6653345369377348e-16,
+        "projectedForceResidual": 0.00019327364576349654,
+        "maxStep": 0.0033374061289484836,
+        "acceptedAlpha": 0.125,
+        "lsqrStop": 7,
+        "lsqrIterations": 60
+      },
+      {
+        "iteration": 11,
+        "objective": 0.003566476796523124,
+        "hardConstraintError": 1.6653345369377348e-16,
+        "projectedForceResidual": 0.00019148484064845253,
+        "maxStep": 0.0016145507168687015,
+        "acceptedAlpha": 0.0625,
+        "lsqrStop": 7,
+        "lsqrIterations": 60
+      },
+      {
+        "iteration": 12,
+        "objective": 0.003496373882999945,
+        "hardConstraintError": 1.6653345369377348e-16,
+        "projectedForceResidual": 0.00018192106103267965,
+        "maxStep": 0.004176185119304933,
+        "acceptedAlpha": 0.125,
+        "lsqrStop": 7,
+        "lsqrIterations": 60
+      },
+      {
+        "iteration": 13,
+        "objective": 0.003417162363369524,
+        "hardConstraintError": 2.220446049250313e-16,
+        "projectedForceResidual": 0.0001750652264826524,
+        "maxStep": 0.0013060217964341988,
+        "acceptedAlpha": 0.0625,
+        "lsqrStop": 7,
+        "lsqrIterations": 60
+      },
+      {
+        "iteration": 14,
+        "objective": 0.0034023694000193264,
+        "hardConstraintError": 1.6653345369377348e-16,
+        "projectedForceResidual": 0.0001648667251709063,
+        "maxStep": 0.004279442473442854,
+        "acceptedAlpha": 0.125,
+        "lsqrStop": 7,
+        "lsqrIterations": 60
+      },
+      {
+        "iteration": 15,
+        "objective": 0.0033454687505382183,
+        "hardConstraintError": 2.220446049250313e-16,
+        "projectedForceResidual": 0.0001634511316053302,
+        "maxStep": 0.00120532050618637,
+        "acceptedAlpha": 0.0625,
+        "lsqrStop": 7,
+        "lsqrIterations": 60
+      },
+      {
+        "iteration": 16,
+        "objective": 0.003314234320091823,
+        "hardConstraintError": 1.6653345369377348e-16,
+        "projectedForceResidual": 0.00015685324785362536,
+        "maxStep": 0.0028840043729203395,
+        "acceptedAlpha": 0.125,
+        "lsqrStop": 7,
+        "lsqrIterations": 60
+      },
+      {
+        "iteration": 17,
+        "objective": 0.003254836749043937,
+        "hardConstraintError": 2.220446049250313e-16,
+        "projectedForceResidual": 0.0001541812444059706,
+        "maxStep": 0.001135732767030618,
+        "acceptedAlpha": 0.0625,
+        "lsqrStop": 7,
+        "lsqrIterations": 60
+      },
+      {
+        "iteration": 18,
+        "objective": 0.003238770922616957,
+        "hardConstraintError": 1.6653345369377348e-16,
+        "projectedForceResidual": 0.00014636106660861878,
+        "maxStep": 0.003388401113674264,
+        "acceptedAlpha": 0.125,
+        "lsqrStop": 7,
+        "lsqrIterations": 60
+      },
+      {
+        "iteration": 19,
+        "objective": 0.0032117248577620315,
+        "hardConstraintError": 2.220446049250313e-16,
+        "projectedForceResidual": 0.00014323389441791765,
+        "maxStep": 0.0020853571298210614,
+        "acceptedAlpha": 0.0625,
+        "lsqrStop": 7,
+        "lsqrIterations": 60
+      },
+      {
+        "iteration": 20,
+        "objective": 0.0031613402911098345,
+        "hardConstraintError": 1.6653345369377348e-16,
+        "projectedForceResidual": 0.00014164167604514935,
+        "maxStep": 0.0014238671453696962,
+        "acceptedAlpha": 0.0625,
+        "lsqrStop": 7,
+        "lsqrIterations": 60
+      }
+    ]
+  },
+  "runtimeSeconds": 62.08538179984316,
+  "componentReports": [
+    {
+      "component": 0,
+      "vertices": 37494,
+      "landmarks": 455,
+      "status": "max_iterations",
+      "iterations": 20,
+      "constraintRank": 1365,
+      "constraintRows": 1365,
+      "rigidConstraintRank": 6,
+      "finalConstraintError": 2.220446049250313e-16,
+      "projectedForceResidual": 0.000134983241059436,
+      "objective": 0.0031613402911098345,
+      "maxStep": 0.008329964711412147,
+      "runtimeSeconds": 60.84310550009832,
+      "history": [
+        {
+          "iteration": 0,
+          "type": "feasible_projection",
+          "maxStep": 0.008329964711412147
+        },
+        {
+          "iteration": 1,
+          "objective": 0.005937861332054645,
+          "hardConstraintError": 1.1102230246251565e-16,
+          "projectedForceResidual": 0.0002903608896347371,
+          "maxStep": 0.006335077706047597,
+          "acceptedAlpha": 0.25,
+          "lsqrStop": 7,
+          "lsqrIterations": 60
+        },
+        {
+          "iteration": 2,
+          "objective": 0.005586024438217645,
+          "hardConstraintError": 1.1102230246251565e-16,
+          "projectedForceResidual": 0.0002926097450980516,
+          "maxStep": 0.008003631981353315,
+          "acceptedAlpha": 0.25,
+          "lsqrStop": 7,
+          "lsqrIterations": 60
+        },
+        {
+          "iteration": 3,
+          "objective": 0.005164909245719286,
+          "hardConstraintError": 1.1102230246251565e-16,
+          "projectedForceResidual": 0.00031162006136296487,
+          "maxStep": 0.005602074874001995,
+          "acceptedAlpha": 0.25,
+          "lsqrStop": 7,
+          "lsqrIterations": 60
+        },
+        {
+          "iteration": 4,
+          "objective": 0.004551795452750985,
+          "hardConstraintError": 1.1102230246251565e-16,
+          "projectedForceResidual": 0.000298415281002436,
+          "maxStep": 0.0038982003691957747,
+          "acceptedAlpha": 0.25,
+          "lsqrStop": 7,
+          "lsqrIterations": 60
+        },
+        {
+          "iteration": 5,
+          "objective": 0.004269107141044781,
+          "hardConstraintError": 1.1102230246251565e-16,
+          "projectedForceResidual": 0.0002553362780735471,
+          "maxStep": 0.0034490287729024766,
+          "acceptedAlpha": 0.125,
+          "lsqrStop": 7,
+          "lsqrIterations": 60
+        },
+        {
+          "iteration": 6,
+          "objective": 0.004044780328346162,
+          "hardConstraintError": 1.1102230246251565e-16,
+          "projectedForceResidual": 0.00023518708127670461,
+          "maxStep": 0.004249799024653677,
+          "acceptedAlpha": 0.125,
+          "lsqrStop": 7,
+          "lsqrIterations": 60
+        },
+        {
+          "iteration": 7,
+          "objective": 0.0038580711644484785,
+          "hardConstraintError": 1.1102230246251565e-16,
+          "projectedForceResidual": 0.00021695282932259534,
+          "maxStep": 0.002507299398090641,
+          "acceptedAlpha": 0.125,
+          "lsqrStop": 7,
+          "lsqrIterations": 60
+        },
+        {
+          "iteration": 8,
+          "objective": 0.0037476333884641283,
+          "hardConstraintError": 1.6653345369377348e-16,
+          "projectedForceResidual": 0.00020138759609470062,
+          "maxStep": 0.0025145611131958483,
+          "acceptedAlpha": 0.125,
+          "lsqrStop": 7,
+          "lsqrIterations": 60
+        },
+        {
+          "iteration": 9,
+          "objective": 0.0037020211948169414,
+          "hardConstraintError": 1.1102230246251565e-16,
+          "projectedForceResidual": 0.00019213837560513452,
+          "maxStep": 0.003572933026785325,
+          "acceptedAlpha": 0.125,
+          "lsqrStop": 7,
+          "lsqrIterations": 60
+        },
+        {
+          "iteration": 10,
+          "objective": 0.0036569591750674757,
+          "hardConstraintError": 1.6653345369377348e-16,
+          "projectedForceResidual": 0.00019327364576349654,
+          "maxStep": 0.0033374061289484836,
+          "acceptedAlpha": 0.125,
+          "lsqrStop": 7,
+          "lsqrIterations": 60
+        },
+        {
+          "iteration": 11,
+          "objective": 0.003566476796523124,
+          "hardConstraintError": 1.6653345369377348e-16,
+          "projectedForceResidual": 0.00019148484064845253,
+          "maxStep": 0.0016145507168687015,
+          "acceptedAlpha": 0.0625,
+          "lsqrStop": 7,
+          "lsqrIterations": 60
+        },
+        {
+          "iteration": 12,
+          "objective": 0.003496373882999945,
+          "hardConstraintError": 1.6653345369377348e-16,
+          "projectedForceResidual": 0.00018192106103267965,
+          "maxStep": 0.004176185119304933,
+          "acceptedAlpha": 0.125,
+          "lsqrStop": 7,
+          "lsqrIterations": 60
+        },
+        {
+          "iteration": 13,
+          "objective": 0.003417162363369524,
+          "hardConstraintError": 2.220446049250313e-16,
+          "projectedForceResidual": 0.0001750652264826524,
+          "maxStep": 0.0013060217964341988,
+          "acceptedAlpha": 0.0625,
+          "lsqrStop": 7,
+          "lsqrIterations": 60
+        },
+        {
+          "iteration": 14,
+          "objective": 0.0034023694000193264,
+          "hardConstraintError": 1.6653345369377348e-16,
+          "projectedForceResidual": 0.0001648667251709063,
+          "maxStep": 0.004279442473442854,
+          "acceptedAlpha": 0.125,
+          "lsqrStop": 7,
+          "lsqrIterations": 60
+        },
+        {
+          "iteration": 15,
+          "objective": 0.0033454687505382183,
+          "hardConstraintError": 2.220446049250313e-16,
+          "projectedForceResidual": 0.0001634511316053302,
+          "maxStep": 0.00120532050618637,
+          "acceptedAlpha": 0.0625,
+          "lsqrStop": 7,
+          "lsqrIterations": 60
+        },
+        {
+          "iteration": 16,
+          "objective": 0.003314234320091823,
+          "hardConstraintError": 1.6653345369377348e-16,
+          "projectedForceResidual": 0.00015685324785362536,
+          "maxStep": 0.0028840043729203395,
+          "acceptedAlpha": 0.125,
+          "lsqrStop": 7,
+          "lsqrIterations": 60
+        },
+        {
+          "iteration": 17,
+          "objective": 0.003254836749043937,
+          "hardConstraintError": 2.220446049250313e-16,
+          "projectedForceResidual": 0.0001541812444059706,
+          "maxStep": 0.001135732767030618,
+          "acceptedAlpha": 0.0625,
+          "lsqrStop": 7,
+          "lsqrIterations": 60
+        },
+        {
+          "iteration": 18,
+          "objective": 0.003238770922616957,
+          "hardConstraintError": 1.6653345369377348e-16,
+          "projectedForceResidual": 0.00014636106660861878,
+          "maxStep": 0.003388401113674264,
+          "acceptedAlpha": 0.125,
+          "lsqrStop": 7,
+          "lsqrIterations": 60
+        },
+        {
+          "iteration": 19,
+          "objective": 0.0032117248577620315,
+          "hardConstraintError": 2.220446049250313e-16,
+          "projectedForceResidual": 0.00014323389441791765,
+          "maxStep": 0.0020853571298210614,
+          "acceptedAlpha": 0.0625,
+          "lsqrStop": 7,
+          "lsqrIterations": 60
+        },
+        {
+          "iteration": 20,
+          "objective": 0.0031613402911098345,
+          "hardConstraintError": 1.6653345369377348e-16,
+          "projectedForceResidual": 0.00014164167604514935,
+          "maxStep": 0.0014238671453696962,
+          "acceptedAlpha": 0.0625,
+          "lsqrStop": 7,
+          "lsqrIterations": 60
+        }
+      ]
+    }
+  ],
+  "topologyChanged": false
+}

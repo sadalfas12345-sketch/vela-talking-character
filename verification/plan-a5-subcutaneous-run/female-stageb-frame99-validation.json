@@ -1,0 +1,72 @@
+{
+  "frame": 99,
+  "vertices": 41747,
+  "triangles": 79627,
+  "landmarks": 478,
+  "allVertexCoordinatesFinite": true,
+  "allLandmarkTargetsFinite": true,
+  "maxLandmarkError": 0.0034397414400535293,
+  "rmsLandmarkError": 0.0004198147609104618,
+  "maxVertexDisplacement": 0.007326774139973006,
+  "maxEdgeStrain": 21.065810840545407,
+  "p95AbsEdgeStrain": 0.5625379445898495,
+  "collapsedTrianglesAreaBelow1e-6Relative": 0,
+  "normalReversalsRelativeToNeutral": 2272,
+  "solverFailure": {
+    "component": 0,
+    "status": "max_iterations",
+    "iterations": 3,
+    "constraintRank": 1365,
+    "constraintRows": 1365,
+    "rigidConstraintRank": 6,
+    "finalConstraintError": 1.1102230246251565e-16,
+    "projectedForceResidual": 0.0003073130974259108,
+    "objective": 0.006928501320140046,
+    "maxStep": 0.00785619076642748,
+    "runtimeSeconds": 9.874803099781275,
+    "history": [
+      {
+        "iteration": 0,
+        "type": "feasible_projection",
+        "maxStep": 0.00785619076642748
+      },
+      {
+        "iteration": 1,
+        "objective": 0.009345522044835098,
+        "hardConstraintError": 1.1102230246251565e-16,
+        "projectedForceResidual": 0.00035296999704328595,
+        "maxStep": 0.007042779714232018,
+        "acceptedAlpha": 0.5,
+        "lsqrStop": 7,
+        "lsqrIterations": 30
+      },
+      {
+        "iteration": 2,
+        "objective": 0.007660581249751688,
+        "hardConstraintError": 1.6653345369377348e-16,
+        "projectedForceResidual": 0.00044117048197064407,
+        "maxStep": 0.0037030992831226872,
+        "acceptedAlpha": 0.25,
+        "lsqrStop": 7,
+        "lsqrIterations": 30
+      },
+      {
+        "iteration": 3,
+        "objective": 0.006928501320140046,
+        "hardConstraintError": 1.1102230246251565e-16,
+        "projectedForceResidual": 0.0003489353733742305,
+        "maxStep": 0.004009634133499434,
+        "acceptedAlpha": 0.25,
+        "lsqrStop": 7,
+        "lsqrIterations": 30
+      }
+    ]
+  },
+  "solverRuntimeSeconds": 11.122416500002146,
+  "solverHardConstraintError": 1.1102230246251565e-16,
+  "solverStatus": [
+    "max_iterations"
+  ],
+  "originalNeutralPreserved": true,
+  "visualReviewRequired": true
+}

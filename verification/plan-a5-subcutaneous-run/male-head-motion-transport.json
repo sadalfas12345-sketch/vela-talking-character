@@ -1,0 +1,10 @@
+{
+  "vertices": 208351,
+  "landmarks": 478,
+  "rotationDegrees": 5.0,
+  "translationInterocularWidths": 0.03,
+  "maxBarycentricTransportError": 1.1527756336890508e-16,
+  "rmsBarycentricTransportError": 4.319119383854478e-17,
+  "pass": true,
+  "source": "head-stabilized expression data; synthetic rigid transport only"
+}

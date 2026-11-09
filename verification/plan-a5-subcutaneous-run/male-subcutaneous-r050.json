@@ -1,0 +1,20 @@
+{
+  "sourceGraph": "verification\\plan-a5-subcutaneous-run\\male-spring-graph-r050.npz",
+  "vertices": 208351,
+  "triangles": 401474,
+  "originalSprings": 609759,
+  "virtualSeamSprings": 146,
+  "abstractAnchors": 208351,
+  "supportSprings": 832561,
+  "ownSupportSprings": 208351,
+  "neighborSupportSprings": 624210,
+  "anchorDepthFractionOfLocalMedianEdge": 0.25,
+  "neighborAnchorCount": 3,
+  "anchorDepthMin": 9.931525430207359e-05,
+  "anchorDepthMedian": 0.00043754985213186406,
+  "anchorDepthMax": 0.0015106755424601735,
+  "finiteAnchors": true,
+  "finiteRestLengths": true,
+  "topologyChanged": false,
+  "layerInterpretation": "abstract fixed solver control layer; not classified as anatomical subcutaneous tissue"
+}

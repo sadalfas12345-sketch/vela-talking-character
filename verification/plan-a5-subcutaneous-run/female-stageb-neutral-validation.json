@@ -1,0 +1,24 @@
+{
+  "frame": 0,
+  "vertices": 41747,
+  "triangles": 79627,
+  "landmarks": 478,
+  "allVertexCoordinatesFinite": true,
+  "allLandmarkTargetsFinite": true,
+  "maxLandmarkError": 5.721958498152797e-17,
+  "rmsLandmarkError": 1.4424176635673266e-17,
+  "maxVertexDisplacement": 2.775562855513763e-16,
+  "maxEdgeStrain": 4.591620238616933e-13,
+  "p95AbsEdgeStrain": 0.0,
+  "collapsedTrianglesAreaBelow1e-6Relative": 0,
+  "normalReversalsRelativeToNeutral": 0,
+  "solverFailure": null,
+  "solverRuntimeSeconds": 6.166167700197548,
+  "solverHardConstraintError": 5.551115123125783e-17,
+  "solverStatus": [
+    "converged",
+    "converged"
+  ],
+  "originalNeutralPreserved": true,
+  "visualReviewRequired": true
+}
