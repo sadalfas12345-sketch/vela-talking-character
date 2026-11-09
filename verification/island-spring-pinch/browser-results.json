@@ -227,9 +227,9 @@
           "numericalMassFloorKg": 4.116203486919403e-7,
           "highestEstimatedNaturalFrequencyHz": 4.110506565959024,
           "substepsPerRenderedFrame": 10,
-          "energy": 0.000002692886993360236,
-          "maxDisplacement": 0.0015658816327934835,
-          "maxStrain": 1.2357760408693959,
+          "energy": 6.325503568274311e-7,
+          "maxDisplacement": 0.0010536916241691856,
+          "maxStrain": 0.6505985457301621,
           "finite": true,
           "orientationSign": 1
         },
@@ -318,14 +318,14 @@
             0.004149089242713136
           ],
           "actualAtRelease": [
-            0.061277202495954614,
-            0.42444680811872737,
-            0.004473161629514196
+            0.06108688351451212,
+            0.42429467394016307,
+            0.004047059291370154
           ],
-          "trackingErrorMeters": 0.00011184922854489977,
-          "peakForceN": 0.011405995131210881,
-          "peakTrackingErrorMeters": 0.0001267661931610834,
-          "maxDisplacementAtRelease": 0.0008435483507273026
+          "trackingErrorMeters": 0.0000355004000900355,
+          "peakForceN": 0.007360110201197793,
+          "peakTrackingErrorMeters": 0.00008177951938410817,
+          "maxDisplacementAtRelease": 0.0014005923165142217
         },
         "tests": {},
         "metrics": {
@@ -366,9 +366,9 @@
           "numericalMassFloorKg": 4.116203486919403e-7,
           "highestEstimatedNaturalFrequencyHz": 4.110506565959024,
           "substepsPerRenderedFrame": 10,
-          "energy": 4.2270397931673397e-7,
-          "maxDisplacement": 0.0007381281146348822,
-          "maxStrain": 0.49045127053168847,
+          "energy": 9.510861760274528e-7,
+          "maxDisplacement": 0.0013285243031422658,
+          "maxStrain": 0.6992254259306213,
           "finite": true,
           "orientationSign": 1
         },
@@ -493,9 +493,9 @@
               "numericalMassFloorKg": 4.116203486919403e-7,
               "highestEstimatedNaturalFrequencyHz": 4.110506565959024,
               "substepsPerRenderedFrame": 10,
-              "energy": 0.000002692886993360236,
-              "maxDisplacement": 0.0015658816327934835,
-              "maxStrain": 1.2357760408693959,
+              "energy": 6.325503568274311e-7,
+              "maxDisplacement": 0.0010536916241691856,
+              "maxStrain": 0.6505985457301621,
               "finite": true,
               "orientationSign": 1
             },
@@ -584,14 +584,14 @@
                 0.004149089242713136
               ],
               "actualAtRelease": [
-                0.061277202495954614,
-                0.42444680811872737,
-                0.004473161629514196
+                0.06108688351451212,
+                0.42429467394016307,
+                0.004047059291370154
               ],
-              "trackingErrorMeters": 0.00011184922854489977,
-              "peakForceN": 0.011405995131210881,
-              "peakTrackingErrorMeters": 0.0001267661931610834,
-              "maxDisplacementAtRelease": 0.0008435483507273026
+              "trackingErrorMeters": 0.0000355004000900355,
+              "peakForceN": 0.007360110201197793,
+              "peakTrackingErrorMeters": 0.00008177951938410817,
+              "maxDisplacementAtRelease": 0.0014005923165142217
             },
             "tests": {},
             "metrics": {
@@ -632,9 +632,9 @@
               "numericalMassFloorKg": 4.116203486919403e-7,
               "highestEstimatedNaturalFrequencyHz": 4.110506565959024,
               "substepsPerRenderedFrame": 10,
-              "energy": 4.2270397931673397e-7,
-              "maxDisplacement": 0.0007381281146348822,
-              "maxStrain": 0.49045127053168847,
+              "energy": 9.510861760274528e-7,
+              "maxDisplacement": 0.0013285243031422658,
+              "maxStrain": 0.6992254259306213,
               "finite": true,
               "orientationSign": 1
             },
@@ -760,9 +760,9 @@
               "numericalMassFloorKg": 4.116203486919403e-7,
               "highestEstimatedNaturalFrequencyHz": 4.110506565959024,
               "substepsPerRenderedFrame": 10,
-              "energy": 3.6724781553724003e-9,
-              "maxDisplacement": 0.00006583995342618451,
-              "maxStrain": 0.04509072248345355,
+              "energy": 3.6720762724898018e-9,
+              "maxDisplacement": 0.00006583711372975195,
+              "maxStrain": 0.04508866717698498,
               "finite": true,
               "orientationSign": 1
             },
@@ -853,12 +853,12 @@
               "actualAtRelease": [
                 0.06153953086252771,
                 0.4246793452119568,
-                0.005099133262177636
+                0.0050991365410498245
               ],
-              "trackingErrorMeters": 0.0003270807693950706,
-              "peakForceN": 0.03111591596061114,
-              "peakTrackingErrorMeters": 0.00034540338897369975,
-              "maxDisplacementAtRelease": 0.00006583995342618451
+              "trackingErrorMeters": 0.0003270816265432275,
+              "peakForceN": 0.03111183862786047,
+              "peakTrackingErrorMeters": 0.0003453745115458084,
+              "maxDisplacementAtRelease": 0.00006583711372975195
             },
             "tests": {},
             "metrics": {
@@ -899,9 +899,9 @@
               "numericalMassFloorKg": 4.116203486919403e-7,
               "highestEstimatedNaturalFrequencyHz": 4.110506565959024,
               "substepsPerRenderedFrame": 10,
-              "energy": 3.202751684614762e-8,
-              "maxDisplacement": 0.00019567431112357532,
-              "maxStrain": 0.13434708222627173,
+              "energy": 3.2023528890920925e-8,
+              "maxDisplacement": 0.00019566076555945563,
+              "maxStrain": 0.13433808178615395,
               "finite": true,
               "orientationSign": 1
             },
@@ -1027,9 +1027,9 @@
               "numericalMassFloorKg": 4.116203486919403e-7,
               "highestEstimatedNaturalFrequencyHz": 4.110506565959024,
               "substepsPerRenderedFrame": 10,
-              "energy": 0.0000014914062341935277,
-              "maxDisplacement": 0.001309664143331026,
-              "maxStrain": 0.9707395240443574,
+              "energy": 0.000002255980333400906,
+              "maxDisplacement": 0.0014351823230781143,
+              "maxStrain": 1.1541751609566722,
               "finite": true,
               "orientationSign": 1
             },
@@ -1118,14 +1118,14 @@
                 0.004149089242713136
               ],
               "actualAtRelease": [
-                0.06111646853277737,
-                0.42433198231064306,
-                0.004130159173018703
+                0.06098675108412557,
+                0.42421218359803603,
+                0.0038187917061196374
               ],
-              "trackingErrorMeters": 0.000008796087250391113,
-              "peakForceN": 0.006861926380851125,
-              "peakTrackingErrorMeters": 0.00007660776813561739,
-              "maxDisplacementAtRelease": 0.001309664143331026
+              "trackingErrorMeters": 0.00011420527617034146,
+              "peakForceN": 0.013939919328142859,
+              "peakTrackingErrorMeters": 0.00015549477894306765,
+              "maxDisplacementAtRelease": 0.001705772879823943
             },
             "tests": {},
             "metrics": {
@@ -1166,9 +1166,9 @@
               "numericalMassFloorKg": 4.116203486919403e-7,
               "highestEstimatedNaturalFrequencyHz": 4.110506565959024,
               "substepsPerRenderedFrame": 10,
-              "energy": 0.0000015465372313712285,
-              "maxDisplacement": 0.0013432404347980963,
-              "maxStrain": 0.9859373564719245,
+              "energy": 0.000005143337973637434,
+              "maxDisplacement": 0.0019482800714796,
+              "maxStrain": 1.6050912242514483,
               "finite": true,
               "orientationSign": 1
             },
@@ -1262,14 +1262,14 @@
             0.004149089242713136
           ],
           "actualAtRelease": [
-            0.06111646853277737,
-            0.42433198231064306,
-            0.004130159173018703
+            0.06098675108412557,
+            0.42421218359803603,
+            0.0038187917061196374
           ],
-          "trackingErrorMeters": 0.000008796087250391113,
-          "peakForceN": 0.006861926380851125,
-          "peakTrackingErrorMeters": 0.00007660776813561739,
-          "maxDisplacementAtRelease": 0.001309664143331026
+          "trackingErrorMeters": 0.00011420527617034146,
+          "peakForceN": 0.013939919328142859,
+          "peakTrackingErrorMeters": 0.00015549477894306765,
+          "maxDisplacementAtRelease": 0.001705772879823943
         },
         "tests": {},
         "metrics": {
@@ -1495,7 +1495,7 @@
           "numericalMassFloorKg": 0.000002171159267425537,
           "highestEstimatedNaturalFrequencyHz": 1.8883647714007723,
           "substepsPerRenderedFrame": 10,
-          "energy": 0.0001241187266798579,
+          "energy": 0.00012411881096226551,
           "maxDisplacement": 0.010572855855413817,
           "maxStrain": 5.250364741596934,
           "finite": true,
@@ -1588,12 +1588,12 @@
           "actualAtRelease": [
             0.27360838426786627,
             0.2559846680812482,
-            0.06583607393367437
+            0.06583607930410032
           ],
-          "trackingErrorMeters": 0.0006040248737502117,
-          "peakForceN": 0.054392381889097625,
-          "peakTrackingErrorMeters": 0.0006039818956808532,
-          "maxDisplacementAtRelease": 0.01216441758422023
+          "trackingErrorMeters": 0.0006040233266960008,
+          "peakForceN": 0.05439238926884985,
+          "peakTrackingErrorMeters": 0.0006039813888889662,
+          "maxDisplacementAtRelease": 0.012164410437514556
         },
         "tests": {},
         "metrics": {
@@ -1634,9 +1634,9 @@
           "numericalMassFloorKg": 0.000002171159267425537,
           "highestEstimatedNaturalFrequencyHz": 1.8883647714007723,
           "substepsPerRenderedFrame": 10,
-          "energy": 0.0001738868266676845,
-          "maxDisplacement": 0.01222323814125549,
-          "maxStrain": 5.9014439562648215,
+          "energy": 0.0001738865315990199,
+          "maxDisplacement": 0.012223230994430699,
+          "maxStrain": 5.901440204894663,
           "finite": true,
           "orientationSign": 1
         },
@@ -1761,7 +1761,7 @@
               "numericalMassFloorKg": 0.000002171159267425537,
               "highestEstimatedNaturalFrequencyHz": 1.8883647714007723,
               "substepsPerRenderedFrame": 10,
-              "energy": 0.0001241187266798579,
+              "energy": 0.00012411881096226551,
               "maxDisplacement": 0.010572855855413817,
               "maxStrain": 5.250364741596934,
               "finite": true,
@@ -1854,12 +1854,12 @@
               "actualAtRelease": [
                 0.27360838426786627,
                 0.2559846680812482,
-                0.06583607393367437
+                0.06583607930410032
               ],
-              "trackingErrorMeters": 0.0006040248737502117,
-              "peakForceN": 0.054392381889097625,
-              "peakTrackingErrorMeters": 0.0006039818956808532,
-              "maxDisplacementAtRelease": 0.01216441758422023
+              "trackingErrorMeters": 0.0006040233266960008,
+              "peakForceN": 0.05439238926884985,
+              "peakTrackingErrorMeters": 0.0006039813888889662,
+              "maxDisplacementAtRelease": 0.012164410437514556
             },
             "tests": {},
             "metrics": {
@@ -1900,9 +1900,9 @@
               "numericalMassFloorKg": 0.000002171159267425537,
               "highestEstimatedNaturalFrequencyHz": 1.8883647714007723,
               "substepsPerRenderedFrame": 10,
-              "energy": 0.0001738868266676845,
-              "maxDisplacement": 0.01222323814125549,
-              "maxStrain": 5.9014439562648215,
+              "energy": 0.0001738865315990199,
+              "maxDisplacement": 0.012223230994430699,
+              "maxStrain": 5.901440204894663,
               "finite": true,
               "orientationSign": 1
             },
@@ -2028,9 +2028,9 @@
               "numericalMassFloorKg": 0.000002171159267425537,
               "highestEstimatedNaturalFrequencyHz": 1.8883647714007723,
               "substepsPerRenderedFrame": 10,
-              "energy": 7.52824264465806e-8,
-              "maxDisplacement": 0.0002262119736652316,
-              "maxStrain": 0.09552156909365316,
+              "energy": 7.527082861043776e-8,
+              "maxDisplacement": 0.00022619054272532887,
+              "maxStrain": 0.09551316635404894,
               "finite": true,
               "orientationSign": 1
             },
@@ -2119,14 +2119,14 @@
                 0.06776941804631664
               ],
               "actualAtRelease": [
-                0.2714146452895366,
+                0.27141459975730703,
                 0.2558120071352615,
-                0.07330142784024925
+                0.07330145860587985
               ],
-              "trackingErrorMeters": 0.0017308595602103247,
-              "peakForceN": 0.16450331560536557,
-              "peakTrackingErrorMeters": 0.001827503621709798,
-              "maxDisplacementAtRelease": 0.000505601930284564
+              "trackingErrorMeters": 0.0017308722780782684,
+              "peakForceN": 0.16447547834452111,
+              "peakTrackingErrorMeters": 0.0018273064730881248,
+              "maxDisplacementAtRelease": 0.0005055182379268549
             },
             "tests": {},
             "metrics": {
@@ -2167,9 +2167,9 @@
               "numericalMassFloorKg": 0.000002171159267425537,
               "highestEstimatedNaturalFrequencyHz": 1.8883647714007723,
               "substepsPerRenderedFrame": 10,
-              "energy": 0.0000010439562723215393,
-              "maxDisplacement": 0.0008380992983036887,
-              "maxStrain": 0.3735884915032924,
+              "energy": 0.000001043674493128246,
+              "maxDisplacement": 0.000837979206944271,
+              "maxStrain": 0.37352634770472865,
               "finite": true,
               "orientationSign": 1
             },
@@ -2295,9 +2295,9 @@
               "numericalMassFloorKg": 0.000002171159267425537,
               "highestEstimatedNaturalFrequencyHz": 1.8883647714007723,
               "substepsPerRenderedFrame": 10,
-              "energy": 0.00006124432284716596,
-              "maxDisplacement": 0.00774547767578337,
-              "maxStrain": 3.892458008940347,
+              "energy": 0.00006124418926663456,
+              "maxDisplacement": 0.007745470531211653,
+              "maxStrain": 3.8924542973810277,
               "finite": true,
               "orientationSign": 1
             },
@@ -2388,12 +2388,12 @@
               "actualAtRelease": [
                 0.27285920509055916,
                 0.2559148759399669,
-                0.06840505925802719
+                0.06840506878876243
               ],
-              "trackingErrorMeters": 0.0001990529869998198,
-              "peakForceN": 0.07358771099283741,
-              "peakTrackingErrorMeters": 0.000818777966662028,
-              "maxDisplacementAtRelease": 0.008454706421276888
+              "trackingErrorMeters": 0.00019905572612909995,
+              "peakForceN": 0.07358774441504921,
+              "peakTrackingErrorMeters": 0.0008187791633143339,
+              "maxDisplacementAtRelease": 0.008454699276642143
             },
             "tests": {},
             "metrics": {
@@ -2434,9 +2434,9 @@
               "numericalMassFloorKg": 0.000002171159267425537,
               "highestEstimatedNaturalFrequencyHz": 1.8883647714007723,
               "substepsPerRenderedFrame": 10,
-              "energy": 0.00008943739426171394,
-              "maxDisplacement": 0.00916102056571537,
-              "maxStrain": 4.6204440336483,
+              "energy": 0.00008943721569691556,
+              "maxDisplacement": 0.009161013420990209,
+              "maxStrain": 4.620440305451659,
               "finite": true,
               "orientationSign": 1
             },
