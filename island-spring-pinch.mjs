@@ -8,7 +8,7 @@ const ui = {
   character: $('character'), state: $('loadState'), stageText: $('stageText'), island: $('islandSelect'), metrics: $('metrics'),
   showOriginal: $('showOriginal'), showIslands: $('showIslands'), showSprings: $('showSprings'), showInner: $('showInner'),
   showStrain: $('showStrain'), showMass: $('showMass'), depth: $('depth'), depthOut: $('depthOut'), neighbors: $('neighbors'), neighborsOut: $('neighborsOut'),
-  wireDensity: $('wireDensity'), physicsPreset: $('physicsPreset'), pinchKp: $('pinchKp'), pinchKd: $('pinchKd'), kpOut: $('kpOut'), kdOut: $('kdOut'), hardDrag: $('hardDrag'), pause: $('pause'),
+  wireDensity: $('wireDensity'), physicsPreset: $('physicsPreset'), integrator: $('integrator'), pinchKp: $('pinchKp'), pinchKd: $('pinchKd'), kpOut: $('kpOut'), kdOut: $('kdOut'), hardDrag: $('hardDrag'), pause: $('pause'),
 };
 const PHYSICS_PRESETS = {
   biological: {
@@ -32,7 +32,7 @@ const STAGE_TEXT = {
   1: 'Original mesh islands. Colors come from real indexed triangle connectivity; no material, proximity, semantic segmentation, welding, or cross-island links are used.',
   2: 'Surface springs. Every unique undirected edge from the selected island’s original triangles becomes one Hookean spring. Rendered wire density is only a display filter.',
   3: 'Fixed inner layer. One local inward-offset anchor is generated per selected-island vertex. Own and same-island neighbor tethers are shown without changing the render mesh.',
-  4: 'Dynamics validation. Explicit RK4 integrates positions and velocities with surface springs, fixed inner tethers, mass from triangle area, and physical damping.',
+  4: 'Dynamics validation. Explicit RK4 is measured directly; biological settings use a visible implicit physical fallback when explicit substepping is impractical.',
   5: 'Actual pinch. Pointer raycasts the visible original triangle, preserves its barycentric hit point, applies one compliant Kp/Kd force distributed by its three original vertex weights during RK4, then releases it to recover.',
 };
 const scene = new THREE.Scene();
@@ -154,9 +154,17 @@ function buildEntry(mesh) {
   }
   const faceIsland = new Int32Array(faceCount);
   for (let face = 0; face < faceCount; face++) { const id = vertexIsland[index[face * 3]]; faceIsland[face] = id; islands[id].faces.push(face); }
+  let crossIslandTriangleEdges = 0;
+  for (let face = 0; face < faceCount; face++) {
+    const id = faceIsland[face], offset = face * 3;
+    for (let corner = 0; corner < 3; corner++) {
+      if (vertexIsland[index[offset + corner]] !== id) crossIslandTriangleEdges++;
+    }
+  }
+  const topology = { vertexCount, faceCount, faceAssignmentCount: faceIsland.length, crossIslandTriangleEdges, everyFaceAssignedOnce: faceIsland.length === faceCount && crossIslandTriangleEdges === 0 };
   const position = geometry.attributes.position;
   for (const island of islands) for (const vertex of island.vertices) island.bounds.expandByPoint(new THREE.Vector3().fromBufferAttribute(position, vertex));
-  return { mesh, geometry, islands, vertexIsland, faceIsland, index };
+  return { mesh, geometry, islands, vertexIsland, faceIsland, index, topology };
 }
 
 function loadFaceFrame(attachmentData) {
@@ -307,6 +315,11 @@ function buildSystem() {
   const innerK = ui.physicsPreset.value === 'diagnostic' ? 0.35 * surfaceK : 1;
   const damping = preset.dampingRatio * 2 * Math.sqrt(Math.max(surfaceK * medianMass, 1e-18));
   const stableDt = Math.min(requestedDt, stabilityFactor * Math.sqrt(minMass / Math.max(surfaceK * (maxDegree + neighborCount + 1), 1e-18)));
+  const explicitSubstepsPerFrame = Math.max(1, Math.ceil((1 / 60) / Math.max(stableDt, 1e-18)));
+  const requestedIntegrator = ui.integrator.value;
+  const integrator = requestedIntegrator === 'auto'
+    ? (explicitSubstepsPerFrame > 200 ? 'implicit' : 'rk4')
+    : requestedIntegrator;
   let positions = neutral.slice(), velocities = new Float32Array(vertexCount * 3), pin = null, innerEnabled = true, neutralSettled = true;
 
   const scratchLength = vertexCount * 3;
@@ -315,19 +328,25 @@ function buildSystem() {
     x2: new Float32Array(scratchLength), x3: new Float32Array(scratchLength), x4: new Float32Array(scratchLength),
     v2: new Float32Array(scratchLength), v3: new Float32Array(scratchLength), v4: new Float32Array(scratchLength),
   };
+  const implicitCandidate = new Float32Array(scratchLength);
+  const implicitVelocity = new Float32Array(scratchLength);
+  const diagonalK = new Float64Array(vertexCount);
+  for (let i = 0; i < edgeA.length; i++) { diagonalK[edgeA[i]] += surfaceK; diagonalK[edgeB[i]] += surfaceK; }
+  for (let i = 0; i < supportAArray.length; i++) diagonalK[supportAArray[i]] += supportKArray[i];
+  const implicitIterations = 8;
   function acceleration(x, v, withInner, pinState, targetOffset = 0, result = rkScratch.a1) {
     result.fill(0);
     for (let i = 0; i < edgeA.length; i++) {
       const ia = edgeA[i], ib = edgeB[i], dx = x[ib * 3] - x[ia * 3], dy = x[ib * 3 + 1] - x[ia * 3 + 1], dz = x[ib * 3 + 2] - x[ia * 3 + 2], length = Math.hypot(dx, dy, dz);
       if (length <= 1e-12) continue;
-      const q = surfaceK * (length - edgeInfo.rest[i]) / length, fx = q * dx, fy = q * dy, fz = q * dz;
+      const q = surfaceK * ((length - edgeInfo.rest[i]) * sourceMetersPerUnit) / length, fx = q * dx, fy = q * dy, fz = q * dz;
       result[ia * 3] += fx * invMass[ia]; result[ia * 3 + 1] += fy * invMass[ia]; result[ia * 3 + 2] += fz * invMass[ia];
       result[ib * 3] -= fx * invMass[ib]; result[ib * 3 + 1] -= fy * invMass[ib]; result[ib * 3 + 2] -= fz * invMass[ib];
     }
     if (withInner) for (let i = 0; i < supportAArray.length; i++) {
       const ia = supportAArray[i], ib = supportBArray[i], dx = anchors[ib * 3] - x[ia * 3], dy = anchors[ib * 3 + 1] - x[ia * 3 + 1], dz = anchors[ib * 3 + 2] - x[ia * 3 + 2], length = Math.hypot(dx, dy, dz);
       if (length <= 1e-12) continue;
-      const q = supportKArray[i] * (length - supportRestArray[i]) / length;
+      const q = supportKArray[i] * ((length - supportRestArray[i]) * sourceMetersPerUnit) / length;
       result[ia * 3] += q * dx * invMass[ia]; result[ia * 3 + 1] += q * dy * invMass[ia]; result[ia * 3 + 2] += q * dz * invMass[ia];
     }
     if (pinState && !pinState.hard) {
@@ -376,11 +395,47 @@ function buildSystem() {
     for (const value of velocities) if (!Number.isFinite(value)) throw new Error('RK4 produced nonfinite velocities');
   }
 
+  function integrateImplicitOne(dt) {
+    // Backward-Euler position solve for the same Hookean forces. This is an
+    // explicit, visible fallback for the biological preset when RK4's
+    // measured stability step would require tens of thousands of substeps.
+    const base = implicitCandidate;
+    for (let i = 0; i < scratchLength; i++) base[i] = positions[i] + velocities[i] * dt;
+    for (let iteration = 0; iteration < implicitIterations; iteration++) {
+      for (let i = 0; i < scratchLength; i++) implicitVelocity[i] = (base[i] - positions[i]) / dt;
+      acceleration(base, implicitVelocity, innerEnabled, pin, dt, rkScratch.a1);
+      let maxCorrection = 0;
+      for (let i = 0; i < vertexCount; i++) {
+        let pinK = 0, pinD = 0;
+        if (pin && !pin.hard) {
+          for (let j = 0; j < 3; j++) if (pin.ids[j] === i) {
+            const w = pin.weights[j]; pinK += pin.kp * w * w; pinD += pin.kd * w * w;
+          }
+        }
+        const inv = invMass[i], denominator = 1 + dt * inv * (damping + pinD) + dt * dt * inv * (diagonalK[i] + pinK);
+        for (let axis = 0; axis < 3; axis++) {
+          const offset = i * 3 + axis, desired = positions[offset] + velocities[offset] * dt + dt * dt * rkScratch.a1[offset];
+          const correction = (desired - base[offset]) / denominator;
+          base[offset] += correction;
+          maxCorrection = Math.max(maxCorrection, Math.abs(correction));
+        }
+      }
+      projectConstraint(base, implicitVelocity, pin);
+      if (maxCorrection <= Math.max(state.faceScale * 1e-8, 1e-10)) break;
+    }
+    positions.set(base);
+    velocities.set(implicitVelocity);
+    projectConstraint(positions, velocities, pin);
+    for (const value of positions) if (!Number.isFinite(value)) throw new Error('Implicit solve produced nonfinite positions');
+    for (const value of velocities) if (!Number.isFinite(value)) throw new Error('Implicit solve produced nonfinite velocities');
+  }
+
   function integrate(dt) {
     // The neutral state is an exact zero-force equilibrium. Keep the requested
     // RK4 step count observable while avoiding four full force allocations for
     // a state whose derivative is analytically zero.
     if (neutralSettled && !pin && innerEnabled) return;
+    if (integrator === 'implicit') { integrateImplicitOne(dt); return; }
     const substeps = Math.max(1, Math.ceil(dt / Math.max(stableDt, 1e-7)));
     const h = dt / substeps;
     for (let i = 0; i < substeps; i++) integrateOne(h);
@@ -388,8 +443,8 @@ function buildSystem() {
 
   function energy() {
     let value = 0;
-    for (let i = 0; i < edgeA.length; i++) { const ia = edgeA[i], ib = edgeB[i], length = Math.hypot(positions[ib * 3] - positions[ia * 3], positions[ib * 3 + 1] - positions[ia * 3 + 1], positions[ib * 3 + 2] - positions[ia * 3 + 2]); const extension = length - edgeInfo.rest[i]; value += 0.5 * surfaceK * extension * extension; }
-    if (innerEnabled) for (let i = 0; i < supportAArray.length; i++) { const ia = supportAArray[i], ib = supportBArray[i], length = Math.hypot(anchors[ib * 3] - positions[ia * 3], anchors[ib * 3 + 1] - positions[ia * 3 + 1], anchors[ib * 3 + 2] - positions[ia * 3 + 2]); const extension = length - supportRestArray[i]; value += 0.5 * supportKArray[i] * extension * extension; }
+    for (let i = 0; i < edgeA.length; i++) { const ia = edgeA[i], ib = edgeB[i], length = Math.hypot(positions[ib * 3] - positions[ia * 3], positions[ib * 3 + 1] - positions[ia * 3 + 1], positions[ib * 3 + 2] - positions[ia * 3 + 2]); const extension = (length - edgeInfo.rest[i]) * sourceMetersPerUnit; value += 0.5 * surfaceK * extension * extension; }
+    if (innerEnabled) for (let i = 0; i < supportAArray.length; i++) { const ia = supportAArray[i], ib = supportBArray[i], length = Math.hypot(anchors[ib * 3] - positions[ia * 3], anchors[ib * 3 + 1] - positions[ia * 3 + 1], anchors[ib * 3 + 2] - positions[ia * 3 + 2]); const extension = (length - supportRestArray[i]) * sourceMetersPerUnit; value += 0.5 * supportKArray[i] * extension * extension; }
     return value;
   }
 
@@ -410,7 +465,9 @@ function buildSystem() {
       minPositiveMassMg: minPositiveMass * 1e6, medianMassMg: medianMass * 1e6, maxPositiveMassMg: maxPositiveMass * 1e6,
       zeroMassVertexCount, degenerateFaceCount, areaConservationError: Math.abs(attributedArea.reduce((sum, value) => sum + value, 0) - totalAreaM2),
       numericalMassFloorKg: numericalMassFloor, highestEstimatedNaturalFrequencyHz: Math.sqrt(surfaceK * (maxDegree + neighborCount + 1) / Math.max(minMass, 1e-18)) / (2 * Math.PI),
-      substepsPerRenderedFrame: Math.max(1, Math.ceil((1 / 60) / Math.max(stableDt, 1e-18))), energy: energy(), maxDisplacement, maxStrain, finite: true, orientationSign,
+      integrator, requestedIntegrator, explicitSubstepsPerFrame, implicitIterations,
+      substepsPerRenderedFrame: integrator === 'implicit' ? 1 : explicitSubstepsPerFrame,
+      energy: energy(), maxDisplacement, maxStrain, finite: true, orientationSign,
     };
   }
 
@@ -549,17 +606,17 @@ async function runTest(kind) {
     spring.update(); state.tests.rest = { drift: spring.diagnostics().maxDisplacement, energy: spring.energy(), steps: 1000 };
     updateMetrics(`NEUTRAL REST\n1000 RK4 steps\nDrift: ${state.tests.rest.drift.toExponential(4)}\nEnergy: ${state.tests.rest.energy.toExponential(4)}`);
   } else if (kind === 'nudge') {
-    spring.positions[0] += state.faceScale * 0.001; spring.markActive(); const energies = [];
-    const recoverySteps = 2;
-    for (let i = 0; i < recoverySteps; i++) { spring.step(dt); if (i % 20 === 0) energies.push(spring.energy()); }
+    spring.positions[0] += state.faceScale * 0.001; spring.markActive(); const energies = [spring.energy()];
+    const recoverySteps = 30;
+    for (let i = 0; i < recoverySteps; i++) { spring.step(dt); if (i === 0 || (i + 1) % 10 === 0) energies.push(spring.energy()); }
     const neighbors = new Set();
     for (let i = 0; i < spring.edgeA.length; i++) { if (spring.edgeA[i] === 0) neighbors.add(spring.edgeB[i]); if (spring.edgeB[i] === 0) neighbors.add(spring.edgeA[i]); }
     let maxNeighborMovement = 0;
     for (const vertex of neighbors) maxNeighborMovement = Math.max(maxNeighborMovement, Math.hypot(spring.positions[vertex * 3] - spring.neutral[vertex * 3], spring.positions[vertex * 3 + 1] - spring.neutral[vertex * 3 + 1], spring.positions[vertex * 3 + 2] - spring.neutral[vertex * 3 + 2]));
-    spring.update(); state.tests.nudge = { initialNudge: state.faceScale * 0.001, recoverySteps, maxDisplacement: spring.diagnostics().maxDisplacement, maxNeighborMovement, neighborCount: neighbors.size, energies, finite: true };
+    spring.update(); state.tests.nudge = { initialNudge: state.faceScale * 0.001, recoverySteps, maxDisplacement: spring.diagnostics().maxDisplacement, maxNeighborMovement, neighborCount: neighbors.size, energies, energyDecreased: energies.at(-1) < energies[0], finite: true };
     updateMetrics(`ONE-VERTEX NUDGE\nNudge: ${(state.faceScale * 0.001).toExponential(4)}\nFinal max displacement: ${state.tests.nudge.maxDisplacement.toExponential(4)}\nNeighbor response: ${state.tests.nudge.maxDisplacement > 0 ? 'YES' : 'NO'}\nEnergy samples: ${energies.slice(0, 4).map(value => value.toExponential(2)).join(', ')}`);
   } else {
-    const wasEnabled = spring.getInner(); spring.setInner(false); const recoverySteps = 2; for (let i = 0; i < recoverySteps; i++) spring.step(dt); spring.update(); state.tests.noAnchor = { recoverySteps, maxDisplacement: spring.diagnostics().maxDisplacement, energy: spring.energy(), innerSprings: false }; spring.setInner(wasEnabled);
+    const wasEnabled = spring.getInner(); spring.setInner(false); const recoverySteps = 30; for (let i = 0; i < recoverySteps; i++) spring.step(dt); spring.update(); state.tests.noAnchor = { recoverySteps, maxDisplacement: spring.diagnostics().maxDisplacement, energy: spring.energy(), innerSprings: false, finite: true }; spring.setInner(wasEnabled);
     updateMetrics(`NO ANCHOR COMPARISON\nInner springs disabled for ${recoverySteps} RK4 steps\nMax displacement: ${state.tests.noAnchor.maxDisplacement.toExponential(4)}\nEnergy: ${state.tests.noAnchor.energy.toExponential(4)}`);
   }
 }
@@ -618,6 +675,8 @@ async function loadModel(name) {
     return {
       model: state.model, stage: state.stage, lastPinch: state.lastPinch, tests: state.tests,
       metrics: state.spring?.diagnostics(), islands: { count: allIslands.length, minVertices: Math.min(...allIslands.map(item => item.vertices)), maxVertices: Math.max(...allIslands.map(item => item.vertices)), selected: state.selected ? { id: state.selected.island.id, vertices: state.selected.island.vertices.length, triangles: state.selected.island.faces.length } : null },
+      topology: state.entries.map(entry => ({ mesh: entry.mesh.name, ...entry.topology })),
+      springTopology: state.spring ? { rawTriangleEdgeUses: state.selected.island.faces.length * 3, uniqueSurfaceEdges: state.spring.edgeA.length, duplicateRawEdgeUsesRemoved: state.spring.edgeInfo.duplicateRawEdges, invariant: state.spring.edgeA.length + state.spring.edgeInfo.duplicateRawEdges === state.selected.island.faces.length * 3 } : null,
       interIslandSprings: 0, pointerDebug: state.pointerDebug,
       render: { bounds: { min: bounds.min.toArray(), max: bounds.max.toArray() }, camera: camera.position.toArray(), target: controls.target.toArray(), meshes: state.meshes.length, visible: state.meshes.filter(mesh => mesh.visible).length, drawCalls: renderer.info.render.calls }
     };
@@ -643,6 +702,7 @@ for (const button of document.querySelectorAll('.tab')) button.addEventListener(
 ui.character.addEventListener('change', () => loadModel(ui.character.value).catch(error => { ui.state.textContent = `Error: ${error.message}`; console.error(error); }));
 ui.showOriginal.addEventListener('change', updateVisuals); ui.showIslands.addEventListener('change', updateVisuals); ui.showSprings.addEventListener('change', updateVisuals); ui.showStrain.addEventListener('change', updateVisuals); ui.showMass.addEventListener('change', updateVisuals); ui.showInner.addEventListener('change', updateVisuals);
 ui.physicsPreset.addEventListener('change', () => { if (state.spring) buildSystem(); });
+ui.integrator.addEventListener('change', () => { if (state.spring) buildSystem(); });
 ui.pinchKp.addEventListener('input', () => { ui.kpOut.textContent = `${ui.pinchKp.value} N/m`; });
 ui.pinchKd.addEventListener('input', () => { ui.kdOut.textContent = `${ui.pinchKd.value} N·s/m`; });
 ui.wireDensity.addEventListener('input', () => { if (state.spring) buildDiagnosticsVisuals(); updateVisuals(); });

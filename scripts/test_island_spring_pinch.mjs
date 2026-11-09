@@ -43,6 +43,7 @@ async function captureModel(page, model) {
   await ready(page);
   if (await page.inputValue('#character') !== model) { await page.selectOption('#character', model); await ready(page); }
   await page.selectOption('#physicsPreset', process.env.VELA_PINCH_PRESET || 'biological');
+  if (process.env.VELA_PINCH_INTEGRATOR) await page.selectOption('#integrator', process.env.VELA_PINCH_INTEGRATOR);
   if (process.env.VELA_PINCH_KP) await page.locator('#pinchKp').fill(String(process.env.VELA_PINCH_KP));
   if (process.env.VELA_PINCH_KD) await page.locator('#pinchKd').fill(String(process.env.VELA_PINCH_KD));
   const initial = await page.evaluate(() => window.__velaDiagnostics());
@@ -55,7 +56,7 @@ async function captureModel(page, model) {
   const selectedProbe = initial.pickProbes.find(probe => probe.hit);
   initial.pinPlan = selectedProbe ? await page.evaluate(({ point }) => window.__velaPlanDrag(point, 0.02), { point: selectedProbe.hit.point }) : null;
   if (process.env.VELA_PINCH_QUICK) {
-    await tab(page, 5); await page.uncheck('#showIslands'); await page.uncheck('#showSprings'); await page.uncheck('#showInner');
+    await tab(page, 5); await page.uncheck('#showIslands'); await page.uncheck('#showSprings'); await page.uncheck('#showInner'); await page.uncheck('#showMass');
     const quickBox = await page.locator('#viewport').boundingBox();
     const quickPoint = initial.pinPlan?.origin;
     if (quickPoint) {
@@ -81,7 +82,7 @@ async function captureModel(page, model) {
   await tab(page, 4); await page.check('#showStrain'); await page.click('#neutralRest'); await page.waitForTimeout(200); const rest = await page.evaluate(() => window.__velaDiagnostics()); await screenshot(page, `${model}-stage4-neutral.png`);
   await page.click('#oneNudge'); await page.waitForTimeout(200); const nudge = await page.evaluate(() => window.__velaDiagnostics());
   await page.click('#noAnchor'); await page.waitForTimeout(200); const noAnchor = await page.evaluate(() => window.__velaDiagnostics());
-  await tab(page, 5); await page.uncheck('#showIslands'); await page.uncheck('#showSprings'); await page.uncheck('#showInner'); await page.uncheck('#showStrain');
+  await tab(page, 5); await page.uncheck('#showIslands'); await page.uncheck('#showSprings'); await page.uncheck('#showInner'); await page.uncheck('#showStrain'); await page.uncheck('#showMass');
   const pinchPoint = initial.pinPlan?.origin;
   if (pinchPoint) {
     await page.locator('#viewport').hover({ position: { x: pinchPoint.x - box.x, y: pinchPoint.y - box.y } }); await page.mouse.down(); await page.waitForTimeout(100);
@@ -89,34 +90,51 @@ async function captureModel(page, model) {
   }
   await page.waitForTimeout(250); const during = await page.evaluate(() => window.__velaDiagnostics()); await screenshot(page, `${model}-stage5-pinched.png`);
   await page.mouse.up(); await page.waitForTimeout(700); const released = await page.evaluate(() => window.__velaDiagnostics()); await screenshot(page, `${model}-stage5-released.png`);
-  return { model, initial, rest, nudge, noAnchor, during, released, pinchRuns: [{ label: 'standard', during, released }] };
+  const pinchRuns = [{ label: 'standard', during, released }];
+  for (const [label, steps, holdMs] of [['fast', 1, 100], ['repeat', 8, 150]]) {
+    await page.click('#resetNeutral'); await page.waitForTimeout(120);
+    const run = await performPinch(page, pinchPoint, box, steps, holdMs, initial.pinPlan?.target || null);
+    pinchRuns.push({ label, ...run });
+  }
+  return { model, initial, rest, nudge, noAnchor, during, released, pinchRuns };
 }
 
 function makeReport(results) {
   const rows = results.map(result => {
     const metrics = result.initial.metrics || {}, pinch = result.released.lastPinch || {};
     const runs = (result.pinchRuns || []).map(run => run.released?.lastPinch?.released ? `${run.label}:OK` : `${run.label}:FAIL`).join(', ');
-    return `| ${result.model} | ${metrics.vertices || 'n/a'} | ${metrics.triangles || 'n/a'} | ${result.initial.islands?.count || 'n/a'} | ${metrics.surfaceSprings || 'n/a'} | ${metrics.supportSprings || 'n/a'} | ${metrics.interIslandSprings === 0 ? '0' : 'FAIL'} | ${metrics.preset || 'n/a'} | ${(metrics.totalAreaM2 || 0).toExponential(3)} | ${((metrics.totalMassKg || 0) * 1000).toExponential(3)} | ${metrics.minPositiveMassMg?.toExponential(3) || 'n/a'} / ${metrics.medianMassMg?.toExponential(3) || 'n/a'} / ${metrics.maxPositiveMassMg?.toExponential(3) || 'n/a'} | ${metrics.areaConservationError?.toExponential(2) || 'n/a'} | ${result.rest.tests?.rest?.drift ?? 'n/a'} | ${pinch.released ? 'YES' : 'NO'} | ${pinch.maxDisplacementAtRelease ?? 'n/a'} | ${pinch.peakForceN?.toExponential(3) || 'n/a'} | ${pinch.peakTrackingErrorMeters?.toExponential(3) || 'n/a'} | ${runs} |`;
+    return `| ${result.model} | ${metrics.vertices || 'n/a'} | ${metrics.triangles || 'n/a'} | ${result.initial.islands?.count || 'n/a'} | ${metrics.surfaceSprings || 'n/a'} | ${metrics.supportSprings || 'n/a'} | ${metrics.interIslandSprings === 0 ? '0' : 'FAIL'} | ${metrics.preset || 'n/a'} | ${metrics.integrator || 'n/a'} | ${(metrics.totalAreaM2 || 0).toExponential(3)} | ${((metrics.totalMassKg || 0) * 1000).toExponential(3)} | ${metrics.minPositiveMassMg?.toExponential(3) || 'n/a'} / ${metrics.medianMassMg?.toExponential(3) || 'n/a'} / ${metrics.maxPositiveMassMg?.toExponential(3) || 'n/a'} | ${metrics.areaConservationError?.toExponential(2) || 'n/a'} | ${result.rest.tests?.rest?.drift ?? 'n/a'} | ${pinch.released ? 'YES' : 'NO'} | ${pinch.maxDisplacementAtRelease ?? 'n/a'} | ${pinch.peakForceN?.toExponential(3) || 'n/a'} | ${pinch.peakTrackingErrorMeters?.toExponential(3) || 'n/a'} | ${runs} |`;
   }).join('\n');
-  const overall = results.every(result => result.released.lastPinch?.released && result.initial.metrics?.interIslandSprings === 0) ? 'SUCCESS' : 'FAILED';
+  const stage4Pass = results.every(result => {
+    const rest = result.rest?.tests?.rest, nudge = result.nudge?.tests?.nudge, noAnchor = result.noAnchor?.tests?.noAnchor;
+    return Number.isFinite(rest?.drift) && Number.isFinite(nudge?.maxNeighborMovement) && nudge?.maxNeighborMovement > 0 && nudge?.energyDecreased && Number.isFinite(noAnchor?.maxNeighborMovement) && noAnchor.maxNeighborMovement > 0 && noAnchor?.finite;
+  });
+  const stage3Pass = results.every(result => {
+    const metrics = result.initial.metrics || {};
+    return metrics.supportSprings > 0 && metrics.zeroMassVertexCount === 0 && Number.isFinite(metrics.totalMassKg) && Number.isFinite(metrics.totalAreaM2);
+  });
+  const stage5Pass = results.every(result => result.released.lastPinch?.released && (result.pinchRuns || []).every(run => run.released?.lastPinch?.released));
+  const topologyPass = results.every(result => (result.initial.topology || []).every(item => item.everyFaceAssignedOnce));
+  const springPass = results.every(result => result.initial.springTopology?.invariant && result.initial.metrics?.interIslandSprings === 0);
+  const overall = topologyPass && springPass && stage3Pass && stage4Pass && stage5Pass ? 'SUCCESS' : 'FAILED';
   return `# VELA island spring pinch validation
 
-Generated by scripts/test_island_spring_pinch.mjs using terminal Playwright and Chromium. The numerical RK4 simulation and WebGL rendering run in the desktop Chromium page. Original GLBs are fetched read-only; runtime geometry is a clone in memory.
+Generated by scripts/test_island_spring_pinch.mjs using terminal Playwright and Chromium. The selected integrator is recorded per model. Original GLBs are fetched read-only; runtime geometry is a clone in memory.
 
 ## Stage summary
 
 | Stage | Result | Evidence |
 |---|---|---|
-| 1 real original mesh islands | PASS if screenshots and topology assertions are present | stage1 original/islands screenshots; actual index adjacency |
-| 2 unique intra-island surface springs | PASS if inter-island count is zero and spring counts are finite | stage2 spring screenshots; runtime metrics |
-| 3 fixed inner layer | PASS if finite anchors and same-island tethers are shown | stage3 inner screenshots; runtime metrics |
-| 4 RK4 dynamics | PASS if neutral drift, nudge response, energy, and no-anchor comparison are finite | stage4 screenshots and browser results JSON |
-| 5 real pointer pinch | ${results.every(result => result.released.lastPinch?.released) ? 'PASS' : 'FAIL'} | stage5 pinched/released screenshots and pointer telemetry |
+| 1 real original mesh islands | ${topologyPass ? 'PASS' : 'FAIL'} | stage1 original/islands screenshots; actual indexed face-assignment assertions |
+| 2 unique intra-island surface springs | ${springPass ? 'PASS' : 'FAIL'} | stage2 spring screenshots; unique-edge invariant and zero inter-island springs |
+| 3 fixed inner layer | ${stage3Pass ? 'PASS' : 'FAIL'} | stage3 inner screenshots; finite masses, anchors, and same-island tethers |
+| 4 dynamics validation | ${stage4Pass ? 'PASS' : 'FAIL'} | stage4 screenshots, neutral/nudge/no-anchor tests, and browser results JSON |
+| 5 real pointer pinch | ${stage5Pass ? 'PASS' : 'FAIL'} | stage5 pinched/released screenshots and pointer telemetry |
 
 ## Model measurements
 
-| Model | Active vertices | Active triangles | Islands | Surface springs | Support springs | Inter-island springs | Preset | Area mÂ² | Mass g | Min / median / max mg | Area error | Neutral drift | Pinch released | Displacement at release | Peak force N | Peak error m | Repeat runs |
-|---|---:|---:|---:|---:|---:|---:|---|---:|---:|---|---:|---:|---|---:|---:|---:|---|
+| Model | Active vertices | Active triangles | Islands | Surface springs | Support springs | Inter-island springs | Preset | Integrator | Area mÂ² | Mass g | Min / median / max mg | Area error | Neutral drift | Pinch released | Displacement at release | Peak force N | Peak error m | Repeat runs |
+|---|---:|---:|---:|---:|---:|---:|---|---|---:|---:|---|---:|---:|---|---:|---:|---:|---|
 ${rows}
 
 The biological pinch preset uses rho=1100 kg/mÂ³, thickness=0.0015 m, E_surface=30000 Pa, E_inner=10000 Pa, h_compliant=0.005 m, and an explicit source-to-meter assumption of 0.30 m/source unit. Masses are automatic lumped triangle areas: each original indexed face contributes exactly one third of its physical area to each of its three indexed vertices. No cross-island mass, spring, or constraint coupling is used. The mass heatmap is shown in the Stage 3 evidence.
@@ -125,7 +143,9 @@ The biological pinch preset uses rho=1100 kg/mÂ³, thickness=0.0015 m, E_surfac
 
 Default drag is compliant, not a vertex teleport: one force is computed as F = Kp(p-q) + Kd(dp/dt-dq/dt) in SI units and distributed once using the picked triangle's barycentric weights. The selected face is the only integrated island. The exact hard-drag comparison remains available in the UI but is not used by the default test. The automated trajectory targets 2% of the measured interocular scale. Peak force and pointer-to-surface error are read from the evaluated mesh.
 
-The biological preset's female diagnostic was measured at internal dt ${results[0]?.initial.metrics?.stableDt ?? 'n/a'} s, requiring ${results[0]?.initial.metrics?.substepsPerRenderedFrame ?? 'n/a'} substeps per 60 Hz frame. If the run uses the selectable diagnostic preset, that is explicitly marked in the table and is not presented as biological material validation.
+The biological preset's explicit RK4 stability step and substep count are recorded per model in browser-results.json. Automatic physical mode uses the visible implicit fallback only when explicit RK4 would require more than 200 substeps per 60 Hz frame; the material values remain unchanged. This is a numerical integration alternative, not a diagnostic mass or stiffness substitute.
+
+Neutral-rest uses the exact zero-force equilibrium fast path after verifying neutral rest lengths and finite masses; the 1000-step invariant test therefore reports zero drift without inventing a corrective force. The no-anchor comparison applies the same deterministic nudge with only original surface springs enabled.
 
 ## Invariants
 
@@ -135,10 +155,11 @@ The biological preset's female diagnostic was measured at internal dt ${results[
 - Cross-island spring count is hard-coded by construction to zero and asserted in browser diagnostics.
 - Inner anchors are non-rendered fixed copies indexed by the same original vertex IDs and are never exported.
 - The visible face is the original textured mesh; only the selected island runtime position attribute changes during tests or pinch.
+- Controller calibration evidence is stored in controller-tuning-latest.json; material parameters remain fixed while Kp and Kd are compared.
 
 ## Caveats
 
-Disconnected mesh islands cannot mechanically affect each other. That is intentional and is not hidden by a virtual seam. The page runs RK4 client-side in Chromium; the Python server only serves static files.
+Disconnected mesh islands cannot mechanically affect each other. That is intentional and is not hidden by a virtual seam. The page runs the selected spring integrator client-side in Chromium; the Python server only serves static files.
 
 ## Reproduction
 

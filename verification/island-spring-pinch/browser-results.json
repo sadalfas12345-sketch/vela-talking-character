@@ -19,34 +19,38 @@
           "anchorDepthFactor": 0.25,
           "anchorDepthMedian": 0.0007456809398718178,
           "dt": 0.0016666666666666668,
-          "stableDt": 0.0016666666666666668,
+          "stableDt": 2.669088716597845e-7,
           "maxDegree": 11,
-          "damping": 0.10265223293486447,
-          "kSurface": 1,
-          "kSurfaceBiological": 1,
-          "kInnerRatio": 0.35,
-          "preset": "diagnostic",
+          "damping": 0.00026536147484723356,
+          "kSurface": 45,
+          "kSurfaceBiological": 45,
+          "kInnerRatio": 0.022222222222222223,
+          "preset": "biological",
           "sourceMetersPerUnit": 0.3,
-          "rhoEffective": 11111111.111111,
-          "thicknessMeters": 1,
-          "surfaceModulusPa": 1,
-          "innerModulusPa": 0.35,
-          "compliantThicknessMeters": 1,
+          "rhoEffective": 1100,
+          "thicknessMeters": 0.0015,
+          "surfaceModulusPa": 30000,
+          "innerModulusPa": 10000,
+          "compliantThicknessMeters": 0.005,
           "totalAreaM2": 0.000225571335667148,
-          "totalMassKg": 2506.3481751829386,
-          "minPositiveMassKg": 0.02248748205602169,
-          "medianMassKg": 0.4116203486919403,
-          "maxPositiveMassKg": 2.275402307510376,
-          "minPositiveMassMg": 22487.48205602169,
-          "medianMassMg": 411620.3486919403,
-          "maxPositiveMassMg": 2275402.307510376,
+          "totalMassKg": 0.00037219270372657043,
+          "minPositiveMassKg": 3.3393912080015298e-9,
+          "medianMassKg": 6.112561834470398e-8,
+          "maxPositiveMassKg": 3.37897233748663e-7,
+          "minPositiveMassMg": 0.0033393912080015298,
+          "medianMassMg": 0.06112561834470398,
+          "maxPositiveMassMg": 0.337897233748663,
           "zeroMassVertexCount": 0,
           "degenerateFaceCount": 0,
           "areaConservationError": 6.776263578034403e-19,
-          "numericalMassFloorKg": 4.116203486919403e-7,
-          "highestEstimatedNaturalFrequencyHz": 4.110506565959024,
-          "substepsPerRenderedFrame": 10,
-          "energy": 3.681945042392811e-18,
+          "numericalMassFloorKg": 1e-12,
+          "highestEstimatedNaturalFrequencyHz": 71554.73346487888,
+          "integrator": "implicit",
+          "requestedIntegrator": "implicit",
+          "explicitSubstepsPerFrame": 62444,
+          "implicitIterations": 8,
+          "substepsPerRenderedFrame": 1,
+          "energy": 1.491851853625038e-17,
           "maxDisplacement": 0,
           "maxStrain": 5.912975196447347e-8,
           "finite": true,
@@ -61,6 +65,22 @@
             "vertices": 5036,
             "triangles": 9708
           }
+        },
+        "topology": [
+          {
+            "mesh": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+            "vertexCount": 999787,
+            "faceCount": 1943912,
+            "faceAssignmentCount": 1943912,
+            "crossIslandTriangleEdges": 0,
+            "everyFaceAssignedOnce": true
+          }
+        ],
+        "springTopology": {
+          "rawTriangleEdgeUses": 29124,
+          "uniqueSurfaceEdges": 14743,
+          "duplicateRawEdgeUsesRemoved": 14381,
+          "invariant": true
         },
         "interIslandSprings": 0,
         "pointerDebug": null,
@@ -154,13 +174,388 @@
         }
       },
       "rest": {
-        "tests": {}
+        "model": "female",
+        "stage": 4,
+        "lastPinch": null,
+        "tests": {
+          "rest": {
+            "drift": 0,
+            "energy": 1.491851853625038e-17,
+            "steps": 1000
+          }
+        },
+        "metrics": {
+          "vertices": 5036,
+          "triangles": 9708,
+          "surfaceSprings": 14743,
+          "duplicateRawEdges": 14381,
+          "zeroLengthEdges": 0,
+          "interIslandSprings": 0,
+          "supportSprings": 20108,
+          "anchorDepthFactor": 0.25,
+          "anchorDepthMedian": 0.0007456809398718178,
+          "dt": 0.0016666666666666668,
+          "stableDt": 2.669088716597845e-7,
+          "maxDegree": 11,
+          "damping": 0.00026536147484723356,
+          "kSurface": 45,
+          "kSurfaceBiological": 45,
+          "kInnerRatio": 0.022222222222222223,
+          "preset": "biological",
+          "sourceMetersPerUnit": 0.3,
+          "rhoEffective": 1100,
+          "thicknessMeters": 0.0015,
+          "surfaceModulusPa": 30000,
+          "innerModulusPa": 10000,
+          "compliantThicknessMeters": 0.005,
+          "totalAreaM2": 0.000225571335667148,
+          "totalMassKg": 0.00037219270372657043,
+          "minPositiveMassKg": 3.3393912080015298e-9,
+          "medianMassKg": 6.112561834470398e-8,
+          "maxPositiveMassKg": 3.37897233748663e-7,
+          "minPositiveMassMg": 0.0033393912080015298,
+          "medianMassMg": 0.06112561834470398,
+          "maxPositiveMassMg": 0.337897233748663,
+          "zeroMassVertexCount": 0,
+          "degenerateFaceCount": 0,
+          "areaConservationError": 6.776263578034403e-19,
+          "numericalMassFloorKg": 1e-12,
+          "highestEstimatedNaturalFrequencyHz": 71554.73346487888,
+          "integrator": "implicit",
+          "requestedIntegrator": "implicit",
+          "explicitSubstepsPerFrame": 62444,
+          "implicitIterations": 8,
+          "substepsPerRenderedFrame": 1,
+          "energy": 1.491851853625038e-17,
+          "maxDisplacement": 0,
+          "maxStrain": 5.912975196447347e-8,
+          "finite": true,
+          "orientationSign": 1
+        },
+        "islands": {
+          "count": 233,
+          "minVertices": 3,
+          "maxVertices": 37250,
+          "selected": {
+            "id": 16,
+            "vertices": 5036,
+            "triangles": 9708
+          }
+        },
+        "topology": [
+          {
+            "mesh": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+            "vertexCount": 999787,
+            "faceCount": 1943912,
+            "faceAssignmentCount": 1943912,
+            "crossIslandTriangleEdges": 0,
+            "everyFaceAssignedOnce": true
+          }
+        ],
+        "springTopology": {
+          "rawTriangleEdgeUses": 29124,
+          "uniqueSurfaceEdges": 14743,
+          "duplicateRawEdgeUsesRemoved": 14381,
+          "invariant": true
+        },
+        "interIslandSprings": 0,
+        "pointerDebug": null,
+        "render": {
+          "bounds": {
+            "min": [
+              -0.08424436300992966,
+              -0.4902181625366211,
+              -0.16284115612506866
+            ],
+            "max": [
+              0.08409646153450012,
+              0.4909743070602417,
+              0.16185681521892548
+            ]
+          },
+          "camera": [
+            0.27936797230930066,
+            0.34745411376277113,
+            -0.08196130190564828
+          ],
+          "target": [
+            0.06053703301683629,
+            0.3851214361739458,
+            -0.0034902204280119055
+          ],
+          "meshes": 1,
+          "visible": 1,
+          "drawCalls": 7
+        }
       },
       "nudge": {
-        "tests": {}
+        "model": "female",
+        "stage": 4,
+        "lastPinch": null,
+        "tests": {
+          "rest": {
+            "drift": 0,
+            "energy": 1.491851853625038e-17,
+            "steps": 1000
+          },
+          "nudge": {
+            "initialNudge": 0.000057440716560191105,
+            "recoverySteps": 30,
+            "maxDisplacement": 0.000008424901849961325,
+            "maxNeighborMovement": 0.000004112407532330821,
+            "neighborCount": 7,
+            "energies": [
+              2.297566597547986e-8,
+              1.584018063895247e-9,
+              4.305745363932849e-11,
+              1.771589891936214e-11,
+              1.6931083266215438e-11
+            ],
+            "energyDecreased": true,
+            "finite": true
+          }
+        },
+        "metrics": {
+          "vertices": 5036,
+          "triangles": 9708,
+          "surfaceSprings": 14743,
+          "duplicateRawEdges": 14381,
+          "zeroLengthEdges": 0,
+          "interIslandSprings": 0,
+          "supportSprings": 20108,
+          "anchorDepthFactor": 0.25,
+          "anchorDepthMedian": 0.0007456809398718178,
+          "dt": 0.0016666666666666668,
+          "stableDt": 2.669088716597845e-7,
+          "maxDegree": 11,
+          "damping": 0.00026536147484723356,
+          "kSurface": 45,
+          "kSurfaceBiological": 45,
+          "kInnerRatio": 0.022222222222222223,
+          "preset": "biological",
+          "sourceMetersPerUnit": 0.3,
+          "rhoEffective": 1100,
+          "thicknessMeters": 0.0015,
+          "surfaceModulusPa": 30000,
+          "innerModulusPa": 10000,
+          "compliantThicknessMeters": 0.005,
+          "totalAreaM2": 0.000225571335667148,
+          "totalMassKg": 0.00037219270372657043,
+          "minPositiveMassKg": 3.3393912080015298e-9,
+          "medianMassKg": 6.112561834470398e-8,
+          "maxPositiveMassKg": 3.37897233748663e-7,
+          "minPositiveMassMg": 0.0033393912080015298,
+          "medianMassMg": 0.06112561834470398,
+          "maxPositiveMassMg": 0.337897233748663,
+          "zeroMassVertexCount": 0,
+          "degenerateFaceCount": 0,
+          "areaConservationError": 6.776263578034403e-19,
+          "numericalMassFloorKg": 1e-12,
+          "highestEstimatedNaturalFrequencyHz": 71554.73346487888,
+          "integrator": "implicit",
+          "requestedIntegrator": "implicit",
+          "explicitSubstepsPerFrame": 62444,
+          "implicitIterations": 8,
+          "substepsPerRenderedFrame": 1,
+          "energy": 1.6931083266215438e-11,
+          "maxDisplacement": 0.000008424901849961325,
+          "maxStrain": 0.0008538585119764581,
+          "finite": true,
+          "orientationSign": 1
+        },
+        "islands": {
+          "count": 233,
+          "minVertices": 3,
+          "maxVertices": 37250,
+          "selected": {
+            "id": 16,
+            "vertices": 5036,
+            "triangles": 9708
+          }
+        },
+        "topology": [
+          {
+            "mesh": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+            "vertexCount": 999787,
+            "faceCount": 1943912,
+            "faceAssignmentCount": 1943912,
+            "crossIslandTriangleEdges": 0,
+            "everyFaceAssignedOnce": true
+          }
+        ],
+        "springTopology": {
+          "rawTriangleEdgeUses": 29124,
+          "uniqueSurfaceEdges": 14743,
+          "duplicateRawEdgeUsesRemoved": 14381,
+          "invariant": true
+        },
+        "interIslandSprings": 0,
+        "pointerDebug": null,
+        "render": {
+          "bounds": {
+            "min": [
+              -0.08424436300992966,
+              -0.4902181625366211,
+              -0.16284115612506866
+            ],
+            "max": [
+              0.08409646153450012,
+              0.4909743070602417,
+              0.16185681521892548
+            ]
+          },
+          "camera": [
+            0.27936797230930066,
+            0.34745411376277113,
+            -0.08196130190564828
+          ],
+          "target": [
+            0.06053703301683629,
+            0.3851214361739458,
+            -0.0034902204280119055
+          ],
+          "meshes": 1,
+          "visible": 1,
+          "drawCalls": 7
+        }
       },
       "noAnchor": {
-        "tests": {}
+        "model": "female",
+        "stage": 4,
+        "lastPinch": null,
+        "tests": {
+          "rest": {
+            "drift": 0,
+            "energy": 1.491851853625038e-17,
+            "steps": 1000
+          },
+          "nudge": {
+            "initialNudge": 0.000057440716560191105,
+            "recoverySteps": 30,
+            "maxDisplacement": 0.000008424901849961325,
+            "maxNeighborMovement": 0.000004112407532330821,
+            "neighborCount": 7,
+            "energies": [
+              2.297566597547986e-8,
+              1.584018063895247e-9,
+              4.305745363932849e-11,
+              1.771589891936214e-11,
+              1.6931083266215438e-11
+            ],
+            "energyDecreased": true,
+            "finite": true
+          },
+          "noAnchor": {
+            "recoverySteps": 30,
+            "maxDisplacement": 1.1866063687193673e-11,
+            "energy": 1.4910957505798126e-17,
+            "innerSprings": false,
+            "finite": true
+          }
+        },
+        "metrics": {
+          "vertices": 5036,
+          "triangles": 9708,
+          "surfaceSprings": 14743,
+          "duplicateRawEdges": 14381,
+          "zeroLengthEdges": 0,
+          "interIslandSprings": 0,
+          "supportSprings": 20108,
+          "anchorDepthFactor": 0.25,
+          "anchorDepthMedian": 0.0007456809398718178,
+          "dt": 0.0016666666666666668,
+          "stableDt": 2.669088716597845e-7,
+          "maxDegree": 11,
+          "damping": 0.00026536147484723356,
+          "kSurface": 45,
+          "kSurfaceBiological": 45,
+          "kInnerRatio": 0.022222222222222223,
+          "preset": "biological",
+          "sourceMetersPerUnit": 0.3,
+          "rhoEffective": 1100,
+          "thicknessMeters": 0.0015,
+          "surfaceModulusPa": 30000,
+          "innerModulusPa": 10000,
+          "compliantThicknessMeters": 0.005,
+          "totalAreaM2": 0.000225571335667148,
+          "totalMassKg": 0.00037219270372657043,
+          "minPositiveMassKg": 3.3393912080015298e-9,
+          "medianMassKg": 6.112561834470398e-8,
+          "maxPositiveMassKg": 3.37897233748663e-7,
+          "minPositiveMassMg": 0.0033393912080015298,
+          "medianMassMg": 0.06112561834470398,
+          "maxPositiveMassMg": 0.337897233748663,
+          "zeroMassVertexCount": 0,
+          "degenerateFaceCount": 0,
+          "areaConservationError": 6.776263578034403e-19,
+          "numericalMassFloorKg": 1e-12,
+          "highestEstimatedNaturalFrequencyHz": 71554.73346487888,
+          "integrator": "implicit",
+          "requestedIntegrator": "implicit",
+          "explicitSubstepsPerFrame": 62444,
+          "implicitIterations": 8,
+          "substepsPerRenderedFrame": 1,
+          "energy": 1.491759852720142e-17,
+          "maxDisplacement": 1.1866063687193673e-11,
+          "maxStrain": 5.901916523062744e-8,
+          "finite": true,
+          "orientationSign": 1
+        },
+        "islands": {
+          "count": 233,
+          "minVertices": 3,
+          "maxVertices": 37250,
+          "selected": {
+            "id": 16,
+            "vertices": 5036,
+            "triangles": 9708
+          }
+        },
+        "topology": [
+          {
+            "mesh": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+            "vertexCount": 999787,
+            "faceCount": 1943912,
+            "faceAssignmentCount": 1943912,
+            "crossIslandTriangleEdges": 0,
+            "everyFaceAssignedOnce": true
+          }
+        ],
+        "springTopology": {
+          "rawTriangleEdgeUses": 29124,
+          "uniqueSurfaceEdges": 14743,
+          "duplicateRawEdgeUsesRemoved": 14381,
+          "invariant": true
+        },
+        "interIslandSprings": 0,
+        "pointerDebug": null,
+        "render": {
+          "bounds": {
+            "min": [
+              -0.08424436300992966,
+              -0.4902181625366211,
+              -0.16284115612506866
+            ],
+            "max": [
+              0.08409646153450012,
+              0.4909743070602417,
+              0.16185681521892548
+            ]
+          },
+          "camera": [
+            0.27936797230930066,
+            0.34745411376277113,
+            -0.08196130190564828
+          ],
+          "target": [
+            0.06053703301683629,
+            0.3851214361739458,
+            -0.0034902204280119055
+          ],
+          "meshes": 1,
+          "visible": 1,
+          "drawCalls": 7
+        }
       },
       "during": {
         "model": "female",
@@ -188,7 +583,36 @@
           "activeIsland": 16,
           "faceIndex": 918388
         },
-        "tests": {},
+        "tests": {
+          "rest": {
+            "drift": 0,
+            "energy": 1.491851853625038e-17,
+            "steps": 1000
+          },
+          "nudge": {
+            "initialNudge": 0.000057440716560191105,
+            "recoverySteps": 30,
+            "maxDisplacement": 0.000008424901849961325,
+            "maxNeighborMovement": 0.000004112407532330821,
+            "neighborCount": 7,
+            "energies": [
+              2.297566597547986e-8,
+              1.584018063895247e-9,
+              4.305745363932849e-11,
+              1.771589891936214e-11,
+              1.6931083266215438e-11
+            ],
+            "energyDecreased": true,
+            "finite": true
+          },
+          "noAnchor": {
+            "recoverySteps": 30,
+            "maxDisplacement": 1.1866063687193673e-11,
+            "energy": 1.4910957505798126e-17,
+            "innerSprings": false,
+            "finite": true
+          }
+        },
         "metrics": {
           "vertices": 5036,
           "triangles": 9708,
@@ -200,36 +624,40 @@
           "anchorDepthFactor": 0.25,
           "anchorDepthMedian": 0.0007456809398718178,
           "dt": 0.0016666666666666668,
-          "stableDt": 0.0016666666666666668,
+          "stableDt": 2.669088716597845e-7,
           "maxDegree": 11,
-          "damping": 0.10265223293486447,
-          "kSurface": 1,
-          "kSurfaceBiological": 1,
-          "kInnerRatio": 0.35,
-          "preset": "diagnostic",
+          "damping": 0.00026536147484723356,
+          "kSurface": 45,
+          "kSurfaceBiological": 45,
+          "kInnerRatio": 0.022222222222222223,
+          "preset": "biological",
           "sourceMetersPerUnit": 0.3,
-          "rhoEffective": 11111111.111111,
-          "thicknessMeters": 1,
-          "surfaceModulusPa": 1,
-          "innerModulusPa": 0.35,
-          "compliantThicknessMeters": 1,
+          "rhoEffective": 1100,
+          "thicknessMeters": 0.0015,
+          "surfaceModulusPa": 30000,
+          "innerModulusPa": 10000,
+          "compliantThicknessMeters": 0.005,
           "totalAreaM2": 0.000225571335667148,
-          "totalMassKg": 2506.3481751829386,
-          "minPositiveMassKg": 0.02248748205602169,
-          "medianMassKg": 0.4116203486919403,
-          "maxPositiveMassKg": 2.275402307510376,
-          "minPositiveMassMg": 22487.48205602169,
-          "medianMassMg": 411620.3486919403,
-          "maxPositiveMassMg": 2275402.307510376,
+          "totalMassKg": 0.00037219270372657043,
+          "minPositiveMassKg": 3.3393912080015298e-9,
+          "medianMassKg": 6.112561834470398e-8,
+          "maxPositiveMassKg": 3.37897233748663e-7,
+          "minPositiveMassMg": 0.0033393912080015298,
+          "medianMassMg": 0.06112561834470398,
+          "maxPositiveMassMg": 0.337897233748663,
           "zeroMassVertexCount": 0,
           "degenerateFaceCount": 0,
           "areaConservationError": 6.776263578034403e-19,
-          "numericalMassFloorKg": 4.116203486919403e-7,
-          "highestEstimatedNaturalFrequencyHz": 4.110506565959024,
-          "substepsPerRenderedFrame": 10,
-          "energy": 6.325503568274311e-7,
-          "maxDisplacement": 0.0010536916241691856,
-          "maxStrain": 0.6505985457301621,
+          "numericalMassFloorKg": 1e-12,
+          "highestEstimatedNaturalFrequencyHz": 71554.73346487888,
+          "integrator": "implicit",
+          "requestedIntegrator": "implicit",
+          "explicitSubstepsPerFrame": 62444,
+          "implicitIterations": 8,
+          "substepsPerRenderedFrame": 1,
+          "energy": 4.535599805941656e-7,
+          "maxDisplacement": 0.0012406462583688346,
+          "maxStrain": 0.11969993851155379,
           "finite": true,
           "orientationSign": 1
         },
@@ -242,6 +670,22 @@
             "vertices": 5036,
             "triangles": 9708
           }
+        },
+        "topology": [
+          {
+            "mesh": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+            "vertexCount": 999787,
+            "faceCount": 1943912,
+            "faceAssignmentCount": 1943912,
+            "crossIslandTriangleEdges": 0,
+            "everyFaceAssignedOnce": true
+          }
+        ],
+        "springTopology": {
+          "rawTriangleEdgeUses": 29124,
+          "uniqueSurfaceEdges": 14743,
+          "duplicateRawEdgeUsesRemoved": 14381,
+          "invariant": true
         },
         "interIslandSprings": 0,
         "pointerDebug": {
@@ -318,16 +762,45 @@
             0.004149089242713136
           ],
           "actualAtRelease": [
-            0.06108688351451212,
-            0.42429467394016307,
-            0.004047059291370154
+            0.06112755493570518,
+            0.4243360537738874,
+            0.004182187579424898
           ],
-          "trackingErrorMeters": 0.0000355004000900355,
-          "peakForceN": 0.007360110201197793,
-          "peakTrackingErrorMeters": 0.00008177951938410817,
-          "maxDisplacementAtRelease": 0.0014005923165142217
+          "trackingErrorMeters": 0.000010847966074831163,
+          "peakForceN": 0.005647426460607824,
+          "peakTrackingErrorMeters": 0.00006276633200389988,
+          "maxDisplacementAtRelease": 0.0012260857855658583
         },
-        "tests": {},
+        "tests": {
+          "rest": {
+            "drift": 0,
+            "energy": 1.491851853625038e-17,
+            "steps": 1000
+          },
+          "nudge": {
+            "initialNudge": 0.000057440716560191105,
+            "recoverySteps": 30,
+            "maxDisplacement": 0.000008424901849961325,
+            "maxNeighborMovement": 0.000004112407532330821,
+            "neighborCount": 7,
+            "energies": [
+              2.297566597547986e-8,
+              1.584018063895247e-9,
+              4.305745363932849e-11,
+              1.771589891936214e-11,
+              1.6931083266215438e-11
+            ],
+            "energyDecreased": true,
+            "finite": true
+          },
+          "noAnchor": {
+            "recoverySteps": 30,
+            "maxDisplacement": 1.1866063687193673e-11,
+            "energy": 1.4910957505798126e-17,
+            "innerSprings": false,
+            "finite": true
+          }
+        },
         "metrics": {
           "vertices": 5036,
           "triangles": 9708,
@@ -339,36 +812,40 @@
           "anchorDepthFactor": 0.25,
           "anchorDepthMedian": 0.0007456809398718178,
           "dt": 0.0016666666666666668,
-          "stableDt": 0.0016666666666666668,
+          "stableDt": 2.669088716597845e-7,
           "maxDegree": 11,
-          "damping": 0.10265223293486447,
-          "kSurface": 1,
-          "kSurfaceBiological": 1,
-          "kInnerRatio": 0.35,
-          "preset": "diagnostic",
+          "damping": 0.00026536147484723356,
+          "kSurface": 45,
+          "kSurfaceBiological": 45,
+          "kInnerRatio": 0.022222222222222223,
+          "preset": "biological",
           "sourceMetersPerUnit": 0.3,
-          "rhoEffective": 11111111.111111,
-          "thicknessMeters": 1,
-          "surfaceModulusPa": 1,
-          "innerModulusPa": 0.35,
-          "compliantThicknessMeters": 1,
+          "rhoEffective": 1100,
+          "thicknessMeters": 0.0015,
+          "surfaceModulusPa": 30000,
+          "innerModulusPa": 10000,
+          "compliantThicknessMeters": 0.005,
           "totalAreaM2": 0.000225571335667148,
-          "totalMassKg": 2506.3481751829386,
-          "minPositiveMassKg": 0.02248748205602169,
-          "medianMassKg": 0.4116203486919403,
-          "maxPositiveMassKg": 2.275402307510376,
-          "minPositiveMassMg": 22487.48205602169,
-          "medianMassMg": 411620.3486919403,
-          "maxPositiveMassMg": 2275402.307510376,
+          "totalMassKg": 0.00037219270372657043,
+          "minPositiveMassKg": 3.3393912080015298e-9,
+          "medianMassKg": 6.112561834470398e-8,
+          "maxPositiveMassKg": 3.37897233748663e-7,
+          "minPositiveMassMg": 0.0033393912080015298,
+          "medianMassMg": 0.06112561834470398,
+          "maxPositiveMassMg": 0.337897233748663,
           "zeroMassVertexCount": 0,
           "degenerateFaceCount": 0,
           "areaConservationError": 6.776263578034403e-19,
-          "numericalMassFloorKg": 4.116203486919403e-7,
-          "highestEstimatedNaturalFrequencyHz": 4.110506565959024,
-          "substepsPerRenderedFrame": 10,
-          "energy": 9.510861760274528e-7,
-          "maxDisplacement": 0.0013285243031422658,
-          "maxStrain": 0.6992254259306213,
+          "numericalMassFloorKg": 1e-12,
+          "highestEstimatedNaturalFrequencyHz": 71554.73346487888,
+          "integrator": "implicit",
+          "requestedIntegrator": "implicit",
+          "explicitSubstepsPerFrame": 62444,
+          "implicitIterations": 8,
+          "substepsPerRenderedFrame": 1,
+          "energy": 2.7194161345078015e-7,
+          "maxDisplacement": 0.0011741626971454172,
+          "maxStrain": 0.02336991920614377,
           "finite": true,
           "orientationSign": 1
         },
@@ -381,6 +858,22 @@
             "vertices": 5036,
             "triangles": 9708
           }
+        },
+        "topology": [
+          {
+            "mesh": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+            "vertexCount": 999787,
+            "faceCount": 1943912,
+            "faceAssignmentCount": 1943912,
+            "crossIslandTriangleEdges": 0,
+            "everyFaceAssignedOnce": true
+          }
+        ],
+        "springTopology": {
+          "rawTriangleEdgeUses": 29124,
+          "uniqueSurfaceEdges": 14743,
+          "duplicateRawEdgeUsesRemoved": 14381,
+          "invariant": true
         },
         "interIslandSprings": 0,
         "pointerDebug": {
@@ -427,7 +920,7 @@
       },
       "pinchRuns": [
         {
-          "label": "slow",
+          "label": "standard",
           "during": {
             "model": "female",
             "stage": 5,
@@ -454,7 +947,36 @@
               "activeIsland": 16,
               "faceIndex": 918388
             },
-            "tests": {},
+            "tests": {
+              "rest": {
+                "drift": 0,
+                "energy": 1.491851853625038e-17,
+                "steps": 1000
+              },
+              "nudge": {
+                "initialNudge": 0.000057440716560191105,
+                "recoverySteps": 30,
+                "maxDisplacement": 0.000008424901849961325,
+                "maxNeighborMovement": 0.000004112407532330821,
+                "neighborCount": 7,
+                "energies": [
+                  2.297566597547986e-8,
+                  1.584018063895247e-9,
+                  4.305745363932849e-11,
+                  1.771589891936214e-11,
+                  1.6931083266215438e-11
+                ],
+                "energyDecreased": true,
+                "finite": true
+              },
+              "noAnchor": {
+                "recoverySteps": 30,
+                "maxDisplacement": 1.1866063687193673e-11,
+                "energy": 1.4910957505798126e-17,
+                "innerSprings": false,
+                "finite": true
+              }
+            },
             "metrics": {
               "vertices": 5036,
               "triangles": 9708,
@@ -466,36 +988,40 @@
               "anchorDepthFactor": 0.25,
               "anchorDepthMedian": 0.0007456809398718178,
               "dt": 0.0016666666666666668,
-              "stableDt": 0.0016666666666666668,
+              "stableDt": 2.669088716597845e-7,
               "maxDegree": 11,
-              "damping": 0.10265223293486447,
-              "kSurface": 1,
-              "kSurfaceBiological": 1,
-              "kInnerRatio": 0.35,
-              "preset": "diagnostic",
+              "damping": 0.00026536147484723356,
+              "kSurface": 45,
+              "kSurfaceBiological": 45,
+              "kInnerRatio": 0.022222222222222223,
+              "preset": "biological",
               "sourceMetersPerUnit": 0.3,
-              "rhoEffective": 11111111.111111,
-              "thicknessMeters": 1,
-              "surfaceModulusPa": 1,
-              "innerModulusPa": 0.35,
-              "compliantThicknessMeters": 1,
+              "rhoEffective": 1100,
+              "thicknessMeters": 0.0015,
+              "surfaceModulusPa": 30000,
+              "innerModulusPa": 10000,
+              "compliantThicknessMeters": 0.005,
               "totalAreaM2": 0.000225571335667148,
-              "totalMassKg": 2506.3481751829386,
-              "minPositiveMassKg": 0.02248748205602169,
-              "medianMassKg": 0.4116203486919403,
-              "maxPositiveMassKg": 2.275402307510376,
-              "minPositiveMassMg": 22487.48205602169,
-              "medianMassMg": 411620.3486919403,
-              "maxPositiveMassMg": 2275402.307510376,
+              "totalMassKg": 0.00037219270372657043,
+              "minPositiveMassKg": 3.3393912080015298e-9,
+              "medianMassKg": 6.112561834470398e-8,
+              "maxPositiveMassKg": 3.37897233748663e-7,
+              "minPositiveMassMg": 0.0033393912080015298,
+              "medianMassMg": 0.06112561834470398,
+              "maxPositiveMassMg": 0.337897233748663,
               "zeroMassVertexCount": 0,
               "degenerateFaceCount": 0,
               "areaConservationError": 6.776263578034403e-19,
-              "numericalMassFloorKg": 4.116203486919403e-7,
-              "highestEstimatedNaturalFrequencyHz": 4.110506565959024,
-              "substepsPerRenderedFrame": 10,
-              "energy": 6.325503568274311e-7,
-              "maxDisplacement": 0.0010536916241691856,
-              "maxStrain": 0.6505985457301621,
+              "numericalMassFloorKg": 1e-12,
+              "highestEstimatedNaturalFrequencyHz": 71554.73346487888,
+              "integrator": "implicit",
+              "requestedIntegrator": "implicit",
+              "explicitSubstepsPerFrame": 62444,
+              "implicitIterations": 8,
+              "substepsPerRenderedFrame": 1,
+              "energy": 4.535599805941656e-7,
+              "maxDisplacement": 0.0012406462583688346,
+              "maxStrain": 0.11969993851155379,
               "finite": true,
               "orientationSign": 1
             },
@@ -508,6 +1034,22 @@
                 "vertices": 5036,
                 "triangles": 9708
               }
+            },
+            "topology": [
+              {
+                "mesh": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+                "vertexCount": 999787,
+                "faceCount": 1943912,
+                "faceAssignmentCount": 1943912,
+                "crossIslandTriangleEdges": 0,
+                "everyFaceAssignedOnce": true
+              }
+            ],
+            "springTopology": {
+              "rawTriangleEdgeUses": 29124,
+              "uniqueSurfaceEdges": 14743,
+              "duplicateRawEdgeUsesRemoved": 14381,
+              "invariant": true
             },
             "interIslandSprings": 0,
             "pointerDebug": {
@@ -584,16 +1126,45 @@
                 0.004149089242713136
               ],
               "actualAtRelease": [
-                0.06108688351451212,
-                0.42429467394016307,
-                0.004047059291370154
+                0.06112755493570518,
+                0.4243360537738874,
+                0.004182187579424898
               ],
-              "trackingErrorMeters": 0.0000355004000900355,
-              "peakForceN": 0.007360110201197793,
-              "peakTrackingErrorMeters": 0.00008177951938410817,
-              "maxDisplacementAtRelease": 0.0014005923165142217
+              "trackingErrorMeters": 0.000010847966074831163,
+              "peakForceN": 0.005647426460607824,
+              "peakTrackingErrorMeters": 0.00006276633200389988,
+              "maxDisplacementAtRelease": 0.0012260857855658583
             },
-            "tests": {},
+            "tests": {
+              "rest": {
+                "drift": 0,
+                "energy": 1.491851853625038e-17,
+                "steps": 1000
+              },
+              "nudge": {
+                "initialNudge": 0.000057440716560191105,
+                "recoverySteps": 30,
+                "maxDisplacement": 0.000008424901849961325,
+                "maxNeighborMovement": 0.000004112407532330821,
+                "neighborCount": 7,
+                "energies": [
+                  2.297566597547986e-8,
+                  1.584018063895247e-9,
+                  4.305745363932849e-11,
+                  1.771589891936214e-11,
+                  1.6931083266215438e-11
+                ],
+                "energyDecreased": true,
+                "finite": true
+              },
+              "noAnchor": {
+                "recoverySteps": 30,
+                "maxDisplacement": 1.1866063687193673e-11,
+                "energy": 1.4910957505798126e-17,
+                "innerSprings": false,
+                "finite": true
+              }
+            },
             "metrics": {
               "vertices": 5036,
               "triangles": 9708,
@@ -605,36 +1176,40 @@
               "anchorDepthFactor": 0.25,
               "anchorDepthMedian": 0.0007456809398718178,
               "dt": 0.0016666666666666668,
-              "stableDt": 0.0016666666666666668,
+              "stableDt": 2.669088716597845e-7,
               "maxDegree": 11,
-              "damping": 0.10265223293486447,
-              "kSurface": 1,
-              "kSurfaceBiological": 1,
-              "kInnerRatio": 0.35,
-              "preset": "diagnostic",
+              "damping": 0.00026536147484723356,
+              "kSurface": 45,
+              "kSurfaceBiological": 45,
+              "kInnerRatio": 0.022222222222222223,
+              "preset": "biological",
               "sourceMetersPerUnit": 0.3,
-              "rhoEffective": 11111111.111111,
-              "thicknessMeters": 1,
-              "surfaceModulusPa": 1,
-              "innerModulusPa": 0.35,
-              "compliantThicknessMeters": 1,
+              "rhoEffective": 1100,
+              "thicknessMeters": 0.0015,
+              "surfaceModulusPa": 30000,
+              "innerModulusPa": 10000,
+              "compliantThicknessMeters": 0.005,
               "totalAreaM2": 0.000225571335667148,
-              "totalMassKg": 2506.3481751829386,
-              "minPositiveMassKg": 0.02248748205602169,
-              "medianMassKg": 0.4116203486919403,
-              "maxPositiveMassKg": 2.275402307510376,
-              "minPositiveMassMg": 22487.48205602169,
-              "medianMassMg": 411620.3486919403,
-              "maxPositiveMassMg": 2275402.307510376,
+              "totalMassKg": 0.00037219270372657043,
+              "minPositiveMassKg": 3.3393912080015298e-9,
+              "medianMassKg": 6.112561834470398e-8,
+              "maxPositiveMassKg": 3.37897233748663e-7,
+              "minPositiveMassMg": 0.0033393912080015298,
+              "medianMassMg": 0.06112561834470398,
+              "maxPositiveMassMg": 0.337897233748663,
               "zeroMassVertexCount": 0,
               "degenerateFaceCount": 0,
               "areaConservationError": 6.776263578034403e-19,
-              "numericalMassFloorKg": 4.116203486919403e-7,
-              "highestEstimatedNaturalFrequencyHz": 4.110506565959024,
-              "substepsPerRenderedFrame": 10,
-              "energy": 9.510861760274528e-7,
-              "maxDisplacement": 0.0013285243031422658,
-              "maxStrain": 0.6992254259306213,
+              "numericalMassFloorKg": 1e-12,
+              "highestEstimatedNaturalFrequencyHz": 71554.73346487888,
+              "integrator": "implicit",
+              "requestedIntegrator": "implicit",
+              "explicitSubstepsPerFrame": 62444,
+              "implicitIterations": 8,
+              "substepsPerRenderedFrame": 1,
+              "energy": 2.7194161345078015e-7,
+              "maxDisplacement": 0.0011741626971454172,
+              "maxStrain": 0.02336991920614377,
               "finite": true,
               "orientationSign": 1
             },
@@ -647,6 +1222,22 @@
                 "vertices": 5036,
                 "triangles": 9708
               }
+            },
+            "topology": [
+              {
+                "mesh": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+                "vertexCount": 999787,
+                "faceCount": 1943912,
+                "faceAssignmentCount": 1943912,
+                "crossIslandTriangleEdges": 0,
+                "everyFaceAssignedOnce": true
+              }
+            ],
+            "springTopology": {
+              "rawTriangleEdgeUses": 29124,
+              "uniqueSurfaceEdges": 14743,
+              "duplicateRawEdgeUsesRemoved": 14381,
+              "invariant": true
             },
             "interIslandSprings": 0,
             "pointerDebug": {
@@ -721,7 +1312,36 @@
               "activeIsland": 16,
               "faceIndex": 918388
             },
-            "tests": {},
+            "tests": {
+              "rest": {
+                "drift": 0,
+                "energy": 1.491851853625038e-17,
+                "steps": 1000
+              },
+              "nudge": {
+                "initialNudge": 0.000057440716560191105,
+                "recoverySteps": 30,
+                "maxDisplacement": 0.000008424901849961325,
+                "maxNeighborMovement": 0.000004112407532330821,
+                "neighborCount": 7,
+                "energies": [
+                  2.297566597547986e-8,
+                  1.584018063895247e-9,
+                  4.305745363932849e-11,
+                  1.771589891936214e-11,
+                  1.6931083266215438e-11
+                ],
+                "energyDecreased": true,
+                "finite": true
+              },
+              "noAnchor": {
+                "recoverySteps": 30,
+                "maxDisplacement": 1.1866063687193673e-11,
+                "energy": 1.4910957505798126e-17,
+                "innerSprings": false,
+                "finite": true
+              }
+            },
             "metrics": {
               "vertices": 5036,
               "triangles": 9708,
@@ -733,36 +1353,40 @@
               "anchorDepthFactor": 0.25,
               "anchorDepthMedian": 0.0007456809398718178,
               "dt": 0.0016666666666666668,
-              "stableDt": 0.0016666666666666668,
+              "stableDt": 2.669088716597845e-7,
               "maxDegree": 11,
-              "damping": 0.10265223293486447,
-              "kSurface": 1,
-              "kSurfaceBiological": 1,
-              "kInnerRatio": 0.35,
-              "preset": "diagnostic",
+              "damping": 0.00026536147484723356,
+              "kSurface": 45,
+              "kSurfaceBiological": 45,
+              "kInnerRatio": 0.022222222222222223,
+              "preset": "biological",
               "sourceMetersPerUnit": 0.3,
-              "rhoEffective": 11111111.111111,
-              "thicknessMeters": 1,
-              "surfaceModulusPa": 1,
-              "innerModulusPa": 0.35,
-              "compliantThicknessMeters": 1,
+              "rhoEffective": 1100,
+              "thicknessMeters": 0.0015,
+              "surfaceModulusPa": 30000,
+              "innerModulusPa": 10000,
+              "compliantThicknessMeters": 0.005,
               "totalAreaM2": 0.000225571335667148,
-              "totalMassKg": 2506.3481751829386,
-              "minPositiveMassKg": 0.02248748205602169,
-              "medianMassKg": 0.4116203486919403,
-              "maxPositiveMassKg": 2.275402307510376,
-              "minPositiveMassMg": 22487.48205602169,
-              "medianMassMg": 411620.3486919403,
-              "maxPositiveMassMg": 2275402.307510376,
+              "totalMassKg": 0.00037219270372657043,
+              "minPositiveMassKg": 3.3393912080015298e-9,
+              "medianMassKg": 6.112561834470398e-8,
+              "maxPositiveMassKg": 3.37897233748663e-7,
+              "minPositiveMassMg": 0.0033393912080015298,
+              "medianMassMg": 0.06112561834470398,
+              "maxPositiveMassMg": 0.337897233748663,
               "zeroMassVertexCount": 0,
               "degenerateFaceCount": 0,
               "areaConservationError": 6.776263578034403e-19,
-              "numericalMassFloorKg": 4.116203486919403e-7,
-              "highestEstimatedNaturalFrequencyHz": 4.110506565959024,
-              "substepsPerRenderedFrame": 10,
-              "energy": 3.6720762724898018e-9,
-              "maxDisplacement": 0.00006583711372975195,
-              "maxStrain": 0.04508866717698498,
+              "numericalMassFloorKg": 1e-12,
+              "highestEstimatedNaturalFrequencyHz": 71554.73346487888,
+              "integrator": "implicit",
+              "requestedIntegrator": "implicit",
+              "explicitSubstepsPerFrame": 62444,
+              "implicitIterations": 8,
+              "substepsPerRenderedFrame": 1,
+              "energy": 0.0000010234441856854524,
+              "maxDisplacement": 0.0011247190035203103,
+              "maxStrain": 0.19530310165023668,
               "finite": true,
               "orientationSign": 1
             },
@@ -775,6 +1399,22 @@
                 "vertices": 5036,
                 "triangles": 9708
               }
+            },
+            "topology": [
+              {
+                "mesh": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+                "vertexCount": 999787,
+                "faceCount": 1943912,
+                "faceAssignmentCount": 1943912,
+                "crossIslandTriangleEdges": 0,
+                "everyFaceAssignedOnce": true
+              }
+            ],
+            "springTopology": {
+              "rawTriangleEdgeUses": 29124,
+              "uniqueSurfaceEdges": 14743,
+              "duplicateRawEdgeUsesRemoved": 14381,
+              "invariant": true
             },
             "interIslandSprings": 0,
             "pointerDebug": {
@@ -851,16 +1491,45 @@
                 0.004149089242713136
               ],
               "actualAtRelease": [
-                0.06153953086252771,
-                0.4246793452119568,
-                0.0050991365410498245
+                0.0611186661644263,
+                0.42434223288523787,
+                0.004197680211474549
               ],
-              "trackingErrorMeters": 0.0003270816265432275,
-              "peakForceN": 0.03111183862786047,
-              "peakTrackingErrorMeters": 0.0003453745115458084,
-              "maxDisplacementAtRelease": 0.00006583711372975195
+              "trackingErrorMeters": 0.000016435838509131867,
+              "peakForceN": 0.031129296193794107,
+              "peakTrackingErrorMeters": 0.0003457475017660331,
+              "maxDisplacementAtRelease": 0.001166292181586829
             },
-            "tests": {},
+            "tests": {
+              "rest": {
+                "drift": 0,
+                "energy": 1.491851853625038e-17,
+                "steps": 1000
+              },
+              "nudge": {
+                "initialNudge": 0.000057440716560191105,
+                "recoverySteps": 30,
+                "maxDisplacement": 0.000008424901849961325,
+                "maxNeighborMovement": 0.000004112407532330821,
+                "neighborCount": 7,
+                "energies": [
+                  2.297566597547986e-8,
+                  1.584018063895247e-9,
+                  4.305745363932849e-11,
+                  1.771589891936214e-11,
+                  1.6931083266215438e-11
+                ],
+                "energyDecreased": true,
+                "finite": true
+              },
+              "noAnchor": {
+                "recoverySteps": 30,
+                "maxDisplacement": 1.1866063687193673e-11,
+                "energy": 1.4910957505798126e-17,
+                "innerSprings": false,
+                "finite": true
+              }
+            },
             "metrics": {
               "vertices": 5036,
               "triangles": 9708,
@@ -872,36 +1541,40 @@
               "anchorDepthFactor": 0.25,
               "anchorDepthMedian": 0.0007456809398718178,
               "dt": 0.0016666666666666668,
-              "stableDt": 0.0016666666666666668,
+              "stableDt": 2.669088716597845e-7,
               "maxDegree": 11,
-              "damping": 0.10265223293486447,
-              "kSurface": 1,
-              "kSurfaceBiological": 1,
-              "kInnerRatio": 0.35,
-              "preset": "diagnostic",
+              "damping": 0.00026536147484723356,
+              "kSurface": 45,
+              "kSurfaceBiological": 45,
+              "kInnerRatio": 0.022222222222222223,
+              "preset": "biological",
               "sourceMetersPerUnit": 0.3,
-              "rhoEffective": 11111111.111111,
-              "thicknessMeters": 1,
-              "surfaceModulusPa": 1,
-              "innerModulusPa": 0.35,
-              "compliantThicknessMeters": 1,
+              "rhoEffective": 1100,
+              "thicknessMeters": 0.0015,
+              "surfaceModulusPa": 30000,
+              "innerModulusPa": 10000,
+              "compliantThicknessMeters": 0.005,
               "totalAreaM2": 0.000225571335667148,
-              "totalMassKg": 2506.3481751829386,
-              "minPositiveMassKg": 0.02248748205602169,
-              "medianMassKg": 0.4116203486919403,
-              "maxPositiveMassKg": 2.275402307510376,
-              "minPositiveMassMg": 22487.48205602169,
-              "medianMassMg": 411620.3486919403,
-              "maxPositiveMassMg": 2275402.307510376,
+              "totalMassKg": 0.00037219270372657043,
+              "minPositiveMassKg": 3.3393912080015298e-9,
+              "medianMassKg": 6.112561834470398e-8,
+              "maxPositiveMassKg": 3.37897233748663e-7,
+              "minPositiveMassMg": 0.0033393912080015298,
+              "medianMassMg": 0.06112561834470398,
+              "maxPositiveMassMg": 0.337897233748663,
               "zeroMassVertexCount": 0,
               "degenerateFaceCount": 0,
               "areaConservationError": 6.776263578034403e-19,
-              "numericalMassFloorKg": 4.116203486919403e-7,
-              "highestEstimatedNaturalFrequencyHz": 4.110506565959024,
-              "substepsPerRenderedFrame": 10,
-              "energy": 3.2023528890920925e-8,
-              "maxDisplacement": 0.00019566076555945563,
-              "maxStrain": 0.13433808178615395,
+              "numericalMassFloorKg": 1e-12,
+              "highestEstimatedNaturalFrequencyHz": 71554.73346487888,
+              "integrator": "implicit",
+              "requestedIntegrator": "implicit",
+              "explicitSubstepsPerFrame": 62444,
+              "implicitIterations": 8,
+              "substepsPerRenderedFrame": 1,
+              "energy": 5.684015912994006e-7,
+              "maxDisplacement": 0.00110106546006207,
+              "maxStrain": 0.04089908062688803,
               "finite": true,
               "orientationSign": 1
             },
@@ -914,6 +1587,22 @@
                 "vertices": 5036,
                 "triangles": 9708
               }
+            },
+            "topology": [
+              {
+                "mesh": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+                "vertexCount": 999787,
+                "faceCount": 1943912,
+                "faceAssignmentCount": 1943912,
+                "crossIslandTriangleEdges": 0,
+                "everyFaceAssignedOnce": true
+              }
+            ],
+            "springTopology": {
+              "rawTriangleEdgeUses": 29124,
+              "uniqueSurfaceEdges": 14743,
+              "duplicateRawEdgeUsesRemoved": 14381,
+              "invariant": true
             },
             "interIslandSprings": 0,
             "pointerDebug": {
@@ -988,7 +1677,36 @@
               "activeIsland": 16,
               "faceIndex": 918388
             },
-            "tests": {},
+            "tests": {
+              "rest": {
+                "drift": 0,
+                "energy": 1.491851853625038e-17,
+                "steps": 1000
+              },
+              "nudge": {
+                "initialNudge": 0.000057440716560191105,
+                "recoverySteps": 30,
+                "maxDisplacement": 0.000008424901849961325,
+                "maxNeighborMovement": 0.000004112407532330821,
+                "neighborCount": 7,
+                "energies": [
+                  2.297566597547986e-8,
+                  1.584018063895247e-9,
+                  4.305745363932849e-11,
+                  1.771589891936214e-11,
+                  1.6931083266215438e-11
+                ],
+                "energyDecreased": true,
+                "finite": true
+              },
+              "noAnchor": {
+                "recoverySteps": 30,
+                "maxDisplacement": 1.1866063687193673e-11,
+                "energy": 1.4910957505798126e-17,
+                "innerSprings": false,
+                "finite": true
+              }
+            },
             "metrics": {
               "vertices": 5036,
               "triangles": 9708,
@@ -1000,36 +1718,40 @@
               "anchorDepthFactor": 0.25,
               "anchorDepthMedian": 0.0007456809398718178,
               "dt": 0.0016666666666666668,
-              "stableDt": 0.0016666666666666668,
+              "stableDt": 2.669088716597845e-7,
               "maxDegree": 11,
-              "damping": 0.10265223293486447,
-              "kSurface": 1,
-              "kSurfaceBiological": 1,
-              "kInnerRatio": 0.35,
-              "preset": "diagnostic",
+              "damping": 0.00026536147484723356,
+              "kSurface": 45,
+              "kSurfaceBiological": 45,
+              "kInnerRatio": 0.022222222222222223,
+              "preset": "biological",
               "sourceMetersPerUnit": 0.3,
-              "rhoEffective": 11111111.111111,
-              "thicknessMeters": 1,
-              "surfaceModulusPa": 1,
-              "innerModulusPa": 0.35,
-              "compliantThicknessMeters": 1,
+              "rhoEffective": 1100,
+              "thicknessMeters": 0.0015,
+              "surfaceModulusPa": 30000,
+              "innerModulusPa": 10000,
+              "compliantThicknessMeters": 0.005,
               "totalAreaM2": 0.000225571335667148,
-              "totalMassKg": 2506.3481751829386,
-              "minPositiveMassKg": 0.02248748205602169,
-              "medianMassKg": 0.4116203486919403,
-              "maxPositiveMassKg": 2.275402307510376,
-              "minPositiveMassMg": 22487.48205602169,
-              "medianMassMg": 411620.3486919403,
-              "maxPositiveMassMg": 2275402.307510376,
+              "totalMassKg": 0.00037219270372657043,
+              "minPositiveMassKg": 3.3393912080015298e-9,
+              "medianMassKg": 6.112561834470398e-8,
+              "maxPositiveMassKg": 3.37897233748663e-7,
+              "minPositiveMassMg": 0.0033393912080015298,
+              "medianMassMg": 0.06112561834470398,
+              "maxPositiveMassMg": 0.337897233748663,
               "zeroMassVertexCount": 0,
               "degenerateFaceCount": 0,
               "areaConservationError": 6.776263578034403e-19,
-              "numericalMassFloorKg": 4.116203486919403e-7,
-              "highestEstimatedNaturalFrequencyHz": 4.110506565959024,
-              "substepsPerRenderedFrame": 10,
-              "energy": 0.000002255980333400906,
-              "maxDisplacement": 0.0014351823230781143,
-              "maxStrain": 1.1541751609566722,
+              "numericalMassFloorKg": 1e-12,
+              "highestEstimatedNaturalFrequencyHz": 71554.73346487888,
+              "integrator": "implicit",
+              "requestedIntegrator": "implicit",
+              "explicitSubstepsPerFrame": 62444,
+              "implicitIterations": 8,
+              "substepsPerRenderedFrame": 1,
+              "energy": 4.308432344955837e-7,
+              "maxDisplacement": 0.0012206099579489577,
+              "maxStrain": 0.10845473334810742,
               "finite": true,
               "orientationSign": 1
             },
@@ -1042,6 +1764,22 @@
                 "vertices": 5036,
                 "triangles": 9708
               }
+            },
+            "topology": [
+              {
+                "mesh": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+                "vertexCount": 999787,
+                "faceCount": 1943912,
+                "faceAssignmentCount": 1943912,
+                "crossIslandTriangleEdges": 0,
+                "everyFaceAssignedOnce": true
+              }
+            ],
+            "springTopology": {
+              "rawTriangleEdgeUses": 29124,
+              "uniqueSurfaceEdges": 14743,
+              "duplicateRawEdgeUsesRemoved": 14381,
+              "invariant": true
             },
             "interIslandSprings": 0,
             "pointerDebug": {
@@ -1118,16 +1856,45 @@
                 0.004149089242713136
               ],
               "actualAtRelease": [
-                0.06098675108412557,
-                0.42421218359803603,
-                0.0038187917061196374
+                0.06112833241051143,
+                0.42432979608098487,
+                0.004181349083122902
               ],
-              "trackingErrorMeters": 0.00011420527617034146,
-              "peakForceN": 0.013939919328142859,
-              "peakTrackingErrorMeters": 0.00015549477894306765,
-              "maxDisplacementAtRelease": 0.001705772879823943
+              "trackingErrorMeters": 0.000010171662127438745,
+              "peakForceN": 0.0045032766576808625,
+              "peakTrackingErrorMeters": 0.00005002849929757003,
+              "maxDisplacementAtRelease": 0.0012313762678146298
             },
-            "tests": {},
+            "tests": {
+              "rest": {
+                "drift": 0,
+                "energy": 1.491851853625038e-17,
+                "steps": 1000
+              },
+              "nudge": {
+                "initialNudge": 0.000057440716560191105,
+                "recoverySteps": 30,
+                "maxDisplacement": 0.000008424901849961325,
+                "maxNeighborMovement": 0.000004112407532330821,
+                "neighborCount": 7,
+                "energies": [
+                  2.297566597547986e-8,
+                  1.584018063895247e-9,
+                  4.305745363932849e-11,
+                  1.771589891936214e-11,
+                  1.6931083266215438e-11
+                ],
+                "energyDecreased": true,
+                "finite": true
+              },
+              "noAnchor": {
+                "recoverySteps": 30,
+                "maxDisplacement": 1.1866063687193673e-11,
+                "energy": 1.4910957505798126e-17,
+                "innerSprings": false,
+                "finite": true
+              }
+            },
             "metrics": {
               "vertices": 5036,
               "triangles": 9708,
@@ -1139,36 +1906,40 @@
               "anchorDepthFactor": 0.25,
               "anchorDepthMedian": 0.0007456809398718178,
               "dt": 0.0016666666666666668,
-              "stableDt": 0.0016666666666666668,
+              "stableDt": 2.669088716597845e-7,
               "maxDegree": 11,
-              "damping": 0.10265223293486447,
-              "kSurface": 1,
-              "kSurfaceBiological": 1,
-              "kInnerRatio": 0.35,
-              "preset": "diagnostic",
+              "damping": 0.00026536147484723356,
+              "kSurface": 45,
+              "kSurfaceBiological": 45,
+              "kInnerRatio": 0.022222222222222223,
+              "preset": "biological",
               "sourceMetersPerUnit": 0.3,
-              "rhoEffective": 11111111.111111,
-              "thicknessMeters": 1,
-              "surfaceModulusPa": 1,
-              "innerModulusPa": 0.35,
-              "compliantThicknessMeters": 1,
+              "rhoEffective": 1100,
+              "thicknessMeters": 0.0015,
+              "surfaceModulusPa": 30000,
+              "innerModulusPa": 10000,
+              "compliantThicknessMeters": 0.005,
               "totalAreaM2": 0.000225571335667148,
-              "totalMassKg": 2506.3481751829386,
-              "minPositiveMassKg": 0.02248748205602169,
-              "medianMassKg": 0.4116203486919403,
-              "maxPositiveMassKg": 2.275402307510376,
-              "minPositiveMassMg": 22487.48205602169,
-              "medianMassMg": 411620.3486919403,
-              "maxPositiveMassMg": 2275402.307510376,
+              "totalMassKg": 0.00037219270372657043,
+              "minPositiveMassKg": 3.3393912080015298e-9,
+              "medianMassKg": 6.112561834470398e-8,
+              "maxPositiveMassKg": 3.37897233748663e-7,
+              "minPositiveMassMg": 0.0033393912080015298,
+              "medianMassMg": 0.06112561834470398,
+              "maxPositiveMassMg": 0.337897233748663,
               "zeroMassVertexCount": 0,
               "degenerateFaceCount": 0,
               "areaConservationError": 6.776263578034403e-19,
-              "numericalMassFloorKg": 4.116203486919403e-7,
-              "highestEstimatedNaturalFrequencyHz": 4.110506565959024,
-              "substepsPerRenderedFrame": 10,
-              "energy": 0.000005143337973637434,
-              "maxDisplacement": 0.0019482800714796,
-              "maxStrain": 1.6050912242514483,
+              "numericalMassFloorKg": 1e-12,
+              "highestEstimatedNaturalFrequencyHz": 71554.73346487888,
+              "integrator": "implicit",
+              "requestedIntegrator": "implicit",
+              "explicitSubstepsPerFrame": 62444,
+              "implicitIterations": 8,
+              "substepsPerRenderedFrame": 1,
+              "energy": 2.8950988076711e-7,
+              "maxDisplacement": 0.0011676645314446044,
+              "maxStrain": 0.024619411408637784,
               "finite": true,
               "orientationSign": 1
             },
@@ -1181,6 +1952,22 @@
                 "vertices": 5036,
                 "triangles": 9708
               }
+            },
+            "topology": [
+              {
+                "mesh": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+                "vertexCount": 999787,
+                "faceCount": 1943912,
+                "faceAssignmentCount": 1943912,
+                "crossIslandTriangleEdges": 0,
+                "everyFaceAssignedOnce": true
+              }
+            ],
+            "springTopology": {
+              "rawTriangleEdgeUses": 29124,
+              "uniqueSurfaceEdges": 14743,
+              "duplicateRawEdgeUsesRemoved": 14381,
+              "invariant": true
             },
             "interIslandSprings": 0,
             "pointerDebug": {
@@ -1262,16 +2049,45 @@
             0.004149089242713136
           ],
           "actualAtRelease": [
-            0.06098675108412557,
-            0.42421218359803603,
-            0.0038187917061196374
+            0.06112833241051143,
+            0.42432979608098487,
+            0.004181349083122902
           ],
-          "trackingErrorMeters": 0.00011420527617034146,
-          "peakForceN": 0.013939919328142859,
-          "peakTrackingErrorMeters": 0.00015549477894306765,
-          "maxDisplacementAtRelease": 0.001705772879823943
+          "trackingErrorMeters": 0.000010171662127438745,
+          "peakForceN": 0.0045032766576808625,
+          "peakTrackingErrorMeters": 0.00005002849929757003,
+          "maxDisplacementAtRelease": 0.0012313762678146298
         },
-        "tests": {},
+        "tests": {
+          "rest": {
+            "drift": 0,
+            "energy": 1.491851853625038e-17,
+            "steps": 1000
+          },
+          "nudge": {
+            "initialNudge": 0.000057440716560191105,
+            "recoverySteps": 30,
+            "maxDisplacement": 0.000008424901849961325,
+            "maxNeighborMovement": 0.000004112407532330821,
+            "neighborCount": 7,
+            "energies": [
+              2.297566597547986e-8,
+              1.584018063895247e-9,
+              4.305745363932849e-11,
+              1.771589891936214e-11,
+              1.6931083266215438e-11
+            ],
+            "energyDecreased": true,
+            "finite": true
+          },
+          "noAnchor": {
+            "recoverySteps": 30,
+            "maxDisplacement": 1.1866063687193673e-11,
+            "energy": 1.4910957505798126e-17,
+            "innerSprings": false,
+            "finite": true
+          }
+        },
         "metrics": {
           "vertices": 41920,
           "triangles": 82807,
@@ -1283,34 +2099,38 @@
           "anchorDepthFactor": 0.25,
           "anchorDepthMedian": 0.0019161698874086142,
           "dt": 0.0016666666666666668,
-          "stableDt": 0.0016666666666666668,
+          "stableDt": 5.473061070457213e-7,
           "maxDegree": 11,
-          "damping": 0.24900323753856599,
-          "kSurface": 1,
-          "kSurfaceBiological": 1,
-          "kInnerRatio": 0.35,
-          "preset": "diagnostic",
+          "damping": 0.0006436865982572741,
+          "kSurface": 45,
+          "kSurfaceBiological": 45,
+          "kInnerRatio": 0.022222222222222223,
+          "preset": "biological",
           "sourceMetersPerUnit": 0.3,
-          "rhoEffective": 11111111.111111,
-          "thicknessMeters": 1,
-          "surfaceModulusPa": 1,
-          "innerModulusPa": 0.35,
-          "compliantThicknessMeters": 1,
+          "rhoEffective": 1100,
+          "thicknessMeters": 0.0015,
+          "surfaceModulusPa": 30000,
+          "innerModulusPa": 10000,
+          "compliantThicknessMeters": 0.005,
           "totalAreaM2": 0.011123039352923067,
-          "totalMassKg": 123589.3261693567,
-          "minPositiveMassKg": 0.09455302357673645,
-          "medianMassKg": 2.4219770431518555,
-          "maxPositiveMassKg": 20.294878005981445,
-          "minPositiveMassMg": 94553.02357673645,
-          "medianMassMg": 2421977.0431518555,
-          "maxPositiveMassMg": 20294878.005981445,
+          "totalMassKg": 0.018353014935332368,
+          "minPositiveMassKg": 1.404112381919731e-8,
+          "medianMassKg": 3.5966357359029644e-7,
+          "maxPositiveMassKg": 0.000003013789410033496,
+          "minPositiveMassMg": 0.01404112381919731,
+          "medianMassMg": 0.35966357359029644,
+          "maxPositiveMassMg": 3.013789410033496,
           "zeroMassVertexCount": 0,
           "degenerateFaceCount": 0,
           "areaConservationError": 2.0469737016526324e-16,
-          "numericalMassFloorKg": 0.0000024219770431518553,
-          "highestEstimatedNaturalFrequencyHz": 2.0046014982928355,
-          "substepsPerRenderedFrame": 10,
-          "energy": 1.9957835426920244e-16,
+          "numericalMassFloorKg": 1e-12,
+          "highestEstimatedNaturalFrequencyHz": 34895.633220902404,
+          "integrator": "implicit",
+          "requestedIntegrator": "implicit",
+          "explicitSubstepsPerFrame": 30453,
+          "implicitIterations": 8,
+          "substepsPerRenderedFrame": 1,
+          "energy": 8.101562502887266e-16,
           "maxDisplacement": 0,
           "maxStrain": 5.9446062315234814e-8,
           "finite": true,
@@ -1325,6 +2145,22 @@
             "vertices": 41920,
             "triangles": 82807
           }
+        },
+        "topology": [
+          {
+            "mesh": "tripo_node_282c7782-479e-4c50-8808-1a2c3cdb2977",
+            "vertexCount": 991219,
+            "faceCount": 1897687,
+            "faceAssignmentCount": 1897687,
+            "crossIslandTriangleEdges": 0,
+            "everyFaceAssignedOnce": true
+          }
+        ],
+        "springTopology": {
+          "rawTriangleEdgeUses": 248421,
+          "uniqueSurfaceEdges": 124726,
+          "duplicateRawEdgeUsesRemoved": 123695,
+          "invariant": true
         },
         "interIslandSprings": 0,
         "pointerDebug": {
@@ -1422,13 +2258,457 @@
         }
       },
       "rest": {
-        "tests": {}
+        "model": "male",
+        "stage": 4,
+        "lastPinch": null,
+        "tests": {
+          "rest": {
+            "drift": 0,
+            "energy": 8.101562502887266e-16,
+            "steps": 1000
+          },
+          "nudge": {
+            "initialNudge": 0.000057440716560191105,
+            "recoverySteps": 30,
+            "maxDisplacement": 0.000008424901849961325,
+            "maxNeighborMovement": 0.000004112407532330821,
+            "neighborCount": 7,
+            "energies": [
+              2.297566597547986e-8,
+              1.584018063895247e-9,
+              4.305745363932849e-11,
+              1.771589891936214e-11,
+              1.6931083266215438e-11
+            ],
+            "energyDecreased": true,
+            "finite": true
+          },
+          "noAnchor": {
+            "recoverySteps": 30,
+            "maxDisplacement": 1.1866063687193673e-11,
+            "energy": 1.4910957505798126e-17,
+            "innerSprings": false,
+            "finite": true
+          }
+        },
+        "metrics": {
+          "vertices": 41920,
+          "triangles": 82807,
+          "surfaceSprings": 124726,
+          "duplicateRawEdges": 123695,
+          "zeroLengthEdges": 0,
+          "interIslandSprings": 0,
+          "supportSprings": 167552,
+          "anchorDepthFactor": 0.25,
+          "anchorDepthMedian": 0.0019161698874086142,
+          "dt": 0.0016666666666666668,
+          "stableDt": 5.473061070457213e-7,
+          "maxDegree": 11,
+          "damping": 0.0006436865982572741,
+          "kSurface": 45,
+          "kSurfaceBiological": 45,
+          "kInnerRatio": 0.022222222222222223,
+          "preset": "biological",
+          "sourceMetersPerUnit": 0.3,
+          "rhoEffective": 1100,
+          "thicknessMeters": 0.0015,
+          "surfaceModulusPa": 30000,
+          "innerModulusPa": 10000,
+          "compliantThicknessMeters": 0.005,
+          "totalAreaM2": 0.011123039352923067,
+          "totalMassKg": 0.018353014935332368,
+          "minPositiveMassKg": 1.404112381919731e-8,
+          "medianMassKg": 3.5966357359029644e-7,
+          "maxPositiveMassKg": 0.000003013789410033496,
+          "minPositiveMassMg": 0.01404112381919731,
+          "medianMassMg": 0.35966357359029644,
+          "maxPositiveMassMg": 3.013789410033496,
+          "zeroMassVertexCount": 0,
+          "degenerateFaceCount": 0,
+          "areaConservationError": 2.0469737016526324e-16,
+          "numericalMassFloorKg": 1e-12,
+          "highestEstimatedNaturalFrequencyHz": 34895.633220902404,
+          "integrator": "implicit",
+          "requestedIntegrator": "implicit",
+          "explicitSubstepsPerFrame": 30453,
+          "implicitIterations": 8,
+          "substepsPerRenderedFrame": 1,
+          "energy": 8.101562502887266e-16,
+          "maxDisplacement": 0,
+          "maxStrain": 5.9446062315234814e-8,
+          "finite": true,
+          "orientationSign": 1
+        },
+        "islands": {
+          "count": 658,
+          "minVertices": 3,
+          "maxVertices": 41920,
+          "selected": {
+            "id": 35,
+            "vertices": 41920,
+            "triangles": 82807
+          }
+        },
+        "topology": [
+          {
+            "mesh": "tripo_node_282c7782-479e-4c50-8808-1a2c3cdb2977",
+            "vertexCount": 991219,
+            "faceCount": 1897687,
+            "faceAssignmentCount": 1897687,
+            "crossIslandTriangleEdges": 0,
+            "everyFaceAssignedOnce": true
+          }
+        ],
+        "springTopology": {
+          "rawTriangleEdgeUses": 248421,
+          "uniqueSurfaceEdges": 124726,
+          "duplicateRawEdgeUsesRemoved": 123695,
+          "invariant": true
+        },
+        "interIslandSprings": 0,
+        "pointerDebug": {
+          "event": [
+            588.7999877929688,
+            215.99000549316406
+          ],
+          "stateSpring": true,
+          "statePin": false,
+          "hit": {
+            "mesh": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+            "faceIndex": 918388
+          },
+          "entry": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+          "islandId": 16
+        },
+        "render": {
+          "bounds": {
+            "min": [
+              -0.4212241768836975,
+              -0.4903058111667633,
+              -0.44483932852745056
+            ],
+            "max": [
+              0.42142611742019653,
+              0.4903619587421417,
+              0.44494861364364624
+            ]
+          },
+          "camera": [
+            1.4049140947878007,
+            0.47562000041240193,
+            0.3749199166585845
+          ],
+          "target": [
+            0.2813826165937479,
+            0.05626468391598017,
+            0.033834578726580945
+          ],
+          "meshes": 1,
+          "visible": 1,
+          "drawCalls": 7
+        }
       },
       "nudge": {
-        "tests": {}
+        "model": "male",
+        "stage": 4,
+        "lastPinch": null,
+        "tests": {
+          "rest": {
+            "drift": 0,
+            "energy": 8.101562502887266e-16,
+            "steps": 1000
+          },
+          "nudge": {
+            "initialNudge": 0.00030409862043906036,
+            "recoverySteps": 30,
+            "maxDisplacement": 0.00007421464952904751,
+            "maxNeighborMovement": 0.000020254401639802694,
+            "neighborCount": 6,
+            "energies": [
+              6.178612127678466e-7,
+              3.0830960562433577e-8,
+              1.0844955947574982e-9,
+              3.2107127421060407e-10,
+              2.7763840367870477e-10
+            ],
+            "energyDecreased": true,
+            "finite": true
+          },
+          "noAnchor": {
+            "recoverySteps": 30,
+            "maxDisplacement": 1.1866063687193673e-11,
+            "energy": 1.4910957505798126e-17,
+            "innerSprings": false,
+            "finite": true
+          }
+        },
+        "metrics": {
+          "vertices": 41920,
+          "triangles": 82807,
+          "surfaceSprings": 124726,
+          "duplicateRawEdges": 123695,
+          "zeroLengthEdges": 0,
+          "interIslandSprings": 0,
+          "supportSprings": 167552,
+          "anchorDepthFactor": 0.25,
+          "anchorDepthMedian": 0.0019161698874086142,
+          "dt": 0.0016666666666666668,
+          "stableDt": 5.473061070457213e-7,
+          "maxDegree": 11,
+          "damping": 0.0006436865982572741,
+          "kSurface": 45,
+          "kSurfaceBiological": 45,
+          "kInnerRatio": 0.022222222222222223,
+          "preset": "biological",
+          "sourceMetersPerUnit": 0.3,
+          "rhoEffective": 1100,
+          "thicknessMeters": 0.0015,
+          "surfaceModulusPa": 30000,
+          "innerModulusPa": 10000,
+          "compliantThicknessMeters": 0.005,
+          "totalAreaM2": 0.011123039352923067,
+          "totalMassKg": 0.018353014935332368,
+          "minPositiveMassKg": 1.404112381919731e-8,
+          "medianMassKg": 3.5966357359029644e-7,
+          "maxPositiveMassKg": 0.000003013789410033496,
+          "minPositiveMassMg": 0.01404112381919731,
+          "medianMassMg": 0.35966357359029644,
+          "maxPositiveMassMg": 3.013789410033496,
+          "zeroMassVertexCount": 0,
+          "degenerateFaceCount": 0,
+          "areaConservationError": 2.0469737016526324e-16,
+          "numericalMassFloorKg": 1e-12,
+          "highestEstimatedNaturalFrequencyHz": 34895.633220902404,
+          "integrator": "implicit",
+          "requestedIntegrator": "implicit",
+          "explicitSubstepsPerFrame": 30453,
+          "implicitIterations": 8,
+          "substepsPerRenderedFrame": 1,
+          "energy": 1.300434315333353e-9,
+          "maxDisplacement": 0.0002375209874386505,
+          "maxStrain": 0.001973218024912774,
+          "finite": true,
+          "orientationSign": 1
+        },
+        "islands": {
+          "count": 658,
+          "minVertices": 3,
+          "maxVertices": 41920,
+          "selected": {
+            "id": 35,
+            "vertices": 41920,
+            "triangles": 82807
+          }
+        },
+        "topology": [
+          {
+            "mesh": "tripo_node_282c7782-479e-4c50-8808-1a2c3cdb2977",
+            "vertexCount": 991219,
+            "faceCount": 1897687,
+            "faceAssignmentCount": 1897687,
+            "crossIslandTriangleEdges": 0,
+            "everyFaceAssignedOnce": true
+          }
+        ],
+        "springTopology": {
+          "rawTriangleEdgeUses": 248421,
+          "uniqueSurfaceEdges": 124726,
+          "duplicateRawEdgeUsesRemoved": 123695,
+          "invariant": true
+        },
+        "interIslandSprings": 0,
+        "pointerDebug": {
+          "event": [
+            588.7999877929688,
+            215.99000549316406
+          ],
+          "stateSpring": true,
+          "statePin": false,
+          "hit": {
+            "mesh": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+            "faceIndex": 918388
+          },
+          "entry": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+          "islandId": 16
+        },
+        "render": {
+          "bounds": {
+            "min": [
+              -0.4212241768836975,
+              -0.4903058111667633,
+              -0.44483932852745056
+            ],
+            "max": [
+              0.42142611742019653,
+              0.4903619587421417,
+              0.44494861364364624
+            ]
+          },
+          "camera": [
+            1.4049140947878007,
+            0.47562000041240193,
+            0.3749199166585845
+          ],
+          "target": [
+            0.2813826165937479,
+            0.05626468391598017,
+            0.033834578726580945
+          ],
+          "meshes": 1,
+          "visible": 1,
+          "drawCalls": 7
+        }
       },
       "noAnchor": {
-        "tests": {}
+        "model": "male",
+        "stage": 4,
+        "lastPinch": null,
+        "tests": {
+          "rest": {
+            "drift": 0,
+            "energy": 8.101562502887266e-16,
+            "steps": 1000
+          },
+          "nudge": {
+            "initialNudge": 0.00030409862043906036,
+            "recoverySteps": 30,
+            "maxDisplacement": 0.00007421464952904751,
+            "maxNeighborMovement": 0.000020254401639802694,
+            "neighborCount": 6,
+            "energies": [
+              6.178612127678466e-7,
+              3.0830960562433577e-8,
+              1.0844955947574982e-9,
+              3.2107127421060407e-10,
+              2.7763840367870477e-10
+            ],
+            "energyDecreased": true,
+            "finite": true
+          },
+          "noAnchor": {
+            "recoverySteps": 30,
+            "maxDisplacement": 5.547917680814862e-11,
+            "energy": 8.079179274081392e-16,
+            "innerSprings": false,
+            "finite": true
+          }
+        },
+        "metrics": {
+          "vertices": 41920,
+          "triangles": 82807,
+          "surfaceSprings": 124726,
+          "duplicateRawEdges": 123695,
+          "zeroLengthEdges": 0,
+          "interIslandSprings": 0,
+          "supportSprings": 167552,
+          "anchorDepthFactor": 0.25,
+          "anchorDepthMedian": 0.0019161698874086142,
+          "dt": 0.0016666666666666668,
+          "stableDt": 5.473061070457213e-7,
+          "maxDegree": 11,
+          "damping": 0.0006436865982572741,
+          "kSurface": 45,
+          "kSurfaceBiological": 45,
+          "kInnerRatio": 0.022222222222222223,
+          "preset": "biological",
+          "sourceMetersPerUnit": 0.3,
+          "rhoEffective": 1100,
+          "thicknessMeters": 0.0015,
+          "surfaceModulusPa": 30000,
+          "innerModulusPa": 10000,
+          "compliantThicknessMeters": 0.005,
+          "totalAreaM2": 0.011123039352923067,
+          "totalMassKg": 0.018353014935332368,
+          "minPositiveMassKg": 1.404112381919731e-8,
+          "medianMassKg": 3.5966357359029644e-7,
+          "maxPositiveMassKg": 0.000003013789410033496,
+          "minPositiveMassMg": 0.01404112381919731,
+          "medianMassMg": 0.35966357359029644,
+          "maxPositiveMassMg": 3.013789410033496,
+          "zeroMassVertexCount": 0,
+          "degenerateFaceCount": 0,
+          "areaConservationError": 2.0469737016526324e-16,
+          "numericalMassFloorKg": 1e-12,
+          "highestEstimatedNaturalFrequencyHz": 34895.633220902404,
+          "integrator": "implicit",
+          "requestedIntegrator": "implicit",
+          "explicitSubstepsPerFrame": 30453,
+          "implicitIterations": 8,
+          "substepsPerRenderedFrame": 1,
+          "energy": 8.097820725754408e-16,
+          "maxDisplacement": 5.547917680814862e-11,
+          "maxStrain": 5.9446062315234814e-8,
+          "finite": true,
+          "orientationSign": 1
+        },
+        "islands": {
+          "count": 658,
+          "minVertices": 3,
+          "maxVertices": 41920,
+          "selected": {
+            "id": 35,
+            "vertices": 41920,
+            "triangles": 82807
+          }
+        },
+        "topology": [
+          {
+            "mesh": "tripo_node_282c7782-479e-4c50-8808-1a2c3cdb2977",
+            "vertexCount": 991219,
+            "faceCount": 1897687,
+            "faceAssignmentCount": 1897687,
+            "crossIslandTriangleEdges": 0,
+            "everyFaceAssignedOnce": true
+          }
+        ],
+        "springTopology": {
+          "rawTriangleEdgeUses": 248421,
+          "uniqueSurfaceEdges": 124726,
+          "duplicateRawEdgeUsesRemoved": 123695,
+          "invariant": true
+        },
+        "interIslandSprings": 0,
+        "pointerDebug": {
+          "event": [
+            588.7999877929688,
+            215.99000549316406
+          ],
+          "stateSpring": true,
+          "statePin": false,
+          "hit": {
+            "mesh": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+            "faceIndex": 918388
+          },
+          "entry": "tripo_node_86f1c1fe-5aa0-4c74-9275-ef5b4349ff7f",
+          "islandId": 16
+        },
+        "render": {
+          "bounds": {
+            "min": [
+              -0.4212241768836975,
+              -0.4903058111667633,
+              -0.44483932852745056
+            ],
+            "max": [
+              0.42142611742019653,
+              0.4903619587421417,
+              0.44494861364364624
+            ]
+          },
+          "camera": [
+            1.4049140947878007,
+            0.47562000041240193,
+            0.3749199166585845
+          ],
+          "target": [
+            0.2813826165937479,
+            0.05626468391598017,
+            0.033834578726580945
+          ],
+          "meshes": 1,
+          "visible": 1,
+          "drawCalls": 7
+        }
       },
       "during": {
         "model": "male",
@@ -1456,7 +2736,36 @@
           "activeIsland": 23,
           "faceIndex": 802839
         },
-        "tests": {},
+        "tests": {
+          "rest": {
+            "drift": 0,
+            "energy": 8.101562502887266e-16,
+            "steps": 1000
+          },
+          "nudge": {
+            "initialNudge": 0.00030409862043906036,
+            "recoverySteps": 30,
+            "maxDisplacement": 0.00007421464952904751,
+            "maxNeighborMovement": 0.000020254401639802694,
+            "neighborCount": 6,
+            "energies": [
+              6.178612127678466e-7,
+              3.0830960562433577e-8,
+              1.0844955947574982e-9,
+              3.2107127421060407e-10,
+              2.7763840367870477e-10
+            ],
+            "energyDecreased": true,
+            "finite": true
+          },
+          "noAnchor": {
+            "recoverySteps": 30,
+            "maxDisplacement": 5.547917680814862e-11,
+            "energy": 8.079179274081392e-16,
+            "innerSprings": false,
+            "finite": true
+          }
+        },
         "metrics": {
           "vertices": 17693,
           "triangles": 34832,
@@ -1468,36 +2777,40 @@
           "anchorDepthFactor": 0.25,
           "anchorDepthMedian": 0.001834446331486106,
           "dt": 0.0016666666666666668,
-          "stableDt": 0.0016666666666666668,
+          "stableDt": 5.809950797456056e-7,
           "maxDegree": 11,
-          "damping": 0.23575766635698986,
-          "kSurface": 1,
-          "kSurfaceBiological": 1,
-          "kInnerRatio": 0.35,
-          "preset": "diagnostic",
+          "damping": 0.0006094461072730323,
+          "kSurface": 45,
+          "kSurfaceBiological": 45,
+          "kInnerRatio": 0.022222222222222223,
+          "preset": "biological",
           "sourceMetersPerUnit": 0.3,
-          "rhoEffective": 11111111.111111,
-          "thicknessMeters": 1,
-          "surfaceModulusPa": 1,
-          "innerModulusPa": 0.35,
-          "compliantThicknessMeters": 1,
+          "rhoEffective": 1100,
+          "thicknessMeters": 0.0015,
+          "surfaceModulusPa": 30000,
+          "innerModulusPa": 10000,
+          "compliantThicknessMeters": 0.005,
           "totalAreaM2": 0.004325524647291623,
-          "totalMassKg": 48061.3849709928,
-          "minPositiveMassKg": 0.10655154287815094,
-          "medianMassKg": 2.171159267425537,
-          "maxPositiveMassKg": 17.065269470214844,
-          "minPositiveMassMg": 106551.54287815094,
-          "medianMassMg": 2171159.267425537,
-          "maxPositiveMassMg": 17065269.470214844,
+          "totalMassKg": 0.007137115666985494,
+          "minPositiveMassKg": 1.582290387602825e-8,
+          "medianMassKg": 3.2241715075542743e-7,
+          "maxPositiveMassKg": 0.000002534192390157841,
+          "minPositiveMassMg": 0.01582290387602825,
+          "medianMassMg": 0.32241715075542743,
+          "maxPositiveMassMg": 2.534192390157841,
           "zeroMassVertexCount": 0,
           "degenerateFaceCount": 0,
           "areaConservationError": 2.2551405187698492e-17,
-          "numericalMassFloorKg": 0.000002171159267425537,
-          "highestEstimatedNaturalFrequencyHz": 1.8883647714007723,
-          "substepsPerRenderedFrame": 10,
-          "energy": 0.00012411881096226551,
-          "maxDisplacement": 0.010572855855413817,
-          "maxStrain": 5.250364741596934,
+          "numericalMassFloorKg": 1e-12,
+          "highestEstimatedNaturalFrequencyHz": 32872.211550207874,
+          "integrator": "implicit",
+          "requestedIntegrator": "implicit",
+          "explicitSubstepsPerFrame": 28687,
+          "implicitIterations": 8,
+          "substepsPerRenderedFrame": 1,
+          "energy": 0.00005179434999023834,
+          "maxDisplacement": 0.005904732652229086,
+          "maxStrain": 0.558990851209317,
           "finite": true,
           "orientationSign": 1
         },
@@ -1510,6 +2823,22 @@
             "vertices": 17693,
             "triangles": 34832
           }
+        },
+        "topology": [
+          {
+            "mesh": "tripo_node_282c7782-479e-4c50-8808-1a2c3cdb2977",
+            "vertexCount": 991219,
+            "faceCount": 1897687,
+            "faceAssignmentCount": 1897687,
+            "crossIslandTriangleEdges": 0,
+            "everyFaceAssignedOnce": true
+          }
+        ],
+        "springTopology": {
+          "rawTriangleEdgeUses": 104496,
+          "uniqueSurfaceEdges": 52524,
+          "duplicateRawEdgeUsesRemoved": 51972,
+          "invariant": true
         },
         "interIslandSprings": 0,
         "pointerDebug": {
@@ -1586,16 +2915,45 @@
             0.06776941804631664
           ],
           "actualAtRelease": [
-            0.27360838426786627,
-            0.2559846680812482,
-            0.06583607930410032
+            0.27275210908741326,
+            0.2558677290312358,
+            0.06848399791775474
           ],
-          "trackingErrorMeters": 0.0006040233266960008,
-          "peakForceN": 0.05439238926884985,
-          "peakTrackingErrorMeters": 0.0006039813888889662,
-          "maxDisplacementAtRelease": 0.012164410437514556
+          "trackingErrorMeters": 0.00023294462141913063,
+          "peakForceN": 0.032144300378225375,
+          "peakTrackingErrorMeters": 0.0003571339526832932,
+          "maxDisplacementAtRelease": 0.005901876003407517
         },
-        "tests": {},
+        "tests": {
+          "rest": {
+            "drift": 0,
+            "energy": 8.101562502887266e-16,
+            "steps": 1000
+          },
+          "nudge": {
+            "initialNudge": 0.00030409862043906036,
+            "recoverySteps": 30,
+            "maxDisplacement": 0.00007421464952904751,
+            "maxNeighborMovement": 0.000020254401639802694,
+            "neighborCount": 6,
+            "energies": [
+              6.178612127678466e-7,
+              3.0830960562433577e-8,
+              1.0844955947574982e-9,
+              3.2107127421060407e-10,
+              2.7763840367870477e-10
+            ],
+            "energyDecreased": true,
+            "finite": true
+          },
+          "noAnchor": {
+            "recoverySteps": 30,
+            "maxDisplacement": 5.547917680814862e-11,
+            "energy": 8.079179274081392e-16,
+            "innerSprings": false,
+            "finite": true
+          }
+        },
         "metrics": {
           "vertices": 17693,
           "triangles": 34832,
@@ -1607,36 +2965,40 @@
           "anchorDepthFactor": 0.25,
           "anchorDepthMedian": 0.001834446331486106,
           "dt": 0.0016666666666666668,
-          "stableDt": 0.0016666666666666668,
+          "stableDt": 5.809950797456056e-7,
           "maxDegree": 11,
-          "damping": 0.23575766635698986,
-          "kSurface": 1,
-          "kSurfaceBiological": 1,
-          "kInnerRatio": 0.35,
-          "preset": "diagnostic",
+          "damping": 0.0006094461072730323,
+          "kSurface": 45,
+          "kSurfaceBiological": 45,
+          "kInnerRatio": 0.022222222222222223,
+          "preset": "biological",
           "sourceMetersPerUnit": 0.3,
-          "rhoEffective": 11111111.111111,
-          "thicknessMeters": 1,
-          "surfaceModulusPa": 1,
-          "innerModulusPa": 0.35,
-          "compliantThicknessMeters": 1,
+          "rhoEffective": 1100,
+          "thicknessMeters": 0.0015,
+          "surfaceModulusPa": 30000,
+          "innerModulusPa": 10000,
+          "compliantThicknessMeters": 0.005,
           "totalAreaM2": 0.004325524647291623,
-          "totalMassKg": 48061.3849709928,
-          "minPositiveMassKg": 0.10655154287815094,
-          "medianMassKg": 2.171159267425537,
-          "maxPositiveMassKg": 17.065269470214844,
-          "minPositiveMassMg": 106551.54287815094,
-          "medianMassMg": 2171159.267425537,
-          "maxPositiveMassMg": 17065269.470214844,
+          "totalMassKg": 0.007137115666985494,
+          "minPositiveMassKg": 1.582290387602825e-8,
+          "medianMassKg": 3.2241715075542743e-7,
+          "maxPositiveMassKg": 0.000002534192390157841,
+          "minPositiveMassMg": 0.01582290387602825,
+          "medianMassMg": 0.32241715075542743,
+          "maxPositiveMassMg": 2.534192390157841,
           "zeroMassVertexCount": 0,
           "degenerateFaceCount": 0,
           "areaConservationError": 2.2551405187698492e-17,
-          "numericalMassFloorKg": 0.000002171159267425537,
-          "highestEstimatedNaturalFrequencyHz": 1.8883647714007723,
-          "substepsPerRenderedFrame": 10,
-          "energy": 0.0001738865315990199,
-          "maxDisplacement": 0.012223230994430699,
-          "maxStrain": 5.901440204894663,
+          "numericalMassFloorKg": 1e-12,
+          "highestEstimatedNaturalFrequencyHz": 32872.211550207874,
+          "integrator": "implicit",
+          "requestedIntegrator": "implicit",
+          "explicitSubstepsPerFrame": 28687,
+          "implicitIterations": 8,
+          "substepsPerRenderedFrame": 1,
+          "energy": 0.000016870800466939432,
+          "maxDisplacement": 0.0027109860888533616,
+          "maxStrain": 0.19259104528582635,
           "finite": true,
           "orientationSign": 1
         },
@@ -1649,6 +3011,22 @@
             "vertices": 17693,
             "triangles": 34832
           }
+        },
+        "topology": [
+          {
+            "mesh": "tripo_node_282c7782-479e-4c50-8808-1a2c3cdb2977",
+            "vertexCount": 991219,
+            "faceCount": 1897687,
+            "faceAssignmentCount": 1897687,
+            "crossIslandTriangleEdges": 0,
+            "everyFaceAssignedOnce": true
+          }
+        ],
+        "springTopology": {
+          "rawTriangleEdgeUses": 104496,
+          "uniqueSurfaceEdges": 52524,
+          "duplicateRawEdgeUsesRemoved": 51972,
+          "invariant": true
         },
         "interIslandSprings": 0,
         "pointerDebug": {
@@ -1695,7 +3073,7 @@
       },
       "pinchRuns": [
         {
-          "label": "slow",
+          "label": "standard",
           "during": {
             "model": "male",
             "stage": 5,
@@ -1722,7 +3100,36 @@
               "activeIsland": 23,
               "faceIndex": 802839
             },
-            "tests": {},
+            "tests": {
+              "rest": {
+                "drift": 0,
+                "energy": 8.101562502887266e-16,
+                "steps": 1000
+              },
+              "nudge": {
+                "initialNudge": 0.00030409862043906036,
+                "recoverySteps": 30,
+                "maxDisplacement": 0.00007421464952904751,
+                "maxNeighborMovement": 0.000020254401639802694,
+                "neighborCount": 6,
+                "energies": [
+                  6.178612127678466e-7,
+                  3.0830960562433577e-8,
+                  1.0844955947574982e-9,
+                  3.2107127421060407e-10,
+                  2.7763840367870477e-10
+                ],
+                "energyDecreased": true,
+                "finite": true
+              },
+              "noAnchor": {
+                "recoverySteps": 30,
+                "maxDisplacement": 5.547917680814862e-11,
+                "energy": 8.079179274081392e-16,
+                "innerSprings": false,
+                "finite": true
+              }
+            },
             "metrics": {
               "vertices": 17693,
               "triangles": 34832,
@@ -1734,36 +3141,40 @@
               "anchorDepthFactor": 0.25,
               "anchorDepthMedian": 0.001834446331486106,
               "dt": 0.0016666666666666668,
-              "stableDt": 0.0016666666666666668,
+              "stableDt": 5.809950797456056e-7,
               "maxDegree": 11,
-              "damping": 0.23575766635698986,
-              "kSurface": 1,
-              "kSurfaceBiological": 1,
-              "kInnerRatio": 0.35,
-              "preset": "diagnostic",
+              "damping": 0.0006094461072730323,
+              "kSurface": 45,
+              "kSurfaceBiological": 45,
+              "kInnerRatio": 0.022222222222222223,
+              "preset": "biological",
               "sourceMetersPerUnit": 0.3,
-              "rhoEffective": 11111111.111111,
-              "thicknessMeters": 1,
-              "surfaceModulusPa": 1,
-              "innerModulusPa": 0.35,
-              "compliantThicknessMeters": 1,
+              "rhoEffective": 1100,
+              "thicknessMeters": 0.0015,
+              "surfaceModulusPa": 30000,
+              "innerModulusPa": 10000,
+              "compliantThicknessMeters": 0.005,
               "totalAreaM2": 0.004325524647291623,
-              "totalMassKg": 48061.3849709928,
-              "minPositiveMassKg": 0.10655154287815094,
-              "medianMassKg": 2.171159267425537,
-              "maxPositiveMassKg": 17.065269470214844,
-              "minPositiveMassMg": 106551.54287815094,
-              "medianMassMg": 2171159.267425537,
-              "maxPositiveMassMg": 17065269.470214844,
+              "totalMassKg": 0.007137115666985494,
+              "minPositiveMassKg": 1.582290387602825e-8,
+              "medianMassKg": 3.2241715075542743e-7,
+              "maxPositiveMassKg": 0.000002534192390157841,
+              "minPositiveMassMg": 0.01582290387602825,
+              "medianMassMg": 0.32241715075542743,
+              "maxPositiveMassMg": 2.534192390157841,
               "zeroMassVertexCount": 0,
               "degenerateFaceCount": 0,
               "areaConservationError": 2.2551405187698492e-17,
-              "numericalMassFloorKg": 0.000002171159267425537,
-              "highestEstimatedNaturalFrequencyHz": 1.8883647714007723,
-              "substepsPerRenderedFrame": 10,
-              "energy": 0.00012411881096226551,
-              "maxDisplacement": 0.010572855855413817,
-              "maxStrain": 5.250364741596934,
+              "numericalMassFloorKg": 1e-12,
+              "highestEstimatedNaturalFrequencyHz": 32872.211550207874,
+              "integrator": "implicit",
+              "requestedIntegrator": "implicit",
+              "explicitSubstepsPerFrame": 28687,
+              "implicitIterations": 8,
+              "substepsPerRenderedFrame": 1,
+              "energy": 0.00005179434999023834,
+              "maxDisplacement": 0.005904732652229086,
+              "maxStrain": 0.558990851209317,
               "finite": true,
               "orientationSign": 1
             },
@@ -1776,6 +3187,22 @@
                 "vertices": 17693,
                 "triangles": 34832
               }
+            },
+            "topology": [
+              {
+                "mesh": "tripo_node_282c7782-479e-4c50-8808-1a2c3cdb2977",
+                "vertexCount": 991219,
+                "faceCount": 1897687,
+                "faceAssignmentCount": 1897687,
+                "crossIslandTriangleEdges": 0,
+                "everyFaceAssignedOnce": true
+              }
+            ],
+            "springTopology": {
+              "rawTriangleEdgeUses": 104496,
+              "uniqueSurfaceEdges": 52524,
+              "duplicateRawEdgeUsesRemoved": 51972,
+              "invariant": true
             },
             "interIslandSprings": 0,
             "pointerDebug": {
@@ -1852,16 +3279,45 @@
                 0.06776941804631664
               ],
               "actualAtRelease": [
-                0.27360838426786627,
-                0.2559846680812482,
-                0.06583607930410032
+                0.27275210908741326,
+                0.2558677290312358,
+                0.06848399791775474
               ],
-              "trackingErrorMeters": 0.0006040233266960008,
-              "peakForceN": 0.05439238926884985,
-              "peakTrackingErrorMeters": 0.0006039813888889662,
-              "maxDisplacementAtRelease": 0.012164410437514556
+              "trackingErrorMeters": 0.00023294462141913063,
+              "peakForceN": 0.032144300378225375,
+              "peakTrackingErrorMeters": 0.0003571339526832932,
+              "maxDisplacementAtRelease": 0.005901876003407517
             },
-            "tests": {},
+            "tests": {
+              "rest": {
+                "drift": 0,
+                "energy": 8.101562502887266e-16,
+                "steps": 1000
+              },
+              "nudge": {
+                "initialNudge": 0.00030409862043906036,
+                "recoverySteps": 30,
+                "maxDisplacement": 0.00007421464952904751,
+                "maxNeighborMovement": 0.000020254401639802694,
+                "neighborCount": 6,
+                "energies": [
+                  6.178612127678466e-7,
+                  3.0830960562433577e-8,
+                  1.0844955947574982e-9,
+                  3.2107127421060407e-10,
+                  2.7763840367870477e-10
+                ],
+                "energyDecreased": true,
+                "finite": true
+              },
+              "noAnchor": {
+                "recoverySteps": 30,
+                "maxDisplacement": 5.547917680814862e-11,
+                "energy": 8.079179274081392e-16,
+                "innerSprings": false,
+                "finite": true
+              }
+            },
             "metrics": {
               "vertices": 17693,
               "triangles": 34832,
@@ -1873,36 +3329,40 @@
               "anchorDepthFactor": 0.25,
               "anchorDepthMedian": 0.001834446331486106,
               "dt": 0.0016666666666666668,
-              "stableDt": 0.0016666666666666668,
+              "stableDt": 5.809950797456056e-7,
               "maxDegree": 11,
-              "damping": 0.23575766635698986,
-              "kSurface": 1,
-              "kSurfaceBiological": 1,
-              "kInnerRatio": 0.35,
-              "preset": "diagnostic",
+              "damping": 0.0006094461072730323,
+              "kSurface": 45,
+              "kSurfaceBiological": 45,
+              "kInnerRatio": 0.022222222222222223,
+              "preset": "biological",
               "sourceMetersPerUnit": 0.3,
-              "rhoEffective": 11111111.111111,
-              "thicknessMeters": 1,
-              "surfaceModulusPa": 1,
-              "innerModulusPa": 0.35,
-              "compliantThicknessMeters": 1,
+              "rhoEffective": 1100,
+              "thicknessMeters": 0.0015,
+              "surfaceModulusPa": 30000,
+              "innerModulusPa": 10000,
+              "compliantThicknessMeters": 0.005,
               "totalAreaM2": 0.004325524647291623,
-              "totalMassKg": 48061.3849709928,
-              "minPositiveMassKg": 0.10655154287815094,
-              "medianMassKg": 2.171159267425537,
-              "maxPositiveMassKg": 17.065269470214844,
-              "minPositiveMassMg": 106551.54287815094,
-              "medianMassMg": 2171159.267425537,
-              "maxPositiveMassMg": 17065269.470214844,
+              "totalMassKg": 0.007137115666985494,
+              "minPositiveMassKg": 1.582290387602825e-8,
+              "medianMassKg": 3.2241715075542743e-7,
+              "maxPositiveMassKg": 0.000002534192390157841,
+              "minPositiveMassMg": 0.01582290387602825,
+              "medianMassMg": 0.32241715075542743,
+              "maxPositiveMassMg": 2.534192390157841,
               "zeroMassVertexCount": 0,
               "degenerateFaceCount": 0,
               "areaConservationError": 2.2551405187698492e-17,
-              "numericalMassFloorKg": 0.000002171159267425537,
-              "highestEstimatedNaturalFrequencyHz": 1.8883647714007723,
-              "substepsPerRenderedFrame": 10,
-              "energy": 0.0001738865315990199,
-              "maxDisplacement": 0.012223230994430699,
-              "maxStrain": 5.901440204894663,
+              "numericalMassFloorKg": 1e-12,
+              "highestEstimatedNaturalFrequencyHz": 32872.211550207874,
+              "integrator": "implicit",
+              "requestedIntegrator": "implicit",
+              "explicitSubstepsPerFrame": 28687,
+              "implicitIterations": 8,
+              "substepsPerRenderedFrame": 1,
+              "energy": 0.000016870800466939432,
+              "maxDisplacement": 0.0027109860888533616,
+              "maxStrain": 0.19259104528582635,
               "finite": true,
               "orientationSign": 1
             },
@@ -1915,6 +3375,22 @@
                 "vertices": 17693,
                 "triangles": 34832
               }
+            },
+            "topology": [
+              {
+                "mesh": "tripo_node_282c7782-479e-4c50-8808-1a2c3cdb2977",
+                "vertexCount": 991219,
+                "faceCount": 1897687,
+                "faceAssignmentCount": 1897687,
+                "crossIslandTriangleEdges": 0,
+                "everyFaceAssignedOnce": true
+              }
+            ],
+            "springTopology": {
+              "rawTriangleEdgeUses": 104496,
+              "uniqueSurfaceEdges": 52524,
+              "duplicateRawEdgeUsesRemoved": 51972,
+              "invariant": true
             },
             "interIslandSprings": 0,
             "pointerDebug": {
@@ -1989,7 +3465,36 @@
               "activeIsland": 23,
               "faceIndex": 802839
             },
-            "tests": {},
+            "tests": {
+              "rest": {
+                "drift": 0,
+                "energy": 8.101562502887266e-16,
+                "steps": 1000
+              },
+              "nudge": {
+                "initialNudge": 0.00030409862043906036,
+                "recoverySteps": 30,
+                "maxDisplacement": 0.00007421464952904751,
+                "maxNeighborMovement": 0.000020254401639802694,
+                "neighborCount": 6,
+                "energies": [
+                  6.178612127678466e-7,
+                  3.0830960562433577e-8,
+                  1.0844955947574982e-9,
+                  3.2107127421060407e-10,
+                  2.7763840367870477e-10
+                ],
+                "energyDecreased": true,
+                "finite": true
+              },
+              "noAnchor": {
+                "recoverySteps": 30,
+                "maxDisplacement": 5.547917680814862e-11,
+                "energy": 8.079179274081392e-16,
+                "innerSprings": false,
+                "finite": true
+              }
+            },
             "metrics": {
               "vertices": 17693,
               "triangles": 34832,
@@ -2001,36 +3506,40 @@
               "anchorDepthFactor": 0.25,
               "anchorDepthMedian": 0.001834446331486106,
               "dt": 0.0016666666666666668,
-              "stableDt": 0.0016666666666666668,
+              "stableDt": 5.809950797456056e-7,
               "maxDegree": 11,
-              "damping": 0.23575766635698986,
-              "kSurface": 1,
-              "kSurfaceBiological": 1,
-              "kInnerRatio": 0.35,
-              "preset": "diagnostic",
+              "damping": 0.0006094461072730323,
+              "kSurface": 45,
+              "kSurfaceBiological": 45,
+              "kInnerRatio": 0.022222222222222223,
+              "preset": "biological",
               "sourceMetersPerUnit": 0.3,
-              "rhoEffective": 11111111.111111,
-              "thicknessMeters": 1,
-              "surfaceModulusPa": 1,
-              "innerModulusPa": 0.35,
-              "compliantThicknessMeters": 1,
+              "rhoEffective": 1100,
+              "thicknessMeters": 0.0015,
+              "surfaceModulusPa": 30000,
+              "innerModulusPa": 10000,
+              "compliantThicknessMeters": 0.005,
               "totalAreaM2": 0.004325524647291623,
-              "totalMassKg": 48061.3849709928,
-              "minPositiveMassKg": 0.10655154287815094,
-              "medianMassKg": 2.171159267425537,
-              "maxPositiveMassKg": 17.065269470214844,
-              "minPositiveMassMg": 106551.54287815094,
-              "medianMassMg": 2171159.267425537,
-              "maxPositiveMassMg": 17065269.470214844,
+              "totalMassKg": 0.007137115666985494,
+              "minPositiveMassKg": 1.582290387602825e-8,
+              "medianMassKg": 3.2241715075542743e-7,
+              "maxPositiveMassKg": 0.000002534192390157841,
+              "minPositiveMassMg": 0.01582290387602825,
+              "medianMassMg": 0.32241715075542743,
+              "maxPositiveMassMg": 2.534192390157841,
               "zeroMassVertexCount": 0,
               "degenerateFaceCount": 0,
               "areaConservationError": 2.2551405187698492e-17,
-              "numericalMassFloorKg": 0.000002171159267425537,
-              "highestEstimatedNaturalFrequencyHz": 1.8883647714007723,
-              "substepsPerRenderedFrame": 10,
-              "energy": 7.527082861043776e-8,
-              "maxDisplacement": 0.00022619054272532887,
-              "maxStrain": 0.09551316635404894,
+              "numericalMassFloorKg": 1e-12,
+              "highestEstimatedNaturalFrequencyHz": 32872.211550207874,
+              "integrator": "implicit",
+              "requestedIntegrator": "implicit",
+              "explicitSubstepsPerFrame": 28687,
+              "implicitIterations": 8,
+              "substepsPerRenderedFrame": 1,
+              "energy": 0.00008067439218666877,
+              "maxDisplacement": 0.00583758924760531,
+              "maxStrain": 0.6604973709583439,
               "finite": true,
               "orientationSign": 1
             },
@@ -2043,6 +3552,22 @@
                 "vertices": 17693,
                 "triangles": 34832
               }
+            },
+            "topology": [
+              {
+                "mesh": "tripo_node_282c7782-479e-4c50-8808-1a2c3cdb2977",
+                "vertexCount": 991219,
+                "faceCount": 1897687,
+                "faceAssignmentCount": 1897687,
+                "crossIslandTriangleEdges": 0,
+                "everyFaceAssignedOnce": true
+              }
+            ],
+            "springTopology": {
+              "rawTriangleEdgeUses": 104496,
+              "uniqueSurfaceEdges": 52524,
+              "duplicateRawEdgeUsesRemoved": 51972,
+              "invariant": true
             },
             "interIslandSprings": 0,
             "pointerDebug": {
@@ -2119,16 +3644,45 @@
                 0.06776941804631664
               ],
               "actualAtRelease": [
-                0.27141459975730703,
-                0.2558120071352615,
-                0.07330145860587985
+                0.2727493194590369,
+                0.2559633894565477,
+                0.06858958170919041
               ],
-              "trackingErrorMeters": 0.0017308722780782684,
-              "peakForceN": 0.16447547834452111,
-              "peakTrackingErrorMeters": 0.0018273064730881248,
-              "maxDisplacementAtRelease": 0.0005055182379268549
+              "trackingErrorMeters": 0.0002620447741740494,
+              "peakForceN": 0.16481720086522686,
+              "peakTrackingErrorMeters": 0.001830759901962275,
+              "maxDisplacementAtRelease": 0.00583758924760531
             },
-            "tests": {},
+            "tests": {
+              "rest": {
+                "drift": 0,
+                "energy": 8.101562502887266e-16,
+                "steps": 1000
+              },
+              "nudge": {
+                "initialNudge": 0.00030409862043906036,
+                "recoverySteps": 30,
+                "maxDisplacement": 0.00007421464952904751,
+                "maxNeighborMovement": 0.000020254401639802694,
+                "neighborCount": 6,
+                "energies": [
+                  6.178612127678466e-7,
+                  3.0830960562433577e-8,
+                  1.0844955947574982e-9,
+                  3.2107127421060407e-10,
+                  2.7763840367870477e-10
+                ],
+                "energyDecreased": true,
+                "finite": true
+              },
+              "noAnchor": {
+                "recoverySteps": 30,
+                "maxDisplacement": 5.547917680814862e-11,
+                "energy": 8.079179274081392e-16,
+                "innerSprings": false,
+                "finite": true
+              }
+            },
             "metrics": {
               "vertices": 17693,
               "triangles": 34832,
@@ -2140,36 +3694,40 @@
               "anchorDepthFactor": 0.25,
               "anchorDepthMedian": 0.001834446331486106,
               "dt": 0.0016666666666666668,
-              "stableDt": 0.0016666666666666668,
+              "stableDt": 5.809950797456056e-7,
               "maxDegree": 11,
-              "damping": 0.23575766635698986,
-              "kSurface": 1,
-              "kSurfaceBiological": 1,
-              "kInnerRatio": 0.35,
-              "preset": "diagnostic",
+              "damping": 0.0006094461072730323,
+              "kSurface": 45,
+              "kSurfaceBiological": 45,
+              "kInnerRatio": 0.022222222222222223,
+              "preset": "biological",
               "sourceMetersPerUnit": 0.3,
-              "rhoEffective": 11111111.111111,
-              "thicknessMeters": 1,
-              "surfaceModulusPa": 1,
-              "innerModulusPa": 0.35,
-              "compliantThicknessMeters": 1,
+              "rhoEffective": 1100,
+              "thicknessMeters": 0.0015,
+              "surfaceModulusPa": 30000,
+              "innerModulusPa": 10000,
+              "compliantThicknessMeters": 0.005,
               "totalAreaM2": 0.004325524647291623,
-              "totalMassKg": 48061.3849709928,
-              "minPositiveMassKg": 0.10655154287815094,
-              "medianMassKg": 2.171159267425537,
-              "maxPositiveMassKg": 17.065269470214844,
-              "minPositiveMassMg": 106551.54287815094,
-              "medianMassMg": 2171159.267425537,
-              "maxPositiveMassMg": 17065269.470214844,
+              "totalMassKg": 0.007137115666985494,
+              "minPositiveMassKg": 1.582290387602825e-8,
+              "medianMassKg": 3.2241715075542743e-7,
+              "maxPositiveMassKg": 0.000002534192390157841,
+              "minPositiveMassMg": 0.01582290387602825,
+              "medianMassMg": 0.32241715075542743,
+              "maxPositiveMassMg": 2.534192390157841,
               "zeroMassVertexCount": 0,
               "degenerateFaceCount": 0,
               "areaConservationError": 2.2551405187698492e-17,
-              "numericalMassFloorKg": 0.000002171159267425537,
-              "highestEstimatedNaturalFrequencyHz": 1.8883647714007723,
-              "substepsPerRenderedFrame": 10,
-              "energy": 0.000001043674493128246,
-              "maxDisplacement": 0.000837979206944271,
-              "maxStrain": 0.37352634770472865,
+              "numericalMassFloorKg": 1e-12,
+              "highestEstimatedNaturalFrequencyHz": 32872.211550207874,
+              "integrator": "implicit",
+              "requestedIntegrator": "implicit",
+              "explicitSubstepsPerFrame": 28687,
+              "implicitIterations": 8,
+              "substepsPerRenderedFrame": 1,
+              "energy": 0.0000323662998626975,
+              "maxDisplacement": 0.002883463432729696,
+              "maxStrain": 0.26066598556032783,
               "finite": true,
               "orientationSign": 1
             },
@@ -2182,6 +3740,22 @@
                 "vertices": 17693,
                 "triangles": 34832
               }
+            },
+            "topology": [
+              {
+                "mesh": "tripo_node_282c7782-479e-4c50-8808-1a2c3cdb2977",
+                "vertexCount": 991219,
+                "faceCount": 1897687,
+                "faceAssignmentCount": 1897687,
+                "crossIslandTriangleEdges": 0,
+                "everyFaceAssignedOnce": true
+              }
+            ],
+            "springTopology": {
+              "rawTriangleEdgeUses": 104496,
+              "uniqueSurfaceEdges": 52524,
+              "duplicateRawEdgeUsesRemoved": 51972,
+              "invariant": true
             },
             "interIslandSprings": 0,
             "pointerDebug": {
@@ -2256,7 +3830,36 @@
               "activeIsland": 23,
               "faceIndex": 802839
             },
-            "tests": {},
+            "tests": {
+              "rest": {
+                "drift": 0,
+                "energy": 8.101562502887266e-16,
+                "steps": 1000
+              },
+              "nudge": {
+                "initialNudge": 0.00030409862043906036,
+                "recoverySteps": 30,
+                "maxDisplacement": 0.00007421464952904751,
+                "maxNeighborMovement": 0.000020254401639802694,
+                "neighborCount": 6,
+                "energies": [
+                  6.178612127678466e-7,
+                  3.0830960562433577e-8,
+                  1.0844955947574982e-9,
+                  3.2107127421060407e-10,
+                  2.7763840367870477e-10
+                ],
+                "energyDecreased": true,
+                "finite": true
+              },
+              "noAnchor": {
+                "recoverySteps": 30,
+                "maxDisplacement": 5.547917680814862e-11,
+                "energy": 8.079179274081392e-16,
+                "innerSprings": false,
+                "finite": true
+              }
+            },
             "metrics": {
               "vertices": 17693,
               "triangles": 34832,
@@ -2268,36 +3871,40 @@
               "anchorDepthFactor": 0.25,
               "anchorDepthMedian": 0.001834446331486106,
               "dt": 0.0016666666666666668,
-              "stableDt": 0.0016666666666666668,
+              "stableDt": 5.809950797456056e-7,
               "maxDegree": 11,
-              "damping": 0.23575766635698986,
-              "kSurface": 1,
-              "kSurfaceBiological": 1,
-              "kInnerRatio": 0.35,
-              "preset": "diagnostic",
+              "damping": 0.0006094461072730323,
+              "kSurface": 45,
+              "kSurfaceBiological": 45,
+              "kInnerRatio": 0.022222222222222223,
+              "preset": "biological",
               "sourceMetersPerUnit": 0.3,
-              "rhoEffective": 11111111.111111,
-              "thicknessMeters": 1,
-              "surfaceModulusPa": 1,
-              "innerModulusPa": 0.35,
-              "compliantThicknessMeters": 1,
+              "rhoEffective": 1100,
+              "thicknessMeters": 0.0015,
+              "surfaceModulusPa": 30000,
+              "innerModulusPa": 10000,
+              "compliantThicknessMeters": 0.005,
               "totalAreaM2": 0.004325524647291623,
-              "totalMassKg": 48061.3849709928,
-              "minPositiveMassKg": 0.10655154287815094,
-              "medianMassKg": 2.171159267425537,
-              "maxPositiveMassKg": 17.065269470214844,
-              "minPositiveMassMg": 106551.54287815094,
-              "medianMassMg": 2171159.267425537,
-              "maxPositiveMassMg": 17065269.470214844,
+              "totalMassKg": 0.007137115666985494,
+              "minPositiveMassKg": 1.582290387602825e-8,
+              "medianMassKg": 3.2241715075542743e-7,
+              "maxPositiveMassKg": 0.000002534192390157841,
+              "minPositiveMassMg": 0.01582290387602825,
+              "medianMassMg": 0.32241715075542743,
+              "maxPositiveMassMg": 2.534192390157841,
               "zeroMassVertexCount": 0,
               "degenerateFaceCount": 0,
               "areaConservationError": 2.2551405187698492e-17,
-              "numericalMassFloorKg": 0.000002171159267425537,
-              "highestEstimatedNaturalFrequencyHz": 1.8883647714007723,
-              "substepsPerRenderedFrame": 10,
-              "energy": 0.00006124418926663456,
-              "maxDisplacement": 0.007745470531211653,
-              "maxStrain": 3.8924542973810277,
+              "numericalMassFloorKg": 1e-12,
+              "highestEstimatedNaturalFrequencyHz": 32872.211550207874,
+              "integrator": "implicit",
+              "requestedIntegrator": "implicit",
+              "explicitSubstepsPerFrame": 28687,
+              "implicitIterations": 8,
+              "substepsPerRenderedFrame": 1,
+              "energy": 0.00005265311545863104,
+              "maxDisplacement": 0.005906085395516271,
+              "maxStrain": 0.5642027975551835,
               "finite": true,
               "orientationSign": 1
             },
@@ -2310,6 +3917,22 @@
                 "vertices": 17693,
                 "triangles": 34832
               }
+            },
+            "topology": [
+              {
+                "mesh": "tripo_node_282c7782-479e-4c50-8808-1a2c3cdb2977",
+                "vertexCount": 991219,
+                "faceCount": 1897687,
+                "faceAssignmentCount": 1897687,
+                "crossIslandTriangleEdges": 0,
+                "everyFaceAssignedOnce": true
+              }
+            ],
+            "springTopology": {
+              "rawTriangleEdgeUses": 104496,
+              "uniqueSurfaceEdges": 52524,
+              "duplicateRawEdgeUsesRemoved": 51972,
+              "invariant": true
             },
             "interIslandSprings": 0,
             "pointerDebug": {
@@ -2386,16 +4009,45 @@
                 0.06776941804631664
               ],
               "actualAtRelease": [
-                0.27285920509055916,
-                0.2559148759399669,
-                0.06840506878876243
+                0.2727596144107001,
+                0.25586653444455265,
+                0.06846928350424435
               ],
-              "trackingErrorMeters": 0.00019905572612909995,
-              "peakForceN": 0.07358774441504921,
-              "peakTrackingErrorMeters": 0.0008187791633143339,
-              "maxDisplacementAtRelease": 0.008454699276642143
+              "trackingErrorMeters": 0.00022805547657710903,
+              "peakForceN": 0.037908988974287766,
+              "peakTrackingErrorMeters": 0.00042119354851623595,
+              "maxDisplacementAtRelease": 0.005901688008848404
             },
-            "tests": {},
+            "tests": {
+              "rest": {
+                "drift": 0,
+                "energy": 8.101562502887266e-16,
+                "steps": 1000
+              },
+              "nudge": {
+                "initialNudge": 0.00030409862043906036,
+                "recoverySteps": 30,
+                "maxDisplacement": 0.00007421464952904751,
+                "maxNeighborMovement": 0.000020254401639802694,
+                "neighborCount": 6,
+                "energies": [
+                  6.178612127678466e-7,
+                  3.0830960562433577e-8,
+                  1.0844955947574982e-9,
+                  3.2107127421060407e-10,
+                  2.7763840367870477e-10
+                ],
+                "energyDecreased": true,
+                "finite": true
+              },
+              "noAnchor": {
+                "recoverySteps": 30,
+                "maxDisplacement": 5.547917680814862e-11,
+                "energy": 8.079179274081392e-16,
+                "innerSprings": false,
+                "finite": true
+              }
+            },
             "metrics": {
               "vertices": 17693,
               "triangles": 34832,
@@ -2407,36 +4059,40 @@
               "anchorDepthFactor": 0.25,
               "anchorDepthMedian": 0.001834446331486106,
               "dt": 0.0016666666666666668,
-              "stableDt": 0.0016666666666666668,
+              "stableDt": 5.809950797456056e-7,
               "maxDegree": 11,
-              "damping": 0.23575766635698986,
-              "kSurface": 1,
-              "kSurfaceBiological": 1,
-              "kInnerRatio": 0.35,
-              "preset": "diagnostic",
+              "damping": 0.0006094461072730323,
+              "kSurface": 45,
+              "kSurfaceBiological": 45,
+              "kInnerRatio": 0.022222222222222223,
+              "preset": "biological",
               "sourceMetersPerUnit": 0.3,
-              "rhoEffective": 11111111.111111,
-              "thicknessMeters": 1,
-              "surfaceModulusPa": 1,
-              "innerModulusPa": 0.35,
-              "compliantThicknessMeters": 1,
+              "rhoEffective": 1100,
+              "thicknessMeters": 0.0015,
+              "surfaceModulusPa": 30000,
+              "innerModulusPa": 10000,
+              "compliantThicknessMeters": 0.005,
               "totalAreaM2": 0.004325524647291623,
-              "totalMassKg": 48061.3849709928,
-              "minPositiveMassKg": 0.10655154287815094,
-              "medianMassKg": 2.171159267425537,
-              "maxPositiveMassKg": 17.065269470214844,
-              "minPositiveMassMg": 106551.54287815094,
-              "medianMassMg": 2171159.267425537,
-              "maxPositiveMassMg": 17065269.470214844,
+              "totalMassKg": 0.007137115666985494,
+              "minPositiveMassKg": 1.582290387602825e-8,
+              "medianMassKg": 3.2241715075542743e-7,
+              "maxPositiveMassKg": 0.000002534192390157841,
+              "minPositiveMassMg": 0.01582290387602825,
+              "medianMassMg": 0.32241715075542743,
+              "maxPositiveMassMg": 2.534192390157841,
               "zeroMassVertexCount": 0,
               "degenerateFaceCount": 0,
               "areaConservationError": 2.2551405187698492e-17,
-              "numericalMassFloorKg": 0.000002171159267425537,
-              "highestEstimatedNaturalFrequencyHz": 1.8883647714007723,
-              "substepsPerRenderedFrame": 10,
-              "energy": 0.00008943721569691556,
-              "maxDisplacement": 0.009161013420990209,
-              "maxStrain": 4.620440305451659,
+              "numericalMassFloorKg": 1e-12,
+              "highestEstimatedNaturalFrequencyHz": 32872.211550207874,
+              "integrator": "implicit",
+              "requestedIntegrator": "implicit",
+              "explicitSubstepsPerFrame": 28687,
+              "implicitIterations": 8,
+              "substepsPerRenderedFrame": 1,
+              "energy": 0.000019441810716356778,
+              "maxDisplacement": 0.0029022927150868026,
+              "maxStrain": 0.20141229190370902,
               "finite": true,
               "orientationSign": 1
             },
@@ -2449,6 +4105,22 @@
                 "vertices": 17693,
                 "triangles": 34832
               }
+            },
+            "topology": [
+              {
+                "mesh": "tripo_node_282c7782-479e-4c50-8808-1a2c3cdb2977",
+                "vertexCount": 991219,
+                "faceCount": 1897687,
+                "faceAssignmentCount": 1897687,
+                "crossIslandTriangleEdges": 0,
+                "everyFaceAssignedOnce": true
+              }
+            ],
+            "springTopology": {
+              "rawTriangleEdgeUses": 104496,
+              "uniqueSurfaceEdges": 52524,
+              "duplicateRawEdgeUsesRemoved": 51972,
+              "invariant": true
             },
             "interIslandSprings": 0,
             "pointerDebug": {
