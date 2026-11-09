@@ -14,6 +14,9 @@
     .mode-hint{color:#dfe9f7;font-size:11px;line-height:1.35;margin-top:7px}
     #viewport.pinch-mode{cursor:crosshair}
     #viewport:not(.pinch-mode){cursor:grab}
+    .load-progress{height:5px;margin:-4px 0 12px;border-radius:999px;background:#162237;overflow:hidden}
+    .load-progress-bar{height:100%;width:0;background:var(--accent);transition:width .18s ease}
+    .load-progress-text{color:var(--muted);font-size:11px;margin:-7px 0 10px;min-height:15px}
   </style>
   <script type="importmap">
   {"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.186/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.186/examples/jsm/"}}
@@ -27,6 +30,8 @@
         <div><strong>VELA</strong><span>original-island RK4 pinch</span></div>
         <div id="loadState" class="pill">Loading…</div>
       </header>
+      <div class="load-progress" aria-label="Loading progress"><div id="loadProgressBar" class="load-progress-bar"></div></div>
+      <div id="loadProgressText" class="load-progress-text">Preparing original model...</div>
       <div class="toolbar">
         <label>Character<select id="character"><option value="female">Female original</option><option value="male">Male original</option></select></label>
         <button id="resetCamera">Reset camera</button>

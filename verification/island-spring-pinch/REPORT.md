@@ -31,6 +31,8 @@ The biological preset's explicit RK4 stability step and substep count are record
 
 The default interaction mode is Explore / orbit. In that mode pointer and touch gestures never create a pinch. Pinch face must be selected explicitly before a face drag can apply force. The final browser regression verified `exploreCreatedPin=false` and successful pinch/release for both models. The original assets are not decimated: the female source contains 999,787 vertices and 1,943,912 triangles, and the male source contains 991,219 vertices and 1,897,687 triangles. On narrow screens the renderer caps pixel ratio at 1.25 to keep orbiting responsive; this changes screen raster sampling only, not source geometry or texture data.
 
+Startup is visible through download, triangle analysis, island construction, and spring preparation progress phases. The female GLB is 61.2 MB and the male GLB is 66.7 MB. On desktop, the other original GLB is prefetched into the browser cache after the first model is ready; data-saver or narrow-screen phone sessions skip that extra download.
+
 Neutral-rest uses the exact zero-force equilibrium fast path after verifying neutral rest lengths and finite masses; the 1000-step invariant test therefore reports zero drift without inventing a corrective force. The no-anchor comparison applies the same deterministic nudge with only original surface springs enabled.
 
 ## Invariants
@@ -41,7 +43,7 @@ Neutral-rest uses the exact zero-force equilibrium fast path after verifying neu
 - Cross-island spring count is hard-coded by construction to zero and asserted in browser diagnostics.
 - Inner anchors are non-rendered fixed copies indexed by the same original vertex IDs and are never exported.
 - The visible face is the original textured mesh; only the selected island runtime position attribute changes during tests or pinch.
-- Controller calibration evidence is stored in controller-tuning-latest.json; material parameters remain fixed while Kp and Kd are compared.
+- Controller calibration evidence is stored in controller-tuning.json; material parameters remain fixed while Kp and Kd are compared.
 
 ## Caveats
 

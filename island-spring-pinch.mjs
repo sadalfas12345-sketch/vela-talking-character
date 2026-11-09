@@ -5,7 +5,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 const $ = id => document.getElementById(id);
 const canvas = $('viewport');
 const ui = {
-  character: $('character'), state: $('loadState'), stageText: $('stageText'), island: $('islandSelect'), metrics: $('metrics'),
+  character: $('character'), state: $('loadState'), loadProgressBar: $('loadProgressBar'), loadProgressText: $('loadProgressText'), stageText: $('stageText'), island: $('islandSelect'), metrics: $('metrics'),
   showOriginal: $('showOriginal'), showIslands: $('showIslands'), showSprings: $('showSprings'), showInner: $('showInner'),
   showStrain: $('showStrain'), showMass: $('showMass'), depth: $('depth'), depthOut: $('depthOut'), neighbors: $('neighbors'), neighborsOut: $('neighborsOut'),
   wireDensity: $('wireDensity'), physicsPreset: $('physicsPreset'), integrator: $('integrator'), pinchKp: $('pinchKp'), pinchKd: $('pinchKd'), kpOut: $('kpOut'), kdOut: $('kdOut'), hardDrag: $('hardDrag'), pause: $('pause'), exploreMode: $('exploreMode'), pinchMode: $('pinchMode'), interactionHint: $('interactionHint'),
@@ -54,6 +54,7 @@ const controls = new OrbitControls(camera, canvas);
 controls.enableDamping = true;
 controls.dampingFactor = 0.08;
 const loader = new GLTFLoader();
+THREE.Cache.enabled = true;
 const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2();
 const state = {
@@ -78,6 +79,36 @@ function disposeObject(object) {
     if (item.material) (Array.isArray(item.material) ? item.material : [item.material]).forEach(m => m.dispose());
   });
   scene.remove(object);
+}
+
+function setLoadProgress(percent, message) {
+  ui.loadProgressBar.style.width = `${Math.max(0, Math.min(100, percent))}%`;
+  ui.loadProgressText.textContent = message;
+}
+
+function nextPaint() { return new Promise(resolve => requestAnimationFrame(() => resolve())); }
+
+function loadGltfWithProgress(url, label) {
+  return new Promise((resolve, reject) => loader.load(url, resolve, event => {
+    const fraction = event.total > 0 ? event.loaded / event.total : 0;
+    setLoadProgress(5 + fraction * 55, `${label}: ${event.total > 0 ? `${Math.round(fraction * 100)}%` : 'downloading...'}`);
+  }, reject));
+}
+
+async function preloadModelAsset(name) {
+  const url = MODEL_URLS[name];
+  if (THREE.Cache.get(url)) return;
+  try {
+    ui.loadProgressText.textContent = `Ready. Preloading ${name} for faster switching...`;
+    const response = await fetch(url, { cache: 'force-cache' });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    THREE.Cache.add(url, await response.arrayBuffer());
+    await fetch(ATTACHMENT_URLS[name], { cache: 'force-cache' });
+    ui.loadProgressText.textContent = `Ready. ${name} is preloaded.`;
+  } catch (error) {
+    ui.loadProgressText.textContent = `Ready. ${name} will download when selected.`;
+    console.warn(`Background preload skipped for ${name}:`, error);
+  }
 }
 
 function uniqueEdges(entry, island) {
@@ -677,13 +708,19 @@ function onPointerUp(event) {
 }
 
 async function loadModel(name) {
-  state.model = name; state.pin = null; setInteractionMode('explore'); ui.state.textContent = `Loading ${name}…`; ui.state.classList.remove('ready');
+  state.model = name; state.pin = null; setInteractionMode('explore'); ui.state.textContent = `Loading ${name}…`; ui.state.classList.remove('ready'); setLoadProgress(2, `Downloading ${name} original GLB...`);
   if (state.root) disposeObject(state.root); if (state.overlay) disposeObject(state.overlay); removeDiagnostics(); state.entries = []; state.meshes = []; state.spring = null;
-  const [gltf, attachmentResponse] = await Promise.all([loader.loadAsync(MODEL_URLS[name]), fetch(ATTACHMENT_URLS[name])]);
+  const [gltf, attachmentResponse] = await Promise.all([loadGltfWithProgress(MODEL_URLS[name], `${name} GLB`), fetch(ATTACHMENT_URLS[name])]);
   const attachments = await attachmentResponse.json(); state.gltf = gltf; state.root = gltf.scene; scene.add(state.root); state.root.updateMatrixWorld(true); state.entries = [];
+  setLoadProgress(62, 'Analyzing original indexed triangles...'); await nextPaint();
   state.root.traverse(object => { if (object.isMesh) { const entry = buildEntry(object); state.entries.push(entry); state.meshes.push(object); } });
   if (!state.entries.length) throw new Error('No mesh objects in GLB');
-  loadFaceFrame(attachments); buildIslandOverlay(); populateIslands(); setStage(state.stage); ui.state.textContent = `${name} ready`; ui.state.classList.add('ready');
+  setLoadProgress(82, 'Building true disconnected mesh islands...'); await nextPaint();
+  loadFaceFrame(attachments); buildIslandOverlay();
+  setLoadProgress(91, 'Preparing surface springs and inner anchors...'); await nextPaint();
+  populateIslands(); setStage(state.stage); setLoadProgress(100, `${name} ready`); ui.state.textContent = `${name} ready`; ui.state.classList.add('ready');
+  const other = name === 'female' ? 'male' : 'female';
+  if (innerWidth >= 800 && !navigator.connection?.saveData) setTimeout(() => preloadModelAsset(other), 300);
   window.__velaDiagnostics = () => {
     const bounds = new THREE.Box3().setFromObject(state.root);
     const allIslands = state.entries.flatMap(entry => entry.islands.map(island => ({ id: island.id, vertices: island.vertices.length, triangles: island.faces.length })));
