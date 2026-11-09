@@ -1,0 +1,7 @@
+{
+  "controller": { "Kp_N_per_m": 45, "Kd_Ns_per_m": 0.04, "trajectory": "2 percent measured interocular width", "preset": "diagnostic stable" },
+  "female": { "peakForceN": 0.008116917019693897, "peakTrackingErrorM": 0.00018040887346799453, "releaseErrorM": 0.00011862852351957775, "maxDisplacementSourceUnits": 0.0017033584336722622, "repeatedRunsPassed": 3 },
+  "male": { "peakForceN": 0.03353973955735677, "peakTrackingErrorM": 0.0007462874230517695, "releaseErrorM": 0.0003043519087302832, "maxDisplacementSourceUnits": 0.010807011254141309, "repeatedRunsPassed": 3 },
+  "crossIslandSprings": 0,
+  "note": "This is the measured compliant-controller baseline. The diagnostic-stable preset is used only because the biological RK4 timestep requires tens of thousands of substeps per rendered frame at full island resolution."
+}

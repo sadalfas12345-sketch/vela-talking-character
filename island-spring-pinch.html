@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>VELA — Island Spring Pinch</title>
+  <link rel="stylesheet" href="./island-spring-pinch.css" />
+  <script type="importmap">
+  {"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.186/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.186/examples/jsm/"}}
+  </script>
+</head>
+<body>
+  <div id="app">
+    <canvas id="viewport" aria-label="Interactive original Tripo face"></canvas>
+    <aside id="controls">
+      <header>
+        <div><strong>VELA</strong><span>original-island RK4 pinch</span></div>
+        <div id="loadState" class="pill">Loading…</div>
+      </header>
+      <div class="toolbar">
+        <label>Character<select id="character"><option value="female">Female original</option><option value="male">Male original</option></select></label>
+        <button id="resetCamera">Reset camera</button>
+        <button id="resetNeutral">Reset neutral</button>
+        <button id="pause">Pause</button>
+      </div>
+      <div class="tabs" role="tablist">
+        <button class="tab active" data-stage="1">1 Islands</button>
+        <button class="tab" data-stage="2">2 Springs</button>
+        <button class="tab" data-stage="3">3 Inner</button>
+        <button class="tab" data-stage="4">4 Dynamics</button>
+        <button class="tab" data-stage="5">5 Pinch</button>
+      </div>
+      <section id="stageText"></section>
+      <div class="toggles">
+        <label><input id="showOriginal" type="checkbox" checked /> Original texture</label>
+        <label><input id="showIslands" type="checkbox" /> Color islands</label>
+        <label><input id="showSprings" type="checkbox" /> Surface springs</label>
+        <label><input id="showInner" type="checkbox" /> Inner anchors</label>
+        <label><input id="showStrain" type="checkbox" /> Strain overlay</label>
+        <label><input id="showMass" type="checkbox" /> Mass heatmap</label>
+      </div>
+      <section class="island-picker">
+        <label>Active island<select id="islandSelect"></select></label>
+        <label>Physics preset<select id="physicsPreset"><option value="biological" selected>Biological pinch</option><option value="diagnostic">Diagnostic stable</option></select></label>
+        <label>Wire density<input id="wireDensity" type="range" min="1" max="30" value="6" /></label>
+        <label>Anchor depth <output id="depthOut">0.25× edge</output><input id="depth" type="range" min="0.05" max="0.60" step="0.01" value="0.25" /></label>
+        <label>Neighbor anchors <output id="neighborsOut">3</output><input id="neighbors" type="range" min="0" max="3" step="1" value="3" /></label>
+        <label>Pinch Kp <output id="kpOut">90 N/m</output><input id="pinchKp" type="range" min="5" max="200" step="1" value="90" /></label>
+        <label>Pinch Kd <output id="kdOut">0.08 N·s/m</output><input id="pinchKd" type="range" min="0" max="1" step="0.01" value="0.08" /></label>
+        <label><input id="hardDrag" type="checkbox" /> Exact hard drag comparison</label>
+      </section>
+      <section class="buttons">
+        <button id="neutralRest">NEUTRAL REST · 1000 RK4 steps</button>
+        <button id="oneNudge">ONE-VERTEX NUDGE · release</button>
+        <button id="noAnchor">NO ANCHOR COMPARISON</button>
+      </section>
+      <section id="metrics" class="metrics"></section>
+      <p class="hint">Drag directly on the textured face. Default pinch uses one compliant barycentric force controller in N, distributed by the hit triangle weights; only that existing island is integrated. Release to recover.</p>
+    </aside>
+  </div>
+  <script type="module" src="./island-spring-pinch.mjs"></script>
+</body>
+</html>

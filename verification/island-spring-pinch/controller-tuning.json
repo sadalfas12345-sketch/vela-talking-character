@@ -1,0 +1,20 @@
+{
+  "trajectory": "2 percent measured interocular width, same pointer path on both models",
+  "materialFrozen": true,
+  "candidates": [
+    {
+      "kp_N_per_m": 45,
+      "kd_Ns_per_m": 0.04,
+      "female": { "peakForceN": 0.008116917019693897, "peakTrackingErrorM": 0.00018040887346799453, "releaseErrorM": 0.00011862852351957775, "repeatedRunsPassed": 3 },
+      "male": { "peakForceN": 0.03353973955735677, "peakTrackingErrorM": 0.0007462874230517695, "releaseErrorM": 0.0003043519087302832, "repeatedRunsPassed": 3 }
+    },
+    {
+      "kp_N_per_m": 90,
+      "kd_Ns_per_m": 0.08,
+      "female": { "peakForceN": 0.010268156568553611, "peakTrackingErrorM": 0.00011375073547877161, "releaseErrorM": 0.00008738528829219138, "repeatedRunsPassed": 3 },
+      "male": { "peakForceN": 0.05439246615501428, "peakTrackingErrorM": 0.0006039827975436206, "releaseErrorM": 0.000604025729076327, "repeatedRunsPassed": 3 }
+    }
+  ],
+  "selected": { "kp_N_per_m": 90, "kd_Ns_per_m": 0.08, "reason": "lower peak tracking error for both models; force and recovery remain finite and all repeated runs pass" },
+  "crossIslandSprings": 0
+}

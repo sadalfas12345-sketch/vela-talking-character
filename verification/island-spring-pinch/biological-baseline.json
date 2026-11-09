@@ -1,0 +1,42 @@
+{
+  "source": "browser diagnostics before pinch-controller fallback",
+  "preset": "biological",
+  "parameters": {
+    "sourceMetersPerUnit": 0.3,
+    "rhoEffectiveKgPerM3": 1100,
+    "thicknessMeters": 0.0015,
+    "surfaceModulusPa": 30000,
+    "innerModulusPa": 10000,
+    "compliantThicknessMeters": 0.005
+  },
+  "female": {
+    "activeVertices": 5036,
+    "activeTriangles": 9708,
+    "surfaceSprings": 14743,
+    "supportSprings": 20108,
+    "totalAreaM2": 0.000225571335667148,
+    "totalMassKg": 0.00037219270372657043,
+    "minPositiveMassKg": 3.3393912080015298e-9,
+    "medianMassKg": 6.112561834470398e-8,
+    "maxPositiveMassKg": 3.37897233748663e-7,
+    "areaConservationErrorM2": 6.776263578034403e-19,
+    "internalDtSeconds": 2.669088716597845e-7,
+    "substepsPer60HzFrame": 62444,
+    "highestEstimatedNaturalFrequencyHz": 71554.7334648789
+  },
+  "male": {
+    "activeVertices": 41920,
+    "activeTriangles": 82807,
+    "surfaceSprings": 124726,
+    "supportSprings": 167552,
+    "totalAreaM2": 0.011123039352923067,
+    "totalMassKg": 0.018353014935332368,
+    "minPositiveMassKg": 1.404112381919731e-8,
+    "medianMassKg": 3.5966357359029644e-7,
+    "maxPositiveMassKg": 3.013789410033496e-6,
+    "areaConservationErrorM2": 2.0469737016526324e-16,
+    "internalDtSeconds": 5.473061070457213e-7,
+    "substepsPer60HzFrame": 30453,
+    "highestEstimatedNaturalFrequencyHz": 34895.633220902404
+  }
+}

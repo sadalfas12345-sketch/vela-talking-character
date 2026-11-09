@@ -10,6 +10,7 @@
     "test:tripo-face": "node ./scripts/verify_tripo_face_animation.mjs",
     "test:tripo-photoreal": "node ./scripts/verify_tripo_photoreal_animation.mjs",
     "test:tripo-mobile": "node ./scripts/verify_tripo_photoreal_mobile.mjs",
+    "test:island-pinch": "node ./scripts/test_island_spring_pinch.mjs",
     "certify:tripo": "node ./scripts/tripo-certify.mjs",
     "generate:tripo": "node ./scripts/generate_tripo_character.mjs",
     "rig:tripo": "node ./scripts/tripo_autorig_character.mjs"
