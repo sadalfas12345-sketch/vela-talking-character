@@ -293,6 +293,8 @@ function buildSystem() {
   const neutralFaceAreas = new Float32Array(island.faces.length);
   const neutralFaceNormals = new Float32Array(island.faces.length * 3);
   const localFaceVertices = new Uint32Array(island.faces.length * 3);
+  const faceNeighbors = Array.from({ length: island.faces.length }, () => []);
+  const faceEdgeOwners = new Map();
   for (let fi = 0; fi < island.faces.length; fi++) {
     const face = island.faces[fi], offset = face * 3;
     const ga = index[offset], gb = index[offset + 1], gc = index[offset + 2];
@@ -305,6 +307,10 @@ function buildSystem() {
     const length = Math.hypot(nx, ny, nz);
     neutralFaceAreas[fi] = length * 0.5;
     if (length > 1e-15) { neutralFaceNormals[fi * 3] = nx / length; neutralFaceNormals[fi * 3 + 1] = ny / length; neutralFaceNormals[fi * 3 + 2] = nz / length; }
+    for (const [u, v] of [[ia, ib], [ib, ic], [ic, ia]]) {
+      const key = u < v ? `${u}:${v}` : `${v}:${u}`, previous = faceEdgeOwners.get(key);
+      if (previous !== undefined) { faceNeighbors[fi].push(previous); faceNeighbors[previous].push(fi); } else faceEdgeOwners.set(key, fi);
+    }
   }
   const preset = PHYSICS_PRESETS[ui.physicsPreset.value] || PHYSICS_PRESETS.biological;
   const sourceMetersPerUnit = preset.sourceMetersPerUnit;
@@ -396,13 +402,26 @@ function buildSystem() {
     x2: new Float32Array(scratchLength), x3: new Float32Array(scratchLength), x4: new Float32Array(scratchLength),
     v2: new Float32Array(scratchLength), v3: new Float32Array(scratchLength), v4: new Float32Array(scratchLength),
   };
-  const implicitCandidate = new Float32Array(scratchLength);
-  const implicitVelocity = new Float32Array(scratchLength);
+  const implicitCandidate = new Float64Array(scratchLength);
+  const implicitVelocity = new Float64Array(scratchLength);
+  const implicitAcceleration = new Float64Array(scratchLength);
+  const implicitResidual = new Float64Array(scratchLength);
+  const implicitTrialResidual = new Float64Array(scratchLength);
+  const implicitNewtonDelta = new Float64Array(scratchLength);
+  const implicitCgResidual = new Float64Array(scratchLength);
+  const implicitCgPreconditioned = new Float64Array(scratchLength);
+  const implicitCgDirection = new Float64Array(scratchLength);
+  const implicitCgProduct = new Float64Array(scratchLength);
+  const implicitPreconditioner = new Float64Array(scratchLength);
   const diagonalK = new Float64Array(vertexCount);
   for (let i = 0; i < edgeA.length; i++) { diagonalK[edgeA[i]] += surfaceK; diagonalK[edgeB[i]] += surfaceK; }
   for (let i = 0; i < supportAArray.length; i++) diagonalK[supportAArray[i]] += supportKArray[i];
-  const implicitIterations = 8;
-  let implicitDiagnostics = { iterations: 0, finalCorrection: 0, equationResidual: 0, positionVelocityResidual: 0, converged: false, correctionTolerance: 0, residualTolerance: 0 };
+  // The release step can start far from the next implicit equilibrium even
+  // though the held step is close.  Keep the physical equations unchanged,
+  // but give the nonlinear solve enough iterations and a finer numerical
+  // trust-region backtrack to resolve that release transient.
+  const implicitNewtonIterations = 32, implicitCgIterations = 256, implicitLineSearchMin = 1 / 4096;
+  let implicitDiagnostics = { iterations: 0, linearIterations: 0, finalCorrection: 0, equationResidual: 0, positionVelocityResidual: 0, converged: false, status: 'idle', correctionTolerance: 0, residualTolerance: 0, residualHistory: [] };
   function acceleration(x, v, withInner, pinState, targetOffset = 0, result = rkScratch.a1) {
     result.fill(0);
     for (let i = 0; i < edgeA.length; i++) {
@@ -465,59 +484,120 @@ function buildSystem() {
     for (const value of velocities) if (!Number.isFinite(value)) throw new Error('RK4 produced nonfinite velocities');
   }
 
+  function implicitResidualAt(x, dt, out) {
+    for (let i = 0; i < scratchLength; i++) implicitVelocity[i] = (x[i] - positions[i]) / dt;
+    acceleration(x, implicitVelocity, innerEnabled, pin, dt, implicitAcceleration);
+    let maxResidual = 0;
+    for (let i = 0; i < scratchLength; i++) {
+      out[i] = x[i] - positions[i] - dt * velocities[i] - dt * dt * implicitAcceleration[i];
+      maxResidual = Math.max(maxResidual, Math.abs(out[i]));
+    }
+    return maxResidual;
+  }
+
+  function applyImplicitJacobian(x, direction, dt, out) {
+    out.set(direction);
+    const addEdge = (ia, ib, rest, stiffness, dx, dy, dz, length) => {
+      if (length <= 1e-12) return;
+      const ux = dx / length, uy = dy / length, uz = dz / length, ratio = rest / length;
+      const scale = stiffness * (1 - ratio), axial = stiffness * ratio;
+      const hxx = scale + axial * ux * ux, hxy = axial * ux * uy, hxz = axial * ux * uz;
+      const hyy = scale + axial * uy * uy, hyz = axial * uy * uz, hzz = scale + axial * uz * uz;
+      const dx0 = direction[ib * 3] - direction[ia * 3], dy0 = direction[ib * 3 + 1] - direction[ia * 3 + 1], dz0 = direction[ib * 3 + 2] - direction[ia * 3 + 2];
+      const kx = hxx * dx0 + hxy * dy0 + hxz * dz0, ky = hxy * dx0 + hyy * dy0 + hyz * dz0, kz = hxz * dx0 + hyz * dy0 + hzz * dz0;
+      const factor = dt * dt;
+      // R(x) = x - x_n - dt*v_n - dt^2*a(x).  For a surface spring,
+      // da_a = +M_a^-1 H (d_b - d_a), so its contribution to dR is
+      // -dt^2 M_a^-1 H (d_b - d_a).  The previous implementation used
+      // the opposite sign, making the Newton operator indefinite and
+      // invalidating the CG solve on the real meshes.
+      out[ia * 3] -= factor * (kx * invMass[ia]); out[ia * 3 + 1] -= factor * (ky * invMass[ia]); out[ia * 3 + 2] -= factor * (kz * invMass[ia]);
+      out[ib * 3] += factor * (kx * invMass[ib]); out[ib * 3 + 1] += factor * (ky * invMass[ib]); out[ib * 3 + 2] += factor * (kz * invMass[ib]);
+    };
+    for (let i = 0; i < edgeA.length; i++) {
+      const ia = edgeA[i], ib = edgeB[i], dx = x[ib * 3] - x[ia * 3], dy = x[ib * 3 + 1] - x[ia * 3 + 1], dz = x[ib * 3 + 2] - x[ia * 3 + 2];
+      addEdge(ia, ib, edgeInfo.rest[i], surfaceK, dx, dy, dz, Math.hypot(dx, dy, dz));
+    }
+    for (let i = 0; i < supportAArray.length; i++) {
+      const ia = supportAArray[i], dx = anchors[supportBArray[i] * 3] - x[ia * 3], dy = anchors[supportBArray[i] * 3 + 1] - x[ia * 3 + 1], dz = anchors[supportBArray[i] * 3 + 2] - x[ia * 3 + 2], length = Math.hypot(dx, dy, dz);
+      if (length <= 1e-12) continue;
+      const ux = dx / length, uy = dy / length, uz = dz / length, ratio = supportRestArray[i] / length, scale = supportKArray[i] * (1 - ratio), axial = supportKArray[i] * ratio;
+      const hxx = scale + axial * ux * ux, hxy = axial * ux * uy, hxz = axial * ux * uz, hyy = scale + axial * uy * uy, hyz = axial * uy * uz, hzz = scale + axial * uz * uz;
+      const qx = direction[ia * 3], qy = direction[ia * 3 + 1], qz = direction[ia * 3 + 2], factor = dt * dt * invMass[ia];
+      out[ia * 3] += factor * (hxx * qx + hxy * qy + hxz * qz); out[ia * 3 + 1] += factor * (hxy * qx + hyy * qy + hyz * qz); out[ia * 3 + 2] += factor * (hxz * qx + hyz * qy + hzz * qz);
+    }
+    for (let i = 0; i < vertexCount; i++) { const factor = dt * damping * invMass[i]; out[i * 3] += factor * direction[i * 3]; out[i * 3 + 1] += factor * direction[i * 3 + 1]; out[i * 3 + 2] += factor * direction[i * 3 + 2]; }
+    if (pin && !pin.hard) {
+      const pinFactor = dt * dt * pin.kp + dt * pin.kd, weighted = [0, 0, 0];
+      for (let j = 0; j < 3; j++) { const id = pin.ids[j], w = pin.weights[j]; weighted[0] += w * direction[id * 3]; weighted[1] += w * direction[id * 3 + 1]; weighted[2] += w * direction[id * 3 + 2]; }
+      for (let j = 0; j < 3; j++) { const id = pin.ids[j], factor = pin.weights[j] * invMass[id] * pinFactor; out[id * 3] += factor * weighted[0]; out[id * 3 + 1] += factor * weighted[1]; out[id * 3 + 2] += factor * weighted[2]; }
+    }
+    return out;
+  }
+
+  function buildImplicitPreconditioner(dt) {
+    for (let i = 0; i < vertexCount; i++) {
+      let pinK = 0, pinD = 0;
+      if (pin && !pin.hard) for (let j = 0; j < 3; j++) if (pin.ids[j] === i) { pinK += pin.kp * pin.weights[j] * pin.weights[j]; pinD += pin.kd * pin.weights[j] * pin.weights[j]; }
+      const value = 1 + dt * invMass[i] * (damping + pinD) + dt * dt * invMass[i] * (diagonalK[i] + pinK);
+      implicitPreconditioner[i * 3] = value; implicitPreconditioner[i * 3 + 1] = value; implicitPreconditioner[i * 3 + 2] = value;
+    }
+  }
+
+  function solveImplicitLinearSystem(x, dt, rhs, out) {
+    out.fill(0); implicitCgResidual.set(rhs); let rhsNorm = 0;
+    for (let i = 0; i < scratchLength; i++) rhsNorm = Math.max(rhsNorm, Math.abs(rhs[i]));
+    const tolerance = Math.max(rhsNorm * 1e-7, state.faceScale * 1e-12), z = implicitCgPreconditioned, p = implicitCgDirection, ap = implicitCgProduct;
+    for (let i = 0; i < scratchLength; i++) z[i] = implicitCgResidual[i] / Math.max(implicitPreconditioner[i], 1e-12);
+    p.set(z); let rz = 0; for (let i = 0; i < scratchLength; i++) rz += implicitCgResidual[i] * z[i];
+    let iterations = 0;
+    for (; iterations < implicitCgIterations; iterations++) {
+      applyImplicitJacobian(x, p, dt, ap); let denominator = 0; for (let i = 0; i < scratchLength; i++) denominator += p[i] * ap[i];
+      if (!(denominator > 0) || !Number.isFinite(denominator)) break;
+      const alpha = rz / denominator; for (let i = 0; i < scratchLength; i++) { out[i] += alpha * p[i]; implicitCgResidual[i] -= alpha * ap[i]; }
+      let residualNorm = 0; for (let i = 0; i < scratchLength; i++) residualNorm = Math.max(residualNorm, Math.abs(implicitCgResidual[i]));
+      if (residualNorm <= tolerance) { iterations++; break; }
+      for (let i = 0; i < scratchLength; i++) z[i] = implicitCgResidual[i] / Math.max(implicitPreconditioner[i], 1e-12);
+      let nextRz = 0; for (let i = 0; i < scratchLength; i++) nextRz += implicitCgResidual[i] * z[i];
+      const beta = nextRz / Math.max(rz, 1e-30); for (let i = 0; i < scratchLength; i++) p[i] = z[i] + beta * p[i]; rz = nextRz;
+    }
+    return iterations;
+  }
+
   function integrateImplicitOne(dt) {
-    // Backward-Euler position solve for the same Hookean forces. This is an
-    // explicit, visible fallback for the biological preset when RK4's
-    // measured stability step would require tens of thousands of substeps.
     const base = implicitCandidate;
     for (let i = 0; i < scratchLength; i++) base[i] = positions[i] + velocities[i] * dt;
-    let iterations = 0, finalCorrection = Infinity;
-    const correctionTolerance = Math.max(state.faceScale * 1e-8, 1e-10);
-    for (let iteration = 0; iteration < implicitIterations; iteration++) {
-      iterations = iteration + 1;
-      for (let i = 0; i < scratchLength; i++) implicitVelocity[i] = (base[i] - positions[i]) / dt;
-      acceleration(base, implicitVelocity, innerEnabled, pin, dt, rkScratch.a1);
-      let maxCorrection = 0;
-      for (let i = 0; i < vertexCount; i++) {
-        let pinK = 0, pinD = 0;
-        if (pin && !pin.hard) {
-          for (let j = 0; j < 3; j++) if (pin.ids[j] === i) {
-            const w = pin.weights[j]; pinK += pin.kp * w * w; pinD += pin.kd * w * w;
-          }
+    buildImplicitPreconditioner(dt);
+    const correctionTolerance = Math.max(state.faceScale * 1e-8, 1e-10), residualTolerance = Math.max(state.faceScale * 1e-7, 1e-9);
+    const residualHistory = [], trial = new Float64Array(scratchLength), rhs = new Float64Array(scratchLength);
+    let finalCorrection = 0, linearIterations = 0, status = 'maxIterations', currentResidual = implicitResidualAt(base, dt, implicitResidual);
+    for (let iteration = 0; iteration < implicitNewtonIterations; iteration++) {
+      residualHistory.push(currentResidual);
+      if (currentResidual <= residualTolerance) { status = 'converged'; break; }
+      for (let i = 0; i < scratchLength; i++) rhs[i] = -implicitResidual[i];
+      linearIterations += solveImplicitLinearSystem(base, dt, rhs, implicitNewtonDelta);
+      let accepted = false, alpha = 1;
+      while (alpha >= implicitLineSearchMin) {
+        for (let i = 0; i < scratchLength; i++) trial[i] = base[i] + alpha * implicitNewtonDelta[i];
+        if (pin?.hard) { for (let i = 0; i < scratchLength; i++) implicitVelocity[i] = (trial[i] - positions[i]) / dt; projectConstraint(trial, implicitVelocity, pin); }
+        const trialResidual = implicitResidualAt(trial, dt, implicitTrialResidual);
+        if (trialResidual < currentResidual * (1 - 1e-8) || trialResidual <= residualTolerance) {
+          finalCorrection = 0; for (let i = 0; i < scratchLength; i++) { const correction = Math.abs(trial[i] - base[i]); finalCorrection = Math.max(finalCorrection, correction); base[i] = trial[i]; }
+          implicitResidual.set(implicitTrialResidual); currentResidual = trialResidual; accepted = true; break;
         }
-        const inv = invMass[i], denominator = 1 + dt * inv * (damping + pinD) + dt * dt * inv * (diagonalK[i] + pinK);
-        for (let axis = 0; axis < 3; axis++) {
-          const offset = i * 3 + axis, desired = positions[offset] + velocities[offset] * dt + dt * dt * rkScratch.a1[offset];
-          const correction = (desired - base[offset]) / denominator;
-          base[offset] += correction;
-          maxCorrection = Math.max(maxCorrection, Math.abs(correction));
-        }
+        alpha *= 0.5;
       }
-      // The position correction changes the implicit velocity. Recompute it
-      // before applying the hard barycentric projection; using the velocity
-      // from the beginning of the iteration makes the residual diagnostic and
-      // the next state inconsistent with the solved position.
-      for (let i = 0; i < scratchLength; i++) implicitVelocity[i] = (base[i] - positions[i]) / dt;
-      projectConstraint(base, implicitVelocity, pin);
-      finalCorrection = maxCorrection;
-      if (maxCorrection <= correctionTolerance) break;
+      if (!accepted) { status = 'stagnated'; break; }
+      if (finalCorrection <= correctionTolerance && currentResidual <= residualTolerance) { status = 'converged'; break; }
     }
-    // Recompute from the final accepted position, not from the previous
-    // fixed-point iterate, before evaluating the nonlinear equation residual.
     for (let i = 0; i < scratchLength; i++) implicitVelocity[i] = (base[i] - positions[i]) / dt;
-    projectConstraint(base, implicitVelocity, pin);
+    if (pin?.hard) projectConstraint(base, implicitVelocity, pin);
     for (let i = 0; i < scratchLength; i++) implicitVelocity[i] = (base[i] - positions[i]) / dt;
-    acceleration(base, implicitVelocity, innerEnabled, pin, dt, rkScratch.a1);
-    let equationResidual = 0, positionVelocityResidual = 0;
-    for (let i = 0; i < scratchLength; i++) {
-      equationResidual = Math.max(equationResidual, Math.abs(implicitVelocity[i] - velocities[i] - dt * rkScratch.a1[i]));
-      positionVelocityResidual = Math.max(positionVelocityResidual, Math.abs(base[i] - positions[i] - dt * implicitVelocity[i]));
-    }
-    const residualTolerance = Math.max(state.faceScale * 1e-5, 1e-8);
-    implicitDiagnostics = { iterations, finalCorrection, equationResidual, positionVelocityResidual, converged: finalCorrection <= correctionTolerance && equationResidual <= residualTolerance, correctionTolerance, residualTolerance };
-    positions.set(base);
-    velocities.set(implicitVelocity);
-    projectConstraint(positions, velocities, pin);
+    const equationResidual = implicitResidualAt(base, dt, implicitTrialResidual) / Math.max(dt, 1e-12);
+    let positionVelocityResidual = 0; for (let i = 0; i < scratchLength; i++) positionVelocityResidual = Math.max(positionVelocityResidual, Math.abs(base[i] - positions[i] - dt * implicitVelocity[i]));
+    if (equationResidual <= residualTolerance / Math.max(dt, 1e-12)) status = 'converged';
+    implicitDiagnostics = { iterations: residualHistory.length, linearIterations, finalCorrection, equationResidual, positionVelocityResidual, converged: status === 'converged', status, correctionTolerance, residualTolerance, residualHistory };
+    positions.set(base); velocities.set(implicitVelocity); if (pin?.hard) projectConstraint(positions, velocities, pin);
     for (const value of positions) if (!Number.isFinite(value)) throw new Error('Implicit solve produced nonfinite positions');
     for (const value of velocities) if (!Number.isFinite(value)) throw new Error('Implicit solve produced nonfinite velocities');
   }
@@ -580,7 +660,7 @@ function buildSystem() {
       minPositiveMassMg: minPositiveMass * 1e6, medianMassMg: medianMass * 1e6, maxPositiveMassMg: maxPositiveMass * 1e6,
       zeroMassVertexCount, degenerateFaceCount, areaConservationError: Math.abs(attributedArea.reduce((sum, value) => sum + value, 0) - totalAreaM2),
       numericalMassFloorKg: numericalMassFloor, highestEstimatedNaturalFrequencyHz: Math.sqrt(surfaceK * (maxDegree + neighborCount + 1) / Math.max(minMass, 1e-18)) / (2 * Math.PI),
-      integrator, requestedIntegrator, explicitSubstepsPerFrame, implicitIterations,
+      integrator, requestedIntegrator, explicitSubstepsPerFrame, implicitNewtonIterations, implicitCgIterations, implicitLineSearchMin,
       substepsPerRenderedFrame: integrator === 'implicit' ? 1 : explicitSubstepsPerFrame,
       energy: energies.surfacePotential + energies.innerPotential, energyBreakdown: energies, maxDisplacement, maxStrain, finite: true, orientationSign, implicit: { ...implicitDiagnostics },
       faceScaleSourceUnits: state.faceScale, faceScaleMeters: state.faceScale * sourceMetersPerUnit, sourceMetersPerUnit,
@@ -589,6 +669,7 @@ function buildSystem() {
 
   function geometryDiagnostics() {
     let minAreaRatio = Infinity, minAreaFace = -1, collapsedTriangles = 0, orientationFlips = 0, nonfiniteVertices = 0;
+    const orientationFlipDetails = [];
     const strains = new Array(edgeA.length);
     let maxEdgeStrain = 0, maxEdgeIndex = -1, boundaryMaxDisplacement = 0;
     const boundaryVertices = new Set();
@@ -613,9 +694,23 @@ function buildSystem() {
       if (ratio < minAreaRatio) { minAreaRatio = ratio; minAreaFace = island.faces[fi]; }
       if (ratio <= 1e-3) collapsedTriangles++;
       const neutralDot = (nx * neutralFaceNormals[fi * 3] + ny * neutralFaceNormals[fi * 3 + 1] + nz * neutralFaceNormals[fi * 3 + 2]) / Math.max(area2, 1e-20);
-      if (neutralDot < 0) orientationFlips++;
+      if (neutralDot < 0) {
+        orientationFlips++;
+        const originalVertexIds = [island.vertices[ia], island.vertices[ib], island.vertices[ic]];
+        const currentVertices = [[ax, ay, az], [positions[ib * 3], positions[ib * 3 + 1], positions[ib * 3 + 2]], [positions[ic * 3], positions[ic * 3 + 1], positions[ic * 3 + 2]]];
+        const neutralVertices = [[neutral[ia * 3], neutral[ia * 3 + 1], neutral[ia * 3 + 2]], [neutral[ib * 3], neutral[ib * 3 + 1], neutral[ib * 3 + 2]], [neutral[ic * 3], neutral[ic * 3 + 1], neutral[ic * 3 + 2]]];
+        const neighborFaces = faceNeighbors[fi].map(neighbor => {
+          const na = localFaceVertices[neighbor * 3], nb = localFaceVertices[neighbor * 3 + 1], nc = localFaceVertices[neighbor * 3 + 2];
+          const nx0 = positions[nb * 3] - positions[na * 3], ny0 = positions[nb * 3 + 1] - positions[na * 3 + 1], nz0 = positions[nb * 3 + 2] - positions[na * 3 + 2];
+          const nx1 = positions[nc * 3] - positions[na * 3], ny1 = positions[nc * 3 + 1] - positions[na * 3 + 1], nz1 = positions[nc * 3 + 2] - positions[na * 3 + 2];
+          const nnx = ny0 * nz1 - nz0 * ny1, nny = nz0 * nx1 - nx0 * nz1, nnz = nx0 * ny1 - ny0 * nx1, narea2 = Math.hypot(nnx, nny, nnz);
+          const neutralArea = neutralFaceAreas[neighbor];
+          return { faceId: island.faces[neighbor], area: narea2 * 0.5, areaRatio: narea2 / Math.max(neutralArea * 2, 1e-20), normalDotNeutral: (nnx * neutralFaceNormals[neighbor * 3] + nny * neutralFaceNormals[neighbor * 3 + 1] + nnz * neutralFaceNormals[neighbor * 3 + 2]) / Math.max(narea2, 1e-20) };
+        });
+        orientationFlipDetails.push({ faceId: island.faces[fi], originalVertexIds, neutralVertices, currentVertices, neutralArea: neutralFaceAreas[fi], deformedArea: area2 * 0.5, areaRatio: ratio, normalDotNeutral: neutralDot, neighboringFaces: neighborFaces });
+      }
     }
-    return { boundaryEdgeCount: edgeInfo.boundaryEdgeCount, boundaryVertexCount: boundaryVertices.size, boundaryMaxDisplacement, boundaryMaxDisplacementPctFaceScale: boundaryMaxDisplacement / Math.max(state.faceScale, 1e-12), maxEdgeStrain, p95EdgeStrain: strains[Math.max(0, Math.floor(strains.length * 0.95) - 1)] || 0, maxEdgeIndex, minAreaRatio: Number.isFinite(minAreaRatio) ? minAreaRatio : null, minAreaFace, collapsedTriangles, orientationFlips, nonfiniteVertices, valid: nonfiniteVertices === 0 && collapsedTriangles === 0 && orientationFlips === 0 };
+    return { boundaryEdgeCount: edgeInfo.boundaryEdgeCount, boundaryVertexCount: boundaryVertices.size, boundaryMaxDisplacement, boundaryMaxDisplacementPctFaceScale: boundaryMaxDisplacement / Math.max(state.faceScale, 1e-12), maxEdgeStrain, p95EdgeStrain: strains[Math.max(0, Math.floor(strains.length * 0.95) - 1)] || 0, maxEdgeIndex, minAreaRatio: Number.isFinite(minAreaRatio) ? minAreaRatio : null, minAreaFace, collapsedTriangles, orientationFlips, orientationFlipDetails, nonfiniteVertices, valid: nonfiniteVertices === 0 && collapsedTriangles === 0 && orientationFlips === 0 };
   }
 
   function update() { const attr = geometry.attributes.position; for (let i = 0; i < vertexCount; i++) attr.setXYZ(island.vertices[i], positions[i * 3], positions[i * 3 + 1], positions[i * 3 + 2]); attr.needsUpdate = true; if (state.springLines) updateLinePositions(); if (state.massHeatmap) updateMassHeatmapPositions(); updatePinVisuals(); }

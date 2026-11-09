@@ -142,6 +142,33 @@
         "toleranceSourceUnits": 0.00002,
         "pass": true
       }
+    },
+    {
+      "name": "production implicit versus fine RK4 identical-force network",
+      "pass": true,
+      "details": {
+        "duration": 0.05,
+        "dtProduction": 0.00008333333333333333,
+        "dtRk4": 0.000001,
+        "kNPerM": 45,
+        "massKg": 0.001,
+        "dampingNsPerM": 0.03394112549695428,
+        "production": {
+          "x": 0.0009611502848824991,
+          "v": 0.01503770436386484,
+          "maxResidual": 1.0874116332622102e-19,
+          "steps": 600
+        },
+        "rk4": {
+          "x": 0.000958594965571795,
+          "v": 0.01661324613064132,
+          "steps": 50000
+        },
+        "maxPositionErrorSourceUnits": 0.0000025553193107040765,
+        "maxVelocityErrorSourceUnitsPerSecond": 0.0015755417667764789,
+        "toleranceSourceUnits": 0.00002,
+        "pass": true
+      }
     }
   ],
   "forceScaleTests": [
@@ -264,6 +291,29 @@
       "steps": 600
     },
     "maxPositionErrorSourceUnits": 0.000018946233310697088,
+    "toleranceSourceUnits": 0.00002,
+    "pass": true
+  },
+  "productionVsRk4": {
+    "duration": 0.05,
+    "dtProduction": 0.00008333333333333333,
+    "dtRk4": 0.000001,
+    "kNPerM": 45,
+    "massKg": 0.001,
+    "dampingNsPerM": 0.03394112549695428,
+    "production": {
+      "x": 0.0009611502848824991,
+      "v": 0.01503770436386484,
+      "maxResidual": 1.0874116332622102e-19,
+      "steps": 600
+    },
+    "rk4": {
+      "x": 0.000958594965571795,
+      "v": 0.01661324613064132,
+      "steps": 50000
+    },
+    "maxPositionErrorSourceUnits": 0.0000025553193107040765,
+    "maxVelocityErrorSourceUnitsPerSecond": 0.0015755417667764789,
     "toleranceSourceUnits": 0.00002,
     "pass": true
   },

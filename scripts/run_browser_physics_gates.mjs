@@ -8,7 +8,9 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const outDir = path.join(root, 'verification', 'island-spring-pinch');
 const port = Number(process.env.VELA_GATE_PORT || 4188);
 const baseUrl = `http://127.0.0.1:${port}/island-spring-pinch.html`;
-const models = ['female', 'male'];
+const models = (process.env.VELA_GATE_MODELS || 'female,male').split(',').map(value => value.trim()).filter(Boolean);
+const reportFile = process.env.VELA_GATE_OUTPUT || 'browser-mathematical-gates.json';
+const captureScreenshots = process.env.VELA_GATE_SCREENSHOTS !== '0';
 const report = { gates: [], models: {} };
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -16,12 +18,25 @@ function startServer() { return spawn('python', ['serve.py', String(port)], { cw
 async function waitFor(url, timeout = 30000) { const end = Date.now() + timeout; while (Date.now() < end) { try { if ((await fetch(url)).ok) return; } catch {} await sleep(250); } throw new Error(`Timed out waiting for ${url}`); }
 async function writeAndStop(server, browser, exitCode = 0) {
   await fs.mkdir(outDir, { recursive: true });
-  await fs.writeFile(path.join(outDir, 'browser-mathematical-gates.json'), JSON.stringify(report, null, 2));
+  await fs.writeFile(path.join(outDir, reportFile), JSON.stringify(report, null, 2));
   await fs.writeFile(path.join(outDir, 'BROWSER_GATES.md'), `# Browser mathematical gates\n\n${report.gates.map(g => `- Gate ${g.gate}: **${g.pass ? 'PASS' : 'FAIL'}** — ${g.name}`).join('\n')}\n\nFull measurements: browser-mathematical-gates.json\n`);
   await browser?.close().catch(() => {}); server?.kill();
   process.exit(exitCode);
 }
 function addGate(number, name, pass, measurements) { const gate = { gate: number, name, pass, measurements }; report.gates.push(gate); console.log(`Browser gate ${number}: ${pass ? 'PASS' : 'FAIL'} — ${name}`); return pass; }
+async function capture(page, filePath) {
+  if (!captureScreenshots) return { saved: false, skipped: true };
+  try {
+    // Capture the actual WebGL canvas pixels. Playwright's page screenshot
+    // waits for document layout/fonts and can block behind the million-vertex
+    // renderer even though the canvas itself is readable.
+    const dataUrl = await page.evaluate(() => document.querySelector('#viewport')?.toDataURL('image/png'));
+    if (!dataUrl?.startsWith('data:image/png;base64,')) throw new Error('viewport canvas did not return PNG pixels');
+    await fs.writeFile(filePath, Buffer.from(dataUrl.slice('data:image/png;base64,'.length), 'base64'));
+    return { saved: true, method: 'webgl-canvas-toDataURL' };
+  }
+  catch (error) { console.error(`[screenshot] ${path.basename(filePath)}: ${error.message}`); return { saved: false, error: error.message }; }
+}
 async function loadModel(page, model) { await page.goto(`${baseUrl}?model=${model}`, { waitUntil: 'domcontentloaded', timeout: 30000 }); await page.waitForFunction(() => document.querySelector('#loadState')?.classList.contains('ready'), null, { timeout: 180000 }); await page.waitForTimeout(250); await page.selectOption('#physicsPreset', 'biological'); await page.selectOption('#integrator', 'implicit'); }
 
 const server = startServer();
@@ -37,7 +52,11 @@ try {
   // Gate 6: one actual original island, not a synthetic mesh.
   for (const model of models) {
     await loadModel(page, model);
-    await page.click('#oneNudge');
+    // The render loop can keep the canvas/page in a continuously changing
+    // layout state on the original million-vertex GLB. Invoke the actual
+    // button handler through the DOM rather than adding an actionability
+    // timeout to the physics test itself.
+    await page.evaluate(() => document.querySelector('#oneNudge')?.click());
     await page.waitForFunction(() => Boolean(window.__velaDiagnostics().tests?.nudge), null, { timeout: 180000 });
     const d = await page.evaluate(() => window.__velaDiagnostics());
     report.models[model] = { gate6: d };
@@ -61,11 +80,13 @@ try {
     const plan = await page.evaluate(point => window.__velaPlanDrag(point, 0.02), probe.hit.point);
     await page.mouse.move(probe.x, probe.y); await page.mouse.down(); await page.waitForTimeout(80);
     const down = await page.evaluate(() => window.__velaDiagnostics());
-    await page.mouse.move(plan.target.x, plan.target.y, { steps: 12 }); await page.waitForTimeout(300);
-    const held = await page.evaluate(() => window.__velaDiagnostics()); await page.screenshot({ path: path.join(outDir, `${model}-gate7-held.png`), fullPage: false });
+    await page.mouse.move(plan.target.x, plan.target.y, { steps: 12 });
+    const history = [];
+    for (let i = 0; i < 12; i++) { await page.waitForTimeout(50); history.push(await page.evaluate(() => { const d = window.__velaDiagnostics(); return { geometry: d.geometry, implicit: d.metrics?.implicit, maxDisplacement: d.metrics?.maxDisplacement }; })); }
+    const held = await page.evaluate(() => window.__velaDiagnostics()); const heldScreenshot = await capture(page, path.join(outDir, `${model}-gate7-held.png`));
     await page.mouse.up(); await page.waitForTimeout(800);
-    const released = await page.evaluate(() => window.__velaDiagnostics()); await page.screenshot({ path: path.join(outDir, `${model}-gate7-released.png`), fullPage: false });
-    report.models[model].gate7 = { plan, down, held, released };
+    const released = await page.evaluate(() => window.__velaDiagnostics()); const releasedScreenshot = await capture(page, path.join(outDir, `${model}-gate7-released.png`));
+    report.models[model].gate7 = { plan, down, held, released, history, heldScreenshot, releasedScreenshot };
   }
   const gate7Pass = models.every(model => {
     const item = report.models[model].gate7, d = item?.held, r = item?.released, p = r?.lastPinch;
