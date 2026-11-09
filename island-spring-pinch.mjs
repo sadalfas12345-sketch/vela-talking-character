@@ -132,7 +132,24 @@ function uniqueEdges(entry, island) {
   }
   let zeroLengthEdges = 0;
   for (const value of rest) if (value <= 1e-12) zeroLengthEdges++;
-  return { a: aa, b: bb, rest, duplicateRawEdges: island.faces.length * 3 - a.length, zeroLengthEdges };
+  let boundaryEdgeCount = 0;
+  const edgeUseCount = new Map();
+  for (const face of island.faces) {
+    const offset = face * 3;
+    const vertices = [index[offset], index[offset + 1], index[offset + 2]];
+    for (let k = 0; k < 3; k++) {
+      const edgeKey = key(vertices[k], vertices[(k + 1) % 3]);
+      edgeUseCount.set(edgeKey, (edgeUseCount.get(edgeKey) || 0) + 1);
+    }
+  }
+  for (const count of edgeUseCount.values()) if (count === 1) boundaryEdgeCount++;
+  const boundaryA = [], boundaryB = [];
+  for (const [edgeKey, count] of edgeUseCount) {
+    if (count !== 1) continue;
+    const [u, v] = edgeKey.split(':').map(Number);
+    boundaryA.push(u); boundaryB.push(v);
+  }
+  return { a: aa, b: bb, rest, duplicateRawEdges: island.faces.length * 3 - a.length, zeroLengthEdges, boundaryEdgeCount, boundaryA: new Uint32Array(boundaryA), boundaryB: new Uint32Array(boundaryB) };
 }
 
 function buildEntry(mesh) {
@@ -272,6 +289,22 @@ function buildSystem() {
   for (let i = 0; i < vertexCount; i++) {
     const point = new THREE.Vector3().fromBufferAttribute(position, island.vertices[i]);
     neutral[i * 3] = point.x; neutral[i * 3 + 1] = point.y; neutral[i * 3 + 2] = point.z;
+  }
+  const neutralFaceAreas = new Float32Array(island.faces.length);
+  const neutralFaceNormals = new Float32Array(island.faces.length * 3);
+  const localFaceVertices = new Uint32Array(island.faces.length * 3);
+  for (let fi = 0; fi < island.faces.length; fi++) {
+    const face = island.faces[fi], offset = face * 3;
+    const ga = index[offset], gb = index[offset + 1], gc = index[offset + 2];
+    const ia = localMap.get(ga), ib = localMap.get(gb), ic = localMap.get(gc);
+    localFaceVertices[fi * 3] = ia; localFaceVertices[fi * 3 + 1] = ib; localFaceVertices[fi * 3 + 2] = ic;
+    const ax = neutral[ia * 3], ay = neutral[ia * 3 + 1], az = neutral[ia * 3 + 2];
+    const abx = neutral[ib * 3] - ax, aby = neutral[ib * 3 + 1] - ay, abz = neutral[ib * 3 + 2] - az;
+    const acx = neutral[ic * 3] - ax, acy = neutral[ic * 3 + 1] - ay, acz = neutral[ic * 3 + 2] - az;
+    const nx = aby * acz - abz * acy, ny = abz * acx - abx * acz, nz = abx * acy - aby * acx;
+    const length = Math.hypot(nx, ny, nz);
+    neutralFaceAreas[fi] = length * 0.5;
+    if (length > 1e-15) { neutralFaceNormals[fi * 3] = nx / length; neutralFaceNormals[fi * 3 + 1] = ny / length; neutralFaceNormals[fi * 3 + 2] = nz / length; }
   }
   const preset = PHYSICS_PRESETS[ui.physicsPreset.value] || PHYSICS_PRESETS.biological;
   const sourceMetersPerUnit = preset.sourceMetersPerUnit;
@@ -506,8 +539,39 @@ function buildSystem() {
     };
   }
 
+  function geometryDiagnostics() {
+    let minAreaRatio = Infinity, minAreaFace = -1, collapsedTriangles = 0, orientationFlips = 0, nonfiniteVertices = 0;
+    const strains = new Array(edgeA.length);
+    let maxEdgeStrain = 0, maxEdgeIndex = -1, boundaryMaxDisplacement = 0;
+    const boundaryVertices = new Set();
+    for (let i = 0; i < edgeInfo.boundaryA.length; i++) { const a = localMap.get(edgeInfo.boundaryA[i]), b = localMap.get(edgeInfo.boundaryB[i]); if (a !== undefined) boundaryVertices.add(a); if (b !== undefined) boundaryVertices.add(b); }
+    for (let i = 0; i < vertexCount; i++) {
+      const dx = positions[i * 3] - neutral[i * 3], dy = positions[i * 3 + 1] - neutral[i * 3 + 1], dz = positions[i * 3 + 2] - neutral[i * 3 + 2];
+      if (!Number.isFinite(dx) || !Number.isFinite(dy) || !Number.isFinite(dz)) nonfiniteVertices++;
+      if (boundaryVertices.has(i)) boundaryMaxDisplacement = Math.max(boundaryMaxDisplacement, Math.hypot(dx, dy, dz));
+    }
+    for (let i = 0; i < edgeA.length; i++) {
+      const length = Math.hypot(positions[edgeB[i] * 3] - positions[edgeA[i] * 3], positions[edgeB[i] * 3 + 1] - positions[edgeA[i] * 3 + 1], positions[edgeB[i] * 3 + 2] - positions[edgeA[i] * 3 + 2]);
+      const strain = Math.abs(length - edgeInfo.rest[i]) / Math.max(edgeInfo.rest[i], 1e-12); strains[i] = strain;
+      if (strain > maxEdgeStrain) { maxEdgeStrain = strain; maxEdgeIndex = i; }
+    }
+    strains.sort((a, b) => a - b);
+    for (let fi = 0; fi < island.faces.length; fi++) {
+      const ia = localFaceVertices[fi * 3], ib = localFaceVertices[fi * 3 + 1], ic = localFaceVertices[fi * 3 + 2];
+      const ax = positions[ia * 3], ay = positions[ia * 3 + 1], az = positions[ia * 3 + 2];
+      const abx = positions[ib * 3] - ax, aby = positions[ib * 3 + 1] - ay, abz = positions[ib * 3 + 2] - az;
+      const acx = positions[ic * 3] - ax, acy = positions[ic * 3 + 1] - ay, acz = positions[ic * 3 + 2] - az;
+      const nx = aby * acz - abz * acy, ny = abz * acx - abx * acz, nz = abx * acy - aby * acx, area2 = Math.hypot(nx, ny, nz), ratio = area2 / Math.max(neutralFaceAreas[fi] * 2, 1e-20);
+      if (ratio < minAreaRatio) { minAreaRatio = ratio; minAreaFace = island.faces[fi]; }
+      if (ratio <= 1e-3) collapsedTriangles++;
+      const neutralDot = (nx * neutralFaceNormals[fi * 3] + ny * neutralFaceNormals[fi * 3 + 1] + nz * neutralFaceNormals[fi * 3 + 2]) / Math.max(area2, 1e-20);
+      if (neutralDot < 0) orientationFlips++;
+    }
+    return { boundaryEdgeCount: edgeInfo.boundaryEdgeCount, boundaryVertexCount: boundaryVertices.size, boundaryMaxDisplacement, boundaryMaxDisplacementPctFaceScale: boundaryMaxDisplacement / Math.max(state.faceScale, 1e-12), maxEdgeStrain, p95EdgeStrain: strains[Math.max(0, Math.floor(strains.length * 0.95) - 1)] || 0, maxEdgeIndex, minAreaRatio: Number.isFinite(minAreaRatio) ? minAreaRatio : null, minAreaFace, collapsedTriangles, orientationFlips, nonfiniteVertices, valid: nonfiniteVertices === 0 && collapsedTriangles === 0 && orientationFlips === 0 };
+  }
+
   function update() { const attr = geometry.attributes.position; for (let i = 0; i < vertexCount; i++) attr.setXYZ(island.vertices[i], positions[i * 3], positions[i * 3 + 1], positions[i * 3 + 2]); attr.needsUpdate = true; if (state.springLines) updateLinePositions(); if (state.massHeatmap) updateMassHeatmapPositions(); updatePinVisuals(); }
-  state.spring = { edgeInfo, edgeA, edgeB, supportA: supportAArray, supportB: supportBArray, supportRest: supportRestArray, supportK: supportKArray, positions, velocities, neutral, anchors, masses, attributedArea, vertexCount, invMass, sourceMetersPerUnit, step: integrate, energy, diagnostics, setPin: value => { pin = value; neutralSettled = false; }, clearPin: () => { pin = null; }, setInner: value => { innerEnabled = value; neutralSettled = false; }, getInner: () => innerEnabled, markActive: () => { neutralSettled = false; }, markNeutral: () => { neutralSettled = true; }, update };
+  state.spring = { edgeInfo, edgeA, edgeB, supportA: supportAArray, supportB: supportBArray, supportRest: supportRestArray, supportK: supportKArray, positions, velocities, neutral, anchors, masses, attributedArea, vertexCount, invMass, sourceMetersPerUnit, step: integrate, energy, diagnostics, geometryDiagnostics, setPin: value => { pin = value; neutralSettled = false; }, clearPin: () => { pin = null; }, setInner: value => { innerEnabled = value; neutralSettled = false; }, getInner: () => innerEnabled, markActive: () => { neutralSettled = false; }, markNeutral: () => { neutralSettled = true; }, update };
   buildDiagnosticsVisuals(); update();
 }
 
@@ -729,7 +793,7 @@ async function loadModel(name) {
       metrics: state.spring?.diagnostics(), islands: { count: allIslands.length, minVertices: Math.min(...allIslands.map(item => item.vertices)), maxVertices: Math.max(...allIslands.map(item => item.vertices)), selected: state.selected ? { id: state.selected.island.id, vertices: state.selected.island.vertices.length, triangles: state.selected.island.faces.length } : null },
       topology: state.entries.map(entry => ({ mesh: entry.mesh.name, ...entry.topology })),
       springTopology: state.spring ? { rawTriangleEdgeUses: state.selected.island.faces.length * 3, uniqueSurfaceEdges: state.spring.edgeA.length, duplicateRawEdgeUsesRemoved: state.spring.edgeInfo.duplicateRawEdges, invariant: state.spring.edgeA.length + state.spring.edgeInfo.duplicateRawEdges === state.selected.island.faces.length * 3 } : null,
-      interIslandSprings: 0, pointerDebug: state.pointerDebug,
+      geometry: state.spring?.geometryDiagnostics(), interIslandSprings: 0, pointerDebug: state.pointerDebug,
       render: { bounds: { min: bounds.min.toArray(), max: bounds.max.toArray() }, camera: camera.position.toArray(), target: controls.target.toArray(), meshes: state.meshes.length, visible: state.meshes.filter(mesh => mesh.visible).length, drawCalls: renderer.info.render.calls, pixelRatio: renderer.getPixelRatio(), drawingBuffer: [renderer.domElement.width, renderer.domElement.height], maxTextureSize: renderer.capabilities.maxTextureSize }
     };
   };
