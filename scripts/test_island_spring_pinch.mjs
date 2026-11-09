@@ -116,7 +116,8 @@ function makeReport(results) {
   }).join('\n');
   const stage4Pass = results.every(result => {
     const rest = result.rest?.tests?.rest, nudge = result.nudge?.tests?.nudge, noAnchor = result.noAnchor?.tests?.noAnchor;
-    return Number.isFinite(rest?.drift) && Number.isFinite(nudge?.maxNeighborMovement) && nudge?.maxNeighborMovement > 0 && nudge?.energyDecreased && Number.isFinite(noAnchor?.maxDisplacement) && noAnchor?.finite;
+    const withInner = noAnchor?.withInner, withoutInner = noAnchor?.withoutInner;
+    return Number.isFinite(rest?.drift) && Number.isFinite(nudge?.maxNeighborMovement) && nudge?.maxNeighborMovement > 0 && nudge?.energyDecreased && nudge?.restoredTowardNeutral && withInner?.finite && withoutInner?.finite && Number.isFinite(withInner?.maxNeighborMovement) && Number.isFinite(withoutInner?.maxNeighborMovement) && withInner.maxNeighborMovement > 0 && withoutInner.maxNeighborMovement > 0 && withInner.restoredTowardNeutral;
   });
   const stage3Pass = results.every(result => {
     const metrics = result.initial.metrics || {};
@@ -156,7 +157,7 @@ The biological preset's explicit RK4 stability step and substep count are record
 
 ## Phone interaction and rendering
 
-The default interaction mode is Explore / orbit. In that mode pointer and touch gestures never create a pinch. Pinch face must be selected explicitly before a face drag can apply force. The final browser regression verifies `exploreCreatedPin=false` and successful pinch/release for both models. The original assets are not decimated: the female source contains 999,787 vertices and 1,943,912 triangles, and the male source contains 991,219 vertices and 1,897,687 triangles. On narrow screens the renderer caps pixel ratio at 1.25 to keep orbiting responsive; this changes screen raster sampling only, not source geometry or texture data.
+The default interaction mode is Explore / orbit. In that mode pointer and touch gestures never create a pinch. Pinch face must be selected explicitly before a face drag can apply force. The final browser regression verifies exploreCreatedPin=false and successful pinch/release for both models. The original assets are not decimated: the female source contains 999,787 vertices and 1,943,912 triangles, and the male source contains 991,219 vertices and 1,897,687 triangles. On narrow screens the renderer caps pixel ratio at 1.25 to keep orbiting responsive; this changes screen raster sampling only, not source geometry or texture data.
 
 Startup is visible through download, triangle analysis, island construction, and spring preparation progress phases. The female GLB is 61.2 MB and the male GLB is 66.7 MB. On desktop, the other original GLB is prefetched into the browser cache after the first model is ready; data-saver or narrow-screen phone sessions skip that extra download.
 
@@ -191,14 +192,17 @@ try {
   await fs.mkdir(out, { recursive: true });
   await waitFor(url);
   const browser = await chromium.launch({ headless: true, args: ['--enable-webgl', '--use-angle=swiftshader', '--ignore-gpu-blocklist'] });
-  const page = await browser.newPage({ viewport: { width: 1280, height: 900 }, deviceScaleFactor: 1 });
+  const page = await browser.newPage({ viewport: { width: Number(process.env.VELA_PINCH_VIEWPORT_WIDTH || 1280), height: 900 }, deviceScaleFactor: 1 });
+  await page.addInitScript(() => { try { Object.defineProperty(navigator, 'connection', { configurable: true, value: { saveData: true } }); } catch {} });
   page.setDefaultTimeout(180000);
   page.on('console', message => { if (message.type() === 'error') console.error(`[browser] ${message.text()}`); });
   page.on('pageerror', error => console.error(`[pageerror] ${error.stack || error}`));
-  await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
   const results = [];
   const models = (process.env.VELA_PINCH_MODELS || 'female,male').split(',').map(value => value.trim()).filter(Boolean);
-  for (const model of models) results.push(await captureModel(page, model));
+  for (const model of models) {
+    await page.goto(`${url}?model=${encodeURIComponent(model)}`, { waitUntil: 'domcontentloaded', timeout: 30000 });
+    results.push(await captureModel(page, model));
+  }
   await fs.writeFile(path.join(out, 'browser-results.json'), JSON.stringify({ url, results }, null, 2));
   await fs.writeFile(path.join(out, 'REPORT.md'), makeReport(results));
   console.log(JSON.stringify({ url, models: results.map(result => ({ model: result.model, pinchReleased: Boolean(result.released.lastPinch?.released), interIslandSprings: result.initial.metrics?.interIslandSprings, neutralDrift: result.rest.tests?.rest?.drift })) }));

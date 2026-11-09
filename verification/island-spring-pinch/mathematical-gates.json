@@ -1,0 +1,323 @@
+{
+  "scaleMetersPerSourceUnit": 0.3,
+  "gates": [
+    {
+      "gate": 1,
+      "name": "Physical units",
+      "checks": [
+        {
+          "name": "1 N on 1 kg equals 1 m/s² physically",
+          "pass": true,
+          "observed": [
+            {
+              "scale": 0.01,
+              "sourceAcceleration": 100,
+              "physicalAcceleration": 1,
+              "pass": true
+            },
+            {
+              "scale": 0.05,
+              "sourceAcceleration": 20,
+              "physicalAcceleration": 1,
+              "pass": true
+            },
+            {
+              "scale": 0.3,
+              "sourceAcceleration": 3.3333333333333335,
+              "physicalAcceleration": 1,
+              "pass": true
+            },
+            {
+              "scale": 1,
+              "sourceAcceleration": 1,
+              "physicalAcceleration": 1,
+              "pass": true
+            },
+            {
+              "scale": 3,
+              "sourceAcceleration": 0.3333333333333333,
+              "physicalAcceleration": 1,
+              "pass": true
+            }
+          ]
+        },
+        {
+          "name": "surface spring conversion",
+          "pass": true,
+          "observed": {
+            "extensionM": 0.001,
+            "forceN": 0.04,
+            "sourceAcceleration": 133.33333333333334
+          }
+        },
+        {
+          "name": "inner spring conversion",
+          "pass": true,
+          "observed": {
+            "extensionM": 0.001,
+            "forceN": 0.04,
+            "sourceAcceleration": 133.33333333333334
+          }
+        },
+        {
+          "name": "damping uses physical velocity and converts acceleration once",
+          "pass": true,
+          "observed": {
+            "damping": 0.25,
+            "physicalVelocity": 0.2,
+            "dampingForce": 0.05
+          }
+        },
+        {
+          "name": "pinch force conversion",
+          "pass": true,
+          "observed": {
+            "forceN": 1,
+            "sourceAcceleration": 3333.3333333333335
+          }
+        },
+        {
+          "name": "source code converts surface acceleration back by sourceMetersPerUnit",
+          "pass": true,
+          "observed": "surface acceleration division present"
+        },
+        {
+          "name": "source code converts inner acceleration back by sourceMetersPerUnit",
+          "pass": true,
+          "observed": "inner acceleration division present"
+        },
+        {
+          "name": "source code converts barycentric pinch acceleration by mass and scale",
+          "pass": true,
+          "observed": "pinch conversion present"
+        }
+      ],
+      "measurements": {
+        "sourceMetersPerUnit": 0.3,
+        "oneNewton": [
+          {
+            "scale": 0.01,
+            "sourceAcceleration": 100,
+            "physicalAcceleration": 1,
+            "pass": true
+          },
+          {
+            "scale": 0.05,
+            "sourceAcceleration": 20,
+            "physicalAcceleration": 1,
+            "pass": true
+          },
+          {
+            "scale": 0.3,
+            "sourceAcceleration": 3.3333333333333335,
+            "physicalAcceleration": 1,
+            "pass": true
+          },
+          {
+            "scale": 1,
+            "sourceAcceleration": 1,
+            "physicalAcceleration": 1,
+            "pass": true
+          },
+          {
+            "scale": 3,
+            "sourceAcceleration": 0.3333333333333333,
+            "physicalAcceleration": 1,
+            "pass": true
+          }
+        ]
+      },
+      "pass": true
+    },
+    {
+      "gate": 2,
+      "name": "One fixed-anchor spring",
+      "checks": [
+        {
+          "name": "restoring force",
+          "expected": 0.04,
+          "observed": 0.04,
+          "pass": true
+        },
+        {
+          "name": "physical acceleration",
+          "expected": 40,
+          "observed": 40,
+          "pass": true
+        },
+        {
+          "name": "zero extension has zero force",
+          "expected": 0,
+          "observed": 0,
+          "pass": true
+        },
+        {
+          "name": "fixed anchor displacement",
+          "expected": 0,
+          "observed": 0,
+          "pass": true
+        }
+      ],
+      "measurements": {
+        "massKg": 0.001,
+        "stiffnessNPerM": 40,
+        "displacementM": 0.001,
+        "forceN": 0.04,
+        "sourceAcceleration": 133.33333333333334
+      },
+      "pass": true
+    },
+    {
+      "gate": 3,
+      "name": "Two moving vertices",
+      "checks": [
+        {
+          "name": "equal and opposite spring forces",
+          "expected": 0,
+          "observed": 0,
+          "pass": true
+        },
+        {
+          "name": "no external force conserves momentum derivative",
+          "expected": 0,
+          "observed": 0,
+          "pass": true
+        },
+        {
+          "name": "Hookean potential energy",
+          "expected": 0.00002,
+          "observed": 0.00002,
+          "pass": true
+        },
+        {
+          "name": "literal k*deltaL is reported as force, not energy",
+          "expected": "dimensionally invalid as joules",
+          "observed": 0.04,
+          "pass": true
+        }
+      ],
+      "measurements": {
+        "massesKg": [
+          0.001,
+          0.002
+        ],
+        "restLengthM": 0.002,
+        "currentLengthM": 0.003,
+        "extensionM": 0.001,
+        "forceN": 0.04,
+        "potentialEnergyJ": 0.00002,
+        "literalKDeltaL": 0.04
+      },
+      "pass": true
+    },
+    {
+      "gate": 4,
+      "name": "RK4 analytical oscillator",
+      "checks": [
+        {
+          "name": "angular frequency",
+          "expected": 200,
+          "observed": 200,
+          "pass": true
+        },
+        {
+          "name": "period",
+          "expected": 0.031415926535897934,
+          "observed": 0.031415926535897934,
+          "pass": true
+        },
+        {
+          "name": "fourth-order convergence ratios approach 16",
+          "expected": "ratios > 10 and < 25",
+          "observed": [
+            15.556832601581036,
+            15.893596078858643,
+            15.973542766664059
+          ],
+          "pass": true
+        }
+      ],
+      "measurements": {
+        "omega": 200,
+        "period": 0.031415926535897934,
+        "duration": 0.3141592653589793,
+        "runs": [
+          {
+            "dt": 0.0015707963267948967,
+            "x": 0.0009986699751944206,
+            "v": 0.0009830443588005056,
+            "expectedX": 0.001,
+            "expectedV": 4.898587196589413e-16,
+            "error": 0.000983045258538241
+          },
+          {
+            "dt": 0.0007853981633974483,
+            "x": 0.0009999583526806098,
+            "v": 0.00006319056521431748,
+            "expectedX": 0.001,
+            "expectedV": 4.898587196589413e-16,
+            "error": 0.00006319057893817887
+          },
+          {
+            "dt": 0.00039269908169872416,
+            "x": 0.0009999986968411475,
+            "v": 0.0000039758513578729004,
+            "expectedX": 0.001,
+            "expectedV": 4.898587196589413e-16,
+            "error": 0.0000039758515709502505
+          },
+          {
+            "dt": 0.00019634954084936208,
+            "x": 0.000999999959258097,
+            "v": 2.489022994829615e-7,
+            "expectedX": 0.001,
+            "expectedV": 4.898587196589413e-16,
+            "error": 2.4890230232754896e-7
+          }
+        ],
+        "errorRatios": [
+          15.556832601581036,
+          15.893596078858643,
+          15.973542766664059
+        ]
+      },
+      "pass": true
+    },
+    {
+      "gate": 5,
+      "name": "Damping and energy",
+      "checks": [
+        {
+          "name": "energy is non-increasing within RK4 roundoff",
+          "expected": "<= 1e-12 J per step",
+          "observed": 0,
+          "pass": true
+        },
+        {
+          "name": "known displacement recovers toward neutral",
+          "expected": "< 0.000019999999999999998 J",
+          "observed": 3.4997612465365213e-14,
+          "pass": true
+        },
+        {
+          "name": "all final state values finite",
+          "expected": true,
+          "observed": true,
+          "pass": true
+        }
+      ],
+      "measurements": {
+        "dampingNsPerM": 0.032,
+        "initialEnergyJ": 0.000019999999999999998,
+        "finalEnergyJ": 3.4997612465365213e-14,
+        "maxEnergyIncreaseJPerStep": 0,
+        "finalState": {
+          "x": 3.825279866132633e-8,
+          "v": 0.000003385876653655837
+        }
+      },
+      "pass": true
+    }
+  ],
+  "allDeterministicGatesPass": true
+}

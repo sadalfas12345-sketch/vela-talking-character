@@ -1,0 +1,271 @@
+{
+  "tests": [
+    {
+      "name": "1N/1kg scale conversion",
+      "pass": true,
+      "details": [
+        {
+          "scale": 0.01,
+          "forceN": 1,
+          "massKg": 1,
+          "sourceAcceleration": 100,
+          "physicalAcceleration": 1,
+          "pass": true
+        },
+        {
+          "scale": 0.05,
+          "forceN": 1,
+          "massKg": 1,
+          "sourceAcceleration": 20,
+          "physicalAcceleration": 1,
+          "pass": true
+        },
+        {
+          "scale": 0.3,
+          "forceN": 1,
+          "massKg": 1,
+          "sourceAcceleration": 3.3333333333333335,
+          "physicalAcceleration": 1,
+          "pass": true
+        },
+        {
+          "scale": 1,
+          "forceN": 1,
+          "massKg": 1,
+          "sourceAcceleration": 1,
+          "physicalAcceleration": 1,
+          "pass": true
+        },
+        {
+          "scale": 3,
+          "forceN": 1,
+          "massKg": 1,
+          "sourceAcceleration": 0.3333333333333333,
+          "physicalAcceleration": 1,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "name": "1mm2 lumped mass",
+      "pass": true,
+      "details": {
+        "areaM2": 0.000001,
+        "rho": 1100,
+        "thickness": 0.0015,
+        "expectedMassKg": 0.00000165,
+        "actualMassKg": 0.00000165,
+        "pass": true
+      }
+    },
+    {
+      "name": "area scales with s^2",
+      "pass": true,
+      "details": [
+        {
+          "scale": 0.01,
+          "sourceArea": 0.000002,
+          "physicalArea": 2e-10,
+          "areaOverScaleSquared": 0.000002,
+          "pass": true
+        },
+        {
+          "scale": 0.05,
+          "sourceArea": 0.000002,
+          "physicalArea": 5e-9,
+          "areaOverScaleSquared": 0.0000019999999999999995,
+          "pass": true
+        },
+        {
+          "scale": 0.3,
+          "sourceArea": 0.000002,
+          "physicalArea": 1.8e-7,
+          "areaOverScaleSquared": 0.000002,
+          "pass": true
+        },
+        {
+          "scale": 1,
+          "sourceArea": 0.000002,
+          "physicalArea": 0.000002,
+          "areaOverScaleSquared": 0.000002,
+          "pass": true
+        },
+        {
+          "scale": 3,
+          "sourceArea": 0.000002,
+          "physicalArea": 0.000018,
+          "areaOverScaleSquared": 0.000002,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "name": "inner spring analytical force",
+      "pass": true,
+      "details": {
+        "massKg": 0.00000165,
+        "kNPerM": 2,
+        "displacementM": 0.001,
+        "forceN": -0.002,
+        "physicalAcceleration": -1212.121212121212,
+        "pass": true
+      }
+    },
+    {
+      "name": "implicit versus fine RK4 small network",
+      "pass": true,
+      "details": {
+        "duration": 0.05,
+        "rk4": {
+          "x": [
+            0.0010733205167005857,
+            0.001926679483299415
+          ],
+          "v": [
+            0.015040711031805713,
+            -0.015040711031805501
+          ],
+          "steps": 50000
+        },
+        "implicit": {
+          "x": [
+            0.0010543742833898887,
+            0.0019456257166082778
+          ],
+          "v": [
+            0.012033157285062414,
+            -0.012033157284916697
+          ],
+          "steps": 600
+        },
+        "maxPositionErrorSourceUnits": 0.000018946233310697088,
+        "toleranceSourceUnits": 0.00002,
+        "pass": true
+      }
+    }
+  ],
+  "forceScaleTests": [
+    {
+      "scale": 0.01,
+      "forceN": 1,
+      "massKg": 1,
+      "sourceAcceleration": 100,
+      "physicalAcceleration": 1,
+      "pass": true
+    },
+    {
+      "scale": 0.05,
+      "forceN": 1,
+      "massKg": 1,
+      "sourceAcceleration": 20,
+      "physicalAcceleration": 1,
+      "pass": true
+    },
+    {
+      "scale": 0.3,
+      "forceN": 1,
+      "massKg": 1,
+      "sourceAcceleration": 3.3333333333333335,
+      "physicalAcceleration": 1,
+      "pass": true
+    },
+    {
+      "scale": 1,
+      "forceN": 1,
+      "massKg": 1,
+      "sourceAcceleration": 1,
+      "physicalAcceleration": 1,
+      "pass": true
+    },
+    {
+      "scale": 3,
+      "forceN": 1,
+      "massKg": 1,
+      "sourceAcceleration": 0.3333333333333333,
+      "physicalAcceleration": 1,
+      "pass": true
+    }
+  ],
+  "massTest": {
+    "areaM2": 0.000001,
+    "rho": 1100,
+    "thickness": 0.0015,
+    "expectedMassKg": 0.00000165,
+    "actualMassKg": 0.00000165,
+    "pass": true
+  },
+  "scaleAreaTests": [
+    {
+      "scale": 0.01,
+      "sourceArea": 0.000002,
+      "physicalArea": 2e-10,
+      "areaOverScaleSquared": 0.000002,
+      "pass": true
+    },
+    {
+      "scale": 0.05,
+      "sourceArea": 0.000002,
+      "physicalArea": 5e-9,
+      "areaOverScaleSquared": 0.0000019999999999999995,
+      "pass": true
+    },
+    {
+      "scale": 0.3,
+      "sourceArea": 0.000002,
+      "physicalArea": 1.8e-7,
+      "areaOverScaleSquared": 0.000002,
+      "pass": true
+    },
+    {
+      "scale": 1,
+      "sourceArea": 0.000002,
+      "physicalArea": 0.000002,
+      "areaOverScaleSquared": 0.000002,
+      "pass": true
+    },
+    {
+      "scale": 3,
+      "sourceArea": 0.000002,
+      "physicalArea": 0.000018,
+      "areaOverScaleSquared": 0.000002,
+      "pass": true
+    }
+  ],
+  "innerSpring": {
+    "massKg": 0.00000165,
+    "kNPerM": 2,
+    "displacementM": 0.001,
+    "forceN": -0.002,
+    "physicalAcceleration": -1212.121212121212,
+    "pass": true
+  },
+  "integratorTest": {
+    "duration": 0.05,
+    "rk4": {
+      "x": [
+        0.0010733205167005857,
+        0.001926679483299415
+      ],
+      "v": [
+        0.015040711031805713,
+        -0.015040711031805501
+      ],
+      "steps": 50000
+    },
+    "implicit": {
+      "x": [
+        0.0010543742833898887,
+        0.0019456257166082778
+      ],
+      "v": [
+        0.012033157285062414,
+        -0.012033157284916697
+      ],
+      "steps": 600
+    },
+    "maxPositionErrorSourceUnits": 0.000018946233310697088,
+    "toleranceSourceUnits": 0.00002,
+    "pass": true
+  },
+  "allPass": true
+}

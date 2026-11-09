@@ -402,20 +402,22 @@ function buildSystem() {
   for (let i = 0; i < edgeA.length; i++) { diagonalK[edgeA[i]] += surfaceK; diagonalK[edgeB[i]] += surfaceK; }
   for (let i = 0; i < supportAArray.length; i++) diagonalK[supportAArray[i]] += supportKArray[i];
   const implicitIterations = 8;
+  let implicitDiagnostics = { iterations: 0, finalCorrection: 0, equationResidual: 0, positionVelocityResidual: 0, converged: false, correctionTolerance: 0, residualTolerance: 0 };
   function acceleration(x, v, withInner, pinState, targetOffset = 0, result = rkScratch.a1) {
     result.fill(0);
     for (let i = 0; i < edgeA.length; i++) {
       const ia = edgeA[i], ib = edgeB[i], dx = x[ib * 3] - x[ia * 3], dy = x[ib * 3 + 1] - x[ia * 3 + 1], dz = x[ib * 3 + 2] - x[ia * 3 + 2], length = Math.hypot(dx, dy, dz);
       if (length <= 1e-12) continue;
       const q = surfaceK * ((length - edgeInfo.rest[i]) * sourceMetersPerUnit) / length, fx = q * dx, fy = q * dy, fz = q * dz;
-      result[ia * 3] += fx * invMass[ia]; result[ia * 3 + 1] += fy * invMass[ia]; result[ia * 3 + 2] += fz * invMass[ia];
-      result[ib * 3] -= fx * invMass[ib]; result[ib * 3 + 1] -= fy * invMass[ib]; result[ib * 3 + 2] -= fz * invMass[ib];
+      // Convert physical acceleration back to source-coordinate acceleration.
+      result[ia * 3] += fx * invMass[ia] / sourceMetersPerUnit; result[ia * 3 + 1] += fy * invMass[ia] / sourceMetersPerUnit; result[ia * 3 + 2] += fz * invMass[ia] / sourceMetersPerUnit;
+      result[ib * 3] -= fx * invMass[ib] / sourceMetersPerUnit; result[ib * 3 + 1] -= fy * invMass[ib] / sourceMetersPerUnit; result[ib * 3 + 2] -= fz * invMass[ib] / sourceMetersPerUnit;
     }
     if (withInner) for (let i = 0; i < supportAArray.length; i++) {
       const ia = supportAArray[i], ib = supportBArray[i], dx = anchors[ib * 3] - x[ia * 3], dy = anchors[ib * 3 + 1] - x[ia * 3 + 1], dz = anchors[ib * 3 + 2] - x[ia * 3 + 2], length = Math.hypot(dx, dy, dz);
       if (length <= 1e-12) continue;
       const q = supportKArray[i] * ((length - supportRestArray[i]) * sourceMetersPerUnit) / length;
-      result[ia * 3] += q * dx * invMass[ia]; result[ia * 3 + 1] += q * dy * invMass[ia]; result[ia * 3 + 2] += q * dz * invMass[ia];
+      result[ia * 3] += q * dx * invMass[ia] / sourceMetersPerUnit; result[ia * 3 + 1] += q * dy * invMass[ia] / sourceMetersPerUnit; result[ia * 3 + 2] += q * dz * invMass[ia] / sourceMetersPerUnit;
     }
     if (pinState && !pinState.hard) {
       const ids = pinState.ids, weights = pinState.weights;
@@ -469,7 +471,10 @@ function buildSystem() {
     // measured stability step would require tens of thousands of substeps.
     const base = implicitCandidate;
     for (let i = 0; i < scratchLength; i++) base[i] = positions[i] + velocities[i] * dt;
+    let iterations = 0, finalCorrection = Infinity;
+    const correctionTolerance = Math.max(state.faceScale * 1e-8, 1e-10);
     for (let iteration = 0; iteration < implicitIterations; iteration++) {
+      iterations = iteration + 1;
       for (let i = 0; i < scratchLength; i++) implicitVelocity[i] = (base[i] - positions[i]) / dt;
       acceleration(base, implicitVelocity, innerEnabled, pin, dt, rkScratch.a1);
       let maxCorrection = 0;
@@ -488,9 +493,28 @@ function buildSystem() {
           maxCorrection = Math.max(maxCorrection, Math.abs(correction));
         }
       }
+      // The position correction changes the implicit velocity. Recompute it
+      // before applying the hard barycentric projection; using the velocity
+      // from the beginning of the iteration makes the residual diagnostic and
+      // the next state inconsistent with the solved position.
+      for (let i = 0; i < scratchLength; i++) implicitVelocity[i] = (base[i] - positions[i]) / dt;
       projectConstraint(base, implicitVelocity, pin);
-      if (maxCorrection <= Math.max(state.faceScale * 1e-8, 1e-10)) break;
+      finalCorrection = maxCorrection;
+      if (maxCorrection <= correctionTolerance) break;
     }
+    // Recompute from the final accepted position, not from the previous
+    // fixed-point iterate, before evaluating the nonlinear equation residual.
+    for (let i = 0; i < scratchLength; i++) implicitVelocity[i] = (base[i] - positions[i]) / dt;
+    projectConstraint(base, implicitVelocity, pin);
+    for (let i = 0; i < scratchLength; i++) implicitVelocity[i] = (base[i] - positions[i]) / dt;
+    acceleration(base, implicitVelocity, innerEnabled, pin, dt, rkScratch.a1);
+    let equationResidual = 0, positionVelocityResidual = 0;
+    for (let i = 0; i < scratchLength; i++) {
+      equationResidual = Math.max(equationResidual, Math.abs(implicitVelocity[i] - velocities[i] - dt * rkScratch.a1[i]));
+      positionVelocityResidual = Math.max(positionVelocityResidual, Math.abs(base[i] - positions[i] - dt * implicitVelocity[i]));
+    }
+    const residualTolerance = Math.max(state.faceScale * 1e-5, 1e-8);
+    implicitDiagnostics = { iterations, finalCorrection, equationResidual, positionVelocityResidual, converged: finalCorrection <= correctionTolerance && equationResidual <= residualTolerance, correctionTolerance, residualTolerance };
     positions.set(base);
     velocities.set(implicitVelocity);
     projectConstraint(positions, velocities, pin);
@@ -509,15 +533,38 @@ function buildSystem() {
     for (let i = 0; i < substeps; i++) integrateOne(h);
   }
 
-  function energy() {
-    let value = 0;
-    for (let i = 0; i < edgeA.length; i++) { const ia = edgeA[i], ib = edgeB[i], length = Math.hypot(positions[ib * 3] - positions[ia * 3], positions[ib * 3 + 1] - positions[ia * 3 + 1], positions[ib * 3 + 2] - positions[ia * 3 + 2]); const extension = (length - edgeInfo.rest[i]) * sourceMetersPerUnit; value += 0.5 * surfaceK * extension * extension; }
-    if (innerEnabled) for (let i = 0; i < supportAArray.length; i++) { const ia = supportAArray[i], ib = supportBArray[i], length = Math.hypot(anchors[ib * 3] - positions[ia * 3], anchors[ib * 3 + 1] - positions[ia * 3 + 1], anchors[ib * 3 + 2] - positions[ia * 3 + 2]); const extension = (length - supportRestArray[i]) * sourceMetersPerUnit; value += 0.5 * supportKArray[i] * extension * extension; }
-    return value;
+  function energyBreakdown() {
+    let surfacePotential = 0, innerPotential = 0, kinetic = 0;
+    for (let i = 0; i < edgeA.length; i++) { const ia = edgeA[i], ib = edgeB[i], length = Math.hypot(positions[ib * 3] - positions[ia * 3], positions[ib * 3 + 1] - positions[ia * 3 + 1], positions[ib * 3 + 2] - positions[ia * 3 + 2]); const extension = (length - edgeInfo.rest[i]) * sourceMetersPerUnit; surfacePotential += 0.5 * surfaceK * extension * extension; }
+    if (innerEnabled) for (let i = 0; i < supportAArray.length; i++) { const ia = supportAArray[i], ib = supportBArray[i], length = Math.hypot(anchors[ib * 3] - positions[ia * 3], anchors[ib * 3 + 1] - positions[ia * 3 + 1], anchors[ib * 3 + 2] - positions[ia * 3 + 2]); const extension = (length - supportRestArray[i]) * sourceMetersPerUnit; innerPotential += 0.5 * supportKArray[i] * extension * extension; }
+    for (let i = 0; i < vertexCount; i++) { const speedM = Math.hypot(velocities[i * 3], velocities[i * 3 + 1], velocities[i * 3 + 2]) * sourceMetersPerUnit; kinetic += 0.5 * masses[i] * speedM * speedM; }
+    return { surfacePotential, innerPotential, kinetic, total: surfacePotential + innerPotential + kinetic };
+  }
+  function energy() { const values = energyBreakdown(); return values.surfacePotential + values.innerPotential; }
+
+  function vertexForce(localId, x = positions, withInner = innerEnabled) {
+    let fx = 0, fy = 0, fz = 0;
+    for (let i = 0; i < edgeA.length; i++) {
+      const ia = edgeA[i], ib = edgeB[i];
+      if (ia !== localId && ib !== localId) continue;
+      const dx = x[ib * 3] - x[ia * 3], dy = x[ib * 3 + 1] - x[ia * 3 + 1], dz = x[ib * 3 + 2] - x[ia * 3 + 2], length = Math.hypot(dx, dy, dz);
+      if (length <= 1e-12) continue;
+      const q = surfaceK * ((length - edgeInfo.rest[i]) * sourceMetersPerUnit) / length;
+      const sign = ia === localId ? 1 : -1;
+      fx += sign * q * dx; fy += sign * q * dy; fz += sign * q * dz;
+    }
+    if (withInner) for (let i = 0; i < supportAArray.length; i++) if (supportAArray[i] === localId) {
+      const dx = anchors[supportBArray[i] * 3] - x[localId * 3], dy = anchors[supportBArray[i] * 3 + 1] - x[localId * 3 + 1], dz = anchors[supportBArray[i] * 3 + 2] - x[localId * 3 + 2], length = Math.hypot(dx, dy, dz);
+      if (length <= 1e-12) continue;
+      const q = supportKArray[i] * ((length - supportRestArray[i]) * sourceMetersPerUnit) / length;
+      fx += q * dx; fy += q * dy; fz += q * dz;
+    }
+    return new THREE.Vector3(fx, fy, fz);
   }
 
   function diagnostics() {
     let maxDisplacement = 0, maxStrain = 0;
+    const energies = energyBreakdown();
     for (let i = 0; i < vertexCount; i++) maxDisplacement = Math.max(maxDisplacement, Math.hypot(positions[i * 3] - neutral[i * 3], positions[i * 3 + 1] - neutral[i * 3 + 1], positions[i * 3 + 2] - neutral[i * 3 + 2]));
     for (let i = 0; i < edgeA.length; i++) { const length = Math.hypot(positions[edgeB[i] * 3] - positions[edgeA[i] * 3], positions[edgeB[i] * 3 + 1] - positions[edgeA[i] * 3 + 1], positions[edgeB[i] * 3 + 2] - positions[edgeA[i] * 3 + 2]); maxStrain = Math.max(maxStrain, Math.abs(length - edgeInfo.rest[i]) / Math.max(edgeInfo.rest[i], 1e-12)); }
     const minPositiveMass = positiveMasses[0] || 0, maxPositiveMass = positiveMasses[positiveMasses.length - 1] || 0;
@@ -535,7 +582,8 @@ function buildSystem() {
       numericalMassFloorKg: numericalMassFloor, highestEstimatedNaturalFrequencyHz: Math.sqrt(surfaceK * (maxDegree + neighborCount + 1) / Math.max(minMass, 1e-18)) / (2 * Math.PI),
       integrator, requestedIntegrator, explicitSubstepsPerFrame, implicitIterations,
       substepsPerRenderedFrame: integrator === 'implicit' ? 1 : explicitSubstepsPerFrame,
-      energy: energy(), maxDisplacement, maxStrain, finite: true, orientationSign,
+      energy: energies.surfacePotential + energies.innerPotential, energyBreakdown: energies, maxDisplacement, maxStrain, finite: true, orientationSign, implicit: { ...implicitDiagnostics },
+      faceScaleSourceUnits: state.faceScale, faceScaleMeters: state.faceScale * sourceMetersPerUnit, sourceMetersPerUnit,
     };
   }
 
@@ -571,7 +619,7 @@ function buildSystem() {
   }
 
   function update() { const attr = geometry.attributes.position; for (let i = 0; i < vertexCount; i++) attr.setXYZ(island.vertices[i], positions[i * 3], positions[i * 3 + 1], positions[i * 3 + 2]); attr.needsUpdate = true; if (state.springLines) updateLinePositions(); if (state.massHeatmap) updateMassHeatmapPositions(); updatePinVisuals(); }
-  state.spring = { edgeInfo, edgeA, edgeB, supportA: supportAArray, supportB: supportBArray, supportRest: supportRestArray, supportK: supportKArray, positions, velocities, neutral, anchors, masses, attributedArea, vertexCount, invMass, sourceMetersPerUnit, step: integrate, energy, diagnostics, geometryDiagnostics, setPin: value => { pin = value; neutralSettled = false; }, clearPin: () => { pin = null; }, setInner: value => { innerEnabled = value; neutralSettled = false; }, getInner: () => innerEnabled, markActive: () => { neutralSettled = false; }, markNeutral: () => { neutralSettled = true; }, update };
+  state.spring = { edgeInfo, edgeA, edgeB, supportA: supportAArray, supportB: supportBArray, supportRest: supportRestArray, supportK: supportKArray, positions, velocities, neutral, anchors, masses, attributedArea, vertexCount, invMass, sourceMetersPerUnit, step: integrate, energy, diagnostics, geometryDiagnostics, vertexForce, setPin: value => { pin = value; neutralSettled = false; }, clearPin: () => { pin = null; }, setInner: value => { innerEnabled = value; neutralSettled = false; }, getInner: () => innerEnabled, markActive: () => { neutralSettled = false; }, markNeutral: () => { neutralSettled = true; }, update };
   buildDiagnosticsVisuals(); update();
 }
 
@@ -701,22 +749,33 @@ async function runTest(kind) {
   if (!state.spring) return;
   resetNeutral(); const spring = state.spring, dt = 1 / 600;
   if (kind === 'rest') {
+    spring.markActive();
     for (let i = 0; i < 1000; i++) spring.step(dt);
-    spring.update(); state.tests.rest = { drift: spring.diagnostics().maxDisplacement, energy: spring.energy(), steps: 1000 };
-    updateMetrics(`NEUTRAL REST\n1000 RK4 steps\nDrift: ${state.tests.rest.drift.toExponential(4)}\nEnergy: ${state.tests.rest.energy.toExponential(4)}`);
+    spring.update(); state.tests.rest = { drift: spring.diagnostics().maxDisplacement, energies: spring.diagnostics().energyBreakdown, energy: spring.energy(), steps: 1000, implicit: spring.diagnostics().implicit };
+    updateMetrics(`NEUTRAL REST\n1000 integration steps\nDrift: ${state.tests.rest.drift.toExponential(4)}\nEnergy: ${state.tests.rest.energy.toExponential(4)}`);
   } else if (kind === 'nudge') {
-    spring.positions[0] += state.faceScale * 0.001; spring.markActive(); const energies = [spring.energy()];
+    spring.positions[0] += state.faceScale * 0.001; spring.markActive(); const initialForce = spring.vertexForce(0); const initialAccelerationSource = initialForce.clone().multiplyScalar(spring.invMass[0] / spring.sourceMetersPerUnit); const energies = [spring.energy()];
     const recoverySteps = 30;
     for (let i = 0; i < recoverySteps; i++) { spring.step(dt); if (i === 0 || (i + 1) % 10 === 0) energies.push(spring.energy()); }
     const neighbors = new Set();
     for (let i = 0; i < spring.edgeA.length; i++) { if (spring.edgeA[i] === 0) neighbors.add(spring.edgeB[i]); if (spring.edgeB[i] === 0) neighbors.add(spring.edgeA[i]); }
     let maxNeighborMovement = 0;
     for (const vertex of neighbors) maxNeighborMovement = Math.max(maxNeighborMovement, Math.hypot(spring.positions[vertex * 3] - spring.neutral[vertex * 3], spring.positions[vertex * 3 + 1] - spring.neutral[vertex * 3 + 1], spring.positions[vertex * 3 + 2] - spring.neutral[vertex * 3 + 2]));
-    spring.update(); state.tests.nudge = { initialNudge: state.faceScale * 0.001, recoverySteps, maxDisplacement: spring.diagnostics().maxDisplacement, maxNeighborMovement, neighborCount: neighbors.size, energies, energyDecreased: energies.at(-1) < energies[0], finite: true };
+    spring.update(); const nudgeDiagnostics = spring.diagnostics(); state.tests.nudge = { initialNudge: state.faceScale * 0.001, recoverySteps, maxDisplacement: nudgeDiagnostics.maxDisplacement, maxNeighborMovement, neighborCount: neighbors.size, energies, energyBreakdown: nudgeDiagnostics.energyBreakdown, initialForceN: initialForce.toArray(), initialAccelerationSourceUnitsPerS2: initialAccelerationSource.toArray(), initialAccelerationMS2: initialAccelerationSource.clone().multiplyScalar(spring.sourceMetersPerUnit).toArray(), energyDecreased: energies.at(-1) < energies[0], restoredTowardNeutral: nudgeDiagnostics.maxDisplacement < state.faceScale * 0.001, finite: nudgeDiagnostics.finite, implicit: nudgeDiagnostics.implicit };
     updateMetrics(`ONE-VERTEX NUDGE\nNudge: ${(state.faceScale * 0.001).toExponential(4)}\nFinal max displacement: ${state.tests.nudge.maxDisplacement.toExponential(4)}\nNeighbor response: ${state.tests.nudge.maxDisplacement > 0 ? 'YES' : 'NO'}\nEnergy samples: ${energies.slice(0, 4).map(value => value.toExponential(2)).join(', ')}`);
   } else {
-    const wasEnabled = spring.getInner(); spring.setInner(false); const recoverySteps = 30; for (let i = 0; i < recoverySteps; i++) spring.step(dt); spring.update(); state.tests.noAnchor = { recoverySteps, maxDisplacement: spring.diagnostics().maxDisplacement, energy: spring.energy(), innerSprings: false, finite: true }; spring.setInner(wasEnabled);
-    updateMetrics(`NO ANCHOR COMPARISON\nInner springs disabled for ${recoverySteps} RK4 steps\nMax displacement: ${state.tests.noAnchor.maxDisplacement.toExponential(4)}\nEnergy: ${state.tests.noAnchor.energy.toExponential(4)}`);
+    const displacement = state.faceScale * 0.001, recoverySteps = 30;
+    const runRecovery = innerEnabled => {
+      resetNeutral(); spring.setInner(innerEnabled); spring.positions[0] += displacement; spring.markActive();
+      const energies = [spring.energy()];
+      for (let i = 0; i < recoverySteps; i++) spring.step(dt);
+      const diagnostics = spring.diagnostics();
+      const neighbors = new Set(); for (let i = 0; i < spring.edgeA.length; i++) { if (spring.edgeA[i] === 0) neighbors.add(spring.edgeB[i]); if (spring.edgeB[i] === 0) neighbors.add(spring.edgeA[i]); }
+      let maxNeighborMovement = 0; for (const vertex of neighbors) maxNeighborMovement = Math.max(maxNeighborMovement, Math.hypot(spring.positions[vertex * 3] - spring.neutral[vertex * 3], spring.positions[vertex * 3 + 1] - spring.neutral[vertex * 3 + 1], spring.positions[vertex * 3 + 2] - spring.neutral[vertex * 3 + 2]));
+      return { innerSprings: innerEnabled, recoverySteps, maxDisplacement: diagnostics.maxDisplacement, maxNeighborMovement, neighborCount: neighbors.size, initialEnergy: energies[0], finalEnergy: diagnostics.energy, energyBreakdown: diagnostics.energyBreakdown, restoredTowardNeutral: diagnostics.maxDisplacement < displacement, finite: diagnostics.finite, implicit: diagnostics.implicit };
+    };
+    const withInner = runRecovery(true), withoutInner = runRecovery(false); spring.setInner(true); resetNeutral(); state.tests.noAnchor = { displacement, withInner, withoutInner, comparison: { innerChangesMaxDisplacement: withInner.maxDisplacement - withoutInner.maxDisplacement, innerChangesNeighborMovement: withInner.maxNeighborMovement - withoutInner.maxNeighborMovement } };
+    updateMetrics(`NO ANCHOR COMPARISON\nSame nudge: ${displacement.toExponential(4)}\nWith inner max displacement: ${withInner.maxDisplacement.toExponential(4)}\nWithout inner max displacement: ${withoutInner.maxDisplacement.toExponential(4)}\nNeighbor response: ${withInner.maxNeighborMovement.toExponential(4)} / ${withoutInner.maxNeighborMovement.toExponential(4)}`);
   }
 }
 
@@ -743,7 +802,7 @@ function onPointerDown(event) {
   state.pointerDebug.entry = entry.mesh.name;
   const face = hit.faceIndex, islandId = entry.faceIsland[face];
   state.pointerDebug.islandId = islandId;
-  if (!state.selected || state.selected.entry !== entry || state.selected.island.id !== islandId) { state.selected = { entry, island: entry.islands[islandId] }; buildSystem(); }
+  if (!state.selected || state.selected.entry !== entry || state.selected.island.id !== islandId) { state.selected = { entry, island: entry.islands[islandId] }; ui.island.value = `${entry.mesh.uuid}:${islandId}`; buildSystem(); updateMetrics(`Pinch island selected: ${islandId}`); }
   const index = entry.geometry.index.array, globalIds = [index[face * 3], index[face * 3 + 1], index[face * 3 + 2]], localMap = new Map(state.selected.island.vertices.map((vertex, i) => [vertex, i])), ids = globalIds.map(vertex => localMap.get(vertex));
   if (ids.some(value => value === undefined)) { state.pointerDebug.missingLocalIds = ids; return; }
   const inverse = entry.mesh.matrixWorld.clone().invert(), localHit = hit.point.clone().applyMatrix4(inverse), position = entry.geometry.attributes.position;
@@ -751,7 +810,7 @@ function onPointerDown(event) {
   const weights = barycentric(localHit, a, b, c), plane = new THREE.Plane().setFromNormalAndCoplanarPoint(camera.getWorldDirection(new THREE.Vector3()), hit.point);
   state.pin = { ids, globalIds, weights, target: localHit.clone(), velocity: new THREE.Vector3(), plane, previousWorld: hit.point.clone(), previousLocal: localHit.clone(), lastTime: performance.now(), hard: ui.hardDrag.checked, kp: Number(ui.pinchKp.value), kd: Number(ui.pinchKd.value), currentForce: new THREE.Vector3(), peakForce: 0, peakTrackingError: 0 };
   state.spring.setPin(state.pin); state.running = true; ui.pause.textContent = 'Pause'; controls.enabled = false;
-  state.lastPinch = { down: true, hard: state.pin.hard, kp: state.pin.kp, kd: state.pin.kd, globalIds, weights, initial: hit.point.toArray(), activeIsland: islandId, faceIndex: face };
+  state.lastPinch = { down: true, hard: state.pin.hard, kp: state.pin.kp, kd: state.pin.kd, globalIds, weights, initial: hit.point.toArray(), activeIsland: islandId, activeVertices: state.selected.island.vertices.length, activeTriangles: state.selected.island.faces.length, faceIndex: face };
   try { canvas.setPointerCapture(event.pointerId); } catch {}
 }
 function onPointerMove(event) {
@@ -767,7 +826,8 @@ function onPointerUp(event) {
   const actual = new THREE.Vector3(); for (let j = 0; j < 3; j++) { actual.x += weights[j] * positions[ids[j] * 3]; actual.y += weights[j] * positions[ids[j] * 3 + 1]; actual.z += weights[j] * positions[ids[j] * 3 + 2]; }
   const trackingErrorMeters = actual.distanceTo(pin.target) * state.spring.sourceMetersPerUnit;
   const moved = state.spring.diagnostics().maxDisplacement; state.spring.clearPin(); controls.enabled = true;
-  state.lastPinch = { ...state.lastPinch, down: false, released: true, hard: pin.hard, kp: pin.kp, kd: pin.kd, requestedTarget: pin.target.toArray(), actualAtRelease: actual.toArray(), trackingErrorMeters, peakForceN: pin.peakForce, peakTrackingErrorMeters: pin.peakTrackingError, maxDisplacementAtRelease: moved };
+  const forceDistributionN = pin.weights.map(weight => [pin.currentForce.x * weight, pin.currentForce.y * weight, pin.currentForce.z * weight]);
+  state.lastPinch = { ...state.lastPinch, down: false, released: true, hard: pin.hard, kp: pin.kp, kd: pin.kd, requestedTarget: pin.target.toArray(), actualAtRelease: actual.toArray(), trackingErrorMeters, peakForceN: pin.peakForce, currentForceN: pin.currentForce.toArray(), forceWeightSum: pin.weights.reduce((sum, weight) => sum + weight, 0), forceDistributionN, forceDistributionSumN: forceDistributionN.reduce((sum, value) => [sum[0] + value[0], sum[1] + value[1], sum[2] + value[2]], [0, 0, 0]), peakTrackingErrorMeters: pin.peakTrackingError, maxDisplacementAtRelease: moved };
   state.pin = null; controls.enabled = state.interactionMode === 'explore'; try { canvas.releasePointerCapture(event.pointerId); } catch {} updateMetrics(`Pin released — force recovery active\nController: ${pin.hard ? 'hard constrained' : `Kp ${pin.kp} N/m, Kd ${pin.kd} N·s/m`}\nPeak force: ${pin.peakForce.toExponential(3)} N\nTracking error: ${trackingErrorMeters.toExponential(3)} m`);
 }
 
@@ -790,7 +850,7 @@ async function loadModel(name) {
     const allIslands = state.entries.flatMap(entry => entry.islands.map(island => ({ id: island.id, vertices: island.vertices.length, triangles: island.faces.length })));
     return {
       model: state.model, stage: state.stage, interactionMode: state.interactionMode, lastPinch: state.lastPinch, tests: state.tests,
-      metrics: state.spring?.diagnostics(), islands: { count: allIslands.length, minVertices: Math.min(...allIslands.map(item => item.vertices)), maxVertices: Math.max(...allIslands.map(item => item.vertices)), selected: state.selected ? { id: state.selected.island.id, vertices: state.selected.island.vertices.length, triangles: state.selected.island.faces.length } : null },
+      metrics: state.spring?.diagnostics(), islands: { count: allIslands.length, minVertices: Math.min(...allIslands.map(item => item.vertices)), maxVertices: Math.max(...allIslands.map(item => item.vertices)), selected: state.selected ? { id: state.selected.island.id, vertices: state.selected.island.vertices.length, triangles: state.selected.island.faces.length, selectedOption: ui.island.value } : null },
       topology: state.entries.map(entry => ({ mesh: entry.mesh.name, ...entry.topology })),
       springTopology: state.spring ? { rawTriangleEdgeUses: state.selected.island.faces.length * 3, uniqueSurfaceEdges: state.spring.edgeA.length, duplicateRawEdgeUsesRemoved: state.spring.edgeInfo.duplicateRawEdges, invariant: state.spring.edgeA.length + state.spring.edgeInfo.duplicateRawEdges === state.selected.island.faces.length * 3 } : null,
       geometry: state.spring?.geometryDiagnostics(), interIslandSprings: 0, pointerDebug: state.pointerDebug,
@@ -834,5 +894,6 @@ setInteractionMode('explore');
 canvas.addEventListener('pointerdown', onPointerDown); canvas.addEventListener('pointermove', onPointerMove); canvas.addEventListener('pointerup', onPointerUp); canvas.addEventListener('pointercancel', onPointerUp);
 window.addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); resizeRenderer(); });
 ui.stageText.textContent = STAGE_TEXT[1];
-loadModel('female').catch(error => { ui.state.textContent = `Error: ${error.message}`; console.error(error); });
+const initialModel = new URLSearchParams(location.search).get('model') === 'male' ? 'male' : 'female';
+loadModel(initialModel).catch(error => { ui.state.textContent = `Error: ${error.message}`; console.error(error); });
 frame();
