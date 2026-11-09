@@ -6,6 +6,7 @@
       "initial": {
         "model": "female",
         "stage": 1,
+        "interactionMode": "explore",
         "lastPinch": null,
         "tests": {},
         "metrics": {
@@ -109,7 +110,13 @@
           ],
           "meshes": 1,
           "visible": 1,
-          "drawCalls": 1
+          "drawCalls": 1,
+          "pixelRatio": 1,
+          "drawingBuffer": [
+            1280,
+            900
+          ],
+          "maxTextureSize": 8192
         },
         "pickProbes": [
           {
@@ -171,11 +178,14 @@
           },
           "sourceDisplacement": 0.0011488143312038221,
           "faceScale": 0.057440716560191105
-        }
+        },
+        "exploreCreatedPin": false,
+        "defaultInteractionMode": "explore"
       },
       "rest": {
         "model": "female",
         "stage": 4,
+        "interactionMode": "pinch",
         "lastPinch": null,
         "tests": {
           "rest": {
@@ -285,12 +295,19 @@
           ],
           "meshes": 1,
           "visible": 1,
-          "drawCalls": 7
+          "drawCalls": 7,
+          "pixelRatio": 1,
+          "drawingBuffer": [
+            1280,
+            900
+          ],
+          "maxTextureSize": 8192
         }
       },
       "nudge": {
         "model": "female",
         "stage": 4,
+        "interactionMode": "pinch",
         "lastPinch": null,
         "tests": {
           "rest": {
@@ -416,12 +433,19 @@
           ],
           "meshes": 1,
           "visible": 1,
-          "drawCalls": 7
+          "drawCalls": 7,
+          "pixelRatio": 1,
+          "drawingBuffer": [
+            1280,
+            900
+          ],
+          "maxTextureSize": 8192
         }
       },
       "noAnchor": {
         "model": "female",
         "stage": 4,
+        "interactionMode": "pinch",
         "lastPinch": null,
         "tests": {
           "rest": {
@@ -554,12 +578,19 @@
           ],
           "meshes": 1,
           "visible": 1,
-          "drawCalls": 7
+          "drawCalls": 7,
+          "pixelRatio": 1,
+          "drawingBuffer": [
+            1280,
+            900
+          ],
+          "maxTextureSize": 8192
         }
       },
       "during": {
         "model": "female",
         "stage": 5,
+        "interactionMode": "pinch",
         "lastPinch": {
           "down": true,
           "hard": false,
@@ -655,9 +686,9 @@
           "explicitSubstepsPerFrame": 62444,
           "implicitIterations": 8,
           "substepsPerRenderedFrame": 1,
-          "energy": 4.535599805941656e-7,
-          "maxDisplacement": 0.0012406462583688346,
-          "maxStrain": 0.11969993851155379,
+          "energy": 4.939098112881317e-7,
+          "maxDisplacement": 0.0012201858803199375,
+          "maxStrain": 0.1344076481544573,
           "finite": true,
           "orientationSign": 1
         },
@@ -727,12 +758,19 @@
           ],
           "meshes": 1,
           "visible": 1,
-          "drawCalls": 4
+          "drawCalls": 4,
+          "pixelRatio": 1,
+          "drawingBuffer": [
+            1280,
+            900
+          ],
+          "maxTextureSize": 8192
         }
       },
       "released": {
         "model": "female",
         "stage": 5,
+        "interactionMode": "pinch",
         "lastPinch": {
           "down": false,
           "hard": false,
@@ -762,14 +800,14 @@
             0.004149089242713136
           ],
           "actualAtRelease": [
-            0.06112755493570518,
-            0.4243360537738874,
-            0.004182187579424898
+            0.061128679916575945,
+            0.4243309688810014,
+            0.004179329187634794
           ],
-          "trackingErrorMeters": 0.000010847966074831163,
-          "peakForceN": 0.005647426460607824,
-          "peakTrackingErrorMeters": 0.00006276633200389988,
-          "maxDisplacementAtRelease": 0.0012260857855658583
+          "trackingErrorMeters": 0.000009614778885673079,
+          "peakForceN": 0.00553968215788093,
+          "peakTrackingErrorMeters": 0.00006156525958036977,
+          "maxDisplacementAtRelease": 0.0012279979210914997
         },
         "tests": {
           "rest": {
@@ -843,9 +881,9 @@
           "explicitSubstepsPerFrame": 62444,
           "implicitIterations": 8,
           "substepsPerRenderedFrame": 1,
-          "energy": 2.7194161345078015e-7,
-          "maxDisplacement": 0.0011741626971454172,
-          "maxStrain": 0.02336991920614377,
+          "energy": 3.550760034378699e-7,
+          "maxDisplacement": 0.0011663655933065685,
+          "maxStrain": 0.021746197756061996,
           "finite": true,
           "orientationSign": 1
         },
@@ -915,7 +953,13 @@
           ],
           "meshes": 1,
           "visible": 1,
-          "drawCalls": 4
+          "drawCalls": 4,
+          "pixelRatio": 1,
+          "drawingBuffer": [
+            1280,
+            900
+          ],
+          "maxTextureSize": 8192
         }
       },
       "pinchRuns": [
@@ -924,6 +968,7 @@
           "during": {
             "model": "female",
             "stage": 5,
+            "interactionMode": "pinch",
             "lastPinch": {
               "down": true,
               "hard": false,
@@ -1019,9 +1064,9 @@
               "explicitSubstepsPerFrame": 62444,
               "implicitIterations": 8,
               "substepsPerRenderedFrame": 1,
-              "energy": 4.535599805941656e-7,
-              "maxDisplacement": 0.0012406462583688346,
-              "maxStrain": 0.11969993851155379,
+              "energy": 4.939098112881317e-7,
+              "maxDisplacement": 0.0012201858803199375,
+              "maxStrain": 0.1344076481544573,
               "finite": true,
               "orientationSign": 1
             },
@@ -1091,12 +1136,19 @@
               ],
               "meshes": 1,
               "visible": 1,
-              "drawCalls": 4
+              "drawCalls": 4,
+              "pixelRatio": 1,
+              "drawingBuffer": [
+                1280,
+                900
+              ],
+              "maxTextureSize": 8192
             }
           },
           "released": {
             "model": "female",
             "stage": 5,
+            "interactionMode": "pinch",
             "lastPinch": {
               "down": false,
               "hard": false,
@@ -1126,14 +1178,14 @@
                 0.004149089242713136
               ],
               "actualAtRelease": [
-                0.06112755493570518,
-                0.4243360537738874,
-                0.004182187579424898
+                0.061128679916575945,
+                0.4243309688810014,
+                0.004179329187634794
               ],
-              "trackingErrorMeters": 0.000010847966074831163,
-              "peakForceN": 0.005647426460607824,
-              "peakTrackingErrorMeters": 0.00006276633200389988,
-              "maxDisplacementAtRelease": 0.0012260857855658583
+              "trackingErrorMeters": 0.000009614778885673079,
+              "peakForceN": 0.00553968215788093,
+              "peakTrackingErrorMeters": 0.00006156525958036977,
+              "maxDisplacementAtRelease": 0.0012279979210914997
             },
             "tests": {
               "rest": {
@@ -1207,9 +1259,9 @@
               "explicitSubstepsPerFrame": 62444,
               "implicitIterations": 8,
               "substepsPerRenderedFrame": 1,
-              "energy": 2.7194161345078015e-7,
-              "maxDisplacement": 0.0011741626971454172,
-              "maxStrain": 0.02336991920614377,
+              "energy": 3.550760034378699e-7,
+              "maxDisplacement": 0.0011663655933065685,
+              "maxStrain": 0.021746197756061996,
               "finite": true,
               "orientationSign": 1
             },
@@ -1279,7 +1331,13 @@
               ],
               "meshes": 1,
               "visible": 1,
-              "drawCalls": 4
+              "drawCalls": 4,
+              "pixelRatio": 1,
+              "drawingBuffer": [
+                1280,
+                900
+              ],
+              "maxTextureSize": 8192
             }
           }
         },
@@ -1289,6 +1347,7 @@
           "during": {
             "model": "female",
             "stage": 5,
+            "interactionMode": "pinch",
             "lastPinch": {
               "down": true,
               "hard": false,
@@ -1384,9 +1443,9 @@
               "explicitSubstepsPerFrame": 62444,
               "implicitIterations": 8,
               "substepsPerRenderedFrame": 1,
-              "energy": 0.0000010234441856854524,
-              "maxDisplacement": 0.0011247190035203103,
-              "maxStrain": 0.19530310165023668,
+              "energy": 0.0000010253875951919929,
+              "maxDisplacement": 0.0011252095451182934,
+              "maxStrain": 0.1953820178703519,
               "finite": true,
               "orientationSign": 1
             },
@@ -1456,12 +1515,19 @@
               ],
               "meshes": 1,
               "visible": 1,
-              "drawCalls": 4
+              "drawCalls": 4,
+              "pixelRatio": 1,
+              "drawingBuffer": [
+                1280,
+                900
+              ],
+              "maxTextureSize": 8192
             }
           },
           "released": {
             "model": "female",
             "stage": 5,
+            "interactionMode": "pinch",
             "lastPinch": {
               "down": false,
               "hard": false,
@@ -1491,14 +1557,14 @@
                 0.004149089242713136
               ],
               "actualAtRelease": [
-                0.0611186661644263,
-                0.42434223288523787,
-                0.004197680211474549
+                0.061118253287487434,
+                0.4243418870813458,
+                0.004196802604341425
               ],
-              "trackingErrorMeters": 0.000016435838509131867,
-              "peakForceN": 0.031129296193794107,
-              "peakTrackingErrorMeters": 0.0003457475017660331,
-              "maxDisplacementAtRelease": 0.001166292181586829
+              "trackingErrorMeters": 0.000016216682639956232,
+              "peakForceN": 0.03115815663343314,
+              "peakTrackingErrorMeters": 0.0003460282453422881,
+              "maxDisplacementAtRelease": 0.0011668702823845328
             },
             "tests": {
               "rest": {
@@ -1572,9 +1638,9 @@
               "explicitSubstepsPerFrame": 62444,
               "implicitIterations": 8,
               "substepsPerRenderedFrame": 1,
-              "energy": 5.684015912994006e-7,
-              "maxDisplacement": 0.00110106546006207,
-              "maxStrain": 0.04089908062688803,
+              "energy": 5.69906392055838e-7,
+              "maxDisplacement": 0.0011019763981848984,
+              "maxStrain": 0.04098207198411635,
               "finite": true,
               "orientationSign": 1
             },
@@ -1644,7 +1710,13 @@
               ],
               "meshes": 1,
               "visible": 1,
-              "drawCalls": 4
+              "drawCalls": 4,
+              "pixelRatio": 1,
+              "drawingBuffer": [
+                1280,
+                900
+              ],
+              "maxTextureSize": 8192
             }
           }
         },
@@ -1654,6 +1726,7 @@
           "during": {
             "model": "female",
             "stage": 5,
+            "interactionMode": "pinch",
             "lastPinch": {
               "down": true,
               "hard": false,
@@ -1749,9 +1822,9 @@
               "explicitSubstepsPerFrame": 62444,
               "implicitIterations": 8,
               "substepsPerRenderedFrame": 1,
-              "energy": 4.308432344955837e-7,
-              "maxDisplacement": 0.0012206099579489577,
-              "maxStrain": 0.10845473334810742,
+              "energy": 4.834230399806375e-7,
+              "maxDisplacement": 0.0012220394254660314,
+              "maxStrain": 0.14095456843791565,
               "finite": true,
               "orientationSign": 1
             },
@@ -1821,12 +1894,19 @@
               ],
               "meshes": 1,
               "visible": 1,
-              "drawCalls": 4
+              "drawCalls": 4,
+              "pixelRatio": 1,
+              "drawingBuffer": [
+                1280,
+                900
+              ],
+              "maxTextureSize": 8192
             }
           },
           "released": {
             "model": "female",
             "stage": 5,
+            "interactionMode": "pinch",
             "lastPinch": {
               "down": false,
               "hard": false,
@@ -1856,14 +1936,14 @@
                 0.004149089242713136
               ],
               "actualAtRelease": [
-                0.06112833241051143,
-                0.42432979608098487,
-                0.004181349083122902
+                0.061125050000506664,
+                0.4243346112527703,
+                0.004189967333759825
               ],
-              "trackingErrorMeters": 0.000010171662127438745,
-              "peakForceN": 0.0045032766576808625,
-              "peakTrackingErrorMeters": 0.00005002849929757003,
-              "maxDisplacementAtRelease": 0.0012313762678146298
+              "trackingErrorMeters": 0.000013127135488628853,
+              "peakForceN": 0.004735021158911286,
+              "peakTrackingErrorMeters": 0.00005260465501638351,
+              "maxDisplacementAtRelease": 0.0012220394254660314
             },
             "tests": {
               "rest": {
@@ -1937,9 +2017,9 @@
               "explicitSubstepsPerFrame": 62444,
               "implicitIterations": 8,
               "substepsPerRenderedFrame": 1,
-              "energy": 2.8950988076711e-7,
-              "maxDisplacement": 0.0011676645314446044,
-              "maxStrain": 0.024619411408637784,
+              "energy": 2.707452208803997e-7,
+              "maxDisplacement": 0.0011110284789545611,
+              "maxStrain": 0.0346041432986645,
               "finite": true,
               "orientationSign": 1
             },
@@ -2009,7 +2089,13 @@
               ],
               "meshes": 1,
               "visible": 1,
-              "drawCalls": 4
+              "drawCalls": 4,
+              "pixelRatio": 1,
+              "drawingBuffer": [
+                1280,
+                900
+              ],
+              "maxTextureSize": 8192
             }
           }
         }
@@ -2020,6 +2106,7 @@
       "initial": {
         "model": "male",
         "stage": 5,
+        "interactionMode": "explore",
         "lastPinch": {
           "down": false,
           "hard": false,
@@ -2049,14 +2136,14 @@
             0.004149089242713136
           ],
           "actualAtRelease": [
-            0.06112833241051143,
-            0.42432979608098487,
-            0.004181349083122902
+            0.061125050000506664,
+            0.4243346112527703,
+            0.004189967333759825
           ],
-          "trackingErrorMeters": 0.000010171662127438745,
-          "peakForceN": 0.0045032766576808625,
-          "peakTrackingErrorMeters": 0.00005002849929757003,
-          "maxDisplacementAtRelease": 0.0012313762678146298
+          "trackingErrorMeters": 0.000013127135488628853,
+          "peakForceN": 0.004735021158911286,
+          "peakTrackingErrorMeters": 0.00005260465501638351,
+          "maxDisplacementAtRelease": 0.0012220394254660314
         },
         "tests": {
           "rest": {
@@ -2202,7 +2289,13 @@
           ],
           "meshes": 1,
           "visible": 1,
-          "drawCalls": 1
+          "drawCalls": 1,
+          "pixelRatio": 1,
+          "drawingBuffer": [
+            1280,
+            900
+          ],
+          "maxTextureSize": 8192
         },
         "pickProbes": [
           {
@@ -2255,11 +2348,14 @@
           },
           "sourceDisplacement": 0.0060819724087812065,
           "faceScale": 0.30409862043906033
-        }
+        },
+        "exploreCreatedPin": false,
+        "defaultInteractionMode": "explore"
       },
       "rest": {
         "model": "male",
         "stage": 4,
+        "interactionMode": "pinch",
         "lastPinch": null,
         "tests": {
           "rest": {
@@ -2405,12 +2501,19 @@
           ],
           "meshes": 1,
           "visible": 1,
-          "drawCalls": 7
+          "drawCalls": 7,
+          "pixelRatio": 1,
+          "drawingBuffer": [
+            1280,
+            900
+          ],
+          "maxTextureSize": 8192
         }
       },
       "nudge": {
         "model": "male",
         "stage": 4,
+        "interactionMode": "pinch",
         "lastPinch": null,
         "tests": {
           "rest": {
@@ -2556,12 +2659,19 @@
           ],
           "meshes": 1,
           "visible": 1,
-          "drawCalls": 7
+          "drawCalls": 7,
+          "pixelRatio": 1,
+          "drawingBuffer": [
+            1280,
+            900
+          ],
+          "maxTextureSize": 8192
         }
       },
       "noAnchor": {
         "model": "male",
         "stage": 4,
+        "interactionMode": "pinch",
         "lastPinch": null,
         "tests": {
           "rest": {
@@ -2707,12 +2817,19 @@
           ],
           "meshes": 1,
           "visible": 1,
-          "drawCalls": 7
+          "drawCalls": 7,
+          "pixelRatio": 1,
+          "drawingBuffer": [
+            1280,
+            900
+          ],
+          "maxTextureSize": 8192
         }
       },
       "during": {
         "model": "male",
         "stage": 5,
+        "interactionMode": "pinch",
         "lastPinch": {
           "down": true,
           "hard": false,
@@ -2808,9 +2925,9 @@
           "explicitSubstepsPerFrame": 28687,
           "implicitIterations": 8,
           "substepsPerRenderedFrame": 1,
-          "energy": 0.00005179434999023834,
-          "maxDisplacement": 0.005904732652229086,
-          "maxStrain": 0.558990851209317,
+          "energy": 0.00005181147672759386,
+          "maxDisplacement": 0.0059069065300573105,
+          "maxStrain": 0.5594051764783503,
           "finite": true,
           "orientationSign": 1
         },
@@ -2880,12 +2997,19 @@
           ],
           "meshes": 1,
           "visible": 1,
-          "drawCalls": 4
+          "drawCalls": 4,
+          "pixelRatio": 1,
+          "drawingBuffer": [
+            1280,
+            900
+          ],
+          "maxTextureSize": 8192
         }
       },
       "released": {
         "model": "male",
         "stage": 5,
+        "interactionMode": "pinch",
         "lastPinch": {
           "down": false,
           "hard": false,
@@ -2915,14 +3039,14 @@
             0.06776941804631664
           ],
           "actualAtRelease": [
-            0.27275210908741326,
-            0.2558677290312358,
-            0.06848399791775474
+            0.27275440041267973,
+            0.25586293231882845,
+            0.06848174229544055
           ],
-          "trackingErrorMeters": 0.00023294462141913063,
-          "peakForceN": 0.032144300378225375,
-          "peakTrackingErrorMeters": 0.0003571339526832932,
-          "maxDisplacementAtRelease": 0.005901876003407517
+          "trackingErrorMeters": 0.0002321888273219322,
+          "peakForceN": 0.03214279142392856,
+          "peakTrackingErrorMeters": 0.0003571208205756187,
+          "maxDisplacementAtRelease": 0.005902791953747255
         },
         "tests": {
           "rest": {
@@ -2996,9 +3120,9 @@
           "explicitSubstepsPerFrame": 28687,
           "implicitIterations": 8,
           "substepsPerRenderedFrame": 1,
-          "energy": 0.000016870800466939432,
-          "maxDisplacement": 0.0027109860888533616,
-          "maxStrain": 0.19259104528582635,
+          "energy": 0.000017051741596414635,
+          "maxDisplacement": 0.002806020324548993,
+          "maxStrain": 0.190132950660203,
           "finite": true,
           "orientationSign": 1
         },
@@ -3068,7 +3192,13 @@
           ],
           "meshes": 1,
           "visible": 1,
-          "drawCalls": 4
+          "drawCalls": 4,
+          "pixelRatio": 1,
+          "drawingBuffer": [
+            1280,
+            900
+          ],
+          "maxTextureSize": 8192
         }
       },
       "pinchRuns": [
@@ -3077,6 +3207,7 @@
           "during": {
             "model": "male",
             "stage": 5,
+            "interactionMode": "pinch",
             "lastPinch": {
               "down": true,
               "hard": false,
@@ -3172,9 +3303,9 @@
               "explicitSubstepsPerFrame": 28687,
               "implicitIterations": 8,
               "substepsPerRenderedFrame": 1,
-              "energy": 0.00005179434999023834,
-              "maxDisplacement": 0.005904732652229086,
-              "maxStrain": 0.558990851209317,
+              "energy": 0.00005181147672759386,
+              "maxDisplacement": 0.0059069065300573105,
+              "maxStrain": 0.5594051764783503,
               "finite": true,
               "orientationSign": 1
             },
@@ -3244,12 +3375,19 @@
               ],
               "meshes": 1,
               "visible": 1,
-              "drawCalls": 4
+              "drawCalls": 4,
+              "pixelRatio": 1,
+              "drawingBuffer": [
+                1280,
+                900
+              ],
+              "maxTextureSize": 8192
             }
           },
           "released": {
             "model": "male",
             "stage": 5,
+            "interactionMode": "pinch",
             "lastPinch": {
               "down": false,
               "hard": false,
@@ -3279,14 +3417,14 @@
                 0.06776941804631664
               ],
               "actualAtRelease": [
-                0.27275210908741326,
-                0.2558677290312358,
-                0.06848399791775474
+                0.27275440041267973,
+                0.25586293231882845,
+                0.06848174229544055
               ],
-              "trackingErrorMeters": 0.00023294462141913063,
-              "peakForceN": 0.032144300378225375,
-              "peakTrackingErrorMeters": 0.0003571339526832932,
-              "maxDisplacementAtRelease": 0.005901876003407517
+              "trackingErrorMeters": 0.0002321888273219322,
+              "peakForceN": 0.03214279142392856,
+              "peakTrackingErrorMeters": 0.0003571208205756187,
+              "maxDisplacementAtRelease": 0.005902791953747255
             },
             "tests": {
               "rest": {
@@ -3360,9 +3498,9 @@
               "explicitSubstepsPerFrame": 28687,
               "implicitIterations": 8,
               "substepsPerRenderedFrame": 1,
-              "energy": 0.000016870800466939432,
-              "maxDisplacement": 0.0027109860888533616,
-              "maxStrain": 0.19259104528582635,
+              "energy": 0.000017051741596414635,
+              "maxDisplacement": 0.002806020324548993,
+              "maxStrain": 0.190132950660203,
               "finite": true,
               "orientationSign": 1
             },
@@ -3432,7 +3570,13 @@
               ],
               "meshes": 1,
               "visible": 1,
-              "drawCalls": 4
+              "drawCalls": 4,
+              "pixelRatio": 1,
+              "drawingBuffer": [
+                1280,
+                900
+              ],
+              "maxTextureSize": 8192
             }
           }
         },
@@ -3442,6 +3586,7 @@
           "during": {
             "model": "male",
             "stage": 5,
+            "interactionMode": "pinch",
             "lastPinch": {
               "down": true,
               "hard": false,
@@ -3537,9 +3682,9 @@
               "explicitSubstepsPerFrame": 28687,
               "implicitIterations": 8,
               "substepsPerRenderedFrame": 1,
-              "energy": 0.00008067439218666877,
-              "maxDisplacement": 0.00583758924760531,
-              "maxStrain": 0.6604973709583439,
+              "energy": 0.0000806906502547109,
+              "maxDisplacement": 0.005838208957380503,
+              "maxStrain": 0.6605640829911633,
               "finite": true,
               "orientationSign": 1
             },
@@ -3609,12 +3754,19 @@
               ],
               "meshes": 1,
               "visible": 1,
-              "drawCalls": 4
+              "drawCalls": 4,
+              "pixelRatio": 1,
+              "drawingBuffer": [
+                1280,
+                900
+              ],
+              "maxTextureSize": 8192
             }
           },
           "released": {
             "model": "male",
             "stage": 5,
+            "interactionMode": "pinch",
             "lastPinch": {
               "down": false,
               "hard": false,
@@ -3644,14 +3796,14 @@
                 0.06776941804631664
               ],
               "actualAtRelease": [
-                0.2727493194590369,
-                0.2559633894565477,
-                0.06858958170919041
+                0.27274945091808195,
+                0.2559634191383342,
+                0.0685890924815063
               ],
-              "trackingErrorMeters": 0.0002620447741740494,
-              "peakForceN": 0.16481720086522686,
-              "peakTrackingErrorMeters": 0.001830759901962275,
-              "maxDisplacementAtRelease": 0.00583758924760531
+              "trackingErrorMeters": 0.00026189375253147655,
+              "peakForceN": 0.16483386470367709,
+              "peakTrackingErrorMeters": 0.0018309220015580944,
+              "maxDisplacementAtRelease": 0.005838208957380503
             },
             "tests": {
               "rest": {
@@ -3725,9 +3877,9 @@
               "explicitSubstepsPerFrame": 28687,
               "implicitIterations": 8,
               "substepsPerRenderedFrame": 1,
-              "energy": 0.0000323662998626975,
-              "maxDisplacement": 0.002883463432729696,
-              "maxStrain": 0.26066598556032783,
+              "energy": 0.0000806906502547109,
+              "maxDisplacement": 0.005838208957380503,
+              "maxStrain": 0.6605640829911633,
               "finite": true,
               "orientationSign": 1
             },
@@ -3797,7 +3949,13 @@
               ],
               "meshes": 1,
               "visible": 1,
-              "drawCalls": 4
+              "drawCalls": 4,
+              "pixelRatio": 1,
+              "drawingBuffer": [
+                1280,
+                900
+              ],
+              "maxTextureSize": 8192
             }
           }
         },
@@ -3807,6 +3965,7 @@
           "during": {
             "model": "male",
             "stage": 5,
+            "interactionMode": "pinch",
             "lastPinch": {
               "down": true,
               "hard": false,
@@ -3902,9 +4061,9 @@
               "explicitSubstepsPerFrame": 28687,
               "implicitIterations": 8,
               "substepsPerRenderedFrame": 1,
-              "energy": 0.00005265311545863104,
-              "maxDisplacement": 0.005906085395516271,
-              "maxStrain": 0.5642027975551835,
+              "energy": 0.00005277314398840704,
+              "maxDisplacement": 0.0059071907210928535,
+              "maxStrain": 0.5467938792656815,
               "finite": true,
               "orientationSign": 1
             },
@@ -3974,12 +4133,19 @@
               ],
               "meshes": 1,
               "visible": 1,
-              "drawCalls": 4
+              "drawCalls": 4,
+              "pixelRatio": 1,
+              "drawingBuffer": [
+                1280,
+                900
+              ],
+              "maxTextureSize": 8192
             }
           },
           "released": {
             "model": "male",
             "stage": 5,
+            "interactionMode": "pinch",
             "lastPinch": {
               "down": false,
               "hard": false,
@@ -4009,14 +4175,14 @@
                 0.06776941804631664
               ],
               "actualAtRelease": [
-                0.2727596144107001,
-                0.25586653444455265,
-                0.06846928350424435
+                0.27275648239589534,
+                0.2558569089876084,
+                0.06847027103392811
               ],
-              "trackingErrorMeters": 0.00022805547657710903,
-              "peakForceN": 0.037908988974287766,
-              "peakTrackingErrorMeters": 0.00042119354851623595,
-              "maxDisplacementAtRelease": 0.005901688008848404
+              "trackingErrorMeters": 0.00022896268885123209,
+              "peakForceN": 0.03820967834994604,
+              "peakTrackingErrorMeters": 0.00042451956918473113,
+              "maxDisplacementAtRelease": 0.005909548359373423
             },
             "tests": {
               "rest": {
@@ -4090,9 +4256,9 @@
               "explicitSubstepsPerFrame": 28687,
               "implicitIterations": 8,
               "substepsPerRenderedFrame": 1,
-              "energy": 0.000019441810716356778,
-              "maxDisplacement": 0.0029022927150868026,
-              "maxStrain": 0.20141229190370902,
+              "energy": 0.00001954422686230343,
+              "maxDisplacement": 0.002805134835704883,
+              "maxStrain": 0.22423506471265786,
               "finite": true,
               "orientationSign": 1
             },
@@ -4162,7 +4328,13 @@
               ],
               "meshes": 1,
               "visible": 1,
-              "drawCalls": 4
+              "drawCalls": 4,
+              "pixelRatio": 1,
+              "drawingBuffer": [
+                1280,
+                900
+              ],
+              "maxTextureSize": 8192
             }
           }
         }

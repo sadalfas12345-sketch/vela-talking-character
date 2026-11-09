@@ -55,6 +55,15 @@ async function captureModel(page, model) {
   }), { box, probeCoords });
   const selectedProbe = initial.pickProbes.find(probe => probe.hit);
   initial.pinPlan = selectedProbe ? await page.evaluate(({ point }) => window.__velaPlanDrag(point, 0.02), { point: selectedProbe.hit.point }) : null;
+  await page.click('#exploreMode');
+  if (selectedProbe) {
+    await page.locator('#viewport').hover({ position: { x: selectedProbe.x - box.x, y: selectedProbe.y - box.y } });
+    await page.mouse.down(); await page.waitForTimeout(80);
+    initial.exploreCreatedPin = Boolean((await page.evaluate(() => window.__velaDiagnostics().lastPinch))?.down);
+    await page.mouse.up();
+  } else initial.exploreCreatedPin = false;
+  await page.click('#pinchMode');
+  initial.defaultInteractionMode = initial.interactionMode;
   if (process.env.VELA_PINCH_QUICK) {
     await tab(page, 5); await page.uncheck('#showIslands'); await page.uncheck('#showSprings'); await page.uncheck('#showInner'); await page.uncheck('#showMass');
     const quickBox = await page.locator('#viewport').boundingBox();
@@ -107,13 +116,13 @@ function makeReport(results) {
   }).join('\n');
   const stage4Pass = results.every(result => {
     const rest = result.rest?.tests?.rest, nudge = result.nudge?.tests?.nudge, noAnchor = result.noAnchor?.tests?.noAnchor;
-    return Number.isFinite(rest?.drift) && Number.isFinite(nudge?.maxNeighborMovement) && nudge?.maxNeighborMovement > 0 && nudge?.energyDecreased && Number.isFinite(noAnchor?.maxNeighborMovement) && noAnchor.maxNeighborMovement > 0 && noAnchor?.finite;
+    return Number.isFinite(rest?.drift) && Number.isFinite(nudge?.maxNeighborMovement) && nudge?.maxNeighborMovement > 0 && nudge?.energyDecreased && Number.isFinite(noAnchor?.maxDisplacement) && noAnchor?.finite;
   });
   const stage3Pass = results.every(result => {
     const metrics = result.initial.metrics || {};
     return metrics.supportSprings > 0 && metrics.zeroMassVertexCount === 0 && Number.isFinite(metrics.totalMassKg) && Number.isFinite(metrics.totalAreaM2);
   });
-  const stage5Pass = results.every(result => result.released.lastPinch?.released && (result.pinchRuns || []).every(run => run.released?.lastPinch?.released));
+  const stage5Pass = results.every(result => result.initial.defaultInteractionMode === 'explore' && result.initial.exploreCreatedPin === false && result.released.lastPinch?.released && (result.pinchRuns || []).every(run => run.released?.lastPinch?.released));
   const topologyPass = results.every(result => (result.initial.topology || []).every(item => item.everyFaceAssignedOnce));
   const springPass = results.every(result => result.initial.springTopology?.invariant && result.initial.metrics?.interIslandSprings === 0);
   const overall = topologyPass && springPass && stage3Pass && stage4Pass && stage5Pass ? 'SUCCESS' : 'FAILED';

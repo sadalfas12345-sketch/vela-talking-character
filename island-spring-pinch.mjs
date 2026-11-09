@@ -8,7 +8,7 @@ const ui = {
   character: $('character'), state: $('loadState'), stageText: $('stageText'), island: $('islandSelect'), metrics: $('metrics'),
   showOriginal: $('showOriginal'), showIslands: $('showIslands'), showSprings: $('showSprings'), showInner: $('showInner'),
   showStrain: $('showStrain'), showMass: $('showMass'), depth: $('depth'), depthOut: $('depthOut'), neighbors: $('neighbors'), neighborsOut: $('neighborsOut'),
-  wireDensity: $('wireDensity'), physicsPreset: $('physicsPreset'), integrator: $('integrator'), pinchKp: $('pinchKp'), pinchKd: $('pinchKd'), kpOut: $('kpOut'), kdOut: $('kdOut'), hardDrag: $('hardDrag'), pause: $('pause'),
+  wireDensity: $('wireDensity'), physicsPreset: $('physicsPreset'), integrator: $('integrator'), pinchKp: $('pinchKp'), pinchKd: $('pinchKd'), kpOut: $('kpOut'), kdOut: $('kdOut'), hardDrag: $('hardDrag'), pause: $('pause'), exploreMode: $('exploreMode'), pinchMode: $('pinchMode'), interactionHint: $('interactionHint'),
 };
 const PHYSICS_PRESETS = {
   biological: {
@@ -43,8 +43,12 @@ keyLight.position.set(2, 3, 4);
 scene.add(keyLight);
 const camera = new THREE.PerspectiveCamera(34, innerWidth / innerHeight, 0.001, 100);
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
-renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-renderer.setSize(innerWidth, innerHeight, false);
+function resizeRenderer() {
+  const maxPixelRatio = innerWidth < 800 ? 1.25 : 2;
+  renderer.setPixelRatio(Math.min(devicePixelRatio, maxPixelRatio));
+  renderer.setSize(innerWidth, innerHeight, false);
+}
+resizeRenderer();
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 const controls = new OrbitControls(camera, canvas);
 controls.enableDamping = true;
@@ -56,7 +60,7 @@ const state = {
   model: 'female', gltf: null, root: null, entries: [], meshes: [], faceScale: 1, faceCenter: new THREE.Vector3(),
   front: new THREE.Vector3(0, 0, 1), right: new THREE.Vector3(1, 0, 0), stage: 1, selected: null, spring: null,
   overlay: null, springLines: null, strainLines: null, massHeatmap: null, innerLines: null, innerPoints: null, pinMarker: null, targetMarker: null, forceLine: null, running: false, pin: null, lastPinch: null,
-  tests: {}, frameCount: 0, lastFrame: performance.now(), attachments: null, attachmentRecords: null, pointerDebug: null,
+  tests: {}, frameCount: 0, lastFrame: performance.now(), attachments: null, attachmentRecords: null, pointerDebug: null, interactionMode: 'explore',
 };
 
 function dsu(n) {
@@ -596,7 +600,7 @@ function populateIslands() {
 }
 
 function setStage(stage) { state.stage = stage; document.querySelectorAll('.tab').forEach(button => button.classList.toggle('active', Number(button.dataset.stage) === stage)); ui.stageText.textContent = STAGE_TEXT[stage]; updateVisuals(); updateMetrics(); }
-function resetNeutral() { if (!state.spring) return; state.spring.positions.set(state.spring.neutral); state.spring.velocities.fill(0); state.spring.clearPin(); state.spring.markNeutral(); state.spring.update(); state.lastPinch = null; updateMetrics('Neutral reset'); }
+function resetNeutral() { if (!state.spring) return; state.spring.positions.set(state.spring.neutral); state.spring.velocities.fill(0); state.spring.clearPin(); state.pin = null; state.spring.markNeutral(); state.spring.update(); state.lastPinch = null; controls.enabled = state.interactionMode === 'explore'; updateMetrics('Neutral reset'); }
 
 async function runTest(kind) {
   if (!state.spring) return;
@@ -623,9 +627,20 @@ async function runTest(kind) {
 
 function barycentric(point, a, b, c) { const v0 = b.clone().sub(a), v1 = c.clone().sub(a), v2 = point.clone().sub(a), d00 = v0.dot(v0), d01 = v0.dot(v1), d11 = v1.dot(v1), d20 = v2.dot(v0), d21 = v2.dot(v1), denominator = d00 * d11 - d01 * d01, v = (d11 * d20 - d01 * d21) / denominator, w = (d00 * d21 - d01 * d20) / denominator; return [1 - v - w, v, w]; }
 function pointerHit(event) { const rect = canvas.getBoundingClientRect(); pointer.x = (event.clientX - rect.left) / rect.width * 2 - 1; pointer.y = -((event.clientY - rect.top) / rect.height) * 2 + 1; raycaster.setFromCamera(pointer, camera); return raycaster.intersectObjects(state.meshes, false)[0]; }
+function setInteractionMode(mode) {
+  if (mode === 'explore' && state.pin && state.spring) { state.spring.clearPin(); state.pin = null; }
+  state.interactionMode = mode;
+  ui.exploreMode.classList.toggle('active', mode === 'explore');
+  ui.pinchMode.classList.toggle('active', mode === 'pinch');
+  ui.interactionHint.textContent = mode === 'pinch'
+    ? 'Pinch mode: touch the face, drag, then release. Tap Explore to orbit without deforming.'
+    : 'Explore mode: touch and drag to orbit. The face will not deform.';
+  canvas.classList.toggle('pinch-mode', mode === 'pinch');
+  controls.enabled = mode === 'explore' && !state.pin;
+}
 
 function onPointerDown(event) {
-  if (!state.spring || state.pin) return;
+  if (state.interactionMode !== 'pinch' || !state.spring || state.pin) return;
   state.pointerDebug = { event: [event.clientX, event.clientY], stateSpring: Boolean(state.spring), statePin: Boolean(state.pin) };
   const hit = pointerHit(event); if (!hit) return;
   state.pointerDebug.hit = { mesh: hit.object.name, faceIndex: hit.faceIndex };
@@ -658,11 +673,11 @@ function onPointerUp(event) {
   const trackingErrorMeters = actual.distanceTo(pin.target) * state.spring.sourceMetersPerUnit;
   const moved = state.spring.diagnostics().maxDisplacement; state.spring.clearPin(); controls.enabled = true;
   state.lastPinch = { ...state.lastPinch, down: false, released: true, hard: pin.hard, kp: pin.kp, kd: pin.kd, requestedTarget: pin.target.toArray(), actualAtRelease: actual.toArray(), trackingErrorMeters, peakForceN: pin.peakForce, peakTrackingErrorMeters: pin.peakTrackingError, maxDisplacementAtRelease: moved };
-  state.pin = null; try { canvas.releasePointerCapture(event.pointerId); } catch {} updateMetrics(`Pin released — force recovery active\nController: ${pin.hard ? 'hard constrained' : `Kp ${pin.kp} N/m, Kd ${pin.kd} N·s/m`}\nPeak force: ${pin.peakForce.toExponential(3)} N\nTracking error: ${trackingErrorMeters.toExponential(3)} m`);
+  state.pin = null; controls.enabled = state.interactionMode === 'explore'; try { canvas.releasePointerCapture(event.pointerId); } catch {} updateMetrics(`Pin released — force recovery active\nController: ${pin.hard ? 'hard constrained' : `Kp ${pin.kp} N/m, Kd ${pin.kd} N·s/m`}\nPeak force: ${pin.peakForce.toExponential(3)} N\nTracking error: ${trackingErrorMeters.toExponential(3)} m`);
 }
 
 async function loadModel(name) {
-  state.model = name; ui.state.textContent = `Loading ${name}…`; ui.state.classList.remove('ready');
+  state.model = name; state.pin = null; setInteractionMode('explore'); ui.state.textContent = `Loading ${name}…`; ui.state.classList.remove('ready');
   if (state.root) disposeObject(state.root); if (state.overlay) disposeObject(state.overlay); removeDiagnostics(); state.entries = []; state.meshes = []; state.spring = null;
   const [gltf, attachmentResponse] = await Promise.all([loader.loadAsync(MODEL_URLS[name]), fetch(ATTACHMENT_URLS[name])]);
   const attachments = await attachmentResponse.json(); state.gltf = gltf; state.root = gltf.scene; scene.add(state.root); state.root.updateMatrixWorld(true); state.entries = [];
@@ -673,12 +688,12 @@ async function loadModel(name) {
     const bounds = new THREE.Box3().setFromObject(state.root);
     const allIslands = state.entries.flatMap(entry => entry.islands.map(island => ({ id: island.id, vertices: island.vertices.length, triangles: island.faces.length })));
     return {
-      model: state.model, stage: state.stage, lastPinch: state.lastPinch, tests: state.tests,
+      model: state.model, stage: state.stage, interactionMode: state.interactionMode, lastPinch: state.lastPinch, tests: state.tests,
       metrics: state.spring?.diagnostics(), islands: { count: allIslands.length, minVertices: Math.min(...allIslands.map(item => item.vertices)), maxVertices: Math.max(...allIslands.map(item => item.vertices)), selected: state.selected ? { id: state.selected.island.id, vertices: state.selected.island.vertices.length, triangles: state.selected.island.faces.length } : null },
       topology: state.entries.map(entry => ({ mesh: entry.mesh.name, ...entry.topology })),
       springTopology: state.spring ? { rawTriangleEdgeUses: state.selected.island.faces.length * 3, uniqueSurfaceEdges: state.spring.edgeA.length, duplicateRawEdgeUsesRemoved: state.spring.edgeInfo.duplicateRawEdges, invariant: state.spring.edgeA.length + state.spring.edgeInfo.duplicateRawEdges === state.selected.island.faces.length * 3 } : null,
       interIslandSprings: 0, pointerDebug: state.pointerDebug,
-      render: { bounds: { min: bounds.min.toArray(), max: bounds.max.toArray() }, camera: camera.position.toArray(), target: controls.target.toArray(), meshes: state.meshes.length, visible: state.meshes.filter(mesh => mesh.visible).length, drawCalls: renderer.info.render.calls }
+      render: { bounds: { min: bounds.min.toArray(), max: bounds.max.toArray() }, camera: camera.position.toArray(), target: controls.target.toArray(), meshes: state.meshes.length, visible: state.meshes.filter(mesh => mesh.visible).length, drawCalls: renderer.info.render.calls, pixelRatio: renderer.getPixelRatio(), drawingBuffer: [renderer.domElement.width, renderer.domElement.height], maxTextureSize: renderer.capabilities.maxTextureSize }
     };
   };
   window.__velaPickTest = (clientX, clientY) => {
@@ -700,6 +715,8 @@ function frame() { requestAnimationFrame(frame); const now = performance.now(), 
 
 for (const button of document.querySelectorAll('.tab')) button.addEventListener('click', () => { state.stage = Number(button.dataset.stage); document.querySelectorAll('.tab').forEach(item => item.classList.toggle('active', Number(item.dataset.stage) === state.stage)); ui.stageText.textContent = STAGE_TEXT[state.stage]; updateVisuals(); updateMetrics(); });
 ui.character.addEventListener('change', () => loadModel(ui.character.value).catch(error => { ui.state.textContent = `Error: ${error.message}`; console.error(error); }));
+ui.exploreMode.addEventListener('click', () => setInteractionMode('explore'));
+ui.pinchMode.addEventListener('click', () => setInteractionMode('pinch'));
 ui.showOriginal.addEventListener('change', updateVisuals); ui.showIslands.addEventListener('change', updateVisuals); ui.showSprings.addEventListener('change', updateVisuals); ui.showStrain.addEventListener('change', updateVisuals); ui.showMass.addEventListener('change', updateVisuals); ui.showInner.addEventListener('change', updateVisuals);
 ui.physicsPreset.addEventListener('change', () => { if (state.spring) buildSystem(); });
 ui.integrator.addEventListener('change', () => { if (state.spring) buildSystem(); });
@@ -712,8 +729,9 @@ ui.pause.addEventListener('click', () => { state.running = !state.running; ui.pa
 $('resetNeutral').addEventListener('click', resetNeutral); $('resetCamera').addEventListener('click', () => { camera.position.copy(state.faceCenter).addScaledVector(state.front, state.faceScale * 4.1); controls.target.copy(state.faceCenter); controls.update(); });
 $('neutralRest').addEventListener('click', () => runTest('rest')); $('oneNudge').addEventListener('click', () => runTest('nudge')); $('noAnchor').addEventListener('click', () => runTest('noAnchor'));
 ui.depthOut.textContent = `${ui.depth.value}× edge`; ui.neighborsOut.textContent = ui.neighbors.value; ui.pause.textContent = 'Resume';
+setInteractionMode('explore');
 canvas.addEventListener('pointerdown', onPointerDown); canvas.addEventListener('pointermove', onPointerMove); canvas.addEventListener('pointerup', onPointerUp); canvas.addEventListener('pointercancel', onPointerUp);
-window.addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight, false); });
+window.addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); resizeRenderer(); });
 ui.stageText.textContent = STAGE_TEXT[1];
 loadModel('female').catch(error => { ui.state.textContent = `Error: ${error.message}`; console.error(error); });
 frame();

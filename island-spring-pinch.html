@@ -5,6 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>VELA — Island Spring Pinch</title>
   <link rel="stylesheet" href="./island-spring-pinch.css" />
+  <style>
+    .interaction-mode{margin:10px 0;padding:10px;border:1px solid #83f2d055;border-radius:11px;background:#83f2d00d}
+    .mode-title{color:var(--muted);font-size:11px;margin-bottom:6px}
+    .mode-buttons{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+    .mode{font-weight:700}
+    .mode.active{color:#07141a;background:var(--accent);border-color:var(--accent)}
+    .mode-hint{color:#dfe9f7;font-size:11px;line-height:1.35;margin-top:7px}
+    #viewport.pinch-mode{cursor:crosshair}
+    #viewport:not(.pinch-mode){cursor:grab}
+  </style>
   <script type="importmap">
   {"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.186/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.186/examples/jsm/"}}
   </script>
@@ -23,6 +33,14 @@
         <button id="resetNeutral">Reset neutral</button>
         <button id="pause">Pause</button>
       </div>
+      <section class="interaction-mode" aria-label="Interaction mode">
+        <div class="mode-title">Touch behavior</div>
+        <div class="mode-buttons">
+          <button id="exploreMode" class="mode active" type="button">Explore / orbit</button>
+          <button id="pinchMode" class="mode" type="button">Pinch face</button>
+        </div>
+        <div id="interactionHint" class="mode-hint">Explore mode: touch and drag to orbit. The face will not deform.</div>
+      </section>
       <div class="tabs" role="tablist">
         <button class="tab active" data-stage="1">1 Islands</button>
         <button class="tab" data-stage="2">2 Springs</button>
