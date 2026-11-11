@@ -776,6 +776,29 @@ async function main() {
   const started = performance.now(), loaded = {};
   for (const name of requestedModels) { console.log(JSON.stringify({ phase: 'load', model: name })); loaded[name] = await loadModel(name); console.log(JSON.stringify({ phase: 'loaded', model: name, islandVertices: loaded[name].system.vertexCount, islandTriangles: loaded[name].system.faces.length, screenIslandVertices: loaded[name].screenMesh?.system.vertexCount, microIslandVertices: loaded[name].microMesh?.system.vertexCount, islandCount: loaded[name].islandCount })); }
   const meshes = Object.values(loaded);
+  if (argv.has('--material-stress-sweep')) {
+    const sweepCheckpoint = resumePath ? await loadWaterfallCheckpoint(resumePath) : null;
+    const base = sweepCheckpoint?.current || createCandidate([0, 0, 0, 0, -1, -1, -1]);
+    const pairs = (process.env.VELA_CALIBRATION_MATERIAL_PAIRS || '0,0;0.5,0;0,0.5;0.5,0.5;1,1').split(';').map(pair => pair.split(',').map(Number)).filter(pair => pair.length === 2 && pair.every(Number.isFinite));
+    const pinchKpLog = Number(process.env.VELA_CALIBRATION_PINCH_KP_LOG ?? -1);
+    const pinchKdLog = Number(process.env.VELA_CALIBRATION_PINCH_KD_LOG ?? -1);
+    const count = Math.max(1, Number(process.env.VELA_CALIBRATION_STRESS_COUNT || 3));
+    const evaluations = [];
+    for (let index = 0; index < pairs.length; index++) {
+      const [surfaceLog, innerLog] = pairs[index];
+      const candidate = withParameterBlock(base, { 1: surfaceLog, 2: innerLog, 5: pinchKpLog, 6: pinchKdLog });
+      const physical = evaluateCandidate(meshes, candidate, 'micro6');
+      const stress = Object.fromEntries(meshes.map((mesh, modelIndex) => [mesh.name, randomPinchStress(mesh.microMesh || mesh.screenMesh || mesh, candidate, count, seed + 100 + modelIndex, { holdSeconds: stressHoldSeconds, releaseSeconds: stressReleaseSeconds })]));
+      const record = { candidate, gravity: compactResult(physical), stress };
+      evaluations.push(record);
+      console.log(JSON.stringify({ phase: 'material-stress-sweep', evaluation: index + 1, candidate, gravityValid: physical.valid, stressValid: Object.values(stress).every(value => value.valid) }));
+    }
+    const sweep = { schema: 'vela-rk4-material-stress-sweep-v1', generatedAt: new Date().toISOString(), seed, count, holdSeconds: stressHoldSeconds, releaseSeconds: stressReleaseSeconds, evaluations };
+    const sweepPath = path.join(outputDir, 'rk4-material-stress-sweep.json');
+    await fs.mkdir(outputDir, { recursive: true }); await fs.writeFile(sweepPath, JSON.stringify(sweep, null, 2));
+    console.log(JSON.stringify({ phase: 'material-stress-complete', path: path.relative(root, sweepPath), evaluations: evaluations.length }));
+    return;
+  }
   if (argv.has('--stress-controller-only')) {
     const probeCheckpoint = resumePath ? await loadWaterfallCheckpoint(resumePath) : null;
     const base = probeCheckpoint?.current || createCandidate([0, 0, 0, 0, -1, 0, 0]);
