@@ -1,0 +1,915 @@
+{
+  "schema": "vela-realtime-rk4-calibration-v1",
+  "generatedAt": "2026-11-11T17:25:22.970Z",
+  "seed": 20261111,
+  "requestedModels": [
+    "female",
+    "male"
+  ],
+  "architecture": {
+    "sourceMetersPerUnit": 0.3,
+    "frameDt": 0.016666666666666666,
+    "baseDt": 0.0016666666666666668,
+    "anchorDepthFactor": 0.25,
+    "neighborAnchorCount": 3,
+    "originalTopology": true,
+    "crossIslandSprings": 0,
+    "integrator": "RK4",
+    "massFromTriangleArea": true,
+    "fixedInnerAnchors": true
+  },
+  "search": {
+    "generations": 2,
+    "populationSize": 6,
+    "fullSurvivors": [
+      {
+        "candidate": {
+          "massMultiplier": 288063.9692461627,
+          "surfaceMultiplier": 0.3343597554356497,
+          "innerMultiplier": 47.315434468853795,
+          "dampingMultiplier": 0.14695724096099927,
+          "dtMultiplier": 0.1,
+          "logParameters": [
+            5.459488940556897,
+            -0.4757860011015441,
+            1.6750028323075095,
+            -0.8328090102587355,
+            -1.099475803764957
+          ]
+        },
+        "fidelity": "full",
+        "valid": false,
+        "score": 5410657.600000001,
+        "source": "full-survivor",
+        "runtimeMs": 111.1427999999978,
+        "models": {
+          "female": {
+            "rejected": "operation-budget",
+            "evaluatedIsland": "female",
+            "evaluatedVertices": 5036,
+            "triangles": 9708,
+            "surfaceSprings": 14743,
+            "supportSprings": 20108,
+            "estimatedStages": 501854400,
+            "maxEstimatedStages": 250000000,
+            "stableDt": 0.0001666666666666667,
+            "substepsPerFrame": 100,
+            "totalMassKg": 107.21530759572161
+          },
+          "male": {
+            "rejected": "operation-budget",
+            "evaluatedIsland": "male",
+            "evaluatedVertices": 41920,
+            "triangles": 82807,
+            "surfaceSprings": 124726,
+            "supportSprings": 167552,
+            "estimatedStages": 4208803200,
+            "maxEstimatedStages": 250000000,
+            "stableDt": 0.0001666666666666667,
+            "substepsPerFrame": 100,
+            "totalMassKg": 5286.842329039061
+          }
+        }
+      },
+      {
+        "candidate": {
+          "massMultiplier": 4363.826078334338,
+          "surfaceMultiplier": 0.06428910594859734,
+          "innerMultiplier": 22.140085764737325,
+          "dampingMultiplier": 0.8784131075349956,
+          "dtMultiplier": 10,
+          "logParameters": [
+            3.6398674333175736,
+            -1.1918626138137238,
+            1.345179298885975,
+            -0.0563011923752581,
+            2.155350980719934
+          ]
+        },
+        "fidelity": "full",
+        "valid": false,
+        "score": 9528203.392,
+        "source": "full-survivor",
+        "runtimeMs": 110.30749999999898,
+        "models": {
+          "female": {
+            "rejected": "operation-budget",
+            "evaluatedIsland": "female",
+            "evaluatedVertices": 5036,
+            "triangles": 9708,
+            "surfaceSprings": 14743,
+            "supportSprings": 20108,
+            "estimatedStages": 1084005504,
+            "maxEstimatedStages": 250000000,
+            "stableDt": 0.00007731500176721539,
+            "substepsPerFrame": 216,
+            "totalMassKg": 1.6241842272298614
+          },
+          "male": {
+            "rejected": "operation-budget",
+            "evaluatedIsland": "male",
+            "evaluatedVertices": 41920,
+            "triangles": 82807,
+            "surfaceSprings": 124726,
+            "supportSprings": 167552,
+            "estimatedStages": 7744197888,
+            "maxEstimatedStages": 250000000,
+            "stableDt": 0.0000908434098660964,
+            "substepsPerFrame": 184,
+            "totalMassKg": 80.08936517773058
+          }
+        }
+      }
+    ],
+    "maxSubsteps": 800,
+    "maxEstimatedStages": 250000000,
+    "algorithm": "bounded log-space CMA-ES with multi-fidelity early rejection",
+    "parameterBounds": {
+      "massMultiplier": [
+        1,
+        100000000
+      ],
+      "surfaceMultiplier": [
+        0.01,
+        100
+      ],
+      "innerMultiplier": [
+        0.01,
+        10000
+      ],
+      "dampingMultiplier": [
+        0.1,
+        100
+      ],
+      "dtMultiplier": [
+        0.1,
+        10
+      ]
+    },
+    "baseline": {
+      "candidate": {
+        "massMultiplier": 1,
+        "surfaceMultiplier": 1,
+        "innerMultiplier": 1,
+        "dampingMultiplier": 1,
+        "dtMultiplier": 1,
+        "logParameters": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "fidelity": "screen",
+      "valid": false,
+      "score": 13534854.168,
+      "generation": -1,
+      "source": "biological-baseline",
+      "runtimeMs": 9.643699999999967,
+      "models": {
+        "female": {
+          "rejected": "substep-budget",
+          "evaluatedIsland": "female-screen-island-58",
+          "evaluatedVertices": 998,
+          "triangles": 1812,
+          "surfaceSprings": 2809,
+          "supportSprings": 3985,
+          "estimatedStages": 10126674408,
+          "stableDt": 1.3418113412489285e-7,
+          "substepsPerFrame": 124211,
+          "totalMassKg": 0.000041969330358717356
+        },
+        "male": {
+          "rejected": "substep-budget",
+          "evaluatedIsland": "male-screen-island-389",
+          "evaluatedVertices": 999,
+          "triangles": 1858,
+          "surfaceSprings": 2856,
+          "supportSprings": 3991,
+          "estimatedStages": 2554478760,
+          "stableDt": 5.360891775356927e-7,
+          "substepsPerFrame": 31090,
+          "totalMassKg": 0.0001702680451880214
+        }
+      }
+    },
+    "existingRealtime": {
+      "candidate": {
+        "massMultiplier": 1000000,
+        "surfaceMultiplier": 0.25,
+        "innerMultiplier": 800.0000000000003,
+        "dampingMultiplier": 2.25,
+        "dtMultiplier": 1,
+        "logParameters": [
+          6,
+          -0.6020599913279624,
+          2.9030899869919438,
+          0.3521825181113625,
+          0
+        ]
+      },
+      "fidelity": "screen",
+      "valid": false,
+      "score": 1507662.4074534606,
+      "generation": -1,
+      "source": "existing-realtime",
+      "runtimeMs": 654.4487,
+      "models": {
+        "female": {
+          "gravity": {
+            "worstFlips": 507,
+            "worstStrain": 66.2407453460724,
+            "maxDisplacement": 0.03287374651301281,
+            "maxVelocity": 1.021259494597214,
+            "finite": true
+          },
+          "response": {
+            "displacement": 0.000020281507472259304,
+            "targetMeters": 0.000017232214968057332,
+            "finite": true,
+            "flips": 0,
+            "strain": 0.033792648899967415,
+            "forceN": 0.0015508993471244348
+          },
+          "convergence": null,
+          "evaluatedIsland": "female-screen-island-58",
+          "evaluatedVertices": 998,
+          "triangles": 1812,
+          "surfaceSprings": 2809,
+          "supportSprings": 3985,
+          "estimatedStages": 6603768,
+          "stableDt": 0.00020756754915895738,
+          "substepsPerFrame": 81,
+          "totalMassKg": 41.96933035871733,
+          "runtimeMs": 654.4127
+        }
+      }
+    },
+    "history": [
+      {
+        "candidate": {
+          "massMultiplier": 10000,
+          "surfaceMultiplier": 10,
+          "innerMultiplier": 10000,
+          "dampingMultiplier": 100,
+          "dtMultiplier": 10,
+          "logParameters": [
+            4,
+            1,
+            4,
+            2,
+            1
+          ]
+        },
+        "fidelity": "screen",
+        "valid": false,
+        "score": 1298206.1600000001,
+        "generation": 0,
+        "source": "seed-3",
+        "runtimeMs": 3.9643999999998414,
+        "models": {
+          "female": {
+            "rejected": "substep-budget",
+            "evaluatedIsland": "female-screen-island-58",
+            "evaluatedVertices": 998,
+            "triangles": 1812,
+            "surfaceSprings": 2809,
+            "supportSprings": 3985,
+            "estimatedStages": 344048160,
+            "stableDt": 0.000003950277682215678,
+            "substepsPerFrame": 4220,
+            "totalMassKg": 0.4196933035871742
+          },
+          "male": {
+            "rejected": "substep-budget",
+            "evaluatedIsland": "male-screen-island-389",
+            "evaluatedVertices": 999,
+            "triangles": 1858,
+            "surfaceSprings": 2856,
+            "supportSprings": 3991,
+            "estimatedStages": 126368232,
+            "stableDt": 0.000010837221696741963,
+            "substepsPerFrame": 1538,
+            "totalMassKg": 1.7026804518802126
+          }
+        }
+      },
+      {
+        "candidate": {
+          "massMultiplier": 1000000,
+          "surfaceMultiplier": 0.251188643150958,
+          "innerMultiplier": 794.3282347242813,
+          "dampingMultiplier": 2.2387211385683394,
+          "dtMultiplier": 1,
+          "logParameters": [
+            6,
+            -0.6,
+            2.9,
+            0.35,
+            0
+          ]
+        },
+        "fidelity": "screen",
+        "valid": false,
+        "score": 1506660.3556061264,
+        "generation": 0,
+        "source": "existing-realtime",
+        "runtimeMs": 630.1133,
+        "models": {
+          "female": {
+            "gravity": {
+              "worstFlips": 506,
+              "worstStrain": 66.0355606126414,
+              "maxDisplacement": 0.03291960318653385,
+              "maxVelocity": 1.0246102797635661,
+              "finite": true
+            },
+            "response": {
+              "displacement": 0.00002028764077637441,
+              "targetMeters": 0.000017232214968057332,
+              "finite": true,
+              "flips": 0,
+              "strain": 0.03379879471699407,
+              "forceN": 0.0015508993471244348
+            },
+            "convergence": null,
+            "evaluatedIsland": "female-screen-island-58",
+            "evaluatedVertices": 998,
+            "triangles": 1812,
+            "surfaceSprings": 2809,
+            "supportSprings": 3985,
+            "estimatedStages": 6603768,
+            "stableDt": 0.00020781360204416124,
+            "substepsPerFrame": 81,
+            "totalMassKg": 41.96933035871733,
+            "runtimeMs": 630.0848000000001
+          }
+        }
+      },
+      {
+        "candidate": {
+          "massMultiplier": 100,
+          "surfaceMultiplier": 10,
+          "innerMultiplier": 1000,
+          "dampingMultiplier": 10,
+          "dtMultiplier": 1,
+          "logParameters": [
+            2,
+            1,
+            3,
+            1,
+            0
+          ]
+        },
+        "fidelity": "screen",
+        "valid": false,
+        "score": 4837250.507999999,
+        "generation": 0,
+        "source": "seed-1",
+        "runtimeMs": 3.794300000000021,
+        "models": {
+          "female": {
+            "rejected": "substep-budget",
+            "evaluatedIsland": "female-screen-island-58",
+            "evaluatedVertices": 998,
+            "triangles": 1812,
+            "surfaceSprings": 2809,
+            "supportSprings": 3985,
+            "estimatedStages": 3226633656,
+            "stableDt": 4.2112105082436825e-7,
+            "substepsPerFrame": 39577,
+            "totalMassKg": 0.0041969330358717334
+          },
+          "male": {
+            "rejected": "substep-budget",
+            "evaluatedIsland": "male-screen-island-389",
+            "evaluatedVertices": 999,
+            "triangles": 1858,
+            "surfaceSprings": 2856,
+            "supportSprings": 3991,
+            "estimatedStages": 862146852,
+            "stableDt": 0.0000015884617393717934,
+            "substepsPerFrame": 10493,
+            "totalMassKg": 0.017026804518802122
+          }
+        }
+      },
+      {
+        "candidate": {
+          "massMultiplier": 1000,
+          "surfaceMultiplier": 100,
+          "innerMultiplier": 10000,
+          "dampingMultiplier": 10,
+          "dtMultiplier": 10,
+          "logParameters": [
+            3,
+            2,
+            4,
+            1,
+            1
+          ]
+        },
+        "fidelity": "screen",
+        "valid": false,
+        "score": 4837250.507999999,
+        "generation": 0,
+        "source": "seed-2",
+        "runtimeMs": 3.4636999999997897,
+        "models": {
+          "female": {
+            "rejected": "substep-budget",
+            "evaluatedIsland": "female-screen-island-58",
+            "evaluatedVertices": 998,
+            "triangles": 1812,
+            "surfaceSprings": 2809,
+            "supportSprings": 3985,
+            "estimatedStages": 3226633656,
+            "stableDt": 4.211210508243683e-7,
+            "substepsPerFrame": 39577,
+            "totalMassKg": 0.04196933035871737
+          },
+          "male": {
+            "rejected": "substep-budget",
+            "evaluatedIsland": "male-screen-island-389",
+            "evaluatedVertices": 999,
+            "triangles": 1858,
+            "surfaceSprings": 2856,
+            "supportSprings": 3991,
+            "estimatedStages": 862146852,
+            "stableDt": 0.0000015884617393717934,
+            "substepsPerFrame": 10493,
+            "totalMassKg": 0.17026804518802166
+          }
+        }
+      },
+      {
+        "candidate": {
+          "massMultiplier": 1,
+          "surfaceMultiplier": 1,
+          "innerMultiplier": 1,
+          "dampingMultiplier": 1,
+          "dtMultiplier": 1,
+          "logParameters": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "fidelity": "screen",
+        "valid": false,
+        "score": 13534854.168,
+        "generation": 0,
+        "source": "biological-baseline",
+        "runtimeMs": 3.4380999999998494,
+        "models": {
+          "female": {
+            "rejected": "substep-budget",
+            "evaluatedIsland": "female-screen-island-58",
+            "evaluatedVertices": 998,
+            "triangles": 1812,
+            "surfaceSprings": 2809,
+            "supportSprings": 3985,
+            "estimatedStages": 10126674408,
+            "stableDt": 1.3418113412489285e-7,
+            "substepsPerFrame": 124211,
+            "totalMassKg": 0.000041969330358717356
+          },
+          "male": {
+            "rejected": "substep-budget",
+            "evaluatedIsland": "male-screen-island-389",
+            "evaluatedVertices": 999,
+            "triangles": 1858,
+            "surfaceSprings": 2856,
+            "supportSprings": 3991,
+            "estimatedStages": 2554478760,
+            "stableDt": 5.360891775356927e-7,
+            "substepsPerFrame": 31090,
+            "totalMassKg": 0.0001702680451880214
+          }
+        }
+      },
+      {
+        "candidate": {
+          "massMultiplier": 1,
+          "surfaceMultiplier": 1,
+          "innerMultiplier": 1000,
+          "dampingMultiplier": 10,
+          "dtMultiplier": 1,
+          "logParameters": [
+            0,
+            0,
+            3,
+            1,
+            0
+          ]
+        },
+        "fidelity": "screen",
+        "valid": false,
+        "score": 15753883.100000001,
+        "generation": 0,
+        "source": "seed-0",
+        "runtimeMs": 4.552999999999884,
+        "models": {
+          "female": {
+            "rejected": "substep-budget",
+            "evaluatedIsland": "female-screen-island-58",
+            "evaluatedVertices": 998,
+            "triangles": 1812,
+            "surfaceSprings": 2809,
+            "supportSprings": 3985,
+            "estimatedStages": 10877547288,
+            "stableDt": 1.249187486593236e-7,
+            "substepsPerFrame": 133421,
+            "totalMassKg": 0.000041969330358717356
+          },
+          "male": {
+            "rejected": "substep-budget",
+            "evaluatedIsland": "male-screen-island-389",
+            "evaluatedVertices": 999,
+            "triangles": 1858,
+            "surfaceSprings": 2856,
+            "supportSprings": 3991,
+            "estimatedStages": 3995881812,
+            "stableDt": 3.427030406989917e-7,
+            "substepsPerFrame": 48633,
+            "totalMassKg": 0.0001702680451880214
+          }
+        }
+      },
+      {
+        "candidate": {
+          "massMultiplier": 288063.9692461627,
+          "surfaceMultiplier": 0.3343597554356497,
+          "innerMultiplier": 47.315434468853795,
+          "dampingMultiplier": 0.14695724096099927,
+          "dtMultiplier": 0.1,
+          "logParameters": [
+            5.459488940556897,
+            -0.4757860011015441,
+            1.6750028323075095,
+            -0.8328090102587355,
+            -1.099475803764957
+          ]
+        },
+        "fidelity": "low",
+        "valid": false,
+        "score": 1026064.6234064249,
+        "generation": 1,
+        "source": "cma-1",
+        "runtimeMs": 2872.5661,
+        "models": {
+          "female": {
+            "gravity": {
+              "worstFlips": 26,
+              "worstStrain": 6.462340642491339,
+              "maxDisplacement": 0.01784481802613715,
+              "maxVelocity": 1.0498301968363506,
+              "finite": true
+            },
+            "response": {
+              "displacement": 0.000059459158030290535,
+              "targetMeters": 0.000017232214968057332,
+              "finite": true,
+              "flips": 0,
+              "strain": 0.09016972334017054,
+              "forceN": 0.0015508993471244348
+            },
+            "convergence": null,
+            "evaluatedIsland": "female-screen-island-58",
+            "evaluatedVertices": 998,
+            "triangles": 1812,
+            "surfaceSprings": 2809,
+            "supportSprings": 3985,
+            "estimatedStages": 44351232,
+            "stableDt": 0.00012322019169034467,
+            "substepsPerFrame": 136,
+            "totalMassKg": 12.089851889735604,
+            "runtimeMs": 2872.5494
+          }
+        }
+      },
+      {
+        "candidate": {
+          "massMultiplier": 4363.826078334338,
+          "surfaceMultiplier": 0.06428910594859734,
+          "innerMultiplier": 22.140085764737325,
+          "dampingMultiplier": 0.8784131075349956,
+          "dtMultiplier": 10,
+          "logParameters": [
+            3.6398674333175736,
+            -1.1918626138137238,
+            1.345179298885975,
+            -0.0563011923752581,
+            2.155350980719934
+          ]
+        },
+        "fidelity": "low",
+        "valid": false,
+        "score": 1190016.487710773,
+        "generation": 1,
+        "source": "cma-1",
+        "runtimeMs": 10269.3233,
+        "models": {
+          "female": {
+            "gravity": {
+              "worstFlips": 190,
+              "worstStrain": 1.6487710772933828,
+              "maxDisplacement": 0.010448997863795582,
+              "maxVelocity": 0.4479852306257688,
+              "finite": true
+            },
+            "response": {
+              "displacement": 0.00005519769835739633,
+              "targetMeters": 0.000017232214968057332,
+              "finite": true,
+              "flips": 0,
+              "strain": 0.03693232149134679,
+              "forceN": 0.0015508993471244348
+            },
+            "convergence": null,
+            "evaluatedIsland": "female-screen-island-58",
+            "evaluatedVertices": 998,
+            "triangles": 1812,
+            "surfaceSprings": 2809,
+            "supportSprings": 3985,
+            "estimatedStages": 159794880,
+            "stableDt": 0.00003406988261561258,
+            "substepsPerFrame": 490,
+            "totalMassKg": 0.18314685830959987,
+            "runtimeMs": 10269.2978
+          }
+        }
+      },
+      {
+        "candidate": {
+          "massMultiplier": 1735455.9300183556,
+          "surfaceMultiplier": 100,
+          "innerMultiplier": 1500.5574763694306,
+          "dampingMultiplier": 9.18449094092571,
+          "dtMultiplier": 10,
+          "logParameters": [
+            6.239413589719989,
+            2.1436687487335653,
+            3.176252635010468,
+            0.9630550901275494,
+            1.0269883920314082
+          ]
+        },
+        "fidelity": "low",
+        "valid": false,
+        "score": 1429038.0553565999,
+        "generation": 1,
+        "source": "cma-1",
+        "runtimeMs": 5086.800199999998,
+        "models": {
+          "female": {
+            "rejected": "substep-budget",
+            "evaluatedIsland": "female-screen-island-58",
+            "evaluatedVertices": 998,
+            "triangles": 1812,
+            "surfaceSprings": 2809,
+            "supportSprings": 3985,
+            "estimatedStages": 307849728,
+            "stableDt": 0.000017657554872278723,
+            "substepsPerFrame": 944,
+            "totalMassKg": 72.83592324993543
+          },
+          "male": {
+            "gravity": {
+              "worstFlips": 271,
+              "worstStrain": 4.432735659995869,
+              "maxDisplacement": 0.009960978139206487,
+              "maxVelocity": 0.40967591200014297,
+              "finite": true
+            },
+            "response": {
+              "displacement": 0.00000197396115979077,
+              "targetMeters": 0.00009122958613171812,
+              "finite": true,
+              "flips": 0,
+              "strain": 0.0007080215609655453,
+              "forceN": 0.008210662751854725
+            },
+            "convergence": null,
+            "evaluatedIsland": "male-screen-island-389",
+            "evaluatedVertices": 999,
+            "triangles": 1858,
+            "surfaceSprings": 2856,
+            "supportSprings": 3991,
+            "estimatedStages": 78548784,
+            "stableDt": 0.00006993836215810078,
+            "substepsPerFrame": 239,
+            "totalMassKg": 295.49268871418485,
+            "runtimeMs": 5086.772199999999
+          }
+        }
+      },
+      {
+        "candidate": {
+          "massMultiplier": 1962.7394599369368,
+          "surfaceMultiplier": 36.836071806000156,
+          "innerMultiplier": 40.94205366356932,
+          "dampingMultiplier": 100,
+          "dtMultiplier": 10,
+          "logParameters": [
+            3.292862653842806,
+            1.5662733108858813,
+            1.6121696231918174,
+            3.3976122922972225,
+            2.29806742435579
+          ]
+        },
+        "fidelity": "low",
+        "valid": false,
+        "score": 7669199.464,
+        "generation": 1,
+        "source": "cma-1",
+        "runtimeMs": 3.4724999999998545,
+        "models": {
+          "female": {
+            "rejected": "substep-budget",
+            "evaluatedIsland": "female-screen-island-58",
+            "evaluatedVertices": 998,
+            "triangles": 1812,
+            "surfaceSprings": 2809,
+            "supportSprings": 3985,
+            "estimatedStages": 5549447904,
+            "stableDt": 9.794503000048935e-7,
+            "substepsPerFrame": 17017,
+            "totalMassKg": 0.08237486080218384
+          },
+          "male": {
+            "rejected": "substep-budget",
+            "evaluatedIsland": "male-screen-island-389",
+            "evaluatedVertices": 999,
+            "triangles": 1858,
+            "surfaceSprings": 2856,
+            "supportSprings": 3991,
+            "estimatedStages": 1400074560,
+            "stableDt": 0.000003912890835085084,
+            "substepsPerFrame": 4260,
+            "totalMassKg": 0.3341918110568549
+          }
+        }
+      },
+      {
+        "candidate": {
+          "massMultiplier": 191.88211707345627,
+          "surfaceMultiplier": 9.6560305283848,
+          "innerMultiplier": 4183.564641834515,
+          "dampingMultiplier": 76.34757244926134,
+          "dtMultiplier": 0.23602463836018306,
+          "logParameters": [
+            2.283034501477452,
+            0.9847986301514409,
+            3.6215464838213465,
+            1.8827952327657078,
+            -0.6270426591258487
+          ]
+        },
+        "fidelity": "low",
+        "valid": false,
+        "score": 13025863.608000001,
+        "generation": 1,
+        "source": "cma-1",
+        "runtimeMs": 3.1503000000011525,
+        "models": {
+          "female": {
+            "rejected": "substep-budget",
+            "evaluatedIsland": "female-screen-island-58",
+            "evaluatedVertices": 998,
+            "triangles": 1812,
+            "surfaceSprings": 2809,
+            "supportSprings": 3985,
+            "estimatedStages": 9384198912,
+            "stableDt": 5.791884036148915e-7,
+            "substepsPerFrame": 28776,
+            "totalMassKg": 0.008053163961385966
+          },
+          "male": {
+            "rejected": "substep-budget",
+            "evaluatedIsland": "male-screen-island-389",
+            "evaluatedVertices": 999,
+            "triangles": 1858,
+            "surfaceSprings": 2856,
+            "supportSprings": 3991,
+            "estimatedStages": 2905647696,
+            "stableDt": 0.000001885229223768121,
+            "substepsPerFrame": 8841,
+            "totalMassKg": 0.03267139298063643
+          }
+        }
+      },
+      {
+        "candidate": {
+          "massMultiplier": 297085.69128605357,
+          "surfaceMultiplier": 1.111264406037197,
+          "innerMultiplier": 2751.452880726421,
+          "dampingMultiplier": 100,
+          "dtMultiplier": 10,
+          "logParameters": [
+            5.472881735125251,
+            0.045817404054227184,
+            3.4395620798163637,
+            2.3028820834420882,
+            1.5856841624592741
+          ]
+        },
+        "fidelity": "low",
+        "valid": false,
+        "score": 2.4558192444033532e+275,
+        "generation": 1,
+        "source": "cma-1",
+        "runtimeMs": 6097.1765,
+        "models": {
+          "female": {
+            "gravity": {
+              "worstFlips": 545,
+              "worstStrain": 2.4558192444033532e+274,
+              "maxDisplacement": 4.865982299201101e+270,
+              "maxVelocity": 3.023001087339166e+275,
+              "finite": true
+            },
+            "response": {
+              "displacement": 6.877060039863937e+216,
+              "targetMeters": 0.000017232214968057332,
+              "finite": true,
+              "flips": 801,
+              "strain": 3.470792812704633e+220,
+              "forceN": 1.3420751586941221e+191
+            },
+            "convergence": null,
+            "evaluatedIsland": "female-screen-island-58",
+            "evaluatedVertices": 998,
+            "triangles": 1812,
+            "surfaceSprings": 2809,
+            "supportSprings": 3985,
+            "estimatedStages": 94246368,
+            "stableDt": 0.000057731615604382445,
+            "substepsPerFrame": 289,
+            "totalMassKg": 12.468487522432303,
+            "runtimeMs": 6097.154800000002
+          }
+        }
+      }
+    ],
+    "best": {
+      "candidate": {
+        "massMultiplier": 288063.9692461627,
+        "surfaceMultiplier": 0.3343597554356497,
+        "innerMultiplier": 47.315434468853795,
+        "dampingMultiplier": 0.14695724096099927,
+        "dtMultiplier": 0.1,
+        "logParameters": [
+          5.459488940556897,
+          -0.4757860011015441,
+          1.6750028323075095,
+          -0.8328090102587355,
+          -1.099475803764957
+        ]
+      },
+      "fidelity": "full",
+      "valid": false,
+      "score": 5410657.600000001,
+      "source": "full-survivor",
+      "runtimeMs": 111.1427999999978,
+      "models": {
+        "female": {
+          "rejected": "operation-budget",
+          "evaluatedIsland": "female",
+          "evaluatedVertices": 5036,
+          "triangles": 9708,
+          "surfaceSprings": 14743,
+          "supportSprings": 20108,
+          "estimatedStages": 501854400,
+          "maxEstimatedStages": 250000000,
+          "stableDt": 0.0001666666666666667,
+          "substepsPerFrame": 100,
+          "totalMassKg": 107.21530759572161
+        },
+        "male": {
+          "rejected": "operation-budget",
+          "evaluatedIsland": "male",
+          "evaluatedVertices": 41920,
+          "triangles": 82807,
+          "surfaceSprings": 124726,
+          "supportSprings": 167552,
+          "estimatedStages": 4208803200,
+          "maxEstimatedStages": 250000000,
+          "stableDt": 0.0001666666666666667,
+          "substepsPerFrame": 100,
+          "totalMassKg": 5286.842329039061
+        }
+      }
+    },
+    "finalValidation": [],
+    "pinchStress": {
+      "status": "not-run",
+      "reason": "No full candidate passed both-character gravity, geometry, convergence, and compute gates."
+    },
+    "elapsedMs": 26759.142
+  }
+}

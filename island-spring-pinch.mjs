@@ -7,16 +7,23 @@ const canvas = $('viewport');
 const ui = {
   character: $('character'), state: $('loadState'), loadProgressBar: $('loadProgressBar'), loadProgressText: $('loadProgressText'), stageText: $('stageText'), island: $('islandSelect'), metrics: $('metrics'),
   showOriginal: $('showOriginal'), showIslands: $('showIslands'), showSprings: $('showSprings'), showInner: $('showInner'),
-  showStrain: $('showStrain'), showMass: $('showMass'), depth: $('depth'), depthOut: $('depthOut'), neighbors: $('neighbors'), neighborsOut: $('neighborsOut'),
+  showStrain: $('showStrain'), showMass: $('showMass'), gravityDirection: $('gravityDirection'), depth: $('depth'), depthOut: $('depthOut'), neighbors: $('neighbors'), neighborsOut: $('neighborsOut'),
   wireDensity: $('wireDensity'), physicsPreset: $('physicsPreset'), integrator: $('integrator'), pinchKp: $('pinchKp'), pinchKd: $('pinchKd'), kpOut: $('kpOut'), kdOut: $('kdOut'), hardDrag: $('hardDrag'), pause: $('pause'), exploreMode: $('exploreMode'), pinchMode: $('pinchMode'), interactionHint: $('interactionHint'),
 };
 const PHYSICS_PRESETS = {
   biological: {
-    name: 'biological', sourceMetersPerUnit: 0.30, rhoEffective: 1100, thicknessMeters: 0.0015,
+    name: 'biological', sourceMetersPerUnit: 0.30, rhoEffective: 1100, thicknessMeters: 0.0015, massScale: 1,
     surfaceModulusPa: 30000, innerModulusPa: 10000, compliantThicknessMeters: 0.005, dampingRatio: 0.08,
   },
+  realtime: {
+    // Automated-calibration candidate. These values are intentionally not
+    // biological; the calibration report records whether this candidate is
+    // numerically and geometrically acceptable on the original islands.
+    name: 'realtime-rk4', sourceMetersPerUnit: 0.30, rhoEffective: 1100, thicknessMeters: 0.0015, massScale: 1e6,
+    surfaceModulusPa: 7500, innerModulusPa: 8000000, compliantThicknessMeters: 0.005, dampingRatio: 0.18,
+  },
   diagnostic: {
-    name: 'diagnostic', sourceMetersPerUnit: 0.30, rhoEffective: 11111111.111111, thicknessMeters: 1.0,
+    name: 'diagnostic', sourceMetersPerUnit: 0.30, rhoEffective: 11111111.111111, thicknessMeters: 1.0, massScale: 1,
     surfaceModulusPa: 1.0, innerModulusPa: 0.35, compliantThicknessMeters: 1.0, dampingRatio: 0.08,
   },
 };
@@ -59,9 +66,11 @@ const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2();
 const state = {
   model: 'female', gltf: null, root: null, entries: [], meshes: [], faceScale: 1, faceCenter: new THREE.Vector3(),
-  front: new THREE.Vector3(0, 0, 1), right: new THREE.Vector3(1, 0, 0), stage: 1, selected: null, spring: null,
+  front: new THREE.Vector3(0, 0, 1), right: new THREE.Vector3(1, 0, 0), up: new THREE.Vector3(0, 1, 0), stage: 1, selected: null, spring: null,
   overlay: null, springLines: null, strainLines: null, massHeatmap: null, innerLines: null, innerPoints: null, pinMarker: null, targetMarker: null, forceLine: null, running: false, pin: null, lastPinch: null,
   tests: {}, frameCount: 0, lastFrame: performance.now(), attachments: null, attachmentRecords: null, pointerDebug: null, interactionMode: 'explore',
+  gravity: new THREE.Vector3(), gravityMagnitude: 9.81,
+  performance: { frames: 0, physicsSteps: 0, physicsMs: 0, wallMs: 0, lastPhysicsMs: 0, lastFrameMs: 0, simTime: 0 },
 };
 
 function dsu(n) {
@@ -240,9 +249,19 @@ function loadFaceFrame(attachmentData) {
   state.faceScale = points[263].distanceTo(points[33]);
   state.faceCenter = points.reduce((s, point) => s.add(point), new THREE.Vector3()).multiplyScalar(1 / points.length);
   state.front.copy(front); state.right.copy(right);
+  state.up.copy(new THREE.Vector3().crossVectors(front, right).normalize());
   controls.target.copy(state.faceCenter);
   camera.position.copy(state.faceCenter).addScaledVector(state.front, state.faceScale * 4.1);
   camera.lookAt(state.faceCenter); controls.update();
+}
+
+function setGravityDirection(direction) {
+  const axes = {
+    none: new THREE.Vector3(), down: state.up.clone().negate(), up: state.up.clone(), left: state.right.clone().negate(), right: state.right.clone(), forward: state.front.clone(), backward: state.front.clone().negate(),
+  };
+  state.gravity.copy(axes[direction] || axes.none).multiplyScalar(state.gravityMagnitude);
+  if (state.spring) state.spring.markActive();
+  updateMetrics(`Gravity: ${direction || 'none'} at ${state.gravityMagnitude.toFixed(2)} m/s²`);
 }
 
 function buildIslandOverlay() {
@@ -329,7 +348,7 @@ function buildSystem() {
   }
   let zeroMassVertexCount = 0;
   for (let i = 0; i < vertexCount; i++) {
-    masses[i] = preset.rhoEffective * preset.thicknessMeters * attributedArea[i];
+    masses[i] = preset.rhoEffective * preset.thicknessMeters * attributedArea[i] * preset.massScale;
     if (!(masses[i] > 0) || !Number.isFinite(masses[i])) zeroMassVertexCount++;
   }
   const sortedMasses = Array.from(masses).sort((x, y) => x - y);
@@ -388,13 +407,19 @@ function buildSystem() {
   const surfaceK = ui.physicsPreset.value === 'diagnostic' ? Math.min(1, Math.max(stableStiffness, 1e-12)) : biologicalSurfaceK;
   const innerK = ui.physicsPreset.value === 'diagnostic' ? 0.35 * surfaceK : 1;
   const damping = preset.dampingRatio * 2 * Math.sqrt(Math.max(surfaceK * medianMass, 1e-18));
-  const stableDt = Math.min(requestedDt, stabilityFactor * Math.sqrt(minMass / Math.max(surfaceK * (maxDegree + neighborCount + 1), 1e-18)));
+  const localStiffness = new Float64Array(vertexCount);
+  for (let i = 0; i < edgeA.length; i++) { localStiffness[edgeA[i]] += surfaceK; localStiffness[edgeB[i]] += surfaceK; }
+  for (let i = 0; i < supportAArray.length; i++) localStiffness[supportAArray[i]] += supportKArray[i];
+  let maxLocalStiffness = 1e-18;
+  for (const value of localStiffness) maxLocalStiffness = Math.max(maxLocalStiffness, value);
+  const stableDt = Math.min(requestedDt, stabilityFactor * Math.sqrt(minMass / maxLocalStiffness));
   const explicitSubstepsPerFrame = Math.max(1, Math.ceil((1 / 60) / Math.max(stableDt, 1e-18)));
   const requestedIntegrator = ui.integrator.value;
   const integrator = requestedIntegrator === 'auto'
     ? (explicitSubstepsPerFrame > 200 ? 'implicit' : 'rk4')
     : requestedIntegrator;
   let positions = neutral.slice(), velocities = new Float32Array(vertexCount * 3), pin = null, innerEnabled = true, neutralSettled = true;
+  state.performance = { frames: 0, physicsSteps: 0, physicsMs: 0, wallMs: 0, lastPhysicsMs: 0, lastFrameMs: 0, simTime: 0 };
 
   const scratchLength = vertexCount * 3;
   const rkScratch = {
@@ -460,7 +485,11 @@ function buildSystem() {
       pinState.peakTrackingError = Math.max(pinState.peakTrackingError, Math.hypot((targetX - qx) * sourceMetersPerUnit, (targetY - qy) * sourceMetersPerUnit, (targetZ - qz) * sourceMetersPerUnit));
       for (let j = 0; j < 3; j++) { const id = ids[j], w = weights[j] / (masses[id] * sourceMetersPerUnit); result[id * 3] += w * forceX; result[id * 3 + 1] += w * forceY; result[id * 3 + 2] += w * forceZ; }
     }
-    for (let i = 0; i < vertexCount; i++) { result[i * 3] -= damping * v[i * 3] * invMass[i]; result[i * 3 + 1] -= damping * v[i * 3 + 1] * invMass[i]; result[i * 3 + 2] -= damping * v[i * 3 + 2] * invMass[i]; }
+    const gx = state.gravity.x / sourceMetersPerUnit, gy = state.gravity.y / sourceMetersPerUnit, gz = state.gravity.z / sourceMetersPerUnit;
+    for (let i = 0; i < vertexCount; i++) {
+      result[i * 3] += gx; result[i * 3 + 1] += gy; result[i * 3 + 2] += gz;
+      result[i * 3] -= damping * v[i * 3] * invMass[i]; result[i * 3 + 1] -= damping * v[i * 3 + 1] * invMass[i]; result[i * 3 + 2] -= damping * v[i * 3 + 2] * invMass[i];
+    }
     return result;
   }
 
@@ -646,13 +675,16 @@ function buildSystem() {
   }
 
   function energyBreakdown() {
-    let surfacePotential = 0, innerPotential = 0, kinetic = 0;
+    let surfacePotential = 0, innerPotential = 0, gravityPotential = 0, kinetic = 0;
     for (let i = 0; i < edgeA.length; i++) { const ia = edgeA[i], ib = edgeB[i], length = Math.hypot(positions[ib * 3] - positions[ia * 3], positions[ib * 3 + 1] - positions[ia * 3 + 1], positions[ib * 3 + 2] - positions[ia * 3 + 2]); const extension = (length - edgeInfo.rest[i]) * sourceMetersPerUnit; surfacePotential += 0.5 * surfaceK * extension * extension; }
     if (innerEnabled) for (let i = 0; i < supportAArray.length; i++) { const ia = supportAArray[i], ib = supportBArray[i], length = Math.hypot(anchors[ib * 3] - positions[ia * 3], anchors[ib * 3 + 1] - positions[ia * 3 + 1], anchors[ib * 3 + 2] - positions[ia * 3 + 2]); const extension = (length - supportRestArray[i]) * sourceMetersPerUnit; innerPotential += 0.5 * supportKArray[i] * extension * extension; }
-    for (let i = 0; i < vertexCount; i++) { const speedM = Math.hypot(velocities[i * 3], velocities[i * 3 + 1], velocities[i * 3 + 2]) * sourceMetersPerUnit; kinetic += 0.5 * masses[i] * speedM * speedM; }
-    return { surfacePotential, innerPotential, kinetic, total: surfacePotential + innerPotential + kinetic };
+    for (let i = 0; i < vertexCount; i++) {
+      const speedM = Math.hypot(velocities[i * 3], velocities[i * 3 + 1], velocities[i * 3 + 2]) * sourceMetersPerUnit; kinetic += 0.5 * masses[i] * speedM * speedM;
+      const displacement = new THREE.Vector3(positions[i * 3] - neutral[i * 3], positions[i * 3 + 1] - neutral[i * 3 + 1], positions[i * 3 + 2] - neutral[i * 3 + 2]); gravityPotential -= masses[i] * state.gravity.dot(displacement) * sourceMetersPerUnit;
+    }
+    return { surfacePotential, innerPotential, gravityPotential, kinetic, total: surfacePotential + innerPotential + gravityPotential + kinetic };
   }
-  function energy() { const values = energyBreakdown(); return values.surfacePotential + values.innerPotential; }
+  function energy() { const values = energyBreakdown(); return values.surfacePotential + values.innerPotential + values.gravityPotential; }
 
   function vertexForce(localId, x = positions, withInner = innerEnabled) {
     let fx = 0, fy = 0, fz = 0;
@@ -684,9 +716,9 @@ function buildSystem() {
     return {
       vertices: vertexCount, triangles: island.faces.length, surfaceSprings: edgeA.length, duplicateRawEdges: edgeInfo.duplicateRawEdges,
       zeroLengthEdges: edgeInfo.zeroLengthEdges, interIslandSprings: 0, supportSprings: supportAArray.length,
-      anchorDepthFactor: depthFactor, anchorDepthMedian: medianEdge, dt: 1 / 600, stableDt, maxDegree, damping,
+      anchorDepthFactor: depthFactor, anchorDepthMedian: medianEdge, dt: 1 / 600, stableDt, maxDegree, maxLocalStiffness, damping,
       kSurface: surfaceK, kSurfaceBiological: biologicalSurfaceK, kInnerRatio: innerK / Math.max(surfaceK, 1e-18),
-      preset: preset.name, sourceMetersPerUnit, rhoEffective: preset.rhoEffective, thicknessMeters: preset.thicknessMeters,
+      preset: preset.name, sourceMetersPerUnit, rhoEffective: preset.rhoEffective, thicknessMeters: preset.thicknessMeters, massScale: preset.massScale,
       surfaceModulusPa: preset.surfaceModulusPa, innerModulusPa: preset.innerModulusPa, compliantThicknessMeters: preset.compliantThicknessMeters,
       totalAreaM2, totalMassKg, minPositiveMassKg: minPositiveMass, medianMassKg: medianMass, maxPositiveMassKg: maxPositiveMass,
       minPositiveMassMg: minPositiveMass * 1e6, medianMassMg: medianMass * 1e6, maxPositiveMassMg: maxPositiveMass * 1e6,
@@ -694,8 +726,9 @@ function buildSystem() {
       numericalMassFloorKg: numericalMassFloor, highestEstimatedNaturalFrequencyHz: Math.sqrt(surfaceK * (maxDegree + neighborCount + 1) / Math.max(minMass, 1e-18)) / (2 * Math.PI),
       integrator, requestedIntegrator, explicitSubstepsPerFrame, implicitNewtonIterations, implicitCgIterations, implicitLineSearchMin,
       substepsPerRenderedFrame: integrator === 'implicit' ? 1 : explicitSubstepsPerFrame,
-      energy: energies.surfacePotential + energies.innerPotential, energyBreakdown: energies, maxDisplacement, maxStrain, finite: true, orientationSign, implicit: { ...implicitDiagnostics },
+      energy: energies.total, energyBreakdown: energies, maxDisplacement, maxStrain, finite: true, orientationSign, implicit: { ...implicitDiagnostics },
       faceScaleSourceUnits: state.faceScale, faceScaleMeters: state.faceScale * sourceMetersPerUnit, sourceMetersPerUnit,
+      gravityMS2: state.gravity.toArray(), performance: { ...state.performance, averagePhysicsMs: state.performance.physicsSteps ? state.performance.physicsMs / state.performance.physicsSteps : 0, averageFrameMs: state.performance.frames ? state.performance.wallMs / state.performance.frames : 0, simulatedSeconds: state.performance.simTime },
     };
   }
 
@@ -854,7 +887,7 @@ function updateMetrics(extra = '') {
   const selection = activeData(); if (!selection) { ui.metrics.textContent = 'Loading original GLB…'; return; }
   const totals = state.entries.reduce((acc, entry) => { acc.vertices += entry.geometry.attributes.position.count; acc.triangles += entry.index.length / 3; acc.islands += entry.islands.length; return acc; }, { vertices: 0, triangles: 0, islands: 0 });
   const d = state.spring ? state.spring.diagnostics() : null;
-  ui.metrics.textContent = `${state.model.toUpperCase()}\nOriginal vertices: ${totals.vertices.toLocaleString()}   triangles: ${totals.triangles.toLocaleString()}   islands: ${totals.islands}\nSelected: ${selection.entry.mesh.name} / island ${selection.island.id}\nIsland vertices: ${selection.island.vertices.length.toLocaleString()}   triangles: ${selection.island.faces.length.toLocaleString()}\n${d ? `Unique surface springs: ${d.surfaceSprings.toLocaleString()}\nDuplicate raw triangle edges removed: ${d.duplicateRawEdges.toLocaleString()}\nZero-length edges: ${d.zeroLengthEdges}\nInter-island springs: 0\nSupport springs: ${d.supportSprings.toLocaleString()}\nPreset: ${d.preset}   scale: ${d.sourceMetersPerUnit} m/source unit\nArea: ${d.totalAreaM2.toExponential(4)} m²   mass: ${(d.totalMassKg * 1000).toFixed(4)} g\nMass min/median/max: ${d.minPositiveMassMg.toExponential(3)} / ${d.medianMassMg.toExponential(3)} / ${d.maxPositiveMassMg.toExponential(3)} mg\nZero-mass vertices: ${d.zeroMassVertexCount}   area error: ${d.areaConservationError.toExponential(2)} m²\nρ: ${d.rhoEffective} kg/m³   thickness: ${(d.thicknessMeters * 1000).toFixed(2)} mm\nRK4 dt: ${d.dt.toExponential(3)}   internal dt: ${d.stableDt.toExponential(3)}   damping: ${d.damping.toExponential(3)}\nEnergy: ${d.energy.toExponential(4)}   max displacement: ${d.maxDisplacement.toExponential(4)}\nMax edge strain: ${d.maxStrain.toFixed(4)}\nFinite integrator: ${d.finite ? 'YES' : 'NO'}` : 'Springs not initialized'}${extra ? `\n\n${extra}` : ''}`;
+  ui.metrics.textContent = `${state.model.toUpperCase()}\nOriginal vertices: ${totals.vertices.toLocaleString()}   triangles: ${totals.triangles.toLocaleString()}   islands: ${totals.islands}\nSelected: ${selection.entry.mesh.name} / island ${selection.island.id}\nIsland vertices: ${selection.island.vertices.length.toLocaleString()}   triangles: ${selection.island.faces.length.toLocaleString()}\n${d ? `Unique surface springs: ${d.surfaceSprings.toLocaleString()}\nDuplicate raw triangle edges removed: ${d.duplicateRawEdges.toLocaleString()}\nZero-length edges: ${d.zeroLengthEdges}\nInter-island springs: 0\nSupport springs: ${d.supportSprings.toLocaleString()}\nPreset: ${d.preset}   mass scale: ${d.massScale.toExponential(2)}   scale: ${d.sourceMetersPerUnit} m/source unit\nArea: ${d.totalAreaM2.toExponential(4)} m²   mass: ${(d.totalMassKg * 1000).toFixed(4)} g\nMass min/median/max: ${d.minPositiveMassMg.toExponential(3)} / ${d.medianMassMg.toExponential(3)} / ${d.maxPositiveMassMg.toExponential(3)} mg\nZero-mass vertices: ${d.zeroMassVertexCount}   area error: ${d.areaConservationError.toExponential(2)} m²\nρ: ${d.rhoEffective} kg/m³   thickness: ${(d.thicknessMeters * 1000).toFixed(2)} mm\nRK4 dt: ${d.dt.toExponential(3)}   stable dt: ${d.stableDt.toExponential(3)}   substeps/frame: ${d.explicitSubstepsPerFrame}\nGravity: ${d.gravityMS2.map(value => value.toFixed(2)).join(', ')} m/s²   damping: ${d.damping.toExponential(3)}\nEnergy: ${d.energy.toExponential(4)}   max displacement: ${d.maxDisplacement.toExponential(4)}\nMax edge strain: ${d.maxStrain.toFixed(4)}\nPhysics: ${d.performance.averagePhysicsMs.toFixed(2)} ms/step   frame: ${d.performance.averageFrameMs.toFixed(2)} ms   sim/wall: ${d.performance.simulatedSeconds.toFixed(3)} s\nFinite integrator: ${d.finite ? 'YES' : 'NO'}` : 'Springs not initialized'}${extra ? `\n\n${extra}` : ''}`;
 }
 
 function populateIslands() {
@@ -967,7 +1000,7 @@ async function loadModel(name) {
   state.root.traverse(object => { if (object.isMesh) { const entry = buildEntry(object); state.entries.push(entry); state.meshes.push(object); } });
   if (!state.entries.length) throw new Error('No mesh objects in GLB');
   setLoadProgress(82, 'Building true disconnected mesh islands...'); await nextPaint();
-  loadFaceFrame(attachments); buildIslandOverlay();
+  loadFaceFrame(attachments); setGravityDirection(ui.gravityDirection?.value || 'none'); buildIslandOverlay();
   setLoadProgress(91, 'Preparing surface springs and inner anchors...'); await nextPaint();
   populateIslands(); setStage(state.stage); setLoadProgress(100, `${name} ready`); ui.state.textContent = `${name} ready`; ui.state.classList.add('ready');
   const other = name === 'female' ? 'male' : 'female';
@@ -985,10 +1018,13 @@ async function loadModel(name) {
     };
   };
   window.__velaSetRunning = value => { state.running = Boolean(value); };
+  window.__velaSetGravity = direction => setGravityDirection(direction);
   window.__velaStep = (count = 1, dt = 1 / 600) => {
     if (!state.spring) return null;
     state.spring.markActive();
+    const stepStart = performance.now();
     for (let i = 0; i < count; i++) state.spring.step(dt);
+    const physicsMs = performance.now() - stepStart; state.performance.frames++; state.performance.physicsSteps += count; state.performance.physicsMs += physicsMs; state.performance.wallMs += count * dt * 1000; state.performance.lastPhysicsMs = physicsMs; state.performance.lastFrameMs = count * dt * 1000; state.performance.simTime += count * dt;
     state.spring.update();
     return window.__velaDiagnostics();
   };
@@ -1007,10 +1043,23 @@ async function loadModel(name) {
   };
 }
 
-function frame() { requestAnimationFrame(frame); const now = performance.now(), elapsed = Math.min((now - state.lastFrame) / 1000, 0.05); state.lastFrame = now; controls.update(); if (state.running && state.spring) { const steps = Math.max(1, Math.min(8, Math.ceil(elapsed / (1 / 600)))); for (let i = 0; i < steps; i++) state.spring.step(elapsed / steps); state.spring.update(); if (state.frameCount++ % 8 === 0) updateMetrics(); } renderer.render(scene, camera); }
+function frame() {
+  requestAnimationFrame(frame);
+  const wallStart = performance.now(), now = wallStart, elapsed = Math.min((now - state.lastFrame) / 1000, 0.05); state.lastFrame = now; controls.update();
+  if (state.running && state.spring) {
+    const steps = Math.max(1, Math.min(8, Math.ceil(elapsed / (1 / 600)))), stepStart = performance.now();
+    for (let i = 0; i < steps; i++) state.spring.step(elapsed / steps);
+    state.spring.update();
+    const physicsMs = performance.now() - stepStart; state.performance.frames++; state.performance.physicsSteps += steps; state.performance.physicsMs += physicsMs; state.performance.wallMs += elapsed * 1000; state.performance.lastPhysicsMs = physicsMs; state.performance.lastFrameMs = elapsed * 1000; state.performance.simTime += elapsed;
+    if (state.frameCount++ % 8 === 0) updateMetrics();
+  }
+  renderer.render(scene, camera);
+  if (state.running) state.performance.wallMs += Math.max(0, performance.now() - wallStart - elapsed * 1000);
+}
 
 for (const button of document.querySelectorAll('.tab')) button.addEventListener('click', () => { state.stage = Number(button.dataset.stage); document.querySelectorAll('.tab').forEach(item => item.classList.toggle('active', Number(item.dataset.stage) === state.stage)); ui.stageText.textContent = STAGE_TEXT[state.stage]; updateVisuals(); updateMetrics(); });
 ui.character.addEventListener('change', () => loadModel(ui.character.value).catch(error => { ui.state.textContent = `Error: ${error.message}`; console.error(error); }));
+ui.gravityDirection?.addEventListener('change', () => setGravityDirection(ui.gravityDirection.value));
 ui.exploreMode.addEventListener('click', () => setInteractionMode('explore'));
 ui.pinchMode.addEventListener('click', () => setInteractionMode('pinch'));
 ui.showOriginal.addEventListener('change', updateVisuals); ui.showIslands.addEventListener('change', updateVisuals); ui.showSprings.addEventListener('change', updateVisuals); ui.showStrain.addEventListener('change', updateVisuals); ui.showMass.addEventListener('change', updateVisuals); ui.showInner.addEventListener('change', updateVisuals);
