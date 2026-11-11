@@ -32,9 +32,12 @@ const maxOfflineStages = Number(process.env.VELA_CALIBRATION_MAX_OFFLINE_STAGES 
 const maxOfflineScreenStages = Number(process.env.VELA_CALIBRATION_MAX_OFFLINE_SCREEN_STAGES || 50000000);
 const offlineScreenSeconds = Number(process.env.VELA_CALIBRATION_OFFLINE_SCREEN_SECONDS || 0.02);
 const offlineMicroSeconds = Number(process.env.VELA_CALIBRATION_OFFLINE_MICRO_SECONDS || 0.005);
+const offlineGravitySeconds = Number(process.env.VELA_CALIBRATION_OFFLINE_GRAVITY_SECONDS || 0.02);
 const offlineLowSeconds = Number(process.env.VELA_CALIBRATION_OFFLINE_LOW_SECONDS || 0.02);
 const offlineFullSeconds = Number(process.env.VELA_CALIBRATION_OFFLINE_FULL_SECONDS || 0.05);
 const offlineFinalSeconds = Number(process.env.VELA_CALIBRATION_OFFLINE_FINAL_SECONDS || 0.20);
+const stressHoldSeconds = Number(process.env.VELA_CALIBRATION_STRESS_HOLD_SECONDS || frameDt);
+const stressReleaseSeconds = Number(process.env.VELA_CALIBRATION_STRESS_RELEASE_SECONDS || 0.05);
 const seed = Number(process.env.VELA_CALIBRATION_SEED || 20261111);
 const noSearch = argv.has('--baseline-only');
 const checkpointPath = process.env.VELA_CALIBRATION_CHECKPOINT || path.join(outputDir, 'rk4-calibration-checkpoint.json');
@@ -48,6 +51,7 @@ const resumeArgIndex = process.argv.indexOf('--resume');
 const resumePath = resumeArgIndex >= 0 && process.argv[resumeArgIndex + 1] && !process.argv[resumeArgIndex + 1].startsWith('--')
   ? process.argv[resumeArgIndex + 1] : process.env.VELA_CALIBRATION_RESUME || null;
 const resultCache = new Map();
+const preparedPhysicsCache = new Map();
 
 function rng(seedValue) {
   let state = seedValue >>> 0;
@@ -250,6 +254,9 @@ function createCandidate(logs, bounds = defaultLogBounds) {
 }
 
 function preparePhysics(mesh, candidate) {
+  const cacheKey = `${mesh.name}|${candidateKey(candidate)}`;
+  const cached = preparedPhysicsCache.get(cacheKey);
+  if (cached) return cached;
   const base = mesh.system, n = base.vertexCount;
   const surfaceK = 30000 * 0.0015 * candidate.surfaceMultiplier;
   const innerModulus = 10000 * candidate.innerMultiplier;
@@ -275,7 +282,9 @@ function preparePhysics(mesh, candidate) {
   const requestedDt = baseDt * candidate.dtMultiplier;
   const stableDt = Math.min(requestedDt, 0.12 * Math.sqrt(minMass / Math.max(maxLocalK, 1e-18)));
   const damping = 0.08 * candidate.dampingMultiplier * 2 * Math.sqrt(Math.max(surfaceK * medianMass, 1e-18));
-  return { ...base, masses, surfaceK, supportA: Uint32Array.from(supportA), supportB: Uint32Array.from(supportB), supportRest: Float64Array.from(supportRest), supportK: Float64Array.from(supportK), stableDt, requestedDt, damping, totalMass, minMass, medianMass, maxLocalK, explicitSubsteps: Math.max(1, Math.ceil(frameDt / Math.max(stableDt, 1e-18))) };
+  const prepared = { ...base, masses, surfaceK, supportA: Uint32Array.from(supportA), supportB: Uint32Array.from(supportB), supportRest: Float64Array.from(supportRest), supportK: Float64Array.from(supportK), stableDt, requestedDt, damping, totalMass, minMass, medianMass, maxLocalK, explicitSubsteps: Math.max(1, Math.ceil(frameDt / Math.max(stableDt, 1e-18))) };
+  preparedPhysicsCache.set(cacheKey, prepared);
+  return prepared;
 }
 
 function simulate(model, candidate, options = {}) {
@@ -288,13 +297,20 @@ function simulate(model, candidate, options = {}) {
     forceEvaluations++;
     out.fill(0);
     for (let i = 0; i < edgeCount; i++) {
-      const ia = system.edgeA[i], ib = system.edgeB[i], dx = x[ib * 3] - x[ia * 3], dy = x[ib * 3 + 1] - x[ia * 3 + 1], dz = x[ib * 3 + 2] - x[ia * 3 + 2], len = Math.hypot(dx, dy, dz); if (len <= 1e-12) continue;
+      const ia = system.edgeA[i], ib = system.edgeB[i], ia3 = ia * 3, ib3 = ib * 3;
+      const dx = x[ib3] - x[ia3], dy = x[ib3 + 1] - x[ia3 + 1], dz = x[ib3 + 2] - x[ia3 + 2];
+      const len = Math.sqrt(dx * dx + dy * dy + dz * dz); if (len <= 1e-12) continue;
       const q = system.surfaceK * ((len - system.edgeRest[i]) * sourceMetersPerUnit) / len;
-      add3(out, ia, q * dx, q * dy, q * dz); add3(out, ib, -q * dx, -q * dy, -q * dz);
+      const fx = q * dx, fy = q * dy, fz = q * dz;
+      out[ia3] += fx; out[ia3 + 1] += fy; out[ia3 + 2] += fz;
+      out[ib3] -= fx; out[ib3 + 1] -= fy; out[ib3 + 2] -= fz;
     }
     for (let i = 0; i < system.supportA.length; i++) {
-      const ia = system.supportA[i], ib = system.supportB[i], dx = system.anchors[ib * 3] - x[ia * 3], dy = system.anchors[ib * 3 + 1] - x[ia * 3 + 1], dz = system.anchors[ib * 3 + 2] - x[ia * 3 + 2], len = Math.hypot(dx, dy, dz); if (len <= 1e-12) continue;
-      const q = system.supportK[i] * ((len - system.supportRest[i]) * sourceMetersPerUnit) / len; add3(out, ia, q * dx, q * dy, q * dz);
+      const ia = system.supportA[i], ib = system.supportB[i], ia3 = ia * 3, ib3 = ib * 3;
+      const dx = system.anchors[ib3] - x[ia3], dy = system.anchors[ib3 + 1] - x[ia3 + 1], dz = system.anchors[ib3 + 2] - x[ia3 + 2];
+      const len = Math.sqrt(dx * dx + dy * dy + dz * dz); if (len <= 1e-12) continue;
+      const q = system.supportK[i] * ((len - system.supportRest[i]) * sourceMetersPerUnit) / len;
+      out[ia3] += q * dx; out[ia3 + 1] += q * dy; out[ia3 + 2] += q * dz;
     }
     if (usePinch) {
       const { ids, weights, target, velocity, kp, kd } = usePinch; let qx = 0, qy = 0, qz = 0, qvx = 0, qvy = 0, qvz = 0;
@@ -389,11 +405,13 @@ function timestepRangeTest(mesh, candidate, seconds) {
   return { startingEstimate: h, samples, largestTestedStableMultiplier: stable.length ? Math.max(...stable.map(sample => sample.factor)) : null, smallestTestedStableMultiplier: stable.length ? Math.min(...stable.map(sample => sample.factor)) : null };
 }
 
-function randomPinchStress(mesh, candidate, count = 20, stressSeed = seed) {
+function randomPinchStress(mesh, candidate, count = 20, stressSeed = seed, options = {}) {
   const random = rng(stressSeed), system = preparePhysics(mesh, candidate), results = [];
   const directionsByName = directions(mesh);
   const directionNames = Object.keys(directionsByName);
   const started = performance.now();
+  const holdSeconds = options.holdSeconds ?? stressHoldSeconds;
+  const releaseSeconds = options.releaseSeconds ?? stressReleaseSeconds;
   for (let sequence = 0; sequence < count; sequence++) {
     const face = system.faces[Math.floor(random() * system.faces.length)], ids = face.slice();
     let u = random(), v = random(); if (u + v > 1) { u = 1 - u; v = 1 - v; }
@@ -406,18 +424,18 @@ function randomPinchStress(mesh, candidate, count = 20, stressSeed = seed) {
     for (let phase = 1; phase <= 4; phase++) {
       const phaseTarget = origin.map((value, axis) => value + (target[axis] - value) * phase / 4);
       const pin = { ids, weights, target: phaseTarget, velocity: direction.map(value => value * magnitude * 4), kp: 90 * candidate.pinchKpMultiplier, kd: 0.08 * candidate.pinchKdMultiplier, peakForce: 0 };
-      const segment = simulate(mesh, candidate, { gravity: direction.map(value => value * 9.81), seconds: 1 / 60, initialPositions: positions, initialVelocities: velocities, pinch: pin });
+      const segment = simulate(mesh, candidate, { gravity: direction.map(value => value * 9.81), seconds: holdSeconds, initialPositions: positions, initialVelocities: velocities, pinch: pin });
       positions = segment.positions; velocities = segment.velocities; heldGeometry = segment.geometry; maxForce = Math.max(maxForce, pin.peakForce || 0); maxTrackingError = Math.max(maxTrackingError, pin.error || 0); invalid ||= segment.nonfinite || segment.geometry.orientationFlips > 0 || segment.geometry.collapsedTriangles > 0;
     }
-    const release = simulate(mesh, candidate, { gravity: direction.map(value => value * 9.81), seconds: 0.20, initialPositions: positions, initialVelocities: velocities });
+    const release = simulate(mesh, candidate, { gravity: direction.map(value => value * 9.81), seconds: releaseSeconds, initialPositions: positions, initialVelocities: velocities });
     const recoveredDisplacement = maxVertexDisplacement(system.neutral, release.positions);
     results.push({ sequence, face, direction: directionName, magnitudeSource: magnitude, held: heldGeometry, released: release.geometry, recoveredDisplacement, peakForceN: maxForce, peakTrackingErrorMeters: maxTrackingError, valid: !invalid && release.geometry.finite && release.geometry.orientationFlips === 0 && release.geometry.collapsedTriangles === 0 });
   }
-  return { count, valid: results.every(result => result.valid), results, runtimeMs: performance.now() - started };
+  return { count, holdSeconds, releaseSeconds, valid: results.every(result => result.valid), results, runtimeMs: performance.now() - started };
 }
 
-function candidateKey(candidate) { return JSON.stringify([candidate.massMultiplier, candidate.surfaceMultiplier, candidate.innerMultiplier, candidate.dampingMultiplier, candidate.dtMultiplier]); }
-function evaluationKey(meshes, candidate, fidelity) { return `${requestedModels.join(',')}|${fidelity}|${candidateKey(candidate)}`; }
+function candidateKey(candidate) { return JSON.stringify([candidate.massMultiplier, candidate.surfaceMultiplier, candidate.innerMultiplier, candidate.dampingMultiplier, candidate.dtMultiplier, candidate.pinchKpMultiplier, candidate.pinchKdMultiplier]); }
+function evaluationKey(meshes, candidate, fidelity) { return `${meshes.map(mesh => mesh.name).join(',')}|${fidelity}|${candidateKey(candidate)}`; }
 
 function diagnoseModel(value) {
   if (value.deferred === 'offline-wall-limit') { const limit = value.maxOfflineStages || maxOfflineStages; return { mechanism: 'deferred-offline-compute', distance: Math.max(0, value.estimatedStages / limit - 1), requiredReduction: value.estimatedStages / limit, evidence: { estimatedStages: value.estimatedStages, maxOfflineStages: limit } }; }
@@ -450,7 +468,7 @@ function evaluateCandidate(meshes, candidate, fidelity) {
   for (const mesh of meshes) {
     const evalMesh = fidelity === 'full' ? mesh : fidelity === 'micro' || fidelity === 'micro6' ? mesh.microMesh || mesh.screenMesh || mesh : mesh.screenMesh || mesh;
     const prepared = preparePhysics(evalMesh, candidate);
-    const seconds = fidelity === 'micro' || fidelity === 'micro6' ? offlineMicroSeconds : fidelity === 'screen' ? offlineScreenSeconds : fidelity === 'full' ? offlineFullSeconds : offlineLowSeconds;
+    const seconds = fidelity === 'micro6' ? offlineGravitySeconds : fidelity === 'micro' ? offlineMicroSeconds : fidelity === 'screen' ? offlineScreenSeconds : fidelity === 'full' ? offlineFullSeconds : offlineLowSeconds;
     const frameCount = Math.max(1, Math.ceil(seconds / frameDt));
     const directionCount = fidelity === 'screen' || fidelity === 'micro' ? 1 : gravityDirections.length;
     const estimatedSteps = Math.max(1, Math.ceil(seconds / Math.max(prepared.stableDt, 1e-18)));
@@ -701,6 +719,30 @@ function profileCandidate(meshes, candidate) {
   }));
 }
 
+function pinchPreflight(meshes, baseCandidate) {
+  const pairs = [[-1, -1], [-1, 0], [-1, 0.5], [-0.5, 0], [-0.5, 0.5], [0, 0], [0.5, 0.5], [1, 1], [1, 0]];
+  const count = Math.max(1, Number(process.env.VELA_CALIBRATION_PINCH_PREFLIGHT_COUNT || 1));
+  const evaluations = [];
+  for (let index = 0; index < pairs.length; index++) {
+    const [kp, kd] = pairs[index];
+    const candidate = withParameterBlock(baseCandidate, { 5: kp, 6: kd });
+    const models = Object.fromEntries(meshes.map((mesh, modelIndex) => {
+      const stress = randomPinchStress(mesh.microMesh || mesh.screenMesh || mesh, candidate, count, seed + 700 + index * 11 + modelIndex, { holdSeconds: stressHoldSeconds, releaseSeconds: stressReleaseSeconds });
+      return [mesh.name, stress];
+    }));
+    const results = Object.values(models);
+    const folds = results.reduce((sum, value) => sum + value.results.reduce((inner, result) => inner + (result.held?.orientationFlips || 0) + (result.released?.orientationFlips || 0), 0), 0);
+    const collapses = results.reduce((sum, value) => sum + value.results.reduce((inner, result) => inner + (result.held?.collapsedTriangles || 0) + (result.released?.collapsedTriangles || 0), 0), 0);
+    const maxStrain = Math.max(...results.flatMap(value => value.results.map(result => Math.max(result.held?.maxEdgeStrain || 0, result.released?.maxEdgeStrain || 0))), 0);
+    const passed = results.length === meshes.length && results.every(value => value.valid);
+    const record = { candidate, passed, folds, collapses, maxStrain, models };
+    evaluations.push(record);
+    console.log(JSON.stringify({ phase: 'pinch-preflight', evaluation: evaluations.length, candidate, passed, folds, collapses, maxStrain }));
+  }
+  const best = evaluations.slice().sort((a, b) => Number(!a.passed) - Number(!b.passed) || a.folds - b.folds || a.collapses - b.collapses || a.maxStrain - b.maxStrain)[0];
+  return { name: 'pinch-preflight', passed: Boolean(best?.passed), candidate: best?.candidate || baseCandidate, evaluations, best, count };
+}
+
 async function runWaterfall(meshes, resource, resumed = null) {
   const stages = resumed?.stages || [], checkpoints = resumed?.checkpoints || [];
   let current = resumed?.current || createCandidate([0, 0, 0, 0, 0, 0, 0]);
@@ -717,7 +759,13 @@ async function runWaterfall(meshes, resource, resumed = null) {
   const stage3 = await execute('damping', [3], 'micro6', 'damping'); if (!stage3?.passed) return { stages, checkpoints, current, completedStage: 'damping', overall: 'FAILED' };
   const stage3Recheck = await execute('timestep-recheck', [4], 'micro', 'timestep'); if (!stage3Recheck?.passed) return { stages, checkpoints, current, completedStage: 'timestep-recheck', overall: 'FAILED' };
   const stage4 = await execute('pinch', [5, 6], 'micro6', 'pinch'); if (!stage4?.passed) return { stages, checkpoints, current, completedStage: 'pinch', overall: 'FAILED' };
-  const robustness = Object.fromEntries(meshes.map((mesh, index) => [mesh.name, { fidelity: 'micro6', randomPinch: randomPinchStress(mesh.microMesh || mesh.screenMesh || mesh, current, 20, seed + 100 + index), gravity: gravityTest(mesh.microMesh || mesh.screenMesh || mesh, current, offlineMicroSeconds, 'full') }]));
+  if (!passed.has('pinch-preflight')) {
+    const preflight = pinchPreflight(meshes, current);
+    stages.push(preflight); current = preflight.candidate; checkpoints.push({ stage: 'pinch-preflight', current, passed: preflight.passed }); await persist('pinch-preflight');
+    if (argv.has('--pinch-preflight-only')) return { stages, checkpoints, current, completedStage: 'pinch-preflight', overall: preflight.passed ? 'PREFLIGHT_PASS' : 'FAILED' };
+    if (!preflight.passed) return { stages, checkpoints, current, completedStage: 'pinch-preflight', overall: 'FAILED' };
+  }
+  const robustness = Object.fromEntries(meshes.map((mesh, index) => [mesh.name, { fidelity: 'micro6', randomPinch: randomPinchStress(mesh.microMesh || mesh.screenMesh || mesh, current, 20, seed + 100 + index, { holdSeconds: stressHoldSeconds, releaseSeconds: stressReleaseSeconds }), gravity: gravityTest(mesh.microMesh || mesh.screenMesh || mesh, current, offlineGravitySeconds, 'full') }]));
   const fullValidation = Object.fromEntries(meshes.map(mesh => { const result = evaluateCandidate([mesh], current, 'full'); return [mesh.name, compactResult(result)]; }));
   const profile = profileCandidate(meshes, current);
   await persist('complete');
@@ -728,12 +776,28 @@ async function main() {
   const started = performance.now(), loaded = {};
   for (const name of requestedModels) { console.log(JSON.stringify({ phase: 'load', model: name })); loaded[name] = await loadModel(name); console.log(JSON.stringify({ phase: 'loaded', model: name, islandVertices: loaded[name].system.vertexCount, islandTriangles: loaded[name].system.faces.length, screenIslandVertices: loaded[name].screenMesh?.system.vertexCount, microIslandVertices: loaded[name].microMesh?.system.vertexCount, islandCount: loaded[name].islandCount })); }
   const meshes = Object.values(loaded);
+  if (argv.has('--stress-controller-only')) {
+    const probeCheckpoint = resumePath ? await loadWaterfallCheckpoint(resumePath) : null;
+    const base = probeCheckpoint?.current || createCandidate([0, 0, 0, 0, -1, 0, 0]);
+    const updates = {};
+    for (const [index, variable] of [[1, 'VELA_CALIBRATION_SURFACE_LOG'], [2, 'VELA_CALIBRATION_INNER_LOG'], [3, 'VELA_CALIBRATION_DAMPING_LOG'], [4, 'VELA_CALIBRATION_DT_LOG'], [5, 'VELA_CALIBRATION_PINCH_KP_LOG'], [6, 'VELA_CALIBRATION_PINCH_KD_LOG']]) if (process.env[variable] !== undefined) updates[index] = Number(process.env[variable]);
+    const candidate = withParameterBlock(base, updates);
+    const count = Math.max(1, Number(process.env.VELA_CALIBRATION_STRESS_COUNT || 20));
+    const probe = { schema: 'vela-rk4-controller-stress-probe-v1', generatedAt: new Date().toISOString(), seed, candidate, count, holdSeconds: stressHoldSeconds, releaseSeconds: stressReleaseSeconds, models: Object.fromEntries(meshes.map((mesh, index) => [mesh.name, randomPinchStress(mesh.microMesh || mesh.screenMesh || mesh, candidate, count, seed + 100 + index, { holdSeconds: stressHoldSeconds, releaseSeconds: stressReleaseSeconds })])) };
+    const probePath = path.join(outputDir, `rk4-controller-stress-probe-s-${String(candidate.surfaceMultiplier).replaceAll('.', '_')}-i-${String(candidate.innerMultiplier).replaceAll('.', '_')}-kp-${String(candidate.pinchKpMultiplier).replaceAll('.', '_')}-kd-${String(candidate.pinchKdMultiplier).replaceAll('.', '_')}.json`);
+    await fs.mkdir(outputDir, { recursive: true }); await fs.writeFile(probePath, JSON.stringify(probe, null, 2));
+    console.log(JSON.stringify({ phase: 'stress-controller-complete', probe: path.relative(root, probePath), candidate, models: Object.fromEntries(Object.entries(probe.models).map(([name, value]) => [name, { valid: value.valid, count: value.count, runtimeMs: value.runtimeMs, folds: value.results.reduce((sum, result) => sum + (result.held?.orientationFlips || 0) + (result.released?.orientationFlips || 0), 0), collapses: value.results.reduce((sum, result) => sum + (result.held?.collapsedTriangles || 0) + (result.released?.collapsedTriangles || 0), 0) }])) }));
+    return;
+  }
   const resource = { stageWallMs: Number(process.env.VELA_CALIBRATION_STAGE_WALL_MS || 90000), stageEvaluationBudget: Number(process.env.VELA_CALIBRATION_STAGE_EVALUATIONS || 12), sigma: Number(process.env.VELA_CALIBRATION_STAGE_SIGMA || 0.45), random: rng(seed + 17) };
   const waterfallCheckpointPath = path.join(outputDir, 'rk4-waterfall-checkpoint.json');
   const resumedWaterfall = resumePath ? await loadWaterfallCheckpoint(resumePath) : null;
   if (resumedWaterfall) console.log(JSON.stringify({ phase: 'waterfall-resume', path: resumePath || waterfallCheckpointPath, stage: resumedWaterfall.stage, completedStages: resumedWaterfall.checkpoints.filter(checkpoint => checkpoint.passed).map(checkpoint => checkpoint.stage) }));
   const waterfall = await runWaterfall(meshes, resource, resumedWaterfall);
   const report = { schema: 'vela-realtime-rk4-calibration-waterfall-v1', generatedAt: new Date().toISOString(), seed, requestedModels, architecture: { sourceMetersPerUnit, frameDt, baseDt, anchorDepthFactor, neighborAnchorCount, originalTopology: true, crossIslandSprings: 0, integrator: 'RK4', massFromTriangleArea: true, fixedInnerAnchors: true }, massPolicy: { referenceMassMultiplier: 1, effectiveMassSearchBounds: defaultLogBounds[0], anatomicalInterpretation: 'Area-derived relative masses are preserved. Multipliers above 1 are effective numerical mass calibration, not anatomical density claims.', surfaceModulusBaselinePa: 30000, innerModulusBaselinePa: 10000, surfaceMultiplierBounds: defaultLogBounds[1], innerMultiplierBounds: defaultLogBounds[2] }, offlineCalibration: { realTimeGatesDisabled: true, offlineStageLimit: maxOfflineStages, screenStageLimit: maxOfflineScreenStages, wallClockProtectionOnly: true, maxSubstepsRetainedForPerformanceReport: maxSubsteps, maxEstimatedStagesRetainedForPerformanceReport: maxEstimatedStages }, stageResource: resource, waterfall, reproduction: { command: 'node scripts/calibrate_realtime_rk4.mjs', checkpoint: waterfallCheckpointPath, resumeCommand: `node scripts/calibrate_realtime_rk4.mjs --resume "${waterfallCheckpointPath}"` }, elapsedMs: performance.now() - started, overall: waterfall.overall };
+  report.offlineCalibration.gravitySeconds = offlineGravitySeconds;
+  report.offlineCalibration.stressHoldSeconds = stressHoldSeconds;
+  report.offlineCalibration.stressReleaseSeconds = stressReleaseSeconds;
   await fs.mkdir(outputDir, { recursive: true });
   await fs.writeFile(path.join(outputDir, 'rk4-calibration-report.json'), JSON.stringify(report, null, 2));
   await fs.writeFile(path.join(outputDir, 'rk4-calibration-summary.md'), `# Staged RK4 waterfall calibration\n\nGenerated ${report.generatedAt}.\n\n- Stages completed through: ${waterfall.completedStage}\n- Reference mass multiplier: 1\n- Offline physical gates excluded the real-time operation estimate.\n- Screen and full-island performance are reported separately.\n- Checkpoint: [rk4-waterfall-checkpoint.json](./rk4-waterfall-checkpoint.json)\n- Resume: \`${report.reproduction.resumeCommand}\`\n\nStage results:\n\n${waterfall.stages.map(stage => `- ${stage.name}: ${stage.passed ? 'PASS' : 'FAILED'} with ${stage.evaluations.length} evaluations`).join('\n')}\n\nFull validation and stress results are in [rk4-calibration-report.json](./rk4-calibration-report.json).\n\nOVERALL STEP RESULT: ${report.overall}`);
