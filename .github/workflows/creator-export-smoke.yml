@@ -1,0 +1,38 @@
+name: VELA Creator export smoke
+
+on:
+  pull_request:
+    paths:
+      - 'creator-recorder.mjs'
+      - 'index.html'
+      - 'scripts/test_creator_export.mjs'
+      - 'package.json'
+      - '.github/workflows/creator-export-smoke.yml'
+  workflow_dispatch:
+
+jobs:
+  browser-export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install npm dependencies
+        run: npm ci
+      - name: Install browser
+        run: npx playwright install --with-deps chromium
+      - name: Start local server
+        run: |
+          python3 serve.py > /tmp/vela-server.log 2>&1 &
+          for i in $(seq 1 30); do
+            curl -fsS http://127.0.0.1:4174/creator-recorder.mjs >/dev/null && exit 0
+            sleep 1
+          done
+          cat /tmp/vela-server.log
+          exit 1
+      - name: Browser audio/video export test
+        run: npm run test:creator
