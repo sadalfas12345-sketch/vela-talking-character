@@ -36,6 +36,7 @@ const offlineGravitySeconds = Number(process.env.VELA_CALIBRATION_OFFLINE_GRAVIT
 const offlineLowSeconds = Number(process.env.VELA_CALIBRATION_OFFLINE_LOW_SECONDS || 0.02);
 const offlineFullSeconds = Number(process.env.VELA_CALIBRATION_OFFLINE_FULL_SECONDS || 0.05);
 const offlineFinalSeconds = Number(process.env.VELA_CALIBRATION_OFFLINE_FINAL_SECONDS || 0.20);
+const offlineModelWallMs = Number(process.env.VELA_CALIBRATION_OFFLINE_MODEL_WALL_MS || 180000);
 const stressHoldSeconds = Number(process.env.VELA_CALIBRATION_STRESS_HOLD_SECONDS || frameDt);
 const stressReleaseSeconds = Number(process.env.VELA_CALIBRATION_STRESS_RELEASE_SECONDS || 0.05);
 const seed = Number(process.env.VELA_CALIBRATION_SEED || 20261111);
@@ -245,7 +246,7 @@ function buildSystem(mesh) {
 // Offline physical search bounds. Mass multipliers above 1 are explicitly effective
 // numerical masses, not claims about anatomical density. The ranges keep the search
 // near the biological baseline while allowing a documented numerical calibration.
-const defaultLogBounds = [[-0.6, 3], [-1, 1], [-2, 2], [-1, 2], [-1, 1], [-1, 1], [-1, 1]];
+const defaultLogBounds = [[-0.3, 0.3], [-1, 1], [-2, 2], [-1, 2], [-5, 1], [-1, 1], [-1, 1]];
 const legacyLogBounds = [[0, 8], [-2, 2], [-2, 4], [-1, 2], [-1, 1], [-1, 1], [-1, 1]];
 function createCandidate(logs, bounds = defaultLogBounds) {
   const clamp = (x, lo, hi) => Math.max(lo, Math.min(hi, x));
@@ -291,7 +292,7 @@ function preparePhysics(mesh, candidate) {
   const requestedDt = baseDt * candidate.dtMultiplier;
   const stableDt = Math.min(requestedDt, 0.12 * Math.sqrt(minMass / Math.max(maxLocalK, 1e-18)));
   const damping = 0.08 * candidate.dampingMultiplier * 2 * Math.sqrt(Math.max(surfaceK * medianMass, 1e-18));
-  const prepared = { ...base, masses, surfaceK, supportA: Uint32Array.from(supportA), supportB: Uint32Array.from(supportB), supportRest: Float64Array.from(supportRest), supportK: Float64Array.from(supportK), stableDt, requestedDt, damping, totalMass, minMass, medianMass, maxLocalK, explicitSubsteps: Math.max(1, Math.ceil(frameDt / Math.max(stableDt, 1e-18))) };
+  const prepared = { ...base, masses, surfaceK, supportA: Uint32Array.from(supportA), supportB: Uint32Array.from(supportB), supportRest: Float64Array.from(supportRest), supportK: Float64Array.from(supportK), stableDt, stabilityEstimateDt: stableDt, requestedDt, timestepLimitedByEstimate: requestedDt > stableDt, damping, totalMass, minMass, medianMass, maxLocalK, explicitSubsteps: Math.max(1, Math.ceil(frameDt / Math.max(stableDt, 1e-18))) };
   preparedPhysicsCache.set(cacheKey, prepared);
   return prepared;
 }
@@ -300,7 +301,7 @@ function simulate(model, candidate, options = {}) {
   const simulationStarted = performance.now(), system = preparePhysics(model, candidate), n = system.vertexCount, length = n * 3;
   const positions = new Float64Array(options.initialPositions || system.neutral), velocities = new Float64Array(options.initialVelocities || length), a1 = new Float64Array(length), a2 = new Float64Array(length), a3 = new Float64Array(length), a4 = new Float64Array(length), x2 = new Float64Array(length), x3 = new Float64Array(length), x4 = new Float64Array(length), v2 = new Float64Array(length), v3 = new Float64Array(length), v4 = new Float64Array(length), forceN = new Float64Array(length);
   const gravity = options.gravity || [0, 0, 0]; const seconds = options.seconds ?? 0.05; const usePinch = options.pinch || null;
-  const substepsPerFrame = options.substepsOverride || system.explicitSubsteps; const defaultH = options.timeStepOverride || frameDt / substepsPerFrame;
+  const substepsPerFrame = options.substepsOverride || system.explicitSubsteps; const defaultH = options.timeStepOverride || system.stableDt; const wallClockLimitMs = options.wallClockLimitMs ?? Infinity;
   const neutral = system.neutral, edgeCount = system.edgeA.length; let forceEvaluations = 0;
   const forces = (x, v, out) => {
     forceEvaluations++;
@@ -331,7 +332,7 @@ function simulate(model, candidate, options = {}) {
     for (let i = 0; i < n; i++) { add3(out, i, system.masses[i] * gravity[0] - system.damping * v[i * 3] * sourceMetersPerUnit, system.masses[i] * gravity[1] - system.damping * v[i * 3 + 1] * sourceMetersPerUnit, system.masses[i] * gravity[2] - system.damping * v[i * 3 + 2] * sourceMetersPerUnit); }
   };
   const acceleration = (x, v, out) => { forces(x, v, forceN); for (let i = 0; i < length; i++) out[i] = forceN[i] / system.masses[Math.floor(i / 3)] / sourceMetersPerUnit; };
-  let nonfinite = false, maxVelocity = 0, steps = 0, elapsed = 0;
+  let nonfinite = false, wallClockExceeded = false, maxVelocity = 0, steps = 0, elapsed = 0;
   const rk4 = h => {
     acceleration(positions, velocities, a1);
     for (let i = 0; i < length; i++) { x2[i] = positions[i] + velocities[i] * h * 0.5; v2[i] = velocities[i] + a1[i] * h * 0.5; }
@@ -344,14 +345,17 @@ function simulate(model, candidate, options = {}) {
     for (let i = 0; i < length; i += 3) maxVelocity = Math.max(maxVelocity, Math.hypot(velocities[i], velocities[i + 1], velocities[i + 2]));
     steps++;
   };
-  while (elapsed < seconds - 1e-15 && !nonfinite) { const h = Math.min(defaultH, seconds - elapsed); rk4(h); elapsed += h; }
+  while (elapsed < seconds - 1e-15 && !nonfinite) {
+    if (performance.now() - simulationStarted >= wallClockLimitMs) { wallClockExceeded = true; break; }
+    const h = Math.min(defaultH, seconds - elapsed); rk4(h); elapsed += h;
+  }
   forces(positions, velocities, forceN);
   let maxNetForce = 0, forceRms = 0, finalVelocity = 0, velocityRms = 0;
   for (let i = 0; i < n; i++) { const fm = Math.hypot(forceN[i * 3], forceN[i * 3 + 1], forceN[i * 3 + 2]); const vm = Math.hypot(velocities[i * 3], velocities[i * 3 + 1], velocities[i * 3 + 2]); maxNetForce = Math.max(maxNetForce, fm); forceRms += fm * fm; finalVelocity = Math.max(finalVelocity, vm); velocityRms += vm * vm; }
   const geometry = geometryMetrics(system, positions);
   const maxDisplacement = maxVertexDisplacement(neutral, positions);
   const totalGravityForce = system.totalMass * Math.hypot(...gravity);
-  return { positions, velocities, system, geometry: { ...geometry, maxDisplacement, maxVelocity, finalVelocity, normalizedVelocity: finalVelocity * frameDt / Math.max(model.faceScale, 1e-12), maxNetForceN: maxNetForce, rmsNetForceN: Math.sqrt(forceRms / Math.max(n, 1)), forceResidualRatio: maxNetForce / Math.max(totalGravityForce / Math.max(n, 1), 1e-12) }, steps, seconds: elapsed, nonfinite, pinch: usePinch ? { ...usePinch } : null, runtimeMs: performance.now() - simulationStarted, forceEvaluations };
+  return { positions, velocities, system, geometry: { ...geometry, maxDisplacement, maxVelocity, finalVelocity, normalizedVelocity: finalVelocity * frameDt / Math.max(model.faceScale, 1e-12), maxNetForceN: maxNetForce, rmsNetForceN: Math.sqrt(forceRms / Math.max(n, 1)), forceResidualRatio: maxNetForce / Math.max(totalGravityForce / Math.max(n, 1), 1e-12) }, steps, seconds: elapsed, complete: !nonfinite && !wallClockExceeded && elapsed >= seconds - 1e-15, nonfinite, wallClockExceeded, pinch: usePinch ? { ...usePinch } : null, runtimeMs: performance.now() - simulationStarted, forceEvaluations };
 }
 
 function maxVertexDisplacement(a, b) { let max = 0; for (let i = 0; i < a.length; i += 3) max = Math.max(max, Math.hypot(b[i] - a[i], b[i + 1] - a[i + 1], b[i + 2] - a[i + 2])); return max; }
@@ -393,42 +397,42 @@ function directions(mesh) {
   };
 }
 
-function gravityTest(mesh, candidate, seconds, fidelity = 'full') {
+function gravityTest(mesh, candidate, seconds, fidelity = 'full', wallClockLimitMs = offlineModelWallMs) {
   const results = {};
   const testedDirections = fidelity === 'screen' || fidelity === 'micro' ? ['down'] : gravityDirections;
   for (const direction of testedDirections) {
-    const unit = directions(mesh)[direction]; const result = simulate(mesh, candidate, { gravity: unit.map(v => v * 9.81), seconds });
-    results[direction] = { geometry: result.geometry, steps: result.steps, simulatedSeconds: result.seconds, wallMs: 0, settled: result.geometry.normalizedVelocity <= maxNormalizedVelocity && result.geometry.forceResidualRatio <= maxForceResidualRatio };
+    const unit = directions(mesh)[direction]; const result = simulate(mesh, candidate, { gravity: unit.map(v => v * 9.81), seconds, wallClockLimitMs });
+    results[direction] = { geometry: result.geometry, steps: result.steps, simulatedSeconds: result.seconds, complete: result.complete, wallClockExceeded: result.wallClockExceeded, wallMs: result.runtimeMs, settled: result.complete && result.geometry.normalizedVelocity <= maxNormalizedVelocity && result.geometry.forceResidualRatio <= maxForceResidualRatio };
   }
-  const all = Object.values(results); return { directions: results, worstFlips: Math.max(...all.map(v => v.geometry.orientationFlips)), worstCollapses: Math.max(...all.map(v => v.geometry.collapsedTriangles)), worstStrain: Math.max(...all.map(v => v.geometry.maxEdgeStrain)), maxDisplacement: Math.max(...all.map(v => v.geometry.maxDisplacement)), maxVelocity: Math.max(...all.map(v => v.geometry.maxVelocity)), maxFinalVelocity: Math.max(...all.map(v => v.geometry.finalVelocity)), maxForceResidualRatio: Math.max(...all.map(v => v.geometry.forceResidualRatio)), allSettled: all.every(v => v.settled), finite: all.every(v => v.geometry.finite), fidelity };
+  const all = Object.values(results); return { directions: results, worstFlips: Math.max(...all.map(v => v.geometry.orientationFlips)), worstCollapses: Math.max(...all.map(v => v.geometry.collapsedTriangles)), worstStrain: Math.max(...all.map(v => v.geometry.maxEdgeStrain)), maxDisplacement: Math.max(...all.map(v => v.geometry.maxDisplacement)), maxVelocity: Math.max(...all.map(v => v.geometry.maxVelocity)), maxFinalVelocity: Math.max(...all.map(v => v.geometry.finalVelocity)), maxForceResidualRatio: Math.max(...all.map(v => v.geometry.forceResidualRatio)), allComplete: all.every(v => v.complete), allSettled: all.every(v => v.settled), finite: all.every(v => v.geometry.finite), fidelity };
 }
 
-function forceResponse(mesh, candidate) {
+function forceResponse(mesh, candidate, wallClockLimitMs = offlineModelWallMs) {
   const system = preparePhysics(mesh, candidate), face = system.faces[Math.floor(system.faces.length / 2)], ids = face, weights = [1 / 3, 1 / 3, 1 / 3];
   const origin = [0, 0, 0]; for (let j = 0; j < 3; j++) for (let axis = 0; axis < 3; axis++) origin[axis] += weights[j] * system.neutral[ids[j] * 3 + axis];
   const target = origin.slice(); target[1] += mesh.faceScale * 0.001;
-  const result = simulate(mesh, candidate, { gravity: [0, 0, 0], seconds: 0.02, pinch: { ids, weights, target, velocity: [0, 0, 0], kp: 90 * candidate.pinchKpMultiplier, kd: 0.08 * candidate.pinchKdMultiplier, peakForce: 0 } });
+  const result = simulate(mesh, candidate, { gravity: [0, 0, 0], seconds: 0.02, wallClockLimitMs, pinch: { ids, weights, target, velocity: [0, 0, 0], kp: 90 * candidate.pinchKpMultiplier, kd: 0.08 * candidate.pinchKdMultiplier, peakForce: 0 } });
   return { displacement: result.geometry.maxDisplacement, targetMeters: mesh.faceScale * 0.001 * sourceMetersPerUnit, finite: result.geometry.finite, flips: result.geometry.orientationFlips, strain: result.geometry.maxEdgeStrain, forceN: result.pinch?.peakForce || 0 };
 }
 
-function convergenceTest(mesh, candidate, requestedSeconds = 0.03333333333333333) {
+function convergenceTest(mesh, candidate, requestedSeconds = 0.03333333333333333, wallClockLimitMs = offlineModelWallMs) {
   const gravity = directions(mesh).down.map(v => v * 9.81);
   const seconds = requestedSeconds;
   const stableDt = preparePhysics(mesh, candidate).stableDt;
-  const solves = [stableDt, stableDt * 0.5, stableDt * 0.25].map(timeStepOverride => simulate(mesh, candidate, { gravity, seconds, timeStepOverride }));
+  const solves = [stableDt, stableDt * 0.5, stableDt * 0.25].map(timeStepOverride => simulate(mesh, candidate, { gravity, seconds, timeStepOverride, wallClockLimitMs }));
   const compare = (a, b) => { let sumP = 0, sumV = 0, maxP = 0, maxV = 0; for (let i = 0; i < a.positions.length; i += 3) { const dp = Math.hypot(a.positions[i] - b.positions[i], a.positions[i + 1] - b.positions[i + 1], a.positions[i + 2] - b.positions[i + 2]); const dv = Math.hypot(a.velocities[i] - b.velocities[i], a.velocities[i + 1] - b.velocities[i + 1], a.velocities[i + 2] - b.velocities[i + 2]); sumP += dp * dp; sumV += dv * dv; maxP = Math.max(maxP, dp); maxV = Math.max(maxV, dv); } return { rmsPositionSource: Math.sqrt(sumP / (a.positions.length / 3)), maxPositionSource: maxP, rmsVelocitySource: Math.sqrt(sumV / (a.positions.length / 3)), maxVelocitySource: maxV }; };
   const hVsH2 = compare(solves[0], solves[1]), h2VsH4 = compare(solves[1], solves[2]);
   const positionOrder = h2VsH4.rmsPositionSource > 0 ? hVsH2.rmsPositionSource / h2VsH4.rmsPositionSource : Infinity;
   const velocityOrder = h2VsH4.rmsVelocitySource > 0 ? hVsH2.rmsVelocitySource / h2VsH4.rmsVelocitySource : Infinity;
-  return { durationSeconds: seconds, steps: solves.map(result => result.steps), timeSteps: [stableDt, stableDt * 0.5, stableDt * 0.25], hVsH2, h2VsH4, positionOrder, velocityOrder, converged: h2VsH4.rmsPositionSource / Math.max(mesh.faceScale, 1e-12) < convergenceTolerance && h2VsH4.rmsVelocitySource * frameDt / Math.max(mesh.faceScale, 1e-12) < convergenceTolerance, samples: solves.map(result => ({ orientationFlips: result.geometry.orientationFlips, collapsedTriangles: result.geometry.collapsedTriangles, finalVelocity: result.geometry.finalVelocity, maxNetForceN: result.geometry.maxNetForceN })) };
+  return { durationSeconds: seconds, steps: solves.map(result => result.steps), timeSteps: [stableDt, stableDt * 0.5, stableDt * 0.25], hVsH2, h2VsH4, positionOrder, velocityOrder, complete: solves.every(result => result.complete), converged: solves.every(result => result.complete) && h2VsH4.rmsPositionSource / Math.max(mesh.faceScale, 1e-12) < convergenceTolerance && h2VsH4.rmsVelocitySource * frameDt / Math.max(mesh.faceScale, 1e-12) < convergenceTolerance, samples: solves.map(result => ({ orientationFlips: result.geometry.orientationFlips, collapsedTriangles: result.geometry.collapsedTriangles, finalVelocity: result.geometry.finalVelocity, maxNetForceN: result.geometry.maxNetForceN, complete: result.complete, wallClockExceeded: result.wallClockExceeded })) };
 }
 
-function timestepRangeTest(mesh, candidate, seconds) {
+function timestepRangeTest(mesh, candidate, seconds, wallClockLimitMs = offlineModelWallMs) {
   const h = preparePhysics(mesh, candidate).stableDt;
   const factors = [4, 2, 1, 0.5, 0.25];
   const samples = factors.map(factor => {
-    const result = simulate(mesh, candidate, { gravity: directions(mesh).down.map(v => v * 9.81), seconds: Math.min(seconds, 0.02), timeStepOverride: h * factor });
-    return { factor, timeStep: h * factor, steps: result.steps, finite: result.geometry.finite, orientationFlips: result.geometry.orientationFlips, collapsedTriangles: result.geometry.collapsedTriangles, maxStrain: result.geometry.maxEdgeStrain, finalVelocity: result.geometry.finalVelocity, forceResidualRatio: result.geometry.forceResidualRatio };
+    const result = simulate(mesh, candidate, { gravity: directions(mesh).down.map(v => v * 9.81), seconds: Math.min(seconds, 0.02), timeStepOverride: h * factor, wallClockLimitMs });
+    return { factor, timeStep: h * factor, steps: result.steps, complete: result.complete, wallClockExceeded: result.wallClockExceeded, finite: result.geometry.finite, orientationFlips: result.geometry.orientationFlips, collapsedTriangles: result.geometry.collapsedTriangles, maxStrain: result.geometry.maxEdgeStrain, finalVelocity: result.geometry.finalVelocity, forceResidualRatio: result.geometry.forceResidualRatio };
   });
   const stable = samples.filter(sample => sample.finite && sample.orientationFlips === 0 && sample.collapsedTriangles === 0);
   return { startingEstimate: h, samples, largestTestedStableMultiplier: stable.length ? Math.max(...stable.map(sample => sample.factor)) : null, smallestTestedStableMultiplier: stable.length ? Math.min(...stable.map(sample => sample.factor)) : null };
@@ -467,6 +471,7 @@ function candidateKey(candidate) { return JSON.stringify([candidate.massMultipli
 function evaluationKey(meshes, candidate, fidelity) { return `${meshes.map(mesh => mesh.name).join(',')}|${fidelity}|${candidateKey(candidate)}`; }
 
 function diagnoseModel(value) {
+  if (value.incomplete === 'wall-clock-limit') return { mechanism: 'wall-clock-limit', distance: 1, evidence: { runtimeMs: value.runtimeMs, estimatedStages: value.estimatedStages, offlineModelWallMs } };
   if (value.deferred === 'offline-wall-limit') { const limit = value.maxOfflineStages || maxOfflineStages; return { mechanism: 'deferred-offline-compute', distance: Math.max(0, value.estimatedStages / limit - 1), requiredReduction: value.estimatedStages / limit, evidence: { estimatedStages: value.estimatedStages, maxOfflineStages: limit } }; }
   if (value.rejected === 'operation-budget') return { mechanism: 'operation-budget', distance: Math.max(0, value.estimatedStages / maxEstimatedStages - 1), requiredReduction: value.estimatedStages / maxEstimatedStages, evidence: { estimatedStages: value.estimatedStages, maxEstimatedStages } };
   if (value.rejected === 'substep-budget') return { mechanism: 'substep-budget', distance: Math.max(0, value.substepsPerFrame / maxSubsteps - 1), requiredReduction: value.substepsPerFrame / maxSubsteps, evidence: { substepsPerFrame: value.substepsPerFrame, maxSubsteps } };
@@ -502,23 +507,16 @@ function evaluateCandidate(meshes, candidate, fidelity) {
     const directionCount = fidelity === 'screen' || fidelity === 'micro' ? 1 : gravityDirections.length;
     const estimatedSteps = Math.max(1, Math.ceil(seconds / Math.max(prepared.stableDt, 1e-18)));
     const estimatedStages = estimatedSteps * directionCount * 4 * (prepared.edgeA.length + prepared.supportA.length);
-    const offlineLimit = fidelity === 'full' ? maxOfflineStages : maxOfflineScreenStages;
-    if (estimatedStages > offlineLimit) {
-      // This is a wall-clock protection for offline experiments, not a physical
-      // failure and not the real-time gate. The candidate remains eligible for
-      // lower-fidelity testing and the reason is fed back as deferred computation.
-      perModel[mesh.name] = { deferred: 'offline-wall-limit', evaluatedIsland: evalMesh.name, evaluatedVertices: prepared.vertexCount, triangles: prepared.faces.length, surfaceSprings: prepared.edgeA.length, supportSprings: prepared.supportA.length, estimatedStages, maxOfflineStages: offlineLimit, stableDt: prepared.stableDt, substepsPerFrame: prepared.explicitSubsteps, totalMassKg: prepared.totalMass };
-      continue;
-    }
-    const gravity = gravityTest(evalMesh, candidate, seconds, fidelity);
-    const response = forceResponse(evalMesh, candidate);
-    const convergence = fidelity === 'full' || fidelity === 'micro' ? convergenceTest(evalMesh, candidate, seconds) : null;
-    const timestepRange = fidelity === 'full' || fidelity === 'micro' ? timestepRangeTest(evalMesh, candidate, seconds) : null;
-    const invalid = !gravity.finite || gravity.worstFlips > 0 || gravity.worstCollapses > 0 || gravity.worstStrain > maxGravityStrain || !gravity.allSettled || response.flips > 0 || !response.finite;
-    perModel[mesh.name] = { gravity, response, convergence, timestepRange, evaluatedIsland: evalMesh.name, evaluatedVertices: prepared.vertexCount, triangles: prepared.faces.length, surfaceSprings: prepared.edgeA.length, supportSprings: prepared.supportA.length, estimatedStages, runtimeMs: performance.now() - started, stableDt: prepared.stableDt, substepsPerFrame: prepared.explicitSubsteps, totalMassKg: prepared.totalMass };
+    const gravity = gravityTest(evalMesh, candidate, seconds, fidelity, offlineModelWallMs);
+    const response = forceResponse(evalMesh, candidate, offlineModelWallMs);
+    const convergence = fidelity === 'full' || fidelity === 'micro' ? convergenceTest(evalMesh, candidate, seconds, offlineModelWallMs) : null;
+    const timestepRange = fidelity === 'full' || fidelity === 'micro' ? timestepRangeTest(evalMesh, candidate, seconds, offlineModelWallMs) : null;
+    const incomplete = !gravity.allComplete || Boolean(convergence && !convergence.complete) || Boolean(timestepRange && timestepRange.samples.some(sample => !sample.complete));
+    const invalid = incomplete || !gravity.finite || gravity.worstFlips > 0 || gravity.worstCollapses > 0 || gravity.worstStrain > maxGravityStrain || !gravity.allSettled || response.flips > 0 || !response.finite;
+    perModel[mesh.name] = { gravity, response, convergence, timestepRange, incomplete: incomplete ? 'wall-clock-limit' : null, evaluatedIsland: evalMesh.name, evaluatedVertices: prepared.vertexCount, triangles: prepared.faces.length, surfaceSprings: prepared.edgeA.length, supportSprings: prepared.supportA.length, estimatedStages, runtimeMs: performance.now() - started, stableDt: prepared.stableDt, requestedDt: prepared.requestedDt, timestepLimitedByEstimate: prepared.timestepLimitedByEstimate, substepsPerFrame: prepared.explicitSubsteps, totalMassKg: prepared.totalMass };
     if (invalid && fidelity === 'screen') break;
   }
-  const values = Object.values(perModel); const valid = values.length === meshes.length && values.every(v => !v.rejected && !v.deferred && v.gravity.finite && v.gravity.worstFlips === 0 && v.gravity.worstCollapses === 0 && v.gravity.worstStrain <= maxGravityStrain && v.gravity.allSettled && v.response.flips === 0 && v.response.displacement > v.response.targetMeters * 0.01 && (v.convergence ? v.convergence.converged : true));
+  const values = Object.values(perModel); const valid = values.length === meshes.length && values.every(v => !v.rejected && !v.deferred && !v.incomplete && v.gravity.finite && v.gravity.worstFlips === 0 && v.gravity.worstCollapses === 0 && v.gravity.worstStrain <= maxGravityStrain && v.gravity.allSettled && v.response.flips === 0 && v.response.displacement > v.response.targetMeters * 0.01 && (v.convergence ? v.convergence.converged : true));
   const preliminary = { candidate, fidelity, valid, score: 0, evaluatedAt: new Date().toISOString(), models: perModel, runtimeMs: performance.now() - started };
   const diagnosis = diagnoseResult(preliminary);
   const score = valid ? values.reduce((sum, v) => sum + v.gravity.worstStrain + (v.convergence?.h2VsH4?.rmsPositionSource || 0) / Math.max(v.evaluatedVertices, 1), 0) + values.reduce((sum, v) => sum + v.runtimeMs / 1000, 0) * 0.01 : 1e6 * diagnosis.failureDistance + diagnosis.failureDistance;
@@ -671,6 +669,7 @@ async function adaptiveSearch(meshes, random, resumed) {
 function compactResult(result) {
   const out = { candidate: result.candidate, fidelity: result.fidelity, valid: result.valid, score: Number.isFinite(result.score) ? result.score : 1e300, generation: result.generation, phase: result.phase, source: result.source, runtimeMs: result.runtimeMs, diagnosis: result.diagnosis ? { ...result.diagnosis, failureDistance: Number.isFinite(result.diagnosis.failureDistance) ? result.diagnosis.failureDistance : 1e6 } : result.diagnosis, models: {} };
   for (const [name, value] of Object.entries(result.models || {})) out.models[name] = value.rejected || value.deferred ? { rejected: value.rejected, deferred: value.deferred, evaluatedIsland: value.evaluatedIsland, evaluatedVertices: value.evaluatedVertices, triangles: value.triangles, surfaceSprings: value.surfaceSprings, supportSprings: value.supportSprings, estimatedStages: value.estimatedStages, maxEstimatedStages: value.maxEstimatedStages, maxOfflineStages: value.maxOfflineStages, stableDt: value.stableDt, substepsPerFrame: value.substepsPerFrame, totalMassKg: value.totalMassKg } : { gravity: { worstFlips: value.gravity.worstFlips, worstCollapses: value.gravity.worstCollapses, worstStrain: value.gravity.worstStrain, maxDisplacement: value.gravity.maxDisplacement, maxVelocity: value.gravity.maxVelocity, maxFinalVelocity: value.gravity.maxFinalVelocity, maxForceResidualRatio: value.gravity.maxForceResidualRatio, allSettled: value.gravity.allSettled, finite: value.gravity.finite }, response: value.response, convergence: value.convergence, timestepRange: value.timestepRange, evaluatedIsland: value.evaluatedIsland, evaluatedVertices: value.evaluatedVertices, triangles: value.triangles, surfaceSprings: value.surfaceSprings, supportSprings: value.supportSprings, estimatedStages: value.estimatedStages, stableDt: value.stableDt, substepsPerFrame: value.substepsPerFrame, totalMassKg: value.totalMassKg, runtimeMs: value.runtimeMs };
+  for (const [name, value] of Object.entries(result.models || {})) if (value.incomplete) out.models[name].incomplete = value.incomplete;
   return out;
 }
 
@@ -682,7 +681,7 @@ function withParameterBlock(base, updates) {
 
 function stageDistance(result, stage) {
   const values = Object.values(result.models || {});
-  if (values.some(value => value.deferred || value.rejected)) return result.diagnosis?.failureDistance || 1e6;
+  if (values.some(value => value.deferred || value.rejected || value.incomplete)) return result.diagnosis?.failureDistance || 1e6;
   if (stage === 'timestep') return values.reduce((sum, value) => sum + (value.convergence?.converged ? 0 : 1) + (value.timestepRange?.largestTestedStableMultiplier ? 0 : 1), 0);
   if (stage === 'gravity' || stage === 'damping') return values.reduce((sum, value) => sum + (value.gravity?.worstFlips || 0) + (value.gravity?.worstCollapses || 0) + Math.max(0, (value.gravity?.worstStrain || 0) - maxGravityStrain) + Math.max(0, (value.gravity?.maxForceResidualRatio || 0) - maxForceResidualRatio) + Math.max(0, (value.gravity?.maxFinalVelocity || 0) * 0 + (value.gravity?.allSettled ? 0 : 1)), 0);
   if (stage === 'pinch') return values.reduce((sum, value) => sum + Math.max(0, 0.5 - (value.response?.displacement || 0) / Math.max(value.response?.targetMeters || 1e-18, 1e-18)) + (value.response?.flips || 0), 0);
@@ -691,7 +690,7 @@ function stageDistance(result, stage) {
 
 function stagePass(result, stage) {
   const values = Object.values(result.models || {});
-  if (!values.length || values.some(value => value.deferred || value.rejected || !value.gravity?.finite)) return false;
+  if (!values.length || values.some(value => value.deferred || value.rejected || value.incomplete || !value.gravity?.finite)) return false;
   if (stage === 'timestep') return values.every(value => value.convergence?.converged && value.timestepRange?.largestTestedStableMultiplier !== null && value.timestepRange?.largestTestedStableMultiplier !== undefined && value.gravity.worstFlips === 0 && value.gravity.worstCollapses === 0);
   if (stage === 'gravity' || stage === 'damping') return values.every(value => value.gravity.allSettled && value.gravity.worstFlips === 0 && value.gravity.worstCollapses === 0 && value.gravity.worstStrain <= maxGravityStrain && value.gravity.maxForceResidualRatio <= maxForceResidualRatio);
   if (stage === 'pinch') return values.every(value => value.response.finite && value.response.flips === 0 && value.response.displacement >= value.response.targetMeters * 0.5);
@@ -718,11 +717,16 @@ async function runWaterfallStage(name, baseCandidate, varyingIndices, fidelity, 
     const result = evaluateCandidate(meshes, candidate, fidelity);
     const record = { stage: name, candidate, fidelity, passed: stagePass(result, passStage), distance: stageDistance(result, passStage), result: compactResult(result) };
     evaluations.push(record);
-    if (!best || record.distance < best.distance) best = record;
+    const better = !best || Number(record.passed) > Number(best.passed) || (record.passed === best.passed && (record.distance < best.distance || (record.distance === best.distance && (record.result?.score || Infinity) < (best.result?.score || Infinity))));
+    if (better) best = record;
     console.log(JSON.stringify({ phase: 'waterfall-stage', stage: name, evaluation: evaluations.length, candidate, passed: record.passed, distance: record.distance, dominantMechanism: result.diagnosis?.dominantMechanism, runtimeMs: result.runtimeMs }));
-    if (record.passed) return { name, passed: true, candidate, evaluations, best: record, elapsedMs: performance.now() - started };
   }
-  return { name, passed: false, candidate: best?.candidate || baseCandidate, evaluations, best, elapsedMs: performance.now() - started, reason: performance.now() - started >= resource.stageWallMs ? 'stage-wall-budget' : 'stage-evaluation-budget' };
+  const passedRecords = evaluations.filter(record => record.passed);
+  if (name === 'timestep' && passedRecords.length) {
+    passedRecords.sort((a, b) => Math.max(...Object.values(b.result.models).map(value => value.timestepRange?.samples?.find(sample => sample.factor === 1)?.timeStep || 0)) - Math.max(...Object.values(a.result.models).map(value => value.timestepRange?.samples?.find(sample => sample.factor === 1)?.timeStep || 0)));
+    best = passedRecords[0];
+  }
+  return { name, passed: Boolean(best?.passed), candidate: best?.candidate || baseCandidate, evaluations, best, elapsedMs: performance.now() - started, reason: best?.passed ? 'stage-complete' : (performance.now() - started >= resource.stageWallMs ? 'stage-wall-budget' : 'stage-evaluation-budget') };
 }
 
 async function loadWaterfallCheckpoint(filePath) {
@@ -797,6 +801,11 @@ async function runWaterfall(meshes, resource, resumed = null) {
     if (!preflight.passed) return { stages, checkpoints, current, completedStage: 'pinch-preflight', overall: 'FAILED' };
   }
   const robustness = Object.fromEntries(meshes.map((mesh, index) => [mesh.name, { fidelity: 'micro6', randomPinch: randomPinchStress(mesh.microMesh || mesh.screenMesh || mesh, current, 20, seed + 100 + index, { holdSeconds: stressHoldSeconds, releaseSeconds: stressReleaseSeconds }), gravity: gravityTest(mesh.microMesh || mesh.screenMesh || mesh, current, offlineGravitySeconds, 'full') }]));
+  const robustnessPassed = Object.values(robustness).every(value => value.randomPinch.valid && value.gravity.finite && value.gravity.allComplete && value.gravity.worstFlips === 0 && value.gravity.worstCollapses === 0 && value.gravity.allSettled);
+  const robustnessStage = { name: 'robustness', passed: robustnessPassed, candidate: current, evaluations: [{ candidate: current, passed: robustnessPassed, robustness }] };
+  const existingRobustness = stages.findIndex(stage => stage.name === 'robustness'); if (existingRobustness >= 0) stages[existingRobustness] = robustnessStage; else stages.push(robustnessStage);
+  checkpoints.push({ stage: 'robustness', current, passed: robustnessPassed }); await persist('robustness');
+  if (!robustnessPassed) return { stages, checkpoints, current, completedStage: 'robustness', robustness, overall: 'FAILED' };
   const fullValidation = Object.fromEntries(meshes.map(mesh => { const result = evaluateCandidate([mesh], current, 'full'); return [mesh.name, compactResult(result)]; }));
   const profile = profileCandidate(meshes, current);
   await persist('complete');
@@ -854,6 +863,28 @@ async function main() {
     console.log(JSON.stringify({ phase: 'damping-stress-complete', path: path.relative(root, sweepPath), evaluations: evaluations.length }));
     return;
   }
+  if (argv.has('--physical-progression')) {
+    const progressionCheckpoint = resumePath ? await loadWaterfallCheckpoint(resumePath) : null;
+    const base = progressionCheckpoint?.current || createCandidate([0, 0, 0, 0, -1, 0, 0]);
+    const levels = [
+      ['micro', mesh => mesh.microMesh || mesh.screenMesh || mesh],
+      ['screen', mesh => mesh.screenMesh || mesh],
+      ['full', mesh => mesh],
+    ];
+    const evaluations = [];
+    for (const [fidelity, select] of levels) {
+      for (const mesh of meshes) {
+        const result = evaluateCandidate([select(mesh)], base, fidelity);
+        evaluations.push({ fidelity, model: mesh.name, result: compactResult(result) });
+        console.log(JSON.stringify({ phase: 'physical-progression', fidelity, model: mesh.name, valid: result.valid, diagnosis: result.diagnosis, runtimeMs: result.runtimeMs, models: Object.fromEntries(Object.entries(result.models).map(([name, value]) => [name, { incomplete: value.incomplete, evaluatedVertices: value.evaluatedVertices, estimatedStages: value.estimatedStages, stableDt: value.stableDt, requestedDt: value.requestedDt }])) }));
+      }
+    }
+    const progression = { schema: 'vela-rk4-physical-progression-v1', generatedAt: new Date().toISOString(), candidate: base, wallClockLimitMs: offlineModelWallMs, levels: evaluations };
+    const progressionPath = path.join(outputDir, 'rk4-physical-progression.json');
+    await fs.mkdir(outputDir, { recursive: true }); await fs.writeFile(progressionPath, JSON.stringify(progression, null, 2));
+    console.log(JSON.stringify({ phase: 'physical-progression-complete', path: path.relative(root, progressionPath), evaluations: evaluations.length }));
+    return;
+  }
   if (argv.has('--stress-controller-only')) {
     const probeCheckpoint = resumePath ? await loadWaterfallCheckpoint(resumePath) : null;
     const base = probeCheckpoint?.current || createCandidate([0, 0, 0, 0, -1, 0, 0]);
@@ -872,7 +903,7 @@ async function main() {
   const resumedWaterfall = resumePath ? await loadWaterfallCheckpoint(resumePath) : null;
   if (resumedWaterfall) console.log(JSON.stringify({ phase: 'waterfall-resume', path: resumePath || waterfallCheckpointPath, stage: resumedWaterfall.stage, completedStages: resumedWaterfall.checkpoints.filter(checkpoint => checkpoint.passed).map(checkpoint => checkpoint.stage) }));
   const waterfall = await runWaterfall(meshes, resource, resumedWaterfall);
-  const report = { schema: 'vela-realtime-rk4-calibration-waterfall-v1', generatedAt: new Date().toISOString(), seed, requestedModels, architecture: { sourceMetersPerUnit, frameDt, baseDt, anchorDepthFactor, neighborAnchorCount, originalTopology: true, crossIslandSprings: 0, integrator: 'RK4', massFromTriangleArea: true, fixedInnerAnchors: true }, massPolicy: { referenceMassMultiplier: 1, effectiveMassSearchBounds: defaultLogBounds[0], anatomicalInterpretation: 'Area-derived relative masses are preserved. Multipliers above 1 are effective numerical mass calibration, not anatomical density claims.', surfaceModulusBaselinePa: 30000, innerModulusBaselinePa: 10000, surfaceMultiplierBounds: defaultLogBounds[1], innerMultiplierBounds: defaultLogBounds[2] }, offlineCalibration: { realTimeGatesDisabled: true, offlineStageLimit: maxOfflineStages, screenStageLimit: maxOfflineScreenStages, wallClockProtectionOnly: true, maxSubstepsRetainedForPerformanceReport: maxSubsteps, maxEstimatedStagesRetainedForPerformanceReport: maxEstimatedStages }, stageResource: resource, waterfall, reproduction: { command: 'node scripts/calibrate_realtime_rk4.mjs', checkpoint: waterfallCheckpointPath, resumeCommand: `node scripts/calibrate_realtime_rk4.mjs --resume "${waterfallCheckpointPath}"` }, elapsedMs: performance.now() - started, overall: waterfall.overall };
+  const report = { schema: 'vela-realtime-rk4-calibration-waterfall-v1', generatedAt: new Date().toISOString(), seed, requestedModels, architecture: { sourceMetersPerUnit, frameDt, baseDt, anchorDepthFactor, neighborAnchorCount, originalTopology: true, crossIslandSprings: 0, integrator: 'RK4', massFromTriangleArea: true, fixedInnerAnchors: true }, massPolicy: { referenceMassMultiplier: 1, effectiveMassSearchBounds: defaultLogBounds[0], anatomicalInterpretation: 'Area-derived relative masses are preserved. Multipliers above 1 are effective numerical mass calibration, not anatomical density claims.', surfaceModulusBaselinePa: 30000, innerModulusBaselinePa: 10000, surfaceMultiplierBounds: defaultLogBounds[1], innerMultiplierBounds: defaultLogBounds[2] }, offlineCalibration: { realTimeGatesDisabled: true, estimatedStageCountsAreInformational: true, offlineStageLimit: maxOfflineStages, screenStageLimit: maxOfflineScreenStages, wallClockProtectionOnly: true, perModelWallClockLimitMs: offlineModelWallMs, maxSubstepsRetainedForPerformanceReport: maxSubsteps, maxEstimatedStagesRetainedForPerformanceReport: maxEstimatedStages }, stageResource: resource, waterfall, reproduction: { command: 'node scripts/calibrate_realtime_rk4.mjs', checkpoint: waterfallCheckpointPath, resumeCommand: `node scripts/calibrate_realtime_rk4.mjs --resume "${waterfallCheckpointPath}"`, physicalProgressionCommand: `VELA_CALIBRATION_OFFLINE_MODEL_WALL_MS=${offlineModelWallMs} node scripts/calibrate_realtime_rk4.mjs --resume "${waterfallCheckpointPath}" --physical-progression` }, elapsedMs: performance.now() - started, overall: waterfall.overall };
   report.offlineCalibration.gravitySeconds = offlineGravitySeconds;
   report.offlineCalibration.stressHoldSeconds = stressHoldSeconds;
   report.offlineCalibration.stressReleaseSeconds = stressReleaseSeconds;
