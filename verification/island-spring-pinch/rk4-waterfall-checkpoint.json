@@ -1,6 +1,6 @@
 {
   "schema": "vela-rk4-waterfall-checkpoint-v1",
-  "generatedAt": "2026-11-11T19:18:39.369Z",
+  "generatedAt": "2026-11-11T21:11:37.922Z",
   "stage": "complete",
   "current": {
     "massMultiplier": 1,
@@ -8,7 +8,7 @@
     "innerMultiplier": 1,
     "dampingMultiplier": 1,
     "dtMultiplier": 0.1,
-    "pinchKpMultiplier": 0.31622776601683794,
+    "pinchKpMultiplier": 1,
     "pinchKdMultiplier": 1,
     "logParameters": [
       0,
@@ -16,7 +16,7 @@
       0,
       0,
       -1,
-      -0.5,
+      0,
       0
     ]
   },
@@ -3842,6 +3842,1464 @@
         }
       },
       "count": 1
+    },
+    {
+      "name": "pinch-preflight",
+      "passed": true,
+      "candidate": {
+        "massMultiplier": 1,
+        "surfaceMultiplier": 1,
+        "innerMultiplier": 1,
+        "dampingMultiplier": 1,
+        "dtMultiplier": 0.1,
+        "pinchKpMultiplier": 1,
+        "pinchKdMultiplier": 1,
+        "logParameters": [
+          0,
+          0,
+          0,
+          0,
+          -1,
+          0,
+          0
+        ]
+      },
+      "evaluations": [
+        {
+          "candidate": {
+            "massMultiplier": 1,
+            "surfaceMultiplier": 1,
+            "innerMultiplier": 1,
+            "dampingMultiplier": 1,
+            "dtMultiplier": 0.1,
+            "pinchKpMultiplier": 0.1,
+            "pinchKdMultiplier": 0.1,
+            "logParameters": [
+              0,
+              0,
+              0,
+              0,
+              -1,
+              -1,
+              -1
+            ]
+          },
+          "passed": false,
+          "folds": 5,
+          "collapses": 0,
+          "maxStrain": 0.030536505729835236,
+          "models": {
+            "female": {
+              "count": 1,
+              "holdSeconds": 0.016666666666666666,
+              "releaseSeconds": 0.02,
+              "valid": true,
+              "results": [
+                {
+                  "sequence": 0,
+                  "face": [
+                    13,
+                    35,
+                    17
+                  ],
+                  "direction": "up",
+                  "magnitudeSource": 0.0005381303892165213,
+                  "held": {
+                    "maxEdgeStrain": 0.0015363638260923883,
+                    "p95EdgeStrain": 0.0004378296877507603,
+                    "orientationFlips": 0,
+                    "genuineFolds": 0,
+                    "genuineFoldFaces": [],
+                    "collapsedTriangles": 0,
+                    "minAreaRatio": 0.997703050390149,
+                    "finite": true,
+                    "maxDisplacement": 0.0008591269509235684,
+                    "maxVelocity": 0.1476300954928802,
+                    "finalVelocity": 0.0028753167524834524,
+                    "normalizedVelocity": 0.0008342853074353216,
+                    "maxNetForceN": 2.6959590551812467e-9,
+                    "rmsNetForceN": 5.13116604104205e-10,
+                    "forceResidualRatio": 0.007999013116627717
+                  },
+                  "released": {
+                    "maxEdgeStrain": 0.0006022142479633559,
+                    "p95EdgeStrain": 0.00013489451555332582,
+                    "orientationFlips": 0,
+                    "genuineFolds": 0,
+                    "genuineFoldFaces": [],
+                    "collapsedTriangles": 0,
+                    "minAreaRatio": 0.9990261021535887,
+                    "finite": true,
+                    "maxDisplacement": 0.0006639577533022766,
+                    "maxVelocity": 0.03128572395880001,
+                    "finalVelocity": 0.006396366305748123,
+                    "normalizedVelocity": 0.0018559327160219425,
+                    "maxNetForceN": 4.7597370536402215e-9,
+                    "rmsNetForceN": 1.2973606298713013e-9,
+                    "forceResidualRatio": 0.01412232097909494
+                  },
+                  "recoveredDisplacement": 0.0006639577533022766,
+                  "peakForceN": 0.00037582120415965585,
+                  "peakTrackingErrorMeters": 0.0000025564913097578037,
+                  "valid": true
+                }
+              ],
+              "runtimeMs": 10524.188900000001
+            },
+            "male": {
+              "count": 1,
+              "holdSeconds": 0.016666666666666666,
+              "releaseSeconds": 0.02,
+              "valid": false,
+              "results": [
+                {
+                  "sequence": 0,
+                  "face": [
+                    39,
+                    88,
+                    48
+                  ],
+                  "direction": "up",
+                  "magnitudeSource": 0.001834660725602843,
+                  "held": {
+                    "maxEdgeStrain": 0.030536505729835236,
+                    "p95EdgeStrain": 0.005109017581929857,
+                    "orientationFlips": 2,
+                    "genuineFolds": 3,
+                    "genuineFoldFaces": [
+                      72,
+                      79,
+                      159
+                    ],
+                    "collapsedTriangles": 0,
+                    "minAreaRatio": 0.966403726666184,
+                    "finite": true,
+                    "maxDisplacement": 0.0024321103167009154,
+                    "maxVelocity": 0.42297911312950026,
+                    "finalVelocity": 0.011446046286894503,
+                    "normalizedVelocity": 0.0006273209587056875,
+                    "maxNetForceN": 5.1934446671785666e-8,
+                    "rmsNetForceN": 1.2943874008516992e-8,
+                    "forceResidualRatio": 0.03571878012492955
+                  },
+                  "released": {
+                    "maxEdgeStrain": 0.008734719588150995,
+                    "p95EdgeStrain": 0.0013352924596958323,
+                    "orientationFlips": 1,
+                    "genuineFolds": 2,
+                    "genuineFoldFaces": [
+                      72,
+                      79
+                    ],
+                    "collapsedTriangles": 0,
+                    "minAreaRatio": 0.9156419354446425,
+                    "finite": true,
+                    "maxDisplacement": 0.0008098541540995095,
+                    "maxVelocity": 0.5757100543107436,
+                    "finalVelocity": 0.05125674045862012,
+                    "normalizedVelocity": 0.002809216978394222,
+                    "maxNetForceN": 9.505602673626688e-7,
+                    "rmsNetForceN": 1.3922726600329559e-7,
+                    "forceResidualRatio": 0.6537636455433138
+                  },
+                  "recoveredDisplacement": 0.0008098541540995095,
+                  "peakForceN": 0.0015854244992915259,
+                  "peakTrackingErrorMeters": 0.00006923161952452531,
+                  "valid": false
+                }
+              ],
+              "runtimeMs": 11514.5766
+            }
+          }
+        },
+        {
+          "candidate": {
+            "massMultiplier": 1,
+            "surfaceMultiplier": 1,
+            "innerMultiplier": 1,
+            "dampingMultiplier": 1,
+            "dtMultiplier": 0.1,
+            "pinchKpMultiplier": 0.1,
+            "pinchKdMultiplier": 1,
+            "logParameters": [
+              0,
+              0,
+              0,
+              0,
+              -1,
+              -1,
+              0
+            ]
+          },
+          "passed": false,
+          "folds": 11,
+          "collapses": 0,
+          "maxStrain": 0.03286378941221386,
+          "models": {
+            "female": {
+              "count": 1,
+              "holdSeconds": 0.016666666666666666,
+              "releaseSeconds": 0.02,
+              "valid": true,
+              "results": [
+                {
+                  "sequence": 0,
+                  "face": [
+                    13,
+                    35,
+                    17
+                  ],
+                  "direction": "forward",
+                  "magnitudeSource": 0.00015392599943178935,
+                  "held": {
+                    "maxEdgeStrain": 0.00038692573016670985,
+                    "p95EdgeStrain": 0.00016067759902180568,
+                    "orientationFlips": 0,
+                    "genuineFolds": 0,
+                    "genuineFoldFaces": [],
+                    "collapsedTriangles": 0,
+                    "minAreaRatio": 0.9991882027795802,
+                    "finite": true,
+                    "maxDisplacement": 0.0001840025030168185,
+                    "maxVelocity": 0.007421880274184119,
+                    "finalVelocity": 0.0035099664094070445,
+                    "normalizedVelocity": 0.0010184315875565993,
+                    "maxNetForceN": 1.236956404681195e-9,
+                    "rmsNetForceN": 2.719101720694049e-10,
+                    "forceResidualRatio": 0.0036700967274431937
+                  },
+                  "released": {
+                    "maxEdgeStrain": 0.00022617569440258172,
+                    "p95EdgeStrain": 0.0000863390672547635,
+                    "orientationFlips": 0,
+                    "genuineFolds": 0,
+                    "genuineFoldFaces": [],
+                    "collapsedTriangles": 0,
+                    "minAreaRatio": 0.999807298661922,
+                    "finite": true,
+                    "maxDisplacement": 0.00025490391040993565,
+                    "maxVelocity": 0.008282023415580925,
+                    "finalVelocity": 0.003850389561600078,
+                    "normalizedVelocity": 0.0011172068038663027,
+                    "maxNetForceN": 1.620069515049365e-9,
+                    "rmsNetForceN": 2.6008720239533495e-10,
+                    "forceResidualRatio": 0.004806807906011523
+                  },
+                  "recoveredDisplacement": 0.00025490391040993565,
+                  "peakForceN": 0.00011867694556189522,
+                  "peakTrackingErrorMeters": 8.917213800049666e-7,
+                  "valid": true
+                }
+              ],
+              "runtimeMs": 11072.4045
+            },
+            "male": {
+              "count": 1,
+              "holdSeconds": 0.016666666666666666,
+              "releaseSeconds": 0.02,
+              "valid": false,
+              "results": [
+                {
+                  "sequence": 0,
+                  "face": [
+                    48,
+                    62,
+                    24
+                  ],
+                  "direction": "forward",
+                  "magnitudeSource": 0.0028416189460678354,
+                  "held": {
+                    "maxEdgeStrain": 0.03286378941221386,
+                    "p95EdgeStrain": 0.009620593765173678,
+                    "orientationFlips": 4,
+                    "genuineFolds": 6,
+                    "genuineFoldFaces": [
+                      72,
+                      79,
+                      86,
+                      118,
+                      119,
+                      122
+                    ],
+                    "collapsedTriangles": 0,
+                    "minAreaRatio": 0.9789669065294634,
+                    "finite": true,
+                    "maxDisplacement": 0.0022552947188516147,
+                    "maxVelocity": 0.3436323049600022,
+                    "finalVelocity": 0.036067031859936594,
+                    "normalizedVelocity": 0.001976717937088012,
+                    "maxNetForceN": 1.258941588480396e-7,
+                    "rmsNetForceN": 3.740556755093689e-8,
+                    "forceResidualRatio": 0.08658580320157802
+                  },
+                  "released": {
+                    "maxEdgeStrain": 0.007811202411679777,
+                    "p95EdgeStrain": 0.0017958352988460093,
+                    "orientationFlips": 6,
+                    "genuineFolds": 5,
+                    "genuineFoldFaces": [
+                      118,
+                      121,
+                      122,
+                      158,
+                      159
+                    ],
+                    "collapsedTriangles": 0,
+                    "minAreaRatio": 0.9907221724557415,
+                    "finite": true,
+                    "maxDisplacement": 0.0011066991428738274,
+                    "maxVelocity": 0.6968552283878162,
+                    "finalVelocity": 0.022030377899592675,
+                    "normalizedVelocity": 0.0012074141094855463,
+                    "maxNetForceN": 0.000002882546396060256,
+                    "rmsNetForceN": 3.28059000118173e-7,
+                    "forceResidualRatio": 1.982519262628822
+                  },
+                  "recoveredDisplacement": 0.0011066991428738274,
+                  "peakForceN": 0.003475895440505247,
+                  "peakTrackingErrorMeters": 0.0002483526296981776,
+                  "valid": false
+                }
+              ],
+              "runtimeMs": 11277.485499999995
+            }
+          }
+        },
+        {
+          "candidate": {
+            "massMultiplier": 1,
+            "surfaceMultiplier": 1,
+            "innerMultiplier": 1,
+            "dampingMultiplier": 1,
+            "dtMultiplier": 0.1,
+            "pinchKpMultiplier": 0.1,
+            "pinchKdMultiplier": 3.1622776601683795,
+            "logParameters": [
+              0,
+              0,
+              0,
+              0,
+              -1,
+              -1,
+              0.5
+            ]
+          },
+          "passed": false,
+          "folds": 0,
+          "collapses": 0,
+          "maxStrain": 0.0405542758223191,
+          "models": {
+            "female": {
+              "count": 1,
+              "holdSeconds": 0.016666666666666666,
+              "releaseSeconds": 0.02,
+              "valid": false,
+              "results": [
+                {
+                  "sequence": 0,
+                  "face": [
+                    13,
+                    32,
+                    70
+                  ],
+                  "direction": "down",
+                  "magnitudeSource": 0.00034412877524896845,
+                  "held": {
+                    "maxEdgeStrain": null,
+                    "p95EdgeStrain": 0,
+                    "orientationFlips": 65,
+                    "genuineFolds": 0,
+                    "genuineFoldFaces": [],
+                    "collapsedTriangles": 0,
+                    "minAreaRatio": null,
+                    "finite": false,
+                    "maxDisplacement": null,
+                    "maxVelocity": null,
+                    "finalVelocity": null,
+                    "normalizedVelocity": null,
+                    "maxNetForceN": null,
+                    "rmsNetForceN": null,
+                    "forceResidualRatio": null
+                  },
+                  "released": {
+                    "maxEdgeStrain": null,
+                    "p95EdgeStrain": 0,
+                    "orientationFlips": 55,
+                    "genuineFolds": 0,
+                    "genuineFoldFaces": [],
+                    "collapsedTriangles": 0,
+                    "minAreaRatio": null,
+                    "finite": false,
+                    "maxDisplacement": null,
+                    "maxVelocity": null,
+                    "finalVelocity": null,
+                    "normalizedVelocity": null,
+                    "maxNetForceN": null,
+                    "rmsNetForceN": null,
+                    "forceResidualRatio": null
+                  },
+                  "recoveredDisplacement": null,
+                  "peakForceN": 0,
+                  "peakTrackingErrorMeters": 8.068208787815953e+152,
+                  "valid": false
+                }
+              ],
+              "runtimeMs": 306.7647999999972
+            },
+            "male": {
+              "count": 1,
+              "holdSeconds": 0.016666666666666666,
+              "releaseSeconds": 0.02,
+              "valid": true,
+              "results": [
+                {
+                  "sequence": 0,
+                  "face": [
+                    75,
+                    35,
+                    45
+                  ],
+                  "direction": "down",
+                  "magnitudeSource": 0.0008075909621422237,
+                  "held": {
+                    "maxEdgeStrain": 0.0405542758223191,
+                    "p95EdgeStrain": 0.00427988766731364,
+                    "orientationFlips": 0,
+                    "genuineFolds": 0,
+                    "genuineFoldFaces": [],
+                    "collapsedTriangles": 0,
+                    "minAreaRatio": 0.994569525448502,
+                    "finite": true,
+                    "maxDisplacement": 0.0005697171781187193,
+                    "maxVelocity": 0.015014460707435867,
+                    "finalVelocity": 0.008454729613589765,
+                    "normalizedVelocity": 0.0004633765191800141,
+                    "maxNetForceN": 1.292255925676999e-7,
+                    "rmsNetForceN": 1.6214869648128142e-8,
+                    "forceResidualRatio": 0.08887705219254814
+                  },
+                  "released": {
+                    "maxEdgeStrain": 0.0005472042818632387,
+                    "p95EdgeStrain": 0.00020985906094959843,
+                    "orientationFlips": 0,
+                    "genuineFolds": 0,
+                    "genuineFoldFaces": [],
+                    "collapsedTriangles": 0,
+                    "minAreaRatio": 0.997880973127885,
+                    "finite": true,
+                    "maxDisplacement": 0.00023576241047055326,
+                    "maxVelocity": 0.5642920227138769,
+                    "finalVelocity": 0.005199722662454194,
+                    "normalizedVelocity": 0.00028498006419467843,
+                    "maxNetForceN": 3.762647594824287e-8,
+                    "rmsNetForceN": 1.1794413966631227e-8,
+                    "forceResidualRatio": 0.025878235109826907
+                  },
+                  "recoveredDisplacement": 0.00023576241047055326,
+                  "peakForceN": 0.0009763531703940084,
+                  "peakTrackingErrorMeters": 0.00008520933633431423,
+                  "valid": true
+                }
+              ],
+              "runtimeMs": 11301.9951
+            }
+          }
+        },
+        {
+          "candidate": {
+            "massMultiplier": 1,
+            "surfaceMultiplier": 1,
+            "innerMultiplier": 1,
+            "dampingMultiplier": 1,
+            "dtMultiplier": 0.1,
+            "pinchKpMultiplier": 0.31622776601683794,
+            "pinchKdMultiplier": 1,
+            "logParameters": [
+              0,
+              0,
+              0,
+              0,
+              -1,
+              -0.5,
+              0
+            ]
+          },
+          "passed": true,
+          "folds": 0,
+          "collapses": 0,
+          "maxStrain": 0.03119710509811223,
+          "models": {
+            "female": {
+              "count": 1,
+              "holdSeconds": 0.016666666666666666,
+              "releaseSeconds": 0.02,
+              "valid": true,
+              "results": [
+                {
+                  "sequence": 0,
+                  "face": [
+                    70,
+                    32,
+                    35
+                  ],
+                  "direction": "left",
+                  "magnitudeSource": 0.0005343315510661476,
+                  "held": {
+                    "maxEdgeStrain": 0.00046807837562865744,
+                    "p95EdgeStrain": 0.00017474504124597947,
+                    "orientationFlips": 0,
+                    "genuineFolds": 0,
+                    "genuineFoldFaces": [],
+                    "collapsedTriangles": 0,
+                    "minAreaRatio": 0.9991947236569388,
+                    "finite": true,
+                    "maxDisplacement": 0.0005514246479370009,
+                    "maxVelocity": 0.06827257736788911,
+                    "finalVelocity": 0.003204865663057129,
+                    "normalizedVelocity": 0.0009299053165823025,
+                    "maxNetForceN": 2.1472905829147864e-9,
+                    "rmsNetForceN": 3.3856427889069843e-10,
+                    "forceResidualRatio": 0.006371092878779574
+                  },
+                  "released": {
+                    "maxEdgeStrain": 0.00020980160031963154,
+                    "p95EdgeStrain": 0.00011508512095657219,
+                    "orientationFlips": 0,
+                    "genuineFolds": 0,
+                    "genuineFoldFaces": [],
+                    "collapsedTriangles": 0,
+                    "minAreaRatio": 0.9994854776027685,
+                    "finite": true,
+                    "maxDisplacement": 0.0003296832001322953,
+                    "maxVelocity": 0.0210471317388766,
+                    "finalVelocity": 0.00754164156271419,
+                    "normalizedVelocity": 0.0021882391720083084,
+                    "maxNetForceN": 2.702412903979293e-9,
+                    "rmsNetForceN": 6.260366679647374e-10,
+                    "forceResidualRatio": 0.008018161931625144
+                  },
+                  "recoveredDisplacement": 0.0003296832001322953,
+                  "peakForceN": 0.001191846519667362,
+                  "peakTrackingErrorMeters": 0.0000016439052604616174,
+                  "valid": true
+                }
+              ],
+              "runtimeMs": 11176.165
+            },
+            "male": {
+              "count": 1,
+              "holdSeconds": 0.016666666666666666,
+              "releaseSeconds": 0.02,
+              "valid": true,
+              "results": [
+                {
+                  "sequence": 0,
+                  "face": [
+                    62,
+                    45,
+                    24
+                  ],
+                  "direction": "right",
+                  "magnitudeSource": 0.0018145491826072162,
+                  "held": {
+                    "maxEdgeStrain": 0.03119710509811223,
+                    "p95EdgeStrain": 0.006220273098377463,
+                    "orientationFlips": 3,
+                    "genuineFolds": 0,
+                    "genuineFoldFaces": [],
+                    "collapsedTriangles": 0,
+                    "minAreaRatio": 0.944743102667761,
+                    "finite": true,
+                    "maxDisplacement": 0.002108122457534445,
+                    "maxVelocity": 0.20986503450798233,
+                    "finalVelocity": 0.009785727900945231,
+                    "normalizedVelocity": 0.000536324251587446,
+                    "maxNetForceN": 4.7781078680189726e-8,
+                    "rmsNetForceN": 1.05848401930784e-8,
+                    "forceResidualRatio": 0.0328622321576951
+                  },
+                  "released": {
+                    "maxEdgeStrain": 0.005248617560534765,
+                    "p95EdgeStrain": 0.0010015313571686978,
+                    "orientationFlips": 2,
+                    "genuineFolds": 0,
+                    "genuineFoldFaces": [],
+                    "collapsedTriangles": 0,
+                    "minAreaRatio": 0.9245612477311351,
+                    "finite": true,
+                    "maxDisplacement": 0.0006816178921937643,
+                    "maxVelocity": 0.6893880388747509,
+                    "finalVelocity": 0.023684242493100516,
+                    "normalizedVelocity": 0.0012980571050111413,
+                    "maxNetForceN": 1.5158992544328415e-7,
+                    "rmsNetForceN": 3.465211793486122e-8,
+                    "forceResidualRatio": 0.10425849437238184
+                  },
+                  "recoveredDisplacement": 0.0006816178921937643,
+                  "peakForceN": 0.004480419886356863,
+                  "peakTrackingErrorMeters": 0.000033137807989024176,
+                  "valid": true
+                }
+              ],
+              "runtimeMs": 11466.9038
+            }
+          }
+        },
+        {
+          "candidate": {
+            "massMultiplier": 1,
+            "surfaceMultiplier": 1,
+            "innerMultiplier": 1,
+            "dampingMultiplier": 1,
+            "dtMultiplier": 0.1,
+            "pinchKpMultiplier": 0.31622776601683794,
+            "pinchKdMultiplier": 3.1622776601683795,
+            "logParameters": [
+              0,
+              0,
+              0,
+              0,
+              -1,
+              -0.5,
+              0.5
+            ]
+          },
+          "passed": true,
+          "folds": 0,
+          "collapses": 0,
+          "maxStrain": 0.0948750377035975,
+          "models": {
+            "female": {
+              "count": 1,
+              "holdSeconds": 0.016666666666666666,
+              "releaseSeconds": 0.02,
+              "valid": true,
+              "results": [
+                {
+                  "sequence": 0,
+                  "face": [
+                    35,
+                    32,
+                    18
+                  ],
+                  "direction": "backward",
+                  "magnitudeSource": 0.0001501271612814157,
+                  "held": {
+                    "maxEdgeStrain": 0.001158383263452499,
+                    "p95EdgeStrain": 0.00036560281546539527,
+                    "orientationFlips": 0,
+                    "genuineFolds": 0,
+                    "genuineFoldFaces": [],
+                    "collapsedTriangles": 0,
+                    "minAreaRatio": 0.997719522265706,
+                    "finite": true,
+                    "maxDisplacement": 0.00036767015721777684,
+                    "maxVelocity": 0.019962300120290984,
+                    "finalVelocity": 0.007318124918264059,
+                    "normalizedVelocity": 0.00212338487299206,
+                    "maxNetForceN": 1.5573328184155122e-8,
+                    "rmsNetForceN": 1.9085085756159903e-9,
+                    "forceResidualRatio": 0.04620665739533277
+                  },
+                  "released": {
+                    "maxEdgeStrain": 0.0014920282410262452,
+                    "p95EdgeStrain": 0.00045324799371322547,
+                    "orientationFlips": 0,
+                    "genuineFolds": 0,
+                    "genuineFoldFaces": [],
+                    "collapsedTriangles": 0,
+                    "minAreaRatio": 0.9971601810591583,
+                    "finite": true,
+                    "maxDisplacement": 0.00038515424612712456,
+                    "maxVelocity": 0.01830642646572709,
+                    "finalVelocity": 0.01059438987066614,
+                    "normalizedVelocity": 0.0030740069951264355,
+                    "maxNetForceN": 2.740838791542178e-8,
+                    "rmsNetForceN": 3.146217333678052e-9,
+                    "forceResidualRatio": 0.08132173002395249
+                  },
+                  "recoveredDisplacement": 0.00038515424612712456,
+                  "peakForceN": 0.0003660274453629164,
+                  "peakTrackingErrorMeters": 5.488846436151224e-7,
+                  "valid": true
+                }
+              ],
+              "runtimeMs": 11144.15969999999
+            },
+            "male": {
+              "count": 1,
+              "holdSeconds": 0.016666666666666666,
+              "releaseSeconds": 0.02,
+              "valid": true,
+              "results": [
+                {
+                  "sequence": 0,
+                  "face": [
+                    48,
+                    24,
+                    128
+                  ],
+                  "direction": "backward",
+                  "magnitudeSource": 0.002821507403072208,
+                  "held": {
+                    "maxEdgeStrain": 0.0948750377035975,
+                    "p95EdgeStrain": 0.021134029227128308,
+                    "orientationFlips": 1,
+                    "genuineFolds": 0,
+                    "genuineFoldFaces": [],
+                    "collapsedTriangles": 0,
+                    "minAreaRatio": 0.8694692830617122,
+                    "finite": true,
+                    "maxDisplacement": 0.0027453254749141023,
+                    "maxVelocity": 0.13205348141569778,
+                    "finalVelocity": 0.011236634335106504,
+                    "normalizedVelocity": 0.0006158437636055341,
+                    "maxNetForceN": 1.5180225169539286e-7,
+                    "rmsNetForceN": 4.082458144324218e-8,
+                    "forceResidualRatio": 0.10440452528634828
+                  },
+                  "released": {
+                    "maxEdgeStrain": 0.011541144372240474,
+                    "p95EdgeStrain": 0.0032666167397437484,
+                    "orientationFlips": 0,
+                    "genuineFolds": 0,
+                    "genuineFoldFaces": [],
+                    "collapsedTriangles": 0,
+                    "minAreaRatio": 0.9727275878113494,
+                    "finite": true,
+                    "maxDisplacement": 0.0008607746110876709,
+                    "maxVelocity": 1.4141246999884327,
+                    "finalVelocity": 0.040567928322038725,
+                    "normalizedVelocity": 0.0022233975863633964,
+                    "maxNetForceN": 6.565790256735288e-7,
+                    "rmsNetForceN": 1.1172593856494256e-7,
+                    "forceResidualRatio": 0.45157315338095416
+                  },
+                  "recoveredDisplacement": 0.0008607746110876709,
+                  "peakForceN": 0.007746019573636016,
+                  "peakTrackingErrorMeters": 0.00009475389164599908,
+                  "valid": true
+                }
+              ],
+              "runtimeMs": 11468.433300000004
+            }
+          }
+        },
+        {
+          "candidate": {
+            "massMultiplier": 1,
+            "surfaceMultiplier": 1,
+            "innerMultiplier": 1,
+            "dampingMultiplier": 1,
+            "dtMultiplier": 0.1,
+            "pinchKpMultiplier": 1,
+            "pinchKdMultiplier": 1,
+            "logParameters": [
+              0,
+              0,
+              0,
+              0,
+              -1,
+              0,
+              0
+            ]
+          },
+          "passed": true,
+          "folds": 0,
+          "collapses": 0,
+          "maxStrain": 0.010211016872716689,
+          "models": {
+            "female": {
+              "count": 1,
+              "holdSeconds": 0.016666666666666666,
+              "releaseSeconds": 0.02,
+              "valid": true,
+              "results": [
+                {
+                  "sequence": 0,
+                  "face": [
+                    32,
+                    92,
+                    18
+                  ],
+                  "direction": "up",
+                  "magnitudeSource": 0.0003403299370985948,
+                  "held": {
+                    "maxEdgeStrain": 0.00020459306214211777,
+                    "p95EdgeStrain": 0.00008217077693040176,
+                    "orientationFlips": 0,
+                    "genuineFolds": 0,
+                    "genuineFoldFaces": [],
+                    "collapsedTriangles": 0,
+                    "minAreaRatio": 0.998996231084424,
+                    "finite": true,
+                    "maxDisplacement": 0.0003652307957236707,
+                    "maxVelocity": 0.1147161194903426,
+                    "finalVelocity": 0.0014402721309052912,
+                    "normalizedVelocity": 0.00041790104567957924,
+                    "maxNetForceN": 4.165282506020981e-10,
+                    "rmsNetForceN": 6.922634067133691e-11,
+                    "forceResidualRatio": 0.0012358551713197977
+                  },
+                  "released": {
+                    "maxEdgeStrain": 0.00017033539983367477,
+                    "p95EdgeStrain": 0.00007282495966510997,
+                    "orientationFlips": 0,
+                    "genuineFolds": 0,
+                    "genuineFoldFaces": [],
+                    "collapsedTriangles": 0,
+                    "minAreaRatio": 0.9990132530348297,
+                    "finite": true,
+                    "maxDisplacement": 0.0002572122980844634,
+                    "maxVelocity": 0.007700330603928784,
+                    "finalVelocity": 0.004343973113207817,
+                    "normalizedVelocity": 0.0012604221573547182,
+                    "maxNetForceN": 8.969352106196887e-10,
+                    "rmsNetForceN": 1.1548701808930889e-10,
+                    "forceResidualRatio": 0.0026612409045024582
+                  },
+                  "recoveredDisplacement": 0.0002572122980844634,
+                  "peakForceN": 0.00502823162440104,
+                  "peakTrackingErrorMeters": 3.642069025259157e-7,
+                  "valid": true
+                }
+              ],
+              "runtimeMs": 11195.209099999993
+            },
+            "male": {
+              "count": 1,
+              "holdSeconds": 0.016666666666666666,
+              "releaseSeconds": 0.02,
+              "valid": true,
+              "results": [
+                {
+                  "sequence": 0,
+                  "face": [
+                    7,
+                    6,
+                    39
+                  ],
+                  "direction": "left",
+                  "magnitudeSource": 0.0007874794191465967,
+                  "held": {
+                    "maxEdgeStrain": 0.010211016872716689,
+                    "p95EdgeStrain": 0.0016472327822325142,
+                    "orientationFlips": 0,
+                    "genuineFolds": 0,
+                    "genuineFoldFaces": [],
+                    "collapsedTriangles": 0,
+                    "minAreaRatio": 0.9959786462259939,
+                    "finite": true,
+                    "maxDisplacement": 0.001041897076830689,
+                    "maxVelocity": 0.2719965970917701,
+                    "finalVelocity": 0.003607246665285366,
+                    "normalizedVelocity": 0.00019770158005963056,
+                    "maxNetForceN": 5.000432652358813e-8,
+                    "rmsNetForceN": 7.097833190367382e-9,
+                    "forceResidualRatio": 0.0343913078669914
+                  },
+                  "released": {
+                    "maxEdgeStrain": 0.0009464506688925357,
+                    "p95EdgeStrain": 0.0004729968055573627,
+                    "orientationFlips": 0,
+                    "genuineFolds": 0,
+                    "genuineFoldFaces": [],
+                    "collapsedTriangles": 0,
+                    "minAreaRatio": 0.9851647154617713,
+                    "finite": true,
+                    "maxDisplacement": 0.0003378022830393756,
+                    "maxVelocity": 0.262339375200079,
+                    "finalVelocity": 0.034955448721912544,
+                    "normalizedVelocity": 0.0019157956428435148,
+                    "maxNetForceN": 2.1954829262567378e-7,
+                    "rmsNetForceN": 3.428308766868268e-8,
+                    "forceResidualRatio": 0.1509979925397076
+                  },
+                  "recoveredDisplacement": 0.0003378022830393756,
+                  "peakForceN": 0.005754817960759123,
+                  "peakTrackingErrorMeters": 0.000005879335006861248,
+                  "valid": true
+                }
+              ],
+              "runtimeMs": 11290.413799999995
+            }
+          }
+        },
+        {
+          "candidate": {
+            "massMultiplier": 1,
+            "surfaceMultiplier": 1,
+            "innerMultiplier": 1,
+            "dampingMultiplier": 1,
+            "dtMultiplier": 0.1,
+            "pinchKpMultiplier": 3.1622776601683795,
+            "pinchKdMultiplier": 3.1622776601683795,
+            "logParameters": [
+              0,
+              0,
+              0,
+              0,
+              -1,
+              0.5,
+              0.5
+            ]
+          },
+          "passed": false,
+          "folds": 2,
+          "collapses": 0,
+          "maxStrain": 0.02371707166866201,
+          "models": {
+            "female": {
+              "count": 1,
+              "holdSeconds": 0.016666666666666666,
+              "releaseSeconds": 0.02,
+              "valid": true,
+              "results": [
+                {
+                  "sequence": 0,
+                  "face": [
+                    112,
+                    23,
+                    118
+                  ],
+                  "direction": "forward",
+                  "magnitudeSource": 0.000530532712915774,
+                  "held": {
+                    "maxEdgeStrain": 0.008411170519184157,
+                    "p95EdgeStrain": 0.002977005308837205,
+                    "orientationFlips": 0,
+                    "genuineFolds": 0,
+                    "genuineFoldFaces": [],
+                    "collapsedTriangles": 0,
+                    "minAreaRatio": 0.9942893752785087,
+                    "finite": true,
+                    "maxDisplacement": 0.0005429143237198052,
+                    "maxVelocity": 0.23817382930658454,
+                    "finalVelocity": 0.012620688976901223,
+                    "normalizedVelocity": 0.0036619462443730215,
+                    "maxNetForceN": 7.0158304414180635e-9,
+                    "rmsNetForceN": 1.1000548437712576e-9,
+                    "forceResidualRatio": 0.020816235920603113
+                  },
+                  "released": {
+                    "maxEdgeStrain": 0.0021044986607364285,
+                    "p95EdgeStrain": 0.00033758411029836575,
+                    "orientationFlips": 0,
+                    "genuineFolds": 0,
+                    "genuineFoldFaces": [],
+                    "collapsedTriangles": 0,
+                    "minAreaRatio": 0.9956318934956774,
+                    "finite": true,
+                    "maxDisplacement": 0.00038003332591203174,
+                    "maxVelocity": 0.17205256490780038,
+                    "finalVelocity": 0.008518410727941822,
+                    "normalizedVelocity": 0.0024716528733340604,
+                    "maxNetForceN": 1.1725791118896653e-8,
+                    "rmsNetForceN": 3.374086857624943e-9,
+                    "forceResidualRatio": 0.034790868497290794
+                  },
+                  "recoveredDisplacement": 0.00038003332591203174,
+                  "peakForceN": 0.011485477693403858,
+                  "peakTrackingErrorMeters": 5.442485279508588e-7,
+                  "valid": true
+                }
+              ],
+              "runtimeMs": 11186.611499999985
+            },
+            "male": {
+              "count": 1,
+              "holdSeconds": 0.016666666666666666,
+              "releaseSeconds": 0.02,
+              "valid": false,
+              "results": [
+                {
+                  "sequence": 0,
+                  "face": [
+                    39,
+                    48,
+                    115
+                  ],
+                  "direction": "forward",
+                  "magnitudeSource": 0.001794437639611589,
+                  "held": {
+                    "maxEdgeStrain": 0.02371707166866201,
+                    "p95EdgeStrain": 0.0054884574054524056,
+                    "orientationFlips": 2,
+                    "genuineFolds": 1,
+                    "genuineFoldFaces": [
+                      159
+                    ],
+                    "collapsedTriangles": 0,
+                    "minAreaRatio": 0.986960800529755,
+                    "finite": true,
+                    "maxDisplacement": 0.0019228554565801554,
+                    "maxVelocity": 0.6435202256047521,
+                    "finalVelocity": 0.029390993768626986,
+                    "normalizedVelocity": 0.0016108257756530869,
+                    "maxNetForceN": 8.364169829728046e-7,
+                    "rmsNetForceN": 8.92019185363471e-8,
+                    "forceResidualRatio": 0.5752597018385704
+                  },
+                  "released": {
+                    "maxEdgeStrain": 0.0025784137934253453,
+                    "p95EdgeStrain": 0.000808746118717882,
+                    "orientationFlips": 0,
+                    "genuineFolds": 1,
+                    "genuineFoldFaces": [
+                      158
+                    ],
+                    "collapsedTriangles": 0,
+                    "minAreaRatio": 0.9724861388130679,
+                    "finite": true,
+                    "maxDisplacement": 0.0007385006618139794,
+                    "maxVelocity": 0.5452384102274243,
+                    "finalVelocity": 0.024291926092435922,
+                    "normalizedVelocity": 0.001331362287304637,
+                    "maxNetForceN": 2.584689162254854e-7,
+                    "rmsNetForceN": 5.9403866917961015e-8,
+                    "forceResidualRatio": 0.17776629923742904
+                  },
+                  "recoveredDisplacement": 0.0007385006618139794,
+                  "peakForceN": 0.039285324967697106,
+                  "peakTrackingErrorMeters": 0.000006116519457164868,
+                  "valid": false
+                }
+              ],
+              "runtimeMs": 11451.842499999999
+            }
+          }
+        },
+        {
+          "candidate": {
+            "massMultiplier": 1,
+            "surfaceMultiplier": 1,
+            "innerMultiplier": 1,
+            "dampingMultiplier": 1,
+            "dtMultiplier": 0.1,
+            "pinchKpMultiplier": 10,
+            "pinchKdMultiplier": 10,
+            "logParameters": [
+              0,
+              0,
+              0,
+              0,
+              -1,
+              1,
+              1
+            ]
+          },
+          "passed": false,
+          "folds": 5,
+          "collapses": 0,
+          "maxStrain": 0.07712610924878306,
+          "models": {
+            "female": {
+              "count": 1,
+              "holdSeconds": 0.016666666666666666,
+              "releaseSeconds": 0.02,
+              "valid": false,
+              "results": [
+                {
+                  "sequence": 0,
+                  "face": [
+                    98,
+                    73,
+                    58
+                  ],
+                  "direction": "down",
+                  "magnitudeSource": 0.000146328323131042,
+                  "held": {
+                    "maxEdgeStrain": null,
+                    "p95EdgeStrain": 4.801281174247741e+126,
+                    "orientationFlips": 41,
+                    "genuineFolds": 0,
+                    "genuineFoldFaces": [],
+                    "collapsedTriangles": 0,
+                    "minAreaRatio": null,
+                    "finite": false,
+                    "maxDisplacement": null,
+                    "maxVelocity": null,
+                    "finalVelocity": null,
+                    "normalizedVelocity": null,
+                    "maxNetForceN": null,
+                    "rmsNetForceN": null,
+                    "forceResidualRatio": null
+                  },
+                  "released": {
+                    "maxEdgeStrain": null,
+                    "p95EdgeStrain": 5.978519414607939e+113,
+                    "orientationFlips": 31,
+                    "genuineFolds": 0,
+                    "genuineFoldFaces": [],
+                    "collapsedTriangles": 0,
+                    "minAreaRatio": null,
+                    "finite": false,
+                    "maxDisplacement": null,
+                    "maxVelocity": null,
+                    "finalVelocity": null,
+                    "normalizedVelocity": null,
+                    "maxNetForceN": null,
+                    "rmsNetForceN": null,
+                    "forceResidualRatio": null
+                  },
+                  "recoveredDisplacement": null,
+                  "peakForceN": 0,
+                  "peakTrackingErrorMeters": 2.373866227934477e+153,
+                  "valid": false
+                }
+              ],
+              "runtimeMs": 14.808599999989383
+            },
+            "male": {
+              "count": 1,
+              "holdSeconds": 0.016666666666666666,
+              "releaseSeconds": 0.02,
+              "valid": false,
+              "results": [
+                {
+                  "sequence": 0,
+                  "face": [
+                    48,
+                    128,
+                    115
+                  ],
+                  "direction": "down",
+                  "magnitudeSource": 0.002801395860076581,
+                  "held": {
+                    "maxEdgeStrain": 0.07712610924878306,
+                    "p95EdgeStrain": 0.024047380972158177,
+                    "orientationFlips": 11,
+                    "genuineFolds": 4,
+                    "genuineFoldFaces": [
+                      85,
+                      86,
+                      121,
+                      158
+                    ],
+                    "collapsedTriangles": 0,
+                    "minAreaRatio": 0.9478335678521117,
+                    "finite": true,
+                    "maxDisplacement": 0.0028560535300874027,
+                    "maxVelocity": 1.004036676552339,
+                    "finalVelocity": 0.08472749759203817,
+                    "normalizedVelocity": 0.00464364145364574,
+                    "maxNetForceN": 1.8147375334106264e-7,
+                    "rmsNetForceN": 2.7382645649559058e-8,
+                    "forceResidualRatio": 0.1248115944124729
+                  },
+                  "released": {
+                    "maxEdgeStrain": 0.0015336162884204078,
+                    "p95EdgeStrain": 0.0007541102573828312,
+                    "orientationFlips": 3,
+                    "genuineFolds": 1,
+                    "genuineFoldFaces": [
+                      86
+                    ],
+                    "collapsedTriangles": 0,
+                    "minAreaRatio": 0.9910972026015973,
+                    "finite": true,
+                    "maxDisplacement": 0.0016774556929669943,
+                    "maxVelocity": 2.5020643221620147,
+                    "finalVelocity": 0.039343988204837074,
+                    "normalizedVelocity": 0.002156317367703053,
+                    "maxNetForceN": 0.0000028426382262792245,
+                    "rmsNetForceN": 2.770068749668484e-7,
+                    "forceResidualRatio": 1.955071754607687
+                  },
+                  "recoveredDisplacement": 0.0016774556929669943,
+                  "peakForceN": 0.19347588271926652,
+                  "peakTrackingErrorMeters": 0.0000049909228417656315,
+                  "valid": false
+                }
+              ],
+              "runtimeMs": 11398.650300000008
+            }
+          }
+        },
+        {
+          "candidate": {
+            "massMultiplier": 1,
+            "surfaceMultiplier": 1,
+            "innerMultiplier": 1,
+            "dampingMultiplier": 1,
+            "dtMultiplier": 0.1,
+            "pinchKpMultiplier": 10,
+            "pinchKdMultiplier": 1,
+            "logParameters": [
+              0,
+              0,
+              0,
+              0,
+              -1,
+              1,
+              0
+            ]
+          },
+          "passed": false,
+          "folds": 1,
+          "collapses": 0,
+          "maxStrain": 0.008758815679322898,
+          "models": {
+            "female": {
+              "count": 1,
+              "holdSeconds": 0.016666666666666666,
+              "releaseSeconds": 0.02,
+              "valid": true,
+              "results": [
+                {
+                  "sequence": 0,
+                  "face": [
+                    73,
+                    15,
+                    58
+                  ],
+                  "direction": "right",
+                  "magnitudeSource": 0.00033653109894822114,
+                  "held": {
+                    "maxEdgeStrain": 0.004416337768961333,
+                    "p95EdgeStrain": 0.0012446093046532365,
+                    "orientationFlips": 0,
+                    "genuineFolds": 0,
+                    "genuineFoldFaces": [],
+                    "collapsedTriangles": 0,
+                    "minAreaRatio": 0.9978189932521008,
+                    "finite": true,
+                    "maxDisplacement": 0.0006369389553710868,
+                    "maxVelocity": 1.2782620009877743,
+                    "finalVelocity": 0.004527031277868117,
+                    "normalizedVelocity": 0.0013135372574737763,
+                    "maxNetForceN": 6.235518558920137e-9,
+                    "rmsNetForceN": 8.83663017735215e-10,
+                    "forceResidualRatio": 0.018501020868962895
+                  },
+                  "released": {
+                    "maxEdgeStrain": 0.0010211667642850287,
+                    "p95EdgeStrain": 0.00025790526013025415,
+                    "orientationFlips": 0,
+                    "genuineFolds": 0,
+                    "genuineFoldFaces": [],
+                    "collapsedTriangles": 0,
+                    "minAreaRatio": 0.9966901950957697,
+                    "finite": true,
+                    "maxDisplacement": 0.0004455739021327056,
+                    "maxVelocity": 0.07164874320840349,
+                    "finalVelocity": 0.007744819688865269,
+                    "normalizedVelocity": 0.002247192163985167,
+                    "maxNetForceN": 5.413838258818342e-9,
+                    "rmsNetForceN": 1.6739208990182597e-9,
+                    "forceResidualRatio": 0.016063064147937327
+                  },
+                  "recoveredDisplacement": 0.0004455739021327056,
+                  "peakForceN": 0.022748156164504194,
+                  "peakTrackingErrorMeters": 4.981996475607737e-8,
+                  "valid": true
+                }
+              ],
+              "runtimeMs": 11276.837200000009
+            },
+            "male": {
+              "count": 1,
+              "holdSeconds": 0.016666666666666666,
+              "releaseSeconds": 0.02,
+              "valid": false,
+              "results": [
+                {
+                  "sequence": 0,
+                  "face": [
+                    48,
+                    128,
+                    115
+                  ],
+                  "direction": "right",
+                  "magnitudeSource": 0.0007673678761509696,
+                  "held": {
+                    "maxEdgeStrain": 0.008758815679322898,
+                    "p95EdgeStrain": 0.0035400948588151676,
+                    "orientationFlips": 0,
+                    "genuineFolds": 1,
+                    "genuineFoldFaces": [
+                      79
+                    ],
+                    "collapsedTriangles": 0,
+                    "minAreaRatio": 0.9809273218257141,
+                    "finite": true,
+                    "maxDisplacement": 0.0012319605205502076,
+                    "maxVelocity": 2.157945573690017,
+                    "finalVelocity": 0.009875036394149939,
+                    "normalizedVelocity": 0.0005412189626670163,
+                    "maxNetForceN": 4.9939372185040774e-8,
+                    "rmsNetForceN": 1.1750998219338434e-8,
+                    "forceResidualRatio": 0.03434663443951857
+                  },
+                  "released": {
+                    "maxEdgeStrain": 0.0027340971856842215,
+                    "p95EdgeStrain": 0.0012751513809921024,
+                    "orientationFlips": 0,
+                    "genuineFolds": 0,
+                    "genuineFoldFaces": [],
+                    "collapsedTriangles": 0,
+                    "minAreaRatio": 0.9683303498189808,
+                    "finite": true,
+                    "maxDisplacement": 0.0005731617293739501,
+                    "maxVelocity": 0.22780694077054814,
+                    "finalVelocity": 0.010899109154304538,
+                    "normalizedVelocity": 0.0005973450947463635,
+                    "maxNetForceN": 2.5424109522732033e-7,
+                    "rmsNetForceN": 3.119311734779385e-8,
+                    "forceResidualRatio": 0.17485854497568853
+                  },
+                  "recoveredDisplacement": 0.0005731617293739501,
+                  "peakForceN": 0.05227639730383236,
+                  "peakTrackingErrorMeters": 6.924517093273053e-7,
+                  "valid": false
+                }
+              ],
+              "runtimeMs": 11399.72570000001
+            }
+          }
+        }
+      ],
+      "best": {
+        "candidate": {
+          "massMultiplier": 1,
+          "surfaceMultiplier": 1,
+          "innerMultiplier": 1,
+          "dampingMultiplier": 1,
+          "dtMultiplier": 0.1,
+          "pinchKpMultiplier": 1,
+          "pinchKdMultiplier": 1,
+          "logParameters": [
+            0,
+            0,
+            0,
+            0,
+            -1,
+            0,
+            0
+          ]
+        },
+        "passed": true,
+        "folds": 0,
+        "collapses": 0,
+        "maxStrain": 0.010211016872716689,
+        "models": {
+          "female": {
+            "count": 1,
+            "holdSeconds": 0.016666666666666666,
+            "releaseSeconds": 0.02,
+            "valid": true,
+            "results": [
+              {
+                "sequence": 0,
+                "face": [
+                  32,
+                  92,
+                  18
+                ],
+                "direction": "up",
+                "magnitudeSource": 0.0003403299370985948,
+                "held": {
+                  "maxEdgeStrain": 0.00020459306214211777,
+                  "p95EdgeStrain": 0.00008217077693040176,
+                  "orientationFlips": 0,
+                  "genuineFolds": 0,
+                  "genuineFoldFaces": [],
+                  "collapsedTriangles": 0,
+                  "minAreaRatio": 0.998996231084424,
+                  "finite": true,
+                  "maxDisplacement": 0.0003652307957236707,
+                  "maxVelocity": 0.1147161194903426,
+                  "finalVelocity": 0.0014402721309052912,
+                  "normalizedVelocity": 0.00041790104567957924,
+                  "maxNetForceN": 4.165282506020981e-10,
+                  "rmsNetForceN": 6.922634067133691e-11,
+                  "forceResidualRatio": 0.0012358551713197977
+                },
+                "released": {
+                  "maxEdgeStrain": 0.00017033539983367477,
+                  "p95EdgeStrain": 0.00007282495966510997,
+                  "orientationFlips": 0,
+                  "genuineFolds": 0,
+                  "genuineFoldFaces": [],
+                  "collapsedTriangles": 0,
+                  "minAreaRatio": 0.9990132530348297,
+                  "finite": true,
+                  "maxDisplacement": 0.0002572122980844634,
+                  "maxVelocity": 0.007700330603928784,
+                  "finalVelocity": 0.004343973113207817,
+                  "normalizedVelocity": 0.0012604221573547182,
+                  "maxNetForceN": 8.969352106196887e-10,
+                  "rmsNetForceN": 1.1548701808930889e-10,
+                  "forceResidualRatio": 0.0026612409045024582
+                },
+                "recoveredDisplacement": 0.0002572122980844634,
+                "peakForceN": 0.00502823162440104,
+                "peakTrackingErrorMeters": 3.642069025259157e-7,
+                "valid": true
+              }
+            ],
+            "runtimeMs": 11195.209099999993
+          },
+          "male": {
+            "count": 1,
+            "holdSeconds": 0.016666666666666666,
+            "releaseSeconds": 0.02,
+            "valid": true,
+            "results": [
+              {
+                "sequence": 0,
+                "face": [
+                  7,
+                  6,
+                  39
+                ],
+                "direction": "left",
+                "magnitudeSource": 0.0007874794191465967,
+                "held": {
+                  "maxEdgeStrain": 0.010211016872716689,
+                  "p95EdgeStrain": 0.0016472327822325142,
+                  "orientationFlips": 0,
+                  "genuineFolds": 0,
+                  "genuineFoldFaces": [],
+                  "collapsedTriangles": 0,
+                  "minAreaRatio": 0.9959786462259939,
+                  "finite": true,
+                  "maxDisplacement": 0.001041897076830689,
+                  "maxVelocity": 0.2719965970917701,
+                  "finalVelocity": 0.003607246665285366,
+                  "normalizedVelocity": 0.00019770158005963056,
+                  "maxNetForceN": 5.000432652358813e-8,
+                  "rmsNetForceN": 7.097833190367382e-9,
+                  "forceResidualRatio": 0.0343913078669914
+                },
+                "released": {
+                  "maxEdgeStrain": 0.0009464506688925357,
+                  "p95EdgeStrain": 0.0004729968055573627,
+                  "orientationFlips": 0,
+                  "genuineFolds": 0,
+                  "genuineFoldFaces": [],
+                  "collapsedTriangles": 0,
+                  "minAreaRatio": 0.9851647154617713,
+                  "finite": true,
+                  "maxDisplacement": 0.0003378022830393756,
+                  "maxVelocity": 0.262339375200079,
+                  "finalVelocity": 0.034955448721912544,
+                  "normalizedVelocity": 0.0019157956428435148,
+                  "maxNetForceN": 2.1954829262567378e-7,
+                  "rmsNetForceN": 3.428308766868268e-8,
+                  "forceResidualRatio": 0.1509979925397076
+                },
+                "recoveredDisplacement": 0.0003378022830393756,
+                "peakForceN": 0.005754817960759123,
+                "peakTrackingErrorMeters": 0.000005879335006861248,
+                "valid": true
+              }
+            ],
+            "runtimeMs": 11290.413799999995
+          }
+        }
+      },
+      "count": 1
     }
   ],
   "checkpoints": [
@@ -3972,6 +5430,28 @@
           0,
           -1,
           -0.5,
+          0
+        ]
+      },
+      "passed": true
+    },
+    {
+      "stage": "pinch-preflight",
+      "current": {
+        "massMultiplier": 1,
+        "surfaceMultiplier": 1,
+        "innerMultiplier": 1,
+        "dampingMultiplier": 1,
+        "dtMultiplier": 0.1,
+        "pinchKpMultiplier": 1,
+        "pinchKdMultiplier": 1,
+        "logParameters": [
+          0,
+          0,
+          0,
+          0,
+          -1,
+          0,
           0
         ]
       },

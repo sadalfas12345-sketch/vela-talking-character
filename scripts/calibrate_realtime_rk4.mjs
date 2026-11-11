@@ -218,6 +218,15 @@ function buildSystem(mesh) {
   }
   const adjacency = Array.from({ length: vertexCount }, () => []);
   for (let i = 0; i < edgeA.length; i++) { adjacency[edgeA[i]].push(edgeB[i]); adjacency[edgeB[i]].push(edgeA[i]); }
+  const edgeFaces = new Map();
+  for (let fi = 0; fi < faces.length; fi++) {
+    const [ia, ib, ic] = faces[fi];
+    for (const [a, b] of [[ia, ib], [ib, ic], [ic, ia]]) {
+      const edgeKey = key(a, b); const list = edgeFaces.get(edgeKey) || []; list.push(fi); edgeFaces.set(edgeKey, list);
+    }
+  }
+  const faceNeighbors = Array.from({ length: faces.length }, () => new Set());
+  for (const list of edgeFaces.values()) for (let i = 0; i < list.length; i++) for (let j = i + 1; j < list.length; j++) { faceNeighbors[list[i]].add(list[j]); faceNeighbors[list[j]].add(list[i]); }
   const normals = new Float64Array(vertexCount * 3);
   for (let fi = 0; fi < faces.length; fi++) for (const vertex of faces[fi]) { normals[vertex * 3] += faceNormals[fi * 3]; normals[vertex * 3 + 1] += faceNormals[fi * 3 + 1]; normals[vertex * 3 + 2] += faceNormals[fi * 3 + 2]; }
   for (let i = 0; i < vertexCount; i++) { const length = Math.hypot(normals[i * 3], normals[i * 3 + 1], normals[i * 3 + 2]) || 1; normals[i * 3] /= length; normals[i * 3 + 1] /= length; normals[i * 3 + 2] /= length; }
@@ -229,7 +238,7 @@ function buildSystem(mesh) {
   for (let i = 0; i < vertexCount; i++) orientation += normals[i * 3] * (neutral[i * 3] - centroid[0]) + normals[i * 3 + 1] * (neutral[i * 3 + 1] - centroid[1]) + normals[i * 3 + 2] * (neutral[i * 3 + 2] - centroid[2]);
   const orientationSign = orientation >= 0 ? 1 : -1;
   for (let i = 0; i < vertexCount; i++) { anchors[i * 3] = neutral[i * 3] - orientationSign * normals[i * 3] * medianEdge * anchorDepthFactor; anchors[i * 3 + 1] = neutral[i * 3 + 1] - orientationSign * normals[i * 3 + 1] * medianEdge * anchorDepthFactor; anchors[i * 3 + 2] = neutral[i * 3 + 2] - orientationSign * normals[i * 3 + 2] * medianEdge * anchorDepthFactor; }
-  const systems = { vertexCount, faces, neutral, anchors, faceAreas, faceNormals, attributedArea, edgeA: Uint32Array.from(edgeA), edgeB: Uint32Array.from(edgeB), edgeRest: Float64Array.from(edgeRest), adjacency, medianEdge };
+  const systems = { vertexCount, faces, neutral, anchors, faceAreas, faceNormals, attributedArea, edgeA: Uint32Array.from(edgeA), edgeB: Uint32Array.from(edgeB), edgeRest: Float64Array.from(edgeRest), adjacency, faceNeighbors: faceNeighbors.map(neighbors => Array.from(neighbors)), medianEdge };
   return systems;
 }
 
@@ -355,7 +364,27 @@ function geometryMetrics(system, positions) {
     const abx = positions[b] - positions[a], aby = positions[b + 1] - positions[a + 1], abz = positions[b + 2] - positions[a + 2], acx = positions[c] - positions[a], acy = positions[c + 1] - positions[a + 1], acz = positions[c + 2] - positions[a + 2];
     const nx = aby * acz - abz * acy, ny = abz * acx - abx * acz, nz = abx * acy - aby * acx, area = Math.hypot(nx, ny, nz) * 0.5, ratio = area / Math.max(system.faceAreas[fi], 1e-18); minAreaRatio = Math.min(minAreaRatio, ratio); if (ratio < 1e-3) collapses++; const dot = nx * system.faceNormals[fi * 3] + ny * system.faceNormals[fi * 3 + 1] + nz * system.faceNormals[fi * 3 + 2]; if (dot < 0) flips++;
   }
-  return { maxEdgeStrain: maxStrain, p95EdgeStrain: p95, orientationFlips: flips, collapsedTriangles: collapses, minAreaRatio, finite: positions.every(Number.isFinite) };
+  const currentNormals = new Float64Array(system.faces.length * 3);
+  for (let fi = 0; fi < system.faces.length; fi++) {
+    const [ia, ib, ic] = system.faces[fi], a = ia * 3, b = ib * 3, c = ic * 3;
+    const abx = positions[b] - positions[a], aby = positions[b + 1] - positions[a + 1], abz = positions[b + 2] - positions[a + 2];
+    const acx = positions[c] - positions[a], acy = positions[c + 1] - positions[a + 1], acz = positions[c + 2] - positions[a + 2];
+    const nx = aby * acz - abz * acy, ny = abz * acx - abx * acz, nz = abx * acy - aby * acx, length = Math.sqrt(nx * nx + ny * ny + nz * nz) || 1;
+    currentNormals[fi * 3] = nx / length; currentNormals[fi * 3 + 1] = ny / length; currentNormals[fi * 3 + 2] = nz / length;
+  }
+  const genuineFoldFaces = [];
+  for (let fi = 0; fi < system.faces.length; fi++) {
+    const neighbors = system.faceNeighbors?.[fi] || [];
+    if (!neighbors.length) continue;
+    let ax = 0, ay = 0, az = 0;
+    for (const neighbor of neighbors) { ax += currentNormals[neighbor * 3]; ay += currentNormals[neighbor * 3 + 1]; az += currentNormals[neighbor * 3 + 2]; }
+    const averageLength = Math.sqrt(ax * ax + ay * ay + az * az);
+    if (averageLength > 1e-12) {
+      const neighborDot = (currentNormals[fi * 3] * ax + currentNormals[fi * 3 + 1] * ay + currentNormals[fi * 3 + 2] * az) / averageLength;
+      if (neighborDot < 0) genuineFoldFaces.push(fi);
+    }
+  }
+  return { maxEdgeStrain: maxStrain, p95EdgeStrain: p95, orientationFlips: flips, genuineFolds: genuineFoldFaces.length, genuineFoldFaces, collapsedTriangles: collapses, minAreaRatio, finite: positions.every(Number.isFinite) };
 }
 
 function directions(mesh) {
@@ -425,11 +454,11 @@ function randomPinchStress(mesh, candidate, count = 20, stressSeed = seed, optio
       const phaseTarget = origin.map((value, axis) => value + (target[axis] - value) * phase / 4);
       const pin = { ids, weights, target: phaseTarget, velocity: direction.map(value => value * magnitude * 4), kp: 90 * candidate.pinchKpMultiplier, kd: 0.08 * candidate.pinchKdMultiplier, peakForce: 0 };
       const segment = simulate(mesh, candidate, { gravity: direction.map(value => value * 9.81), seconds: holdSeconds, initialPositions: positions, initialVelocities: velocities, pinch: pin });
-      positions = segment.positions; velocities = segment.velocities; heldGeometry = segment.geometry; maxForce = Math.max(maxForce, pin.peakForce || 0); maxTrackingError = Math.max(maxTrackingError, pin.error || 0); invalid ||= segment.nonfinite || segment.geometry.orientationFlips > 0 || segment.geometry.collapsedTriangles > 0;
+      positions = segment.positions; velocities = segment.velocities; heldGeometry = segment.geometry; maxForce = Math.max(maxForce, pin.peakForce || 0); maxTrackingError = Math.max(maxTrackingError, pin.error || 0); invalid ||= segment.nonfinite || segment.geometry.genuineFolds > 0 || segment.geometry.collapsedTriangles > 0;
     }
     const release = simulate(mesh, candidate, { gravity: direction.map(value => value * 9.81), seconds: releaseSeconds, initialPositions: positions, initialVelocities: velocities });
     const recoveredDisplacement = maxVertexDisplacement(system.neutral, release.positions);
-    results.push({ sequence, face, direction: directionName, magnitudeSource: magnitude, held: heldGeometry, released: release.geometry, recoveredDisplacement, peakForceN: maxForce, peakTrackingErrorMeters: maxTrackingError, valid: !invalid && release.geometry.finite && release.geometry.orientationFlips === 0 && release.geometry.collapsedTriangles === 0 });
+    results.push({ sequence, face, direction: directionName, magnitudeSource: magnitude, held: heldGeometry, released: release.geometry, recoveredDisplacement, peakForceN: maxForce, peakTrackingErrorMeters: maxTrackingError, valid: !invalid && release.geometry.finite && release.geometry.genuineFolds === 0 && release.geometry.collapsedTriangles === 0 });
   }
   return { count, holdSeconds, releaseSeconds, valid: results.every(result => result.valid), results, runtimeMs: performance.now() - started };
 }
@@ -731,7 +760,7 @@ function pinchPreflight(meshes, baseCandidate) {
       return [mesh.name, stress];
     }));
     const results = Object.values(models);
-    const folds = results.reduce((sum, value) => sum + value.results.reduce((inner, result) => inner + (result.held?.orientationFlips || 0) + (result.released?.orientationFlips || 0), 0), 0);
+    const folds = results.reduce((sum, value) => sum + value.results.reduce((inner, result) => inner + (result.held?.genuineFolds || 0) + (result.released?.genuineFolds || 0), 0), 0);
     const collapses = results.reduce((sum, value) => sum + value.results.reduce((inner, result) => inner + (result.held?.collapsedTriangles || 0) + (result.released?.collapsedTriangles || 0), 0), 0);
     const maxStrain = Math.max(...results.flatMap(value => value.results.map(result => Math.max(result.held?.maxEdgeStrain || 0, result.released?.maxEdgeStrain || 0))), 0);
     const passed = results.length === meshes.length && results.every(value => value.valid);
@@ -759,9 +788,11 @@ async function runWaterfall(meshes, resource, resumed = null) {
   const stage3 = await execute('damping', [3], 'micro6', 'damping'); if (!stage3?.passed) return { stages, checkpoints, current, completedStage: 'damping', overall: 'FAILED' };
   const stage3Recheck = await execute('timestep-recheck', [4], 'micro', 'timestep'); if (!stage3Recheck?.passed) return { stages, checkpoints, current, completedStage: 'timestep-recheck', overall: 'FAILED' };
   const stage4 = await execute('pinch', [5, 6], 'micro6', 'pinch'); if (!stage4?.passed) return { stages, checkpoints, current, completedStage: 'pinch', overall: 'FAILED' };
-  if (!passed.has('pinch-preflight')) {
+  if (!passed.has('pinch-preflight') || argv.has('--pinch-preflight-recheck')) {
     const preflight = pinchPreflight(meshes, current);
-    stages.push(preflight); current = preflight.candidate; checkpoints.push({ stage: 'pinch-preflight', current, passed: preflight.passed }); await persist('pinch-preflight');
+    const previousPreflight = stages.findIndex(stage => stage.name === 'pinch-preflight');
+    if (previousPreflight >= 0) stages[previousPreflight] = preflight; else stages.push(preflight);
+    current = preflight.candidate; checkpoints.push({ stage: 'pinch-preflight', current, passed: preflight.passed }); await persist('pinch-preflight');
     if (argv.has('--pinch-preflight-only')) return { stages, checkpoints, current, completedStage: 'pinch-preflight', overall: preflight.passed ? 'PREFLIGHT_PASS' : 'FAILED' };
     if (!preflight.passed) return { stages, checkpoints, current, completedStage: 'pinch-preflight', overall: 'FAILED' };
   }
@@ -799,6 +830,30 @@ async function main() {
     console.log(JSON.stringify({ phase: 'material-stress-complete', path: path.relative(root, sweepPath), evaluations: evaluations.length }));
     return;
   }
+  if (argv.has('--damping-stress-sweep')) {
+    const sweepCheckpoint = resumePath ? await loadWaterfallCheckpoint(resumePath) : null;
+    const base = sweepCheckpoint?.current || createCandidate([0, 0.5, 0.5, 0, -1, -1, -1]);
+    const surfaceLog = Number(process.env.VELA_CALIBRATION_SURFACE_LOG ?? 0.5);
+    const innerLog = Number(process.env.VELA_CALIBRATION_INNER_LOG ?? 0.5);
+    const pinchKpLog = Number(process.env.VELA_CALIBRATION_PINCH_KP_LOG ?? -1);
+    const pinchKdLog = Number(process.env.VELA_CALIBRATION_PINCH_KD_LOG ?? -1);
+    const dampingLogs = (process.env.VELA_CALIBRATION_DAMPING_LOGS || '0,0.5,1,1.5,2').split(',').map(Number).filter(Number.isFinite);
+    const count = Math.max(1, Number(process.env.VELA_CALIBRATION_STRESS_COUNT || 3));
+    const evaluations = [];
+    for (let index = 0; index < dampingLogs.length; index++) {
+      const candidate = withParameterBlock(base, { 1: surfaceLog, 2: innerLog, 3: dampingLogs[index], 5: pinchKpLog, 6: pinchKdLog });
+      const physical = evaluateCandidate(meshes, candidate, 'micro6');
+      const stress = Object.fromEntries(meshes.map((mesh, modelIndex) => [mesh.name, randomPinchStress(mesh.microMesh || mesh.screenMesh || mesh, candidate, count, seed + 100 + modelIndex, { holdSeconds: stressHoldSeconds, releaseSeconds: stressReleaseSeconds })]));
+      const record = { candidate, gravity: compactResult(physical), stress };
+      evaluations.push(record);
+      console.log(JSON.stringify({ phase: 'damping-stress-sweep', evaluation: index + 1, candidate, gravityValid: physical.valid, stressValid: Object.values(stress).every(value => value.valid) }));
+    }
+    const sweep = { schema: 'vela-rk4-damping-stress-sweep-v1', generatedAt: new Date().toISOString(), seed, count, holdSeconds: stressHoldSeconds, releaseSeconds: stressReleaseSeconds, fixedSurfaceMultiplier: 10 ** surfaceLog, fixedInnerMultiplier: 10 ** innerLog, evaluations };
+    const sweepPath = path.join(outputDir, 'rk4-damping-stress-sweep.json');
+    await fs.mkdir(outputDir, { recursive: true }); await fs.writeFile(sweepPath, JSON.stringify(sweep, null, 2));
+    console.log(JSON.stringify({ phase: 'damping-stress-complete', path: path.relative(root, sweepPath), evaluations: evaluations.length }));
+    return;
+  }
   if (argv.has('--stress-controller-only')) {
     const probeCheckpoint = resumePath ? await loadWaterfallCheckpoint(resumePath) : null;
     const base = probeCheckpoint?.current || createCandidate([0, 0, 0, 0, -1, 0, 0]);
@@ -807,9 +862,9 @@ async function main() {
     const candidate = withParameterBlock(base, updates);
     const count = Math.max(1, Number(process.env.VELA_CALIBRATION_STRESS_COUNT || 20));
     const probe = { schema: 'vela-rk4-controller-stress-probe-v1', generatedAt: new Date().toISOString(), seed, candidate, count, holdSeconds: stressHoldSeconds, releaseSeconds: stressReleaseSeconds, models: Object.fromEntries(meshes.map((mesh, index) => [mesh.name, randomPinchStress(mesh.microMesh || mesh.screenMesh || mesh, candidate, count, seed + 100 + index, { holdSeconds: stressHoldSeconds, releaseSeconds: stressReleaseSeconds })])) };
-    const probePath = path.join(outputDir, `rk4-controller-stress-probe-s-${String(candidate.surfaceMultiplier).replaceAll('.', '_')}-i-${String(candidate.innerMultiplier).replaceAll('.', '_')}-kp-${String(candidate.pinchKpMultiplier).replaceAll('.', '_')}-kd-${String(candidate.pinchKdMultiplier).replaceAll('.', '_')}.json`);
+    const probePath = path.join(outputDir, `rk4-controller-stress-probe-s-${String(candidate.surfaceMultiplier).replaceAll('.', '_')}-i-${String(candidate.innerMultiplier).replaceAll('.', '_')}-d-${String(candidate.dampingMultiplier).replaceAll('.', '_')}-kp-${String(candidate.pinchKpMultiplier).replaceAll('.', '_')}-kd-${String(candidate.pinchKdMultiplier).replaceAll('.', '_')}-n-${count}.json`);
     await fs.mkdir(outputDir, { recursive: true }); await fs.writeFile(probePath, JSON.stringify(probe, null, 2));
-    console.log(JSON.stringify({ phase: 'stress-controller-complete', probe: path.relative(root, probePath), candidate, models: Object.fromEntries(Object.entries(probe.models).map(([name, value]) => [name, { valid: value.valid, count: value.count, runtimeMs: value.runtimeMs, folds: value.results.reduce((sum, result) => sum + (result.held?.orientationFlips || 0) + (result.released?.orientationFlips || 0), 0), collapses: value.results.reduce((sum, result) => sum + (result.held?.collapsedTriangles || 0) + (result.released?.collapsedTriangles || 0), 0) }])) }));
+    console.log(JSON.stringify({ phase: 'stress-controller-complete', probe: path.relative(root, probePath), candidate, models: Object.fromEntries(Object.entries(probe.models).map(([name, value]) => [name, { valid: value.valid, count: value.count, runtimeMs: value.runtimeMs, rawFolds: value.results.reduce((sum, result) => sum + (result.held?.orientationFlips || 0) + (result.released?.orientationFlips || 0), 0), genuineFolds: value.results.reduce((sum, result) => sum + (result.held?.genuineFolds || 0) + (result.released?.genuineFolds || 0), 0), collapses: value.results.reduce((sum, result) => sum + (result.held?.collapsedTriangles || 0) + (result.released?.collapsedTriangles || 0), 0) }])) }));
     return;
   }
   const resource = { stageWallMs: Number(process.env.VELA_CALIBRATION_STAGE_WALL_MS || 90000), stageEvaluationBudget: Number(process.env.VELA_CALIBRATION_STAGE_EVALUATIONS || 12), sigma: Number(process.env.VELA_CALIBRATION_STAGE_SIGMA || 0.45), random: rng(seed + 17) };
