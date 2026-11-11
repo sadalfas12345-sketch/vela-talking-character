@@ -97,7 +97,7 @@ export class VelaCreatorRecorder {
       };
     });
     this._drawActive = true;
-    const draw = () => {
+    this.copyFrame = () => {
       if (!this._drawActive) return;
       ctx.fillStyle = '#070d18';
       ctx.fillRect(0, 0, portrait.width, portrait.height);
@@ -123,6 +123,10 @@ export class VelaCreatorRecorder {
           // Keep the recording alive; the onstop frame check rejects empty exports.
         }
       }
+    };
+    const draw = () => {
+      if (!this._drawActive) return;
+      this.copyFrame(); // Synthetic canvases / browsers without a renderer hook.
       requestAnimationFrame(draw);
     };
     requestAnimationFrame(draw);
@@ -177,6 +181,7 @@ export class VelaCreatorRecorder {
   _cleanup() {
     this.active = false;
     this._drawActive = false;
+    this.copyFrame = null;
     try { this.audioOutputNode.disconnect(this._audioCapture); } catch (_) {}
     if (this._stream) this._stream.getTracks().forEach(track => track.stop());
     this._stream = null;
