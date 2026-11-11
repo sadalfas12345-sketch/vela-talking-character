@@ -412,16 +412,23 @@ function buildSystem() {
   const implicitCgPreconditioned = new Float64Array(scratchLength);
   const implicitCgDirection = new Float64Array(scratchLength);
   const implicitCgProduct = new Float64Array(scratchLength);
+  const implicitCgWeightedResidual = new Float64Array(scratchLength);
+  const implicitCgWeightedRhs = new Float64Array(scratchLength);
   const implicitPreconditioner = new Float64Array(scratchLength);
+  const massRoot = new Float64Array(vertexCount);
+  const inverseMassRoot = new Float64Array(vertexCount);
+  for (let i = 0; i < vertexCount; i++) { massRoot[i] = Math.sqrt(masses[i]); inverseMassRoot[i] = 1 / massRoot[i]; }
   const diagonalK = new Float64Array(vertexCount);
   for (let i = 0; i < edgeA.length; i++) { diagonalK[edgeA[i]] += surfaceK; diagonalK[edgeB[i]] += surfaceK; }
   for (let i = 0; i < supportAArray.length; i++) diagonalK[supportAArray[i]] += supportKArray[i];
+  const edgeInvSqrtMassProduct = new Float64Array(edgeA.length);
+  for (let i = 0; i < edgeA.length; i++) edgeInvSqrtMassProduct[i] = inverseMassRoot[edgeA[i]] * inverseMassRoot[edgeB[i]];
   // The release step can start far from the next implicit equilibrium even
   // though the held step is close.  Keep the physical equations unchanged,
   // but give the nonlinear solve enough iterations and a finer numerical
   // trust-region backtrack to resolve that release transient.
-  const implicitNewtonIterations = 32, implicitCgIterations = 256, implicitLineSearchMin = 1 / 4096;
-  let implicitDiagnostics = { iterations: 0, linearIterations: 0, finalCorrection: 0, equationResidual: 0, positionVelocityResidual: 0, converged: false, status: 'idle', correctionTolerance: 0, residualTolerance: 0, residualHistory: [] };
+  const implicitNewtonIterations = 32, implicitCgIterations = 16, implicitLineSearchMin = 1 / 4096;
+  let implicitDiagnostics = { iterations: 0, linearIterations: 0, finalCorrection: 0, equationResidual: 0, positionVelocityResidual: 0, converged: false, status: 'idle', correctionTolerance: 0, residualTolerance: 0, residualHistory: [], linearStatus: 'idle', negativeCurvatureEvents: 0, regularizationHistory: [], weightedCgResidual: 0 };
   function acceleration(x, v, withInner, pinState, targetOffset = 0, result = rkScratch.a1) {
     result.fill(0);
     for (let i = 0; i < edgeA.length; i++) {
@@ -495,28 +502,40 @@ function buildSystem() {
     return maxResidual;
   }
 
-  function applyImplicitJacobian(x, direction, dt, out) {
+  function applyImplicitJacobian(x, direction, dt, out, weighted = false, regularizationShift = 0) {
     out.set(direction);
-    const addEdge = (ia, ib, rest, stiffness, dx, dy, dz, length) => {
+    const addEdge = (ia, ib, rest, stiffness, dx, dy, dz, length, edgeIndex = -1) => {
       if (length <= 1e-12) return;
       const ux = dx / length, uy = dy / length, uz = dz / length, ratio = rest / length;
       const scale = stiffness * (1 - ratio), axial = stiffness * ratio;
       const hxx = scale + axial * ux * ux, hxy = axial * ux * uy, hxz = axial * ux * uz;
       const hyy = scale + axial * uy * uy, hyz = axial * uy * uz, hzz = scale + axial * uz * uz;
-      const dx0 = direction[ib * 3] - direction[ia * 3], dy0 = direction[ib * 3 + 1] - direction[ia * 3 + 1], dz0 = direction[ib * 3 + 2] - direction[ia * 3 + 2];
-      const kx = hxx * dx0 + hxy * dy0 + hxz * dz0, ky = hxy * dx0 + hyy * dy0 + hyz * dz0, kz = hxz * dx0 + hyz * dy0 + hzz * dz0;
       const factor = dt * dt;
       // R(x) = x - x_n - dt*v_n - dt^2*a(x).  For a surface spring,
       // da_a = +M_a^-1 H (d_b - d_a), so its contribution to dR is
       // -dt^2 M_a^-1 H (d_b - d_a).  The previous implementation used
       // the opposite sign, making the Newton operator indefinite and
       // invalidating the CG solve on the real meshes.
-      out[ia * 3] -= factor * (kx * invMass[ia]); out[ia * 3 + 1] -= factor * (ky * invMass[ia]); out[ia * 3 + 2] -= factor * (kz * invMass[ia]);
-      out[ib * 3] += factor * (kx * invMass[ib]); out[ib * 3 + 1] += factor * (ky * invMass[ib]); out[ib * 3 + 2] += factor * (kz * invMass[ib]);
+      if (!weighted) {
+        const dx0 = direction[ib * 3] - direction[ia * 3], dy0 = direction[ib * 3 + 1] - direction[ia * 3 + 1], dz0 = direction[ib * 3 + 2] - direction[ia * 3 + 2];
+        const kx = hxx * dx0 + hxy * dy0 + hxz * dz0, ky = hxy * dx0 + hyy * dy0 + hyz * dz0, kz = hxz * dx0 + hyz * dy0 + hzz * dz0;
+        out[ia * 3] -= factor * (kx * invMass[ia]); out[ia * 3 + 1] -= factor * (ky * invMass[ia]); out[ia * 3 + 2] -= factor * (kz * invMass[ia]);
+        out[ib * 3] += factor * (kx * invMass[ib]); out[ib * 3 + 1] += factor * (ky * invMass[ib]); out[ib * 3 + 2] += factor * (kz * invMass[ib]);
+      } else {
+        // A = M^(1/2) J M^(-1/2). This is symmetric when the spring
+        // Hessian is symmetric, even when vertex masses differ.
+        const cross = edgeInvSqrtMassProduct[edgeIndex], ma = invMass[ia], mb = invMass[ib];
+        out[ia * 3] += factor * (hxx * ma * direction[ia * 3] - hxx * cross * direction[ib * 3] + hxy * ma * direction[ia * 3 + 1] - hxy * cross * direction[ib * 3 + 1] + hxz * ma * direction[ia * 3 + 2] - hxz * cross * direction[ib * 3 + 2]);
+        out[ia * 3 + 1] += factor * (hxy * ma * direction[ia * 3] - hxy * cross * direction[ib * 3] + hyy * ma * direction[ia * 3 + 1] - hyy * cross * direction[ib * 3 + 1] + hyz * ma * direction[ia * 3 + 2] - hyz * cross * direction[ib * 3 + 2]);
+        out[ia * 3 + 2] += factor * (hxz * ma * direction[ia * 3] - hxz * cross * direction[ib * 3] + hyz * ma * direction[ia * 3 + 1] - hyz * cross * direction[ib * 3 + 1] + hzz * ma * direction[ia * 3 + 2] - hzz * cross * direction[ib * 3 + 2]);
+        out[ib * 3] += factor * (hxx * mb * direction[ib * 3] - hxx * cross * direction[ia * 3] + hxy * mb * direction[ib * 3 + 1] - hxy * cross * direction[ia * 3 + 1] + hxz * mb * direction[ib * 3 + 2] - hxz * cross * direction[ia * 3 + 2]);
+        out[ib * 3 + 1] += factor * (hxy * mb * direction[ib * 3] - hxy * cross * direction[ia * 3] + hyy * mb * direction[ib * 3 + 1] - hyy * cross * direction[ia * 3 + 1] + hyz * mb * direction[ib * 3 + 2] - hyz * cross * direction[ia * 3 + 2]);
+        out[ib * 3 + 2] += factor * (hxz * mb * direction[ib * 3] - hxz * cross * direction[ia * 3] + hyz * mb * direction[ib * 3 + 1] - hyz * cross * direction[ia * 3 + 1] + hzz * mb * direction[ib * 3 + 2] - hzz * cross * direction[ia * 3 + 2]);
+      }
     };
     for (let i = 0; i < edgeA.length; i++) {
       const ia = edgeA[i], ib = edgeB[i], dx = x[ib * 3] - x[ia * 3], dy = x[ib * 3 + 1] - x[ia * 3 + 1], dz = x[ib * 3 + 2] - x[ia * 3 + 2];
-      addEdge(ia, ib, edgeInfo.rest[i], surfaceK, dx, dy, dz, Math.hypot(dx, dy, dz));
+      addEdge(ia, ib, edgeInfo.rest[i], surfaceK, dx, dy, dz, Math.hypot(dx, dy, dz), i);
     }
     for (let i = 0; i < supportAArray.length; i++) {
       const ia = supportAArray[i], dx = anchors[supportBArray[i] * 3] - x[ia * 3], dy = anchors[supportBArray[i] * 3 + 1] - x[ia * 3 + 1], dz = anchors[supportBArray[i] * 3 + 2] - x[ia * 3 + 2], length = Math.hypot(dx, dy, dz);
@@ -528,40 +547,51 @@ function buildSystem() {
     }
     for (let i = 0; i < vertexCount; i++) { const factor = dt * damping * invMass[i]; out[i * 3] += factor * direction[i * 3]; out[i * 3 + 1] += factor * direction[i * 3 + 1]; out[i * 3 + 2] += factor * direction[i * 3 + 2]; }
     if (pin && !pin.hard) {
-      const pinFactor = dt * dt * pin.kp + dt * pin.kd, weighted = [0, 0, 0];
-      for (let j = 0; j < 3; j++) { const id = pin.ids[j], w = pin.weights[j]; weighted[0] += w * direction[id * 3]; weighted[1] += w * direction[id * 3 + 1]; weighted[2] += w * direction[id * 3 + 2]; }
-      for (let j = 0; j < 3; j++) { const id = pin.ids[j], factor = pin.weights[j] * invMass[id] * pinFactor; out[id * 3] += factor * weighted[0]; out[id * 3 + 1] += factor * weighted[1]; out[id * 3 + 2] += factor * weighted[2]; }
+      const pinFactor = dt * dt * pin.kp + dt * pin.kd, weightedValues = [0, 0, 0];
+      for (let j = 0; j < 3; j++) { const id = pin.ids[j], w = pin.weights[j], scale = weighted ? inverseMassRoot[id] : 1; weightedValues[0] += w * direction[id * 3] * scale; weightedValues[1] += w * direction[id * 3 + 1] * scale; weightedValues[2] += w * direction[id * 3 + 2] * scale; }
+      for (let j = 0; j < 3; j++) { const id = pin.ids[j], factor = pin.weights[j] * (weighted ? inverseMassRoot[id] : invMass[id]) * pinFactor; out[id * 3] += factor * weightedValues[0]; out[id * 3 + 1] += factor * weightedValues[1]; out[id * 3 + 2] += factor * weightedValues[2]; }
     }
+    if (weighted && regularizationShift) for (let i = 0; i < scratchLength; i++) out[i] += regularizationShift * direction[i];
     return out;
   }
 
-  function buildImplicitPreconditioner(dt) {
+  function buildImplicitPreconditioner(dt, regularizationShift = 0, weighted = false) {
     for (let i = 0; i < vertexCount; i++) {
       let pinK = 0, pinD = 0;
       if (pin && !pin.hard) for (let j = 0; j < 3; j++) if (pin.ids[j] === i) { pinK += pin.kp * pin.weights[j] * pin.weights[j]; pinD += pin.kd * pin.weights[j] * pin.weights[j]; }
-      const value = 1 + dt * invMass[i] * (damping + pinD) + dt * dt * invMass[i] * (diagonalK[i] + pinK);
+      const value = 1 + dt * invMass[i] * (damping + pinD) + dt * dt * invMass[i] * (diagonalK[i] + pinK) + (weighted ? regularizationShift : 0);
       implicitPreconditioner[i * 3] = value; implicitPreconditioner[i * 3 + 1] = value; implicitPreconditioner[i * 3 + 2] = value;
     }
   }
 
   function solveImplicitLinearSystem(x, dt, rhs, out) {
-    out.fill(0); implicitCgResidual.set(rhs); let rhsNorm = 0;
-    for (let i = 0; i < scratchLength; i++) rhsNorm = Math.max(rhsNorm, Math.abs(rhs[i]));
-    const tolerance = Math.max(rhsNorm * 1e-7, state.faceScale * 1e-12), z = implicitCgPreconditioned, p = implicitCgDirection, ap = implicitCgProduct;
-    for (let i = 0; i < scratchLength; i++) z[i] = implicitCgResidual[i] / Math.max(implicitPreconditioner[i], 1e-12);
-    p.set(z); let rz = 0; for (let i = 0; i < scratchLength; i++) rz += implicitCgResidual[i] * z[i];
-    let iterations = 0;
-    for (; iterations < implicitCgIterations; iterations++) {
-      applyImplicitJacobian(x, p, dt, ap); let denominator = 0; for (let i = 0; i < scratchLength; i++) denominator += p[i] * ap[i];
-      if (!(denominator > 0) || !Number.isFinite(denominator)) break;
-      const alpha = rz / denominator; for (let i = 0; i < scratchLength; i++) { out[i] += alpha * p[i]; implicitCgResidual[i] -= alpha * ap[i]; }
-      let residualNorm = 0; for (let i = 0; i < scratchLength; i++) residualNorm = Math.max(residualNorm, Math.abs(implicitCgResidual[i]));
-      if (residualNorm <= tolerance) { iterations++; break; }
-      for (let i = 0; i < scratchLength; i++) z[i] = implicitCgResidual[i] / Math.max(implicitPreconditioner[i], 1e-12);
-      let nextRz = 0; for (let i = 0; i < scratchLength; i++) nextRz += implicitCgResidual[i] * z[i];
-      const beta = nextRz / Math.max(rz, 1e-30); for (let i = 0; i < scratchLength; i++) p[i] = z[i] + beta * p[i]; rz = nextRz;
+    out.fill(0); let rhsNorm = 0;
+    for (let i = 0; i < scratchLength; i++) { implicitCgWeightedRhs[i] = rhs[i] * massRoot[Math.floor(i / 3)]; rhsNorm = Math.max(rhsNorm, Math.abs(implicitCgWeightedRhs[i])); }
+    const shifts = [0]; for (let shift = 1e-8; shift <= 1e6; shift *= 100) shifts.push(shift);
+    let totalIterations = 0, last = { converged: false, negativeCurvature: false, residualNorm: Infinity, shift: 0, status: 'not-run' };
+    for (const shift of shifts) {
+      buildImplicitPreconditioner(dt, shift, true); implicitCgResidual.set(implicitCgWeightedRhs); let residualNorm = 0;
+      for (let i = 0; i < scratchLength; i++) residualNorm = Math.max(residualNorm, Math.abs(implicitCgResidual[i]));
+      const tolerance = Math.max(rhsNorm * 1e-7, state.faceScale * Math.sqrt(Math.max(medianMass, 1e-30)) * 1e-12), z = implicitCgPreconditioned, p = implicitCgDirection, ap = implicitCgProduct;
+      for (let i = 0; i < scratchLength; i++) z[i] = implicitCgResidual[i] / Math.max(implicitPreconditioner[i], 1e-30);
+      p.set(z); let rz = 0; for (let i = 0; i < scratchLength; i++) rz += implicitCgResidual[i] * z[i];
+      let iterations = 0, negativeCurvature = false, converged = residualNorm <= tolerance;
+      for (; iterations < implicitCgIterations && !converged; iterations++) {
+        applyImplicitJacobian(x, p, dt, ap, true, shift); let denominator = 0; for (let i = 0; i < scratchLength; i++) denominator += p[i] * ap[i];
+        if (!(denominator > Math.max(1e-30, Math.abs(rz) * 1e-14)) || !Number.isFinite(denominator)) { negativeCurvature = true; break; }
+        const alpha = rz / denominator; for (let i = 0; i < scratchLength; i++) { out[i] += alpha * p[i]; implicitCgResidual[i] -= alpha * ap[i]; }
+        residualNorm = 0; for (let i = 0; i < scratchLength; i++) residualNorm = Math.max(residualNorm, Math.abs(implicitCgResidual[i]));
+        converged = residualNorm <= tolerance;
+        if (converged) { iterations++; break; }
+        for (let i = 0; i < scratchLength; i++) z[i] = implicitCgResidual[i] / Math.max(implicitPreconditioner[i], 1e-30);
+        let nextRz = 0; for (let i = 0; i < scratchLength; i++) nextRz += implicitCgResidual[i] * z[i];
+        const beta = nextRz / Math.max(rz, 1e-30); for (let i = 0; i < scratchLength; i++) p[i] = z[i] + beta * p[i]; rz = nextRz;
+      }
+      totalIterations += iterations; last = { converged, negativeCurvature, residualNorm, shift, status: converged ? 'converged' : negativeCurvature ? 'negative-curvature' : 'max-iterations' };
+      if (converged) { for (let i = 0; i < scratchLength; i++) out[i] *= inverseMassRoot[Math.floor(i / 3)]; return { iterations: totalIterations, ...last }; }
+      out.fill(0);
     }
-    return iterations;
+    return { iterations: totalIterations, ...last };
   }
 
   function integrateImplicitOne(dt) {
@@ -570,12 +600,14 @@ function buildSystem() {
     buildImplicitPreconditioner(dt);
     const correctionTolerance = Math.max(state.faceScale * 1e-8, 1e-10), residualTolerance = Math.max(state.faceScale * 1e-7, 1e-9);
     const residualHistory = [], trial = new Float64Array(scratchLength), rhs = new Float64Array(scratchLength);
-    let finalCorrection = 0, linearIterations = 0, status = 'maxIterations', currentResidual = implicitResidualAt(base, dt, implicitResidual);
+    let finalCorrection = 0, linearIterations = 0, status = 'maxIterations', currentResidual = implicitResidualAt(base, dt, implicitResidual), linearStatus = 'idle', negativeCurvatureEvents = 0, regularizationHistory = [], weightedCgResidual = 0;
     for (let iteration = 0; iteration < implicitNewtonIterations; iteration++) {
       residualHistory.push(currentResidual);
       if (currentResidual <= residualTolerance) { status = 'converged'; break; }
       for (let i = 0; i < scratchLength; i++) rhs[i] = -implicitResidual[i];
-      linearIterations += solveImplicitLinearSystem(base, dt, rhs, implicitNewtonDelta);
+      const linear = solveImplicitLinearSystem(base, dt, rhs, implicitNewtonDelta);
+      linearIterations += linear.iterations; linearStatus = linear.status; weightedCgResidual = linear.residualNorm; regularizationHistory.push(linear.shift); if (linear.negativeCurvature) negativeCurvatureEvents++;
+      if (!linear.converged) { status = linear.negativeCurvature ? 'negative-curvature' : 'linear-max-iterations'; break; }
       let accepted = false, alpha = 1;
       while (alpha >= implicitLineSearchMin) {
         for (let i = 0; i < scratchLength; i++) trial[i] = base[i] + alpha * implicitNewtonDelta[i];
@@ -596,7 +628,7 @@ function buildSystem() {
     const equationResidual = implicitResidualAt(base, dt, implicitTrialResidual) / Math.max(dt, 1e-12);
     let positionVelocityResidual = 0; for (let i = 0; i < scratchLength; i++) positionVelocityResidual = Math.max(positionVelocityResidual, Math.abs(base[i] - positions[i] - dt * implicitVelocity[i]));
     if (equationResidual <= residualTolerance / Math.max(dt, 1e-12)) status = 'converged';
-    implicitDiagnostics = { iterations: residualHistory.length, linearIterations, finalCorrection, equationResidual, positionVelocityResidual, converged: status === 'converged', status, correctionTolerance, residualTolerance, residualHistory };
+    implicitDiagnostics = { iterations: residualHistory.length, linearIterations, finalCorrection, equationResidual, positionVelocityResidual, converged: status === 'converged', status, correctionTolerance, residualTolerance, residualHistory, linearStatus, negativeCurvatureEvents, regularizationHistory, weightedCgResidual };
     positions.set(base); velocities.set(implicitVelocity); if (pin?.hard) projectConstraint(positions, velocities, pin);
     for (const value of positions) if (!Number.isFinite(value)) throw new Error('Implicit solve produced nonfinite positions');
     for (const value of velocities) if (!Number.isFinite(value)) throw new Error('Implicit solve produced nonfinite velocities');
@@ -951,6 +983,14 @@ async function loadModel(name) {
       geometry: state.spring?.geometryDiagnostics(), interIslandSprings: 0, pointerDebug: state.pointerDebug,
       render: { bounds: { min: bounds.min.toArray(), max: bounds.max.toArray() }, camera: camera.position.toArray(), target: controls.target.toArray(), meshes: state.meshes.length, visible: state.meshes.filter(mesh => mesh.visible).length, drawCalls: renderer.info.render.calls, pixelRatio: renderer.getPixelRatio(), drawingBuffer: [renderer.domElement.width, renderer.domElement.height], maxTextureSize: renderer.capabilities.maxTextureSize }
     };
+  };
+  window.__velaSetRunning = value => { state.running = Boolean(value); };
+  window.__velaStep = (count = 1, dt = 1 / 600) => {
+    if (!state.spring) return null;
+    state.spring.markActive();
+    for (let i = 0; i < count; i++) state.spring.step(dt);
+    state.spring.update();
+    return window.__velaDiagnostics();
   };
   window.__velaPickTest = (clientX, clientY) => {
     const rect = canvas.getBoundingClientRect();

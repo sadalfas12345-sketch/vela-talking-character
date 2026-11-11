@@ -11,6 +11,8 @@ const baseUrl = `http://127.0.0.1:${port}/island-spring-pinch.html`;
 const models = (process.env.VELA_GATE_MODELS || 'female,male').split(',').map(value => value.trim()).filter(Boolean);
 const reportFile = process.env.VELA_GATE_OUTPUT || 'browser-mathematical-gates.json';
 const captureScreenshots = process.env.VELA_GATE_SCREENSHOTS !== '0';
+const skipGate6 = process.env.VELA_GATE_SKIP_GATE6 === '1';
+const controlledGate8 = process.env.VELA_GATE_CONTROLLED_STEPS === '1';
 const report = { gates: [], models: {} };
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -49,23 +51,23 @@ page.on('console', message => { if (message.type() === 'error') console.error(`[
 page.on('pageerror', error => console.error(`[pageerror] ${error.stack || error}`));
 
 try {
-  // Gate 6: one actual original island, not a synthetic mesh.
-  for (const model of models) {
-    await loadModel(page, model);
-    // The render loop can keep the canvas/page in a continuously changing
-    // layout state on the original million-vertex GLB. Invoke the actual
-    // button handler through the DOM rather than adding an actionability
-    // timeout to the physics test itself.
-    await page.evaluate(() => document.querySelector('#oneNudge')?.click());
-    await page.waitForFunction(() => Boolean(window.__velaDiagnostics().tests?.nudge), null, { timeout: 180000 });
-    const d = await page.evaluate(() => window.__velaDiagnostics());
-    report.models[model] = { gate6: d };
+  // Gate 6: one actual original island, not a synthetic mesh. It can be
+  // skipped for a Gate-8-only regression because it was already recorded and
+  // the expensive nudge would duplicate the same physical setup.
+  if (!skipGate6) {
+    for (const model of models) {
+      await loadModel(page, model);
+      await page.evaluate(() => document.querySelector('#oneNudge')?.click());
+      await page.waitForFunction(() => Boolean(window.__velaDiagnostics().tests?.nudge), null, { timeout: 180000 });
+      const d = await page.evaluate(() => window.__velaDiagnostics());
+      report.models[model] = { gate6: d };
+    }
+    const gate6Pass = models.every(model => {
+      const d = report.models[model].gate6, n = d.tests.nudge, m = d.metrics, topo = d.springTopology;
+      return topo?.invariant && m.interIslandSprings === 0 && m.zeroMassVertexCount === 0 && m.supportSprings > 0 && n.finite && n.maxNeighborMovement > 0 && n.energyDecreased && n.restoredTowardNeutral && n.initialAccelerationMS2.some(value => Math.abs(value) > 0);
+    });
+    if (!addGate(6, 'One actual Tripo island', gate6Pass, report.models)) { await writeAndStop(server, browser, 1); }
   }
-  const gate6Pass = models.every(model => {
-    const d = report.models[model].gate6, n = d.tests.nudge, m = d.metrics, topo = d.springTopology;
-    return topo?.invariant && m.interIslandSprings === 0 && m.zeroMassVertexCount === 0 && m.supportSprings > 0 && n.finite && n.maxNeighborMovement > 0 && n.energyDecreased && n.restoredTowardNeutral && n.initialAccelerationMS2.some(value => Math.abs(value) > 0);
-  });
-  if (!addGate(6, 'One actual Tripo island', gate6Pass, report.models)) { await writeAndStop(server, browser, 1); }
 
   // Gate 7: one barycentric controller force, hold, drag, release.
   for (const model of models) {
@@ -82,9 +84,16 @@ try {
     const down = await page.evaluate(() => window.__velaDiagnostics());
     await page.mouse.move(plan.target.x, plan.target.y, { steps: 12 });
     const history = [];
-    for (let i = 0; i < 12; i++) { await page.waitForTimeout(50); history.push(await page.evaluate(() => { const d = window.__velaDiagnostics(); return { geometry: d.geometry, implicit: d.metrics?.implicit, maxDisplacement: d.metrics?.maxDisplacement }; })); }
+    if (controlledGate8) {
+      await page.evaluate(() => window.__velaSetRunning(false));
+      for (let i = 0; i < 3; i++) history.push(await page.evaluate(() => { const d = window.__velaStep(1); return { geometry: d.geometry, implicit: d.metrics?.implicit, maxDisplacement: d.metrics?.maxDisplacement }; }));
+    } else {
+      for (let i = 0; i < 12; i++) { await page.waitForTimeout(50); history.push(await page.evaluate(() => { const d = window.__velaDiagnostics(); return { geometry: d.geometry, implicit: d.metrics?.implicit, maxDisplacement: d.metrics?.maxDisplacement }; })); }
+    }
     const held = await page.evaluate(() => window.__velaDiagnostics()); const heldScreenshot = await capture(page, path.join(outDir, `${model}-gate7-held.png`));
-    await page.mouse.up(); await page.waitForTimeout(800);
+    await page.mouse.up();
+    if (controlledGate8) await page.evaluate(() => window.__velaStep(20));
+    else await page.waitForTimeout(800);
     const released = await page.evaluate(() => window.__velaDiagnostics()); const releasedScreenshot = await capture(page, path.join(outDir, `${model}-gate7-released.png`));
     report.models[model].gate7 = { plan, down, held, released, history, heldScreenshot, releasedScreenshot };
   }

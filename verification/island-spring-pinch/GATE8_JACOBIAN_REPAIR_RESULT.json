@@ -1,0 +1,24 @@
+{
+  "commitBase": "e990005ca191fb0719ba18ce627e309ce8d3a41",
+  "jacobianAudit": "jacobian-audit.json",
+  "smallNetworkTests": "physics-unit-tests.json",
+  "femaleHeldPreserved": {
+    "converged": true,
+    "orientationFlips": 0,
+    "collapsedTriangles": 0,
+    "equationResidual": 4.279100007264017e-7
+  },
+  "femaleReleasePriorReadback": {
+    "converged": false,
+    "status": "stagnated",
+    "equationResidual": 0.31289280607470094,
+    "orientationFlips": 0,
+    "collapsedTriangles": 0
+  },
+  "postAuditFemaleBrowserAttempts": [
+    { "solverCgIterations": 64, "report": "browser-female-weighted-cg64.json", "completedGate8Readback": false, "failure": "Target page, context or browser has been closed" },
+    { "solverCgIterations": 16, "report": "browser-female-weighted-cg16.json", "completedGate8Readback": false, "failure": "Target page, context or browser has been closed" }
+  ],
+  "gate8": "FAILED",
+  "reason": "The mass-weighted Jacobian audit passes, but a post-repair converged female release readback was not obtained. Male Gate 8 was not run because the female gate was not cleared."
+}

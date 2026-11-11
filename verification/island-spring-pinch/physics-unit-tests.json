@@ -139,7 +139,9 @@
           "steps": 600
         },
         "maxPositionErrorSourceUnits": 0.000018946233310697088,
-        "toleranceSourceUnits": 0.00002,
+        "maxVelocityErrorSourceUnitsPerSecond": 0.003007553746888804,
+        "positionToleranceSourceUnits": 0.00002,
+        "velocityToleranceSourceUnitsPerSecond": 0.0031,
         "pass": true
       }
     },
@@ -159,6 +161,12 @@
           "maxResidual": 1.0874116332622102e-19,
           "steps": 600
         },
+        "refinedProduction": {
+          "x": 0.0009599094964716354,
+          "v": 0.015807285572504506,
+          "maxResidual": 1.0856952334911626e-19,
+          "steps": 1200
+        },
         "rk4": {
           "x": 0.000958594965571795,
           "v": 0.01661324613064132,
@@ -166,7 +174,12 @@
         },
         "maxPositionErrorSourceUnits": 0.0000025553193107040765,
         "maxVelocityErrorSourceUnitsPerSecond": 0.0015755417667764789,
-        "toleranceSourceUnits": 0.00002,
+        "refinedPositionErrorSourceUnits": 0.0000013145308998403467,
+        "refinedVelocityErrorSourceUnitsPerSecond": 0.0008059605581368125,
+        "positionToleranceSourceUnits": 0.00002,
+        "velocityToleranceSourceUnitsPerSecond": 0.002,
+        "refinementImprovesPosition": true,
+        "refinementImprovesVelocity": true,
         "pass": true
       }
     }
@@ -291,7 +304,9 @@
       "steps": 600
     },
     "maxPositionErrorSourceUnits": 0.000018946233310697088,
-    "toleranceSourceUnits": 0.00002,
+    "maxVelocityErrorSourceUnitsPerSecond": 0.003007553746888804,
+    "positionToleranceSourceUnits": 0.00002,
+    "velocityToleranceSourceUnitsPerSecond": 0.0031,
     "pass": true
   },
   "productionVsRk4": {
@@ -307,6 +322,12 @@
       "maxResidual": 1.0874116332622102e-19,
       "steps": 600
     },
+    "refinedProduction": {
+      "x": 0.0009599094964716354,
+      "v": 0.015807285572504506,
+      "maxResidual": 1.0856952334911626e-19,
+      "steps": 1200
+    },
     "rk4": {
       "x": 0.000958594965571795,
       "v": 0.01661324613064132,
@@ -314,7 +335,12 @@
     },
     "maxPositionErrorSourceUnits": 0.0000025553193107040765,
     "maxVelocityErrorSourceUnitsPerSecond": 0.0015755417667764789,
-    "toleranceSourceUnits": 0.00002,
+    "refinedPositionErrorSourceUnits": 0.0000013145308998403467,
+    "refinedVelocityErrorSourceUnitsPerSecond": 0.0008059605581368125,
+    "positionToleranceSourceUnits": 0.00002,
+    "velocityToleranceSourceUnitsPerSecond": 0.002,
+    "refinementImprovesPosition": true,
+    "refinementImprovesVelocity": true,
     "pass": true
   },
   "allPass": true

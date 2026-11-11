@@ -1,0 +1,40 @@
+{
+  "model": "production-equation-audit",
+  "equation": "R(x)=x-x_n-dt*v_n-dt^2*a(x,(x-x_n)/dt)",
+  "massesKg": [
+    0.001,
+    0.002,
+    0.004
+  ],
+  "sourceMetersPerUnit": 0.3,
+  "dt": 0.0016666666666666668,
+  "finiteDifferenceAudit": {
+    "epsilon": 1e-7,
+    "maxAbsDerivativeError": 3.7821468179544127e-10,
+    "rmsDerivativeError": 1.4560052233677991e-10,
+    "maxAbsDerivative": 1.1044701393736478,
+    "pass": true
+  },
+  "symmetryAudit": {
+    "ordinaryBilinearDifference": 0.03499631281024618,
+    "weightedBilinearDifference": 8.881784197001252e-16,
+    "ordinarySymmetric": false,
+    "weightedSymmetric": true,
+    "weightedMatrixTransposeError": 1.734723475976807e-18,
+    "similarityTransformMaxError": 2.220446049250313e-16
+  },
+  "negativeCurvatureAudit": {
+    "currentLength": 0.45,
+    "restLength": 0.9,
+    "stiffness": 40,
+    "transverseHessianEigenvalue": -40,
+    "negativeCurvatureDetected": true,
+    "handling": "weighted CG rejects p·A·p <= 0; Newton retries with a numerical Levenberg shift without changing the physical residual or material coefficients"
+  },
+  "expected": {
+    "ordinaryJacobianGenerallyNonsymmetric": true,
+    "weightedSimilarityTransform": "A=M^(1/2) J M^(-1/2)",
+    "weightedOperatorSymmetricWhenHessianSymmetric": true
+  },
+  "allPass": true
+}

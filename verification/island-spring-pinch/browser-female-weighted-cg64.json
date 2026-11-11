@@ -1,0 +1,8 @@
+{
+  "gates": [],
+  "models": {},
+  "error": {
+    "message": "mouse.move: Target page, context or browser has been closed",
+    "stack": "mouse.move: Target page, context or browser has been closed\n    at C:\\Users\\USER\\talking-character-demo\\scripts\\run_browser_physics_gates.mjs:84:22"
+  }
+}

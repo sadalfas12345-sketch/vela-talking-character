@@ -80,7 +80,8 @@ const duration = 0.05;
 const rk = integrate(rk4Step, 1e-6, duration);
 const implicit = integrate(implicitLinearStep, 1 / 12000, duration);
 const trajectoryError = Math.max(...rk.x.map((value, i) => Math.abs(value - implicit.x[i])));
-const integratorTest = { duration, rk4: rk, implicit, maxPositionErrorSourceUnits: trajectoryError, toleranceSourceUnits: 2e-5, pass: trajectoryError <= 2e-5 };
+const velocityTrajectoryError = Math.max(...rk.v.map((value, i) => Math.abs(value - implicit.v[i])));
+const integratorTest = { duration, rk4: rk, implicit, maxPositionErrorSourceUnits: trajectoryError, maxVelocityErrorSourceUnitsPerSecond: velocityTrajectoryError, positionToleranceSourceUnits: 2e-5, velocityToleranceSourceUnitsPerSecond: 0.0031, pass: trajectoryError <= 2e-5 && velocityTrajectoryError <= 0.0031 };
 
 function oscillatorRK4Step(x, v, dt, kNPerM, massKg, dampingNsPerM, restM = 0.001) {
   const acceleration = (position, velocity) => (-kNPerM * (position - restM) - dampingNsPerM * velocity) / massKg;
@@ -117,11 +118,17 @@ function integrateFineRK4(dt, duration, kNPerM, massKg, dampingNsPerM) {
 }
 const productionVsRk4 = { duration: 0.05, dtProduction: 1 / 12000, dtRk4: 1e-6, kNPerM: 45, massKg: 0.001, dampingNsPerM: 0.08 * 2 * Math.sqrt(45 * 0.001) };
 productionVsRk4.production = integrateProduction(productionVsRk4.dtProduction, productionVsRk4.duration, productionVsRk4.kNPerM, productionVsRk4.massKg, productionVsRk4.dampingNsPerM);
+productionVsRk4.refinedProduction = integrateProduction(productionVsRk4.dtProduction / 2, productionVsRk4.duration, productionVsRk4.kNPerM, productionVsRk4.massKg, productionVsRk4.dampingNsPerM);
 productionVsRk4.rk4 = integrateFineRK4(productionVsRk4.dtRk4, productionVsRk4.duration, productionVsRk4.kNPerM, productionVsRk4.massKg, productionVsRk4.dampingNsPerM);
 productionVsRk4.maxPositionErrorSourceUnits = Math.abs(productionVsRk4.production.x - productionVsRk4.rk4.x);
 productionVsRk4.maxVelocityErrorSourceUnitsPerSecond = Math.abs(productionVsRk4.production.v - productionVsRk4.rk4.v);
-productionVsRk4.toleranceSourceUnits = 2e-5;
-productionVsRk4.pass = productionVsRk4.maxPositionErrorSourceUnits <= productionVsRk4.toleranceSourceUnits && productionVsRk4.production.maxResidual <= 1e-12;
+productionVsRk4.refinedPositionErrorSourceUnits = Math.abs(productionVsRk4.refinedProduction.x - productionVsRk4.rk4.x);
+productionVsRk4.refinedVelocityErrorSourceUnitsPerSecond = Math.abs(productionVsRk4.refinedProduction.v - productionVsRk4.rk4.v);
+productionVsRk4.positionToleranceSourceUnits = 2e-5;
+productionVsRk4.velocityToleranceSourceUnitsPerSecond = 0.002;
+productionVsRk4.refinementImprovesPosition = productionVsRk4.refinedPositionErrorSourceUnits < productionVsRk4.maxPositionErrorSourceUnits;
+productionVsRk4.refinementImprovesVelocity = productionVsRk4.refinedVelocityErrorSourceUnitsPerSecond < productionVsRk4.maxVelocityErrorSourceUnitsPerSecond;
+productionVsRk4.pass = productionVsRk4.maxPositionErrorSourceUnits <= productionVsRk4.positionToleranceSourceUnits && productionVsRk4.maxVelocityErrorSourceUnitsPerSecond <= productionVsRk4.velocityToleranceSourceUnitsPerSecond && productionVsRk4.production.maxResidual <= 1e-12 && productionVsRk4.refinementImprovesPosition && productionVsRk4.refinementImprovesVelocity;
 
 const tests = [
   assert('1N/1kg scale conversion', forceScaleTests.every(t => t.pass), forceScaleTests),
