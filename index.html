@@ -43,7 +43,8 @@
     .select-wrap select { appearance:none; }
     button { width:100%; margin-top:0; border:0; border-radius:12px; padding:12px 16px; color:#06131a; background:linear-gradient(135deg,var(--accent),#b1f8e5); font-weight:700; font-size:14px; cursor:pointer; box-shadow:0 9px 24px rgba(138,241,209,.16); }
     button:disabled { opacity:.45; cursor:wait; }
-    .progress { margin:5px 3px 0; color:var(--muted); font-size:11px; min-height:14px; }
+    #recordClip { margin-top:8px; background:rgba(130,169,255,.17); color:#e6edff; border:1px solid rgba(130,169,255,.45); box-shadow:none; }
+     .progress { margin:5px 3px 0; color:var(--muted); font-size:11px; min-height:14px; }
     @media (max-width:600px) { .shell { padding:12px; padding-bottom:max(8px, env(safe-area-inset-bottom)); } .status { font-size:10px; padding:7px 9px; } .content { width:100%; margin:auto auto 0; } .panel { padding:10px; border-radius:16px; } textarea { height:52px; min-height:52px; } .row { grid-template-columns:1fr 1fr 100px; gap:7px; margin-top:7px; } select { padding:10px 8px; font-size:13px; border-radius:11px; } button { padding:11px 8px; font-size:13px; border-radius:11px; } .progress { margin-top:4px; } .camera-tools { right:auto; left:12px; } }
   </style>
   <script type="importmap">
@@ -85,6 +86,7 @@
           <div><label for="voice">Voice</label><select id="voice"><option value="af_bella">Bella · warm</option><option value="am_fenrir">Fenrir · grounded</option></select></div>
         </div>
         <button id="speak" type="submit" disabled>Loading character…</button>
+         <button id="recordClip" type="button" disabled>Export 9:16 talking clip</button>
         <div id="progress" class="progress" role="status"></div>
       </form>
     </section>
@@ -92,13 +94,15 @@
   <script type="module">
     import { TalkingHead } from "talkinghead";
     import { HeadTTS } from "headtts";
+    import { VelaCreatorRecorder } from "./creator-recorder.mjs";
     import * as THREE from "three";
     import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
     import { inspectCharacter, adaptCharacterGLTF, compatibilityMessage, cacheKey } from "./character-adapter.mjs";
 
     const $ = (id) => document.getElementById(id);
-    const el = { avatar:$('avatar'), form:$('talkForm'), text:$('text'), emotion:$('emotion'), voice:$('voice'), speak:$('speak'), progress:$('progress'), statusDot:$('statusDot'), statusText:$('statusText'), inference:$('inferenceMode'), characterFile:$('characterFile'), characterSelect:$('characterSelect'), compatibility:$('compatibility'), importCharacter:$('importCharacter') };
+    const el = { avatar:$('avatar'), form:$('talkForm'), text:$('text'), emotion:$('emotion'), voice:$('voice'), speak:$('speak'), recordClip:$('recordClip'), progress:$('progress'), statusDot:$('statusDot'), statusText:$('statusText'), inference:$('inferenceMode'), characterFile:$('characterFile'), characterSelect:$('characterSelect'), compatibility:$('compatibility'), importCharacter:$('importCharacter') };
     let head, headtts, ready = false, moodTimer, defaultAvatar, importedCharacter = null, tripoCharacter = null, tripoBindPoseState = null, cameraHome = null, defaultRandomizedMorphs = [], defaultPoseState = null, panCamera=()=>{};
+    let creatorRecorder = null, pendingRecord = false, recordWatchdog = null;
     const moods = { neutral:'neutral', happy:'happy', sad:'sad', angry:'angry', nervous:'fear' };
 
     function setStatus(text, isReady=false) { el.statusText.textContent=text; el.statusDot.classList.toggle('ready', isReady); }
@@ -117,6 +121,20 @@
 
     async function boot() {
       head = new TalkingHead(el.avatar, { ttsEndpoint:'N/A', lipsyncModules:[], cameraView:'head', mixerGainSpeech:3, cameraRotateEnable:true, cameraPanEnable:true, cameraZoomEnable:true, ambientLightColor:0x9fb8d6, ambientLightIntensity:1.5, cameraY:0.02, cameraRotateX:0, cameraRotateY:0 });
+      creatorRecorder = new VelaCreatorRecorder({
+        renderCanvas: head.renderer.domElement,
+        audioContext: head.audioCtx,
+        audioOutputNode: head.audioReverbNode,
+        onStatus: message => { el.progress.textContent = message; }
+      });
+      // Capture immediately after WebGL drawing, while the rendered pixels are
+      // still available; periodic independent canvas capture can be blank.
+      const renderNative = head.renderer.render.bind(head.renderer);
+      head.renderer.render = (...args) => {
+        const result = renderNative(...args);
+        if (creatorRecorder?.active) creatorRecorder.copyFrame?.();
+        return result;
+      };
       const lookAheadNative=head.lookAhead.bind(head);
       head.lookAhead=(duration)=>head.avatar?.avatarDisableMoodPose?undefined:lookAheadNative(duration);
       const updateMorphTargetsNative=head.updateMorphTargets.bind(head);
@@ -165,10 +183,45 @@
         dictionaryURL:'../dictionaries', trace:0
       });
       headtts.onmessage = (message) => {
-        if (message.type === 'audio') { head.speakMarker(() => {}); head.speakAudio(message.data, {}, (word) => { el.progress.textContent = word || 'Speaking…'; }); }
-        else if (message.type === 'error') { el.progress.textContent = `TTS error: ${message.data?.error || 'unknown error'}`; el.speak.disabled=false; }
-      };
-      const info = { head:'', tts:'' };
+         if (message.type === 'audio') {
+           let recordingPromise = null;
+           if (pendingRecord) {
+             pendingRecord = false;
+             clearTimeout(recordWatchdog);
+             try {
+               recordingPromise = creatorRecorder.start();
+               recordingPromise.catch(error => {
+                 el.progress.textContent = 'Export failed: ' + (error.message || error);
+               }).finally(() => {
+                 el.recordClip.disabled = false;
+                 el.speak.disabled = false;
+               });
+             } catch (error) {
+               el.progress.textContent = 'Recording unavailable: ' + (error.message || error);
+               el.recordClip.disabled = false;
+             }
+           }
+           try {
+             head.speakMarker(() => {});
+             head.speakAudio(message.data, {}, (word) => {
+               if (!creatorRecorder?.active) el.progress.textContent = word || 'Speaking…';
+             });
+             if (recordingPromise) creatorRecorder.watchSpeech(() => head.isSpeaking);
+           } catch (error) {
+             if (recordingPromise) creatorRecorder.stop(false);
+             el.progress.textContent = 'Speech failed: ' + (error.message || error);
+             el.recordClip.disabled = false;
+             el.speak.disabled = false;
+           }
+         } else if (message.type === 'error') {
+           clearTimeout(recordWatchdog);
+           pendingRecord = false;
+           el.progress.textContent = 'TTS error: ' + (message.data?.error || 'unknown error');
+           el.speak.disabled = false;
+           el.recordClip.disabled = false;
+         }
+       };
+       const info = { head:'', tts:'' };
       const progress = (name, ev) => { if (ev?.lengthComputable) info[name]=`${Math.round(ev.loaded/ev.total*100)}%`; else if (ev) info[name]=`${Math.round(ev.loaded/1000)} KB`; el.progress.textContent=`Loading ${info.head || 'avatar'} · ${info.tts || 'voice engine'}`; };
       defaultAvatar = { url:'./TalkingHead/avatars/avaturn.glb', body:'F', avatarMood:'neutral', lipsyncLang:'en', retarget:{ Hips:{y:0.03}, Spine:{y:0.02}, Spine1:{y:0.02,z:0.01}, Spine2:{y:0.02,z:0.01}, Neck:{z:0.02,y:0.01}, Head:{z:0.02}, LeftShoulder:{rx:-0.5}, RightShoulder:{rx:-0.5}, scaleToHipsLevel:1.0 }, baseline:{ headRotateX:-0.05, eyeBlinkLeft:0.15, eyeBlinkRight:0.15 } };
       await Promise.all([
@@ -223,7 +276,7 @@
           }
         } else if (importedCharacter) await activateAvatar(importedCharacter.avatar);
       });
-      ready=true; el.speak.disabled=false; el.speak.textContent='Speak'; el.progress.textContent='Ready · type a line and press Speak'; setStatus('Ready to speak', true);
+      ready=true; el.speak.disabled=false; el.recordClip.disabled=!VelaCreatorRecorder.isSupported(); el.speak.textContent='Speak'; el.progress.textContent='Ready · type a line and press Speak'; setStatus('Ready to speak', true);
       el.inference.textContent = 'RTX inference · ready';
     }
     async function importCharacterFile(fileOverride=null) {
@@ -368,10 +421,49 @@
         if (el.characterSelect.value==='imported' || el.characterSelect.value==='tripo') el.characterSelect.value='default';
         el.progress.textContent='Character load failed';
         return false;
-      } finally { el.speak.disabled=!ready; }
+      } finally { el.speak.disabled=!ready || pendingRecord || Boolean(creatorRecorder?.active); el.recordClip.disabled=!ready || pendingRecord || Boolean(creatorRecorder?.active) || !VelaCreatorRecorder.isSupported(); }
     }
     el.voice.addEventListener('change', () => { if (ready) headtts.setup({voice:el.voice.value}); });
-    el.form.addEventListener('submit', (event) => { event.preventDefault(); const text=el.text.value.trim(); if (!ready || !text) return; setMood(el.emotion.value); el.speak.disabled=true; el.progress.textContent='Synthesizing locally…'; headtts.synthesize({ input:text }).finally(() => { el.speak.disabled=false; }); });
+    el.form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const text = el.text.value.trim();
+      if (!ready || !text || pendingRecord || creatorRecorder?.active) return;
+      setMood(el.emotion.value);
+      el.speak.disabled = true;
+      el.progress.textContent = 'Synthesizing locally…';
+      headtts.synthesize({ input:text }).catch(error => {
+        el.progress.textContent = 'TTS error: ' + (error.message || error);
+      }).finally(() => {
+        if (!pendingRecord && !creatorRecorder?.active) el.speak.disabled = false;
+      });
+    });
+    el.recordClip.addEventListener('click', () => {
+      const text = el.text.value.trim();
+      if (!ready || !text || pendingRecord || creatorRecorder?.active) return;
+      if (head.isSpeaking) {
+        el.progress.textContent = 'Finish the current speech before exporting.';
+        return;
+      }
+      pendingRecord = true;
+      el.speak.disabled = true;
+      el.recordClip.disabled = true;
+      setMood(el.emotion.value);
+      el.progress.textContent = 'Synthesizing audio for portrait export…';
+      recordWatchdog = setTimeout(() => {
+        if (!pendingRecord) return;
+        pendingRecord = false;
+        el.speak.disabled = false;
+        el.recordClip.disabled = false;
+        el.progress.textContent = 'Recording timed out waiting for synthesized audio.';
+      }, 30_000);
+      headtts.synthesize({ input:text }).catch(error => {
+        clearTimeout(recordWatchdog);
+        pendingRecord = false;
+        el.speak.disabled = false;
+        el.recordClip.disabled = false;
+        el.progress.textContent = 'TTS error: ' + (error.message || error);
+      });
+    });
     document.addEventListener('visibilitychange', () => { if (!head) return; document.visibilityState === 'visible' ? head.start() : head.stop(); });
     window.addEventListener('resize',()=>{if(!head?.camera)return;const tripo=head.avatar?.avatarDisableMoodPose;head.camera.fov=window.innerWidth<700?(tripo?15.5:24):(tripo?14:18);head.camera.updateProjectionMatrix();});
     boot().catch((error) => { console.error(error); setStatus('Startup needs attention'); el.progress.textContent=`Could not start: ${error.message || error}`; el.speak.textContent='Retry'; el.speak.disabled=false; el.inference.textContent='Browser fallback available'; });

@@ -2,6 +2,14 @@
 
 Browser-based talking character demo built from pinned upstream TalkingHead and HeadTTS submodules. The browser renders the avatar locally; HeadTTS Kokoro inference prefers the PC-side REST service and falls back to browser WebGPU/WASM.
 
+## VELA Creator — portrait video export (experimental)
+
+The **Export 9:16 talking clip** button uses the same active avatar, voice and text as **Speak**, then records a 720×1280 portrait **WebM** with the actual TalkingHead speech audio. This is a browser-side recorder: there is no new inference model, no third-party rendering API, and no server-side video encoding cost. The export contains the avatar canvas, not the editor controls.
+
+Use desktop Chrome or Edge first. Run the existing HeadTTS service (`npm.cmd run tts`) and local VELA server (`npm.cmd run serve`), choose a tested character, type dialogue, then click **Export 9:16 talking clip**. The browser should download a `vela-creator-*.webm` file after speech ends. WebM is not MP4; conversion and production distribution remain separate work.
+
+Verification: while the VELA server is running, execute `npm.cmd run test:creator`. This checks the recorder with real Chromium MediaRecorder, synthetic canvas frames and a browser audio oscillator. It does **not** certify the photorealistic Tripo mesh, verify lip movements against audio, verify a real Android device, or demonstrate that the exported video is commercially ready. Preserve all existing Tripo certification gates; do not represent experimental exports as passed visual-quality validation.
+
 ## Run
 
 From this directory, use two terminals:
