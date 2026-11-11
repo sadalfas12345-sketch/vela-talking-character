@@ -127,6 +127,14 @@
         audioOutputNode: head.audioReverbNode,
         onStatus: message => { el.progress.textContent = message; }
       });
+      // Capture immediately after WebGL drawing, while the rendered pixels are
+      // still available; periodic independent canvas capture can be blank.
+      const renderNative = head.renderer.render.bind(head.renderer);
+      head.renderer.render = (...args) => {
+        const result = renderNative(...args);
+        if (creatorRecorder?.active) creatorRecorder.copyFrame?.();
+        return result;
+      };
       const lookAheadNative=head.lookAhead.bind(head);
       head.lookAhead=(duration)=>head.avatar?.avatarDisableMoodPose?undefined:lookAheadNative(duration);
       const updateMorphTargetsNative=head.updateMorphTargets.bind(head);
