@@ -177,6 +177,23 @@
       "femaleGenuineFolds": 0,
       "maleGenuineFolds": 2,
       "result": "FAIL"
+    },
+    {
+      "label": "damping-10-kd-0.1",
+      "massMultiplier": 1,
+      "surfaceMultiplier": 3.1622776601683795,
+      "innerMultiplier": 3.1622776601683795,
+      "dampingMultiplier": 10,
+      "dtMultiplier": 0.1,
+      "pinchKpMultiplier": 0.1,
+      "pinchKdMultiplier": 0.1,
+      "femaleResponseRatio": 1.8739108580,
+      "maleResponseRatio": 2.0908076765,
+      "femaleGenuineFolds": 0,
+      "maleGenuineFolds": 1,
+      "maleFirstFoldFace": 100,
+      "result": "FAIL",
+      "interpretation": "Best observed short-probe fold count, but still a genuine male fold and substantial overshoot"
     }
   ],
   "conclusion": "No screened continuation candidate satisfies both the response gate and zero male genuine folds. Candidates that reduce folds below the original baseline remain invalid; no candidate was promoted to the waterfall checkpoint.",
