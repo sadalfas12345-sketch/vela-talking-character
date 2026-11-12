@@ -37,6 +37,7 @@ const offlineLowSeconds = Number(process.env.VELA_CALIBRATION_OFFLINE_LOW_SECOND
 const offlineFullSeconds = Number(process.env.VELA_CALIBRATION_OFFLINE_FULL_SECONDS || 0.05);
 const offlineFinalSeconds = Number(process.env.VELA_CALIBRATION_OFFLINE_FINAL_SECONDS || 0.20);
 const offlineModelWallMs = Number(process.env.VELA_CALIBRATION_OFFLINE_MODEL_WALL_MS || 180000);
+const empiricalStabilityMultiplier = Number(process.env.VELA_CALIBRATION_STABILITY_MULTIPLIER || 1);
 const stressHoldSeconds = Number(process.env.VELA_CALIBRATION_STRESS_HOLD_SECONDS || frameDt);
 const stressReleaseSeconds = Number(process.env.VELA_CALIBRATION_STRESS_RELEASE_SECONDS || 0.05);
 const seed = Number(process.env.VELA_CALIBRATION_SEED || 20261111);
@@ -53,6 +54,8 @@ const resumePath = resumeArgIndex >= 0 && process.argv[resumeArgIndex + 1] && !p
   ? process.argv[resumeArgIndex + 1] : process.env.VELA_CALIBRATION_RESUME || null;
 const resultCache = new Map();
 const preparedPhysicsCache = new Map();
+const evidenceSuffix = (process.env.VELA_CALIBRATION_EVIDENCE_SUFFIX || '').trim().replace(/[^A-Za-z0-9_-]+/g, '-').replace(/^-+|-+$/g, '');
+function evidencePath(stem) { return path.join(outputDir, `${stem}${evidenceSuffix ? `-${evidenceSuffix}` : ''}.json`); }
 
 function rng(seedValue) {
   let state = seedValue >>> 0;
@@ -333,11 +336,56 @@ function preparePhysics(mesh, candidate) {
   for (let i = 0; i < supportA.length; i++) localK[supportA[i]] += supportK[i];
   let maxLocalK = 0; for (const value of localK) maxLocalK = Math.max(maxLocalK, value);
   const requestedDt = baseDt * candidate.dtMultiplier;
-  const stableDt = Math.min(requestedDt, 0.12 * Math.sqrt(minMass / Math.max(maxLocalK, 1e-18)));
   const damping = 0.08 * candidate.dampingMultiplier * 2 * Math.sqrt(Math.max(surfaceK * medianMass, 1e-18));
-  const prepared = { ...base, masses, surfaceK, supportA: Uint32Array.from(supportA), supportB: Uint32Array.from(supportB), supportRest: Float64Array.from(supportRest), supportK: Float64Array.from(supportK), stableDt, stabilityEstimateDt: stableDt, requestedDt, timestepLimitedByEstimate: requestedDt > stableDt, damping, totalMass, minMass, medianMass, maxLocalK, explicitSubsteps: Math.max(1, Math.ceil(frameDt / Math.max(stableDt, 1e-18))) };
+  const springStabilityEstimateDt = 0.12 * Math.sqrt(minMass / Math.max(maxLocalK, 1e-18));
+  const dampingRate = damping / Math.max(minMass, 1e-18);
+  const dampingStabilityEstimateDt = 0.12 / Math.max(dampingRate, 1e-18);
+  const stabilityEstimateDt = Math.min(springStabilityEstimateDt, dampingStabilityEstimateDt);
+  const stableDt = Math.min(requestedDt, stabilityEstimateDt * empiricalStabilityMultiplier);
+  const prepared = { ...base, masses, surfaceK, supportA: Uint32Array.from(supportA), supportB: Uint32Array.from(supportB), supportRest: Float64Array.from(supportRest), supportK: Float64Array.from(supportK), stableDt, stabilityEstimateDt, springStabilityEstimateDt, dampingStabilityEstimateDt, dampingRate, empiricalStabilityMultiplier, requestedDt, timestepLimitedByEstimate: requestedDt > stableDt, damping, totalMass, minMass, medianMass, maxLocalK, explicitSubsteps: Math.max(1, Math.ceil(frameDt / Math.max(stableDt, 1e-18))) };
   preparedPhysicsCache.set(cacheKey, prepared);
   return prepared;
+}
+
+function quantile(values, fraction) {
+  const sorted = Array.from(values).sort((a, b) => a - b);
+  if (!sorted.length) return 0;
+  return sorted[Math.min(sorted.length - 1, Math.max(0, Math.floor(fraction * sorted.length)))];
+}
+
+function domainAudit(mesh, candidate) {
+  const prepared = preparePhysics(mesh, candidate), base = mesh.system;
+  const faceAreas = base.faceAreas;
+  const edgeRest = base.edgeRest;
+  const areaRatios = [];
+  for (let i = 0; i < faceAreas.length; i++) areaRatios.push(faceAreas[i]);
+  const massValues = Array.from(prepared.masses);
+  const edgeValues = Array.from(edgeRest);
+  let zeroAreaFaces = 0;
+  for (const area of faceAreas) if (area <= 1e-15) zeroAreaFaces++;
+  const minValue = values => values.reduce((minimum, value) => Math.min(minimum, value), Infinity);
+  const maxValue = values => values.reduce((maximum, value) => Math.max(maximum, value), -Infinity);
+  return {
+    domain: mesh.name,
+    domainKind: mesh.domainKind,
+    sourceIslandId: mesh.sourceIslandId,
+    vertices: prepared.vertexCount,
+    triangles: base.faces.length,
+    surfaceSprings: prepared.edgeA.length,
+    supportSprings: prepared.supportA.length,
+    zeroAreaFaces,
+    faceArea: { min: minValue(areaRatios), p01: quantile(areaRatios, 0.01), median: quantile(areaRatios, 0.5), p99: quantile(areaRatios, 0.99), max: maxValue(areaRatios) },
+    edgeRestLength: { min: minValue(edgeValues), p01: quantile(edgeValues, 0.01), median: quantile(edgeValues, 0.5), p99: quantile(edgeValues, 0.99), max: maxValue(edgeValues) },
+    massKg: { min: minValue(massValues), p01: quantile(massValues, 0.01), median: quantile(massValues, 0.5), p99: quantile(massValues, 0.99), max: maxValue(massValues), total: prepared.totalMass },
+    localStiffness: { max: prepared.maxLocalK },
+    damping: { coefficientNsPerM: prepared.damping, ratePerSecondAtMinMass: prepared.dampingRate, springStabilityEstimateDt: prepared.springStabilityEstimateDt, dampingStabilityEstimateDt: prepared.dampingStabilityEstimateDt },
+    requestedDt: prepared.requestedDt,
+    stabilityEstimateDt: prepared.stabilityEstimateDt,
+    empiricalStabilityMultiplier: prepared.empiricalStabilityMultiplier,
+    explicitSubstepsPerFrame: prepared.explicitSubsteps,
+    timestepLimitedByEstimate: prepared.timestepLimitedByEstimate,
+    parameterInterpretation: { massMultiplier: candidate.massMultiplier, surfaceMultiplier: candidate.surfaceMultiplier, innerMultiplier: candidate.innerMultiplier, effectiveMassNotAnatomicalDensity: true },
+  };
 }
 
 function simulate(model, candidate, options = {}) {
@@ -458,10 +506,11 @@ function forceResponse(mesh, candidate, wallClockLimitMs = offlineModelWallMs) {
   return { displacement: result.geometry.maxDisplacement, targetMeters: mesh.faceScale * 0.001 * sourceMetersPerUnit, finite: result.geometry.finite, flips: result.geometry.orientationFlips, strain: result.geometry.maxEdgeStrain, forceN: result.pinch?.peakForce || 0 };
 }
 
-function convergenceTest(mesh, candidate, requestedSeconds = 0.03333333333333333, wallClockLimitMs = offlineModelWallMs) {
+function convergenceTest(mesh, candidate, requestedSeconds = 0.03333333333333333, wallClockLimitMs = offlineModelWallMs, startingMultiplier = null) {
   const gravity = directions(mesh).down.map(v => v * 9.81);
   const seconds = requestedSeconds;
-  const stableDt = preparePhysics(mesh, candidate).stableDt;
+  const prepared = preparePhysics(mesh, candidate);
+  const stableDt = prepared.stabilityEstimateDt * (startingMultiplier ?? empiricalStabilityMultiplier);
   const solves = [stableDt, stableDt * 0.5, stableDt * 0.25].map(timeStepOverride => simulate(mesh, candidate, { gravity, seconds, timeStepOverride, wallClockLimitMs }));
   const compare = (a, b) => { let sumP = 0, sumV = 0, maxP = 0, maxV = 0; for (let i = 0; i < a.positions.length; i += 3) { const dp = Math.hypot(a.positions[i] - b.positions[i], a.positions[i + 1] - b.positions[i + 1], a.positions[i + 2] - b.positions[i + 2]); const dv = Math.hypot(a.velocities[i] - b.velocities[i], a.velocities[i + 1] - b.velocities[i + 1], a.velocities[i + 2] - b.velocities[i + 2]); sumP += dp * dp; sumV += dv * dv; maxP = Math.max(maxP, dp); maxV = Math.max(maxV, dv); } return { rmsPositionSource: Math.sqrt(sumP / (a.positions.length / 3)), maxPositionSource: maxP, rmsVelocitySource: Math.sqrt(sumV / (a.positions.length / 3)), maxVelocitySource: maxV }; };
   const hVsH2 = compare(solves[0], solves[1]), h2VsH4 = compare(solves[1], solves[2]);
@@ -470,9 +519,8 @@ function convergenceTest(mesh, candidate, requestedSeconds = 0.03333333333333333
   return { durationSeconds: seconds, steps: solves.map(result => result.steps), timeSteps: [stableDt, stableDt * 0.5, stableDt * 0.25], hVsH2, h2VsH4, positionOrder, velocityOrder, complete: solves.every(result => result.complete), converged: solves.every(result => result.complete) && h2VsH4.rmsPositionSource / Math.max(mesh.faceScale, 1e-12) < convergenceTolerance && h2VsH4.rmsVelocitySource * frameDt / Math.max(mesh.faceScale, 1e-12) < convergenceTolerance, samples: solves.map(result => ({ orientationFlips: result.geometry.orientationFlips, collapsedTriangles: result.geometry.collapsedTriangles, finalVelocity: result.geometry.finalVelocity, maxNetForceN: result.geometry.maxNetForceN, complete: result.complete, wallClockExceeded: result.wallClockExceeded })) };
 }
 
-function timestepRangeTest(mesh, candidate, seconds, wallClockLimitMs = offlineModelWallMs) {
+function timestepRangeTest(mesh, candidate, seconds, wallClockLimitMs = offlineModelWallMs, factors = [4, 2, 1, 0.5, 0.25]) {
   const h = preparePhysics(mesh, candidate).stableDt;
-  const factors = [4, 2, 1, 0.5, 0.25];
   const samples = factors.map(factor => {
     const result = simulate(mesh, candidate, { gravity: directions(mesh).down.map(v => v * 9.81), seconds: Math.min(seconds, 0.02), timeStepOverride: h * factor, wallClockLimitMs });
     return { factor, timeStep: h * factor, steps: result.steps, complete: result.complete, wallClockExceeded: result.wallClockExceeded, finite: result.geometry.finite, orientationFlips: result.geometry.orientationFlips, collapsedTriangles: result.geometry.collapsedTriangles, maxStrain: result.geometry.maxEdgeStrain, finalVelocity: result.geometry.finalVelocity, forceResidualRatio: result.geometry.forceResidualRatio };
@@ -554,11 +602,15 @@ function evaluateCandidate(meshes, candidate, fidelity) {
     const estimatedStages = estimatedSteps * directionCount * 4 * (prepared.edgeA.length + prepared.supportA.length);
     const gravity = gravityTest(evalMesh, candidate, seconds, fidelity, offlineModelWallMs);
     const response = forceResponse(evalMesh, candidate, offlineModelWallMs);
-    const convergence = fidelity === 'full' || fidelity === 'micro' ? convergenceTest(evalMesh, candidate, seconds, offlineModelWallMs) : null;
+    const convergence = fidelity === 'full' || fidelity === 'micro' ? convergenceTest(evalMesh, candidate, seconds, offlineModelWallMs, empiricalStabilityMultiplier) : null;
     const timestepRange = fidelity === 'full' || fidelity === 'micro' ? timestepRangeTest(evalMesh, candidate, seconds, offlineModelWallMs) : null;
-    const incomplete = !gravity.allComplete || Boolean(convergence && !convergence.complete) || Boolean(timestepRange && timestepRange.samples.some(sample => !sample.complete));
+    const timestepMainSamples = timestepRange?.samples?.filter(sample => sample.factor <= 1) || [];
+    const timestepMainComplete = timestepMainSamples.every(sample => sample.complete);
+    const incomplete = !gravity.allComplete || Boolean(convergence && !convergence.complete) || Boolean(timestepRange && !timestepMainComplete);
+    const wallClockExceeded = Object.values(gravity.directions || {}).some(direction => direction.wallClockExceeded) || Boolean(convergence?.samples?.some(sample => sample.wallClockExceeded)) || Boolean(timestepRange?.samples?.some(sample => sample.wallClockExceeded));
+    const incompleteReason = incomplete ? (wallClockExceeded ? 'wall-clock-limit' : 'solver-incomplete') : null;
     const invalid = incomplete || !gravity.finite || gravity.worstFlips > 0 || gravity.worstCollapses > 0 || gravity.worstStrain > maxGravityStrain || !gravity.allSettled || response.flips > 0 || !response.finite;
-    perModel[mesh.name] = { gravity, response, convergence, timestepRange, incomplete: incomplete ? 'wall-clock-limit' : null, evaluatedIsland: evalMesh.name, evaluatedVertices: prepared.vertexCount, triangles: prepared.faces.length, surfaceSprings: prepared.edgeA.length, supportSprings: prepared.supportA.length, estimatedStages, runtimeMs: performance.now() - started, stableDt: prepared.stableDt, requestedDt: prepared.requestedDt, timestepLimitedByEstimate: prepared.timestepLimitedByEstimate, substepsPerFrame: prepared.explicitSubsteps, totalMassKg: prepared.totalMass };
+    perModel[mesh.name] = { gravity, response, convergence, timestepRange, timestepMainComplete, incomplete: incompleteReason, evaluatedIsland: evalMesh.name, evaluatedVertices: prepared.vertexCount, triangles: prepared.faces.length, surfaceSprings: prepared.edgeA.length, supportSprings: prepared.supportA.length, estimatedStages, runtimeMs: performance.now() - started, stableDt: prepared.stableDt, stabilityEstimateDt: prepared.stabilityEstimateDt, springStabilityEstimateDt: prepared.springStabilityEstimateDt, dampingStabilityEstimateDt: prepared.dampingStabilityEstimateDt, dampingRate: prepared.dampingRate, empiricalStabilityMultiplier: prepared.empiricalStabilityMultiplier, requestedDt: prepared.requestedDt, timestepLimitedByEstimate: prepared.timestepLimitedByEstimate, substepsPerFrame: prepared.explicitSubsteps, totalMassKg: prepared.totalMass };
     if (invalid && fidelity === 'screen') break;
   }
   const values = Object.values(perModel); const valid = values.length === meshes.length && values.every(v => !v.rejected && !v.deferred && !v.incomplete && v.gravity.finite && v.gravity.worstFlips === 0 && v.gravity.worstCollapses === 0 && v.gravity.worstStrain <= maxGravityStrain && v.gravity.allSettled && v.response.flips === 0 && v.response.displacement > v.response.targetMeters * 0.01 && (v.convergence ? v.convergence.converged : true));
@@ -715,6 +767,15 @@ function compactResult(result) {
   const out = { candidate: result.candidate, fidelity: result.fidelity, valid: result.valid, score: Number.isFinite(result.score) ? result.score : 1e300, generation: result.generation, phase: result.phase, source: result.source, runtimeMs: result.runtimeMs, diagnosis: result.diagnosis ? { ...result.diagnosis, failureDistance: Number.isFinite(result.diagnosis.failureDistance) ? result.diagnosis.failureDistance : 1e6 } : result.diagnosis, models: {} };
   for (const [name, value] of Object.entries(result.models || {})) out.models[name] = value.rejected || value.deferred ? { rejected: value.rejected, deferred: value.deferred, evaluatedIsland: value.evaluatedIsland, evaluatedVertices: value.evaluatedVertices, triangles: value.triangles, surfaceSprings: value.surfaceSprings, supportSprings: value.supportSprings, estimatedStages: value.estimatedStages, maxEstimatedStages: value.maxEstimatedStages, maxOfflineStages: value.maxOfflineStages, stableDt: value.stableDt, substepsPerFrame: value.substepsPerFrame, totalMassKg: value.totalMassKg } : { gravity: { worstFlips: value.gravity.worstFlips, worstCollapses: value.gravity.worstCollapses, worstStrain: value.gravity.worstStrain, maxDisplacement: value.gravity.maxDisplacement, maxVelocity: value.gravity.maxVelocity, maxFinalVelocity: value.gravity.maxFinalVelocity, maxForceResidualRatio: value.gravity.maxForceResidualRatio, allSettled: value.gravity.allSettled, finite: value.gravity.finite }, response: value.response, convergence: value.convergence, timestepRange: value.timestepRange, evaluatedIsland: value.evaluatedIsland, evaluatedVertices: value.evaluatedVertices, triangles: value.triangles, surfaceSprings: value.surfaceSprings, supportSprings: value.supportSprings, estimatedStages: value.estimatedStages, stableDt: value.stableDt, substepsPerFrame: value.substepsPerFrame, totalMassKg: value.totalMassKg, runtimeMs: value.runtimeMs };
   for (const [name, value] of Object.entries(result.models || {})) if (value.incomplete) out.models[name].incomplete = value.incomplete;
+  for (const [name, value] of Object.entries(result.models || {})) if (!value.rejected && !value.deferred) {
+    out.models[name].gravity.allComplete = value.gravity.allComplete;
+    out.models[name].timestepMainComplete = value.timestepMainComplete;
+    out.models[name].stabilityEstimateDt = value.stabilityEstimateDt;
+    out.models[name].springStabilityEstimateDt = value.springStabilityEstimateDt;
+    out.models[name].dampingStabilityEstimateDt = value.dampingStabilityEstimateDt;
+    out.models[name].dampingRate = value.dampingRate;
+    out.models[name].empiricalStabilityMultiplier = value.empiricalStabilityMultiplier;
+  }
   return out;
 }
 
@@ -865,6 +926,82 @@ async function main() {
   const started = performance.now(), loaded = {};
   for (const name of requestedModels) { console.log(JSON.stringify({ phase: 'load', model: name })); loaded[name] = await loadModel(name); console.log(JSON.stringify({ phase: 'loaded', model: name, islandVertices: loaded[name].system.vertexCount, islandTriangles: loaded[name].system.faces.length, screenIslandVertices: loaded[name].screenMesh?.system.vertexCount, screenDomainKind: loaded[name].screenMesh?.domainKind, screenSourceIslandId: loaded[name].screenMesh?.sourceIslandId, microIslandVertices: loaded[name].microMesh?.system.vertexCount, microDomainKind: loaded[name].microMesh?.domainKind, microSourceIslandId: loaded[name].microMesh?.sourceIslandId, islandCount: loaded[name].islandCount })); }
   const meshes = Object.values(loaded);
+  if (argv.has('--domain-audit')) {
+    const candidateCheckpoint = resumePath ? await loadWaterfallCheckpoint(resumePath) : null;
+    const base = candidateCheckpoint?.current || createCandidate([0, 0, 0, 2, -1, -1, -2]);
+    const updates = {};
+    for (const [index, variable] of [[0, 'VELA_CALIBRATION_MASS_LOG'], [1, 'VELA_CALIBRATION_SURFACE_LOG'], [2, 'VELA_CALIBRATION_INNER_LOG'], [3, 'VELA_CALIBRATION_DAMPING_LOG'], [4, 'VELA_CALIBRATION_DT_LOG'], [5, 'VELA_CALIBRATION_PINCH_KP_LOG'], [6, 'VELA_CALIBRATION_PINCH_KD_LOG']]) if (process.env[variable] !== undefined) updates[index] = Number(process.env[variable]);
+    const candidate = withParameterBlock(base, updates);
+    const domains = {};
+    for (const mesh of meshes) {
+      domains[mesh.name] = {
+        full: domainAudit(mesh, candidate),
+        screen: mesh.screenMesh ? domainAudit(mesh.screenMesh, candidate) : null,
+        micro: mesh.microMesh ? domainAudit(mesh.microMesh, candidate) : null,
+      };
+    }
+    const audit = { schema: 'vela-rk4-domain-audit-v1', generatedAt: new Date().toISOString(), sourceMetersPerUnit, frameDt, candidate, domains };
+    const auditPath = evidencePath('rk4-domain-audit');
+    await fs.mkdir(outputDir, { recursive: true });
+    await fs.writeFile(auditPath, JSON.stringify(audit, null, 2));
+    console.log(JSON.stringify({ phase: 'domain-audit-complete', path: path.relative(root, auditPath), domains }));
+    return;
+  }
+  if (argv.has('--timestep-audit')) {
+    const candidateCheckpoint = resumePath ? await loadWaterfallCheckpoint(resumePath) : null;
+    const base = candidateCheckpoint?.current || createCandidate([0, 0, 0, 2, -1, -1, -2]);
+    const updates = {};
+    for (const [index, variable] of [[0, 'VELA_CALIBRATION_MASS_LOG'], [1, 'VELA_CALIBRATION_SURFACE_LOG'], [2, 'VELA_CALIBRATION_INNER_LOG'], [3, 'VELA_CALIBRATION_DAMPING_LOG'], [4, 'VELA_CALIBRATION_DT_LOG'], [5, 'VELA_CALIBRATION_PINCH_KP_LOG'], [6, 'VELA_CALIBRATION_PINCH_KD_LOG']]) if (process.env[variable] !== undefined) updates[index] = Number(process.env[variable]);
+    const candidate = withParameterBlock(base, updates);
+    const fidelity = process.env.VELA_CALIBRATION_TIMESTEP_FIDELITY || 'micro';
+    const seconds = Number(process.env.VELA_CALIBRATION_TIMESTEP_SECONDS || (fidelity === 'full' ? 0.002 : 0.02));
+    const factors = (process.env.VELA_CALIBRATION_TIMESTEP_FACTORS || '32,16,8,4,2,1,0.5,0.25').split(',').map(Number).filter(value => Number.isFinite(value) && value > 0);
+    const domains = Object.fromEntries(meshes.map(mesh => {
+      const evalMesh = fidelity === 'full' ? mesh : fidelity === 'screen' ? mesh.screenMesh || mesh : mesh.microMesh || mesh.screenMesh || mesh;
+      return [mesh.name, { domain: evalMesh.name, fidelity, vertices: evalMesh.system.vertexCount, triangles: evalMesh.system.faces.length, timestep: timestepRangeTest(evalMesh, candidate, seconds, offlineModelWallMs, factors) }];
+    }));
+    const result = { schema: 'vela-rk4-timestep-audit-v1', generatedAt: new Date().toISOString(), candidate, fidelity, seconds, factors, domains, sourceMetersPerUnit };
+    const resultPath = evidencePath('rk4-timestep-audit');
+    await fs.mkdir(outputDir, { recursive: true }); await fs.writeFile(resultPath, JSON.stringify(result, null, 2));
+    console.log(JSON.stringify({ phase: 'timestep-audit-complete', path: path.relative(root, resultPath), fidelity, seconds, domains }));
+    return;
+  }
+  if (argv.has('--convergence-audit')) {
+    const candidateCheckpoint = resumePath ? await loadWaterfallCheckpoint(resumePath) : null;
+    const base = candidateCheckpoint?.current || createCandidate([0, 0, 0, 2, -1, -1, -2]);
+    const updates = {};
+    for (const [index, variable] of [[0, 'VELA_CALIBRATION_MASS_LOG'], [1, 'VELA_CALIBRATION_SURFACE_LOG'], [2, 'VELA_CALIBRATION_INNER_LOG'], [3, 'VELA_CALIBRATION_DAMPING_LOG'], [4, 'VELA_CALIBRATION_DT_LOG'], [5, 'VELA_CALIBRATION_PINCH_KP_LOG'], [6, 'VELA_CALIBRATION_PINCH_KD_LOG']]) if (process.env[variable] !== undefined) updates[index] = Number(process.env[variable]);
+    const candidate = withParameterBlock(base, updates);
+    const fidelity = process.env.VELA_CALIBRATION_TIMESTEP_FIDELITY || 'full';
+    const seconds = Number(process.env.VELA_CALIBRATION_TIMESTEP_SECONDS || (fidelity === 'full' ? 0.002 : 0.02));
+    const startingMultiplier = Number(process.env.VELA_CALIBRATION_CONVERGENCE_MULTIPLIER || 32);
+    const domains = Object.fromEntries(meshes.map(mesh => {
+      const evalMesh = fidelity === 'full' ? mesh : fidelity === 'screen' ? mesh.screenMesh || mesh : mesh.microMesh || mesh.screenMesh || mesh;
+      return [mesh.name, { domain: evalMesh.name, fidelity, vertices: evalMesh.system.vertexCount, triangles: evalMesh.system.faces.length, convergence: convergenceTest(evalMesh, candidate, seconds, offlineModelWallMs, startingMultiplier) }];
+    }));
+    const result = { schema: 'vela-rk4-convergence-audit-v1', generatedAt: new Date().toISOString(), candidate, fidelity, seconds, startingMultiplier, domains, sourceMetersPerUnit };
+    const resultPath = evidencePath('rk4-convergence-audit');
+    await fs.mkdir(outputDir, { recursive: true }); await fs.writeFile(resultPath, JSON.stringify(result, null, 2));
+    console.log(JSON.stringify({ phase: 'convergence-audit-complete', path: path.relative(root, resultPath), fidelity, seconds, startingMultiplier, domains }));
+    return;
+  }
+  if (argv.has('--full-domain-evaluation')) {
+    const candidateCheckpoint = resumePath ? await loadWaterfallCheckpoint(resumePath) : null;
+    const base = candidateCheckpoint?.current || createCandidate([0, 0, 0, 2, -1, -1, -2]);
+    const updates = {};
+    for (const [index, variable] of [[0, 'VELA_CALIBRATION_MASS_LOG'], [1, 'VELA_CALIBRATION_SURFACE_LOG'], [2, 'VELA_CALIBRATION_INNER_LOG'], [3, 'VELA_CALIBRATION_DAMPING_LOG'], [4, 'VELA_CALIBRATION_DT_LOG'], [5, 'VELA_CALIBRATION_PINCH_KP_LOG'], [6, 'VELA_CALIBRATION_PINCH_KD_LOG']]) if (process.env[variable] !== undefined) updates[index] = Number(process.env[variable]);
+    const candidate = withParameterBlock(base, updates);
+    const evaluations = {};
+    for (const mesh of meshes) {
+      const result = evaluateCandidate([mesh], candidate, 'full');
+      evaluations[mesh.name] = compactResult(result);
+    }
+    const result = { schema: 'vela-rk4-full-domain-evaluation-v1', generatedAt: new Date().toISOString(), candidate, empiricalStabilityMultiplier, offlineFullSeconds, offlineModelWallMs, evaluations, overall: Object.values(evaluations).every(value => value.valid) ? 'SUCCESS' : 'FAILED' };
+    const resultPath = evidencePath('rk4-full-domain-evaluation');
+    await fs.mkdir(outputDir, { recursive: true }); await fs.writeFile(resultPath, JSON.stringify(result, null, 2));
+    console.log(JSON.stringify({ phase: 'full-domain-evaluation-complete', path: path.relative(root, resultPath), candidate, empiricalStabilityMultiplier, evaluations, overall: result.overall }));
+    return;
+  }
   if (argv.has('--waterfall-candidate')) {
     const candidateCheckpoint = resumePath ? await loadWaterfallCheckpoint(resumePath) : null;
     const base = candidateCheckpoint?.current || createCandidate([0, 0, 0, 0, -1, -1, -1]);
@@ -1004,7 +1141,7 @@ async function main() {
   const resumedWaterfall = resumePath ? await loadWaterfallCheckpoint(resumePath) : null;
   if (resumedWaterfall) console.log(JSON.stringify({ phase: 'waterfall-resume', path: resumePath || waterfallCheckpointPath, stage: resumedWaterfall.stage, completedStages: resumedWaterfall.checkpoints.filter(checkpoint => checkpoint.passed).map(checkpoint => checkpoint.stage) }));
   const waterfall = await runWaterfall(meshes, resource, resumedWaterfall);
-  const report = { schema: 'vela-realtime-rk4-calibration-waterfall-v1', generatedAt: new Date().toISOString(), seed, requestedModels, architecture: { sourceMetersPerUnit, frameDt, baseDt, anchorDepthFactor, neighborAnchorCount, originalTopology: true, crossIslandSprings: 0, integrator: 'RK4', massFromTriangleArea: true, fixedInnerAnchors: true }, massPolicy: { referenceMassMultiplier: 1, effectiveMassSearchBounds: defaultLogBounds[0], anatomicalInterpretation: 'Area-derived relative masses are preserved. Multipliers above 1 are effective numerical mass calibration, not anatomical density claims.', surfaceModulusBaselinePa: 30000, innerModulusBaselinePa: 10000, surfaceMultiplierBounds: defaultLogBounds[1], innerMultiplierBounds: defaultLogBounds[2] }, offlineCalibration: { realTimeGatesDisabled: true, estimatedStageCountsAreInformational: true, offlineStageLimit: maxOfflineStages, screenStageLimit: maxOfflineScreenStages, wallClockProtectionOnly: true, perModelWallClockLimitMs: offlineModelWallMs, maxSubstepsRetainedForPerformanceReport: maxSubsteps, maxEstimatedStagesRetainedForPerformanceReport: maxEstimatedStages }, stageResource: resource, waterfall, reproduction: { command: 'node scripts/calibrate_realtime_rk4.mjs', checkpoint: waterfallCheckpointPath, resumeCommand: `node scripts/calibrate_realtime_rk4.mjs --resume "${waterfallCheckpointPath}"`, physicalProgressionCommand: `VELA_CALIBRATION_OFFLINE_MODEL_WALL_MS=${offlineModelWallMs} node scripts/calibrate_realtime_rk4.mjs --resume "${waterfallCheckpointPath}" --physical-progression` }, elapsedMs: performance.now() - started, overall: waterfall.overall };
+  const report = { schema: 'vela-realtime-rk4-calibration-waterfall-v1', generatedAt: new Date().toISOString(), seed, requestedModels, architecture: { sourceMetersPerUnit, frameDt, baseDt, anchorDepthFactor, neighborAnchorCount, originalTopology: true, crossIslandSprings: 0, integrator: 'RK4', massFromTriangleArea: true, fixedInnerAnchors: true }, massPolicy: { referenceMassMultiplier: 1, effectiveMassSearchBounds: defaultLogBounds[0], anatomicalInterpretation: 'Area-derived relative masses are preserved. Multipliers above 1 are effective numerical mass calibration, not anatomical density claims.', surfaceModulusBaselinePa: 30000, innerModulusBaselinePa: 10000, surfaceMultiplierBounds: defaultLogBounds[1], innerMultiplierBounds: defaultLogBounds[2] }, timestepPolicy: { conservativeEstimateFactor: 0.12, includesSpringAndDampingRates: true, empiricalStabilityMultiplier, empiricalMultiplierIsOnlyEnabledAfterConvergenceAudit: true }, offlineCalibration: { realTimeGatesDisabled: true, estimatedStageCountsAreInformational: true, offlineStageLimit: maxOfflineStages, screenStageLimit: maxOfflineScreenStages, wallClockProtectionOnly: true, perModelWallClockLimitMs: offlineModelWallMs, maxSubstepsRetainedForPerformanceReport: maxSubsteps, maxEstimatedStagesRetainedForPerformanceReport: maxEstimatedStages }, stageResource: resource, waterfall, reproduction: { command: 'node scripts/calibrate_realtime_rk4.mjs', checkpoint: waterfallCheckpointPath, resumeCommand: `node scripts/calibrate_realtime_rk4.mjs --resume "${waterfallCheckpointPath}"`, physicalProgressionCommand: `VELA_CALIBRATION_OFFLINE_MODEL_WALL_MS=${offlineModelWallMs} node scripts/calibrate_realtime_rk4.mjs --resume "${waterfallCheckpointPath}" --physical-progression` }, elapsedMs: performance.now() - started, overall: waterfall.overall };
   report.offlineCalibration.gravitySeconds = offlineGravitySeconds;
   report.offlineCalibration.stressHoldSeconds = stressHoldSeconds;
   report.offlineCalibration.stressReleaseSeconds = stressReleaseSeconds;

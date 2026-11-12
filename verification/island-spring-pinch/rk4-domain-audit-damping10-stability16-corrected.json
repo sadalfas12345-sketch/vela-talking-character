@@ -1,0 +1,342 @@
+{
+  "schema": "vela-rk4-domain-audit-v1",
+  "generatedAt": "2026-11-12T12:13:44.567Z",
+  "sourceMetersPerUnit": 0.3,
+  "frameDt": 0.016666666666666666,
+  "candidate": {
+    "massMultiplier": 1,
+    "surfaceMultiplier": 1,
+    "innerMultiplier": 1,
+    "dampingMultiplier": 10,
+    "dtMultiplier": 0.1,
+    "pinchKpMultiplier": 1,
+    "pinchKdMultiplier": 1,
+    "logParameters": [
+      0,
+      0,
+      0,
+      1,
+      -1,
+      0,
+      0
+    ]
+  },
+  "domains": {
+    "female": {
+      "full": {
+        "domain": "female",
+        "domainKind": "original-island",
+        "sourceIslandId": 16,
+        "vertices": 5036,
+        "triangles": 9708,
+        "surfaceSprings": 14743,
+        "supportSprings": 20108,
+        "zeroAreaFaces": 0,
+        "faceArea": {
+          "min": 1.1122301450288737e-8,
+          "p01": 4.051171971472387e-8,
+          "median": 2.119630486194675e-7,
+          "p99": 8.056711483203957e-7,
+          "max": 0.000001598595115837796
+        },
+        "edgeRestLength": {
+          "min": 0.00010268365218029273,
+          "p01": 0.00028208860820775906,
+          "median": 0.0007456809207839641,
+          "p99": 0.0018479872152726002,
+          "max": 0.0029046524155470045
+        },
+        "massKg": {
+          "min": 3.3393911063458856e-9,
+          "p01": 1.1019067989779078e-8,
+          "median": 6.112561976337039e-8,
+          "p99": 2.2520560040881364e-7,
+          "max": 3.378972344971908e-7,
+          "total": 0.0003721927038507954
+        },
+        "localStiffness": {
+          "max": 495.1034990078772
+        },
+        "damping": {
+          "coefficientNsPerM": 0.00265361477926625,
+          "ratePerSecondAtMinMass": 794640.308595047,
+          "springStabilityEstimateDt": 3.1164982786003106e-7,
+          "dampingStabilityEstimateDt": 1.5101172027399964e-7
+        },
+        "requestedDt": 0.0001666666666666667,
+        "stabilityEstimateDt": 1.5101172027399964e-7,
+        "empiricalStabilityMultiplier": 16,
+        "explicitSubstepsPerFrame": 6898,
+        "timestepLimitedByEstimate": true,
+        "parameterInterpretation": {
+          "massMultiplier": 1,
+          "surfaceMultiplier": 1,
+          "innerMultiplier": 1,
+          "effectiveMassNotAnatomicalDensity": true
+        }
+      },
+      "screen": {
+        "domain": "female-screen-facial-patch",
+        "domainKind": "connected-subpatch",
+        "sourceIslandId": 16,
+        "vertices": 1000,
+        "triangles": 1855,
+        "surfaceSprings": 2854,
+        "supportSprings": 3988,
+        "zeroAreaFaces": 0,
+        "faceArea": {
+          "min": 1.4851739845000405e-8,
+          "p01": 4.8720399036925277e-8,
+          "median": 3.3654437729527946e-7,
+          "p99": 9.030784649302118e-7,
+          "max": 0.0000014161506086816458
+        },
+        "edgeRestLength": {
+          "min": 0.00011874978538052067,
+          "p01": 0.00028032514847429915,
+          "median": 0.0009168421658761662,
+          "p99": 0.0020253146385105746,
+          "max": 0.0024384426091312254
+        },
+        "massKg": {
+          "min": 4.5279160785323336e-9,
+          "p01": 1.4358725109032109e-8,
+          "median": 8.754665818804716e-8,
+          "p99": 2.407449452386189e-7,
+          "max": 3.1445885934112406e-7,
+          "total": 0.00009718449087849978
+        },
+        "localStiffness": {
+          "max": 405.33889320540266
+        },
+        "damping": {
+          "coefficientNsPerM": 0.0031757479470611383,
+          "ratePerSecondAtMinMass": 701370.7612908137,
+          "springStabilityEstimateDt": 4.0107102864609603e-7,
+          "dampingStabilityEstimateDt": 1.710935308725304e-7
+        },
+        "requestedDt": 0.0001666666666666667,
+        "stabilityEstimateDt": 1.710935308725304e-7,
+        "empiricalStabilityMultiplier": 16,
+        "explicitSubstepsPerFrame": 6089,
+        "timestepLimitedByEstimate": true,
+        "parameterInterpretation": {
+          "massMultiplier": 1,
+          "surfaceMultiplier": 1,
+          "innerMultiplier": 1,
+          "effectiveMassNotAnatomicalDensity": true
+        }
+      },
+      "micro": {
+        "domain": "female-micro-facial-patch",
+        "domainKind": "connected-subpatch",
+        "sourceIslandId": 16,
+        "vertices": 128,
+        "triangles": 206,
+        "surfaceSprings": 333,
+        "supportSprings": 504,
+        "zeroAreaFaces": 0,
+        "faceArea": {
+          "min": 1.3094137662553954e-7,
+          "p01": 1.7875080127621607e-7,
+          "median": 4.1892670791598606e-7,
+          "p99": 8.121368105337161e-7,
+          "max": 9.022799428858627e-7
+        },
+        "edgeRestLength": {
+          "min": 0.0005053584395384919,
+          "p01": 0.0005603332984635073,
+          "median": 0.0010234220024115924,
+          "p99": 0.0019492814133021147,
+          "max": 0.0020253146385105746
+        },
+        "massKg": {
+          "min": 2.000447597607798e-8,
+          "p01": 2.3082842077409436e-8,
+          "median": 1.0233546023448581e-7,
+          "p99": 1.8843333456775949e-7,
+          "max": 2.1588008198073225e-7,
+          "total": 0.00001291333869102962
+        },
+        "localStiffness": {
+          "max": 360.26167282664323
+        },
+        "damping": {
+          "coefficientNsPerM": 0.0034335178780680272,
+          "ratePerSecondAtMinMass": 171637.481640306,
+          "springStabilityEstimateDt": 8.942023463362137e-7,
+          "dampingStabilityEstimateDt": 6.991479882668013e-7
+        },
+        "requestedDt": 0.0001666666666666667,
+        "stabilityEstimateDt": 6.991479882668013e-7,
+        "empiricalStabilityMultiplier": 16,
+        "explicitSubstepsPerFrame": 1490,
+        "timestepLimitedByEstimate": true,
+        "parameterInterpretation": {
+          "massMultiplier": 1,
+          "surfaceMultiplier": 1,
+          "innerMultiplier": 1,
+          "effectiveMassNotAnatomicalDensity": true
+        }
+      }
+    },
+    "male": {
+      "full": {
+        "domain": "male",
+        "domainKind": "original-island",
+        "sourceIslandId": 35,
+        "vertices": 41920,
+        "triangles": 82807,
+        "surfaceSprings": 124726,
+        "supportSprings": 167552,
+        "zeroAreaFaces": 0,
+        "faceArea": {
+          "min": 6.036867677717552e-8,
+          "p01": 2.553136588434946e-7,
+          "median": 0.0000012176474067404923,
+          "p99": 0.000005106462080191508,
+          "max": 0.000014107278572006763
+        },
+        "edgeRestLength": {
+          "min": 0.00018623182263405509,
+          "p01": 0.0005864689187318647,
+          "median": 0.0019161698436641283,
+          "p99": 0.0046882069053169355,
+          "max": 0.008766339206396885
+        },
+        "massKg": {
+          "min": 1.4041123950623787e-8,
+          "p01": 7.586962484705447e-8,
+          "median": 3.5966358341393786e-7,
+          "p99": 0.0000014247279389126505,
+          "max": 0.0000030137894874807115,
+          "total": 0.018353014932322997
+        },
+        "localStiffness": {
+          "max": 498.1311775821614
+        },
+        "damping": {
+          "coefficientNsPerM": 0.006436866070479146,
+          "ratePerSecondAtMinMass": 458429.545463359,
+          "springStabilityEstimateDt": 6.37103983168012e-7,
+          "dampingStabilityEstimateDt": 2.617632331675081e-7
+        },
+        "requestedDt": 0.0001666666666666667,
+        "stabilityEstimateDt": 2.617632331675081e-7,
+        "empiricalStabilityMultiplier": 16,
+        "explicitSubstepsPerFrame": 3980,
+        "timestepLimitedByEstimate": true,
+        "parameterInterpretation": {
+          "massMultiplier": 1,
+          "surfaceMultiplier": 1,
+          "innerMultiplier": 1,
+          "effectiveMassNotAnatomicalDensity": true
+        }
+      },
+      "screen": {
+        "domain": "male-screen-facial-patch",
+        "domainKind": "connected-subpatch",
+        "sourceIslandId": 35,
+        "vertices": 1000,
+        "triangles": 1857,
+        "surfaceSprings": 2856,
+        "supportSprings": 3998,
+        "zeroAreaFaces": 0,
+        "faceArea": {
+          "min": 8.467183249651153e-8,
+          "p01": 3.91364224431898e-7,
+          "median": 0.0000010844250809722673,
+          "p99": 0.000003162508851174988,
+          "max": 0.000004951880447150459
+        },
+        "edgeRestLength": {
+          "min": 0.00025706235509346246,
+          "p01": 0.0006068042247956624,
+          "median": 0.0018826008804044745,
+          "p99": 0.0041565792044398475,
+          "max": 0.0060770325160157245
+        },
+        "massKg": {
+          "min": 2.0618797224934363e-8,
+          "p01": 5.1618988929915416e-8,
+          "median": 3.0230651478727744e-7,
+          "p99": 8.655949723843724e-7,
+          "max": 0.0000010588665310865902,
+          "total": 0.0003253349697717426
+        },
+        "localStiffness": {
+          "max": 451.1438939412317
+        },
+        "damping": {
+          "coefficientNsPerM": 0.005901331248412883,
+          "ratePerSecondAtMinMass": 286211.2267769135,
+          "springStabilityEstimateDt": 8.112512294390222e-7,
+          "dampingStabilityEstimateDt": 4.192707649918067e-7
+        },
+        "requestedDt": 0.0001666666666666667,
+        "stabilityEstimateDt": 4.192707649918067e-7,
+        "empiricalStabilityMultiplier": 16,
+        "explicitSubstepsPerFrame": 2485,
+        "timestepLimitedByEstimate": true,
+        "parameterInterpretation": {
+          "massMultiplier": 1,
+          "surfaceMultiplier": 1,
+          "innerMultiplier": 1,
+          "effectiveMassNotAnatomicalDensity": true
+        }
+      },
+      "micro": {
+        "domain": "male-micro-facial-patch",
+        "domainKind": "connected-subpatch",
+        "sourceIslandId": 35,
+        "vertices": 128,
+        "triangles": 210,
+        "surfaceSprings": 337,
+        "supportSprings": 510,
+        "zeroAreaFaces": 0,
+        "faceArea": {
+          "min": 4.1091122590126663e-7,
+          "p01": 4.6599976027772944e-7,
+          "median": 0.0000010851081620728245,
+          "p99": 0.000003376019189285735,
+          "max": 0.000004518205262499733
+        },
+        "edgeRestLength": {
+          "min": 0.0005465733996937958,
+          "p01": 0.0006506275861247185,
+          "median": 0.0021186997594163145,
+          "p99": 0.004628324537510617,
+          "max": 0.005839393626887732
+        },
+        "massKg": {
+          "min": 4.622920428705813e-8,
+          "p01": 4.677936880505323e-8,
+          "median": 2.850097116221003e-7,
+          "p99": 8.208431246235395e-7,
+          "max": 9.301459654567528e-7,
+          "total": 0.00003725934133409261
+        },
+        "localStiffness": {
+          "max": 361.1274496550991
+        },
+        "damping": {
+          "coefficientNsPerM": 0.005730019090619678,
+          "ratePerSecondAtMinMass": 123948.03628977445,
+          "springStabilityEstimateDt": 0.000001357716840319961,
+          "dampingStabilityEstimateDt": 9.681476495477148e-7
+        },
+        "requestedDt": 0.0001666666666666667,
+        "stabilityEstimateDt": 9.681476495477148e-7,
+        "empiricalStabilityMultiplier": 16,
+        "explicitSubstepsPerFrame": 1076,
+        "timestepLimitedByEstimate": true,
+        "parameterInterpretation": {
+          "massMultiplier": 1,
+          "surfaceMultiplier": 1,
+          "innerMultiplier": 1,
+          "effectiveMassNotAnatomicalDensity": true
+        }
+      }
+    }
+  }
+}

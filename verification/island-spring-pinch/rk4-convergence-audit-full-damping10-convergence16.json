@@ -1,0 +1,150 @@
+{
+  "schema": "vela-rk4-convergence-audit-v1",
+  "generatedAt": "2026-11-12T11:52:43.228Z",
+  "candidate": {
+    "massMultiplier": 1,
+    "surfaceMultiplier": 1,
+    "innerMultiplier": 1,
+    "dampingMultiplier": 10,
+    "dtMultiplier": 0.1,
+    "pinchKpMultiplier": 1,
+    "pinchKdMultiplier": 1,
+    "logParameters": [
+      0,
+      0,
+      0,
+      1,
+      -1,
+      0,
+      0
+    ]
+  },
+  "fidelity": "full",
+  "seconds": 0.005,
+  "startingMultiplier": 16,
+  "domains": {
+    "female": {
+      "domain": "female",
+      "fidelity": "full",
+      "vertices": 5036,
+      "triangles": 9708,
+      "convergence": {
+        "durationSeconds": 0.005,
+        "steps": [
+          2070,
+          4139,
+          8278
+        ],
+        "timeSteps": [
+          0.0000024161875243839942,
+          0.0000012080937621919971,
+          6.040468810959986e-7
+        ],
+        "hVsH2": {
+          "rmsPositionSource": 4.643935873329452e-16,
+          "maxPositionSource": 2.4552509082432427e-15,
+          "rmsVelocitySource": 2.5680413491145326e-12,
+          "maxVelocitySource": 1.2852326154003068e-11
+        },
+        "h2VsH4": {
+          "rmsPositionSource": 6.683707877764625e-16,
+          "maxPositionSource": 3.804850902634785e-15,
+          "rmsVelocitySource": 3.7066946851345556e-12,
+          "maxVelocitySource": 2.8347678252243598e-11
+        },
+        "positionOrder": 0.6948143094013591,
+        "velocityOrder": 0.6928116738110334,
+        "complete": true,
+        "converged": true,
+        "samples": [
+          {
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "finalVelocity": 0.002583118151721345,
+            "maxNetForceN": 1.0786628182148964e-8,
+            "complete": true,
+            "wallClockExceeded": false
+          },
+          {
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "finalVelocity": 0.002583118151731772,
+            "maxNetForceN": 1.0786628105856068e-8,
+            "complete": true,
+            "wallClockExceeded": false
+          },
+          {
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "finalVelocity": 0.002583118151920997,
+            "maxNetForceN": 1.0786628253305835e-8,
+            "complete": true,
+            "wallClockExceeded": false
+          }
+        ]
+      }
+    },
+    "male": {
+      "domain": "male",
+      "fidelity": "full",
+      "vertices": 41920,
+      "triangles": 82807,
+      "convergence": {
+        "durationSeconds": 0.005,
+        "steps": [
+          1194,
+          2388,
+          4776
+        ],
+        "timeSteps": [
+          0.000004188211730680129,
+          0.0000020941058653400647,
+          0.0000010470529326700323
+        ],
+        "hVsH2": {
+          "rmsPositionSource": 5.036934796884829e-16,
+          "maxPositionSource": 3.2628815926764504e-15,
+          "rmsVelocitySource": 9.485681753049007e-13,
+          "maxVelocitySource": 9.213588111769567e-12
+        },
+        "h2VsH4": {
+          "rmsPositionSource": 7.133213758729173e-16,
+          "maxPositionSource": 4.519921135493017e-15,
+          "rmsVelocitySource": 1.3324913315710863e-12,
+          "maxVelocitySource": 8.41628275702467e-12
+        },
+        "positionOrder": 0.7061241913185273,
+        "velocityOrder": 0.711875681912679,
+        "complete": true,
+        "converged": true,
+        "samples": [
+          {
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "finalVelocity": 0.007355016567765897,
+            "maxNetForceN": 0.0000011432713726323173,
+            "complete": true,
+            "wallClockExceeded": false
+          },
+          {
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "finalVelocity": 0.007355016567924711,
+            "maxNetForceN": 0.000001143271372774201,
+            "complete": true,
+            "wallClockExceeded": false
+          },
+          {
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "finalVelocity": 0.007355016567927724,
+            "maxNetForceN": 0.0000011432713740184378,
+            "complete": true,
+            "wallClockExceeded": false
+          }
+        ]
+      }
+    }
+  },
+  "sourceMetersPerUnit": 0.3
+}

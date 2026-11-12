@@ -1,0 +1,428 @@
+{
+  "schema": "vela-rk4-full-domain-evaluation-v1",
+  "generatedAt": "2026-11-12T11:40:35.929Z",
+  "candidate": {
+    "massMultiplier": 1,
+    "surfaceMultiplier": 1,
+    "innerMultiplier": 1,
+    "dampingMultiplier": 10,
+    "dtMultiplier": 0.1,
+    "pinchKpMultiplier": 0.1,
+    "pinchKdMultiplier": 0.01,
+    "logParameters": [
+      0,
+      0,
+      0,
+      1,
+      -1,
+      -1,
+      -2
+    ]
+  },
+  "empiricalStabilityMultiplier": 8,
+  "offlineFullSeconds": 0.005,
+  "offlineModelWallMs": 120000,
+  "evaluations": {
+    "female": {
+      "candidate": {
+        "massMultiplier": 1,
+        "surfaceMultiplier": 1,
+        "innerMultiplier": 1,
+        "dampingMultiplier": 10,
+        "dtMultiplier": 0.1,
+        "pinchKpMultiplier": 0.1,
+        "pinchKdMultiplier": 0.01,
+        "logParameters": [
+          0,
+          0,
+          0,
+          1,
+          -1,
+          -1,
+          -2
+        ]
+      },
+      "fidelity": "full",
+      "valid": false,
+      "score": 1000001,
+      "runtimeMs": 124782.27309999999,
+      "diagnosis": {
+        "dominantMechanism": "wall-clock-limit",
+        "failureDistance": 1,
+        "modelDiagnoses": {
+          "female": {
+            "mechanism": "wall-clock-limit",
+            "distance": 1,
+            "evidence": {
+              "runtimeMs": 124781.3127,
+              "estimatedStages": 1677866544,
+              "offlineModelWallMs": 120000
+            }
+          }
+        }
+      },
+      "models": {
+        "female": {
+          "gravity": {
+            "worstFlips": 0,
+            "worstCollapses": 0,
+            "worstStrain": 0.0012611662256501808,
+            "maxDisplacement": 0.00001658124585812093,
+            "maxVelocity": 0.0036290710691776534,
+            "maxFinalVelocity": 0.0030944176562808677,
+            "maxForceResidualRatio": 0.018069809940300118,
+            "allSettled": true,
+            "finite": true
+          },
+          "response": {
+            "displacement": 0.00004909540516062468,
+            "targetMeters": 0.000017232214968057332,
+            "finite": true,
+            "flips": 0,
+            "strain": 0.0016977358235409515,
+            "forceN": 0.00015508993471244348
+          },
+          "convergence": {
+            "durationSeconds": 0.005,
+            "steps": [
+              2006,
+              4011,
+              8022
+            ],
+            "timeSteps": [
+              0.0000024931986228802485,
+              0.0000012465993114401242,
+              6.232996557200621e-7
+            ],
+            "hVsH2": {
+              "rmsPositionSource": 4.623318536800772e-16,
+              "maxPositionSource": 2.999177861068386e-15,
+              "rmsVelocitySource": 2.5547435828710296e-12,
+              "maxVelocitySource": 1.32228858102281e-11
+            },
+            "h2VsH4": {
+              "rmsPositionSource": 6.521057643714023e-16,
+              "maxPositionSource": 3.44281211900954e-15,
+              "rmsVelocitySource": 3.65590447660729e-12,
+              "maxVelocitySource": 3.2436527781699713e-11
+            },
+            "positionOrder": 0.7089829272184738,
+            "velocityOrder": 0.6987993256437195,
+            "complete": true,
+            "converged": true,
+            "samples": [
+              {
+                "orientationFlips": 0,
+                "collapsedTriangles": 0,
+                "finalVelocity": 0.0025831181516756843,
+                "maxNetForceN": 1.0786628419263317e-8,
+                "complete": true,
+                "wallClockExceeded": false
+              },
+              {
+                "orientationFlips": 0,
+                "collapsedTriangles": 0,
+                "finalVelocity": 0.002583118151876941,
+                "maxNetForceN": 1.0786627907530492e-8,
+                "complete": true,
+                "wallClockExceeded": false
+              },
+              {
+                "orientationFlips": 0,
+                "collapsedTriangles": 0,
+                "finalVelocity": 0.0025831181513755346,
+                "maxNetForceN": 1.0786628727970075e-8,
+                "complete": true,
+                "wallClockExceeded": false
+              }
+            ]
+          },
+          "timestepRange": {
+            "startingEstimate": 0.0000024931986228802485,
+            "samples": [
+              {
+                "factor": 4,
+                "timeStep": 0.000009972794491520994,
+                "steps": 87,
+                "complete": false,
+                "wallClockExceeded": false,
+                "finite": true,
+                "orientationFlips": 5172,
+                "collapsedTriangles": 35,
+                "maxStrain": 3.4689837861399628e+158,
+                "finalVelocity": null,
+                "forceResidualRatio": null
+              },
+              {
+                "factor": 2,
+                "timeStep": 0.000004986397245760497,
+                "steps": 301,
+                "complete": false,
+                "wallClockExceeded": false,
+                "finite": true,
+                "orientationFlips": 4767,
+                "collapsedTriangles": 2,
+                "maxStrain": 6.450855377603175e+157,
+                "finalVelocity": null,
+                "forceResidualRatio": null
+              },
+              {
+                "factor": 1,
+                "timeStep": 0.0000024931986228802485,
+                "steps": 2006,
+                "complete": true,
+                "wallClockExceeded": false,
+                "finite": true,
+                "orientationFlips": 0,
+                "collapsedTriangles": 0,
+                "maxStrain": 0.0005318953393470089,
+                "finalVelocity": 0.0025831181516756843,
+                "forceResidualRatio": 0.014877658200906937
+              },
+              {
+                "factor": 0.5,
+                "timeStep": 0.0000012465993114401242,
+                "steps": 4011,
+                "complete": true,
+                "wallClockExceeded": false,
+                "finite": true,
+                "orientationFlips": 0,
+                "collapsedTriangles": 0,
+                "maxStrain": 0.0005318953398592918,
+                "finalVelocity": 0.002583118151876941,
+                "forceResidualRatio": 0.014877657495089904
+              },
+              {
+                "factor": 0.25,
+                "timeStep": 6.232996557200621e-7,
+                "steps": 8022,
+                "complete": true,
+                "wallClockExceeded": false,
+                "finite": true,
+                "orientationFlips": 0,
+                "collapsedTriangles": 0,
+                "maxStrain": 0.0005318953394396686,
+                "finalVelocity": 0.0025831181513755346,
+                "forceResidualRatio": 0.014877658626696483
+              }
+            ],
+            "largestTestedStableMultiplier": 1,
+            "smallestTestedStableMultiplier": 0.25
+          },
+          "evaluatedIsland": "female",
+          "evaluatedVertices": 5036,
+          "triangles": 9708,
+          "surfaceSprings": 14743,
+          "supportSprings": 20108,
+          "estimatedStages": 1677866544,
+          "stableDt": 0.0000024931986228802485,
+          "substepsPerFrame": 6685,
+          "totalMassKg": 0.0003721927038507954,
+          "runtimeMs": 124781.3127,
+          "incomplete": "wall-clock-limit"
+        }
+      }
+    },
+    "male": {
+      "candidate": {
+        "massMultiplier": 1,
+        "surfaceMultiplier": 1,
+        "innerMultiplier": 1,
+        "dampingMultiplier": 10,
+        "dtMultiplier": 0.1,
+        "pinchKpMultiplier": 0.1,
+        "pinchKdMultiplier": 0.01,
+        "logParameters": [
+          0,
+          0,
+          0,
+          1,
+          -1,
+          -1,
+          -2
+        ]
+      },
+      "fidelity": "full",
+      "valid": false,
+      "score": 1000001,
+      "runtimeMs": 666811.117,
+      "diagnosis": {
+        "dominantMechanism": "wall-clock-limit",
+        "failureDistance": 1,
+        "modelDiagnoses": {
+          "male": {
+            "mechanism": "wall-clock-limit",
+            "distance": 1,
+            "evidence": {
+              "runtimeMs": 666811.0911,
+              "estimatedStages": 6888407904,
+              "offlineModelWallMs": 120000
+            }
+          }
+        }
+      },
+      "models": {
+        "male": {
+          "gravity": {
+            "worstFlips": 0,
+            "worstCollapses": 0,
+            "worstStrain": 0.0020696144499943105,
+            "maxDisplacement": 0.00004967180350608391,
+            "maxVelocity": 0.012518284517808643,
+            "maxFinalVelocity": 0.007486028257309292,
+            "maxForceResidualRatio": 0.26619149649867074,
+            "allSettled": false,
+            "finite": true
+          },
+          "response": {
+            "displacement": 0.00015491690796365728,
+            "targetMeters": 0.00009122958613171812,
+            "finite": true,
+            "flips": 0,
+            "strain": 0.008431696933265705,
+            "forceN": 0.0008210662751854725
+          },
+          "convergence": {
+            "durationSeconds": 0.005,
+            "steps": [
+              982,
+              1963,
+              3925
+            ],
+            "timeSteps": [
+              0.000005096831865344096,
+              0.000002548415932672048,
+              0.000001274207966336024
+            ],
+            "hVsH2": {
+              "rmsPositionSource": 4.528596882389446e-16,
+              "maxPositionSource": 2.752835630071622e-15,
+              "rmsVelocitySource": 9.26546338055394e-13,
+              "maxVelocitySource": 6.038534620837052e-11
+            },
+            "h2VsH4": {
+              "rmsPositionSource": 6.447889517595044e-16,
+              "maxPositionSource": 3.965543338409414e-15,
+              "rmsVelocitySource": 1.2178032933907728e-12,
+              "maxVelocitySource": 7.295732729512566e-12
+            },
+            "positionOrder": 0.702337853344382,
+            "velocityOrder": 0.7608341536633377,
+            "complete": true,
+            "converged": true,
+            "samples": [
+              {
+                "orientationFlips": 0,
+                "collapsedTriangles": 0,
+                "finalVelocity": 0.007355016567931579,
+                "maxNetForceN": 0.0000011432713731883724,
+                "complete": true,
+                "wallClockExceeded": false
+              },
+              {
+                "orientationFlips": 0,
+                "collapsedTriangles": 0,
+                "finalVelocity": 0.007355016567747481,
+                "maxNetForceN": 0.000001143271373682246,
+                "complete": true,
+                "wallClockExceeded": false
+              },
+              {
+                "orientationFlips": 0,
+                "collapsedTriangles": 0,
+                "finalVelocity": 0.007355016568216044,
+                "maxNetForceN": 0.0000011432713727136774,
+                "complete": true,
+                "wallClockExceeded": false
+              }
+            ]
+          },
+          "timestepRange": {
+            "startingEstimate": 0.000005096831865344096,
+            "samples": [
+              {
+                "factor": 4,
+                "timeStep": 0.000020387327461376384,
+                "steps": 72,
+                "complete": false,
+                "wallClockExceeded": false,
+                "finite": true,
+                "orientationFlips": 23978,
+                "collapsedTriangles": 151,
+                "maxStrain": 1.554997524095607e+157,
+                "finalVelocity": null,
+                "forceResidualRatio": null
+              },
+              {
+                "factor": 2,
+                "timeStep": 0.000010193663730688192,
+                "steps": 174,
+                "complete": false,
+                "wallClockExceeded": false,
+                "finite": false,
+                "orientationFlips": 11169,
+                "collapsedTriangles": 7,
+                "maxStrain": null,
+                "finalVelocity": null,
+                "forceResidualRatio": null
+              },
+              {
+                "factor": 1,
+                "timeStep": 0.000005096831865344096,
+                "steps": 982,
+                "complete": true,
+                "wallClockExceeded": false,
+                "finite": true,
+                "orientationFlips": 0,
+                "collapsedTriangles": 0,
+                "maxStrain": 0.0020696144499943105,
+                "finalVelocity": 0.007355016567931579,
+                "forceResidualRatio": 0.26619149649867074
+              },
+              {
+                "factor": 0.5,
+                "timeStep": 0.000002548415932672048,
+                "steps": 1963,
+                "complete": true,
+                "wallClockExceeded": false,
+                "finite": true,
+                "orientationFlips": 0,
+                "collapsedTriangles": 0,
+                "maxStrain": 0.0020696144500444943,
+                "finalVelocity": 0.007355016567747481,
+                "forceResidualRatio": 0.2661914966136609
+              },
+              {
+                "factor": 0.25,
+                "timeStep": 0.000001274207966336024,
+                "steps": 3925,
+                "complete": true,
+                "wallClockExceeded": false,
+                "finite": true,
+                "orientationFlips": 0,
+                "collapsedTriangles": 0,
+                "maxStrain": 0.0020696144500236434,
+                "finalVelocity": 0.007355016568216044,
+                "forceResidualRatio": 0.266191496388146
+              }
+            ],
+            "largestTestedStableMultiplier": 1,
+            "smallestTestedStableMultiplier": 0.25
+          },
+          "evaluatedIsland": "male",
+          "evaluatedVertices": 41920,
+          "triangles": 82807,
+          "surfaceSprings": 124726,
+          "supportSprings": 167552,
+          "estimatedStages": 6888407904,
+          "stableDt": 0.000005096831865344096,
+          "substepsPerFrame": 3271,
+          "totalMassKg": 0.018353014932322997,
+          "runtimeMs": 666811.0911,
+          "incomplete": "wall-clock-limit"
+        }
+      }
+    }
+  },
+  "overall": "FAILED"
+}

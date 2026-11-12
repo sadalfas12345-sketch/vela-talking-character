@@ -76,6 +76,20 @@ The next controlled probes ruled out the remaining simple parameter levers. Damp
 
 No material parameters, topology, spring connectivity, mesh vertices, or acceptance thresholds were changed to hide these failures. No performance stage was run after the failed robustness gate.
 
+## Full-island timestep and damping diagnosis
+
+The domain audit showed that the original spring-only timestep estimate was incomplete for high damping. On the full female island, damping 100x gives a minimum-mass damping rate of 7.9464e6 per second and a damping timestep estimate of 1.5101e-8 seconds. On the full male island the corresponding values are 4.5843e6 per second and 2.6176e-8 seconds. The implementation now records both spring and damping stability estimates and uses their minimum before applying the separately measured empirical multiplier.
+
+For damping 1x, full-domain convergence over 0.005 seconds passed at 16x the spring estimate on both characters. For damping 10x, the full-domain convergence and geometry results from the prior spring-estimate run were clean at 8x the spring estimate. Under the corrected damping-aware estimate, that timestep is approximately 16x on the female and 19.5x on the male; therefore 16x is the next common multiplier to validate, rather than treating the old 8x label as a universal timestep.
+
+The full damping 10x physical evaluation was finite and fold-free in the completed gravity samples. Female met the short-window settling thresholds. Male remained finite and fold-free but had a force-residual ratio of 0.2662 after the short 0.005-second window, so it was not marked settled. The evaluation was incomplete under the wall-clock protection while its response and convergence diagnostics were still recorded.
+
+The full damping 100x evaluation at the old 16x spring timestep diverged on both full islands. This is classified as an explicit damping-mode timestep failure, not as a material or topology result.
+
+The corrected damping-aware domain audit is saved in `rk4-domain-audit-damping10-stability16-corrected.json`. It records damping 10x on the same full original islands: the female damping-aware estimate is 1.5101e-7 seconds and the male estimate is 2.6176e-7 seconds. With the common empirical multiplier 16, the selected internal steps are approximately 2.4162e-6 and 4.1882e-6 seconds respectively. The audit also records zero-area-face counts, edge-length and mass distributions, support-spring counts, and the effective-mass-not-anatomical-density interpretation.
+
+The saved full-domain evaluation was generated before the final metadata-only validator correction. Its raw main h, h/2, and h/4 convergence samples are complete and converged on both models; high-factor timestep samples are deliberately diagnostic boundary probes and are not allowed to mark the main evaluation incomplete. A fresh full-domain run will be used for the next physical settling check.
+
 ## Reproduction
 
 ```powershell

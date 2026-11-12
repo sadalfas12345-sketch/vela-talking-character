@@ -1,0 +1,217 @@
+{
+  "schema": "vela-rk4-timestep-audit-v1",
+  "generatedAt": "2026-11-12T11:45:09.895Z",
+  "candidate": {
+    "massMultiplier": 1,
+    "surfaceMultiplier": 1,
+    "innerMultiplier": 1,
+    "dampingMultiplier": 10,
+    "dtMultiplier": 0.1,
+    "pinchKpMultiplier": 1,
+    "pinchKdMultiplier": 1,
+    "logParameters": [
+      0,
+      0,
+      0,
+      1,
+      -1,
+      0,
+      0
+    ]
+  },
+  "fidelity": "screen",
+  "seconds": 0.005,
+  "factors": [
+    32,
+    16,
+    8,
+    4,
+    2,
+    1
+  ],
+  "domains": {
+    "female": {
+      "domain": "female-screen-facial-patch",
+      "fidelity": "screen",
+      "vertices": 1000,
+      "triangles": 1855,
+      "timestep": {
+        "startingEstimate": 1.710935308725304e-7,
+        "samples": [
+          {
+            "factor": 32,
+            "timeStep": 0.000005474992987920973,
+            "steps": 306,
+            "complete": false,
+            "wallClockExceeded": false,
+            "finite": true,
+            "orientationFlips": 906,
+            "collapsedTriangles": 0,
+            "maxStrain": 6.362763929453244e+157,
+            "finalVelocity": null,
+            "forceResidualRatio": null
+          },
+          {
+            "factor": 16,
+            "timeStep": 0.0000027374964939604866,
+            "steps": 1827,
+            "complete": true,
+            "wallClockExceeded": false,
+            "finite": true,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "maxStrain": 0.0005108024865329384,
+            "finalVelocity": 0.0013787162796716607,
+            "forceResidualRatio": 0.006265775860970894
+          },
+          {
+            "factor": 8,
+            "timeStep": 0.0000013687482469802433,
+            "steps": 3653,
+            "complete": true,
+            "wallClockExceeded": false,
+            "finite": true,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "maxStrain": 0.0005108024863525433,
+            "finalVelocity": 0.0013787162790875873,
+            "forceResidualRatio": 0.006265780922753641
+          },
+          {
+            "factor": 4,
+            "timeStep": 6.843741234901216e-7,
+            "steps": 7306,
+            "complete": true,
+            "wallClockExceeded": false,
+            "finite": true,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "maxStrain": 0.0005108024864461824,
+            "finalVelocity": 0.0013787162795455327,
+            "forceResidualRatio": 0.006265773208113341
+          },
+          {
+            "factor": 2,
+            "timeStep": 3.421870617450608e-7,
+            "steps": 14612,
+            "complete": true,
+            "wallClockExceeded": false,
+            "finite": true,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "maxStrain": 0.0005108024864985228,
+            "finalVelocity": 0.0013787162781884223,
+            "forceResidualRatio": 0.006265774887387767
+          },
+          {
+            "factor": 1,
+            "timeStep": 1.710935308725304e-7,
+            "steps": 29224,
+            "complete": true,
+            "wallClockExceeded": false,
+            "finite": true,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "maxStrain": 0.0005108024862464285,
+            "finalVelocity": 0.001378716279600475,
+            "forceResidualRatio": 0.006265779142289831
+          }
+        ],
+        "largestTestedStableMultiplier": 16,
+        "smallestTestedStableMultiplier": 1
+      }
+    },
+    "male": {
+      "domain": "male-screen-facial-patch",
+      "fidelity": "screen",
+      "vertices": 1000,
+      "triangles": 1857,
+      "timestep": {
+        "startingEstimate": 4.192707649918067e-7,
+        "samples": [
+          {
+            "factor": 32,
+            "timeStep": 0.000013416664479737814,
+            "steps": 364,
+            "complete": false,
+            "wallClockExceeded": false,
+            "finite": true,
+            "orientationFlips": 952,
+            "collapsedTriangles": 0,
+            "maxStrain": 1.2591716370589998e+157,
+            "finalVelocity": null,
+            "forceResidualRatio": null
+          },
+          {
+            "factor": 16,
+            "timeStep": 0.000006708332239868907,
+            "steps": 746,
+            "complete": true,
+            "wallClockExceeded": false,
+            "finite": true,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "maxStrain": 0.00046756281806185776,
+            "finalVelocity": 0.004172664957460548,
+            "forceResidualRatio": 0.028238724569011338
+          },
+          {
+            "factor": 8,
+            "timeStep": 0.0000033541661199344536,
+            "steps": 1491,
+            "complete": true,
+            "wallClockExceeded": false,
+            "finite": true,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "maxStrain": 0.0004675628181147961,
+            "finalVelocity": 0.0041726649574952,
+            "forceResidualRatio": 0.02823872453322859
+          },
+          {
+            "factor": 4,
+            "timeStep": 0.0000016770830599672268,
+            "steps": 2982,
+            "complete": true,
+            "wallClockExceeded": false,
+            "finite": true,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "maxStrain": 0.00046756281802751235,
+            "finalVelocity": 0.004172664957615605,
+            "forceResidualRatio": 0.02823872451894973
+          },
+          {
+            "factor": 2,
+            "timeStep": 8.385415299836134e-7,
+            "steps": 5963,
+            "complete": true,
+            "wallClockExceeded": false,
+            "finite": true,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "maxStrain": 0.0004675628182555347,
+            "finalVelocity": 0.0041726649575553765,
+            "forceResidualRatio": 0.02823872447473404
+          },
+          {
+            "factor": 1,
+            "timeStep": 4.192707649918067e-7,
+            "steps": 11926,
+            "complete": true,
+            "wallClockExceeded": false,
+            "finite": true,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "maxStrain": 0.00046756281771556337,
+            "finalVelocity": 0.004172664957534891,
+            "forceResidualRatio": 0.028238724535652786
+          }
+        ],
+        "largestTestedStableMultiplier": 16,
+        "smallestTestedStableMultiplier": 1
+      }
+    }
+  },
+  "sourceMetersPerUnit": 0.3
+}
