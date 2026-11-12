@@ -1,0 +1,1596 @@
+{
+  "schema": "vela-rk4-warp-gpu-benchmark-v1",
+  "generatedAt": "2026-11-12T19:05:13Z",
+  "device": "cuda:0",
+  "warpVersion": "1.19.0",
+  "cudaAvailable": true,
+  "sourceMetersPerUnit": 0.3,
+  "secondsPerRun": 0.0001,
+  "pinchKp": 0.1,
+  "pinchKd": 0.01,
+  "cudaGraph": true,
+  "graphChunk": 16,
+  "reference": "NumPy Float64 implementation of the exported existing Node Float64 equations; fixture topology and parameters are emitted by calibrate_realtime_rk4.mjs.",
+  "gravity": [
+    {
+      "model": "female",
+      "domain": "micro",
+      "vertices": 128,
+      "numpyFloat64": {
+        "label": "gravity",
+        "cpuRuntimeMs": 6.543899988173507,
+        "gpuRuntimeMs": 13.884300002246164,
+        "speedup": 0.4713165220511551,
+        "gpuSteps": 9,
+        "cudaGraphError": null,
+        "positionMaxErrorSource": 4.303949579628379e-08,
+        "positionRmsErrorSource": 3.298098759546477e-08,
+        "positionMaxErrorNormalizedFace": 7.492854959631896e-07,
+        "velocityMaxErrorSourcePerSecond": 0.0001694973182364206,
+        "forceMaxErrorN": 2.813134629089584e-07,
+        "cpuEnergy": {
+          "surfacePotentialJ": 4.834642209653174e-14,
+          "supportPotentialJ": 1.38475705897457e-15,
+          "kineticJ": 6.142935131210402e-13,
+          "mechanicalJ": 6.640246922765465e-13
+        },
+        "gpuEnergy": {
+          "surfacePotentialJ": 4.311761996207194e-14,
+          "supportPotentialJ": 1.0501984619049232e-15,
+          "kineticJ": 6.257809121156414e-13,
+          "mechanicalJ": 6.699487305396183e-13
+        },
+        "gpuGeometry": {
+          "maxEdgeStrain": 3.587740840399573e-05,
+          "p95EdgeStrain": 1.6486709590287578e-05,
+          "orientationFlips": 0,
+          "collapsedTriangles": 0,
+          "minAreaRatio": 0.9999661718433849
+        },
+        "cpuGeometry": {
+          "maxEdgeStrain": 3.6416278529807066e-05,
+          "p95EdgeStrain": 1.8773342472178618e-05,
+          "orientationFlips": 0,
+          "collapsedTriangles": 0,
+          "minAreaRatio": 0.9999582627180783
+        }
+      },
+      "nodeFloat64Reference": {
+        "label": "gravity",
+        "cpuRuntimeMs": 1.1127999999998792,
+        "gpuRuntimeMs": 13.884300002246164,
+        "speedup": 0.08014808091296309,
+        "gpuSteps": 9,
+        "cudaGraphError": null,
+        "positionMaxErrorSource": 4.303949579628379e-08,
+        "positionRmsErrorSource": 3.298098759546477e-08,
+        "positionMaxErrorNormalizedFace": 7.492854959631896e-07,
+        "velocityMaxErrorSourcePerSecond": 0.00016949731823642057,
+        "forceMaxErrorN": null,
+        "cpuEnergy": {
+          "surfacePotentialJ": 4.834642209653174e-14,
+          "supportPotentialJ": 1.38475705897457e-15,
+          "kineticJ": 6.142935131210402e-13,
+          "mechanicalJ": 6.640246922765465e-13
+        },
+        "gpuEnergy": {
+          "surfacePotentialJ": 4.311761996207194e-14,
+          "supportPotentialJ": 1.0501984619049232e-15,
+          "kineticJ": 6.257809121156414e-13,
+          "mechanicalJ": 6.699487305396183e-13
+        },
+        "gpuGeometry": {
+          "maxEdgeStrain": 3.587740840399573e-05,
+          "p95EdgeStrain": 1.6486709590287578e-05,
+          "orientationFlips": 0,
+          "collapsedTriangles": 0,
+          "minAreaRatio": 0.9999661718433849
+        },
+        "cpuGeometry": {
+          "maxEdgeStrain": 3.6416278529807066e-05,
+          "p95EdgeStrain": 1.8773342472178618e-05,
+          "orientationFlips": 0,
+          "collapsedTriangles": 0,
+          "minAreaRatio": 0.9999582627180783
+        }
+      }
+    },
+    {
+      "model": "female",
+      "domain": "screen",
+      "vertices": 1000,
+      "numpyFloat64": {
+        "label": "gravity",
+        "cpuRuntimeMs": 141.35259999602567,
+        "gpuRuntimeMs": 11.316100004478358,
+        "speedup": 12.49128232695763,
+        "gpuSteps": 37,
+        "cudaGraphError": null,
+        "positionMaxErrorSource": 6.248225606843972e-08,
+        "positionRmsErrorSource": 3.783984727980517e-08,
+        "positionMaxErrorNormalizedFace": 1.087769439696416e-06,
+        "velocityMaxErrorSourcePerSecond": 0.00033712840070822096,
+        "forceMaxErrorN": 3.9182281083821083e-07,
+        "cpuEnergy": {
+          "surfacePotentialJ": 2.612625754361907e-13,
+          "supportPotentialJ": 1.2018044302294363e-14,
+          "kineticJ": 6.103388187425176e-12,
+          "mechanicalJ": 6.376668807163661e-12
+        },
+        "gpuEnergy": {
+          "surfacePotentialJ": 2.1360234721987712e-13,
+          "supportPotentialJ": 8.731675572434074e-15,
+          "kineticJ": 6.2200510225415935e-12,
+          "mechanicalJ": 6.442385045333904e-12
+        },
+        "gpuGeometry": {
+          "maxEdgeStrain": 7.214236699973038e-05,
+          "p95EdgeStrain": 1.6169417430917933e-05,
+          "orientationFlips": 0,
+          "collapsedTriangles": 0,
+          "minAreaRatio": 0.9998651445584221
+        },
+        "cpuGeometry": {
+          "maxEdgeStrain": 4.998117339221077e-05,
+          "p95EdgeStrain": 1.80132391733908e-05,
+          "orientationFlips": 0,
+          "collapsedTriangles": 0,
+          "minAreaRatio": 0.9997168761425096
+        }
+      },
+      "nodeFloat64Reference": {
+        "label": "gravity",
+        "cpuRuntimeMs": 20.516700000000128,
+        "gpuRuntimeMs": 11.316100004478358,
+        "speedup": 1.813053966638738,
+        "gpuSteps": 37,
+        "cudaGraphError": null,
+        "positionMaxErrorSource": 6.248225606843972e-08,
+        "positionRmsErrorSource": 3.783984727980517e-08,
+        "positionMaxErrorNormalizedFace": 1.087769439696416e-06,
+        "velocityMaxErrorSourcePerSecond": 0.00033712840070822096,
+        "forceMaxErrorN": null,
+        "cpuEnergy": {
+          "surfacePotentialJ": 2.612625754361907e-13,
+          "supportPotentialJ": 1.2018044302294363e-14,
+          "kineticJ": 6.103388187425176e-12,
+          "mechanicalJ": 6.376668807163661e-12
+        },
+        "gpuEnergy": {
+          "surfacePotentialJ": 2.1360234721987712e-13,
+          "supportPotentialJ": 8.731675572434074e-15,
+          "kineticJ": 6.2200510225415935e-12,
+          "mechanicalJ": 6.442385045333904e-12
+        },
+        "gpuGeometry": {
+          "maxEdgeStrain": 7.214236699973038e-05,
+          "p95EdgeStrain": 1.6169417430917933e-05,
+          "orientationFlips": 0,
+          "collapsedTriangles": 0,
+          "minAreaRatio": 0.9998651445584221
+        },
+        "cpuGeometry": {
+          "maxEdgeStrain": 4.998117339221077e-05,
+          "p95EdgeStrain": 1.80132391733908e-05,
+          "orientationFlips": 0,
+          "collapsedTriangles": 0,
+          "minAreaRatio": 0.9997168761425096
+        }
+      }
+    },
+    {
+      "model": "female",
+      "domain": "full",
+      "vertices": 5036,
+      "numpyFloat64": {
+        "label": "gravity",
+        "cpuRuntimeMs": 970.6271000031848,
+        "gpuRuntimeMs": 11.641399993095547,
+        "speedup": 83.37717977037629,
+        "gpuSteps": 42,
+        "cudaGraphError": null,
+        "positionMaxErrorSource": 6.678695376759689e-08,
+        "positionRmsErrorSource": 3.580304262846058e-08,
+        "positionMaxErrorNormalizedFace": 1.1627110134953145e-06,
+        "velocityMaxErrorSourcePerSecond": 0.0009372656481781777,
+        "forceMaxErrorN": 5.75030686556898e-07,
+        "cpuEnergy": {
+          "surfacePotentialJ": 9.501484256410378e-13,
+          "supportPotentialJ": 4.182518094845199e-14,
+          "kineticJ": 2.2024889896857112e-11,
+          "mechanicalJ": 2.30168635034466e-11
+        },
+        "gpuEnergy": {
+          "surfacePotentialJ": 8.566892515497826e-13,
+          "supportPotentialJ": 3.051925498842048e-14,
+          "kineticJ": 2.252745423313249e-11,
+          "mechanicalJ": 2.3414662739670693e-11
+        },
+        "gpuGeometry": {
+          "maxEdgeStrain": 0.00014394351404508116,
+          "p95EdgeStrain": 1.692934159820091e-05,
+          "orientationFlips": 0,
+          "collapsedTriangles": 0,
+          "minAreaRatio": 0.9998589553065087
+        },
+        "cpuGeometry": {
+          "maxEdgeStrain": 0.00010529420386194691,
+          "p95EdgeStrain": 1.7253665102337807e-05,
+          "orientationFlips": 0,
+          "collapsedTriangles": 0,
+          "minAreaRatio": 0.999688575192552
+        }
+      },
+      "nodeFloat64Reference": {
+        "label": "gravity",
+        "cpuRuntimeMs": 141.45699999999988,
+        "gpuRuntimeMs": 11.641399993095547,
+        "speedup": 12.151201752701331,
+        "gpuSteps": 42,
+        "cudaGraphError": null,
+        "positionMaxErrorSource": 6.678695376759689e-08,
+        "positionRmsErrorSource": 3.580304262846058e-08,
+        "positionMaxErrorNormalizedFace": 1.1627110134953145e-06,
+        "velocityMaxErrorSourcePerSecond": 0.0009372656481781777,
+        "forceMaxErrorN": null,
+        "cpuEnergy": {
+          "surfacePotentialJ": 9.501484256410378e-13,
+          "supportPotentialJ": 4.182518094845199e-14,
+          "kineticJ": 2.2024889896857112e-11,
+          "mechanicalJ": 2.30168635034466e-11
+        },
+        "gpuEnergy": {
+          "surfacePotentialJ": 8.566892515497826e-13,
+          "supportPotentialJ": 3.051925498842048e-14,
+          "kineticJ": 2.252745423313249e-11,
+          "mechanicalJ": 2.3414662739670693e-11
+        },
+        "gpuGeometry": {
+          "maxEdgeStrain": 0.00014394351404508116,
+          "p95EdgeStrain": 1.692934159820091e-05,
+          "orientationFlips": 0,
+          "collapsedTriangles": 0,
+          "minAreaRatio": 0.9998589553065087
+        },
+        "cpuGeometry": {
+          "maxEdgeStrain": 0.00010529420386194691,
+          "p95EdgeStrain": 1.7253665102337807e-05,
+          "orientationFlips": 0,
+          "collapsedTriangles": 0,
+          "minAreaRatio": 0.999688575192552
+        }
+      }
+    },
+    {
+      "model": "male",
+      "domain": "micro",
+      "vertices": 128,
+      "numpyFloat64": {
+        "label": "gravity",
+        "cpuRuntimeMs": 5.966900003841147,
+        "gpuRuntimeMs": 8.78750000265427,
+        "speedup": 0.6790213373586164,
+        "gpuSteps": 7,
+        "cudaGraphError": null,
+        "positionMaxErrorSource": 6.996422393085226e-08,
+        "positionRmsErrorSource": 4.680657767362566e-08,
+        "positionMaxErrorNormalizedFace": 2.3007083632881095e-07,
+        "velocityMaxErrorSourcePerSecond": 0.00015982823502050765,
+        "forceMaxErrorN": 9.371446971667985e-07,
+        "cpuEnergy": {
+          "surfacePotentialJ": 4.028595588822026e-14,
+          "supportPotentialJ": 6.6571342472980695e-15,
+          "kineticJ": 4.120264360094975e-12,
+          "mechanicalJ": 4.167207450230494e-12
+        },
+        "gpuEnergy": {
+          "surfacePotentialJ": 8.385382499302131e-14,
+          "supportPotentialJ": 4.483314587174745e-15,
+          "kineticJ": 4.132844078015168e-12,
+          "mechanicalJ": 4.221181217595364e-12
+        },
+        "gpuGeometry": {
+          "maxEdgeStrain": 4.58882351752337e-05,
+          "p95EdgeStrain": 1.2702366645969354e-05,
+          "orientationFlips": 0,
+          "collapsedTriangles": 0,
+          "minAreaRatio": 0.9999452575831494
+        },
+        "cpuGeometry": {
+          "maxEdgeStrain": 2.446645286245812e-05,
+          "p95EdgeStrain": 8.254341711782703e-06,
+          "orientationFlips": 0,
+          "collapsedTriangles": 0,
+          "minAreaRatio": 0.9999732702281976
+        }
+      },
+      "nodeFloat64Reference": {
+        "label": "gravity",
+        "cpuRuntimeMs": 1.1724999999996726,
+        "gpuRuntimeMs": 8.78750000265427,
+        "speedup": 0.13342816496677307,
+        "gpuSteps": 7,
+        "cudaGraphError": null,
+        "positionMaxErrorSource": 6.996422393085226e-08,
+        "positionRmsErrorSource": 4.680657767362566e-08,
+        "positionMaxErrorNormalizedFace": 2.3007083632881095e-07,
+        "velocityMaxErrorSourcePerSecond": 0.00015982823502050768,
+        "forceMaxErrorN": null,
+        "cpuEnergy": {
+          "surfacePotentialJ": 4.028595588822026e-14,
+          "supportPotentialJ": 6.6571342472980695e-15,
+          "kineticJ": 4.120264360094975e-12,
+          "mechanicalJ": 4.167207450230494e-12
+        },
+        "gpuEnergy": {
+          "surfacePotentialJ": 8.385382499302131e-14,
+          "supportPotentialJ": 4.483314587174745e-15,
+          "kineticJ": 4.132844078015168e-12,
+          "mechanicalJ": 4.221181217595364e-12
+        },
+        "gpuGeometry": {
+          "maxEdgeStrain": 4.58882351752337e-05,
+          "p95EdgeStrain": 1.2702366645969354e-05,
+          "orientationFlips": 0,
+          "collapsedTriangles": 0,
+          "minAreaRatio": 0.9999452575831494
+        },
+        "cpuGeometry": {
+          "maxEdgeStrain": 2.446645286245812e-05,
+          "p95EdgeStrain": 8.254341711782703e-06,
+          "orientationFlips": 0,
+          "collapsedTriangles": 0,
+          "minAreaRatio": 0.9999732702281976
+        }
+      }
+    },
+    {
+      "model": "male",
+      "domain": "screen",
+      "vertices": 1000,
+      "numpyFloat64": {
+        "label": "gravity",
+        "cpuRuntimeMs": 57.55389999831095,
+        "gpuRuntimeMs": 15.314699994632974,
+        "speedup": 3.7580821053289113,
+        "gpuSteps": 15,
+        "cudaGraphError": null,
+        "positionMaxErrorSource": 1.0680042578618272e-07,
+        "positionRmsErrorSource": 7.604908329090991e-08,
+        "positionMaxErrorNormalizedFace": 3.512032564698363e-07,
+        "velocityMaxErrorSourcePerSecond": 0.0004826892939110189,
+        "forceMaxErrorN": 3.6911233362530147e-06,
+        "cpuEnergy": {
+          "surfacePotentialJ": 4.734632936824766e-13,
+          "supportPotentialJ": 6.130235941322393e-14,
+          "kineticJ": 3.973185729556411e-11,
+          "mechanicalJ": 4.026662294865981e-11
+        },
+        "gpuEnergy": {
+          "surfacePotentialJ": 9.88838903500817e-13,
+          "supportPotentialJ": 2.495408774564391e-14,
+          "kineticJ": 3.999829385605973e-11,
+          "mechanicalJ": 4.101208684730619e-11
+        },
+        "gpuGeometry": {
+          "maxEdgeStrain": 0.00012849210152651274,
+          "p95EdgeStrain": 1.5491088098004245e-05,
+          "orientationFlips": 0,
+          "collapsedTriangles": 0,
+          "minAreaRatio": 0.9998942287830429
+        },
+        "cpuGeometry": {
+          "maxEdgeStrain": 0.0001416354710480596,
+          "p95EdgeStrain": 1.3197564331754335e-05,
+          "orientationFlips": 0,
+          "collapsedTriangles": 0,
+          "minAreaRatio": 0.9999190133727723
+        }
+      },
+      "nodeFloat64Reference": {
+        "label": "gravity",
+        "cpuRuntimeMs": 12.49409999999989,
+        "gpuRuntimeMs": 15.314699994632974,
+        "speedup": 0.8158240125094477,
+        "gpuSteps": 15,
+        "cudaGraphError": null,
+        "positionMaxErrorSource": 1.0680042578618272e-07,
+        "positionRmsErrorSource": 7.604908329090991e-08,
+        "positionMaxErrorNormalizedFace": 3.512032564698363e-07,
+        "velocityMaxErrorSourcePerSecond": 0.0004826892939110189,
+        "forceMaxErrorN": null,
+        "cpuEnergy": {
+          "surfacePotentialJ": 4.734632936824766e-13,
+          "supportPotentialJ": 6.130235941322393e-14,
+          "kineticJ": 3.973185729556412e-11,
+          "mechanicalJ": 4.0266622948659816e-11
+        },
+        "gpuEnergy": {
+          "surfacePotentialJ": 9.88838903500817e-13,
+          "supportPotentialJ": 2.495408774564391e-14,
+          "kineticJ": 3.999829385605973e-11,
+          "mechanicalJ": 4.101208684730619e-11
+        },
+        "gpuGeometry": {
+          "maxEdgeStrain": 0.00012849210152651274,
+          "p95EdgeStrain": 1.5491088098004245e-05,
+          "orientationFlips": 0,
+          "collapsedTriangles": 0,
+          "minAreaRatio": 0.9998942287830429
+        },
+        "cpuGeometry": {
+          "maxEdgeStrain": 0.0001416354710480596,
+          "p95EdgeStrain": 1.3197564331754335e-05,
+          "orientationFlips": 0,
+          "collapsedTriangles": 0,
+          "minAreaRatio": 0.9999190133727723
+        }
+      }
+    },
+    {
+      "model": "male",
+      "domain": "full",
+      "vertices": 41920,
+      "numpyFloat64": {
+        "label": "gravity",
+        "cpuRuntimeMs": 5659.916099990369,
+        "gpuRuntimeMs": 125.80619999789633,
+        "speedup": 44.98916667131677,
+        "gpuSteps": 24,
+        "cudaGraphError": null,
+        "positionMaxErrorSource": 1.3812855886198992e-07,
+        "positionRmsErrorSource": 8.462061221074857e-08,
+        "positionMaxErrorNormalizedFace": 4.542229052619793e-07,
+        "velocityMaxErrorSourcePerSecond": 0.0006185275796604262,
+        "forceMaxErrorN": 3.3061264131971312e-06,
+        "cpuEnergy": {
+          "surfacePotentialJ": 2.6379402946637103e-11,
+          "supportPotentialJ": 4.222370235497389e-12,
+          "kineticJ": 3.0387354694406113e-09,
+          "mechanicalJ": 3.069337242622746e-09
+        },
+        "gpuEnergy": {
+          "surfacePotentialJ": 3.1286056835024114e-11,
+          "supportPotentialJ": 1.2995780757446319e-12,
+          "kineticJ": 3.066424504839329e-09,
+          "mechanicalJ": 3.0990101397500974e-09
+        },
+        "gpuGeometry": {
+          "maxEdgeStrain": 0.00013276107506824007,
+          "p95EdgeStrain": 1.4667249679137568e-05,
+          "orientationFlips": 0,
+          "collapsedTriangles": 0,
+          "minAreaRatio": 0.9997204933451331
+        },
+        "cpuGeometry": {
+          "maxEdgeStrain": 0.00011187654970501501,
+          "p95EdgeStrain": 1.4617379685678581e-05,
+          "orientationFlips": 0,
+          "collapsedTriangles": 0,
+          "minAreaRatio": 0.9997188342218105
+        }
+      },
+      "nodeFloat64Reference": {
+        "label": "gravity",
+        "cpuRuntimeMs": 894.7928000000002,
+        "gpuRuntimeMs": 125.80619999789633,
+        "speedup": 7.112469814802152,
+        "gpuSteps": 24,
+        "cudaGraphError": null,
+        "positionMaxErrorSource": 1.3812855886198992e-07,
+        "positionRmsErrorSource": 8.462061221074857e-08,
+        "positionMaxErrorNormalizedFace": 4.542229052619793e-07,
+        "velocityMaxErrorSourcePerSecond": 0.0006185275796604263,
+        "forceMaxErrorN": null,
+        "cpuEnergy": {
+          "surfacePotentialJ": 2.6379402946637103e-11,
+          "supportPotentialJ": 4.222370235497389e-12,
+          "kineticJ": 3.0387354694406117e-09,
+          "mechanicalJ": 3.0693372426227463e-09
+        },
+        "gpuEnergy": {
+          "surfacePotentialJ": 3.1286056835024114e-11,
+          "supportPotentialJ": 1.2995780757446319e-12,
+          "kineticJ": 3.066424504839329e-09,
+          "mechanicalJ": 3.0990101397500974e-09
+        },
+        "gpuGeometry": {
+          "maxEdgeStrain": 0.00013276107506824007,
+          "p95EdgeStrain": 1.4667249679137568e-05,
+          "orientationFlips": 0,
+          "collapsedTriangles": 0,
+          "minAreaRatio": 0.9997204933451331
+        },
+        "cpuGeometry": {
+          "maxEdgeStrain": 0.00011187654970501501,
+          "p95EdgeStrain": 1.4617379685678581e-05,
+          "orientationFlips": 0,
+          "collapsedTriangles": 0,
+          "minAreaRatio": 0.9997188342218105
+        }
+      }
+    }
+  ],
+  "pinch": [
+    {
+      "model": "female",
+      "domain": "micro",
+      "vertices": 128,
+      "hold": {
+        "numpyFloat64": {
+          "label": "pinch-hold",
+          "cpuRuntimeMs": 9.446399999433197,
+          "gpuRuntimeMs": 14.024700009031221,
+          "speedup": 0.6735545140609195,
+          "gpuSteps": 9,
+          "cudaGraphError": null,
+          "positionMaxErrorSource": 4.30394947198062e-08,
+          "positionRmsErrorSource": 3.2270378793173006e-08,
+          "positionMaxErrorNormalizedFace": 7.492854772225183e-07,
+          "velocityMaxErrorSourcePerSecond": 0.0002980933726717965,
+          "forceMaxErrorN": 2.813144572617815e-07,
+          "cpuEnergy": {
+            "surfacePotentialJ": 5.3780568471062765e-14,
+            "supportPotentialJ": 1.345082976913033e-15,
+            "kineticJ": 5.918439020276591e-13,
+            "mechanicalJ": 6.469695534756349e-13
+          },
+          "gpuEnergy": {
+            "surfacePotentialJ": 4.428050143314761e-14,
+            "supportPotentialJ": 1.0350228508175363e-15,
+            "kineticJ": 6.06710564733066e-13,
+            "mechanicalJ": 6.520260890170311e-13
+          },
+          "gpuGeometry": {
+            "maxEdgeStrain": 3.587740840399573e-05,
+            "p95EdgeStrain": 1.6463548801840376e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9999662928424004
+          },
+          "cpuGeometry": {
+            "maxEdgeStrain": 3.641627878319476e-05,
+            "p95EdgeStrain": 1.9585525311242523e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9999590496704001
+          }
+        },
+        "nodeFloat64Reference": {
+          "label": "pinch-hold",
+          "cpuRuntimeMs": 0.7491999999999734,
+          "gpuRuntimeMs": 14.024700009031221,
+          "speedup": 0.053420037470856795,
+          "gpuSteps": 9,
+          "cudaGraphError": null,
+          "positionMaxErrorSource": 4.303949506206172e-08,
+          "positionRmsErrorSource": 3.243965662272248e-08,
+          "positionMaxErrorNormalizedFace": 7.492854831809315e-07,
+          "velocityMaxErrorSourcePerSecond": 0.00037649623181381156,
+          "forceMaxErrorN": null,
+          "cpuEnergy": {
+            "surfacePotentialJ": 5.596458600157829e-14,
+            "supportPotentialJ": 1.3399904908330898e-15,
+            "kineticJ": 5.86098634924006e-13,
+            "mechanicalJ": 6.434032114164174e-13
+          },
+          "gpuEnergy": {
+            "surfacePotentialJ": 4.428050143314761e-14,
+            "supportPotentialJ": 1.0350228508175363e-15,
+            "kineticJ": 6.06710564733066e-13,
+            "mechanicalJ": 6.520260890170311e-13
+          },
+          "gpuGeometry": {
+            "maxEdgeStrain": 3.587740840399573e-05,
+            "p95EdgeStrain": 1.6463548801840376e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9999662928424004
+          },
+          "cpuGeometry": {
+            "maxEdgeStrain": 3.6416278684027466e-05,
+            "p95EdgeStrain": 2.0309890691822968e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9999594005805676
+          }
+        }
+      },
+      "release": {
+        "numpyFloat64": {
+          "label": "pinch-release",
+          "cpuRuntimeMs": 6.457899988163263,
+          "gpuRuntimeMs": 5.80130000889767,
+          "speedup": 1.1131815245304573,
+          "gpuSteps": 9,
+          "cudaGraphError": null,
+          "positionMaxErrorSource": 1.0505873238035518e-07,
+          "positionRmsErrorSource": 7.697944845813888e-08,
+          "positionMaxErrorNormalizedFace": 1.8289941120470876e-06,
+          "velocityMaxErrorSourcePerSecond": 0.0003725947917460284,
+          "forceMaxErrorN": 2.4703117375603496e-07,
+          "cpuEnergy": {
+            "surfacePotentialJ": 1.1764485087816603e-13,
+            "supportPotentialJ": 7.950378204053607e-15,
+            "kineticJ": 6.311770325169758e-13,
+            "mechanicalJ": 7.567722615991954e-13
+          },
+          "gpuEnergy": {
+            "surfacePotentialJ": 9.83360824171537e-14,
+            "supportPotentialJ": 6.269459133543895e-15,
+            "kineticJ": 6.587214687137772e-13,
+            "mechanicalJ": 7.633270102644748e-13
+          },
+          "gpuGeometry": {
+            "maxEdgeStrain": 4.212505466038581e-05,
+            "p95EdgeStrain": 2.497287106560461e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9999360789921291
+          },
+          "cpuGeometry": {
+            "maxEdgeStrain": 5.090054804026647e-05,
+            "p95EdgeStrain": 2.7803031728746036e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9999310619315877
+          }
+        },
+        "nodeFloat64Reference": {
+          "label": "pinch-release",
+          "cpuRuntimeMs": 0.7371999999998025,
+          "gpuRuntimeMs": 5.80130000889767,
+          "speedup": 0.12707496576097277,
+          "gpuSteps": 9,
+          "cudaGraphError": null,
+          "positionMaxErrorSource": 1.0506766201017005e-07,
+          "positionRmsErrorSource": 7.738986855645851e-08,
+          "positionMaxErrorNormalizedFace": 1.829149570236846e-06,
+          "velocityMaxErrorSourcePerSecond": 0.000372548134754877,
+          "forceMaxErrorN": null,
+          "cpuEnergy": {
+            "surfacePotentialJ": 1.1630942464069388e-13,
+            "supportPotentialJ": 7.933004277624744e-15,
+            "kineticJ": 6.317517579379842e-13,
+            "mechanicalJ": 7.559941868563029e-13
+          },
+          "gpuEnergy": {
+            "surfacePotentialJ": 9.83360824171537e-14,
+            "supportPotentialJ": 6.269459133543895e-15,
+            "kineticJ": 6.587214687137772e-13,
+            "mechanicalJ": 7.633270102644748e-13
+          },
+          "gpuGeometry": {
+            "maxEdgeStrain": 4.212505466038581e-05,
+            "p95EdgeStrain": 2.497287106560461e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9999360789921291
+          },
+          "cpuGeometry": {
+            "maxEdgeStrain": 5.089864840564125e-05,
+            "p95EdgeStrain": 2.7802904180278646e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9999310747266089
+          }
+        }
+      },
+      "pinchTargetSource": [
+        0.06350424885749817,
+        0.41886183619499207,
+        0.0007936149486340582
+      ],
+      "pinchTriangleVertexIds": [
+        52,
+        31,
+        47
+      ],
+      "pinchWeights": [
+        0.3333333432674408,
+        0.3333333432674408,
+        0.3333333432674408
+      ]
+    },
+    {
+      "model": "female",
+      "domain": "screen",
+      "vertices": 1000,
+      "hold": {
+        "numpyFloat64": {
+          "label": "pinch-hold",
+          "cpuRuntimeMs": 146.61150000756606,
+          "gpuRuntimeMs": 9.43120000010822,
+          "speedup": 15.545370685160293,
+          "gpuSteps": 37,
+          "cudaGraphError": null,
+          "positionMaxErrorSource": 6.248225606843972e-08,
+          "positionRmsErrorSource": 3.782056842956493e-08,
+          "positionMaxErrorNormalizedFace": 1.087769439696416e-06,
+          "velocityMaxErrorSourcePerSecond": 0.00033712840070822096,
+          "forceMaxErrorN": 3.9182281083821083e-07,
+          "cpuEnergy": {
+            "surfacePotentialJ": 2.664377884823789e-13,
+            "supportPotentialJ": 1.2015402635713336e-14,
+            "kineticJ": 6.101959046740917e-12,
+            "mechanicalJ": 6.380412237859009e-12
+          },
+          "gpuEnergy": {
+            "surfacePotentialJ": 2.1506840974313301e-13,
+            "supportPotentialJ": 8.730644220497375e-15,
+            "kineticJ": 6.219382778631858e-12,
+            "mechanicalJ": 6.443181832595489e-12
+          },
+          "gpuGeometry": {
+            "maxEdgeStrain": 7.214236699973038e-05,
+            "p95EdgeStrain": 1.6354953176140173e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9998651445584221
+          },
+          "cpuGeometry": {
+            "maxEdgeStrain": 4.998117339221077e-05,
+            "p95EdgeStrain": 1.876607405197838e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9997168761425633
+          }
+        },
+        "nodeFloat64Reference": {
+          "label": "pinch-hold",
+          "cpuRuntimeMs": 23.201099999999997,
+          "gpuRuntimeMs": 9.43120000010822,
+          "speedup": 2.4600368987757415,
+          "gpuSteps": 37,
+          "cudaGraphError": null,
+          "positionMaxErrorSource": 6.248225606843972e-08,
+          "positionRmsErrorSource": 3.783716795678942e-08,
+          "positionMaxErrorNormalizedFace": 1.087769439696416e-06,
+          "velocityMaxErrorSourcePerSecond": 0.0003455231511628955,
+          "forceMaxErrorN": null,
+          "cpuEnergy": {
+            "surfacePotentialJ": 2.6875456832671017e-13,
+            "supportPotentialJ": 1.2013188659650247e-14,
+            "kineticJ": 6.100738009068054e-12,
+            "mechanicalJ": 6.381505766054414e-12
+          },
+          "gpuEnergy": {
+            "surfacePotentialJ": 2.1506840974313301e-13,
+            "supportPotentialJ": 8.730644220497375e-15,
+            "kineticJ": 6.219382778631858e-12,
+            "mechanicalJ": 6.443181832595489e-12
+          },
+          "gpuGeometry": {
+            "maxEdgeStrain": 7.214236699973038e-05,
+            "p95EdgeStrain": 1.6354953176140173e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9998651445584221
+          },
+          "cpuGeometry": {
+            "maxEdgeStrain": 4.998117339221077e-05,
+            "p95EdgeStrain": 1.883353768199764e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9997168761425339
+          }
+        }
+      },
+      "release": {
+        "numpyFloat64": {
+          "label": "pinch-release",
+          "cpuRuntimeMs": 140.26790000207257,
+          "gpuRuntimeMs": 22.594599999138154,
+          "speedup": 6.20802758214011,
+          "gpuSteps": 37,
+          "cudaGraphError": null,
+          "positionMaxErrorSource": 1.6199614848729337e-07,
+          "positionRmsErrorSource": 9.535169948647643e-08,
+          "positionMaxErrorNormalizedFace": 2.8202320268331e-06,
+          "velocityMaxErrorSourcePerSecond": 0.0008074070903100708,
+          "forceMaxErrorN": 7.731280093370556e-07,
+          "cpuEnergy": {
+            "surfacePotentialJ": 9.173861604325174e-13,
+            "supportPotentialJ": 7.848637803908756e-14,
+            "kineticJ": 7.114964161055907e-12,
+            "mechanicalJ": 8.110836699527512e-12
+          },
+          "gpuEnergy": {
+            "surfacePotentialJ": 7.221511957232252e-13,
+            "supportPotentialJ": 5.714895502880288e-14,
+            "kineticJ": 7.544777391708492e-12,
+            "mechanicalJ": 8.32407754246052e-12
+          },
+          "gpuGeometry": {
+            "maxEdgeStrain": 0.0001146957158469954,
+            "p95EdgeStrain": 2.8111927892807714e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9997940877765684
+          },
+          "cpuGeometry": {
+            "maxEdgeStrain": 8.811540544501002e-05,
+            "p95EdgeStrain": 3.088158146474479e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9995182637861912
+          }
+        },
+        "nodeFloat64Reference": {
+          "label": "pinch-release",
+          "cpuRuntimeMs": 24.307999999999993,
+          "gpuRuntimeMs": 22.594599999138154,
+          "speedup": 1.0758322785500605,
+          "gpuSteps": 37,
+          "cudaGraphError": null,
+          "positionMaxErrorSource": 1.6199614848729337e-07,
+          "positionRmsErrorSource": 9.537625109393964e-08,
+          "positionMaxErrorNormalizedFace": 2.8202320268331e-06,
+          "velocityMaxErrorSourcePerSecond": 0.0008074070903100708,
+          "forceMaxErrorN": null,
+          "cpuEnergy": {
+            "surfacePotentialJ": 9.19086191445993e-13,
+            "supportPotentialJ": 7.847652358813439e-14,
+            "kineticJ": 7.1143327273214335e-12,
+            "mechanicalJ": 8.11189544235556e-12
+          },
+          "gpuEnergy": {
+            "surfacePotentialJ": 7.221511957232252e-13,
+            "supportPotentialJ": 5.714895502880288e-14,
+            "kineticJ": 7.544777391708492e-12,
+            "mechanicalJ": 8.32407754246052e-12
+          },
+          "gpuGeometry": {
+            "maxEdgeStrain": 0.0001146957158469954,
+            "p95EdgeStrain": 2.8111927892807714e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9997940877765684
+          },
+          "cpuGeometry": {
+            "maxEdgeStrain": 8.811540544501002e-05,
+            "p95EdgeStrain": 3.1023748264000285e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9995182636498511
+          }
+        }
+      },
+      "pinchTargetSource": [
+        0.06342893093824387,
+        0.4128913879394531,
+        0.007007148582488298
+      ],
+      "pinchTriangleVertexIds": [
+        413,
+        350,
+        411
+      ],
+      "pinchWeights": [
+        0.3333333432674408,
+        0.3333333432674408,
+        0.3333333432674408
+      ]
+    },
+    {
+      "model": "female",
+      "domain": "full",
+      "vertices": 5036,
+      "hold": {
+        "numpyFloat64": {
+          "label": "pinch-hold",
+          "cpuRuntimeMs": 911.0345999943092,
+          "gpuRuntimeMs": 13.79090000409633,
+          "speedup": 66.06056165469283,
+          "gpuSteps": 42,
+          "cudaGraphError": null,
+          "positionMaxErrorSource": 6.678695376759689e-08,
+          "positionRmsErrorSource": 3.5776294035187817e-08,
+          "positionMaxErrorNormalizedFace": 1.1627110134953145e-06,
+          "velocityMaxErrorSourcePerSecond": 0.0009372656481781777,
+          "forceMaxErrorN": 5.75030686556898e-07,
+          "cpuEnergy": {
+            "surfacePotentialJ": 9.59408638362298e-13,
+            "supportPotentialJ": 4.176425905481613e-14,
+            "kineticJ": 2.1987889808944633e-11,
+            "mechanicalJ": 2.2989062706361747e-11
+          },
+          "gpuEnergy": {
+            "surfacePotentialJ": 8.577802110507856e-13,
+            "supportPotentialJ": 3.048821895327403e-14,
+            "kineticJ": 2.249884400707357e-11,
+            "mechanicalJ": 2.3387112437077628e-11
+          },
+          "gpuGeometry": {
+            "maxEdgeStrain": 0.00014394351404508116,
+            "p95EdgeStrain": 1.6923867315137218e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9998589553065087
+          },
+          "cpuGeometry": {
+            "maxEdgeStrain": 0.00010529420386194691,
+            "p95EdgeStrain": 1.7319393344894838e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.999688575192552
+          }
+        },
+        "nodeFloat64Reference": {
+          "label": "pinch-hold",
+          "cpuRuntimeMs": 157.14639999999986,
+          "gpuRuntimeMs": 13.79090000409633,
+          "speedup": 11.394934337376274,
+          "gpuSteps": 42,
+          "cudaGraphError": null,
+          "positionMaxErrorSource": 6.678695376759689e-08,
+          "positionRmsErrorSource": 3.578236539206855e-08,
+          "positionMaxErrorNormalizedFace": 1.1627110134953145e-06,
+          "velocityMaxErrorSourcePerSecond": 0.0009372656481781777,
+          "forceMaxErrorN": null,
+          "cpuEnergy": {
+            "surfacePotentialJ": 9.629003073232265e-13,
+            "supportPotentialJ": 4.17481764300132e-14,
+            "kineticJ": 2.198024032433019e-11,
+            "mechanicalJ": 2.298488880808343e-11
+          },
+          "gpuEnergy": {
+            "surfacePotentialJ": 8.577802110507856e-13,
+            "supportPotentialJ": 3.048821895327403e-14,
+            "kineticJ": 2.249884400707357e-11,
+            "mechanicalJ": 2.3387112437077628e-11
+          },
+          "gpuGeometry": {
+            "maxEdgeStrain": 0.00014394351404508116,
+            "p95EdgeStrain": 1.6923867315137218e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9998589553065087
+          },
+          "cpuGeometry": {
+            "maxEdgeStrain": 0.00010529420386194691,
+            "p95EdgeStrain": 1.7319393344894838e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.999688575192552
+          }
+        }
+      },
+      "release": {
+        "numpyFloat64": {
+          "label": "pinch-release",
+          "cpuRuntimeMs": 860.1469999994151,
+          "gpuRuntimeMs": 25.524399999994785,
+          "speedup": 33.69900957513559,
+          "gpuSteps": 41,
+          "cudaGraphError": null,
+          "positionMaxErrorSource": 1.9092509831404703e-07,
+          "positionRmsErrorSource": 8.956741240242887e-08,
+          "positionMaxErrorNormalizedFace": 3.3238634499620146e-06,
+          "velocityMaxErrorSourcePerSecond": 0.0014999689729861814,
+          "forceMaxErrorN": 1.416796059894779e-06,
+          "cpuEnergy": {
+            "surfacePotentialJ": 3.446195129748131e-12,
+            "supportPotentialJ": 2.7668477110575703e-13,
+            "kineticJ": 2.672941576859446e-11,
+            "mechanicalJ": 3.045229566944835e-11
+          },
+          "gpuEnergy": {
+            "surfacePotentialJ": 2.8626950801309726e-12,
+            "supportPotentialJ": 2.0344197082405347e-13,
+            "kineticJ": 2.8572754684324238e-11,
+            "mechanicalJ": 3.163889173527926e-11
+          },
+          "gpuGeometry": {
+            "maxEdgeStrain": 0.00018651112289364097,
+            "p95EdgeStrain": 2.847955715626909e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9997309269207881
+          },
+          "cpuGeometry": {
+            "maxEdgeStrain": 0.00015444986829422696,
+            "p95EdgeStrain": 3.0225488419946234e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9994798572068325
+          }
+        },
+        "nodeFloat64Reference": {
+          "label": "pinch-release",
+          "cpuRuntimeMs": 124.03150000000005,
+          "gpuRuntimeMs": 25.524399999994785,
+          "speedup": 4.859330679664376,
+          "gpuSteps": 41,
+          "cudaGraphError": null,
+          "positionMaxErrorSource": 1.9092509831404703e-07,
+          "positionRmsErrorSource": 8.957781365373044e-08,
+          "positionMaxErrorNormalizedFace": 3.3238634499620146e-06,
+          "velocityMaxErrorSourcePerSecond": 0.0014999689729861814,
+          "forceMaxErrorN": null,
+          "cpuEnergy": {
+            "surfacePotentialJ": 3.4458781735717446e-12,
+            "supportPotentialJ": 2.766088449559262e-13,
+            "kineticJ": 2.672998135310659e-11,
+            "mechanicalJ": 3.045246837163426e-11
+          },
+          "gpuEnergy": {
+            "surfacePotentialJ": 2.8626950801309726e-12,
+            "supportPotentialJ": 2.0344197082405347e-13,
+            "kineticJ": 2.8572754684324238e-11,
+            "mechanicalJ": 3.163889173527926e-11
+          },
+          "gpuGeometry": {
+            "maxEdgeStrain": 0.00018651112289364097,
+            "p95EdgeStrain": 2.847955715626909e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9997309269207881
+          },
+          "cpuGeometry": {
+            "maxEdgeStrain": 0.00015444986829422696,
+            "p95EdgeStrain": 3.0239106128472065e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9994798572068325
+          }
+        }
+      },
+      "pinchTargetSource": [
+        0.058063805103302,
+        0.39317721128463745,
+        0.008368785493075848
+      ],
+      "pinchTriangleVertexIds": [
+        1403,
+        4206,
+        1569
+      ],
+      "pinchWeights": [
+        0.3333333432674408,
+        0.3333333432674408,
+        0.3333333432674408
+      ]
+    },
+    {
+      "model": "male",
+      "domain": "micro",
+      "vertices": 128,
+      "hold": {
+        "numpyFloat64": {
+          "label": "pinch-hold",
+          "cpuRuntimeMs": 5.787000001873821,
+          "gpuRuntimeMs": 10.65060000109952,
+          "speedup": 0.5433496705609447,
+          "gpuSteps": 7,
+          "cudaGraphError": null,
+          "positionMaxErrorSource": 7.266745624605238e-08,
+          "positionRmsErrorSource": 4.734710528007371e-08,
+          "positionMaxErrorNormalizedFace": 2.389601641110191e-07,
+          "velocityMaxErrorSourcePerSecond": 0.00015988626078874667,
+          "forceMaxErrorN": 9.37658993165835e-07,
+          "cpuEnergy": {
+            "surfacePotentialJ": 6.328300834456109e-14,
+            "supportPotentialJ": 6.717492705540256e-15,
+            "kineticJ": 4.119693681628928e-12,
+            "mechanicalJ": 4.1896941826790295e-12
+          },
+          "gpuEnergy": {
+            "surfacePotentialJ": 1.2779290563858485e-13,
+            "supportPotentialJ": 4.479548852798419e-15,
+            "kineticJ": 4.126614122465727e-12,
+            "mechanicalJ": 4.2588865769571104e-12
+          },
+          "gpuGeometry": {
+            "maxEdgeStrain": 6.492528838227564e-05,
+            "p95EdgeStrain": 1.5216025867220088e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9998825000971795
+          },
+          "cpuGeometry": {
+            "maxEdgeStrain": 4.023552645918609e-05,
+            "p95EdgeStrain": 8.713873267975845e-06,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9999249358984553
+          }
+        },
+        "nodeFloat64Reference": {
+          "label": "pinch-hold",
+          "cpuRuntimeMs": 0.680699999999888,
+          "gpuRuntimeMs": 10.65060000109952,
+          "speedup": 0.06391189228114995,
+          "gpuSteps": 7,
+          "cudaGraphError": null,
+          "positionMaxErrorSource": 9.724558494911042e-08,
+          "positionRmsErrorSource": 4.884356537538242e-08,
+          "positionMaxErrorNormalizedFace": 3.1978305198723477e-07,
+          "velocityMaxErrorSourcePerSecond": 0.0014836089825495337,
+          "forceMaxErrorN": null,
+          "cpuEnergy": {
+            "surfacePotentialJ": 6.953910754028589e-14,
+            "supportPotentialJ": 6.458123177134015e-15,
+            "kineticJ": 3.954908954361286e-12,
+            "mechanicalJ": 4.030906185078706e-12
+          },
+          "gpuEnergy": {
+            "surfacePotentialJ": 1.2779290563858485e-13,
+            "supportPotentialJ": 4.479548852798419e-15,
+            "kineticJ": 4.126614122465727e-12,
+            "mechanicalJ": 4.2588865769571104e-12
+          },
+          "gpuGeometry": {
+            "maxEdgeStrain": 6.492528838227564e-05,
+            "p95EdgeStrain": 1.5216025867220088e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9998825000971795
+          },
+          "cpuGeometry": {
+            "maxEdgeStrain": 2.4828342133089732e-05,
+            "p95EdgeStrain": 1.1158152381592188e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9999732702281976
+          }
+        }
+      },
+      "release": {
+        "numpyFloat64": {
+          "label": "pinch-release",
+          "cpuRuntimeMs": 4.941300008795224,
+          "gpuRuntimeMs": 3.565799997886643,
+          "speedup": 1.3857479420393193,
+          "gpuSteps": 6,
+          "cudaGraphError": null,
+          "positionMaxErrorSource": 1.5765203037380738e-07,
+          "positionRmsErrorSource": 7.870657687667841e-08,
+          "positionMaxErrorNormalizedFace": 5.184240235821784e-07,
+          "velocityMaxErrorSourcePerSecond": 0.00040238320996529415,
+          "forceMaxErrorN": 1.71929169229482e-06,
+          "cpuEnergy": {
+            "surfacePotentialJ": 2.4938876654148957e-13,
+            "supportPotentialJ": 5.207067166194176e-14,
+            "kineticJ": 6.1837525995403506e-12,
+            "mechanicalJ": 6.4852120377437816e-12
+          },
+          "gpuEnergy": {
+            "surfacePotentialJ": 3.5169400191447234e-13,
+            "supportPotentialJ": 5.1332020728262216e-14,
+            "kineticJ": 6.228759601831485e-12,
+            "mechanicalJ": 6.631785624474219e-12
+          },
+          "gpuGeometry": {
+            "maxEdgeStrain": 7.6903625066512e-05,
+            "p95EdgeStrain": 2.856092066282174e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9998236878039001
+          },
+          "cpuGeometry": {
+            "maxEdgeStrain": 4.301164373426149e-05,
+            "p95EdgeStrain": 1.9159394534525432e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9999098213926014
+          }
+        },
+        "nodeFloat64Reference": {
+          "label": "pinch-release",
+          "cpuRuntimeMs": 0.6075000000000728,
+          "gpuRuntimeMs": 3.565799997886643,
+          "speedup": 0.17036850085818672,
+          "gpuSteps": 6,
+          "cudaGraphError": null,
+          "positionMaxErrorSource": 1.5992805140834175e-07,
+          "positionRmsErrorSource": 8.158669124765148e-08,
+          "positionMaxErrorNormalizedFace": 5.259085068437211e-07,
+          "velocityMaxErrorSourcePerSecond": 0.0005154357355223419,
+          "forceMaxErrorN": null,
+          "cpuEnergy": {
+            "surfacePotentialJ": 2.348819654343808e-13,
+            "supportPotentialJ": 5.0702951589938174e-14,
+            "kineticJ": 6.136405217447031e-12,
+            "mechanicalJ": 6.42199013447135e-12
+          },
+          "gpuEnergy": {
+            "surfacePotentialJ": 3.5169400191447234e-13,
+            "supportPotentialJ": 5.1332020728262216e-14,
+            "kineticJ": 6.228759601831485e-12,
+            "mechanicalJ": 6.631785624474219e-12
+          },
+          "gpuGeometry": {
+            "maxEdgeStrain": 7.6903625066512e-05,
+            "p95EdgeStrain": 2.856092066282174e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9998236878039001
+          },
+          "cpuGeometry": {
+            "maxEdgeStrain": 4.301174560996477e-05,
+            "p95EdgeStrain": 1.7919456260564526e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9999098213925985
+          }
+        }
+      },
+      "pinchTargetSource": [
+        0.2589900493621826,
+        0.15502522885799408,
+        0.09166473150253296
+      ],
+      "pinchTriangleVertexIds": [
+        30,
+        31,
+        46
+      ],
+      "pinchWeights": [
+        0.3333333432674408,
+        0.3333333432674408,
+        0.3333333432674408
+      ]
+    },
+    {
+      "model": "male",
+      "domain": "screen",
+      "vertices": 1000,
+      "hold": {
+        "numpyFloat64": {
+          "label": "pinch-hold",
+          "cpuRuntimeMs": 57.63920000754297,
+          "gpuRuntimeMs": 15.833900004508905,
+          "speedup": 3.6402402434731473,
+          "gpuSteps": 15,
+          "cudaGraphError": null,
+          "positionMaxErrorSource": 1.0680042578618272e-07,
+          "positionRmsErrorSource": 7.602810023486293e-08,
+          "positionMaxErrorNormalizedFace": 3.512032564698363e-07,
+          "velocityMaxErrorSourcePerSecond": 0.0004826892939110189,
+          "forceMaxErrorN": 3.6911233362530147e-06,
+          "cpuEnergy": {
+            "surfacePotentialJ": 4.940522667429349e-13,
+            "supportPotentialJ": 6.128472878686098e-14,
+            "kineticJ": 3.974490926984534e-11,
+            "mechanicalJ": 4.030024626537514e-11
+          },
+          "gpuEnergy": {
+            "surfacePotentialJ": 1.023958092190802e-12,
+            "supportPotentialJ": 2.4926096618082573e-14,
+            "kineticJ": 4.001134394237825e-11,
+            "mechanicalJ": 4.1060228131187136e-11
+          },
+          "gpuGeometry": {
+            "maxEdgeStrain": 0.00012849210152651274,
+            "p95EdgeStrain": 1.586096444052866e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9998767013702117
+          },
+          "cpuGeometry": {
+            "maxEdgeStrain": 0.0001416354710480596,
+            "p95EdgeStrain": 1.3454031288126077e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9999190133727723
+          }
+        },
+        "nodeFloat64Reference": {
+          "label": "pinch-hold",
+          "cpuRuntimeMs": 9.204400000000533,
+          "gpuRuntimeMs": 15.833900004508905,
+          "speedup": 0.5813097213813061,
+          "gpuSteps": 15,
+          "cudaGraphError": null,
+          "positionMaxErrorSource": 1.1546268543685765e-07,
+          "positionRmsErrorSource": 7.61237025954441e-08,
+          "positionMaxErrorNormalizedFace": 3.7968829082536306e-07,
+          "velocityMaxErrorSourcePerSecond": 0.001427028284116466,
+          "forceMaxErrorN": null,
+          "cpuEnergy": {
+            "surfacePotentialJ": 4.971434106926968e-13,
+            "supportPotentialJ": 6.116711897855997e-14,
+            "kineticJ": 3.963659609390323e-11,
+            "mechanicalJ": 4.019490662357449e-11
+          },
+          "gpuEnergy": {
+            "surfacePotentialJ": 1.023958092190802e-12,
+            "supportPotentialJ": 2.4926096618082573e-14,
+            "kineticJ": 4.001134394237825e-11,
+            "mechanicalJ": 4.1060228131187136e-11
+          },
+          "gpuGeometry": {
+            "maxEdgeStrain": 0.00012849210152651274,
+            "p95EdgeStrain": 1.586096444052866e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9998767013702117
+          },
+          "cpuGeometry": {
+            "maxEdgeStrain": 0.0001416354710480596,
+            "p95EdgeStrain": 1.340756104945979e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9999190133727723
+          }
+        }
+      },
+      "release": {
+        "numpyFloat64": {
+          "label": "pinch-release",
+          "cpuRuntimeMs": 58.570199995301664,
+          "gpuRuntimeMs": 8.574099992983975,
+          "speedup": 6.83106099103446,
+          "gpuSteps": 15,
+          "cudaGraphError": null,
+          "positionMaxErrorSource": 3.025140627141899e-07,
+          "positionRmsErrorSource": 1.9643758820253547e-07,
+          "positionMaxErrorNormalizedFace": 9.94789329453114e-07,
+          "velocityMaxErrorSourcePerSecond": 0.0011421617654449932,
+          "forceMaxErrorN": 4.3989896897673025e-06,
+          "cpuEnergy": {
+            "surfacePotentialJ": 2.735783264778478e-12,
+            "supportPotentialJ": 4.974703413610918e-13,
+            "kineticJ": 6.179155999419903e-11,
+            "mechanicalJ": 6.50248136003386e-11
+          },
+          "gpuEnergy": {
+            "surfacePotentialJ": 4.401174270730854e-12,
+            "supportPotentialJ": 2.43156686595967e-13,
+            "kineticJ": 6.340387301137654e-11,
+            "mechanicalJ": 6.804820396870336e-11
+          },
+          "gpuGeometry": {
+            "maxEdgeStrain": 0.0001677526642378492,
+            "p95EdgeStrain": 3.257606369002808e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9997566230055587
+          },
+          "cpuGeometry": {
+            "maxEdgeStrain": 0.0002676287996745455,
+            "p95EdgeStrain": 3.114713875892161e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9997613969830715
+          }
+        },
+        "nodeFloat64Reference": {
+          "label": "pinch-release",
+          "cpuRuntimeMs": 8.47569999999996,
+          "gpuRuntimeMs": 8.574099992983975,
+          "speedup": 0.9885235776274439,
+          "gpuSteps": 15,
+          "cudaGraphError": null,
+          "positionMaxErrorSource": 3.025140627141899e-07,
+          "positionRmsErrorSource": 1.9628107737493408e-07,
+          "positionMaxErrorNormalizedFace": 9.94789329453114e-07,
+          "velocityMaxErrorSourcePerSecond": 0.0011421617654449932,
+          "forceMaxErrorN": null,
+          "cpuEnergy": {
+            "surfacePotentialJ": 2.715396439560655e-12,
+            "supportPotentialJ": 4.968255101986202e-13,
+            "kineticJ": 6.178391504522076e-11,
+            "mechanicalJ": 6.499613699498003e-11
+          },
+          "gpuEnergy": {
+            "surfacePotentialJ": 4.401174270730854e-12,
+            "supportPotentialJ": 2.43156686595967e-13,
+            "kineticJ": 6.340387301137654e-11,
+            "mechanicalJ": 6.804820396870336e-11
+          },
+          "gpuGeometry": {
+            "maxEdgeStrain": 0.0001677526642378492,
+            "p95EdgeStrain": 3.257606369002808e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9997566230055587
+          },
+          "cpuGeometry": {
+            "maxEdgeStrain": 0.0002676287996745455,
+            "p95EdgeStrain": 3.114713875892161e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9997613969830715
+          }
+        }
+      },
+      "pinchTargetSource": [
+        0.2686103880405426,
+        0.1373143345117569,
+        0.10177776217460632
+      ],
+      "pinchTriangleVertexIds": [
+        703,
+        798,
+        795
+      ],
+      "pinchWeights": [
+        0.3333333432674408,
+        0.3333333432674408,
+        0.3333333432674408
+      ]
+    },
+    {
+      "model": "male",
+      "domain": "full",
+      "vertices": 41920,
+      "hold": {
+        "numpyFloat64": {
+          "label": "pinch-hold",
+          "cpuRuntimeMs": 5622.375899998588,
+          "gpuRuntimeMs": 126.05740000435617,
+          "speedup": 44.60171239295983,
+          "gpuSteps": 24,
+          "cudaGraphError": null,
+          "positionMaxErrorSource": 1.3812855886198992e-07,
+          "positionRmsErrorSource": 8.461897207498911e-08,
+          "positionMaxErrorNormalizedFace": 4.542229052619793e-07,
+          "velocityMaxErrorSourcePerSecond": 0.0006185275796604262,
+          "forceMaxErrorN": 3.3061264131971312e-06,
+          "cpuEnergy": {
+            "surfacePotentialJ": 2.639585119996731e-11,
+            "supportPotentialJ": 4.222549242096882e-12,
+            "kineticJ": 3.0387066398698746e-09,
+            "mechanicalJ": 3.069325040311939e-09
+          },
+          "gpuEnergy": {
+            "surfacePotentialJ": 3.1337053117889455e-11,
+            "supportPotentialJ": 1.2998202197097324e-12,
+            "kineticJ": 3.06639778812898e-09,
+            "mechanicalJ": 3.099034661466579e-09
+          },
+          "gpuGeometry": {
+            "maxEdgeStrain": 0.00013276107506824007,
+            "p95EdgeStrain": 1.4675553583855887e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9997204933451331
+          },
+          "cpuGeometry": {
+            "maxEdgeStrain": 0.00011187654970501501,
+            "p95EdgeStrain": 1.4619656876874172e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9997188342218105
+          }
+        },
+        "nodeFloat64Reference": {
+          "label": "pinch-hold",
+          "cpuRuntimeMs": 755.8900000000003,
+          "gpuRuntimeMs": 126.05740000435617,
+          "speedup": 5.996395292730764,
+          "gpuSteps": 24,
+          "cudaGraphError": null,
+          "positionMaxErrorSource": 1.3812855886198992e-07,
+          "positionRmsErrorSource": 8.46170458657148e-08,
+          "positionMaxErrorNormalizedFace": 4.542229052619793e-07,
+          "velocityMaxErrorSourcePerSecond": 0.0011103637480059311,
+          "forceMaxErrorN": null,
+          "cpuEnergy": {
+            "surfacePotentialJ": 2.641920547612514e-11,
+            "supportPotentialJ": 4.221870384521197e-12,
+            "kineticJ": 3.0383831923267945e-09,
+            "mechanicalJ": 3.069024268187441e-09
+          },
+          "gpuEnergy": {
+            "surfacePotentialJ": 3.1337053117889455e-11,
+            "supportPotentialJ": 1.2998202197097324e-12,
+            "kineticJ": 3.06639778812898e-09,
+            "mechanicalJ": 3.099034661466579e-09
+          },
+          "gpuGeometry": {
+            "maxEdgeStrain": 0.00013276107506824007,
+            "p95EdgeStrain": 1.4675553583855887e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9997204933451331
+          },
+          "cpuGeometry": {
+            "maxEdgeStrain": 0.00011187654970501501,
+            "p95EdgeStrain": 1.4622649733905482e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9997188342218105
+          }
+        }
+      },
+      "release": {
+        "numpyFloat64": {
+          "label": "pinch-release",
+          "cpuRuntimeMs": 5533.821599994553,
+          "gpuRuntimeMs": 13.52930000575725,
+          "speedup": 409.0249752492512,
+          "gpuSteps": 24,
+          "cudaGraphError": null,
+          "positionMaxErrorSource": 3.980314328902197e-07,
+          "positionRmsErrorSource": 2.1490312455136083e-07,
+          "positionMaxErrorNormalizedFace": 1.3088893080657133e-06,
+          "velocityMaxErrorSourcePerSecond": 0.0014479103855019931,
+          "forceMaxErrorN": 7.678782549166977e-06,
+          "cpuEnergy": {
+            "surfacePotentialJ": 1.9071780698965595e-10,
+            "supportPotentialJ": 3.9638430034032126e-11,
+            "kineticJ": 5.796412156590399e-09,
+            "mechanicalJ": 6.026768393614087e-09
+          },
+          "gpuEnergy": {
+            "surfacePotentialJ": 2.857051934767745e-10,
+            "supportPotentialJ": 2.0657996132837745e-11,
+            "kineticJ": 5.922426807907205e-09,
+            "mechanicalJ": 6.228789997516817e-09
+          },
+          "gpuGeometry": {
+            "maxEdgeStrain": 0.00027431731349420287,
+            "p95EdgeStrain": 3.856664874421641e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9993605081867307
+          },
+          "cpuGeometry": {
+            "maxEdgeStrain": 0.00022444295342220177,
+            "p95EdgeStrain": 3.405049524627281e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9994724988604129
+          }
+        },
+        "nodeFloat64Reference": {
+          "label": "pinch-release",
+          "cpuRuntimeMs": 823.4982000000005,
+          "gpuRuntimeMs": 13.52930000575725,
+          "speedup": 60.86776105560299,
+          "gpuSteps": 24,
+          "cudaGraphError": null,
+          "positionMaxErrorSource": 3.980314328902197e-07,
+          "positionRmsErrorSource": 2.148974849505876e-07,
+          "positionMaxErrorNormalizedFace": 1.3088893080657133e-06,
+          "velocityMaxErrorSourcePerSecond": 0.0014479103855019931,
+          "forceMaxErrorN": null,
+          "cpuEnergy": {
+            "surfacePotentialJ": 1.9072861205433995e-10,
+            "supportPotentialJ": 3.963431944282539e-11,
+            "kineticJ": 5.796255648533552e-09,
+            "mechanicalJ": 6.026618580030717e-09
+          },
+          "gpuEnergy": {
+            "surfacePotentialJ": 2.857051934767745e-10,
+            "supportPotentialJ": 2.0657996132837745e-11,
+            "kineticJ": 5.922426807907205e-09,
+            "mechanicalJ": 6.228789997516817e-09
+          },
+          "gpuGeometry": {
+            "maxEdgeStrain": 0.00027431731349420287,
+            "p95EdgeStrain": 3.856664874421641e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9993605081867307
+          },
+          "cpuGeometry": {
+            "maxEdgeStrain": 0.00022444295342220177,
+            "p95EdgeStrain": 3.404987422936249e-05,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.9994724988604129
+          }
+        }
+      },
+      "pinchTargetSource": [
+        0.1985543668270111,
+        0.08364603668451309,
+        0.16405196487903595
+      ],
+      "pinchTriangleVertexIds": [
+        30977,
+        15088,
+        30143
+      ],
+      "pinchWeights": [
+        0.3333333432674408,
+        0.3333333432674408,
+        0.3333333432674408
+      ]
+    }
+  ]
+}

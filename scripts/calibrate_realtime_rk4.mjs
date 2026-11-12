@@ -991,6 +991,107 @@ async function main() {
   const started = performance.now(), loaded = {};
   for (const name of requestedModels) { console.log(JSON.stringify({ phase: 'load', model: name })); loaded[name] = await loadModel(name); console.log(JSON.stringify({ phase: 'loaded', model: name, islandVertices: loaded[name].system.vertexCount, islandTriangles: loaded[name].system.faces.length, screenIslandVertices: loaded[name].screenMesh?.system.vertexCount, screenDomainKind: loaded[name].screenMesh?.domainKind, screenSourceIslandId: loaded[name].screenMesh?.sourceIslandId, microIslandVertices: loaded[name].microMesh?.system.vertexCount, microDomainKind: loaded[name].microMesh?.domainKind, microSourceIslandId: loaded[name].microMesh?.sourceIslandId, islandCount: loaded[name].islandCount })); }
   const meshes = Object.values(loaded);
+  if (argv.has('--export-gpu-cpu-references')) {
+    const candidate = candidateFromEnvironment();
+    const seconds = Number(process.env.VELA_GPU_REFERENCE_SECONDS || 0.0001);
+    const referenceDir = path.join(outputDir, 'gpu-cpu-references');
+    await fs.mkdir(referenceDir, { recursive: true });
+    const writeTyped = async (file, array) => { await fs.writeFile(file, Buffer.from(array.buffer, array.byteOffset, array.byteLength)); return path.basename(file); };
+    const manifest = { schema: 'vela-rk4-gpu-cpu-reference-manifest-v1', generatedAt: new Date().toISOString(), sourceMetersPerUnit, frameDt, seconds, candidate, models: {} };
+    for (const mesh of meshes) {
+      manifest.models[mesh.name] = {};
+      for (const [domain, evalMesh] of [['full', mesh], ['screen', mesh.screenMesh], ['micro', mesh.microMesh]]) {
+        if (!evalMesh) continue;
+        const face = evalMesh.system.faces[Math.floor(evalMesh.system.faces.length / 2)];
+        const ids = face.slice();
+        const weights = [1 / 3, 1 / 3, 1 / 3];
+        const origin = ids.reduce((sum, id, index) => sum.map((value, axis) => value + evalMesh.neutral[id * 3 + axis] * weights[index]), [0, 0, 0]);
+        const target = origin.map((value, axis) => value + evalMesh.up[axis] * evalMesh.faceScale * 0.001);
+        const pinch = { ids, weights, target, velocity: [0, 0, 0], kp: 0.1, kd: 0.01, peakForce: 0 };
+        const gravity = directions(evalMesh).down.map(value => value * 9.81);
+        const gravityResult = simulate(evalMesh, candidate, { gravity, seconds, wallClockLimitMs: Infinity });
+        const holdResult = simulate(evalMesh, candidate, { gravity, seconds, pinch, wallClockLimitMs: Infinity });
+        const releaseResult = simulate(evalMesh, candidate, { gravity, seconds, initialPositions: holdResult.positions, initialVelocities: holdResult.velocities, wallClockLimitMs: Infinity });
+        const basePath = path.join(referenceDir, `${mesh.name}-${domain}`);
+        const stages = {};
+        for (const [stage, result] of [['gravity', gravityResult], ['pinchHold', holdResult], ['pinchRelease', releaseResult]]) {
+          stages[stage] = {
+            positions: await writeTyped(`${basePath}-${stage}-positions.bin`, result.positions),
+            velocities: await writeTyped(`${basePath}-${stage}-velocities.bin`, result.velocities),
+            runtimeMs: result.runtimeMs,
+            steps: result.steps,
+            forceEvaluations: result.forceEvaluations,
+            complete: result.complete,
+            geometry: result.geometry,
+            pinch: result.pinch ? { error: result.pinch.error, peakForce: result.pinch.peakForce } : null,
+          };
+        }
+        manifest.models[mesh.name][domain] = { vertexCount: evalMesh.system.vertexCount, triangleCount: evalMesh.system.faces.length, faceScale: evalMesh.faceScale, anatomicalAxes: { right: evalMesh.right, up: evalMesh.up, front: evalMesh.front }, pinch: { ids, weights, target, kp: pinch.kp, kd: pinch.kd }, stages };
+      }
+    }
+    const manifestPath = path.join(referenceDir, 'manifest.json');
+    await fs.writeFile(manifestPath, JSON.stringify(manifest, null, 2));
+    console.log(JSON.stringify({ phase: 'gpu-cpu-references-complete', path: path.relative(root, manifestPath), seconds }));
+    return;
+  }
+  if (argv.has('--export-gpu-fixtures')) {
+    const candidate = candidateFromEnvironment();
+    const fixtureDir = path.join(outputDir, 'gpu-fixtures');
+    await fs.mkdir(fixtureDir, { recursive: true });
+    const manifest = { schema: 'vela-rk4-gpu-fixture-manifest-v1', generatedAt: new Date().toISOString(), sourceMetersPerUnit, frameDt, candidate, models: {} };
+    const writeArray = async (basePath, array) => {
+      const file = `${basePath}.bin`;
+      await fs.writeFile(file, Buffer.from(array.buffer, array.byteOffset, array.byteLength));
+      return path.basename(file);
+    };
+    for (const mesh of meshes) {
+      manifest.models[mesh.name] = {};
+      for (const [domain, evalMesh] of [['full', mesh], ['screen', mesh.screenMesh], ['micro', mesh.microMesh]]) {
+        if (!evalMesh) continue;
+        const prepared = preparePhysics(evalMesh, candidate);
+        const basePath = path.join(fixtureDir, `${mesh.name}-${domain}`);
+        const faceFlat = new Uint32Array(evalMesh.system.faces.length * 3);
+        evalMesh.system.faces.forEach((face, index) => face.forEach((vertex, axis) => { faceFlat[index * 3 + axis] = vertex; }));
+        const arrays = {
+          neutral: evalMesh.system.neutral,
+          anchors: evalMesh.system.anchors,
+          masses: prepared.masses,
+          edgeA: prepared.edgeA,
+          edgeB: prepared.edgeB,
+          edgeRest: prepared.edgeRest,
+          supportA: prepared.supportA,
+          supportB: prepared.supportB,
+          supportRest: prepared.supportRest,
+          supportK: prepared.supportK,
+          faces: faceFlat,
+        };
+        const files = {};
+        for (const [name, array] of Object.entries(arrays)) files[name] = await writeArray(basePath + `-${name}`, array);
+        manifest.models[mesh.name][domain] = {
+          name: evalMesh.name,
+          domainKind: evalMesh.domainKind,
+          sourceIslandId: evalMesh.sourceIslandId,
+          faceScale: evalMesh.faceScale,
+          anatomicalAxes: { right: evalMesh.right, up: evalMesh.up, front: evalMesh.front },
+          vertexCount: prepared.vertexCount,
+          triangleCount: prepared.faces.length,
+          surfaceSpringCount: prepared.edgeA.length,
+          supportSpringCount: prepared.supportA.length,
+          surfaceK: prepared.surfaceK,
+          damping: prepared.damping,
+          stableDt: prepared.stableDt,
+          requestedDt: prepared.requestedDt,
+          explicitSubsteps: prepared.explicitSubsteps,
+          totalMass: prepared.totalMass,
+          files,
+        };
+      }
+    }
+    const manifestPath = path.join(fixtureDir, 'manifest.json');
+    await fs.writeFile(manifestPath, JSON.stringify(manifest, null, 2));
+    console.log(JSON.stringify({ phase: 'gpu-fixtures-complete', path: path.relative(root, manifestPath), models: manifest.models }));
+    return;
+  }
   if (argv.has('--domain-audit')) {
     const candidateCheckpoint = resumePath ? await loadWaterfallCheckpoint(resumePath) : null;
     const base = candidateCheckpoint?.current || createCandidate([0, 0, 0, 2, -1, -1, -2]);
