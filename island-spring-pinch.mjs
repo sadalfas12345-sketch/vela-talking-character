@@ -978,7 +978,11 @@ function populateIslands() {
   for (const entry of state.entries) for (const island of entry.islands) { const option = document.createElement('option'); option.value = `${entry.mesh.uuid}:${island.id}`; option.textContent = `${entry.mesh.name} · island ${island.id} · ${island.vertices.length}v / ${island.faces.length}f`; ui.island.append(option); }
   const browPoints = [70, 63, 105, 336, 293, 334].map(id => state.attachments?.[id]).filter(Boolean);
   const candidates = state.entries.flatMap(entry => entry.islands.map(island => ({ entry, island })));
-  const faceCandidate = candidates.sort((a, b) => {
+  const requestedIsland = Number(new URLSearchParams(location.search).get('gpuIsland'));
+  const requestedCandidate = Number.isInteger(requestedIsland)
+    ? candidates.find(item => item.island.id === requestedIsland)
+    : null;
+  const faceCandidate = requestedCandidate || candidates.sort((a, b) => {
     const score = item => browPoints.reduce((sum, point) => sum + item.island.bounds.distanceToPoint(point), 0);
     return score(a) - score(b);
   })[0];
