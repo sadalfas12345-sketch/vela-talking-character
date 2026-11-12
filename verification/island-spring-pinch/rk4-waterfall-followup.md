@@ -20,6 +20,10 @@ Generated 2026-11-12 on the original Tripo female and male micro-islands. This i
 | surface 3.1623, inner 3.1623, damping 100, Kp 0.1, Kd 0.01 | 88.70% | 63.16% | Female clean; male 5 genuine folds in 20 sequences | Reject: male geometry |
 | surface 10, inner 10, damping 100, Kp 0.1, Kd 0.01 | 52.42% | 35.89% | Female clean; male 3 genuine folds in 3 sequences | Reject: male compliance and geometry |
 | surface 1, inner 1, damping 100, Kp 0.1, Kd 0.01 | 132.19% | 109.99% | Female clean; male 2 genuine folds in 3 sequences | Reject: male geometry |
+| surface 1, inner 1, damping 316, Kp 0.1, Kd 0.01 | nonfinite | nonfinite | Female runaway with 3 collapses; male nonfinite response | Reject: numerical instability |
+| surface 1, inner 1, damping 100, Kp 0.1, Kd 0.1 | 130.83% | 108.92% | Female clean; male 2 genuine folds in 3 sequences | Reject: male geometry unchanged |
+| surface 1, inner 1, damping 100, Kp 0.0316, Kd 0.1 | 67.60% | 43.12% | Female clean; male 2 genuine folds in 3 sequences | Reject: male response below gate |
+| surface 1, inner 1, mass 1.995, damping 100, Kp 0.1, Kd 0.01 | 119.32% | 93.70% | Female clean; male 4 genuine folds in 3 sequences | Reject: mass worsened male geometry |
 
 The compliant candidate's definitive 20-sequence artifact is:
 
@@ -43,6 +47,8 @@ The previous waterfall's baseline robustness failure remains independently recor
 The low-gain boundary probe at `Kp=0.01×, damping=10×, Kd=0.01×` still produced two genuine male folds and only 42.1% male response. This is not a valid way to hide the deformation by reducing force.
 
 The baseline-material continuation probe at `surface=1×, inner=1×, damping=100×, Kp=0.1×, Kd=0.01×` produced 132.19% female and 109.99% male force response. The female three-sequence stress probe was clean; the male probe produced 8 raw orientation flips and 2 genuine folds with no collapses. The response was adequate, but the male geometry gate still failed, so this candidate was not promoted.
+
+The next controlled probes ruled out the remaining simple parameter levers. Damping 316× became numerically unstable, and lowering the requested RK4 timestep by 10× was bit-identical because the internal conservative timestep cap remained active. Increasing derivative gain to 0.1× left the male fold count unchanged. Lowering proportional gain to 0.0316× reduced male response to 43.12% but still left two folds. Increasing effective mass to 1.995× reduced male response to 93.70% and increased folds to four.
 
 No material parameters, topology, spring connectivity, mesh vertices, or acceptance thresholds were changed to hide these failures. No performance stage was run after the failed robustness gate.
 
