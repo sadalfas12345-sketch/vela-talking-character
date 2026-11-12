@@ -210,6 +210,28 @@
       "maleGenuineFolds": 2,
       "result": "FAIL",
       "interpretation": "The first low-gain point near the response threshold still folds male and misses male compliance"
+    },
+    {
+      "label": "baseline-material-damping-100-kp-0.1-kd-0.01",
+      "massMultiplier": 1,
+      "surfaceMultiplier": 1,
+      "innerMultiplier": 1,
+      "dampingMultiplier": 100,
+      "dtMultiplier": 0.1,
+      "pinchKpMultiplier": 0.1,
+      "pinchKdMultiplier": 0.01,
+      "femaleResponseRatio": 1.3218860882,
+      "maleResponseRatio": 1.0999416907,
+      "femaleGenuineFolds": 0,
+      "maleGenuineFolds": 2,
+      "femaleRawOrientationFlips": 0,
+      "maleRawOrientationFlips": 8,
+      "femaleCollapses": 0,
+      "maleCollapses": 0,
+      "femaleRuntimeMs": 45086.8909,
+      "maleRuntimeMs": 45750.0077,
+      "result": "FAIL",
+      "interpretation": "Baseline material with the high-damping controller exceeds the response gate on both models, but still produces two genuine male folds in the three-sequence stress probe"
     }
   ],
   "conclusion": "No screened continuation candidate satisfies both the response gate and zero male genuine folds. Candidates that reduce folds below the original baseline remain invalid; no candidate was promoted to the waterfall checkpoint.",
