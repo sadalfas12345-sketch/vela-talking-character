@@ -246,7 +246,7 @@ function buildSystem(mesh) {
 // Offline physical search bounds. Mass multipliers above 1 are explicitly effective
 // numerical masses, not claims about anatomical density. The ranges keep the search
 // near the biological baseline while allowing a documented numerical calibration.
-const defaultLogBounds = [[-0.3, 0.3], [-1, 1], [-2, 2], [-1, 2], [-5, 1], [-1, 1], [-1, 1]];
+const defaultLogBounds = [[-0.3, 0.3], [-1, 1], [-2, 2], [-1, 5], [-5, 1], [-3, 1], [-3, 1]];
 const legacyLogBounds = [[0, 8], [-2, 2], [-2, 4], [-1, 2], [-1, 1], [-1, 1], [-1, 1]];
 function createCandidate(logs, bounds = defaultLogBounds) {
   const clamp = (x, lo, hi) => Math.max(lo, Math.min(hi, x));
@@ -683,7 +683,8 @@ function stageDistance(result, stage) {
   const values = Object.values(result.models || {});
   if (values.some(value => value.deferred || value.rejected || value.incomplete)) return result.diagnosis?.failureDistance || 1e6;
   if (stage === 'timestep') return values.reduce((sum, value) => sum + (value.convergence?.converged ? 0 : 1) + (value.timestepRange?.largestTestedStableMultiplier ? 0 : 1), 0);
-  if (stage === 'gravity' || stage === 'damping') return values.reduce((sum, value) => sum + (value.gravity?.worstFlips || 0) + (value.gravity?.worstCollapses || 0) + Math.max(0, (value.gravity?.worstStrain || 0) - maxGravityStrain) + Math.max(0, (value.gravity?.maxForceResidualRatio || 0) - maxForceResidualRatio) + Math.max(0, (value.gravity?.maxFinalVelocity || 0) * 0 + (value.gravity?.allSettled ? 0 : 1)), 0);
+  if (stage === 'gravity') return values.reduce((sum, value) => sum + (value.gravity?.worstFlips || 0) + (value.gravity?.worstCollapses || 0) + Math.max(0, (value.gravity?.worstStrain || 0) - maxGravityStrain) + Math.max(0, (value.gravity?.maxForceResidualRatio || 0) - maxForceResidualRatio) + Math.max(0, (value.gravity?.maxFinalVelocity || 0) * 0 + (value.gravity?.allSettled ? 0 : 1)), 0);
+  if (stage === 'damping') return values.reduce((sum, value) => sum + (value.gravity?.worstFlips || 0) + (value.gravity?.worstCollapses || 0) + Math.max(0, (value.gravity?.worstStrain || 0) - maxGravityStrain) + Math.max(0, (value.gravity?.maxForceResidualRatio || 0) - maxForceResidualRatio) + (value.gravity?.allSettled ? (value.gravity.maxFinalVelocity || 0) / Math.max(maxNormalizedVelocity, 1e-18) + (value.gravity.maxForceResidualRatio || 0) / Math.max(maxForceResidualRatio, 1e-18) : 1e3), 0);
   if (stage === 'pinch') return values.reduce((sum, value) => sum + Math.max(0, 0.5 - (value.response?.displacement || 0) / Math.max(value.response?.targetMeters || 1e-18, 1e-18)) + (value.response?.flips || 0), 0);
   return result.diagnosis?.failureDistance || 1e6;
 }
@@ -701,8 +702,8 @@ async function runWaterfallStage(name, baseCandidate, varyingIndices, fidelity, 
   const started = performance.now(), evaluations = [], tested = new Set(), deterministic = [];
   if (name === 'timestep') for (const value of [-1, -0.5, 0, 0.5, 1]) deterministic.push(withParameterBlock(baseCandidate, { 4: value }));
   if (name === 'gravity') for (const [surface, inner] of [[-1, -2], [-0.5, -1], [0, 0], [0.5, 0], [1, 1], [-1, -1], [0, -2], [1, -2]]) deterministic.push(withParameterBlock(baseCandidate, { 1: surface, 2: inner }));
-  if (name === 'damping') for (const value of [-1, -0.5, 0, 0.5, 1, 1.5, 2]) deterministic.push(withParameterBlock(baseCandidate, { 3: value }));
-  if (name === 'pinch') for (const [kp, kd] of [[-1, -1], [-0.5, 0], [0, 0], [0.5, 0.5], [1, 1], [1, 0]]) deterministic.push(withParameterBlock(baseCandidate, { 5: kp, 6: kd }));
+  if (name === 'damping') for (const value of [-1, -0.5, 0, 0.5, 1, 1.5, 2, 2.5, 3, 4]) deterministic.push(withParameterBlock(baseCandidate, { 3: value }));
+  if (name === 'pinch') for (const [kp, kd] of [[-2, -2], [-1.5, -2], [-1.2, -2], [-1, -2], [-1, -1], [-0.5, 0], [0, 0], [0.5, 0.5], [1, 1], [1, 0]]) deterministic.push(withParameterBlock(baseCandidate, { 5: kp, 6: kd }));
   let iteration = 0, best = null;
   while (performance.now() - started < resource.stageWallMs && evaluations.length < resource.stageEvaluationBudget) {
     let candidate = deterministic[iteration];
@@ -753,7 +754,7 @@ function profileCandidate(meshes, candidate) {
 }
 
 function pinchPreflight(meshes, baseCandidate) {
-  const pairs = [[-1, -1], [-1, 0], [-1, 0.5], [-0.5, 0], [-0.5, 0.5], [0, 0], [0.5, 0.5], [1, 1], [1, 0]];
+  const pairs = [[-2, -2], [-1.5, -2], [-1.2, -2], [-1, -2], [-1, -1], [-0.5, 0], [0, 0], [0.5, 0.5], [1, 1], [1, 0]];
   const count = Math.max(1, Number(process.env.VELA_CALIBRATION_PINCH_PREFLIGHT_COUNT || 1));
   const evaluations = [];
   for (let index = 0; index < pairs.length; index++) {
@@ -761,18 +762,21 @@ function pinchPreflight(meshes, baseCandidate) {
     const candidate = withParameterBlock(baseCandidate, { 5: kp, 6: kd });
     const models = Object.fromEntries(meshes.map((mesh, modelIndex) => {
       const stress = randomPinchStress(mesh.microMesh || mesh.screenMesh || mesh, candidate, count, seed + 700 + index * 11 + modelIndex, { holdSeconds: stressHoldSeconds, releaseSeconds: stressReleaseSeconds });
-      return [mesh.name, stress];
+      const response = forceResponse(mesh.microMesh || mesh.screenMesh || mesh, candidate, offlineModelWallMs);
+      return [mesh.name, { stress, response }];
     }));
     const results = Object.values(models);
-    const folds = results.reduce((sum, value) => sum + value.results.reduce((inner, result) => inner + (result.held?.genuineFolds || 0) + (result.released?.genuineFolds || 0), 0), 0);
-    const collapses = results.reduce((sum, value) => sum + value.results.reduce((inner, result) => inner + (result.held?.collapsedTriangles || 0) + (result.released?.collapsedTriangles || 0), 0), 0);
-    const maxStrain = Math.max(...results.flatMap(value => value.results.map(result => Math.max(result.held?.maxEdgeStrain || 0, result.released?.maxEdgeStrain || 0))), 0);
-    const passed = results.length === meshes.length && results.every(value => value.valid);
-    const record = { candidate, passed, folds, collapses, maxStrain, models };
+    const folds = results.reduce((sum, value) => sum + value.stress.results.reduce((inner, result) => inner + (result.held?.genuineFolds || 0) + (result.released?.genuineFolds || 0), 0), 0);
+    const collapses = results.reduce((sum, value) => sum + value.stress.results.reduce((inner, result) => inner + (result.held?.collapsedTriangles || 0) + (result.released?.collapsedTriangles || 0), 0), 0);
+    const maxStrain = Math.max(...results.flatMap(value => value.stress.results.map(result => Math.max(result.held?.maxEdgeStrain || 0, result.released?.maxEdgeStrain || 0))), 0);
+    const responseRatios = results.map(value => value.response.displacement / Math.max(value.response.targetMeters, 1e-18));
+    const responsePassed = results.length === meshes.length && results.every(value => value.response.finite && value.response.flips === 0 && value.response.displacement >= value.response.targetMeters * 0.5);
+    const passed = results.length === meshes.length && results.every(value => value.stress.valid) && responsePassed;
+    const record = { candidate, passed, responsePassed, responseRatios, folds, collapses, maxStrain, models };
     evaluations.push(record);
-    console.log(JSON.stringify({ phase: 'pinch-preflight', evaluation: evaluations.length, candidate, passed, folds, collapses, maxStrain }));
+    console.log(JSON.stringify({ phase: 'pinch-preflight', evaluation: evaluations.length, candidate, passed, responsePassed, responseRatios, folds, collapses, maxStrain }));
   }
-  const best = evaluations.slice().sort((a, b) => Number(!a.passed) - Number(!b.passed) || a.folds - b.folds || a.collapses - b.collapses || a.maxStrain - b.maxStrain)[0];
+  const best = evaluations.slice().sort((a, b) => Number(!a.passed) - Number(!b.passed) || a.folds - b.folds || a.collapses - b.collapses || a.maxStrain - b.maxStrain || Math.min(...b.responseRatios) - Math.min(...a.responseRatios))[0];
   return { name: 'pinch-preflight', passed: Boolean(best?.passed), candidate: best?.candidate || baseCandidate, evaluations, best, count };
 }
 
@@ -822,11 +826,12 @@ async function main() {
     const pairs = (process.env.VELA_CALIBRATION_MATERIAL_PAIRS || '0,0;0.5,0;0,0.5;0.5,0.5;1,1').split(';').map(pair => pair.split(',').map(Number)).filter(pair => pair.length === 2 && pair.every(Number.isFinite));
     const pinchKpLog = Number(process.env.VELA_CALIBRATION_PINCH_KP_LOG ?? -1);
     const pinchKdLog = Number(process.env.VELA_CALIBRATION_PINCH_KD_LOG ?? -1);
+    const dampingLog = Number(process.env.VELA_CALIBRATION_DAMPING_LOG ?? base.logParameters[3] ?? 0);
     const count = Math.max(1, Number(process.env.VELA_CALIBRATION_STRESS_COUNT || 3));
     const evaluations = [];
     for (let index = 0; index < pairs.length; index++) {
       const [surfaceLog, innerLog] = pairs[index];
-      const candidate = withParameterBlock(base, { 1: surfaceLog, 2: innerLog, 5: pinchKpLog, 6: pinchKdLog });
+      const candidate = withParameterBlock(base, { 1: surfaceLog, 2: innerLog, 3: dampingLog, 5: pinchKpLog, 6: pinchKdLog });
       const physical = evaluateCandidate(meshes, candidate, 'micro6');
       const stress = Object.fromEntries(meshes.map((mesh, modelIndex) => [mesh.name, randomPinchStress(mesh.microMesh || mesh.screenMesh || mesh, candidate, count, seed + 100 + modelIndex, { holdSeconds: stressHoldSeconds, releaseSeconds: stressReleaseSeconds })]));
       const record = { candidate, gravity: compactResult(physical), stress };
@@ -883,6 +888,36 @@ async function main() {
     const progressionPath = path.join(outputDir, 'rk4-physical-progression.json');
     await fs.mkdir(outputDir, { recursive: true }); await fs.writeFile(progressionPath, JSON.stringify(progression, null, 2));
     console.log(JSON.stringify({ phase: 'physical-progression-complete', path: path.relative(root, progressionPath), evaluations: evaluations.length }));
+    return;
+  }
+  if (argv.has('--candidate-verify')) {
+    const verificationCheckpoint = resumePath ? await loadWaterfallCheckpoint(resumePath) : null;
+    const base = verificationCheckpoint?.current || createCandidate([0, 0, 0, 0, -1, -1, -1]);
+    const updates = {};
+    for (const [index, variable] of [[0, 'VELA_CALIBRATION_MASS_LOG'], [1, 'VELA_CALIBRATION_SURFACE_LOG'], [2, 'VELA_CALIBRATION_INNER_LOG'], [3, 'VELA_CALIBRATION_DAMPING_LOG'], [4, 'VELA_CALIBRATION_DT_LOG'], [5, 'VELA_CALIBRATION_PINCH_KP_LOG'], [6, 'VELA_CALIBRATION_PINCH_KD_LOG']]) if (process.env[variable] !== undefined) updates[index] = Number(process.env[variable]);
+    const candidate = withParameterBlock(base, updates);
+    const physical = evaluateCandidate(meshes, candidate, 'micro6');
+    const count = Math.max(1, Number(process.env.VELA_CALIBRATION_STRESS_COUNT || 20));
+    const stress = Object.fromEntries(meshes.map((mesh, index) => [mesh.name, randomPinchStress(mesh.microMesh || mesh.screenMesh || mesh, candidate, count, seed + 100 + index, { holdSeconds: stressHoldSeconds, releaseSeconds: stressReleaseSeconds })]));
+    const verification = { schema: 'vela-rk4-candidate-verification-v1', generatedAt: new Date().toISOString(), candidate, physical: compactResult(physical), stress };
+    const verificationPath = path.join(outputDir, 'rk4-candidate-verification.json');
+    await fs.mkdir(outputDir, { recursive: true }); await fs.writeFile(verificationPath, JSON.stringify(verification, null, 2));
+    console.log(JSON.stringify({ phase: 'candidate-verify-complete', path: path.relative(root, verificationPath), candidate, physicalValid: physical.valid, stressValid: Object.values(stress).every(value => value.valid) }));
+    return;
+  }
+  if (argv.has('--controller-probe')) {
+    const probeCheckpoint = resumePath ? await loadWaterfallCheckpoint(resumePath) : null;
+    const base = probeCheckpoint?.current || createCandidate([0, 0, 0, 0, -1, -1, -1]);
+    const updates = {};
+    for (const [index, variable] of [[0, 'VELA_CALIBRATION_MASS_LOG'], [1, 'VELA_CALIBRATION_SURFACE_LOG'], [2, 'VELA_CALIBRATION_INNER_LOG'], [3, 'VELA_CALIBRATION_DAMPING_LOG'], [4, 'VELA_CALIBRATION_DT_LOG'], [5, 'VELA_CALIBRATION_PINCH_KP_LOG'], [6, 'VELA_CALIBRATION_PINCH_KD_LOG']]) if (process.env[variable] !== undefined) updates[index] = Number(process.env[variable]);
+    const candidate = withParameterBlock(base, updates);
+    const count = Math.max(1, Number(process.env.VELA_CALIBRATION_STRESS_COUNT || 3));
+    const response = Object.fromEntries(meshes.map(mesh => [mesh.name, forceResponse(mesh.microMesh || mesh.screenMesh || mesh, candidate, offlineModelWallMs)]));
+    const stress = Object.fromEntries(meshes.map((mesh, index) => [mesh.name, randomPinchStress(mesh.microMesh || mesh.screenMesh || mesh, candidate, count, seed + 100 + index, { holdSeconds: stressHoldSeconds, releaseSeconds: stressReleaseSeconds })]));
+    const probe = { schema: 'vela-rk4-controller-response-probe-v1', generatedAt: new Date().toISOString(), seed, candidate, count, holdSeconds: stressHoldSeconds, releaseSeconds: stressReleaseSeconds, response, stress };
+    const probePath = path.join(outputDir, 'rk4-controller-response-probe.json');
+    await fs.mkdir(outputDir, { recursive: true }); await fs.writeFile(probePath, JSON.stringify(probe, null, 2));
+    console.log(JSON.stringify({ phase: 'controller-probe-complete', path: path.relative(root, probePath), candidate, response: Object.fromEntries(Object.entries(response).map(([name, value]) => [name, { displacement: value.displacement, targetMeters: value.targetMeters, ratio: value.displacement / Math.max(value.targetMeters, 1e-18), flips: value.flips, strain: value.strain }])), stress: Object.fromEntries(Object.entries(stress).map(([name, value]) => [name, { valid: value.valid, rawFolds: value.results.reduce((sum, result) => sum + (result.held?.orientationFlips || 0) + (result.released?.orientationFlips || 0), 0), genuineFolds: value.results.reduce((sum, result) => sum + (result.held?.genuineFolds || 0) + (result.released?.genuineFolds || 0), 0), collapses: value.results.reduce((sum, result) => sum + (result.held?.collapsedTriangles || 0) + (result.released?.collapsedTriangles || 0), 0) }])) }));
     return;
   }
   if (argv.has('--stress-controller-only')) {
