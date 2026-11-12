@@ -1,0 +1,244 @@
+{
+  "schema": "vela-rk4-timestep-audit-v1",
+  "generatedAt": "2026-11-12T13:18:23.657Z",
+  "candidate": {
+    "massMultiplier": 1,
+    "surfaceMultiplier": 1,
+    "innerMultiplier": 1,
+    "dampingMultiplier": 100,
+    "dtMultiplier": 0.1,
+    "pinchKpMultiplier": 0.1,
+    "pinchKdMultiplier": 0.01,
+    "logParameters": [
+      0,
+      0,
+      0,
+      2,
+      -1,
+      -1,
+      -2
+    ]
+  },
+  "fidelity": "micro",
+  "seconds": 0.02,
+  "factors": [
+    4,
+    3,
+    2.5,
+    2,
+    1.5,
+    1,
+    0.5
+  ],
+  "domains": {
+    "female": {
+      "domain": "female-micro-facial-patch",
+      "fidelity": "micro",
+      "vertices": 128,
+      "triangles": 206,
+      "timestep": {
+        "startingEstimate": 0.000001118636781226882,
+        "samples": [
+          {
+            "factor": 4,
+            "timeStep": 0.000004474547124907528,
+            "steps": 85,
+            "complete": false,
+            "wallClockExceeded": false,
+            "finite": false,
+            "orientationFlips": 106,
+            "collapsedTriangles": 6,
+            "maxStrain": null,
+            "finalVelocity": null,
+            "forceResidualRatio": null
+          },
+          {
+            "factor": 3,
+            "timeStep": 0.0000033559103436806463,
+            "steps": 118,
+            "complete": false,
+            "wallClockExceeded": false,
+            "finite": false,
+            "orientationFlips": 105,
+            "collapsedTriangles": 8,
+            "maxStrain": null,
+            "finalVelocity": null,
+            "forceResidualRatio": null
+          },
+          {
+            "factor": 2.5,
+            "timeStep": 0.0000027965919530672053,
+            "steps": 157,
+            "complete": false,
+            "wallClockExceeded": false,
+            "finite": false,
+            "orientationFlips": 91,
+            "collapsedTriangles": 10,
+            "maxStrain": null,
+            "finalVelocity": null,
+            "forceResidualRatio": null
+          },
+          {
+            "factor": 2,
+            "timeStep": 0.000002237273562453764,
+            "steps": 268,
+            "complete": false,
+            "wallClockExceeded": false,
+            "finite": true,
+            "orientationFlips": 98,
+            "collapsedTriangles": 1,
+            "maxStrain": 8.77278404056669e+156,
+            "finalVelocity": null,
+            "forceResidualRatio": null
+          },
+          {
+            "factor": 1.5,
+            "timeStep": 0.0000016779551718403232,
+            "steps": 2797,
+            "complete": false,
+            "wallClockExceeded": false,
+            "finite": true,
+            "orientationFlips": 104,
+            "collapsedTriangles": 0,
+            "maxStrain": 3.468246689378068e+156,
+            "finalVelocity": null,
+            "forceResidualRatio": null
+          },
+          {
+            "factor": 1,
+            "timeStep": 0.000001118636781226882,
+            "steps": 17879,
+            "complete": true,
+            "wallClockExceeded": false,
+            "finite": true,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "maxStrain": 0.00009801825785150876,
+            "finalVelocity": 0.00010282060158426399,
+            "forceResidualRatio": 0.000028619053688284705
+          },
+          {
+            "factor": 0.5,
+            "timeStep": 5.59318390613441e-7,
+            "steps": 35758,
+            "complete": true,
+            "wallClockExceeded": false,
+            "finite": true,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "maxStrain": 0.00009801825809202586,
+            "finalVelocity": 0.00010282060142425897,
+            "forceResidualRatio": 0.00002861880816216884
+          }
+        ],
+        "largestTestedStableMultiplier": 1,
+        "smallestTestedStableMultiplier": 0.5
+      }
+    },
+    "male": {
+      "domain": "male-micro-facial-patch",
+      "fidelity": "micro",
+      "vertices": 128,
+      "triangles": 210,
+      "timestep": {
+        "startingEstimate": 0.0000015490362392763438,
+        "samples": [
+          {
+            "factor": 4,
+            "timeStep": 0.000006196144957105375,
+            "steps": 84,
+            "complete": false,
+            "wallClockExceeded": false,
+            "finite": true,
+            "orientationFlips": 100,
+            "collapsedTriangles": 7,
+            "maxStrain": 1.0620857814493564e+157,
+            "finalVelocity": null,
+            "forceResidualRatio": null
+          },
+          {
+            "factor": 3,
+            "timeStep": 0.000004647108717829032,
+            "steps": 117,
+            "complete": false,
+            "wallClockExceeded": false,
+            "finite": true,
+            "orientationFlips": 101,
+            "collapsedTriangles": 6,
+            "maxStrain": 1.3292974322494237e+157,
+            "finalVelocity": null,
+            "forceResidualRatio": null
+          },
+          {
+            "factor": 2.5,
+            "timeStep": 0.000003872590598190859,
+            "steps": 157,
+            "complete": false,
+            "wallClockExceeded": false,
+            "finite": false,
+            "orientationFlips": 111,
+            "collapsedTriangles": 3,
+            "maxStrain": null,
+            "finalVelocity": null,
+            "forceResidualRatio": null
+          },
+          {
+            "factor": 2,
+            "timeStep": 0.0000030980724785526877,
+            "steps": 267,
+            "complete": false,
+            "wallClockExceeded": false,
+            "finite": true,
+            "orientationFlips": 103,
+            "collapsedTriangles": 2,
+            "maxStrain": 4.78313274367371e+156,
+            "finalVelocity": null,
+            "forceResidualRatio": null
+          },
+          {
+            "factor": 1.5,
+            "timeStep": 0.000002323554358914516,
+            "steps": 2769,
+            "complete": false,
+            "wallClockExceeded": false,
+            "finite": true,
+            "orientationFlips": 101,
+            "collapsedTriangles": 0,
+            "maxStrain": 2.9416727210136272e+156,
+            "finalVelocity": null,
+            "forceResidualRatio": null
+          },
+          {
+            "factor": 1,
+            "timeStep": 0.0000015490362392763438,
+            "steps": 12912,
+            "complete": true,
+            "wallClockExceeded": false,
+            "finite": true,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "maxStrain": 0.00008346686325277874,
+            "finalVelocity": 0.00041096139721800095,
+            "forceResidualRatio": 0.0002535401793459023
+          },
+          {
+            "factor": 0.5,
+            "timeStep": 7.745181196381719e-7,
+            "steps": 25823,
+            "complete": true,
+            "wallClockExceeded": false,
+            "finite": true,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "maxStrain": 0.00008346686331774716,
+            "finalVelocity": 0.00041096139715296535,
+            "forceResidualRatio": 0.00025354009667775517
+          }
+        ],
+        "largestTestedStableMultiplier": 1,
+        "smallestTestedStableMultiplier": 0.5
+      }
+    }
+  },
+  "sourceMetersPerUnit": 0.3
+}

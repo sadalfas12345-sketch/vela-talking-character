@@ -121,6 +121,10 @@ The current completion-aware validator was run on 20 deterministic pinch sequenc
 
 The comparison candidate at damping 10x with Kp 1x and Kd 1x failed this same micro gate: the female had 19 incomplete sequences, while the male had 12 genuine folds across three sequences that completed. The damping-100 candidate is therefore the current mechanically validated configuration at micro fidelity, while full-island 20-sequence robustness remains unrun because its measured cost is substantially higher.
 
+## Damping-100 timestep range
+
+The corrected micro timestep audit tested factors 4, 3, 2.5, 2, 1.5, 1, and 0.5 relative to the damping-aware estimate. Both female and male micro domains were stable and complete at factors 1 and 0.5. Factors above 1 produced orientation flips, collapses, or nonfinite growth. The largest tested stable multiplier is therefore 1 for this damping-100 configuration; there is no evidence-based timestep increase available to shorten the full-island stress run.
+
 ## Reproduction
 
 ```powershell
