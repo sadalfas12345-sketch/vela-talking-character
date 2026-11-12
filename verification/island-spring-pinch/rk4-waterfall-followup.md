@@ -39,6 +39,8 @@ The staged search has not found a single configuration that is both at least 50%
 
 The previous waterfall's baseline robustness failure remains independently recorded: female valid, male invalid with 67 genuine folds and 99 raw flips. Full-island physical progression also remains incomplete under the explicit wall-clock protection: female full evaluation 300.15 s cutoff and male full evaluation 301.47 s cutoff.
 
+The low-gain boundary probe at `Kp=0.01×, damping=10×, Kd=0.01×` still produced two genuine male folds and only 42.1% male response. This is not a valid way to hide the deformation by reducing force.
+
 No material parameters, topology, spring connectivity, mesh vertices, or acceptance thresholds were changed to hide these failures. No performance stage was run after the failed robustness gate.
 
 ## Reproduction
