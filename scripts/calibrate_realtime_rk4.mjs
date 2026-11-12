@@ -1002,6 +1002,25 @@ async function main() {
     console.log(JSON.stringify({ phase: 'full-domain-evaluation-complete', path: path.relative(root, resultPath), candidate, empiricalStabilityMultiplier, evaluations, overall: result.overall }));
     return;
   }
+  if (argv.has('--gravity-audit')) {
+    const candidateCheckpoint = resumePath ? await loadWaterfallCheckpoint(resumePath) : null;
+    const base = candidateCheckpoint?.current || createCandidate([0, 0, 0, 2, -1, -1, -2]);
+    const updates = {};
+    for (const [index, variable] of [[0, 'VELA_CALIBRATION_MASS_LOG'], [1, 'VELA_CALIBRATION_SURFACE_LOG'], [2, 'VELA_CALIBRATION_INNER_LOG'], [3, 'VELA_CALIBRATION_DAMPING_LOG'], [4, 'VELA_CALIBRATION_DT_LOG'], [5, 'VELA_CALIBRATION_PINCH_KP_LOG'], [6, 'VELA_CALIBRATION_PINCH_KD_LOG']]) if (process.env[variable] !== undefined) updates[index] = Number(process.env[variable]);
+    const candidate = withParameterBlock(base, updates);
+    const seconds = Number(process.env.VELA_CALIBRATION_GRAVITY_AUDIT_SECONDS || offlineGravitySeconds);
+    const fidelity = process.env.VELA_CALIBRATION_GRAVITY_AUDIT_FIDELITY || 'full';
+    const evaluations = {};
+    for (const mesh of meshes) {
+      const evalMesh = fidelity === 'micro' ? mesh.microMesh || mesh.screenMesh || mesh : fidelity === 'screen' ? mesh.screenMesh || mesh : mesh;
+      evaluations[mesh.name] = { domain: evalMesh.name, fidelity, seconds, vertices: evalMesh.system.vertexCount, triangles: evalMesh.system.faces.length, gravity: gravityTest(evalMesh, candidate, seconds, fidelity, offlineModelWallMs) };
+    }
+    const result = { schema: 'vela-rk4-gravity-audit-v1', generatedAt: new Date().toISOString(), candidate, fidelity, seconds, offlineModelWallMs, evaluations, overall: Object.values(evaluations).every(value => value.gravity.finite && value.gravity.allComplete && value.gravity.allSettled && value.gravity.worstFlips === 0 && value.gravity.worstCollapses === 0) ? 'SUCCESS' : 'FAILED' };
+    const resultPath = evidencePath('rk4-gravity-audit');
+    await fs.mkdir(outputDir, { recursive: true }); await fs.writeFile(resultPath, JSON.stringify(result, null, 2));
+    console.log(JSON.stringify({ phase: 'gravity-audit-complete', path: path.relative(root, resultPath), candidate, fidelity, seconds, evaluations, overall: result.overall }));
+    return;
+  }
   if (argv.has('--waterfall-candidate')) {
     const candidateCheckpoint = resumePath ? await loadWaterfallCheckpoint(resumePath) : null;
     const base = candidateCheckpoint?.current || createCandidate([0, 0, 0, 0, -1, -1, -1]);

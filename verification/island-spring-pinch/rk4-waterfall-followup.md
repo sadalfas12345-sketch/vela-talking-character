@@ -90,6 +90,20 @@ The corrected damping-aware domain audit is saved in `rk4-domain-audit-damping10
 
 The saved full-domain evaluation was generated before the final metadata-only validator correction. Its raw main h, h/2, and h/4 convergence samples are complete and converged on both models; high-factor timestep samples are deliberately diagnostic boundary probes and are not allowed to mark the main evaluation incomplete. A fresh full-domain run will be used for the next physical settling check.
 
+## Male full-island gravity settling follow-up
+
+The targeted follow-up is saved in `rk4-gravity-audit-male-damping10-stability16-0_02s.json`. It uses the unchanged original male island, damping 10x, the common stability multiplier 16, and 0.02 seconds of simulated time. All six skull-relative gravity directions completed 4,776 RK4 steps without a wall-clock cutoff.
+
+- Finite state: PASS.
+- Settled in all six directions: PASS.
+- Orientation flips, genuine folds, and collapsed triangles: 0 in every direction.
+- Worst edge strain: 0.00175183, or 0.175183%.
+- Worst final normalized velocity: 0.00011033.
+- Worst force residual ratio: 0.0227295.
+- Per-direction runtime: 109.1 to 142.9 seconds.
+
+This resolves the prior male short-window gravity residual. It does not yet pass the separate 20-sequence full-island pinch gate or the performance gate.
+
 ## Reproduction
 
 ```powershell
