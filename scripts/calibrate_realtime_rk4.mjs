@@ -574,11 +574,12 @@ async function runParallelStress() {
   const candidate = candidateFromEnvironment(checkpoint?.current || undefined);
   const count = Math.max(1, Number(process.env.VELA_CALIBRATION_STRESS_COUNT || 20));
   const workerCount = Math.max(1, Math.min(Number(process.env.VELA_CALIBRATION_STRESS_WORKERS || 4), count));
+  const requestedChunkSize = Number(process.env.VELA_CALIBRATION_STRESS_CHUNK_SIZE || 0);
   const fidelity = process.env.VELA_CALIBRATION_STRESS_FIDELITY || 'full';
   const ranges = [];
   for (const modelName of requestedModels) {
     const modelIndex = requestedModels.indexOf(modelName);
-    const chunk = Math.ceil(count / workerCount);
+    const chunk = requestedChunkSize > 0 ? Math.min(requestedChunkSize, count) : Math.ceil(count / workerCount);
     for (let start = 0; start < count; start += chunk) ranges.push({ modelName, modelIndex, start, count: Math.min(chunk, count - start) });
   }
   const workerResults = await Promise.all(ranges.map(range => new Promise((resolve, reject) => {
@@ -980,7 +981,10 @@ async function main() {
     const modelIndex = Number(process.env.VELA_CALIBRATION_STRESS_MODEL_INDEX || requestedModels.indexOf(modelName));
     const fidelity = process.env.VELA_CALIBRATION_STRESS_FIDELITY || 'full';
     const stress = randomPinchStress(stressDomain(mesh), candidate, count, seed + 100 + modelIndex, { holdSeconds: stressHoldSeconds, releaseSeconds: stressReleaseSeconds, startSequence });
-    console.log(JSON.stringify({ modelName, startSequence, count, fidelity, stress }));
+    const partPath = evidencePath(`rk4-controller-stress-part-${modelName}-start-${startSequence}-n-${count}`);
+    await fs.mkdir(outputDir, { recursive: true });
+    await fs.writeFile(partPath, JSON.stringify({ schema: 'vela-rk4-controller-stress-part-v1', generatedAt: new Date().toISOString(), modelName, modelIndex, startSequence, count, fidelity, candidate, stress }, null, 2));
+    console.log(JSON.stringify({ modelName, startSequence, count, fidelity, partPath: path.relative(root, partPath), stress }));
     return;
   }
   if (argv.has('--stress-parallel')) { await runParallelStress(); return; }
