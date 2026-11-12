@@ -228,6 +228,9 @@ async function loadModel(name) {
   }
   const faceScale = vecDistance(points[263], points[33]);
   const mesh = makeIslandMesh(name, positions, indices, topology, selectedId, points, right, up, front, faceScale);
+  mesh.sourcePositions = positions;
+  mesh.sourceIndices = indices;
+  mesh.topology = topology;
   const screenPatch = selectConnectedPatch(positions, indices, topology, selectedId, browPoints, 1000);
   mesh.screenMesh = makeIslandMesh(`${name}-screen-facial-patch`, positions, indices, topology, selectedId, points, right, up, front, faceScale, screenPatch.vertices, screenPatch.faces);
   const microPatch = selectConnectedPatch(positions, indices, topology, selectedId, browPoints, 128);
@@ -1046,7 +1049,12 @@ async function main() {
     };
     for (const mesh of meshes) {
       manifest.models[mesh.name] = {};
-      for (const [domain, evalMesh] of [['full', mesh], ['screen', mesh.screenMesh], ['micro', mesh.microMesh]]) {
+      const domains = [['full', mesh], ['screen', mesh.screenMesh], ['micro', mesh.microMesh]];
+      const extraIslands = (process.env.VELA_GPU_EXTRA_ISLANDS || '').split(',').map(value => Number(value.trim())).filter(value => Number.isInteger(value) && value >= 0);
+      for (const islandId of extraIslands) {
+        if (islandId < mesh.topology.vertices.length) domains.push([`island-${islandId}`, makeIslandMesh(`${mesh.name}-island-${islandId}`, mesh.sourcePositions, mesh.sourceIndices, mesh.topology, islandId, mesh.points, mesh.right, mesh.up, mesh.front, mesh.faceScale)]);
+      }
+      for (const [domain, evalMesh] of domains) {
         if (!evalMesh) continue;
         const prepared = preparePhysics(evalMesh, candidate);
         const basePath = path.join(fixtureDir, `${mesh.name}-${domain}`);
@@ -1064,6 +1072,7 @@ async function main() {
           supportRest: prepared.supportRest,
           supportK: prepared.supportK,
           faces: faceFlat,
+          globalVertexIds: Uint32Array.from(evalMesh.globalVertices),
         };
         const files = {};
         for (const [name, array] of Object.entries(arrays)) files[name] = await writeArray(basePath + `-${name}`, array);

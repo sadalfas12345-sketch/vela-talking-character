@@ -125,8 +125,23 @@ python scripts/rk4_warp_gpu.py --seconds 0.001 --pinch-kp 0.1 --pinch-kd 0.01 --
 
 # Run the deterministic full-island GPU stress protocol
 python scripts/rk4_warp_gpu.py --seconds 0.0001 --domains female:full,male:full --pinch-kp 0.1 --pinch-kd 0.01 --cuda-graph --stress-count 20 --stress-seed 20261111 --stress-output verification/island-spring-pinch/rk4-warp-gpu-stress-full-n20.json --output verification/island-spring-pinch/rk4-warp-gpu-stress-full-benchmark.json
+
+# Start the local GPU browser bridge and HTTP preview
+python scripts/warp_physics_server.py --manifest verification/island-spring-pinch/gpu-fixtures/manifest.json --port 8765
+python serve.py 4174
+# Open either original character in the existing browser UI:
+# http://127.0.0.1:4174/island-spring-pinch.html?model=female&gpuServer=ws://127.0.0.1:8765
+# http://127.0.0.1:4174/island-spring-pinch.html?model=male&gpuServer=ws://127.0.0.1:8765
 ```
 
 ## Status
 
-Offline GPU acceleration is implemented and numerically validated against the existing Float64 reference for the tested gravity, pinch-hold, and release intervals. The long random-stress physical candidate remains failed, and the full male domain is not yet real-time at the measured configuration. Browser integration is intentionally not claimed by this offline report.
+Offline GPU acceleration is implemented and numerically validated against the existing Float64 reference for the tested gravity, pinch-hold, and release intervals. The long random-stress physical candidate remains failed, and the full male domain is not yet real-time at the measured configuration.
+
+## Browser bridge validation
+
+The browser still loads and renders the original GLBs. The local WebSocket bridge only owns the selected original island on the RTX device and returns evaluated positions at frame boundaries. It verifies the returned `globalVertexIds` against the browser's selected island before applying any positions; if no bridge is available, the existing CPU JavaScript path remains available.
+
+The female GPU browser test loaded the original face, selected island 32 with 1,503 vertices and 2,857 triangles, held a barycentric pinch, and released it. The released state recorded a `1.3058e-5 m` tracking error, `5.1711e-4 N` peak force, and zero reported geometry defects. Evidence: `verification/island-spring-pinch/gpu-browser-pinched-released.png`.
+
+The male browser test loaded the original GLB and selected its default source island 35 with 41,920 vertices and 82,807 triangles. The bridge alias maps the browser's `island-35` request to the matching full fixture, verified by a direct WebSocket bridge probe: `ready_domain=full`, `vertexCount=41920`, followed by a `0.001 s` GPU tick of 239 RK4 steps in `121.3 ms`. The neutral browser evidence is `verification/island-spring-pinch/gpu-browser-male-neutral.png`; that capture used the existing CPU fallback because the GPU handshake had not completed before the screenshot. The female browser pinch is GPU-verified; the male browser endpoint and global-ID mapping are verified, while a complete male pointer replay remains pending because the synchronous local bridge can stall under the full-island frame queue.

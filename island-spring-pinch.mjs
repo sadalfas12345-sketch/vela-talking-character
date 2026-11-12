@@ -8,7 +8,7 @@ const ui = {
   character: $('character'), state: $('loadState'), loadProgressBar: $('loadProgressBar'), loadProgressText: $('loadProgressText'), stageText: $('stageText'), island: $('islandSelect'), metrics: $('metrics'),
   showOriginal: $('showOriginal'), showIslands: $('showIslands'), showSprings: $('showSprings'), showInner: $('showInner'),
   showStrain: $('showStrain'), showMass: $('showMass'), gravityDirection: $('gravityDirection'), depth: $('depth'), depthOut: $('depthOut'), neighbors: $('neighbors'), neighborsOut: $('neighborsOut'),
-  wireDensity: $('wireDensity'), physicsPreset: $('physicsPreset'), integrator: $('integrator'), pinchKp: $('pinchKp'), pinchKd: $('pinchKd'), kpOut: $('kpOut'), kdOut: $('kdOut'), hardDrag: $('hardDrag'), pause: $('pause'), exploreMode: $('exploreMode'), pinchMode: $('pinchMode'), interactionHint: $('interactionHint'),
+  wireDensity: $('wireDensity'), physicsPreset: $('physicsPreset'), physicsBackend: $('physicsBackend'), integrator: $('integrator'), pinchKp: $('pinchKp'), pinchKd: $('pinchKd'), kpOut: $('kpOut'), kdOut: $('kdOut'), hardDrag: $('hardDrag'), pause: $('pause'), exploreMode: $('exploreMode'), pinchMode: $('pinchMode'), interactionHint: $('interactionHint'),
 };
 const PHYSICS_PRESETS = {
   biological: {
@@ -69,6 +69,7 @@ const state = {
   front: new THREE.Vector3(0, 0, 1), right: new THREE.Vector3(1, 0, 0), up: new THREE.Vector3(0, 1, 0), stage: 1, selected: null, spring: null,
   overlay: null, springLines: null, strainLines: null, massHeatmap: null, innerLines: null, innerPoints: null, pinMarker: null, targetMarker: null, forceLine: null, running: false, pin: null, lastPinch: null,
   tests: {}, frameCount: 0, lastFrame: performance.now(), attachments: null, attachmentRecords: null, pointerDebug: null, interactionMode: 'explore',
+  gpu: { socket: null, connected: false, connecting: false, busy: false, pendingSeconds: 0, stateHeader: null, globalToLocal: null, lastRuntimeMs: 0, lastSteps: 0, error: null },
   gravity: new THREE.Vector3(), gravityMagnitude: 9.81,
   performance: { frames: 0, physicsSteps: 0, physicsMs: 0, wallMs: 0, lastPhysicsMs: 0, lastFrameMs: 0, simTime: 0 },
 };
@@ -261,6 +262,7 @@ function setGravityDirection(direction) {
   };
   state.gravity.copy(axes[direction] || axes.none).multiplyScalar(state.gravityMagnitude);
   if (state.spring) state.spring.markActive();
+  gpuSend({ type: 'gravity', value: state.gravity.toArray() });
   updateMetrics(`Gravity: ${direction || 'none'} at ${state.gravityMagnitude.toFixed(2)} m/s²`);
 }
 
@@ -289,6 +291,85 @@ function removeDiagnostics() {
 }
 
 function activeData() { return state.selected ? state.selected : null; }
+
+function closeGpuBackend(reason = '') {
+  const gpu = state.gpu;
+  gpu.connected = false; gpu.connecting = false; gpu.busy = false; gpu.pendingSeconds = 0; gpu.stateHeader = null; gpu.globalToLocal = null;
+  if (gpu.socket) { try { gpu.socket.close(); } catch {} }
+  gpu.socket = null;
+  gpu.error = reason || null;
+}
+
+function gpuSend(message) {
+  const socket = state.gpu.socket;
+  if (!state.gpu.connected || !socket || socket.readyState !== WebSocket.OPEN) return false;
+  socket.send(JSON.stringify(message));
+  return true;
+}
+
+function gpuSendPin(pin) {
+  if (!pin || pin.hard) return false;
+  return gpuSend({ type: 'pinch', ids: pin.globalIds, weights: pin.weights, target: pin.target.toArray(), velocity: pin.velocity.toArray() });
+}
+
+function applyGpuPositions(values) {
+  const gpu = state.gpu, selection = activeData(), spring = state.spring;
+  if (!gpu.globalToLocal || !selection || !spring || values.length !== gpu.globalToLocal.size * 3) return false;
+  for (let i = 0; i < gpu.globalToLocal.size; i++) {
+    const global = gpu.globalIds[i], local = gpu.globalToLocal.get(global);
+    if (local === undefined) return false;
+    spring.positions[local * 3] = values[i * 3]; spring.positions[local * 3 + 1] = values[i * 3 + 1]; spring.positions[local * 3 + 2] = values[i * 3 + 2];
+  }
+  spring.update();
+  return true;
+}
+
+function syncGpuBackend() {
+  const mode = ui.physicsBackend?.value || 'auto';
+  const shouldUseGpu = mode !== 'cpu' && Boolean(state.selected?.entry && state.spring) && ui.integrator?.value === 'rk4' && !ui.hardDrag?.checked;
+  closeGpuBackend();
+  if (!shouldUseGpu) return;
+  const gpu = state.gpu; gpu.connecting = true;
+  const url = new URLSearchParams(location.search).get('gpuServer') || 'ws://127.0.0.1:8765';
+  let socket;
+  try { socket = new WebSocket(url); } catch (error) { gpu.connecting = false; gpu.error = error.message; return; }
+  gpu.socket = socket; socket.binaryType = 'arraybuffer';
+  socket.onopen = () => socket.send(JSON.stringify({ type: 'init', model: state.model, domain: `island-${state.selected.island.id}`, kp: Number(ui.pinchKp.value), kd: Number(ui.pinchKd.value) }));
+  socket.onmessage = async event => {
+    if (typeof event.data === 'string') {
+      const message = JSON.parse(event.data);
+      if (message.type === 'ready') {
+        gpu.globalIds = message.globalVertexIds.map(value => Number(value));
+        gpu.globalToLocal = new Map(gpu.globalIds.map((global, index) => [global, index]));
+        const expected = state.selected.island.vertices;
+        if (expected.length !== gpu.globalIds.length || expected.some(global => !gpu.globalToLocal.has(global))) { closeGpuBackend('GPU fixture does not match the selected original island'); return; }
+        gpu.connected = true; gpu.connecting = false; gpu.error = null; updateMetrics('GPU Warp backend connected');
+      } else if (message.type === 'state') {
+        gpu.stateHeader = message;
+      } else if (message.type === 'error') {
+        closeGpuBackend(message.message);
+      }
+      return;
+    }
+    const buffer = event.data instanceof Blob ? await event.data.arrayBuffer() : event.data;
+    const values = new Float32Array(buffer);
+    if (!applyGpuPositions(values)) { closeGpuBackend('GPU state size or island correspondence mismatch'); return; }
+    gpu.lastRuntimeMs = gpu.stateHeader?.runtimeMs || 0; gpu.lastSteps = gpu.stateHeader?.steps || 0; gpu.busy = false;
+    const simulated = gpu.stateHeader?.seconds || 0;
+    state.performance.frames++; state.performance.physicsSteps += gpu.lastSteps; state.performance.physicsMs += gpu.lastRuntimeMs; state.performance.wallMs += simulated * 1000; state.performance.lastPhysicsMs = gpu.lastRuntimeMs; state.performance.lastFrameMs = simulated * 1000; state.performance.simTime += simulated;
+    gpu.stateHeader = null;
+    if (gpu.pendingSeconds > 1.0e-8) { const next = gpu.pendingSeconds; gpu.pendingSeconds = 0; gpuSendTick(next); }
+  };
+  socket.onclose = () => { if (state.gpu.socket === socket) { gpu.socket = null; gpu.connected = false; gpu.connecting = false; gpu.busy = false; } };
+  socket.onerror = () => { if (mode === 'gpu') gpu.error = `GPU server unavailable at ${url}`; };
+}
+
+function gpuSendTick(seconds) {
+  const gpu = state.gpu;
+  if (!gpu.connected || gpu.busy) { gpu.pendingSeconds += seconds; return false; }
+  gpu.busy = true;
+  return gpuSend({ type: 'tick', seconds, gravity: state.gravity.toArray() });
+}
 
 function buildSystem() {
   const selection = activeData();
@@ -780,7 +861,7 @@ function buildSystem() {
 
   function update() { const attr = geometry.attributes.position; for (let i = 0; i < vertexCount; i++) attr.setXYZ(island.vertices[i], positions[i * 3], positions[i * 3 + 1], positions[i * 3 + 2]); attr.needsUpdate = true; if (state.springLines) updateLinePositions(); if (state.massHeatmap) updateMassHeatmapPositions(); updatePinVisuals(); }
   state.spring = { edgeInfo, edgeA, edgeB, supportA: supportAArray, supportB: supportBArray, supportRest: supportRestArray, supportK: supportKArray, positions, velocities, neutral, anchors, masses, attributedArea, vertexCount, invMass, sourceMetersPerUnit, step: integrate, energy, diagnostics, geometryDiagnostics, vertexForce, setPin: value => { pin = value; neutralSettled = false; }, clearPin: () => { pin = null; }, setInner: value => { innerEnabled = value; neutralSettled = false; }, getInner: () => innerEnabled, markActive: () => { neutralSettled = false; }, markNeutral: () => { neutralSettled = true; }, update };
-  buildDiagnosticsVisuals(); update();
+  buildDiagnosticsVisuals(); update(); syncGpuBackend();
 }
 
 function buildDiagnosticsVisuals() {
@@ -887,7 +968,9 @@ function updateMetrics(extra = '') {
   const selection = activeData(); if (!selection) { ui.metrics.textContent = 'Loading original GLB…'; return; }
   const totals = state.entries.reduce((acc, entry) => { acc.vertices += entry.geometry.attributes.position.count; acc.triangles += entry.index.length / 3; acc.islands += entry.islands.length; return acc; }, { vertices: 0, triangles: 0, islands: 0 });
   const d = state.spring ? state.spring.diagnostics() : null;
-  ui.metrics.textContent = `${state.model.toUpperCase()}\nOriginal vertices: ${totals.vertices.toLocaleString()}   triangles: ${totals.triangles.toLocaleString()}   islands: ${totals.islands}\nSelected: ${selection.entry.mesh.name} / island ${selection.island.id}\nIsland vertices: ${selection.island.vertices.length.toLocaleString()}   triangles: ${selection.island.faces.length.toLocaleString()}\n${d ? `Unique surface springs: ${d.surfaceSprings.toLocaleString()}\nDuplicate raw triangle edges removed: ${d.duplicateRawEdges.toLocaleString()}\nZero-length edges: ${d.zeroLengthEdges}\nInter-island springs: 0\nSupport springs: ${d.supportSprings.toLocaleString()}\nPreset: ${d.preset}   mass scale: ${d.massScale.toExponential(2)}   scale: ${d.sourceMetersPerUnit} m/source unit\nArea: ${d.totalAreaM2.toExponential(4)} m²   mass: ${(d.totalMassKg * 1000).toFixed(4)} g\nMass min/median/max: ${d.minPositiveMassMg.toExponential(3)} / ${d.medianMassMg.toExponential(3)} / ${d.maxPositiveMassMg.toExponential(3)} mg\nZero-mass vertices: ${d.zeroMassVertexCount}   area error: ${d.areaConservationError.toExponential(2)} m²\nρ: ${d.rhoEffective} kg/m³   thickness: ${(d.thicknessMeters * 1000).toFixed(2)} mm\nRK4 dt: ${d.dt.toExponential(3)}   stable dt: ${d.stableDt.toExponential(3)}   substeps/frame: ${d.explicitSubstepsPerFrame}\nGravity: ${d.gravityMS2.map(value => value.toFixed(2)).join(', ')} m/s²   damping: ${d.damping.toExponential(3)}\nEnergy: ${d.energy.toExponential(4)}   max displacement: ${d.maxDisplacement.toExponential(4)}\nMax edge strain: ${d.maxStrain.toFixed(4)}\nPhysics: ${d.performance.averagePhysicsMs.toFixed(2)} ms/step   frame: ${d.performance.averageFrameMs.toFixed(2)} ms   sim/wall: ${d.performance.simulatedSeconds.toFixed(3)} s\nFinite integrator: ${d.finite ? 'YES' : 'NO'}` : 'Springs not initialized'}${extra ? `\n\n${extra}` : ''}`;
+  const backend = state.gpu.connected ? 'GPU Warp server' : 'CPU JavaScript';
+  const backendDetail = state.gpu.error ? `\nGPU note: ${state.gpu.error}` : '';
+  ui.metrics.textContent = `${state.model.toUpperCase()}\nBackend: ${backend}${backendDetail}\nOriginal vertices: ${totals.vertices.toLocaleString()}   triangles: ${totals.triangles.toLocaleString()}   islands: ${totals.islands}\nSelected: ${selection.entry.mesh.name} / island ${selection.island.id}\nIsland vertices: ${selection.island.vertices.length.toLocaleString()}   triangles: ${selection.island.faces.length.toLocaleString()}\n${d ? `Unique surface springs: ${d.surfaceSprings.toLocaleString()}\nDuplicate raw triangle edges removed: ${d.duplicateRawEdges.toLocaleString()}\nZero-length edges: ${d.zeroLengthEdges}\nInter-island springs: 0\nSupport springs: ${d.supportSprings.toLocaleString()}\nPreset: ${d.preset}   mass scale: ${d.massScale.toExponential(2)}   scale: ${d.sourceMetersPerUnit} m/source unit\nArea: ${d.totalAreaM2.toExponential(4)} m²   mass: ${(d.totalMassKg * 1000).toFixed(4)} g\nMass min/median/max: ${d.minPositiveMassMg.toExponential(3)} / ${d.medianMassMg.toExponential(3)} / ${d.maxPositiveMassMg.toExponential(3)} mg\nZero-mass vertices: ${d.zeroMassVertexCount}   area error: ${d.areaConservationError.toExponential(2)} m²\nρ: ${d.rhoEffective} kg/m³   thickness: ${(d.thicknessMeters * 1000).toFixed(2)} mm\nRK4 dt: ${d.dt.toExponential(3)}   stable dt: ${d.stableDt.toExponential(3)}   substeps/frame: ${d.explicitSubstepsPerFrame}\nGravity: ${d.gravityMS2.map(value => value.toFixed(2)).join(', ')} m/s²   damping: ${d.damping.toExponential(3)}\nEnergy: ${d.energy.toExponential(4)}   max displacement: ${d.maxDisplacement.toExponential(4)}\nMax edge strain: ${d.maxStrain.toFixed(4)}\nPhysics: ${d.performance.averagePhysicsMs.toFixed(2)} ms/step   frame: ${d.performance.averageFrameMs.toFixed(2)} ms   sim/wall: ${d.performance.simulatedSeconds.toFixed(3)} s\nFinite integrator: ${d.finite ? 'YES' : 'NO'}` : 'Springs not initialized'}${extra ? `\n\n${extra}` : ''}`;
 }
 
 function populateIslands() {
@@ -903,7 +986,7 @@ function populateIslands() {
 }
 
 function setStage(stage) { state.stage = stage; document.querySelectorAll('.tab').forEach(button => button.classList.toggle('active', Number(button.dataset.stage) === stage)); ui.stageText.textContent = STAGE_TEXT[stage]; updateVisuals(); updateMetrics(); }
-function resetNeutral() { if (!state.spring) return; state.spring.positions.set(state.spring.neutral); state.spring.velocities.fill(0); state.spring.clearPin(); state.pin = null; state.spring.markNeutral(); state.spring.update(); state.lastPinch = null; controls.enabled = state.interactionMode === 'explore'; updateMetrics('Neutral reset'); }
+function resetNeutral() { if (!state.spring) return; state.spring.positions.set(state.spring.neutral); state.spring.velocities.fill(0); state.spring.clearPin(); state.pin = null; state.spring.markNeutral(); state.spring.update(); gpuSend({ type: 'reset' }); state.lastPinch = null; controls.enabled = state.interactionMode === 'explore'; updateMetrics('Neutral reset'); }
 
 async function runTest(kind) {
   if (!state.spring) return;
@@ -942,7 +1025,7 @@ async function runTest(kind) {
 function barycentric(point, a, b, c) { const v0 = b.clone().sub(a), v1 = c.clone().sub(a), v2 = point.clone().sub(a), d00 = v0.dot(v0), d01 = v0.dot(v1), d11 = v1.dot(v1), d20 = v2.dot(v0), d21 = v2.dot(v1), denominator = d00 * d11 - d01 * d01, v = (d11 * d20 - d01 * d21) / denominator, w = (d00 * d21 - d01 * d20) / denominator; return [1 - v - w, v, w]; }
 function pointerHit(event) { const rect = canvas.getBoundingClientRect(); pointer.x = (event.clientX - rect.left) / rect.width * 2 - 1; pointer.y = -((event.clientY - rect.top) / rect.height) * 2 + 1; raycaster.setFromCamera(pointer, camera); return raycaster.intersectObjects(state.meshes, false)[0]; }
 function setInteractionMode(mode) {
-  if (mode === 'explore' && state.pin && state.spring) { state.spring.clearPin(); state.pin = null; }
+  if (mode === 'explore' && state.pin && state.spring) { state.spring.clearPin(); gpuSend({ type: 'release' }); state.pin = null; }
   state.interactionMode = mode;
   ui.exploreMode.classList.toggle('active', mode === 'explore');
   ui.pinchMode.classList.toggle('active', mode === 'pinch');
@@ -969,7 +1052,7 @@ function onPointerDown(event) {
   const a = new THREE.Vector3().fromBufferAttribute(position, globalIds[0]), b = new THREE.Vector3().fromBufferAttribute(position, globalIds[1]), c = new THREE.Vector3().fromBufferAttribute(position, globalIds[2]);
   const weights = barycentric(localHit, a, b, c), plane = new THREE.Plane().setFromNormalAndCoplanarPoint(camera.getWorldDirection(new THREE.Vector3()), hit.point);
   state.pin = { ids, globalIds, weights, target: localHit.clone(), velocity: new THREE.Vector3(), plane, previousWorld: hit.point.clone(), previousLocal: localHit.clone(), lastTime: performance.now(), hard: ui.hardDrag.checked, kp: Number(ui.pinchKp.value), kd: Number(ui.pinchKd.value), currentForce: new THREE.Vector3(), peakForce: 0, peakTrackingError: 0 };
-  state.spring.setPin(state.pin); state.running = true; ui.pause.textContent = 'Pause'; controls.enabled = false;
+  state.spring.setPin(state.pin); gpuSendPin(state.pin); state.running = true; ui.pause.textContent = 'Pause'; controls.enabled = false;
   state.lastPinch = { down: true, hard: state.pin.hard, kp: state.pin.kp, kd: state.pin.kd, globalIds, weights, initial: hit.point.toArray(), activeIsland: islandId, activeVertices: state.selected.island.vertices.length, activeTriangles: state.selected.island.faces.length, faceIndex: face };
   try { canvas.setPointerCapture(event.pointerId); } catch {}
 }
@@ -978,7 +1061,7 @@ function onPointerMove(event) {
   const rect = canvas.getBoundingClientRect(); pointer.x = (event.clientX - rect.left) / rect.width * 2 - 1; pointer.y = -((event.clientY - rect.top) / rect.height) * 2 + 1; raycaster.setFromCamera(pointer, camera);
   const worldPoint = new THREE.Vector3(); if (!raycaster.ray.intersectPlane(state.pin.plane, worldPoint)) return;
   const inverse = state.selected.entry.mesh.matrixWorld.clone().invert(), localPoint = worldPoint.clone().applyMatrix4(inverse), now = performance.now(), delta = Math.max((now - state.pin.lastTime) / 1000, 1e-3);
-  state.pin.velocity.copy(localPoint).sub(state.pin.previousLocal).multiplyScalar(1 / delta); state.pin.target.copy(localPoint); state.pin.previousLocal.copy(localPoint); state.pin.previousWorld.copy(worldPoint); state.pin.lastTime = now;
+  state.pin.velocity.copy(localPoint).sub(state.pin.previousLocal).multiplyScalar(1 / delta); state.pin.target.copy(localPoint); state.pin.previousLocal.copy(localPoint); state.pin.previousWorld.copy(worldPoint); state.pin.lastTime = now; gpuSendPin(state.pin);
 }
 function onPointerUp(event) {
   if (!state.pin) return;
@@ -988,11 +1071,11 @@ function onPointerUp(event) {
   const moved = state.spring.diagnostics().maxDisplacement; state.spring.clearPin(); controls.enabled = true;
   const forceDistributionN = pin.weights.map(weight => [pin.currentForce.x * weight, pin.currentForce.y * weight, pin.currentForce.z * weight]);
   state.lastPinch = { ...state.lastPinch, down: false, released: true, hard: pin.hard, kp: pin.kp, kd: pin.kd, requestedTarget: pin.target.toArray(), actualAtRelease: actual.toArray(), trackingErrorMeters, peakForceN: pin.peakForce, currentForceN: pin.currentForce.toArray(), forceWeightSum: pin.weights.reduce((sum, weight) => sum + weight, 0), forceDistributionN, forceDistributionSumN: forceDistributionN.reduce((sum, value) => [sum[0] + value[0], sum[1] + value[1], sum[2] + value[2]], [0, 0, 0]), peakTrackingErrorMeters: pin.peakTrackingError, maxDisplacementAtRelease: moved };
-  state.pin = null; controls.enabled = state.interactionMode === 'explore'; try { canvas.releasePointerCapture(event.pointerId); } catch {} updateMetrics(`Pin released — force recovery active\nController: ${pin.hard ? 'hard constrained' : `Kp ${pin.kp} N/m, Kd ${pin.kd} N·s/m`}\nPeak force: ${pin.peakForce.toExponential(3)} N\nTracking error: ${trackingErrorMeters.toExponential(3)} m`);
+  gpuSend({ type: 'release' }); state.pin = null; controls.enabled = state.interactionMode === 'explore'; try { canvas.releasePointerCapture(event.pointerId); } catch {} updateMetrics(`Pin released — force recovery active\nController: ${pin.hard ? 'hard constrained' : `Kp ${pin.kp} N/m, Kd ${pin.kd} N·s/m`}\nPeak force: ${pin.peakForce.toExponential(3)} N\nTracking error: ${trackingErrorMeters.toExponential(3)} m`);
 }
 
 async function loadModel(name) {
-  state.model = name; state.pin = null; setInteractionMode('explore'); ui.state.textContent = `Loading ${name}…`; ui.state.classList.remove('ready'); setLoadProgress(2, `Downloading ${name} original GLB...`);
+  closeGpuBackend(); state.model = name; state.pin = null; setInteractionMode('explore'); ui.state.textContent = `Loading ${name}…`; ui.state.classList.remove('ready'); setLoadProgress(2, `Downloading ${name} original GLB...`);
   if (state.root) disposeObject(state.root); if (state.overlay) disposeObject(state.overlay); removeDiagnostics(); state.entries = []; state.meshes = []; state.spring = null;
   const [gltf, attachmentResponse] = await Promise.all([loadGltfWithProgress(MODEL_URLS[name], `${name} GLB`), fetch(ATTACHMENT_URLS[name])]);
   const attachments = await attachmentResponse.json(); state.gltf = gltf; state.root = gltf.scene; scene.add(state.root); state.root.updateMatrixWorld(true); state.entries = [];
@@ -1018,6 +1101,7 @@ async function loadModel(name) {
     };
   };
   window.__velaSetRunning = value => { state.running = Boolean(value); };
+  window.__velaGpuTick = seconds => gpuSendTick(Number(seconds));
   window.__velaSetGravity = direction => setGravityDirection(direction);
   window.__velaStep = (count = 1, dt = 1 / 600) => {
     if (!state.spring) return null;
@@ -1034,7 +1118,7 @@ async function loadModel(name) {
     pointer.y = -((clientY - rect.top) / rect.height) * 2 + 1;
     raycaster.setFromCamera(pointer, camera);
     const hit = raycaster.intersectObjects(state.meshes, false)[0];
-    return hit ? { mesh: hit.object.name, faceIndex: hit.faceIndex, distance: hit.distance, point: hit.point.toArray() } : null;
+    return hit ? { mesh: hit.object.name, faceIndex: hit.faceIndex, islandId: state.entries.find(item => item.mesh === hit.object)?.faceIsland[hit.faceIndex], distance: hit.distance, point: hit.point.toArray() } : null;
   };
   window.__velaPlanDrag = (point, fraction = 0.02) => {
     const origin = new THREE.Vector3(...point), target = origin.clone().addScaledVector(state.right, state.faceScale * fraction);
@@ -1047,10 +1131,14 @@ function frame() {
   requestAnimationFrame(frame);
   const wallStart = performance.now(), now = wallStart, elapsed = Math.min((now - state.lastFrame) / 1000, 0.05); state.lastFrame = now; controls.update();
   if (state.running && state.spring) {
-    const steps = Math.max(1, Math.min(8, Math.ceil(elapsed / (1 / 600)))), stepStart = performance.now();
-    for (let i = 0; i < steps; i++) state.spring.step(elapsed / steps);
-    state.spring.update();
-    const physicsMs = performance.now() - stepStart; state.performance.frames++; state.performance.physicsSteps += steps; state.performance.physicsMs += physicsMs; state.performance.wallMs += elapsed * 1000; state.performance.lastPhysicsMs = physicsMs; state.performance.lastFrameMs = elapsed * 1000; state.performance.simTime += elapsed;
+    if (state.gpu.connected) {
+      gpuSendTick(elapsed);
+    } else {
+      const steps = Math.max(1, Math.min(8, Math.ceil(elapsed / (1 / 600)))), stepStart = performance.now();
+      for (let i = 0; i < steps; i++) state.spring.step(elapsed / steps);
+      state.spring.update();
+      const physicsMs = performance.now() - stepStart; state.performance.frames++; state.performance.physicsSteps += steps; state.performance.physicsMs += physicsMs; state.performance.wallMs += elapsed * 1000; state.performance.lastPhysicsMs = physicsMs; state.performance.lastFrameMs = elapsed * 1000; state.performance.simTime += elapsed;
+    }
     if (state.frameCount++ % 8 === 0) updateMetrics();
   }
   renderer.render(scene, camera);
@@ -1060,6 +1148,13 @@ function frame() {
 for (const button of document.querySelectorAll('.tab')) button.addEventListener('click', () => { state.stage = Number(button.dataset.stage); document.querySelectorAll('.tab').forEach(item => item.classList.toggle('active', Number(item.dataset.stage) === state.stage)); ui.stageText.textContent = STAGE_TEXT[state.stage]; updateVisuals(); updateMetrics(); });
 ui.character.addEventListener('change', () => loadModel(ui.character.value).catch(error => { ui.state.textContent = `Error: ${error.message}`; console.error(error); }));
 ui.gravityDirection?.addEventListener('change', () => setGravityDirection(ui.gravityDirection.value));
+ui.physicsBackend?.addEventListener('change', () => { if (state.spring) buildSystem(); });
+ui.hardDrag?.addEventListener('change', () => { if (state.spring) buildSystem(); });
+ui.island?.addEventListener('change', () => {
+  const [uuid, idText] = String(ui.island.value).split(':');
+  const entry = state.entries.find(item => item.mesh.uuid === uuid), island = entry?.islands[Number(idText)];
+  if (entry && island) { state.selected = { entry, island }; buildSystem(); updateMetrics(`Selected island: ${island.id}`); }
+});
 ui.exploreMode.addEventListener('click', () => setInteractionMode('explore'));
 ui.pinchMode.addEventListener('click', () => setInteractionMode('pinch'));
 ui.showOriginal.addEventListener('change', updateVisuals); ui.showIslands.addEventListener('change', updateVisuals); ui.showSprings.addEventListener('change', updateVisuals); ui.showStrain.addEventListener('change', updateVisuals); ui.showMass.addEventListener('change', updateVisuals); ui.showInner.addEventListener('change', updateVisuals);

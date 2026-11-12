@@ -352,6 +352,12 @@ class WarpSimulation:
         self.neutral_host = fixture["neutral"].reshape(-1, 3).copy()
         self.n = n
 
+    def reset(self, initial_positions=None, initial_velocities=None):
+        start_positions = self.neutral_host if initial_positions is None else initial_positions
+        start_velocities = np.zeros_like(self.neutral_host) if initial_velocities is None else initial_velocities
+        self.positions.assign(np.asarray(start_positions, dtype=np.float32).reshape(-1))
+        self.velocities.assign(np.asarray(start_velocities, dtype=np.float32).reshape(-1))
+
     def set_pinch(self, pinch):
         if pinch is None:
             self.use_pinch = 0
@@ -390,6 +396,26 @@ class WarpSimulation:
         self.positions, self.out_positions = self.out_positions, self.positions
         self.velocities, self.out_velocities = self.out_velocities, self.velocities
 
+    def advance(self, seconds, gravity, pinch=None):
+        """Advance the resident GPU state without resetting or reading per substep."""
+        h0 = self.fixture["stable_dt"]
+        elapsed = 0.0
+        steps = 0
+        started = time.perf_counter()
+        self.set_pinch(pinch)
+        while elapsed < seconds - 1.0e-15:
+            h = min(h0, seconds - elapsed)
+            self._launch_step(h, gravity, pinch)
+            elapsed += h
+            steps += 1
+        self.launch_acceleration(self.positions, self.velocities, self.accel, gravity, pinch)
+        wp.synchronize_device(self.device)
+        runtime_ms = (time.perf_counter() - started) * 1000.0
+        positions = self.positions.numpy().reshape(-1, 3).astype(np.float64)
+        velocities = self.velocities.numpy().reshape(-1, 3).astype(np.float64)
+        forces = self.forces.numpy().reshape(-1, 3).astype(np.float64)
+        return positions, velocities, forces, runtime_ms, steps
+
     def step(self, h, gravity, pinch):
         self._launch_step(h, gravity, pinch)
 
@@ -410,10 +436,7 @@ class WarpSimulation:
 
     def simulate(self, seconds, gravity, pinch=None, use_cuda_graph=False, graph_chunk=16,
                  initial_positions=None, initial_velocities=None):
-        start_positions = self.neutral_host if initial_positions is None else initial_positions
-        start_velocities = np.zeros_like(self.neutral_host) if initial_velocities is None else initial_velocities
-        self.positions.assign(np.asarray(start_positions, dtype=np.float32).reshape(-1))
-        self.velocities.assign(np.asarray(start_velocities, dtype=np.float32).reshape(-1))
+        self.reset(initial_positions, initial_velocities)
         h0 = self.fixture["stable_dt"]
         elapsed = 0.0
         steps = 0

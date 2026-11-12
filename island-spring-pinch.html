@@ -65,6 +65,7 @@
       <section class="island-picker">
         <label>Active island<select id="islandSelect"></select></label>
         <label>Physics preset<select id="physicsPreset"><option value="realtime" selected>Realtime RK4 candidate</option><option value="biological">Biological reference</option><option value="diagnostic">Diagnostic stable</option></select></label>
+        <label>Physics backend<select id="physicsBackend"><option value="auto" selected>GPU Warp if available</option><option value="cpu">CPU JavaScript</option><option value="gpu">GPU Warp server</option></select></label>
         <label>Integrator<select id="integrator"><option value="rk4" selected>Explicit RK4</option><option value="auto">Automatic physical</option><option value="implicit">Implicit stable fallback</option></select></label>
         <label>Gravity<select id="gravityDirection"><option value="none" selected>Off</option><option value="down">Down</option><option value="up">Up</option><option value="left">Left</option><option value="right">Right</option><option value="forward">Forward</option><option value="backward">Backward</option></select></label>
         <label>Wire density<input id="wireDensity" type="range" min="1" max="30" value="6" /></label>
