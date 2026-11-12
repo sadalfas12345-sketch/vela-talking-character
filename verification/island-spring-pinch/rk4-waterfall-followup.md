@@ -31,6 +31,8 @@ Measured final stress result:
 
 The candidate reaches the force-response threshold on both models, but fails the mandatory male geometry gate. It was not promoted to the waterfall checkpoint.
 
+The continued one-variable probes are recorded in `rk4-waterfall-continuation.json`. They include controller derivative-gain, damping, material-ratio, timestep-refinement, and effective-mass tests. The best short-probe result reduced the male fold count to one at `damping=10×, Kp=0.1×, Kd=0.01×`, but its response overshot to 211.9% of target and it was not advanced to the 20-sequence gate. The lower-gain fidelity probe reduced overshoot but still had two male folds. The timestep-refinement probe was bit-identical because the conservative local-stability estimate capped both requested timesteps.
+
 ## Remaining blocker
 
 The staged search has not found a single configuration that is both at least 50% responsive on both characters and free of genuine folds in the male 20-sequence stress set. The clean low-gain candidates are not acceptable because they are mechanically under-responsive. The compliant candidates are not acceptable because the male mesh develops genuine local folds.
