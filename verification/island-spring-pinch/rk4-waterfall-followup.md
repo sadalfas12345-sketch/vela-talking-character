@@ -1,6 +1,18 @@
 # RK4 waterfall follow-up
 
-Generated 2026-11-12 on the original Tripo female and male micro-islands. This is a continuation of `rk4-calibration-report.json`; the earlier full waterfall remains unchanged.
+Generated 2026-11-12 on connected facial subpatches extracted from the brow-containing original Tripo islands. This is a continuation of `rk4-calibration-report.json`; the earlier full waterfall remains unchanged.
+
+## Evaluation-domain correction
+
+The previous multi-fidelity code selected screen and micro domains from arbitrary disconnected GLB islands based only on vertex count. That could make a reported fold belong to unrelated geometry. The implementation now builds deterministic connected subpatches from the same brow-containing original island, preserving original vertex IDs and triangles.
+
+The corrected domains are:
+
+| Domain | Female | Male | Source |
+|---|---:|---:|---|
+| Full original island | 5,036 vertices, 9,708 triangles | 41,920 vertices, 82,807 triangles | Original island 16 / 35 |
+| Screen connected subpatch | 1,000 vertices, 1,855 triangles | 1,000 vertices, 1,857 triangles | Same source island |
+| Micro connected subpatch | 128 vertices, 206 triangles | 128 vertices, 210 triangles | Same source island |
 
 ## Physical-gate policy correction
 
@@ -37,6 +49,18 @@ Measured final stress result:
 The candidate reaches the force-response threshold on both models, but fails the mandatory male geometry gate. It was not promoted to the waterfall checkpoint.
 
 The continued one-variable probes are recorded in `rk4-waterfall-continuation.json`. They include controller derivative-gain, damping, material-ratio, timestep-refinement, and effective-mass tests. The best short-probe result reduced the male fold count to one at `damping=10×, Kp=0.1×, Kd=0.1×`, but its response overshot to 209.1% of target and the remaining fold was local face 100. It was not advanced to the 20-sequence gate. The lower-gain fidelity probe reduced overshoot but still had two male folds. The timestep-refinement probe was bit-identical because the conservative local-stability estimate capped both requested timesteps.
+
+## Fidelity progression with corrected domains
+
+The corrected baseline candidate is `mass=1, surface=1, inner=1, damping=100, dt=0.1, Kp=0.1, Kd=0.01`.
+
+- Micro domain, 20 sequences: female PASS with 0 folds and 0 collapses; male PASS with 0 genuine folds, 3 raw orientation flips, and 0 collapses. Runtime was 161.7 s female and 107.1 s male.
+- Screen domain, 3 sequences: female FAILED with 6 genuine folds and 5,195 raw flips; male PASS with 0 folds. Lowering Kp to 0.0631x produced the same female screen failure, so the pattern is not explained by proportional overshoot alone.
+- Full original island, 1 sequence: female and male timed out under the corrected segment wall protection. Female recorded no fold before timeout; male recorded 6,233 genuine folds and 6,252 raw flips before timeout.
+
+The full-island test also found and fixed a timeout-propagation bug: `randomPinchStress` had not passed the offline wall-clock limit into its hold and release simulations. It now passes the limit and marks incomplete segments invalid instead of treating them as physical results.
+
+The explicit candidate verification artifact records micro preflight, 20-sequence robustness, six-direction gravity, full-island validation, and profiling separately in `rk4-waterfall-candidate-verification.json`. Micro robustness and gravity pass; full validation is incomplete and profiling is deferred.
 
 ## Remaining blocker
 

@@ -334,6 +334,60 @@
       "interpretation": "Doubling effective mass reduced male response and increased the male fold count"
     }
   ],
+  "domainProgression": [
+    {
+      "domain": "micro-connected-facial-subpatch",
+      "femaleVertices": 128,
+      "maleVertices": 128,
+      "femaleTriangles": 206,
+      "maleTriangles": 210,
+      "femaleStressCount": 20,
+      "maleStressCount": 20,
+      "femaleValid": true,
+      "maleValid": true,
+      "femaleGenuineFolds": 0,
+      "maleGenuineFolds": 0,
+      "femaleRawOrientationFlips": 0,
+      "maleRawOrientationFlips": 3,
+      "result": "PASS"
+    },
+    {
+      "domain": "screen-connected-facial-subpatch",
+      "femaleVertices": 1000,
+      "maleVertices": 1000,
+      "femaleTriangles": 1855,
+      "maleTriangles": 1857,
+      "femaleStressCount": 3,
+      "maleStressCount": 3,
+      "femaleValid": false,
+      "maleValid": true,
+      "femaleGenuineFolds": 6,
+      "maleGenuineFolds": 0,
+      "femaleRawOrientationFlips": 5195,
+      "maleRawOrientationFlips": 0,
+      "result": "FAIL",
+      "interpretation": "The female screen-domain fold pattern was unchanged by the lower proportional-gain test"
+    },
+    {
+      "domain": "full-original-facial-island",
+      "femaleVertices": 5036,
+      "maleVertices": 41920,
+      "femaleTriangles": 9708,
+      "maleTriangles": 82807,
+      "femaleStressCount": 1,
+      "maleStressCount": 1,
+      "femaleValid": false,
+      "maleValid": false,
+      "femaleGenuineFolds": 0,
+      "maleGenuineFolds": 6233,
+      "femaleRawOrientationFlips": 0,
+      "maleRawOrientationFlips": 6252,
+      "femaleTimedOut": true,
+      "maleTimedOut": true,
+      "result": "FAIL",
+      "interpretation": "The bounded full-island run did not complete; the male island produced genuine folds before timeout"
+    }
+  ],
   "conclusion": "No screened continuation candidate satisfies both the response gate and zero male genuine folds. Candidates that reduce folds below the original baseline remain invalid; no candidate was promoted to the waterfall checkpoint.",
-  "nextAction": "Preserve failed candidates and either expand a justified offline search budget or investigate the male micro-island geometric failure before any performance-stage claim."
+  "nextAction": "Investigate the female screen-patch boundary and male full-island geometry using the corrected domain provenance before any performance-stage claim."
 }

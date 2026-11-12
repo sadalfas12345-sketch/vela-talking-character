@@ -137,20 +137,57 @@ function bboxDistance(point, bounds) {
 function vecDistance(a, b) { return Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]); }
 function add3(out, index, x, y, z) { out[index * 3] += x; out[index * 3 + 1] += y; out[index * 3 + 2] += z; }
 
-function makeIslandMesh(name, positions, indices, topology, islandId, points, right, up, front, faceScale) {
-  const globalVertices = topology.vertices[islandId];
+function makeIslandMesh(name, positions, indices, topology, islandId, points, right, up, front, faceScale, vertexSubset = null, faceSubset = null) {
+  const globalVertices = vertexSubset || topology.vertices[islandId];
   const globalToLocal = new Int32Array(positions.length / 3); globalToLocal.fill(-1);
   for (let i = 0; i < globalVertices.length; i++) globalToLocal[globalVertices[i]] = i;
   const localFaces = [];
-  for (const face of topology.faces[islandId]) {
+  for (const face of faceSubset || topology.faces[islandId]) {
     const ia = globalToLocal[indices[face * 3]], ib = globalToLocal[indices[face * 3 + 1]], ic = globalToLocal[indices[face * 3 + 2]];
     if (ia >= 0 && ib >= 0 && ic >= 0) localFaces.push([ia, ib, ic]);
   }
   const neutral = new Float64Array(globalVertices.length * 3);
   for (let i = 0; i < globalVertices.length; i++) for (let axis = 0; axis < 3; axis++) neutral[i * 3 + axis] = positions[globalVertices[i] * 3 + axis];
-  const mesh = { name, points, right, up, front, faceScale, neutral, faces: localFaces, globalVertices, allVertexCount: positions.length / 3, islandCount: topology.vertices.length, islandId };
+  const mesh = { name, points, right, up, front, faceScale, neutral, faces: localFaces, globalVertices, allVertexCount: positions.length / 3, islandCount: topology.vertices.length, islandId, sourceIslandId: islandId, domainKind: vertexSubset ? 'connected-subpatch' : 'original-island' };
   mesh.system = buildSystem(mesh);
   return mesh;
+}
+
+function selectConnectedPatch(positions, indices, topology, islandId, seedPoints, targetVertexCount) {
+  const sourceVertices = topology.vertices[islandId];
+  const sourceFaces = topology.faces[islandId];
+  if (targetVertexCount >= sourceVertices.length) return { vertices: sourceVertices, faces: sourceFaces };
+  const globalToLocal = new Int32Array(positions.length / 3); globalToLocal.fill(-1);
+  for (let local = 0; local < sourceVertices.length; local++) globalToLocal[sourceVertices[local]] = local;
+  const adjacency = Array.from({ length: sourceVertices.length }, () => []);
+  for (const face of sourceFaces) {
+    const ga = indices[face * 3], gb = indices[face * 3 + 1], gc = indices[face * 3 + 2];
+    const a = globalToLocal[ga], b = globalToLocal[gb], c = globalToLocal[gc];
+    if (a < 0 || b < 0 || c < 0) continue;
+    adjacency[a].push(b, c); adjacency[b].push(a, c); adjacency[c].push(a, b);
+  }
+  for (const neighbors of adjacency) neighbors.sort((a, b) => a - b);
+  const seedPoint = seedPoints.reduce((sum, point) => sum.map((value, axis) => value + point[axis]), [0, 0, 0]).map(value => value / Math.max(seedPoints.length, 1));
+  let seed = 0, seedDistance = Infinity;
+  for (let local = 0; local < sourceVertices.length; local++) {
+    const global = sourceVertices[local];
+    const distance = Math.hypot(positions[global * 3] - seedPoint[0], positions[global * 3 + 1] - seedPoint[1], positions[global * 3 + 2] - seedPoint[2]);
+    if (distance < seedDistance) { seed = local; seedDistance = distance; }
+  }
+  const selected = new Uint8Array(sourceVertices.length), queue = [seed]; selected[seed] = 1;
+  for (let cursor = 0; cursor < queue.length && queue.length < targetVertexCount; cursor++) {
+    for (const neighbor of adjacency[queue[cursor]]) {
+      if (selected[neighbor]) continue;
+      selected[neighbor] = 1; queue.push(neighbor);
+      if (queue.length >= targetVertexCount) break;
+    }
+  }
+  const vertices = queue.map(local => sourceVertices[local]);
+  const selectedGlobal = new Uint8Array(positions.length / 3);
+  for (const global of vertices) selectedGlobal[global] = 1;
+  const faces = sourceFaces.filter(face => selectedGlobal[indices[face * 3]] && selectedGlobal[indices[face * 3 + 1]] && selectedGlobal[indices[face * 3 + 2]]);
+  if (!faces.length) throw new Error(`Connected patch for island ${islandId} contains no complete triangles`);
+  return { vertices, faces };
 }
 
 async function loadModel(name) {
@@ -187,12 +224,18 @@ async function loadModel(name) {
   }
   const faceScale = vecDistance(points[263], points[33]);
   const mesh = makeIslandMesh(name, positions, indices, topology, selectedId, points, right, up, front, faceScale);
-  const smallCandidates = topology.vertices.map((vertices, islandId) => ({ islandId, size: vertices.length })).filter(item => item.size >= 128 && item.size <= Math.min(4000, topology.vertices[selectedId].length));
-  const screenChoice = smallCandidates.sort((a, b) => Math.abs(a.size - 1000) - Math.abs(b.size - 1000))[0];
-  mesh.screenMesh = screenChoice && screenChoice.islandId !== selectedId ? makeIslandMesh(`${name}-screen-island-${screenChoice.islandId}`, positions, indices, topology, screenChoice.islandId, points, right, up, front, faceScale) : mesh;
-  const microChoice = smallCandidates.slice().sort((a, b) => Math.abs(a.size - 128) - Math.abs(b.size - 128))[0];
-  mesh.microMesh = microChoice && microChoice.islandId !== selectedId ? makeIslandMesh(`${name}-micro-island-${microChoice.islandId}`, positions, indices, topology, microChoice.islandId, points, right, up, front, faceScale) : mesh.screenMesh;
+  const screenPatch = selectConnectedPatch(positions, indices, topology, selectedId, browPoints, 1000);
+  mesh.screenMesh = makeIslandMesh(`${name}-screen-facial-patch`, positions, indices, topology, selectedId, points, right, up, front, faceScale, screenPatch.vertices, screenPatch.faces);
+  const microPatch = selectConnectedPatch(positions, indices, topology, selectedId, browPoints, 128);
+  mesh.microMesh = makeIslandMesh(`${name}-micro-facial-patch`, positions, indices, topology, selectedId, points, right, up, front, faceScale, microPatch.vertices, microPatch.faces);
   return mesh;
+}
+
+function stressDomain(mesh) {
+  const fidelity = process.env.VELA_CALIBRATION_STRESS_FIDELITY || 'micro';
+  if (fidelity === 'full') return mesh;
+  if (fidelity === 'screen') return mesh.screenMesh || mesh;
+  return mesh.microMesh || mesh.screenMesh || mesh;
 }
 
 function buildSystem(mesh) {
@@ -445,6 +488,7 @@ function randomPinchStress(mesh, candidate, count = 20, stressSeed = seed, optio
   const started = performance.now();
   const holdSeconds = options.holdSeconds ?? stressHoldSeconds;
   const releaseSeconds = options.releaseSeconds ?? stressReleaseSeconds;
+  const wallClockLimitMs = options.wallClockLimitMs ?? offlineModelWallMs;
   for (let sequence = 0; sequence < count; sequence++) {
     const face = system.faces[Math.floor(random() * system.faces.length)], ids = face.slice();
     let u = random(), v = random(); if (u + v > 1) { u = 1 - u; v = 1 - v; }
@@ -453,16 +497,17 @@ function randomPinchStress(mesh, candidate, count = 20, stressSeed = seed, optio
     const directionName = directionNames[Math.floor(random() * directionNames.length)];
     const direction = directionsByName[directionName];
     const magnitude = mesh.faceScale * (0.002 + random() * 0.01), target = origin.map((value, axis) => value + direction[axis] * magnitude);
-    let positions = new Float64Array(system.neutral), velocities = new Float64Array(system.vertexCount * 3), heldGeometry = null, maxForce = 0, maxTrackingError = 0, invalid = false;
+    let positions = new Float64Array(system.neutral), velocities = new Float64Array(system.vertexCount * 3), heldGeometry = null, maxForce = 0, maxTrackingError = 0, invalid = false, heldComplete = true;
     for (let phase = 1; phase <= 4; phase++) {
       const phaseTarget = origin.map((value, axis) => value + (target[axis] - value) * phase / 4);
       const pin = { ids, weights, target: phaseTarget, velocity: direction.map(value => value * magnitude * 4), kp: 90 * candidate.pinchKpMultiplier, kd: 0.08 * candidate.pinchKdMultiplier, peakForce: 0 };
-      const segment = simulate(mesh, candidate, { gravity: direction.map(value => value * 9.81), seconds: holdSeconds, initialPositions: positions, initialVelocities: velocities, pinch: pin });
-      positions = segment.positions; velocities = segment.velocities; heldGeometry = segment.geometry; maxForce = Math.max(maxForce, pin.peakForce || 0); maxTrackingError = Math.max(maxTrackingError, pin.error || 0); invalid ||= segment.nonfinite || segment.geometry.genuineFolds > 0 || segment.geometry.collapsedTriangles > 0;
+      const segment = simulate(mesh, candidate, { gravity: direction.map(value => value * 9.81), seconds: holdSeconds, initialPositions: positions, initialVelocities: velocities, pinch: pin, wallClockLimitMs });
+      positions = segment.positions; velocities = segment.velocities; heldGeometry = segment.geometry; heldComplete &&= segment.complete && !segment.wallClockExceeded; maxForce = Math.max(maxForce, pin.peakForce || 0); maxTrackingError = Math.max(maxTrackingError, pin.error || 0); invalid ||= segment.nonfinite || segment.geometry.genuineFolds > 0 || segment.geometry.collapsedTriangles > 0;
     }
-    const release = simulate(mesh, candidate, { gravity: direction.map(value => value * 9.81), seconds: releaseSeconds, initialPositions: positions, initialVelocities: velocities });
+    const release = simulate(mesh, candidate, { gravity: direction.map(value => value * 9.81), seconds: releaseSeconds, initialPositions: positions, initialVelocities: velocities, wallClockLimitMs });
     const recoveredDisplacement = maxVertexDisplacement(system.neutral, release.positions);
-    results.push({ sequence, face, direction: directionName, magnitudeSource: magnitude, held: heldGeometry, released: release.geometry, recoveredDisplacement, peakForceN: maxForce, peakTrackingErrorMeters: maxTrackingError, valid: !invalid && release.geometry.finite && release.geometry.genuineFolds === 0 && release.geometry.collapsedTriangles === 0 });
+    const segmentsComplete = heldComplete && release.complete && !release.wallClockExceeded;
+    results.push({ sequence, face, direction: directionName, magnitudeSource: magnitude, held: heldGeometry, released: release.geometry, heldComplete, releaseComplete: release.complete, wallClockExceeded: Boolean(!heldComplete || release.wallClockExceeded), recoveredDisplacement, peakForceN: maxForce, peakTrackingErrorMeters: maxTrackingError, valid: !invalid && segmentsComplete && release.geometry.finite && release.geometry.genuineFolds === 0 && release.geometry.collapsedTriangles === 0 });
   }
   return { count, holdSeconds, releaseSeconds, valid: results.every(result => result.valid), results, runtimeMs: performance.now() - started };
 }
@@ -818,8 +863,26 @@ async function runWaterfall(meshes, resource, resumed = null) {
 
 async function main() {
   const started = performance.now(), loaded = {};
-  for (const name of requestedModels) { console.log(JSON.stringify({ phase: 'load', model: name })); loaded[name] = await loadModel(name); console.log(JSON.stringify({ phase: 'loaded', model: name, islandVertices: loaded[name].system.vertexCount, islandTriangles: loaded[name].system.faces.length, screenIslandVertices: loaded[name].screenMesh?.system.vertexCount, microIslandVertices: loaded[name].microMesh?.system.vertexCount, islandCount: loaded[name].islandCount })); }
+  for (const name of requestedModels) { console.log(JSON.stringify({ phase: 'load', model: name })); loaded[name] = await loadModel(name); console.log(JSON.stringify({ phase: 'loaded', model: name, islandVertices: loaded[name].system.vertexCount, islandTriangles: loaded[name].system.faces.length, screenIslandVertices: loaded[name].screenMesh?.system.vertexCount, screenDomainKind: loaded[name].screenMesh?.domainKind, screenSourceIslandId: loaded[name].screenMesh?.sourceIslandId, microIslandVertices: loaded[name].microMesh?.system.vertexCount, microDomainKind: loaded[name].microMesh?.domainKind, microSourceIslandId: loaded[name].microMesh?.sourceIslandId, islandCount: loaded[name].islandCount })); }
   const meshes = Object.values(loaded);
+  if (argv.has('--waterfall-candidate')) {
+    const candidateCheckpoint = resumePath ? await loadWaterfallCheckpoint(resumePath) : null;
+    const base = candidateCheckpoint?.current || createCandidate([0, 0, 0, 0, -1, -1, -1]);
+    const updates = {};
+    for (const [index, variable] of [[0, 'VELA_CALIBRATION_MASS_LOG'], [1, 'VELA_CALIBRATION_SURFACE_LOG'], [2, 'VELA_CALIBRATION_INNER_LOG'], [3, 'VELA_CALIBRATION_DAMPING_LOG'], [4, 'VELA_CALIBRATION_DT_LOG'], [5, 'VELA_CALIBRATION_PINCH_KP_LOG'], [6, 'VELA_CALIBRATION_PINCH_KD_LOG']]) if (process.env[variable] !== undefined) updates[index] = Number(process.env[variable]);
+    const candidate = withParameterBlock(base, updates);
+    const preflight = pinchPreflight(meshes, candidate);
+    const robustness = Object.fromEntries(meshes.map((mesh, index) => [mesh.name, { fidelity: process.env.VELA_CALIBRATION_STRESS_FIDELITY || 'micro', randomPinch: randomPinchStress(stressDomain(mesh), candidate, 20, seed + 100 + index, { holdSeconds: stressHoldSeconds, releaseSeconds: stressReleaseSeconds }), gravity: gravityTest(stressDomain(mesh), candidate, offlineGravitySeconds, 'full') }]));
+    const robustnessPassed = Object.values(robustness).every(value => value.randomPinch.valid && value.gravity.finite && value.gravity.allComplete && value.gravity.worstFlips === 0 && value.gravity.worstCollapses === 0 && value.gravity.allSettled);
+    const fullValidation = robustnessPassed ? Object.fromEntries(meshes.map(mesh => { const result = evaluateCandidate([mesh], candidate, 'full'); return [mesh.name, compactResult(result)]; })) : null;
+    const profile = robustnessPassed ? profileCandidate(meshes, candidate) : null;
+    const domains = Object.fromEntries(meshes.map(mesh => [mesh.name, { full: { vertexCount: mesh.system.vertexCount, triangleCount: mesh.system.faces.length, islandId: mesh.islandId, domainKind: mesh.domainKind }, screen: { vertexCount: mesh.screenMesh?.system.vertexCount, triangleCount: mesh.screenMesh?.system.faces.length, sourceIslandId: mesh.screenMesh?.sourceIslandId, domainKind: mesh.screenMesh?.domainKind }, micro: { vertexCount: mesh.microMesh?.system.vertexCount, triangleCount: mesh.microMesh?.system.faces.length, sourceIslandId: mesh.microMesh?.sourceIslandId, domainKind: mesh.microMesh?.domainKind } }]));
+    const result = { schema: 'vela-rk4-waterfall-candidate-verification-v1', generatedAt: new Date().toISOString(), seed, candidate, domains, preflight, robustness, robustnessPassed, fullValidation, profile, overall: robustnessPassed && fullValidation && Object.values(fullValidation).every(value => value.valid) ? 'SUCCESS' : 'FAILED' };
+    const resultPath = path.join(outputDir, 'rk4-waterfall-candidate-verification.json');
+    await fs.mkdir(outputDir, { recursive: true }); await fs.writeFile(resultPath, JSON.stringify(result, null, 2));
+    console.log(JSON.stringify({ phase: 'waterfall-candidate-complete', path: path.relative(root, resultPath), candidate, preflightPassed: preflight.passed, robustnessPassed, fullValidationRan: Boolean(fullValidation), overall: result.overall }));
+    return;
+  }
   if (argv.has('--material-stress-sweep')) {
     const sweepCheckpoint = resumePath ? await loadWaterfallCheckpoint(resumePath) : null;
     const base = sweepCheckpoint?.current || createCandidate([0, 0, 0, 0, -1, -1, -1]);
@@ -833,7 +896,7 @@ async function main() {
       const [surfaceLog, innerLog] = pairs[index];
       const candidate = withParameterBlock(base, { 1: surfaceLog, 2: innerLog, 3: dampingLog, 5: pinchKpLog, 6: pinchKdLog });
       const physical = evaluateCandidate(meshes, candidate, 'micro6');
-      const stress = Object.fromEntries(meshes.map((mesh, modelIndex) => [mesh.name, randomPinchStress(mesh.microMesh || mesh.screenMesh || mesh, candidate, count, seed + 100 + modelIndex, { holdSeconds: stressHoldSeconds, releaseSeconds: stressReleaseSeconds })]));
+      const stress = Object.fromEntries(meshes.map((mesh, modelIndex) => [mesh.name, randomPinchStress(stressDomain(mesh), candidate, count, seed + 100 + modelIndex, { holdSeconds: stressHoldSeconds, releaseSeconds: stressReleaseSeconds })]));
       const record = { candidate, gravity: compactResult(physical), stress };
       evaluations.push(record);
       console.log(JSON.stringify({ phase: 'material-stress-sweep', evaluation: index + 1, candidate, gravityValid: physical.valid, stressValid: Object.values(stress).every(value => value.valid) }));
@@ -857,7 +920,7 @@ async function main() {
     for (let index = 0; index < dampingLogs.length; index++) {
       const candidate = withParameterBlock(base, { 1: surfaceLog, 2: innerLog, 3: dampingLogs[index], 5: pinchKpLog, 6: pinchKdLog });
       const physical = evaluateCandidate(meshes, candidate, 'micro6');
-      const stress = Object.fromEntries(meshes.map((mesh, modelIndex) => [mesh.name, randomPinchStress(mesh.microMesh || mesh.screenMesh || mesh, candidate, count, seed + 100 + modelIndex, { holdSeconds: stressHoldSeconds, releaseSeconds: stressReleaseSeconds })]));
+      const stress = Object.fromEntries(meshes.map((mesh, modelIndex) => [mesh.name, randomPinchStress(stressDomain(mesh), candidate, count, seed + 100 + modelIndex, { holdSeconds: stressHoldSeconds, releaseSeconds: stressReleaseSeconds })]));
       const record = { candidate, gravity: compactResult(physical), stress };
       evaluations.push(record);
       console.log(JSON.stringify({ phase: 'damping-stress-sweep', evaluation: index + 1, candidate, gravityValid: physical.valid, stressValid: Object.values(stress).every(value => value.valid) }));
@@ -898,7 +961,7 @@ async function main() {
     const candidate = withParameterBlock(base, updates);
     const physical = evaluateCandidate(meshes, candidate, 'micro6');
     const count = Math.max(1, Number(process.env.VELA_CALIBRATION_STRESS_COUNT || 20));
-    const stress = Object.fromEntries(meshes.map((mesh, index) => [mesh.name, randomPinchStress(mesh.microMesh || mesh.screenMesh || mesh, candidate, count, seed + 100 + index, { holdSeconds: stressHoldSeconds, releaseSeconds: stressReleaseSeconds })]));
+    const stress = Object.fromEntries(meshes.map((mesh, index) => [mesh.name, randomPinchStress(stressDomain(mesh), candidate, count, seed + 100 + index, { holdSeconds: stressHoldSeconds, releaseSeconds: stressReleaseSeconds })]));
     const verification = { schema: 'vela-rk4-candidate-verification-v1', generatedAt: new Date().toISOString(), candidate, physical: compactResult(physical), stress };
     const verificationPath = path.join(outputDir, 'rk4-candidate-verification.json');
     await fs.mkdir(outputDir, { recursive: true }); await fs.writeFile(verificationPath, JSON.stringify(verification, null, 2));
@@ -912,9 +975,10 @@ async function main() {
     for (const [index, variable] of [[0, 'VELA_CALIBRATION_MASS_LOG'], [1, 'VELA_CALIBRATION_SURFACE_LOG'], [2, 'VELA_CALIBRATION_INNER_LOG'], [3, 'VELA_CALIBRATION_DAMPING_LOG'], [4, 'VELA_CALIBRATION_DT_LOG'], [5, 'VELA_CALIBRATION_PINCH_KP_LOG'], [6, 'VELA_CALIBRATION_PINCH_KD_LOG']]) if (process.env[variable] !== undefined) updates[index] = Number(process.env[variable]);
     const candidate = withParameterBlock(base, updates);
     const count = Math.max(1, Number(process.env.VELA_CALIBRATION_STRESS_COUNT || 3));
-    const response = Object.fromEntries(meshes.map(mesh => [mesh.name, forceResponse(mesh.microMesh || mesh.screenMesh || mesh, candidate, offlineModelWallMs)]));
-    const stress = Object.fromEntries(meshes.map((mesh, index) => [mesh.name, randomPinchStress(mesh.microMesh || mesh.screenMesh || mesh, candidate, count, seed + 100 + index, { holdSeconds: stressHoldSeconds, releaseSeconds: stressReleaseSeconds })]));
-    const probe = { schema: 'vela-rk4-controller-response-probe-v1', generatedAt: new Date().toISOString(), seed, candidate, count, holdSeconds: stressHoldSeconds, releaseSeconds: stressReleaseSeconds, response, stress };
+    const response = Object.fromEntries(meshes.map(mesh => [mesh.name, forceResponse(stressDomain(mesh), candidate, offlineModelWallMs)]));
+    const stress = Object.fromEntries(meshes.map((mesh, index) => [mesh.name, randomPinchStress(stressDomain(mesh), candidate, count, seed + 100 + index, { holdSeconds: stressHoldSeconds, releaseSeconds: stressReleaseSeconds })]));
+    const domains = Object.fromEntries(meshes.map(mesh => [mesh.name, { full: { vertexCount: mesh.system.vertexCount, triangleCount: mesh.system.faces.length, islandId: mesh.islandId, domainKind: mesh.domainKind }, screen: { vertexCount: mesh.screenMesh?.system.vertexCount, triangleCount: mesh.screenMesh?.system.faces.length, sourceIslandId: mesh.screenMesh?.sourceIslandId, domainKind: mesh.screenMesh?.domainKind }, micro: { vertexCount: mesh.microMesh?.system.vertexCount, triangleCount: mesh.microMesh?.system.faces.length, sourceIslandId: mesh.microMesh?.sourceIslandId, domainKind: mesh.microMesh?.domainKind } }]));
+    const probe = { schema: 'vela-rk4-controller-response-probe-v1', generatedAt: new Date().toISOString(), seed, candidate, count, holdSeconds: stressHoldSeconds, releaseSeconds: stressReleaseSeconds, domains, response, stress };
     const probePath = path.join(outputDir, 'rk4-controller-response-probe.json');
     await fs.mkdir(outputDir, { recursive: true }); await fs.writeFile(probePath, JSON.stringify(probe, null, 2));
     console.log(JSON.stringify({ phase: 'controller-probe-complete', path: path.relative(root, probePath), candidate, response: Object.fromEntries(Object.entries(response).map(([name, value]) => [name, { displacement: value.displacement, targetMeters: value.targetMeters, ratio: value.displacement / Math.max(value.targetMeters, 1e-18), flips: value.flips, strain: value.strain }])), stress: Object.fromEntries(Object.entries(stress).map(([name, value]) => [name, { valid: value.valid, rawFolds: value.results.reduce((sum, result) => sum + (result.held?.orientationFlips || 0) + (result.released?.orientationFlips || 0), 0), genuineFolds: value.results.reduce((sum, result) => sum + (result.held?.genuineFolds || 0) + (result.released?.genuineFolds || 0), 0), collapses: value.results.reduce((sum, result) => sum + (result.held?.collapsedTriangles || 0) + (result.released?.collapsedTriangles || 0), 0) }])) }));
@@ -927,8 +991,10 @@ async function main() {
     for (const [index, variable] of [[1, 'VELA_CALIBRATION_SURFACE_LOG'], [2, 'VELA_CALIBRATION_INNER_LOG'], [3, 'VELA_CALIBRATION_DAMPING_LOG'], [4, 'VELA_CALIBRATION_DT_LOG'], [5, 'VELA_CALIBRATION_PINCH_KP_LOG'], [6, 'VELA_CALIBRATION_PINCH_KD_LOG']]) if (process.env[variable] !== undefined) updates[index] = Number(process.env[variable]);
     const candidate = withParameterBlock(base, updates);
     const count = Math.max(1, Number(process.env.VELA_CALIBRATION_STRESS_COUNT || 20));
-    const probe = { schema: 'vela-rk4-controller-stress-probe-v1', generatedAt: new Date().toISOString(), seed, candidate, count, holdSeconds: stressHoldSeconds, releaseSeconds: stressReleaseSeconds, models: Object.fromEntries(meshes.map((mesh, index) => [mesh.name, randomPinchStress(mesh.microMesh || mesh.screenMesh || mesh, candidate, count, seed + 100 + index, { holdSeconds: stressHoldSeconds, releaseSeconds: stressReleaseSeconds })])) };
-    const probePath = path.join(outputDir, `rk4-controller-stress-probe-s-${String(candidate.surfaceMultiplier).replaceAll('.', '_')}-i-${String(candidate.innerMultiplier).replaceAll('.', '_')}-d-${String(candidate.dampingMultiplier).replaceAll('.', '_')}-kp-${String(candidate.pinchKpMultiplier).replaceAll('.', '_')}-kd-${String(candidate.pinchKdMultiplier).replaceAll('.', '_')}-n-${count}.json`);
+    const domains = Object.fromEntries(meshes.map(mesh => [mesh.name, { full: { vertexCount: mesh.system.vertexCount, triangleCount: mesh.system.faces.length, islandId: mesh.islandId, domainKind: mesh.domainKind }, screen: { vertexCount: mesh.screenMesh?.system.vertexCount, triangleCount: mesh.screenMesh?.system.faces.length, sourceIslandId: mesh.screenMesh?.sourceIslandId, domainKind: mesh.screenMesh?.domainKind }, micro: { vertexCount: mesh.microMesh?.system.vertexCount, triangleCount: mesh.microMesh?.system.faces.length, sourceIslandId: mesh.microMesh?.sourceIslandId, domainKind: mesh.microMesh?.domainKind } }]));
+    const fidelity = process.env.VELA_CALIBRATION_STRESS_FIDELITY || 'micro';
+    const probe = { schema: 'vela-rk4-controller-stress-probe-v1', generatedAt: new Date().toISOString(), seed, candidate, fidelity, count, holdSeconds: stressHoldSeconds, releaseSeconds: stressReleaseSeconds, models: Object.fromEntries(meshes.map((mesh, index) => [mesh.name, randomPinchStress(stressDomain(mesh), candidate, count, seed + 100 + index, { holdSeconds: stressHoldSeconds, releaseSeconds: stressReleaseSeconds })])) };
+    const probePath = path.join(outputDir, `rk4-controller-stress-probe-f-${fidelity}-s-${String(candidate.surfaceMultiplier).replaceAll('.', '_')}-i-${String(candidate.innerMultiplier).replaceAll('.', '_')}-d-${String(candidate.dampingMultiplier).replaceAll('.', '_')}-kp-${String(candidate.pinchKpMultiplier).replaceAll('.', '_')}-kd-${String(candidate.pinchKdMultiplier).replaceAll('.', '_')}-n-${count}.json`);
     await fs.mkdir(outputDir, { recursive: true }); await fs.writeFile(probePath, JSON.stringify(probe, null, 2));
     console.log(JSON.stringify({ phase: 'stress-controller-complete', probe: path.relative(root, probePath), candidate, models: Object.fromEntries(Object.entries(probe.models).map(([name, value]) => [name, { valid: value.valid, count: value.count, runtimeMs: value.runtimeMs, rawFolds: value.results.reduce((sum, result) => sum + (result.held?.orientationFlips || 0) + (result.released?.orientationFlips || 0), 0), genuineFolds: value.results.reduce((sum, result) => sum + (result.held?.genuineFolds || 0) + (result.released?.genuineFolds || 0), 0), collapses: value.results.reduce((sum, result) => sum + (result.held?.collapsedTriangles || 0) + (result.released?.collapsedTriangles || 0), 0) }])) }));
     return;
