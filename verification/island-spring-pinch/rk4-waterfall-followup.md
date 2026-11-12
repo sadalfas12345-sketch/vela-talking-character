@@ -115,6 +115,12 @@ The same damping 10x, stability-multiplier 16 configuration was then run on one 
 
 The male raw orientation flip was classified by the existing local geometry validator as a non-genuine 3D rotation; the genuine-fold and collapse counts remained zero. This is a one-sequence mechanical check only. The required 20-sequence full-island robustness gate remains open.
 
+## Corrected micro-domain robustness comparison
+
+The current completion-aware validator was run on 20 deterministic pinch sequences using the connected 128-vertex subpatches from the same original facial islands. Damping 100x with Kp 0.1x, Kd 0.01x passed on both models: female runtime 124.7 seconds with zero raw flips, genuine folds, and collapses; male runtime 91.1 seconds with three raw flips, zero genuine folds, and zero collapses. All held and release segments completed.
+
+The comparison candidate at damping 10x with Kp 1x and Kd 1x failed this same micro gate: the female had 19 incomplete sequences, while the male had 12 genuine folds across three sequences that completed. The damping-100 candidate is therefore the current mechanically validated configuration at micro fidelity, while full-island 20-sequence robustness remains unrun because its measured cost is substantially higher.
+
 ## Reproduction
 
 ```powershell
