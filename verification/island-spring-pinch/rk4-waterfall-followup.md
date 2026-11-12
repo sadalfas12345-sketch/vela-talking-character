@@ -104,6 +104,17 @@ The targeted follow-up is saved in `rk4-gravity-audit-male-damping10-stability16
 
 This resolves the prior male short-window gravity residual. It does not yet pass the separate 20-sequence full-island pinch gate or the performance gate.
 
+## Full-island single pinch follow-up
+
+The same damping 10x, stability-multiplier 16 configuration was then run on one complete held-pinch and release sequence per character. The per-model artifacts are `rk4-controller-stress-probe-f-full-s-1-i-1-d-10-kp-1-kd-1-n-1-full-damping10-stability16-female-single-pinch.json` and `rk4-controller-stress-probe-f-full-s-1-i-1-d-10-kp-1-kd-1-n-1-male.json`.
+
+| Model | Full-island vertices | Completed | Raw orientation flips | Genuine folds | Collapses | Runtime | Result |
+|---|---:|---|---:|---:|---:|---:|---|
+| Female | 5,036 | held and released | 0 | 0 | 0 | 121.5 s | PASS for this sequence |
+| Male | 41,920 | held and released | 1 | 0 | 0 | 755.1 s | PASS for this sequence |
+
+The male raw orientation flip was classified by the existing local geometry validator as a non-genuine 3D rotation; the genuine-fold and collapse counts remained zero. This is a one-sequence mechanical check only. The required 20-sequence full-island robustness gate remains open.
+
 ## Reproduction
 
 ```powershell
