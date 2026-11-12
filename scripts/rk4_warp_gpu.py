@@ -351,6 +351,8 @@ class WarpSimulation:
         self.pinch_velocity = wp.zeros(3, dtype=wp.float32, device=device)
         self.neutral_host = fixture["neutral"].reshape(-1, 3).copy()
         self.n = n
+        self._advance_graph_cache = {}
+        self._advance_graph_errors = {}
 
     def reset(self, initial_positions=None, initial_velocities=None):
         start_positions = self.neutral_host if initial_positions is None else initial_positions
@@ -399,15 +401,34 @@ class WarpSimulation:
     def advance(self, seconds, gravity, pinch=None):
         """Advance the resident GPU state without resetting or reading per substep."""
         h0 = self.fixture["stable_dt"]
+        graph_chunk = 16
         elapsed = 0.0
         steps = 0
         started = time.perf_counter()
         self.set_pinch(pinch)
+        graph = None
+        graph_key = None
+        if seconds >= h0 * graph_chunk - 1.0e-15:
+            pinch_gains = (float(pinch[4]), float(pinch[5])) if pinch is not None else (0.0, 0.0)
+            graph_key = (float(h0), tuple(float(value) for value in gravity), int(self.use_pinch), pinch_gains)
+            graph = self._advance_graph_cache.get(graph_key)
+            if graph is None and graph_key not in self._advance_graph_errors:
+                graph, error = self.capture_chunk(h0, gravity, pinch, graph_chunk)
+                if graph is not None:
+                    self._advance_graph_cache[graph_key] = graph
+                else:
+                    self._advance_graph_errors[graph_key] = error or "unknown CUDA graph capture error"
         while elapsed < seconds - 1.0e-15:
-            h = min(h0, seconds - elapsed)
-            self._launch_step(h, gravity, pinch)
-            elapsed += h
-            steps += 1
+            remaining = seconds - elapsed
+            if graph is not None and remaining >= h0 * graph_chunk - 1.0e-15:
+                wp.capture_launch(graph)
+                elapsed += h0 * graph_chunk
+                steps += graph_chunk
+            else:
+                h = min(h0, remaining)
+                self._launch_step(h, gravity, pinch)
+                elapsed += h
+                steps += 1
         self.launch_acceleration(self.positions, self.velocities, self.accel, gravity, pinch)
         wp.synchronize_device(self.device)
         runtime_ms = (time.perf_counter() - started) * 1000.0

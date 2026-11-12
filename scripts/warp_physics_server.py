@@ -79,8 +79,8 @@ class Session:
             raise ValueError("pinch target and velocity must be 3-vectors")
         self.pinch = (local_ids, weights, target, velocity, self.kp, self.kd)
 
-    def state_packet(self, runtime_ms, steps, seconds):
-        positions = self.sim.positions.numpy().reshape(-1, 3).astype(np.float32, copy=False)
+    def state_packet(self, positions, runtime_ms, steps, seconds):
+        positions = np.asarray(positions, dtype=np.float32).reshape(-1, 3)
         return {
             "type": "state",
             "model": self.model,
@@ -138,8 +138,10 @@ async def handler(websocket, manifest_path: Path, device: str, default_kp: float
                 seconds = float(message.get("seconds", 0.0))
                 if not np.isfinite(seconds) or seconds < 0.0:
                     raise ValueError("tick seconds must be finite and nonnegative")
-                _, _, _, runtime_ms, steps = session.sim.advance(seconds, session.gravity, session.pinch)
-                header, payload = session.state_packet(runtime_ms, steps, seconds)
+                positions, _, _, runtime_ms, steps = await asyncio.to_thread(
+                    session.sim.advance, seconds, session.gravity, session.pinch
+                )
+                header, payload = session.state_packet(positions, runtime_ms, steps, seconds)
                 await websocket.send(json.dumps(header))
                 await websocket.send(payload)
             elif message_type == "ping":
