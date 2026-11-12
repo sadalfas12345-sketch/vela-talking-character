@@ -1,0 +1,89 @@
+{
+  "schema": "vela-rk4-controller-stress-probe-v1",
+  "generatedAt": "2026-11-12T12:54:05.405Z",
+  "seed": 20261111,
+  "candidate": {
+    "massMultiplier": 1,
+    "surfaceMultiplier": 1,
+    "innerMultiplier": 1,
+    "dampingMultiplier": 10,
+    "dtMultiplier": 0.1,
+    "pinchKpMultiplier": 1,
+    "pinchKdMultiplier": 1,
+    "logParameters": [
+      0,
+      0,
+      0,
+      1,
+      -1,
+      0,
+      0
+    ]
+  },
+  "fidelity": "full",
+  "count": 1,
+  "holdSeconds": 0.0166666666666667,
+  "releaseSeconds": 0.05,
+  "models": {
+    "male": {
+      "count": 1,
+      "holdSeconds": 0.0166666666666667,
+      "releaseSeconds": 0.05,
+      "valid": true,
+      "results": [
+        {
+          "sequence": 0,
+          "face": [
+            20821,
+            16476,
+            39587
+          ],
+          "direction": "down",
+          "magnitudeSource": 0.0032145966525321903,
+          "held": {
+            "maxEdgeStrain": 0.36278821427538754,
+            "p95EdgeStrain": 0.0006311493275313831,
+            "orientationFlips": 1,
+            "genuineFolds": 0,
+            "genuineFoldFaces": [],
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.689454974679944,
+            "finite": true,
+            "maxDisplacement": 0.00240730435229912,
+            "maxVelocity": 0.8665782561162827,
+            "finalVelocity": 0.08618107289287803,
+            "normalizedVelocity": 0.004723307237656927,
+            "maxNetForceN": 0.000004568426008864028,
+            "rmsNetForceN": 4.125485158885178e-8,
+            "forceResidualRatio": 1.0636811035962126
+          },
+          "released": {
+            "maxEdgeStrain": 0.006348440506674557,
+            "p95EdgeStrain": 0.000258758829174615,
+            "orientationFlips": 0,
+            "genuineFolds": 0,
+            "genuineFoldFaces": [],
+            "collapsedTriangles": 0,
+            "minAreaRatio": 0.952670076859122,
+            "finite": true,
+            "maxDisplacement": 0.0012588743921962196,
+            "maxVelocity": 4.83953514278103,
+            "finalVelocity": 0.009801793539551646,
+            "normalizedVelocity": 0.000537204757533358,
+            "maxNetForceN": 9.421950976541717e-8,
+            "rmsNetForceN": 1.2536169508371561e-9,
+            "forceResidualRatio": 0.02193742701164889
+          },
+          "heldComplete": true,
+          "releaseComplete": true,
+          "wallClockExceeded": false,
+          "recoveredDisplacement": 0.0012588743921962196,
+          "peakForceN": 0.04062022561122725,
+          "peakTrackingErrorMeters": 0.0002753222603266979,
+          "valid": true
+        }
+      ],
+      "runtimeMs": 755053.0051
+    }
+  }
+}
