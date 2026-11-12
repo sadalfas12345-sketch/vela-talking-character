@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { spawn } from 'node:child_process';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const outputDir = path.join(root, 'verification', 'island-spring-pinch');
@@ -537,6 +538,8 @@ function randomPinchStress(mesh, candidate, count = 20, stressSeed = seed, optio
   const holdSeconds = options.holdSeconds ?? stressHoldSeconds;
   const releaseSeconds = options.releaseSeconds ?? stressReleaseSeconds;
   const wallClockLimitMs = options.wallClockLimitMs ?? offlineModelWallMs;
+  const startSequence = Math.max(0, Number(options.startSequence || 0));
+  for (let skipped = 0; skipped < startSequence * 5; skipped++) random();
   for (let sequence = 0; sequence < count; sequence++) {
     const face = system.faces[Math.floor(random() * system.faces.length)], ids = face.slice();
     let u = random(), v = random(); if (u + v > 1) { u = 1 - u; v = 1 - v; }
@@ -555,9 +558,54 @@ function randomPinchStress(mesh, candidate, count = 20, stressSeed = seed, optio
     const release = simulate(mesh, candidate, { gravity: direction.map(value => value * 9.81), seconds: releaseSeconds, initialPositions: positions, initialVelocities: velocities, wallClockLimitMs });
     const recoveredDisplacement = maxVertexDisplacement(system.neutral, release.positions);
     const segmentsComplete = heldComplete && release.complete && !release.wallClockExceeded;
-    results.push({ sequence, face, direction: directionName, magnitudeSource: magnitude, held: heldGeometry, released: release.geometry, heldComplete, releaseComplete: release.complete, wallClockExceeded: Boolean(!heldComplete || release.wallClockExceeded), recoveredDisplacement, peakForceN: maxForce, peakTrackingErrorMeters: maxTrackingError, valid: !invalid && segmentsComplete && release.geometry.finite && release.geometry.genuineFolds === 0 && release.geometry.collapsedTriangles === 0 });
+    results.push({ sequence: sequence + startSequence, face, direction: directionName, magnitudeSource: magnitude, held: heldGeometry, released: release.geometry, heldComplete, releaseComplete: release.complete, wallClockExceeded: Boolean(!heldComplete || release.wallClockExceeded), recoveredDisplacement, peakForceN: maxForce, peakTrackingErrorMeters: maxTrackingError, valid: !invalid && segmentsComplete && release.geometry.finite && release.geometry.genuineFolds === 0 && release.geometry.collapsedTriangles === 0 });
   }
   return { count, holdSeconds, releaseSeconds, valid: results.every(result => result.valid), results, runtimeMs: performance.now() - started };
+}
+
+function candidateFromEnvironment(base = createCandidate([0, 0, 0, 2, -1, -1, -2])) {
+  const updates = {};
+  for (const [index, variable] of [[0, 'VELA_CALIBRATION_MASS_LOG'], [1, 'VELA_CALIBRATION_SURFACE_LOG'], [2, 'VELA_CALIBRATION_INNER_LOG'], [3, 'VELA_CALIBRATION_DAMPING_LOG'], [4, 'VELA_CALIBRATION_DT_LOG'], [5, 'VELA_CALIBRATION_PINCH_KP_LOG'], [6, 'VELA_CALIBRATION_PINCH_KD_LOG']]) if (process.env[variable] !== undefined) updates[index] = Number(process.env[variable]);
+  return withParameterBlock(base, updates);
+}
+
+async function runParallelStress() {
+  const checkpoint = resumePath ? await loadWaterfallCheckpoint(resumePath) : null;
+  const candidate = candidateFromEnvironment(checkpoint?.current || undefined);
+  const count = Math.max(1, Number(process.env.VELA_CALIBRATION_STRESS_COUNT || 20));
+  const workerCount = Math.max(1, Math.min(Number(process.env.VELA_CALIBRATION_STRESS_WORKERS || 4), count));
+  const fidelity = process.env.VELA_CALIBRATION_STRESS_FIDELITY || 'full';
+  const ranges = [];
+  for (const modelName of requestedModels) {
+    const modelIndex = requestedModels.indexOf(modelName);
+    const chunk = Math.ceil(count / workerCount);
+    for (let start = 0; start < count; start += chunk) ranges.push({ modelName, modelIndex, start, count: Math.min(chunk, count - start) });
+  }
+  const workerResults = await Promise.all(ranges.map(range => new Promise((resolve, reject) => {
+    const env = { ...process.env, VELA_CALIBRATION_MODELS: range.modelName, VELA_CALIBRATION_STRESS_FIDELITY: fidelity, VELA_CALIBRATION_STRESS_COUNT: String(range.count), VELA_CALIBRATION_STRESS_START: String(range.start), VELA_CALIBRATION_STRESS_MODEL_INDEX: String(range.modelIndex), ...Object.fromEntries(candidate.logParameters.map((value, index) => [
+      ['VELA_CALIBRATION_MASS_LOG', 'VELA_CALIBRATION_SURFACE_LOG', 'VELA_CALIBRATION_INNER_LOG', 'VELA_CALIBRATION_DAMPING_LOG', 'VELA_CALIBRATION_DT_LOG', 'VELA_CALIBRATION_PINCH_KP_LOG', 'VELA_CALIBRATION_PINCH_KD_LOG'][index], value,
+    ])) };
+    const child = spawn(process.execPath, [fileURLToPath(import.meta.url), '--stress-worker'], { cwd: root, env, stdio: ['ignore', 'pipe', 'pipe'] });
+    let stdout = '', stderr = '';
+    child.stdout.on('data', chunk => { stdout += chunk.toString(); });
+    child.stderr.on('data', chunk => { stderr += chunk.toString(); });
+    child.on('error', reject);
+    child.on('close', code => {
+      if (code !== 0) return reject(new Error(`stress worker failed for ${range.modelName} ${range.start}-${range.start + range.count - 1}: ${stderr || stdout}`));
+      try { resolve({ range, payload: JSON.parse(stdout.trim()) }); } catch (error) { reject(new Error(`stress worker returned invalid JSON for ${range.modelName} ${range.start}: ${error.message}\n${stdout}`)); }
+    });
+  })));
+  const models = {};
+  for (const modelName of requestedModels) {
+    const parts = workerResults.filter(item => item.range.modelName === modelName).sort((a, b) => a.range.start - b.range.start);
+    const first = parts[0]?.payload?.stress;
+    const results = parts.flatMap(item => item.payload.stress.results);
+    models[modelName] = { ...first, count, valid: results.length === count && results.every(result => result.valid), results, workerRanges: parts.map(item => item.range), runtimeMs: parts.reduce((sum, item) => sum + (item.payload.stress.runtimeMs || 0), 0) };
+  }
+  const result = { schema: 'vela-rk4-controller-stress-parallel-v1', generatedAt: new Date().toISOString(), seed, candidate, fidelity, count, workerCount, models, parallelWallMs: Math.max(...workerResults.map(item => item.payload.stress.runtimeMs || 0), 0), overall: Object.values(models).every(value => value.valid) ? 'SUCCESS' : 'FAILED' };
+  const resultPath = evidencePath(`rk4-controller-stress-parallel-${fidelity}-n-${count}-w-${workerCount}`);
+  await fs.mkdir(outputDir, { recursive: true }); await fs.writeFile(resultPath, JSON.stringify(result, null, 2));
+  console.log(JSON.stringify({ phase: 'parallel-stress-complete', path: path.relative(root, resultPath), candidate, fidelity, count, workerCount, models: Object.fromEntries(Object.entries(models).map(([name, value]) => [name, { valid: value.valid, runtimeMs: value.runtimeMs, genuineFolds: value.results.reduce((sum, item) => sum + (item.held?.genuineFolds || 0) + (item.released?.genuineFolds || 0), 0), collapsedTriangles: value.results.reduce((sum, item) => sum + (item.held?.collapsedTriangles || 0) + (item.released?.collapsedTriangles || 0), 0) }])), overall: result.overall }));
 }
 
 function candidateKey(candidate) { return JSON.stringify([candidate.massMultiplier, candidate.surfaceMultiplier, candidate.innerMultiplier, candidate.dampingMultiplier, candidate.dtMultiplier, candidate.pinchKpMultiplier, candidate.pinchKdMultiplier]); }
@@ -923,6 +971,19 @@ async function runWaterfall(meshes, resource, resumed = null) {
 }
 
 async function main() {
+  if (argv.has('--stress-worker')) {
+    const modelName = requestedModels[0];
+    const mesh = await loadModel(modelName);
+    const candidate = candidateFromEnvironment();
+    const startSequence = Math.max(0, Number(process.env.VELA_CALIBRATION_STRESS_START || 0));
+    const count = Math.max(1, Number(process.env.VELA_CALIBRATION_STRESS_COUNT || 1));
+    const modelIndex = Number(process.env.VELA_CALIBRATION_STRESS_MODEL_INDEX || requestedModels.indexOf(modelName));
+    const fidelity = process.env.VELA_CALIBRATION_STRESS_FIDELITY || 'full';
+    const stress = randomPinchStress(stressDomain(mesh), candidate, count, seed + 100 + modelIndex, { holdSeconds: stressHoldSeconds, releaseSeconds: stressReleaseSeconds, startSequence });
+    console.log(JSON.stringify({ modelName, startSequence, count, fidelity, stress }));
+    return;
+  }
+  if (argv.has('--stress-parallel')) { await runParallelStress(); return; }
   const started = performance.now(), loaded = {};
   for (const name of requestedModels) { console.log(JSON.stringify({ phase: 'load', model: name })); loaded[name] = await loadModel(name); console.log(JSON.stringify({ phase: 'loaded', model: name, islandVertices: loaded[name].system.vertexCount, islandTriangles: loaded[name].system.faces.length, screenIslandVertices: loaded[name].screenMesh?.system.vertexCount, screenDomainKind: loaded[name].screenMesh?.domainKind, screenSourceIslandId: loaded[name].screenMesh?.sourceIslandId, microIslandVertices: loaded[name].microMesh?.system.vertexCount, microDomainKind: loaded[name].microMesh?.domainKind, microSourceIslandId: loaded[name].microMesh?.sourceIslandId, islandCount: loaded[name].islandCount })); }
   const meshes = Object.values(loaded);
