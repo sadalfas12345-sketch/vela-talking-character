@@ -769,7 +769,24 @@ function feedbackDemo() {
   const initial = { mean: [0, 0, 0, 0, -1], sigma: 0.2, bounds: cloneBounds(defaultLogBounds), feedbackHistory: [] };
   const failed = Array.from({ length: 4 }, (_, index) => ({ candidate: createCandidate([0, 0, 0, 0, -1]), fidelity: 'screen', valid: false, score: 1, generation: 0, source: `deliberate-failure-${index}`, diagnosis: { dominantMechanism: 'operation-budget', failureDistance: 4, modelDiagnoses: {} }, models: {} }));
   const adapted = adaptSearchState(initial, failed, 'feedback-demo');
-  return { firstGeneration: { allFailed: failed.every(result => !result.valid), dominantMechanism: adapted.lastFeedback.dominantMechanism }, nextGeneration: { meanChanged: JSON.stringify(initial.mean) !== JSON.stringify(adapted.mean), meanBefore: initial.mean, meanAfter: adapted.mean, boundsBefore: initial.bounds, boundsAfter: adapted.bounds }, passed: failed.every(result => !result.valid) && adapted.lastFeedback.dominantMechanism === 'operation-budget' && JSON.stringify(initial.mean) !== JSON.stringify(adapted.mean) };
+  const passedCandidate = createCandidate([0, 0, 0, 0, -1, -0.5, 0]);
+  const stalePassedCandidate = createCandidate([0, 0, 0, 0, -1, -1, -1]);
+  const failedCandidate = createCandidate([0, 0, 0, 0, -1, 0, 0]);
+  const resumeCandidate = latestPassedWaterfallCandidate({ current: failedCandidate, stages: [
+    { name: 'pinch-preflight', passed: true, candidate: passedCandidate },
+  ], checkpoints: [
+    { stage: 'pinch-preflight', passed: true, current: stalePassedCandidate },
+    { stage: 'robustness', passed: false, current: failedCandidate },
+  ] });
+  const resumeKeepsLastPassedCandidate = candidateKey(resumeCandidate) === candidateKey(passedCandidate);
+  return { firstGeneration: { allFailed: failed.every(result => !result.valid), dominantMechanism: adapted.lastFeedback.dominantMechanism }, nextGeneration: { meanChanged: JSON.stringify(initial.mean) !== JSON.stringify(adapted.mean), meanBefore: initial.mean, meanAfter: adapted.mean, boundsBefore: initial.bounds, boundsAfter: adapted.bounds }, resumeKeepsLastPassedCandidate, passed: failed.every(result => !result.valid) && adapted.lastFeedback.dominantMechanism === 'operation-budget' && JSON.stringify(initial.mean) !== JSON.stringify(adapted.mean) && resumeKeepsLastPassedCandidate };
+}
+
+function latestPassedWaterfallCandidate(checkpoint) {
+  const passedStage = [...(checkpoint?.stages || [])].reverse().find(item => item?.passed && item.candidate);
+  if (passedStage?.candidate) return passedStage.candidate;
+  const passed = [...(checkpoint?.checkpoints || [])].reverse().find(item => item?.passed && item.current);
+  return passed?.current || checkpoint?.current || null;
 }
 
 async function adaptiveSearch(meshes, random, resumed) {
@@ -940,7 +957,10 @@ function pinchPreflight(meshes, baseCandidate) {
 
 async function runWaterfall(meshes, resource, resumed = null) {
   const stages = resumed?.stages || [], checkpoints = resumed?.checkpoints || [];
-  let current = resumed?.current || createCandidate([0, 0, 0, 0, 0, 0, 0]);
+  // A failed later stage must never replace the last verified candidate on resume.
+  // This matters when a robustness attempt fails after pinch-preflight passed: the
+  // next run should retry from the verified preflight controls, not the failed one.
+  let current = latestPassedWaterfallCandidate(resumed) || createCandidate([0, 0, 0, 0, 0, 0, 0]);
   const passed = new Set(checkpoints.filter(checkpoint => checkpoint.passed).map(checkpoint => checkpoint.stage));
   const persist = async stage => { await fs.mkdir(outputDir, { recursive: true }); await fs.writeFile(path.join(outputDir, 'rk4-waterfall-checkpoint.json'), JSON.stringify({ schema: 'vela-rk4-waterfall-checkpoint-v1', generatedAt: new Date().toISOString(), stage, current, stages, checkpoints }, null, 2)); };
   const execute = async (name, varyingIndices, fidelity, passStage) => {
