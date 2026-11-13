@@ -160,12 +160,73 @@ def nonlinear_force_equilibrium(x0, x, external, graph, edges, rest, base, suppo
     return x, {"iterations": len(history), "history": history, "finalGradientNorm": float(np.linalg.norm(gradient)), "finalEnergy": energy, "finalLengths": lengths}
 
 
-def iterative_force_update(x0, x, u, Bforce, L, d2, graph, edges, rest, base, support_ratio, eye, regularization, outer_iterations, response_iterations, nonlinear_inner_iterations):
+def geometry_metrics(x0, x, F, edges, rest):
+    area0 = np.cross(x0[F[:, 1]] - x0[F[:, 0]], x0[F[:, 2]] - x0[F[:, 0]], axis=1)
+    area1 = np.cross(x[F[:, 1]] - x[F[:, 0]], x[F[:, 2]] - x[F[:, 0]], axis=1)
+    area0n = np.linalg.norm(area0, axis=1)
+    area1n = np.linalg.norm(area1, axis=1)
+    positive = rest > 1e-12
+    lengths = np.linalg.norm(x[edges[:, 0]] - x[edges[:, 1]], axis=1)
+    strains = lengths[positive] / rest[positive] - 1.0 if np.any(positive) else np.zeros(0)
+    return {
+        "finite": bool(np.isfinite(x).all()),
+        "orientationReversals": int(np.sum(np.sum(area0 * area1, axis=1) < 0)) if len(F) else 0,
+        "collapses": int(np.sum(area1n <= np.maximum(area0n * 1e-4, 1e-15))) if len(F) else 0,
+        "p95AbsPositiveRestStrain": float(np.quantile(np.abs(strains), 0.95)) if len(strains) else 0.0,
+    }
+
+
+def candidate_is_acceptable(baseline, candidate, tolerance=1e-12):
+    """Monotone acceptance gate for an inverse-physics update.
+
+    Alpha zero is the baseline. A candidate must improve the actual image
+    objective without worsening finite-state, collapse, reversal, or force-
+    balance metrics. This pure predicate is intentionally unit-testable.
+    """
+    if not candidate["finite"]:
+        return False, "nonfinite"
+    if candidate["imageObjective"] >= baseline["imageObjective"] - tolerance:
+        return False, "image_objective_not_improved"
+    if candidate["orientationReversals"] > baseline["orientationReversals"]:
+        return False, "orientation_reversals_increased"
+    if candidate["collapses"] > baseline["collapses"]:
+        return False, "collapses_increased"
+    if candidate["forceBalance"] > baseline["forceBalance"] * (1.0 + 1e-6) + tolerance:
+        return False, "force_balance_worsened"
+    return True, "accepted"
+
+
+def choose_accepted_candidate(baseline, candidates):
+    """Choose an improving candidate, always retaining candidates[0] as alpha zero."""
+    if not candidates:
+        raise ValueError("candidate list must include the alpha-zero baseline")
+    baseline_candidate = candidates[0]
+    rejections = []
+    accepted = []
+    for candidate in candidates[1:]:
+        ok, reason = candidate_is_acceptable(baseline, candidate)
+        candidate["accepted"] = ok
+        candidate["rejectionReason"] = reason
+        if ok:
+            accepted.append(candidate)
+        else:
+            rejections.append({"alpha": candidate.get("alpha"), "reason": reason})
+    if not accepted:
+        baseline_candidate["accepted"] = False
+        baseline_candidate["rejectionReason"] = "all_updates_rejected"
+        return baseline_candidate, rejections
+    return min(accepted, key=lambda value: value["error"]), rejections
+
+
+def iterative_force_update(x0, x, u, Bforce, L, d2, F, graph, edges, rest, base, support_ratio, eye, regularization, outer_iterations, response_iterations, nonlinear_inner_iterations, initial_gradient):
     """Update force coefficients with an implicit equilibrium sensitivity map."""
     history = []
     current = x.copy()
     current_u = u.copy()
     n = len(x0)
+    current_error = float(np.linalg.norm((L @ (current - x0).reshape(-1) - d2) / max(eye, 1e-30)))
+    current_quality = geometry_metrics(x0, current, F, edges, rest)
+    current_balance = float(initial_gradient)
     for outer in range(outer_iterations):
         Je, re, _ = base.spring_jacobian(current, edges, rest, x0)
         Js, rs = build_support_jacobian(current, graph, edges, base, support_ratio)
@@ -181,18 +242,29 @@ def iterative_force_update(x0, x, u, Bforce, L, d2, graph, edges, rest, base, su
         normal = (A.T @ A) / max(eye * eye, 1e-30) + regularization * np.eye(A.shape[1])
         rhs = (A.T @ residual) / max(eye * eye, 1e-30) - regularization * current_u
         du = np.linalg.lstsq(normal, rhs, rcond=1e-10)[0] if len(rhs) else np.zeros(0)
-        old_error = float(np.linalg.norm(residual / max(eye, 1e-30)))
-        chosen = None
+        old_error = current_error
+        baseline = {"imageObjective": current_error, "forceBalance": current_balance, **current_quality}
+        candidates = [{"alpha": 0.0, "u": current_u, "x": current, "report": {"finalGradientNorm": current_balance}, "error": current_error, **current_quality}]
         for alpha in (1.0, 0.5, 0.25, 0.125):
             candidate_u = current_u + alpha * du
             candidate_force = np.asarray(Bforce @ candidate_u).reshape(n, 3)
             candidate_x, candidate_report = nonlinear_force_equilibrium(x0, current, candidate_force, graph, edges, rest, base, support_ratio, 3, nonlinear_inner_iterations)
             candidate_error = float(np.linalg.norm((L @ (candidate_x - x0).reshape(-1) - d2) / max(eye, 1e-30)))
-            if chosen is None or candidate_error < chosen["error"]:
-                chosen = {"alpha": alpha, "u": candidate_u, "x": candidate_x, "report": candidate_report, "error": candidate_error}
-        current_u = chosen["u"]
-        current = chosen["x"]
-        history.append({"outerIteration": outer + 1, "linearizedErrorBefore": old_error, "linearizedControlStepNorm": float(np.linalg.norm(du)), "acceptedAlpha": float(chosen["alpha"]), "actualImageObjective": float(chosen["error"]), "equilibriumGradientNorm": float(chosen["report"]["finalGradientNorm"])})
+            quality = geometry_metrics(x0, candidate_x, F, edges, rest)
+            candidates.append({"alpha": alpha, "u": candidate_u, "x": candidate_x, "report": candidate_report, "error": candidate_error, **quality})
+        prepared = [{"imageObjective": candidate["error"], "forceBalance": candidate["report"]["finalGradientNorm"], **candidate} for candidate in candidates]
+        chosen, rejection_reasons = choose_accepted_candidate(baseline, prepared)
+        if chosen["alpha"] != 0.0:
+            current_u = chosen["u"]
+            current = chosen["x"]
+            current_error = chosen["error"]
+            current_quality = {key: chosen[key] for key in ("finite", "orientationReversals", "collapses", "p95AbsPositiveRestStrain")}
+            current_balance = float(chosen["report"]["finalGradientNorm"])
+        else:
+            chosen = candidates[0]
+        history.append({"outerIteration": outer + 1, "linearizedErrorBefore": old_error, "linearizedControlStepNorm": float(np.linalg.norm(du)), "acceptedAlpha": float(chosen["alpha"]), "actualImageObjective": float(chosen["error"]), "equilibriumGradientNorm": float(chosen["report"]["finalGradientNorm"]), "accepted": bool(chosen["alpha"] != 0.0), "rejections": rejection_reasons, "baselineQuality": baseline})
+        if chosen["alpha"] == 0.0:
+            break
     return current, current_u, history
 
 
@@ -210,7 +282,8 @@ def solve_inverse(args):
     right, up = load_json_axes(args.target_json)
     neutral_lm = landmark_positions(V0, T, Bary)
     d3 = target - neutral_lm
-    controls = select_controls(neutral_lm, d3, args.controls)
+    saved_state = np.load(args.initial_state) if args.initial_state else None
+    controls = saved_state["controls"].astype(np.int64) if saved_state is not None else select_controls(neutral_lm, d3, args.controls)
     n = len(V0)
     Bforce = force_basis(n, T, Bary, controls)
     L = image_landmark_matrix(T, Bary, n, right, up)
@@ -251,19 +324,28 @@ def solve_inverse(args):
         gu = -np.asarray(Bforce.T @ (zeq / eq_scale)).reshape(-1) + zreg / force_scale * np.sqrt(args.force_regularization)
         return np.concatenate((gq, gu))
 
-    op = LinearOperator((rows, cols), matvec=matvec, rmatvec=rmatvec, dtype=float)
-    rhs = np.concatenate((np.zeros(3 * n), d2 / image_scale, np.zeros(p)))
-    result = lsqr(op, rhs, atol=args.linear_atol, btol=args.linear_btol, iter_lim=args.linear_iterations, show=False)
-    solution = np.asarray(result[0])
-    q = solution[: 3 * n]
-    u = solution[3 * n :]
-    x = V0 + q.reshape(n, 3)
+    if saved_state is None:
+        op = LinearOperator((rows, cols), matvec=matvec, rmatvec=rmatvec, dtype=float)
+        rhs = np.concatenate((np.zeros(3 * n), d2 / image_scale, np.zeros(p)))
+        result = lsqr(op, rhs, atol=args.linear_atol, btol=args.linear_btol, iter_lim=args.linear_iterations, show=False)
+        solution = np.asarray(result[0])
+        q = solution[: 3 * n]
+        u = solution[3 * n :]
+        x = V0 + q.reshape(n, 3)
+        linear_report = {"iterations": int(result[2]), "istop": int(result[1]), "residualNorm": float(result[3]), "arnorm": float(result[7]), "acond": float(result[6]), "xnorm": float(result[8]), "source": "neutral_linear_inverse"}
+    else:
+        x = saved_state["positions"].astype(float)
+        u = saved_state["controlCoefficients"].astype(float)
+        q = x - V0
+        result = None
+        linear_report = {"iterations": 0, "istop": 0, "residualNorm": None, "arnorm": None, "acond": None, "xnorm": float(np.linalg.norm(q)), "source": str(args.initial_state)}
     external = np.asarray(Bforce @ u).reshape(n, 3)
 
-    x, nonlinear = nonlinear_force_equilibrium(V0, x, external, graph, edges, rest, BASE, args.support_ratio, args.nonlinear_iterations, args.nonlinear_inner_iterations)
+    initial_relax_iterations = 0 if saved_state is not None else args.nonlinear_iterations
+    x, nonlinear = nonlinear_force_equilibrium(V0, x, external, graph, edges, rest, BASE, args.support_ratio, initial_relax_iterations, args.nonlinear_inner_iterations)
     optimization_history = []
     if args.outer_iterations > 0:
-        x, u, optimization_history = iterative_force_update(V0, x, u, Bforce, L, d2, graph, edges, rest, BASE, args.support_ratio, eye, args.outer_regularization, args.outer_iterations, args.response_iterations, args.nonlinear_inner_iterations)
+        x, u, optimization_history = iterative_force_update(V0, x, u, Bforce, L, d2, F, graph, edges, rest, BASE, args.support_ratio, eye, args.outer_regularization, args.outer_iterations, args.response_iterations, args.nonlinear_inner_iterations, nonlinear["finalGradientNorm"])
         external = np.asarray(Bforce @ u).reshape(n, 3)
 
     # Nonlinear audit at the actual state. This is not a hard landmark
@@ -312,7 +394,7 @@ def solve_inverse(args):
         "inputs": {"vertices": int(n), "triangles": int(len(F)), "springs": int(len(edges)), "supportSprings": int(Jsupp.shape[0]), "landmarks": int(len(T)), "neutralSpringResidualMax": float(np.max(np.abs(residual0))) if len(residual0) else 0.0},
         "controls": {"count": int(len(controls)), "landmarkIds": controls.tolist(), "basisColumns": int(p), "forceDistribution": "original attachment triangle barycentric weights"},
         "scales": {"eyeWidth": eye, "equilibriumScale": eq_scale, "forceScale": force_scale},
-        "linearSolve": {"iterations": int(result[2]), "istop": int(result[1]), "residualNorm": float(result[3]), "arnorm": float(result[7]), "acond": float(result[6]), "xnorm": float(result[8])},
+        "linearSolve": linear_report,
         "nonlinearEquilibrium": {"iterations": int(nonlinear["iterations"]), "finalGradientNorm": float(nonlinear["finalGradientNorm"]), "finalEnergy": float(nonlinear["finalEnergy"]), "history": nonlinear["history"]},
         "forceOptimization": {"outerIterations": int(args.outer_iterations), "responseIterations": int(args.response_iterations), "regularization": float(args.outer_regularization), "history": optimization_history},
         "regionalErrors": regional_errors,
@@ -335,6 +417,7 @@ def main():
     p.add_argument("--target-json", type=Path, required=True)
     p.add_argument("--frame", type=int, default=45)
     p.add_argument("--output", type=Path, required=True)
+    p.add_argument("--initial-state", type=Path, default=None, help="reuse a saved inverse state and its force coefficients as the alpha-zero baseline")
     p.add_argument("--controls", type=int, default=16)
     p.add_argument("--support-ratio", type=float, default=0.1)
     p.add_argument("--equilibrium-scale", type=float, default=1.0)

@@ -87,6 +87,70 @@ is evidence that the local response solve is ill-conditioned at the current
 support and spring scales; it is not evidence that the physical system can
 match the reference. The saved iterative states are retained for diagnosis.
 
+### Acceptance correction regression
+
+The optimizer now tests alpha `0.0` first and treats it as the immutable
+baseline. A candidate is accepted only if its measured image objective
+improves and it does not worsen finite-state, collapse, conservative reversal,
+or force-balance metrics. The regression test passes:
+
+```text
+python scripts/test_inverse_optimizer_acceptance.py
+inverse optimizer acceptance tests: PASS
+```
+
+The corrected run was initialized from the exact saved female 12-reversal
+state, not a regenerated control set. All four tested updates were rejected
+because they did not improve the actual image objective. Alpha zero was kept:
+
+| Metric | Preserved initial inverse | Corrected iterative output |
+|---|---:|---:|
+| Median image error | `1.73157e-3` | `1.73157e-3` |
+| P95 image error | `3.94392e-3` | `3.94392e-3` |
+| Positive-rest P95 strain | `1.12163e-2` | `1.12163e-2` |
+| Conservative reversals | 12 | 12 |
+| Force-balance residual | `1.95595e-3` | `1.95595e-3` |
+| Accepted alpha | baseline | `0.0` |
+
+This prevents the previous regression where a worse state replaced the better
+initial inverse result.
+
+## The twelve female reversals
+
+The exact audit is in [female reversal audit](female-frame045-reversal-audit.json).
+There are 12 conservative orientation reversals. One triangle, local ID
+`44566`, is a coherent-rotation candidate: its area ratio is `0.8694` and its
+mean deformed neighbor normal dot is `0.8041`. The other 11 are local-fold
+candidates under the current evidence because their neighboring normal dots
+are low or negative. Their local IDs are:
+
+```text
+21397, 27895, 28415, 28416, 44564, 44567, 44568,
+55966, 56777, 62294, 68962
+```
+
+The audit records original source vertex IDs, areas, edge ratios, neighboring
+triangles, neutral and deformed dihedral angles, and distances to landmark
+105. A full triangle-intersection test has not yet been run, so the 11 are
+reported as local-fold candidates rather than mathematically proven
+self-intersections. The optimizer therefore continues to reject any geometry
+regression and does not call the female state valid.
+
+## Physics consistency audit
+
+The [physics consistency audit](physics-consistency-audit.json) identifies the
+current mismatch with the calibrated GPU RK4 implementation. The inverse probe
+uses unit coefficient static energy in source units, no mass, damping, gravity,
+or time integration, and retains the Plan A5 virtual seam and abstract-support
+springs. The calibrated RK4 system uses source-to-meter conversion `0.30`,
+area-derived SI masses, 30 kPa surface and 10 kPa inner baselines, physical
+damping, RK4 integration, and zero cross-island springs.
+
+Therefore the initial inverse result remains useful as a static diagnostic but
+its force magnitudes are not yet physically comparable to GPU RK4 controls.
+Unit and spring-definition reconciliation is now an explicit blocker before
+increasing force-basis capacity.
+
 Zero-rest seam springs are reported separately. Their lengths are not divided
 by a rest length, so they are not folded into the positive-rest strain metric.
 
@@ -100,6 +164,9 @@ by a rest length, so they are not folded into the positive-rest strain metric.
 - [Female iterative positions](female-frame045-inverse-iterative-positions.npz)
 - [Male iterative force update](male-frame045-inverse-iterative.json)
 - [Male iterative positions](male-frame045-inverse-iterative-positions.npz)
+- [Corrected female alpha-zero regression](female-frame045-inverse-corrected.json)
+- [Female reversal audit](female-frame045-reversal-audit.json)
+- [Physics consistency audit](physics-consistency-audit.json)
 - [Female hard-target replay](female-frame045.json)
 - [Male hard-target replay from the existing A5 evidence](../plan-a5-subcutaneous-run/male-stageb-frame45-supported.json)
 

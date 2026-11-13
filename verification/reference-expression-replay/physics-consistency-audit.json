@@ -1,0 +1,64 @@
+{
+  "schema": "vela-inverse-physics-consistency-audit-v1",
+  "inverseModel": {
+    "coordinateUnits": "source mesh units",
+    "surfaceSpringCoefficient": "1.0 implicit energy coefficient",
+    "surfaceSpringCount": 121358,
+    "virtualSpringCount": 24,
+    "virtualZeroRestSprings": 23,
+    "supportSpringCount": "from subcutaneous graph; abstract anchor springs",
+    "mass": "not used in static inverse equilibrium",
+    "damping": "not used in static inverse equilibrium",
+    "gravity": "not used in frame-45 expression probe",
+    "timeIntegration": "none; nonlinear static force-balance relaxation"
+  },
+  "gpuRk4Model": {
+    "sourceMetersPerUnit": 0.3,
+    "surfaceModulusBaselinePa": 30000,
+    "innerModulusBaselinePa": 10000,
+    "massDistribution": "triangle-area-derived SI masses",
+    "damping": "physical velocity damping",
+    "gravity": "present in calibrated tests",
+    "integrator": "RK4",
+    "crossIslandSprings": 0,
+    "fixedInnerAnchors": true
+  },
+  "differences": [
+    {
+      "item": "spring coefficient",
+      "inverse": "unit coefficient",
+      "rk4": "30 kPa baseline converted through source scale and area model",
+      "intentional": false,
+      "action": "must be reconciled before claiming RK4-equivalent forces"
+    },
+    {
+      "item": "units",
+      "inverse": "source units",
+      "rk4": "SI force and acceleration with sourceMetersPerUnit=0.30",
+      "intentional": false,
+      "action": "inverse force coefficients are not yet SI-calibrated"
+    },
+    {
+      "item": "mass and damping",
+      "inverse": "absent from static equilibrium",
+      "rk4": "area-derived mass and damping",
+      "intentional": true,
+      "action": "valid only for a static force-control probe, not dynamic equivalence"
+    },
+    {
+      "item": "virtual seams",
+      "inverse": "24 virtual seam springs retained",
+      "rk4": "zero cross-island springs in calibrated architecture",
+      "intentional": false,
+      "action": "do not compare force magnitudes until domain and seam policy are aligned"
+    },
+    {
+      "item": "support springs",
+      "inverse": "abstract support graph from Plan A5",
+      "rk4": "fixed inner-anchor support with calibrated physical stiffness",
+      "intentional": false,
+      "action": "map support stiffness and rest lengths before next optimizer run"
+    }
+  ],
+  "conclusion": "The initial inverse result is a valid diagnostic of the current static A5 graph, but it is not numerically comparable to the calibrated GPU RK4 force system until units, spring coefficients, support springs, and virtual-seam policy are aligned."
+}
