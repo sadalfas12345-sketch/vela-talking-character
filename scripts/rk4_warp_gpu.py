@@ -616,6 +616,12 @@ def gpu_random_stress(fixture, count, seed, hold_seconds, release_seconds, kp, k
     started = time.perf_counter()
     for sequence in range(count):
         pinch = random_pinch(fixture, random, kp, kd)
+        # Keep each sequence resident on the device.  The previous path called
+        # simulate() for every phase, which reset the arrays, copied them back to
+        # the host, and recaptured an RK4 graph four times per hold.  advance()
+        # preserves the same RK4 equations while reusing graphs keyed by gravity,
+        # pinch state, and gains.
+        simulator.reset()
         positions = fixture["neutral"].reshape(-1, 3).copy()
         velocities = np.zeros_like(positions)
         held_geometry = None
@@ -627,11 +633,9 @@ def gpu_random_stress(fixture, count, seed, hold_seconds, release_seconds, kp, k
             phase_target = pinch["origin"] + (pinch["target"].astype(np.float64) - pinch["origin"]) * (phase / 4.0)
             segment_pinch = (pinch["ids"], pinch["weights"], phase_target.astype(np.float32), pinch["velocity"], kp, kd)
             gravity = pinch["direction"] * 9.81
-            positions, velocities, forces, runtime_ms, steps, graph_error = simulator.simulate(
-                hold_seconds, gravity, segment_pinch, use_cuda_graph, graph_chunk, positions, velocities
-            )
+            positions, velocities, forces, runtime_ms, steps = simulator.advance(hold_seconds, gravity, segment_pinch)
             held_geometry = geometry_metrics(fixture, positions)
-            held_complete = bool(held_complete and graph_error is None and np.isfinite(positions).all() and np.isfinite(velocities).all())
+            held_complete = bool(held_complete and np.isfinite(positions).all() and np.isfinite(velocities).all())
             point, point_velocity, tracking_error = point_state(positions, velocities, pinch, phase_target)
             applied = kp * ((phase_target.astype(np.float64) - point) * fixture["meters"])
             applied += kd * ((pinch["velocity"].astype(np.float64) - point_velocity) * fixture["meters"])
@@ -639,8 +643,7 @@ def gpu_random_stress(fixture, count, seed, hold_seconds, release_seconds, kp, k
             peak_tracking_error = max(peak_tracking_error, tracking_error * fixture["meters"])
             invalid = invalid or held_geometry["orientationFlips"] > 0 or held_geometry["collapsedTriangles"] > 0
         release_gravity = pinch["direction"] * 9.81
-        release = simulator.simulate(release_seconds, release_gravity, None, use_cuda_graph, graph_chunk, positions, velocities)
-        release_positions, release_velocities, _, release_runtime, release_steps, release_graph_error = release
+        release_positions, release_velocities, _, release_runtime, release_steps = simulator.advance(release_seconds, release_gravity, None)
         released_geometry = geometry_metrics(fixture, release_positions)
         invalid = invalid or released_geometry["orientationFlips"] > 0 or released_geometry["collapsedTriangles"] > 0
         results.append({
@@ -651,14 +654,14 @@ def gpu_random_stress(fixture, count, seed, hold_seconds, release_seconds, kp, k
             "held": held_geometry,
             "released": released_geometry,
             "heldComplete": held_complete,
-            "releaseComplete": bool(release_graph_error is None and np.isfinite(release_positions).all() and np.isfinite(release_velocities).all()),
+            "releaseComplete": bool(np.isfinite(release_positions).all() and np.isfinite(release_velocities).all()),
             "wallClockExceeded": False,
             "recoveredDisplacementSource": float(np.max(np.linalg.norm(release_positions - fixture["neutral"].reshape(-1, 3), axis=1), initial=0.0)),
             "peakForceN": peak_force,
             "peakTrackingErrorMeters": peak_tracking_error,
             "releaseRuntimeMs": release_runtime,
             "releaseSteps": release_steps,
-            "valid": bool(not invalid and release_graph_error is None and np.isfinite(release_positions).all()),
+            "valid": bool(not invalid and np.isfinite(release_positions).all()),
         })
     return {
         "count": count,

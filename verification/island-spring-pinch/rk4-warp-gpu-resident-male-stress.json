@@ -1,0 +1,57 @@
+{
+  "seed": 20261112,
+  "count": 1,
+  "holdSeconds": 0.016666666666666666,
+  "releaseSeconds": 0.02,
+  "records": [
+    {
+      "model": "male",
+      "domain": "full",
+      "vertices": 41920,
+      "gpu": {
+        "count": 1,
+        "seed": 20261212,
+        "holdSeconds": 0.016666666666666666,
+        "releaseSeconds": 0.02,
+        "valid": true,
+        "results": [
+          {
+            "sequence": 0,
+            "face": [
+              5723,
+              22887,
+              4488
+            ],
+            "direction": "down",
+            "magnitudeSource": 0.0022003251437051514,
+            "held": {
+              "maxEdgeStrain": 0.0027247073188332643,
+              "p95EdgeStrain": 0.00041088981465147557,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9843494282140446
+            },
+            "released": {
+              "maxEdgeStrain": 0.0027247073188332643,
+              "p95EdgeStrain": 0.00041009146918071984,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9843494282140446
+            },
+            "heldComplete": true,
+            "releaseComplete": true,
+            "wallClockExceeded": false,
+            "recoveredDisplacementSource": 0.00010828477450410799,
+            "peakForceN": 0.0001924079956625513,
+            "peakTrackingErrorMeters": 0.0006526584154242101,
+            "releaseRuntimeMs": 12080.350200005341,
+            "releaseSteps": 31393,
+            "valid": true
+          }
+        ],
+        "runtimeMs": 52870.20899998606
+      }
+    }
+  ],
+  "overall": "SUCCESS"
+}
