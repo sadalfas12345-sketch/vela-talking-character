@@ -1,0 +1,197 @@
+{
+  "schema": "vela-reference-expression-replay-audit-v1",
+  "model": "female",
+  "source": {
+    "capture": "verification\\captureforge-facial-rig-test\\worried-reference.capture.npz",
+    "table": "verification\\goal2-browInnerUp-proof\\worried-expression-table.json",
+    "graph": "verification\\plan-a5-subcutaneous-run\\female-spring-graph-r050.npz",
+    "targets": "verification\\plan-a5-subcutaneous-run\\female-targets-r050.npz",
+    "videoProvenance": "verification\\goal2-browInnerUp-proof\\worried-reference.mp4",
+    "headStabilization": "similarity_2d_stable_eyes_nose_chin"
+  },
+  "tracking": {
+    "captureFrames": 121,
+    "captureLandmarkColumns": 478,
+    "captureValidFrames": 121,
+    "captureTransformationMatrices": 121,
+    "blendshapeCoefficientNames": 52,
+    "tableFrames": 121,
+    "tableLandmarkColumns": 478,
+    "tableDerivedTrajectoryIds": "468-477",
+    "rawValidatedTrajectoryIds": "0-467",
+    "direct3DDepthMeasurementAvailable": false
+  },
+  "targets": {
+    "frames": 121,
+    "landmarks": 478,
+    "coordinates": 3,
+    "finite": true,
+    "neutralMatchesGraph": true,
+    "selectedFrames": {
+      "0": {
+        "timeSeconds": 0.0,
+        "maxDisplacement": 0.0,
+        "rmsDisplacement": 0.0,
+        "regions": {
+          "eyebrows": {
+            "landmarks": 17,
+            "maxDisplacement": 0.0,
+            "rmsDisplacement": 0.0,
+            "meanDisplacement": 0.0
+          },
+          "eyelids": {
+            "landmarks": 18,
+            "maxDisplacement": 0.0,
+            "rmsDisplacement": 0.0,
+            "meanDisplacement": 0.0
+          },
+          "cheeks": {
+            "landmarks": 22,
+            "maxDisplacement": 0.0,
+            "rmsDisplacement": 0.0,
+            "meanDisplacement": 0.0
+          },
+          "lips": {
+            "landmarks": 25,
+            "maxDisplacement": 0.0,
+            "rmsDisplacement": 0.0,
+            "meanDisplacement": 0.0
+          },
+          "jaw": {
+            "landmarks": 15,
+            "maxDisplacement": 0.0,
+            "rmsDisplacement": 0.0,
+            "meanDisplacement": 0.0
+          }
+        }
+      },
+      "45": {
+        "timeSeconds": 1.875,
+        "maxDisplacement": 0.006494433396758403,
+        "rmsDisplacement": 0.002271850990986806,
+        "regions": {
+          "eyebrows": {
+            "landmarks": 17,
+            "maxDisplacement": 0.003114162924732008,
+            "rmsDisplacement": 0.0021900939272835014,
+            "meanDisplacement": 0.002065901633340147
+          },
+          "eyelids": {
+            "landmarks": 18,
+            "maxDisplacement": 0.006494433396758403,
+            "rmsDisplacement": 0.003304210755589074,
+            "meanDisplacement": 0.002681731784629231
+          },
+          "cheeks": {
+            "landmarks": 22,
+            "maxDisplacement": 0.0047789420476638264,
+            "rmsDisplacement": 0.0020285001886600324,
+            "meanDisplacement": 0.001765387514477493
+          },
+          "lips": {
+            "landmarks": 25,
+            "maxDisplacement": 0.0028416431788808815,
+            "rmsDisplacement": 0.0017467318489353544,
+            "meanDisplacement": 0.0016161795546083583
+          },
+          "jaw": {
+            "landmarks": 15,
+            "maxDisplacement": 0.005841126938980372,
+            "rmsDisplacement": 0.0031708259027652856,
+            "meanDisplacement": 0.0027797705465480833
+          }
+        }
+      },
+      "97": {
+        "timeSeconds": 4.041666666666666,
+        "maxDisplacement": 0.004981805453263066,
+        "rmsDisplacement": 0.002622947202605537,
+        "regions": {
+          "eyebrows": {
+            "landmarks": 17,
+            "maxDisplacement": 0.003474929856345616,
+            "rmsDisplacement": 0.002348839965226861,
+            "meanDisplacement": 0.0022577011473989377
+          },
+          "eyelids": {
+            "landmarks": 18,
+            "maxDisplacement": 0.0020395714057996413,
+            "rmsDisplacement": 0.0015894841790115091,
+            "meanDisplacement": 0.0015631190852701152
+          },
+          "cheeks": {
+            "landmarks": 22,
+            "maxDisplacement": 0.0036443702520263964,
+            "rmsDisplacement": 0.0026924693198176405,
+            "meanDisplacement": 0.0026330895127373434
+          },
+          "lips": {
+            "landmarks": 25,
+            "maxDisplacement": 0.0048299347878908,
+            "rmsDisplacement": 0.0041100251076217785,
+            "meanDisplacement": 0.00398820216600817
+          },
+          "jaw": {
+            "landmarks": 15,
+            "maxDisplacement": 0.0032193624019160234,
+            "rmsDisplacement": 0.001966357128441594,
+            "meanDisplacement": 0.0018483801079753864
+          }
+        }
+      },
+      "99": {
+        "timeSeconds": 4.125,
+        "maxDisplacement": 0.005117946025586828,
+        "rmsDisplacement": 0.0026534116099617704,
+        "regions": {
+          "eyebrows": {
+            "landmarks": 17,
+            "maxDisplacement": 0.003570489202490552,
+            "rmsDisplacement": 0.002442309100366753,
+            "meanDisplacement": 0.0023576128600031397
+          },
+          "eyelids": {
+            "landmarks": 18,
+            "maxDisplacement": 0.0020631159700641825,
+            "rmsDisplacement": 0.0016534059951172132,
+            "meanDisplacement": 0.00162777507887482
+          },
+          "cheeks": {
+            "landmarks": 22,
+            "maxDisplacement": 0.0036881486215089437,
+            "rmsDisplacement": 0.0027587927711249936,
+            "meanDisplacement": 0.0026951594389669816
+          },
+          "lips": {
+            "landmarks": 25,
+            "maxDisplacement": 0.00484707828866847,
+            "rmsDisplacement": 0.004048443352179898,
+            "meanDisplacement": 0.003925641067210809
+          },
+          "jaw": {
+            "landmarks": 15,
+            "maxDisplacement": 0.0034833384564382,
+            "rmsDisplacement": 0.002101482608945071,
+            "meanDisplacement": 0.0019753848660665784
+          }
+        }
+      }
+    }
+  },
+  "correspondence": {
+    "simulationVertices": 41747,
+    "simulationTriangles": 79627,
+    "constraintCount": 478,
+    "validTriangleIndices": true,
+    "finiteBarycentricWeights": true,
+    "maxWeightSumError": 2.220446049250313e-16,
+    "negativeWeightCount": 0,
+    "negativeWeightRows": [],
+    "neutralReconstructionMaxError": 0.0,
+    "neutralReconstructionRmsError": 0.0,
+    "virtualSprings": 24,
+    "sourceComponents": 16,
+    "simulationComponentsAfterVirtualSprings": 2
+  },
+  "inputAuditPass": true
+}

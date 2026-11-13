@@ -1,0 +1,112 @@
+{
+  "schema": "vela-reference-inverse-physics-v1",
+  "model": "female",
+  "frame": 45,
+  "method": "linearized constrained equilibrium inverse with compact barycentric force basis",
+  "objective": {
+    "landmarkTerm": "confidence-weighted image-plane squared error in target right/up axes",
+    "forceRegularization": 1.0,
+    "temporalTerm": "not used for single-frame probe",
+    "depth": "not optimized; existing target depth is not included in the image objective"
+  },
+  "inputs": {
+    "vertices": 41747,
+    "triangles": 79627,
+    "springs": 121382,
+    "supportSprings": 166796,
+    "landmarks": 478,
+    "neutralSpringResidualMax": 0.0
+  },
+  "controls": {
+    "count": 12,
+    "landmarkIds": [
+      386,
+      149,
+      21,
+      58,
+      397,
+      367,
+      0,
+      159,
+      284,
+      366,
+      177,
+      93
+    ],
+    "basisColumns": 36,
+    "forceDistribution": "original attachment triangle barycentric weights"
+  },
+  "scales": {
+    "eyeWidth": 0.05744088140365605,
+    "equilibriumScale": 0.05744088140365605,
+    "forceScale": 0.0005744088140365605
+  },
+  "linearSolve": {
+    "iterations": 30,
+    "istop": 7,
+    "residualNorm": 0.4173391812007937,
+    "arnorm": 2850.7484511912644,
+    "acond": 11511.803850547221,
+    "xnorm": 0.051342212317350366
+  },
+  "nonlinearEquilibrium": {
+    "iterations": 4,
+    "finalGradientNorm": 0.001955945796808718,
+    "finalEnergy": 6.556905398924015e-06,
+    "history": [
+      {
+        "iteration": 1,
+        "energy": 0.003204112213989949,
+        "gradientNorm": 0.19234656931072397,
+        "acceptedAlpha": 1.0,
+        "lsqrIterations": 25,
+        "accepted": true
+      },
+      {
+        "iteration": 2,
+        "energy": 0.0001859588017622921,
+        "gradientNorm": 0.03187643712219382,
+        "acceptedAlpha": 1.0,
+        "lsqrIterations": 25,
+        "accepted": true
+      },
+      {
+        "iteration": 3,
+        "energy": 3.89055827981982e-05,
+        "gradientNorm": 0.011217551048179699,
+        "acceptedAlpha": 1.0,
+        "lsqrIterations": 25,
+        "accepted": true
+      },
+      {
+        "iteration": 4,
+        "energy": 1.2689115415050464e-05,
+        "gradientNorm": 0.004197454384988098,
+        "acceptedAlpha": 1.0,
+        "lsqrIterations": 25,
+        "accepted": true
+      }
+    ]
+  },
+  "result": {
+    "meanImageError": 0.0018407031336593934,
+    "medianImageError": 0.0017315666746208617,
+    "p95ImageError": 0.003943919987223723,
+    "maxImageError": 0.006235537237452616,
+    "forceNorm": 2.1158117865959655e-06,
+    "maxVertexDisplacement": 0.0066480245485145495,
+    "springEnergy": 2.0381054983044544e-06,
+    "forceBalanceNorm": 0.0019559457968087186,
+    "forceBalanceMax": 0.0005477031226380229,
+    "maxAbsPositiveRestEdgeStrain": 0.6039412114871119,
+    "p95AbsPositiveRestEdgeStrain": 0.011216257420488674,
+    "maxZeroRestSpringLength": 7.236906053747974e-05,
+    "positiveRestSpringCount": 121359,
+    "zeroRestSpringCount": 23,
+    "orientationReversalsConservative": 12,
+    "triangleCollapses": 0,
+    "finite": true
+  },
+  "runtimeSeconds": 22.85971539997263,
+  "status": "invalid_geometry_or_orientation_reversals"
+}

@@ -1,0 +1,96 @@
+{
+  "schema": "vela-reference-inverse-physics-v1",
+  "model": "male",
+  "frame": 45,
+  "method": "linearized constrained equilibrium inverse with compact barycentric force basis",
+  "objective": {
+    "landmarkTerm": "confidence-weighted image-plane squared error in target right/up axes",
+    "forceRegularization": 1.0,
+    "temporalTerm": "not used for single-frame probe",
+    "depth": "not optimized; existing target depth is not included in the image objective"
+  },
+  "inputs": {
+    "vertices": 208351,
+    "triangles": 401474,
+    "springs": 609905,
+    "supportSprings": 832561,
+    "landmarks": 478,
+    "neutralSpringResidualMax": 0.0
+  },
+  "controls": {
+    "count": 4,
+    "landmarkIds": [
+      386,
+      172,
+      149,
+      21
+    ],
+    "basisColumns": 12,
+    "forceDistribution": "original attachment triangle barycentric weights"
+  },
+  "scales": {
+    "eyeWidth": 0.30409851126227233,
+    "equilibriumScale": 0.30409851126227233,
+    "forceScale": 0.003040985112622723
+  },
+  "linearSolve": {
+    "iterations": 15,
+    "istop": 7,
+    "residualNorm": 0.40497578009702356,
+    "arnorm": 43.45561727132983,
+    "acond": 423.8919849305502,
+    "xnorm": 0.293798668108302
+  },
+  "nonlinearEquilibrium": {
+    "iterations": 3,
+    "finalGradientNorm": 0.019067765230274286,
+    "finalEnergy": 0.0002913012095244268,
+    "history": [
+      {
+        "iteration": 1,
+        "energy": 0.10838791742584045,
+        "gradientNorm": 1.179621286728337,
+        "acceptedAlpha": 1.0,
+        "lsqrIterations": 20,
+        "accepted": true
+      },
+      {
+        "iteration": 2,
+        "energy": 0.004013079153608588,
+        "gradientNorm": 0.1430374633753932,
+        "acceptedAlpha": 1.0,
+        "lsqrIterations": 20,
+        "accepted": true
+      },
+      {
+        "iteration": 3,
+        "energy": 0.000822394981584485,
+        "gradientNorm": 0.047644494329399066,
+        "acceptedAlpha": 1.0,
+        "lsqrIterations": 20,
+        "accepted": true
+      }
+    ]
+  },
+  "result": {
+    "meanImageError": 0.009792073712786644,
+    "medianImageError": 0.009455048538314297,
+    "p95ImageError": 0.02078968623614803,
+    "maxImageError": 0.03304735873131981,
+    "forceNorm": 0.00019174488930997975,
+    "maxVertexDisplacement": 0.04301966227238147,
+    "springEnergy": 0.00013387370262300414,
+    "forceBalanceNorm": 0.019067765230274286,
+    "forceBalanceMax": 0.003551743060409735,
+    "maxAbsPositiveRestEdgeStrain": 1.5163248834384442,
+    "p95AbsPositiveRestEdgeStrain": 0.01519911837424098,
+    "maxZeroRestSpringLength": 0.00018320818406887524,
+    "positiveRestSpringCount": 609762,
+    "zeroRestSpringCount": 143,
+    "orientationReversalsConservative": 155,
+    "triangleCollapses": 0,
+    "finite": true
+  },
+  "runtimeSeconds": 86.41351199999917,
+  "status": "invalid_geometry_or_orientation_reversals"
+}
