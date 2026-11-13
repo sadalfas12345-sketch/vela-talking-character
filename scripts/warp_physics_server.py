@@ -20,7 +20,7 @@ from rk4_warp_gpu import WarpSimulation, load_array, load_fixture
 
 
 class Session:
-    def __init__(self, manifest_path: Path, model: str, domain: str, device: str, kp: float, kd: float):
+    def __init__(self, manifest_path: Path, model: str, domain: str, device: str, kp: float, kd: float, dt_factor: float):
         manifest = json.loads(manifest_path.read_text())
         records = manifest["models"][model]
         requested_domain = domain
@@ -39,11 +39,13 @@ class Session:
         if "globalVertexIds" not in record["files"]:
             raise RuntimeError("GPU fixture is missing globalVertexIds; rerun --export-gpu-fixtures")
         self.fixture = load_fixture(manifest_path, model, domain)
+        self.fixture["stable_dt"] *= dt_factor
         self.device = device
         self.model = model
         self.domain = domain
         self.kp = float(kp)
         self.kd = float(kd)
+        self.dt_factor = float(dt_factor)
         self.sim = WarpSimulation(self.fixture, device)
         self.sim.reset()
         self.global_ids = load_array(manifest_path.parent / record["files"]["globalVertexIds"], np.uint32)
@@ -94,7 +96,7 @@ class Session:
         }, positions.tobytes(order="C")
 
 
-async def handler(websocket, manifest_path: Path, device: str, default_kp: float, default_kd: float):
+async def handler(websocket, manifest_path: Path, device: str, default_kp: float, default_kd: float, dt_factor: float):
     session = None
     async for raw in websocket:
         try:
@@ -108,6 +110,7 @@ async def handler(websocket, manifest_path: Path, device: str, default_kp: float
                     device,
                     float(message.get("kp", default_kp)),
                     float(message.get("kd", default_kd)),
+                    dt_factor,
                 )
                 await websocket.send(json.dumps({
                     "type": "ready",
@@ -116,6 +119,7 @@ async def handler(websocket, manifest_path: Path, device: str, default_kp: float
                     "vertexCount": session.fixture["vertex_count"],
                     "globalVertexIds": session.global_ids.tolist(),
                     "stableDt": session.fixture["stable_dt"],
+                    "dtFactor": session.dt_factor,
                     "anatomicalAxes": session.fixture["anatomical_axes"],
                 }))
                 continue
@@ -155,7 +159,7 @@ async def handler(websocket, manifest_path: Path, device: str, default_kp: float
 async def main_async(args):
     manifest_path = Path(args.manifest).resolve()
     async with websockets.serve(
-        lambda websocket: handler(websocket, manifest_path, args.device, args.kp, args.kd),
+        lambda websocket: handler(websocket, manifest_path, args.device, args.kp, args.kd, args.dt_factor),
         args.host,
         args.port,
         max_size=8 * 1024 * 1024,
@@ -172,7 +176,12 @@ def main():
     parser.add_argument("--port", type=int, default=8765)
     parser.add_argument("--kp", type=float, default=0.1)
     parser.add_argument("--kd", type=float, default=0.01)
-    asyncio.run(main_async(parser.parse_args()))
+    parser.add_argument("--dt-factor", type=float, default=24.0,
+                        help="Multiplier for the validated RK4 fixture timestep, default 24")
+    args = parser.parse_args()
+    if not np.isfinite(args.dt_factor) or args.dt_factor <= 0.0:
+        parser.error("--dt-factor must be finite and positive")
+    asyncio.run(main_async(args))
 
 
 if __name__ == "__main__":

@@ -1,0 +1,172 @@
+{
+  "url": "http://127.0.0.1:4174/island-spring-pinch.html?model=male&gpuIsland=35&gpuServer=ws%3A%2F%2F127.0.0.1%3A8765",
+  "backend": "GPU Warp server",
+  "initial": {
+    "vertices": 41920,
+    "triangles": 82807,
+    "island": {
+      "id": 35,
+      "vertices": 41920,
+      "triangles": 82807,
+      "selectedOption": "22e33928-1d44-4025-9aaf-34a39269fbac:35"
+    }
+  },
+  "pick": {
+    "screen": {
+      "x": 409.6,
+      "y": 288
+    },
+    "point": [
+      0.13858472598074068,
+      0.1755594293941929,
+      0.2014325220790373
+    ]
+  },
+  "plan": {
+    "origin": {
+      "x": 409.5999999999975,
+      "y": 288.00000000000296
+    },
+    "target": {
+      "x": 416.54015026609335,
+      "y": 287.83394276137295
+    },
+    "sourceDisplacement": 0.0060819724087812065,
+    "faceScale": 0.30409862043906033
+  },
+  "held": {
+    "lastPinch": {
+      "down": true,
+      "hard": false,
+      "kp": 0.1,
+      "kd": 0.01,
+      "globalIds": [
+        359763,
+        531777,
+        683789
+      ],
+      "weights": [
+        0.35066624590946305,
+        0.06352505371613534,
+        0.5858087003744016
+      ],
+      "initial": [
+        0.13858473364874846,
+        0.1755594308430724,
+        0.20143251780007276
+      ],
+      "activeIsland": 35,
+      "activeVertices": 41920,
+      "activeTriangles": 82807,
+      "faceIndex": 467183
+    },
+    "geometry": {
+      "boundaryEdgeCount": 1031,
+      "boundaryVertexCount": 1031,
+      "boundaryMaxDisplacement": 3.725290298461914e-9,
+      "boundaryMaxDisplacementPctFaceScale": 1.2250270300744233e-8,
+      "maxEdgeStrain": 0.000007754757783170435,
+      "p95EdgeStrain": 1.302677713697914e-7,
+      "maxEdgeIndex": 21205,
+      "minAreaRatio": 0.9999890462575968,
+      "minAreaFace": 395839,
+      "collapsedTriangles": 0,
+      "orientationFlips": 0,
+      "orientationFlipDetails": [],
+      "nonfiniteVertices": 0,
+      "valid": true
+    },
+    "finite": true
+  },
+  "released": {
+    "lastPinch": {
+      "down": false,
+      "hard": false,
+      "kp": 0.1,
+      "kd": 0.01,
+      "globalIds": [
+        359763,
+        531777,
+        683789
+      ],
+      "weights": [
+        0.35066624590946305,
+        0.06352505371613534,
+        0.5858087003744016
+      ],
+      "initial": [
+        0.13858473364874846,
+        0.1755594308430724,
+        0.20143251780007276
+      ],
+      "activeIsland": 35,
+      "activeVertices": 41920,
+      "activeTriangles": 82807,
+      "faceIndex": 467183,
+      "released": true,
+      "requestedTarget": [
+        0.1403041746268483,
+        0.17569642773198224,
+        0.19560026347462764
+      ],
+      "actualAtRelease": [
+        0.13840382377077243,
+        0.17555713360775657,
+        0.2010705192718397
+      ],
+      "trackingErrorMeters": 0.0017377856957791933,
+      "peakForceN": 0,
+      "currentForceN": [
+        0,
+        0,
+        0
+      ],
+      "forceWeightSum": 1,
+      "forceDistributionN": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "forceDistributionSumN": [
+        0,
+        0,
+        0
+      ],
+      "peakTrackingErrorMeters": 0,
+      "maxDisplacementAtRelease": 0.0004472002719194966
+    },
+    "geometry": {
+      "boundaryEdgeCount": 1031,
+      "boundaryVertexCount": 1031,
+      "boundaryMaxDisplacement": 4.1643347181326505e-7,
+      "boundaryMaxDisplacementPctFaceScale": 0.0000013694026997294977,
+      "maxEdgeStrain": 0.00521356793653843,
+      "p95EdgeStrain": 0.000038533926162236786,
+      "maxEdgeIndex": 38034,
+      "minAreaRatio": 0.9981508297479278,
+      "minAreaFace": 462993,
+      "collapsedTriangles": 0,
+      "orientationFlips": 0,
+      "orientationFlipDetails": [],
+      "nonfiniteVertices": 0,
+      "valid": true
+    },
+    "finite": true
+  },
+  "screenshots": [
+    "gpu-browser-male-island35-pinched.png",
+    "gpu-browser-male-island35-pinched-released.png"
+  ]
+}

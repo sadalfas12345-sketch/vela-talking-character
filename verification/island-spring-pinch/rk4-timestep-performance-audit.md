@@ -43,6 +43,26 @@ All states in this comparison were finite and had zero orientation flips and col
 
 The selected 24x factor materially reduces offline cost, but it is not yet real-time on the full original islands. The 20-sequence suite takes 14.175 seconds female and 49.629 seconds male, and one 36.667 ms held/release sequence takes 0.710 seconds female and 2.285 seconds male in the direct state audit. The remaining cost is the number of RK4 substeps and repeated spring-force gathering over the 41,920-vertex male island, not rendering or a failed stability gate.
 
+## Browser bridge verification
+
+The calibrated values were also verified through the actual browser bridge using the original textured Tripo islands, GPU Warp backend, `Kp=0.1`, `Kd=0.01`, and timestep factor `24`.
+
+| Character | Island | Vertices / triangles | Held flips / collapses | Released flips / collapses | Held max strain | Released max strain | Result |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
+| Female | 16 | 5,036 / 9,708 | 0 / 0 | 0 / 0 | 0.12487% | 0.02785% | PASS |
+| Male | 35 | 41,920 / 82,807 | 0 / 0 | 0 / 0 | 0.00078% | 0.52136% | PASS |
+
+The browser runs used the actual textured face and verified finite held and released geometry. The male browser URL is `http://100.116.192.77:4174/island-spring-pinch.html?model=male&gpuIsland=35&gpuServer=ws%3A%2F%2F100.116.192.77%3A8765`. The female URL is the same with `model=female&gpuIsland=16`.
+
+Browser evidence:
+
+- [Female browser diagnostics](./gpu-browser-female-island16.json)
+- [Female held screenshot](./gpu-browser-female-island16-pinched.png)
+- [Female released screenshot](./gpu-browser-female-island16-pinched-released.png)
+- [Male browser diagnostics](./gpu-browser-male-island35.json)
+- [Male held screenshot](./gpu-browser-male-island35-pinched.png)
+- [Male released screenshot](./gpu-browser-male-island35-pinched-released.png)
+
 ## Reproduction
 
 ```powershell

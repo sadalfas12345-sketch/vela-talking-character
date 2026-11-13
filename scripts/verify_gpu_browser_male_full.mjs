@@ -4,7 +4,10 @@ import { chromium } from 'playwright';
 const root = new URL('..', import.meta.url).pathname.replace(/^\//, '').replaceAll('/', '\\');
 const out = `${root}verification\\island-spring-pinch`;
 const islandId = Number(process.env.VELA_GPU_BROWSER_ISLAND || 35);
-const url = `http://127.0.0.1:4174/island-spring-pinch.html?model=male&gpuIsland=${islandId}&gpuServer=ws://127.0.0.1:8765`;
+const model = process.env.VELA_GPU_BROWSER_MODEL || 'male';
+const gpuServer = process.env.VELA_GPU_BROWSER_SERVER || 'ws://127.0.0.1:8765';
+const tag = `${model}-island${islandId}`;
+const url = `http://127.0.0.1:4174/island-spring-pinch.html?model=${encodeURIComponent(model)}&gpuIsland=${islandId}&gpuServer=${encodeURIComponent(gpuServer)}`;
 
 const browser = await chromium.launch({ headless: true, args: ['--enable-webgl', '--use-angle=swiftshader', '--ignore-gpu-blocklist'] });
 const page = await browser.newPage({ viewport: { width: 1280, height: 900 }, deviceScaleFactor: 1 });
@@ -41,11 +44,11 @@ if (!down.lastPinch?.down) throw new Error(`Pointer down did not create a pinch:
 await page.mouse.move(plan.target.x, plan.target.y, { steps: 12 });
 await page.waitForTimeout(1000);
 const held = await page.evaluate(() => window.__velaDiagnostics());
-await page.screenshot({ path: `${out}\\gpu-browser-male-island35-pinched.png` });
+await page.screenshot({ path: `${out}\\gpu-browser-${tag}-pinched.png` });
 await page.mouse.up();
 await page.waitForTimeout(1500);
 const released = await page.evaluate(() => window.__velaDiagnostics());
-await page.screenshot({ path: `${out}\\gpu-browser-male-island35-pinched-released.png` });
+await page.screenshot({ path: `${out}\\gpu-browser-${tag}-pinched-released.png` });
 const result = {
   url,
   backend: 'GPU Warp server',
@@ -54,8 +57,8 @@ const result = {
   plan,
   held: { lastPinch: held.lastPinch, geometry: held.geometry, finite: held.metrics?.finite },
   released: { lastPinch: released.lastPinch, geometry: released.geometry, finite: released.metrics?.finite },
-  screenshots: ['gpu-browser-male-island35-pinched.png', 'gpu-browser-male-island35-pinched-released.png'],
+  screenshots: [`gpu-browser-${tag}-pinched.png`, `gpu-browser-${tag}-pinched-released.png`],
 };
-await fs.writeFile(`${out}\\gpu-browser-male-island35.json`, JSON.stringify(result, null, 2));
+await fs.writeFile(`${out}\\gpu-browser-${tag}.json`, JSON.stringify(result, null, 2));
 console.log(JSON.stringify(result, null, 2));
 await browser.close();

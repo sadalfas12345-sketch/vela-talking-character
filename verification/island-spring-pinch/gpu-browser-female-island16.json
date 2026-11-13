@@ -1,0 +1,172 @@
+{
+  "url": "http://127.0.0.1:4174/island-spring-pinch.html?model=female&gpuIsland=16&gpuServer=ws%3A%2F%2F127.0.0.1%3A8765",
+  "backend": "GPU Warp server",
+  "initial": {
+    "vertices": 5036,
+    "triangles": 9708,
+    "island": {
+      "id": 16,
+      "vertices": 5036,
+      "triangles": 9708,
+      "selectedOption": "84fb3fb3-3cf0-496e-a590-e2fc97fc2970:16"
+    }
+  },
+  "pick": {
+    "screen": {
+      "x": 512,
+      "y": 216
+    },
+    "point": [
+      0.048585403940391736,
+      0.4309442699135886,
+      0.025137295277186084
+    ]
+  },
+  "plan": {
+    "origin": {
+      "x": 512.0000000000056,
+      "y": 215.99999999999284
+    },
+    "target": {
+      "x": 518.0645875518787,
+      "y": 218.09927471723478
+    },
+    "sourceDisplacement": 0.0011488143312038221,
+    "faceScale": 0.057440716560191105
+  },
+  "held": {
+    "lastPinch": {
+      "down": true,
+      "hard": false,
+      "kp": 0.1,
+      "kd": 0.01,
+      "globalIds": [
+        753071,
+        725642,
+        248064
+      ],
+      "weights": [
+        0.48439471317648564,
+        0.4162732908034181,
+        0.09933199602009625
+      ],
+      "initial": [
+        0.048585403940391736,
+        0.4309442699135886,
+        0.025137295277186084
+      ],
+      "activeIsland": 16,
+      "activeVertices": 5036,
+      "activeTriangles": 9708,
+      "faceIndex": 719360
+    },
+    "geometry": {
+      "boundaryEdgeCount": 362,
+      "boundaryVertexCount": 362,
+      "boundaryMaxDisplacement": 0.000507144973621713,
+      "boundaryMaxDisplacementPctFaceScale": 0.008829015443954025,
+      "maxEdgeStrain": 0.0012487176605636015,
+      "p95EdgeStrain": 0.000006985093337365055,
+      "maxEdgeIndex": 688,
+      "minAreaRatio": 0.9990463884477639,
+      "minAreaFace": 736968,
+      "collapsedTriangles": 0,
+      "orientationFlips": 0,
+      "orientationFlipDetails": [],
+      "nonfiniteVertices": 0,
+      "valid": true
+    },
+    "finite": true
+  },
+  "released": {
+    "lastPinch": {
+      "down": false,
+      "hard": false,
+      "kp": 0.1,
+      "kd": 0.01,
+      "globalIds": [
+        753071,
+        725642,
+        248064
+      ],
+      "weights": [
+        0.48439471317648564,
+        0.4162732908034181,
+        0.09933199602009625
+      ],
+      "initial": [
+        0.048585403940391736,
+        0.4309442699135886,
+        0.025137295277186084
+      ],
+      "activeIsland": 16,
+      "activeVertices": 5036,
+      "activeTriangles": 9708,
+      "faceIndex": 719360,
+      "released": true,
+      "requestedTarget": [
+        0.048162383398402786,
+        0.43057331939773064,
+        0.024135687189416305
+      ],
+      "actualAtRelease": [
+        0.04832141325672831,
+        0.4308131515476299,
+        0.024923873879741085
+      ],
+      "trackingErrorMeters": 0.00025172274297181006,
+      "peakForceN": 0,
+      "currentForceN": [
+        0,
+        0,
+        0
+      ],
+      "forceWeightSum": 1,
+      "forceDistributionN": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "forceDistributionSumN": [
+        0,
+        0,
+        0
+      ],
+      "peakTrackingErrorMeters": 0,
+      "maxDisplacementAtRelease": 0.0005157408423748479
+    },
+    "geometry": {
+      "boundaryEdgeCount": 362,
+      "boundaryVertexCount": 362,
+      "boundaryMaxDisplacement": 0.00040026321891678275,
+      "boundaryMaxDisplacementPctFaceScale": 0.006968283873989525,
+      "maxEdgeStrain": 0.00027850056050424447,
+      "p95EdgeStrain": 0.000007648351930877714,
+      "maxEdgeIndex": 692,
+      "minAreaRatio": 0.9994204193923261,
+      "minAreaFace": 736791,
+      "collapsedTriangles": 0,
+      "orientationFlips": 0,
+      "orientationFlipDetails": [],
+      "nonfiniteVertices": 0,
+      "valid": true
+    },
+    "finite": true
+  },
+  "screenshots": [
+    "gpu-browser-female-island16-pinched.png",
+    "gpu-browser-female-island16-pinched-released.png"
+  ]
+}
