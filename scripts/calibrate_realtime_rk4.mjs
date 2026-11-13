@@ -1312,8 +1312,9 @@ async function main() {
     const candidate = withParameterBlock(base, updates);
     const physical = evaluateCandidate(meshes, candidate, 'micro6');
     const count = Math.max(1, Number(process.env.VELA_CALIBRATION_STRESS_COUNT || 20));
-    const stress = Object.fromEntries(meshes.map((mesh, index) => [mesh.name, randomPinchStress(stressDomain(mesh), candidate, count, seed + 100 + index, { holdSeconds: stressHoldSeconds, releaseSeconds: stressReleaseSeconds })]));
-    const verification = { schema: 'vela-rk4-candidate-verification-v1', generatedAt: new Date().toISOString(), candidate, physical: compactResult(physical), stress };
+    const startSequence = Math.max(0, Number(process.env.VELA_CALIBRATION_STRESS_START_SEQUENCE || 0));
+    const stress = Object.fromEntries(meshes.map((mesh, index) => [mesh.name, randomPinchStress(stressDomain(mesh), candidate, count, seed + 100 + index, { holdSeconds: stressHoldSeconds, releaseSeconds: stressReleaseSeconds, startSequence })]));
+    const verification = { schema: 'vela-rk4-candidate-verification-v1', generatedAt: new Date().toISOString(), candidate, physical: compactResult(physical), stress, stressStartSequence: startSequence };
     const verificationPath = path.join(outputDir, 'rk4-candidate-verification.json');
     await fs.mkdir(outputDir, { recursive: true }); await fs.writeFile(verificationPath, JSON.stringify(verification, null, 2));
     console.log(JSON.stringify({ phase: 'candidate-verify-complete', path: path.relative(root, verificationPath), candidate, physicalValid: physical.valid, stressValid: Object.values(stress).every(value => value.valid) }));
