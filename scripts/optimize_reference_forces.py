@@ -113,18 +113,67 @@ def build_support_jacobian(x, graph, edges, base, support_ratio):
     return J, residual
 
 
-def nonlinear_force_equilibrium(x0, x, external, graph, edges, rest, base, support_ratio, iterations, inner_iterations):
+def build_gpu_consistent_support(V0, F, edges, anchors, source_meters_per_unit=0.30, inner_modulus=10000.0, neighbor_count=3):
+    """Build the calibrated RK4 support family without cross-island links."""
+    n = len(V0)
+    face_area_m2 = 0.5 * np.linalg.norm(np.cross(V0[F[:, 1]] - V0[F[:, 0]], V0[F[:, 2]] - V0[F[:, 0]]), axis=1) * source_meters_per_unit ** 2
+    attributed = np.zeros(n, dtype=float)
+    for tri, area in zip(F, face_area_m2):
+        attributed[tri] += area / 3.0
+    adjacency = [[] for _ in range(n)]
+    for a, b in edges:
+        a = int(a); b = int(b)
+        adjacency[a].append(b); adjacency[b].append(a)
+    surface, anchor_ids, rest, stiffness = [], [], [], []
+    for i in range(n):
+        unique = sorted(set(adjacency[i]), key=lambda j: float(np.linalg.norm(V0[j] - V0[i])))[:neighbor_count]
+        per_tether = inner_modulus * attributed[i] / 0.005 / (1 + len(unique))
+        surface.append(i); anchor_ids.append(i); rest.append(float(np.linalg.norm(V0[i] - anchors[i]))); stiffness.append(per_tether)
+        for j in unique:
+            surface.append(i); anchor_ids.append(j); rest.append(float(np.linalg.norm(V0[i] - anchors[j]))); stiffness.append(per_tether)
+    return {"supportSurfaceVertices": np.asarray(surface, dtype=np.int64), "supportAnchorIds": np.asarray(anchor_ids, dtype=np.int64), "supportRestLengths": np.asarray(rest, dtype=float), "supportStiffness": np.asarray(stiffness, dtype=float), "anchorPositions": np.asarray(anchors, dtype=float), "sourceMetersPerUnit": float(source_meters_per_unit), "surfaceStiffness": 30000.0 * 0.0015, "virtualSprings": 0, "mode": "gpu-rk4-consistent-static"}
+
+
+def weighted_spring_jacobian(base, x, edges, rest, reference, stiffness, scale):
+    J, residual, lengths = base.spring_jacobian(x, edges, rest, reference)
+    if np.isscalar(stiffness):
+        weights = np.full(len(residual), np.sqrt(float(stiffness)) * scale)
+    else:
+        weights = np.sqrt(np.asarray(stiffness, dtype=float)) * scale
+    return J.multiply(weights[:, None]), residual * weights, lengths
+
+
+def gpu_consistent_support_jacobian(x, support_data, base, scale):
+    surface = support_data["supportSurfaceVertices"]
+    ids = support_data["supportAnchorIds"]
+    anchors = support_data["anchorPositions"]
+    rest = support_data["supportRestLengths"]
+    stiffness = support_data["supportStiffness"]
+    n = len(x)
+    aug = np.vstack((x, anchors))
+    E = np.column_stack((surface, n + ids)).astype(np.int64)
+    J_aug, residual, lengths = base.spring_jacobian(aug, E, rest, np.vstack((x, anchors)))
+    weights = np.sqrt(stiffness) * scale
+    return J_aug[:, : 3 * n].multiply(weights[:, None]), residual * weights, lengths
+
+
+def nonlinear_force_equilibrium(x0, x, external, graph, edges, rest, base, support_ratio, iterations, inner_iterations, physics=None):
     """Relax the force-controlled state with the same nonlinear spring energy."""
     n = len(x)
     history = []
 
     def terms(state):
-        Je, re, lengths = base.spring_jacobian(state, edges, rest, x0)
-        Js, rs = build_support_jacobian(state, graph, edges, base, support_ratio)
+        if physics is None:
+            Je, re, lengths = base.spring_jacobian(state, edges, rest, x0)
+            Js, rs = build_support_jacobian(state, graph, edges, base, support_ratio)
+        else:
+            Je, re, lengths = weighted_spring_jacobian(base, state, edges, rest, x0, physics["surfaceStiffness"], physics["sourceMetersPerUnit"])
+            Js, rs, _ = gpu_consistent_support_jacobian(state, physics["supportData"], base, physics["sourceMetersPerUnit"])
         J = sparse.vstack((Je, Js), format="csr")
         r = np.concatenate((re, rs))
-        g = np.asarray(J.T @ r).reshape(-1) - external.reshape(-1)
-        energy = float(0.5 * np.dot(r, r) - np.dot(external.reshape(-1), (state - x0).reshape(-1)))
+        external_gradient = external.reshape(-1) * (physics["sourceMetersPerUnit"] if physics is not None else 1.0)
+        g = np.asarray(J.T @ r).reshape(-1) - external_gradient
+        energy = float(0.5 * np.dot(r, r) - np.dot(external_gradient, (state - x0).reshape(-1)))
         return J, r, g, energy, lengths
 
     for it in range(iterations):
@@ -218,7 +267,7 @@ def choose_accepted_candidate(baseline, candidates):
     return min(accepted, key=lambda value: value["error"]), rejections
 
 
-def iterative_force_update(x0, x, u, Bforce, L, d2, F, graph, edges, rest, base, support_ratio, eye, regularization, outer_iterations, response_iterations, nonlinear_inner_iterations, initial_gradient):
+def iterative_force_update(x0, x, u, Bforce, L, d2, F, graph, edges, rest, base, support_ratio, eye, regularization, outer_iterations, response_iterations, nonlinear_inner_iterations, initial_gradient, physics=None):
     """Update force coefficients with an implicit equilibrium sensitivity map."""
     history = []
     current = x.copy()
@@ -228,13 +277,18 @@ def iterative_force_update(x0, x, u, Bforce, L, d2, F, graph, edges, rest, base,
     current_quality = geometry_metrics(x0, current, F, edges, rest)
     current_balance = float(initial_gradient)
     for outer in range(outer_iterations):
-        Je, re, _ = base.spring_jacobian(current, edges, rest, x0)
-        Js, rs = build_support_jacobian(current, graph, edges, base, support_ratio)
+        if physics is None:
+            Je, re, _ = base.spring_jacobian(current, edges, rest, x0)
+            Js, rs = build_support_jacobian(current, graph, edges, base, support_ratio)
+        else:
+            Je, re, _ = weighted_spring_jacobian(base, current, edges, rest, x0, physics["surfaceStiffness"], physics["sourceMetersPerUnit"])
+            Js, rs, _ = gpu_consistent_support_jacobian(current, physics["supportData"], base, physics["sourceMetersPerUnit"])
         J = sparse.vstack((Je, Js), format="csr")
         hop = LinearOperator((3 * n, 3 * n), matvec=lambda v: np.asarray(J.T @ (J @ v)).reshape(-1), rmatvec=lambda v: np.asarray(J.T @ (J @ v)).reshape(-1), dtype=float)
         sensitivities = []
         for col in range(Bforce.shape[1]):
-            response = lsqr(hop, Bforce[:, col].toarray().reshape(-1), atol=1e-5, btol=1e-5, iter_lim=response_iterations)
+            rhs_force = Bforce[:, col].toarray().reshape(-1) * (physics["sourceMetersPerUnit"] if physics is not None else 1.0)
+            response = lsqr(hop, rhs_force, atol=1e-5, btol=1e-5, iter_lim=response_iterations)
             sensitivities.append(response[0])
         S = np.column_stack(sensitivities) if sensitivities else np.zeros((3 * n, 0))
         A = np.asarray(L @ S)
@@ -248,7 +302,7 @@ def iterative_force_update(x0, x, u, Bforce, L, d2, F, graph, edges, rest, base,
         for alpha in (1.0, 0.5, 0.25, 0.125):
             candidate_u = current_u + alpha * du
             candidate_force = np.asarray(Bforce @ candidate_u).reshape(n, 3)
-            candidate_x, candidate_report = nonlinear_force_equilibrium(x0, current, candidate_force, graph, edges, rest, base, support_ratio, 3, nonlinear_inner_iterations)
+            candidate_x, candidate_report = nonlinear_force_equilibrium(x0, current, candidate_force, graph, edges, rest, base, support_ratio, 3, nonlinear_inner_iterations, physics)
             candidate_error = float(np.linalg.norm((L @ (candidate_x - x0).reshape(-1) - d2) / max(eye, 1e-30)))
             quality = geometry_metrics(x0, candidate_x, F, edges, rest)
             candidates.append({"alpha": alpha, "u": candidate_u, "x": candidate_x, "report": candidate_report, "error": candidate_error, **quality})
@@ -277,11 +331,21 @@ def solve_inverse(args):
     F = graph["F"].astype(np.int64)
     T = graph["constraintTriangles"].astype(np.int64)
     Bary = graph["constraintBary"].astype(float)
-    edges = np.vstack((graph["edgeSprings"], graph["virtualSprings"])).astype(np.int64)
-    rest = np.concatenate((graph["edgeRestLengths"], graph["virtualRestLengths"])).astype(float)
+    if args.gpu_consistent:
+        edges = graph["edgeSprings"].astype(np.int64)
+        rest = graph["edgeRestLengths"].astype(float)
+    else:
+        edges = np.vstack((graph["edgeSprings"], graph["virtualSprings"])).astype(np.int64)
+        rest = np.concatenate((graph["edgeRestLengths"], graph["virtualRestLengths"])).astype(float)
     right, up = load_json_axes(args.target_json)
     neutral_lm = landmark_positions(V0, T, Bary)
     d3 = target - neutral_lm
+    physics = None
+    support_graph = graph
+    if args.gpu_consistent:
+        physics = {"sourceMetersPerUnit": 0.30, "surfaceStiffness": 30000.0 * 0.0015, "virtualSprings": 0}
+        physics["supportData"] = build_gpu_consistent_support(V0, F, edges, graph["anchorPositions"].astype(float), physics["sourceMetersPerUnit"], 10000.0, 3)
+        support_graph = {**graph, **physics["supportData"]}
     saved_state = np.load(args.initial_state) if args.initial_state else None
     controls = saved_state["controls"].astype(np.int64) if saved_state is not None else select_controls(neutral_lm, d3, args.controls)
     n = len(V0)
@@ -293,8 +357,14 @@ def solve_inverse(args):
 
     # Linearized physical equilibrium at neutral.  The residual is Kq-Bu,
     # where K is J'J plus the existing support-spring contribution.
-    Jedge, redge, _ = BASE.spring_jacobian(V0, edges, rest, V0)
-    Jsupp, rsupp = build_support_jacobian(V0, graph, edges, BASE, args.support_ratio)
+    if physics is None:
+        Jedge, redge, _ = BASE.spring_jacobian(V0, edges, rest, V0)
+        Jsupp, rsupp = build_support_jacobian(V0, graph, edges, BASE, args.support_ratio)
+        force_coordinate_scale = 1.0
+    else:
+        Jedge, redge, _ = weighted_spring_jacobian(BASE, V0, edges, rest, V0, physics["surfaceStiffness"], physics["sourceMetersPerUnit"])
+        Jsupp, rsupp, _ = gpu_consistent_support_jacobian(V0, physics["supportData"], BASE, physics["sourceMetersPerUnit"])
+        force_coordinate_scale = physics["sourceMetersPerUnit"]
     J = sparse.vstack((Jedge, Jsupp), format="csr")
     residual0 = np.concatenate((redge, rsupp))
     # Neutral should be at rest. Keep any measured residual in the report, but
@@ -303,7 +373,7 @@ def solve_inverse(args):
         return np.asarray(J.T @ (J @ q)).reshape(-1)
 
     eq_scale = max(eye * args.equilibrium_scale, 1e-12)
-    force_scale = max(eye * args.force_scale, 1e-12)
+    force_scale = max((args.force_scale if physics is not None else eye * args.force_scale), 1e-12)
     image_scale = eye
     p = Bforce.shape[1]
     rows = J.shape[1] + L.shape[0] + p
@@ -311,7 +381,7 @@ def solve_inverse(args):
 
     def matvec(y):
         q, u = y[: 3 * n], y[3 * n :]
-        eq = (K_apply(q) - Bforce @ u) / eq_scale
+        eq = (K_apply(q) - Bforce @ u * force_coordinate_scale) / eq_scale
         img = (L @ q - d2) / image_scale
         reg = u / force_scale * np.sqrt(args.force_regularization)
         return np.concatenate((eq, img, reg))
@@ -321,7 +391,7 @@ def solve_inverse(args):
         zimg = z[3 * n : 3 * n + L.shape[0]]
         zreg = z[3 * n + L.shape[0] :]
         gq = K_apply(zeq / eq_scale) / eq_scale + np.asarray(L.T @ (zimg / image_scale)).reshape(-1)
-        gu = -np.asarray(Bforce.T @ (zeq / eq_scale)).reshape(-1) + zreg / force_scale * np.sqrt(args.force_regularization)
+        gu = -np.asarray(Bforce.T @ (zeq / eq_scale)).reshape(-1) * force_coordinate_scale + zreg / force_scale * np.sqrt(args.force_regularization)
         return np.concatenate((gq, gu))
 
     if saved_state is None:
@@ -342,21 +412,27 @@ def solve_inverse(args):
     external = np.asarray(Bforce @ u).reshape(n, 3)
 
     initial_relax_iterations = 0 if saved_state is not None else args.nonlinear_iterations
-    x, nonlinear = nonlinear_force_equilibrium(V0, x, external, graph, edges, rest, BASE, args.support_ratio, initial_relax_iterations, args.nonlinear_inner_iterations)
+    x, nonlinear = nonlinear_force_equilibrium(V0, x, external, support_graph, edges, rest, BASE, args.support_ratio, initial_relax_iterations, args.nonlinear_inner_iterations, physics)
     optimization_history = []
     if args.outer_iterations > 0:
-        x, u, optimization_history = iterative_force_update(V0, x, u, Bforce, L, d2, F, graph, edges, rest, BASE, args.support_ratio, eye, args.outer_regularization, args.outer_iterations, args.response_iterations, args.nonlinear_inner_iterations, nonlinear["finalGradientNorm"])
+        x, u, optimization_history = iterative_force_update(V0, x, u, Bforce, L, d2, F, support_graph, edges, rest, BASE, args.support_ratio, eye, args.outer_regularization, args.outer_iterations, args.response_iterations, args.nonlinear_inner_iterations, nonlinear["finalGradientNorm"], physics)
         external = np.asarray(Bforce @ u).reshape(n, 3)
 
     # Nonlinear audit at the actual state. This is not a hard landmark
     # projection. It reports the physical residual for the force-controlled
     # state and geometry integrity independently.
-    Jx, rx, lengths = BASE.spring_jacobian(x, edges, rest, V0)
-    Jxs, rxs = build_support_jacobian(x, graph, edges, BASE, args.support_ratio)
+    if physics is None:
+        Jx, rx, lengths = BASE.spring_jacobian(x, edges, rest, V0)
+        Jxs, rxs = build_support_jacobian(x, graph, edges, BASE, args.support_ratio)
+        source_scale = 1.0
+    else:
+        Jx, rx, lengths = weighted_spring_jacobian(BASE, x, edges, rest, V0, physics["surfaceStiffness"], physics["sourceMetersPerUnit"])
+        Jxs, rxs, _ = gpu_consistent_support_jacobian(x, physics["supportData"], BASE, physics["sourceMetersPerUnit"])
+        source_scale = physics["sourceMetersPerUnit"]
     grad = np.asarray(Jx.T @ rx).reshape(-1)
     if len(rxs):
         grad += np.asarray(Jxs.T @ rxs).reshape(-1)
-    force_balance = grad.reshape(n, 3) - external
+    force_balance = grad.reshape(n, 3) / source_scale - external
     achieved_lm = landmark_positions(x, T, Bary)
     achieved_2d = np.column_stack(((achieved_lm - neutral_lm) @ right, (achieved_lm - neutral_lm) @ up))
     target_2d = np.column_stack((d3 @ right, d3 @ up))
@@ -385,13 +461,14 @@ def solve_inverse(args):
         "model": args.model,
         "frame": int(args.frame),
         "method": "linearized constrained equilibrium inverse with compact barycentric force basis",
+        "physicsDefinition": "gpu-rk4-consistent-static" if physics is not None else "legacy-plan-a5-static",
         "objective": {
             "landmarkTerm": "confidence-weighted image-plane squared error in target right/up axes",
             "forceRegularization": float(args.force_regularization),
             "temporalTerm": "not used for single-frame probe",
             "depth": "not optimized; existing target depth is not included in the image objective",
         },
-        "inputs": {"vertices": int(n), "triangles": int(len(F)), "springs": int(len(edges)), "supportSprings": int(Jsupp.shape[0]), "landmarks": int(len(T)), "neutralSpringResidualMax": float(np.max(np.abs(residual0))) if len(residual0) else 0.0},
+        "inputs": {"vertices": int(n), "triangles": int(len(F)), "springs": int(len(edges)), "virtualSprings": int(graph["virtualSprings"].shape[0]) if not args.gpu_consistent else 0, "supportSprings": int(Jsupp.shape[0]), "landmarks": int(len(T)), "neutralSpringResidualMax": float(np.max(np.abs(residual0))) if len(residual0) else 0.0},
         "controls": {"count": int(len(controls)), "landmarkIds": controls.tolist(), "basisColumns": int(p), "forceDistribution": "original attachment triangle barycentric weights"},
         "scales": {"eyeWidth": eye, "equilibriumScale": eq_scale, "forceScale": force_scale},
         "linearSolve": linear_report,
@@ -412,6 +489,7 @@ def solve_inverse(args):
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--model", required=True)
+    p.add_argument("--gpu-consistent", action="store_true", help="use the calibrated RK4 spring, support, unit, and no-cross-island definition")
     p.add_argument("--graph", type=Path, required=True)
     p.add_argument("--targets", type=Path, required=True)
     p.add_argument("--target-json", type=Path, required=True)

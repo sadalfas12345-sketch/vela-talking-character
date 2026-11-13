@@ -1,0 +1,172 @@
+{
+  "schema": "vela-rk4-barycentric-force-sensitivity-v1",
+  "candidate": {
+    "massMultiplier": 1,
+    "surfaceMultiplier": 1,
+    "innerMultiplier": 1,
+    "dampingMultiplier": 1,
+    "dtMultiplier": 0.1,
+    "pinchKpMultiplier": 1,
+    "pinchKdMultiplier": 1,
+    "logParameters": [
+      0,
+      0,
+      0,
+      0,
+      -1,
+      0,
+      0
+    ]
+  },
+  "domain": {
+    "name": "female-landmark105-island-50",
+    "islandId": 50,
+    "kind": "original-island",
+    "vertices": 4340,
+    "triangles": 8387,
+    "crossIslandSprings": 0,
+    "surfaceSpringCount": 12726,
+    "supportSpringCount": 17352
+  },
+  "landmark": {
+    "id": 105,
+    "sourceTriangleIndex": 790528,
+    "localTriangleIndex": 5948,
+    "source": "exact Goal 1 attachment on original mesh island",
+    "globalVertexIds": [
+      965687,
+      35767,
+      234033
+    ],
+    "localVertexIds": [
+      4203,
+      155,
+      983
+    ],
+    "barycentricWeights": [
+      0.1442646283355351,
+      0.6650335949540473,
+      0.19070177671041755
+    ]
+  },
+  "force": {
+    "magnitudeN": 0.0001,
+    "axis": [
+      0,
+      1,
+      0
+    ],
+    "seconds": 0.000001,
+    "appliedToVertices": [
+      {
+        "localVertex": 4203,
+        "weight": 0.1442646283355351,
+        "forceN": 0.000014426462833553511
+      },
+      {
+        "localVertex": 155,
+        "weight": 0.6650335949540473,
+        "forceN": 0.00006650335949540474
+      },
+      {
+        "localVertex": 983,
+        "weight": 0.19070177671041755,
+        "forceN": 0.000019070177671041757
+      }
+    ]
+  },
+  "response": {
+    "neutral": [
+      0.07634115025417086,
+      0.4310551797943513,
+      0.019545959192692895
+    ],
+    "plus": [
+      0.07634115025420479,
+      0.4310551828252543,
+      0.019545959192981514
+    ],
+    "minus": [
+      0.07634115025413693,
+      0.4310551767634483,
+      0.019545959192404268
+    ],
+    "actualPositionJacobian": [
+      3.3931191190106347e-10,
+      0.000030309030008002225,
+      2.8862329193302116e-9
+    ],
+    "predictedInertialJacobian": [
+      0,
+      0.000030408950970360344,
+      0
+    ],
+    "difference": [
+      3.3931191190106347e-10,
+      -9.992096235811971e-8,
+      2.8862329193302116e-9
+    ],
+    "actualNormPerN": 0.000030309030147324945,
+    "predictedNormPerN": 0.000030408950970360344,
+    "relativeNormError": 0.0032859016785153996
+  },
+  "geometry": {
+    "neutral": {
+      "maxEdgeStrain": 0,
+      "p95EdgeStrain": 0,
+      "orientationFlips": 0,
+      "genuineFolds": 0,
+      "genuineFoldFaces": [],
+      "collapsedTriangles": 0,
+      "minAreaRatio": 1,
+      "finite": true,
+      "maxDisplacement": 0,
+      "maxVelocity": 2.8796979845621895e-15,
+      "finalVelocity": 2.8796979845621895e-15,
+      "normalizedVelocity": 8.35556540438989e-16,
+      "maxNetForceN": 1.155122197267888e-17,
+      "rmsNetForceN": 2.160482774658674e-18,
+      "forceResidualRatio": 0.00001155122197267888
+    },
+    "plus": {
+      "maxEdgeStrain": 0.00000929971383353238,
+      "p95EdgeStrain": 0,
+      "orientationFlips": 0,
+      "genuineFolds": 0,
+      "genuineFoldFaces": [],
+      "collapsedTriangles": 0,
+      "minAreaRatio": 0.9999902372574342,
+      "finite": true,
+      "maxDisplacement": 4.2896973417619215e-9,
+      "maxVelocity": 0.008562987734630604,
+      "finalVelocity": 0.008562987734630604,
+      "normalizedVelocity": 0.0024845870802167546,
+      "maxNetForceN": 0.00006574301469033934,
+      "rmsNetForceN": 0.0000010615197120759838,
+      "forceResidualRatio": 65743014.69033934
+    },
+    "minus": {
+      "maxEdgeStrain": 0.000009299718274356546,
+      "p95EdgeStrain": 0,
+      "orientationFlips": 0,
+      "genuineFolds": 0,
+      "genuineFoldFaces": [],
+      "collapsedTriangles": 0,
+      "minAreaRatio": 0.9999932807375391,
+      "finite": true,
+      "maxDisplacement": 4.2896973417619215e-9,
+      "maxVelocity": 0.008562987732298896,
+      "finalVelocity": 0.008562987732298896,
+      "normalizedVelocity": 0.0024845870795401994,
+      "maxNetForceN": 0.00006574301460020815,
+      "rmsNetForceN": 0.0000010615197096323666,
+      "forceResidualRatio": 65743014.600208156
+    }
+  },
+  "runtimeMs": {
+    "neutral": 48.22109999999998,
+    "plus": 24.434099999999944,
+    "minus": 19.038800000000037
+  },
+  "interpretation": "The predicted Jacobian is the zero-velocity first-order mass response using the same RK4 masses, source scale, and barycentric force distribution. Agreement at short duration validates force placement and units before spring-dominated inverse optimization."
+}

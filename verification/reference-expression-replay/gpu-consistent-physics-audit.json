@@ -1,0 +1,26 @@
+{
+  "schema": "vela-reference-expression-gpu-consistent-physics-audit-v1",
+  "definition": "The inverse frame-45 probe uses the validated GPU RK4 spring and support definitions inside the existing A5 selected domain.",
+  "surfaceSprings": "original graph edgeSprings only",
+  "virtualSeamSprings": 0,
+  "crossIslandSprings": 0,
+  "sourceMetersPerUnit": 0.3,
+  "surfaceStiffnessNPerM": 45.0,
+  "innerSupportModulusPa": 10000.0,
+  "supportConstruction": "area-attributed per-vertex support springs and same-island neighbor anchors from the calibrated GPU support family",
+  "fixedInnerAnchors": "original graph anchorPositions",
+  "massAndDamping": "not used by the offline static inverse equilibrium; the RK4 sensitivity gate uses the calibrated masses and RK4 integrator",
+  "domainLimitation": "The frame-45 static inverse is run on the existing A5 selected facial domain, not the full GPU RK4 island. This is explicit and is not presented as a full GPU trajectory replay.",
+  "models": {
+    "female": {"vertices": 41747, "triangles": 79627, "surfaceSprings": 121358, "supportSprings": 166792},
+    "male": {"vertices": 208351, "triangles": 401474, "surfaceSprings": 609759, "supportSprings": 832542}
+  },
+  "sensitivity": {
+    "landmark": 105,
+    "triangle": "exact Goal 1 attachment on source island 50",
+    "forceN": 0.0001,
+    "durationSeconds": 0.000001,
+    "relativeJacobianNormError": 0.0032859016785153996,
+    "crossIslandSprings": 0
+  }
+}

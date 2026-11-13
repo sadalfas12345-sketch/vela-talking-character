@@ -1,0 +1,221 @@
+{
+  "schema": "vela-inverse-reversal-audit-v1",
+  "landmark": 105,
+  "triangleCount": 79627,
+  "reversalCount": 3,
+  "intersectionTest": "not performed; records distinguish orientation reversal from coherent neighbor rotation but do not prove self-intersection absence",
+  "landmark105Neutral": [
+    0.07634115025417086,
+    -0.019545959192692895,
+    0.4310551797943513
+  ],
+  "landmark105Deformed": [
+    0.07629619858570483,
+    -0.01949652011647249,
+    0.431050220897396
+  ],
+  "triangles": [
+    {
+      "localTriangleId": 27895,
+      "sourceVertexIds": [
+        38229,
+        33103,
+        31472
+      ],
+      "localVertexIds": [
+        38229,
+        33103,
+        31472
+      ],
+      "component": 0,
+      "neutralCentroid": [
+        0.05499345436692238,
+        -0.016305120040973026,
+        0.3990704119205475
+      ],
+      "deformedCentroid": [
+        0.05500481050088852,
+        -0.016330874176680967,
+        0.3991317535583651
+      ],
+      "distanceToLandmark105Neutral": 0.03859083484511419,
+      "distanceToLandmark105Deformed": 0.03849848150339383,
+      "neutralAreaDouble": 1.6596374988434097e-07,
+      "deformedAreaDouble": 1.020407015510169e-07,
+      "areaRatio": 0.614837285986418,
+      "neutralEdgeLengths": [
+        0.000938555455795976,
+        0.0010179842161262328,
+        0.00018803847025871103
+      ],
+      "deformedEdgeLengths": [
+        0.0009423097364560538,
+        0.000967666665692046,
+        0.00010999059984193175
+      ],
+      "edgeRatios": [
+        1.0040000626887773,
+        0.9505713844703195,
+        0.5849366871077082
+      ],
+      "edgeSharingNeighborIds": [
+        27894,
+        27910,
+        28415
+      ],
+      "neighborNeutralDihedralDegrees": [
+        1.5405141096929689,
+        2.2169403172767845,
+        3.4210060815299648
+      ],
+      "neighborDeformedDihedralDegrees": [
+        178.29079520358653,
+        178.7398120948037,
+        4.9335598992370215
+      ],
+      "deformedNeighborNormalDots": [
+        -0.9995550812193225,
+        -0.9997581323160335,
+        0.9962950939629974
+      ],
+      "rotationCandidate": false,
+      "classification": "local_fold_candidate"
+    },
+    {
+      "localTriangleId": 28415,
+      "sourceVertexIds": [
+        38229,
+        31472,
+        41534
+      ],
+      "localVertexIds": [
+        38229,
+        31472,
+        41534
+      ],
+      "component": 0,
+      "neutralCentroid": [
+        0.05501079186797142,
+        -0.01590953425814708,
+        0.3988473316033681
+      ],
+      "deformedCentroid": [
+        0.05502116327709434,
+        -0.015927912025227725,
+        0.3988925262012315
+      ],
+      "distanceToLandmark105Neutral": 0.03880145951226211,
+      "distanceToLandmark105Deformed": 0.038723112210451854,
+      "neutralAreaDouble": 8.212867369932446e-08,
+      "deformedAreaDouble": 4.4097234768730915e-08,
+      "areaRatio": 0.5369286119263562,
+      "neutralEdgeLengths": [
+        0.00018803847025871103,
+        0.0004656294353299823,
+        0.0004375774466370437
+      ],
+      "deformedEdgeLengths": [
+        0.00010999059984193175,
+        0.0004436531334726441,
+        0.0005007177152292407
+      ],
+      "edgeRatios": [
+        0.5849366871077082,
+        0.9528030227690308,
+        1.1442950706839554
+      ],
+      "edgeSharingNeighborIds": [
+        27895,
+        28416,
+        28417
+      ],
+      "neighborNeutralDihedralDegrees": [
+        3.4210060815299648,
+        55.60117539963139,
+        2.6503542209920363
+      ],
+      "neighborDeformedDihedralDegrees": [
+        4.9335598992370215,
+        32.87793204414932,
+        174.78008517023804
+      ],
+      "deformedNeighborNormalDots": [
+        0.9962950939629974,
+        0.839829010501958,
+        -0.9958528364462567
+      ],
+      "rotationCandidate": false,
+      "classification": "local_fold_candidate"
+    },
+    {
+      "localTriangleId": 28416,
+      "sourceVertexIds": [
+        16871,
+        41534,
+        31472
+      ],
+      "localVertexIds": [
+        16871,
+        41534,
+        31472
+      ],
+      "component": 0,
+      "neutralCentroid": [
+        0.05505248655875524,
+        -0.015677745454013348,
+        0.39878810445467633
+      ],
+      "deformedCentroid": [
+        0.055070155727419697,
+        -0.015664571986101213,
+        0.39884526264024217
+      ],
+      "distanceToLandmark105Neutral": 0.038850153544624226,
+      "distanceToLandmark105Deformed": 0.038760650900631584,
+      "neutralAreaDouble": 4.476541679203944e-08,
+      "deformedAreaDouble": 6.546155618531182e-08,
+      "areaRatio": 1.4623242868354738,
+      "neutralEdgeLengths": [
+        0.00030173923673914086,
+        0.0004656294353299823,
+        0.0007577664484200986
+      ],
+      "deformedEdgeLengths": [
+        0.0003253665049601425,
+        0.0004436531334726441,
+        0.000748330173685828
+      ],
+      "edgeRatios": [
+        1.0783035990822363,
+        0.9528030227690308,
+        0.9875472518558395
+      ],
+      "edgeSharingNeighborIds": [
+        28413,
+        28415,
+        28911
+      ],
+      "neighborNeutralDihedralDegrees": [
+        36.99862055000598,
+        55.60117539963139,
+        11.638691118994943
+      ],
+      "neighborDeformedDihedralDegrees": [
+        124.22740076624342,
+        32.87793204414932,
+        74.9715519479924
+      ],
+      "deformedNeighborNormalDots": [
+        -0.5624788512717784,
+        0.839829010501958,
+        0.25929860711148767
+      ],
+      "rotationCandidate": false,
+      "classification": "local_fold_candidate"
+    }
+  ],
+  "summary": {
+    "coherentRotationCandidates": 0,
+    "localFoldCandidates": 3
+  }
+}

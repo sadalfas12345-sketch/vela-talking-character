@@ -3,10 +3,74 @@
 Status: **frame-45 physical validation FAILED; full 121-frame replay NOT RUN**
 
 This verification changes the expression objective from exact hard landmark
-placement to compact external-force control. It preserves the existing
-Hookean edge springs, abstract support springs, original vertices, original
-triangles, virtual seam list, target trajectories, and barycentric attachments.
-It does not overwrite vertices with landmark targets.
+placement to compact external-force control. It does not overwrite vertices
+with landmark targets.
+
+## GPU RK4 single-source consistency gate
+
+The new frame-45 probe was rerun with the validated GPU RK4 definitions as its
+single physical source of truth. It uses the original `edgeSprings` only,
+original rest lengths, source scale `0.30 m/unit`, surface stiffness
+`45 N/m`, area-derived support stiffness from the `10 kPa` inner modulus, and
+the original fixed inner-anchor positions. The 24 Plan A5 virtual seam springs
+are excluded in this mode, so the reported cross-island spring count is zero.
+This is an explicit network change from the legacy inverse probe, not a silent
+reinterpretation of its result.
+
+The offline inverse state is evaluated on the existing A5 selected facial
+domain. It is not claimed to be a full GPU RK4 trajectory replay. Masses and
+the RK4 integrator are used by the separate short-horizon sensitivity gate;
+the frame-45 inverse is a static force-controlled equilibrium using the same
+spring, support, unit, and anchor definitions.
+
+| Gate | Female | Male |
+|---|---:|---:|
+| Source vertices | 41,747 | 208,351 |
+| Source triangles | 79,627 | 401,474 |
+| Original surface springs | 121,358 | 609,759 |
+| Virtual seam springs | 0 | 0 |
+| Support springs | 166,792 | 832,542 |
+| Frame-45 median image error | 0.0018275 | 0.0096444 |
+| Frame-45 P95 image error | 0.0040906 | 0.0212767 |
+| Force-balance residual | 0.0044873 N | 0.0500302 N |
+| Positive-rest P95 strain | 0.6259% | 0.7623% |
+| Conservative orientation reversals | 3 | 15 |
+| Triangle collapses | 0 | 0 |
+| Result | FAILED | FAILED |
+
+Both states remain invalid because the nonlinear equilibrium residual is not
+converged and conservative orientation reversals remain. The measured maximum
+positive-rest strains are also 41.51% female and 65.91% male, despite their
+lower P95 tails. No 121-frame expansion was started.
+
+The reversal audit classifies female triangles `27895`, `28415`, and `28416`
+as local-fold candidates. Male triangles `24818`, `36899`, `37538`, `111514`,
+`123032`, `158416`, `200537`, `264346`, `264348`, `271432`, `286925`,
+`287875`, `288828`, and `319881` are local-fold candidates. Male triangle
+`305841` is the one coherent-rotation candidate. These classifications use
+neighbor dihedral and normal-consistency evidence; they are not inferred from
+normal rotation alone. The exact machine-readable audits are linked below.
+
+### Force-response sensitivity
+
+The required forward sensitivity test now uses landmark 105's exact Goal 1
+attachment triangle on original source island 50, not a nearby triangle in a
+screen crop. A `0.0001 N` barycentric force was applied along the diagnostic
+up axis and evaluated with the existing GPU RK4 forward model. At a
+`1e-6 s` short horizon, the actual finite-difference position Jacobian norm was
+`3.0309030e-5` units/N and the first-order inertial prediction was
+`3.0408951e-5` units/N, for `0.3286%` relative norm error. The test used zero
+cross-island springs and no virtual seam springs. This validates force
+placement, barycentric distribution, source-scale conversion, and mass units
+before inverse optimization. It does not validate the later spring-dominated
+static equilibrium.
+
+- [GPU-consistent physics audit](gpu-consistent-physics-audit.json)
+- [Exact-triangle RK4 sensitivity](../island-spring-pinch/rk4-reference-force-sensitivity.json)
+- [Female GPU-consistent frame-45 metrics](female-frame045-gpu-consistent.json)
+- [Male GPU-consistent frame-45 metrics](male-frame045-gpu-consistent.json)
+- [Female GPU-consistent reversal audit](female-frame045-gpu-consistent-reversal-audit.json)
+- [Male GPU-consistent reversal audit](male-frame045-gpu-consistent-reversal-audit.json)
 
 ## Input audit
 
@@ -136,20 +200,16 @@ reported as local-fold candidates rather than mathematically proven
 self-intersections. The optimizer therefore continues to reject any geometry
 regression and does not call the female state valid.
 
-## Physics consistency audit
+## Legacy physics consistency audit
 
-The [physics consistency audit](physics-consistency-audit.json) identifies the
-current mismatch with the calibrated GPU RK4 implementation. The inverse probe
-uses unit coefficient static energy in source units, no mass, damping, gravity,
-or time integration, and retains the Plan A5 virtual seam and abstract-support
-springs. The calibrated RK4 system uses source-to-meter conversion `0.30`,
-area-derived SI masses, 30 kPa surface and 10 kPa inner baselines, physical
-damping, RK4 integration, and zero cross-island springs.
-
-Therefore the initial inverse result remains useful as a static diagnostic but
-its force magnitudes are not yet physically comparable to GPU RK4 controls.
-Unit and spring-definition reconciliation is now an explicit blocker before
-increasing force-basis capacity.
+The [legacy physics consistency audit](physics-consistency-audit.json) records
+the mismatch in the pre-381ad11 inverse probe. That legacy state used unit
+coefficient static energy in source units and retained virtual seams, so its
+force magnitudes are not physically comparable to the GPU RK4 controls.
+The new `gpu-rk4-consistent-static` reports remove that mismatch in units,
+spring family, support construction, anchors, and cross-island policy. The
+remaining limitation is explicit domain and static-versus-dynamic scope, not
+an unreported physical-definition change.
 
 Zero-rest seam springs are reported separately. Their lengths are not divided
 by a rest length, so they are not folded into the positive-rest strain metric.
@@ -167,6 +227,12 @@ by a rest length, so they are not folded into the positive-rest strain metric.
 - [Corrected female alpha-zero regression](female-frame045-inverse-corrected.json)
 - [Female reversal audit](female-frame045-reversal-audit.json)
 - [Physics consistency audit](physics-consistency-audit.json)
+- [GPU-consistent physics audit](gpu-consistent-physics-audit.json)
+- [Female GPU-consistent frame-45 render, neutral](female-frame045-gpu-consistent-render-neutral.png)
+- [Female GPU-consistent frame-45 render, evaluated](female-frame045-gpu-consistent-render-supported.png)
+- [Male GPU-consistent frame-45 render, neutral](male-frame045-gpu-consistent-render-neutral.png)
+- [Male GPU-consistent frame-45 render, evaluated](male-frame045-gpu-consistent-render-supported.png)
+- [Reference video frame 45](reference-frame045.png)
 - [Female hard-target replay](female-frame045.json)
 - [Male hard-target replay from the existing A5 evidence](../plan-a5-subcutaneous-run/male-stageb-frame45-supported.json)
 
@@ -178,9 +244,12 @@ for visual comparison:
 - [Male neutral](../plan-a5-subcutaneous-run/male-stageb-frame45-neutral.png)
 - [Male failed supported probe](../plan-a5-subcutaneous-run/male-stageb-frame45-supported.png)
 
-No optimized textured render is claimed: the frame-45 geometry gate failed
-before a valid optimized expression state existed. The saved NPZ files are the
-actual evaluated inverse states, not marker-only output.
+The GPU-consistent evaluated states were rendered over the untouched textured
+GLBs for inspection. They are diagnostic renders only: visual inspection found
+severe spikes, gross facial collapse, and dark void-like regions in both
+evaluated images, consistent with the numerical geometry failure. No valid
+optimized textured expression is claimed. The saved NPZ files and rendered
+images are actual evaluated states, not marker-only output.
 
 ## Decision and next gate
 
@@ -206,6 +275,11 @@ python scripts\audit_reference_expression_replay.py --model female --capture ver
 python scripts\audit_reference_expression_replay.py --model male --capture verification\captureforge-facial-rig-test\worried-reference.capture.npz --table verification\goal2-browInnerUp-proof\worried-expression-table.json --graph verification\plan-a5-subcutaneous-run\male-spring-graph-r050.npz --targets verification\plan-a5-subcutaneous-run\male-targets-r050.npz --output verification\plan-a5-subcutaneous-run\male-reference-replay-audit.json
 python scripts\optimize_reference_forces.py --model female --graph verification\plan-a5-subcutaneous-run\female-subcutaneous-r050.npz --targets verification\plan-a5-subcutaneous-run\female-targets-r050.npz --target-json verification\plan-a5-subcutaneous-run\female-targets-r050.json --frame 45 --controls 12 --force-regularization 1 --linear-iterations 30 --nonlinear-iterations 4 --nonlinear-inner-iterations 25 --output verification\reference-expression-replay\female-frame045-inverse-final.json
 python scripts\optimize_reference_forces.py --model male --graph verification\plan-a5-subcutaneous-run\male-subcutaneous-r050.npz --targets verification\plan-a5-subcutaneous-run\male-targets-r050.npz --target-json verification\plan-a5-subcutaneous-run\male-targets-r050.json --frame 45 --controls 4 --force-regularization 1 --linear-iterations 15 --nonlinear-iterations 3 --nonlinear-inner-iterations 20 --output verification\reference-expression-replay\male-frame045-inverse.json
+$env:VELA_SENSITIVITY_SECONDS='0.000001'; node scripts\calibrate_realtime_rk4.mjs --reference-force-sensitivity
+python scripts\optimize_reference_forces.py --model female --gpu-consistent --graph verification\plan-a5-subcutaneous-run\female-subcutaneous-r050.npz --targets verification\plan-a5-subcutaneous-run\female-targets-r050.npz --target-json verification\plan-a5-subcutaneous-run\female-targets-r050.json --frame 45 --controls 4 --force-scale 0.001 --force-regularization 1 --linear-iterations 20 --nonlinear-iterations 3 --nonlinear-inner-iterations 18 --output verification\reference-expression-replay\female-frame045-gpu-consistent.json
+python scripts\optimize_reference_forces.py --model male --gpu-consistent --graph verification\plan-a5-subcutaneous-run\male-subcutaneous-r050.npz --targets verification\plan-a5-subcutaneous-run\male-targets-r050.npz --target-json verification\plan-a5-subcutaneous-run\male-targets-r050.json --frame 45 --controls 2 --force-scale 0.001 --force-regularization 1 --linear-iterations 12 --nonlinear-iterations 3 --nonlinear-inner-iterations 16 --output verification\reference-expression-replay\male-frame045-gpu-consistent.json
+& 'C:\Program Files\Blender Foundation\Blender 5.2\blender.exe' --background --factory-startup --python scripts\render_plan_a5_probe.py -- --glb assets\tripo\vela-photoreal\generated-original.glb --graph verification\plan-a5-subcutaneous-run\female-subcutaneous-r050.npz --positions verification\reference-expression-replay\female-frame045-gpu-consistent-positions.npz --camera verification\reference-expression-replay\female-frame045-camera.json --output verification\reference-expression-replay\female-frame045-gpu-consistent-render
+& 'C:\Program Files\Blender Foundation\Blender 5.2\blender.exe' --background --factory-startup --python scripts\render_plan_a5_probe.py -- --glb assets\tripo\generalization-male-20261105\generated-original.glb --graph verification\plan-a5-subcutaneous-run\male-subcutaneous-r050.npz --positions verification\reference-expression-replay\male-frame045-gpu-consistent-positions.npz --camera verification\reference-expression-replay\male-frame045-camera.json --output verification\reference-expression-replay\male-frame045-gpu-consistent-render
 ```
 
 OVERALL STEP RESULT: **FAILED**

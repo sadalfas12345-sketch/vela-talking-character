@@ -424,6 +424,10 @@ function simulate(model, candidate, options = {}) {
       usePinch.force = force; usePinch.error = Math.hypot((target[0] - qx) * sourceMetersPerUnit, (target[1] - qy) * sourceMetersPerUnit, (target[2] - qz) * sourceMetersPerUnit); usePinch.peakForce = Math.max(usePinch.peakForce || 0, Math.hypot(...force));
       for (let j = 0; j < 3; j++) { const id = ids[j], w = weights[j]; add3(out, id, w * force[0], w * force[1], w * force[2]); }
     }
+    if (options.externalForces) {
+      const applied = options.externalForces;
+      for (let i = 0; i < length; i++) out[i] += applied[i];
+    }
     for (let i = 0; i < n; i++) { add3(out, i, system.masses[i] * gravity[0] - system.damping * v[i * 3] * sourceMetersPerUnit, system.masses[i] * gravity[1] - system.damping * v[i * 3 + 1] * sourceMetersPerUnit, system.masses[i] * gravity[2] - system.damping * v[i * 3 + 2] * sourceMetersPerUnit); }
   };
   const acceleration = (x, v, out) => { forces(x, v, forceN); for (let i = 0; i < length; i++) out[i] = forceN[i] / system.masses[Math.floor(i / 3)] / sourceMetersPerUnit; };
@@ -451,6 +455,50 @@ function simulate(model, candidate, options = {}) {
   const maxDisplacement = maxVertexDisplacement(neutral, positions);
   const totalGravityForce = system.totalMass * Math.hypot(...gravity);
   return { positions, velocities, system, geometry: { ...geometry, maxDisplacement, maxVelocity, finalVelocity, normalizedVelocity: finalVelocity * frameDt / Math.max(model.faceScale, 1e-12), maxNetForceN: maxNetForce, rmsNetForceN: Math.sqrt(forceRms / Math.max(n, 1)), forceResidualRatio: maxNetForce / Math.max(totalGravityForce / Math.max(n, 1), 1e-12) }, steps, seconds: elapsed, complete: !nonfinite && !wallClockExceeded && elapsed >= seconds - 1e-15, nonfinite, wallClockExceeded, pinch: usePinch ? { ...usePinch } : null, runtimeMs: performance.now() - simulationStarted, forceEvaluations };
+}
+
+async function expressionForceSensitivityProbe() {
+  const checkpoint = resumePath ? await loadWaterfallCheckpoint(resumePath) : null;
+  const candidate = checkpoint?.current || createCandidate([0, 0, 0, 0, -1, 0, 0]);
+  const full = await loadModel('female');
+  const attachmentData = JSON.parse(await fs.readFile(models.female.attachments, 'utf8'));
+  const record = attachmentData.records.find(value => value.index === 105);
+  if (!record) throw new Error('Landmark 105 attachment is missing');
+  const sourceIds = record.triangleVertexIndices.map(Number);
+  const attachmentIsland = full.topology.vertices.findIndex(vertices => sourceIds.every(id => vertices.includes(id)));
+  if (attachmentIsland < 0) throw new Error('The exact Goal 1 landmark-105 attachment does not belong to one original mesh island');
+  // Use the original island containing the exact attachment, not a reduced
+  // screen patch. This keeps the test on original topology with no cross-island
+  // springs while ensuring the force is applied to the known triangle.
+  const model = attachmentIsland === full.islandId
+    ? full
+    : makeIslandMesh(`${full.name}-landmark105-island-${attachmentIsland}`, full.sourcePositions, full.sourceIndices, full.topology, attachmentIsland, full.points, full.right, full.up, full.front, full.faceScale);
+  const system = preparePhysics(model, candidate);
+  const globalToLocal = new Map(model.globalVertices.map((global, local) => [global, local]));
+  const ids = sourceIds.map(value => globalToLocal.get(value));
+  let weights = record.barycentricCoordinates;
+  let faceIndex = model.faces.findIndex(face => face.every(value => ids.includes(value)));
+  if (faceIndex < 0) throw new Error('The exact Goal 1 landmark-105 attachment triangle is not present in the original selected facial island');
+  const forceMagnitudeN = Number(process.env.VELA_SENSITIVITY_FORCE_N || 1e-4);
+  const seconds = Number(process.env.VELA_SENSITIVITY_SECONDS || 0.002);
+  const axis = [0, 1, 0];
+  const applied = new Float64Array(system.vertexCount * 3);
+  for (let j = 0; j < 3; j++) { applied[ids[j] * 3] += weights[j] * forceMagnitudeN * axis[0]; applied[ids[j] * 3 + 1] += weights[j] * forceMagnitudeN * axis[1]; applied[ids[j] * 3 + 2] += weights[j] * forceMagnitudeN * axis[2]; }
+  const negative = new Float64Array(applied.length); for (let i = 0; i < applied.length; i++) negative[i] = -applied[i];
+  const evaluate = (result) => { const out = [0, 0, 0]; for (let j = 0; j < 3; j++) for (let d = 0; d < 3; d++) out[d] += weights[j] * result.positions[ids[j] * 3 + d]; return out; };
+  const neutral = simulate(model, candidate, { seconds, wallClockLimitMs: Infinity });
+  const plus = simulate(model, candidate, { seconds, externalForces: applied, wallClockLimitMs: Infinity });
+  const minus = simulate(model, candidate, { seconds, externalForces: negative, wallClockLimitMs: Infinity });
+  const p0 = evaluate(neutral), pp = evaluate(plus), pm = evaluate(minus);
+  const actual = pp.map((value, i) => (value - pm[i]) / (2 * forceMagnitudeN));
+  const predicted = new Array(3).fill(0);
+  for (let j = 0; j < 3; j++) { const mass = system.masses[ids[j]]; const coefficient = 0.5 * seconds * seconds * weights[j] * weights[j] / Math.max(mass * sourceMetersPerUnit, 1e-30); for (let d = 0; d < 3; d++) predicted[d] += coefficient * axis[d]; }
+  const delta = actual.map((value, i) => value - predicted[i]);
+  const predictedNorm = Math.hypot(...predicted), actualNorm = Math.hypot(...actual);
+  const output = { schema: 'vela-rk4-barycentric-force-sensitivity-v1', candidate, domain: { name: model.name, islandId: attachmentIsland, kind: model.domainKind, vertices: system.vertexCount, triangles: system.faces.length, crossIslandSprings: 0, surfaceSpringCount: system.edgeA.length, supportSpringCount: system.supportA.length }, landmark: { id: 105, sourceTriangleIndex: record.triangleIndex, localTriangleIndex: faceIndex, source: 'exact Goal 1 attachment on original mesh island', globalVertexIds: sourceIds, localVertexIds: ids, barycentricWeights: weights }, force: { magnitudeN: forceMagnitudeN, axis, seconds, appliedToVertices: ids.map((id, j) => ({ localVertex: id, weight: weights[j], forceN: forceMagnitudeN * weights[j] })) }, response: { neutral: p0, plus: pp, minus: pm, actualPositionJacobian: actual, predictedInertialJacobian: predicted, difference: delta, actualNormPerN: actualNorm, predictedNormPerN: predictedNorm, relativeNormError: Math.abs(actualNorm - predictedNorm) / Math.max(predictedNorm, 1e-30) }, geometry: { neutral: neutral.geometry, plus: plus.geometry, minus: minus.geometry }, runtimeMs: { neutral: neutral.runtimeMs, plus: plus.runtimeMs, minus: minus.runtimeMs }, interpretation: 'The predicted Jacobian is the zero-velocity first-order mass response using the same RK4 masses, source scale, and barycentric force distribution. Agreement at short duration validates force placement and units before spring-dominated inverse optimization.' };
+  const outputPath = path.join(outputDir, 'rk4-reference-force-sensitivity.json');
+  await fs.mkdir(outputDir, { recursive: true }); await fs.writeFile(outputPath, JSON.stringify(output, null, 2));
+  console.log(JSON.stringify({ phase: 'reference-force-sensitivity-complete', path: path.relative(root, outputPath), model: model.name, triangle: record.triangleIndex, actualNormPerN: actualNorm, predictedNormPerN: predictedNorm, relativeNormError: output.response.relativeNormError, crossIslandSprings: 0 }));
 }
 
 function maxVertexDisplacement(a, b) { let max = 0; for (let i = 0; i < a.length; i += 3) max = Math.max(max, Math.hypot(b[i] - a[i], b[i + 1] - a[i + 1], b[i + 2] - a[i + 2])); return max; }
@@ -1371,7 +1419,9 @@ async function main() {
   console.log(JSON.stringify({ phase: 'complete', completedStage: waterfall.completedStage, stages: waterfall.stages.map(stage => ({ name: stage.name, passed: stage.passed, evaluations: stage.evaluations.length })), checkpoint: path.join(outputDir, 'rk4-waterfall-checkpoint.json'), report: path.relative(root, path.join(outputDir, 'rk4-calibration-report.json')), elapsedMs: performance.now() - started, overall: report.overall }));
 }
 
-if (argv.has('--feedback-demo')) {
+if (argv.has('--reference-force-sensitivity')) {
+  expressionForceSensitivityProbe().catch(error => { console.error(error.stack || error); process.exitCode = 1; });
+} else if (argv.has('--feedback-demo')) {
   console.log(JSON.stringify({ phase: 'feedback-demo', ...feedbackDemo() }, null, 2));
 } else {
   main().catch(error => { console.error(error.stack || error); process.exitCode = 1; });
