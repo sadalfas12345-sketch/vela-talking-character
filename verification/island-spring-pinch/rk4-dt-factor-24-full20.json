@@ -1,0 +1,1359 @@
+{
+  "seed": 20261113,
+  "count": 20,
+  "holdSeconds": 0.0166666666666667,
+  "releaseSeconds": 0.02,
+  "records": [
+    {
+      "model": "female",
+      "domain": "full",
+      "vertices": 5036,
+      "gpu": {
+        "count": 20,
+        "seed": 20261213,
+        "holdSeconds": 0.0166666666666667,
+        "releaseSeconds": 0.02,
+        "valid": true,
+        "results": [
+          {
+            "sequence": 0,
+            "face": [
+              868,
+              4244,
+              2011
+            ],
+            "direction": "down",
+            "magnitudeSource": 0.0002240318307523217,
+            "held": {
+              "maxEdgeStrain": 0.000909949224323513,
+              "p95EdgeStrain": 0.00027593629041118675,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9950554430128724
+            },
+            "released": {
+              "maxEdgeStrain": 0.0011092683321499643,
+              "p95EdgeStrain": 0.0002815247806696874,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9936724957145288
+            },
+            "heldComplete": true,
+            "releaseComplete": true,
+            "wallClockExceeded": false,
+            "recoveredDisplacementSource": 0.0001962594639458546,
+            "peakForceN": 6.21882192639385e-06,
+            "peakTrackingErrorMeters": 4.4627014628572196e-05,
+            "releaseRuntimeMs": 154.71329999854788,
+            "releaseSteps": 2674,
+            "valid": true
+          },
+          {
+            "sequence": 1,
+            "face": [
+              634,
+              4094,
+              3435
+            ],
+            "direction": "up",
+            "magnitudeSource": 0.0005434667942545132,
+            "held": {
+              "maxEdgeStrain": 0.0014886353217056691,
+              "p95EdgeStrain": 0.00024328071791291915,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.984426265709448
+            },
+            "released": {
+              "maxEdgeStrain": 0.0010260487872622527,
+              "p95EdgeStrain": 0.00023416244731609454,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9846719074266969
+            },
+            "heldComplete": true,
+            "releaseComplete": true,
+            "wallClockExceeded": false,
+            "recoveredDisplacementSource": 0.0001409240643711569,
+            "peakForceN": 1.881902129301498e-05,
+            "peakTrackingErrorMeters": 0.00013514016366127194,
+            "releaseRuntimeMs": 154.94189999299124,
+            "releaseSteps": 2674,
+            "valid": true
+          },
+          {
+            "sequence": 2,
+            "face": [
+              3826,
+              2194,
+              4625
+            ],
+            "direction": "left",
+            "magnitudeSource": 0.0003977598228115786,
+            "held": {
+              "maxEdgeStrain": 0.0008974319452982115,
+              "p95EdgeStrain": 0.00023810424267588898,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9552692956425888
+            },
+            "released": {
+              "maxEdgeStrain": 0.0009224987123482244,
+              "p95EdgeStrain": 0.0002366010159022238,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9557021304117471
+            },
+            "heldComplete": true,
+            "releaseComplete": true,
+            "wallClockExceeded": false,
+            "recoveredDisplacementSource": 0.00010616080058269393,
+            "peakForceN": 1.1852172069871499e-05,
+            "peakTrackingErrorMeters": 9.548904585582832e-05,
+            "releaseRuntimeMs": 157.701599993743,
+            "releaseSteps": 2674,
+            "valid": true
+          },
+          {
+            "sequence": 3,
+            "face": [
+              2511,
+              2989,
+              3643
+            ],
+            "direction": "forward",
+            "magnitudeSource": 0.0006069775410841219,
+            "held": {
+              "maxEdgeStrain": 0.003084385266184478,
+              "p95EdgeStrain": 0.0002064234084035915,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9705921137700286
+            },
+            "released": {
+              "maxEdgeStrain": 0.0012142941626624311,
+              "p95EdgeStrain": 0.00018573931902500496,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9769576251796305
+            },
+            "heldComplete": true,
+            "releaseComplete": true,
+            "wallClockExceeded": false,
+            "recoveredDisplacementSource": 0.00011353522616852296,
+            "peakForceN": 1.7029904216125615e-05,
+            "peakTrackingErrorMeters": 0.00012891567516462918,
+            "releaseRuntimeMs": 159.20560000813566,
+            "releaseSteps": 2674,
+            "valid": true
+          },
+          {
+            "sequence": 4,
+            "face": [
+              1520,
+              1173,
+              4791
+            ],
+            "direction": "down",
+            "magnitudeSource": 0.0002564849304293263,
+            "held": {
+              "maxEdgeStrain": 0.000940070430870159,
+              "p95EdgeStrain": 0.00027926261887622036,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9941449325524606
+            },
+            "released": {
+              "maxEdgeStrain": 0.0009609226774435949,
+              "p95EdgeStrain": 0.0002783959718634845,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9937617737882836
+            },
+            "heldComplete": true,
+            "releaseComplete": true,
+            "wallClockExceeded": false,
+            "recoveredDisplacementSource": 0.00019638141003160307,
+            "peakForceN": 8.296295789132967e-06,
+            "peakTrackingErrorMeters": 5.152261634761526e-05,
+            "releaseRuntimeMs": 152.4506999994628,
+            "releaseSteps": 2674,
+            "valid": true
+          },
+          {
+            "sequence": 5,
+            "face": [
+              4625,
+              4166,
+              3826
+            ],
+            "direction": "up",
+            "magnitudeSource": 0.00016066978857171149,
+            "held": {
+              "maxEdgeStrain": 0.0009677568353073456,
+              "p95EdgeStrain": 0.0002367332139478672,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9846190800863648
+            },
+            "released": {
+              "maxEdgeStrain": 0.001088822539542615,
+              "p95EdgeStrain": 0.00023298840071672464,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9865549843838002
+            },
+            "heldComplete": true,
+            "releaseComplete": true,
+            "wallClockExceeded": false,
+            "recoveredDisplacementSource": 0.00014121009363268547,
+            "peakForceN": 4.449006986277095e-06,
+            "peakTrackingErrorMeters": 2.4280465640432907e-05,
+            "releaseRuntimeMs": 151.50129998801276,
+            "releaseSteps": 2674,
+            "valid": true
+          },
+          {
+            "sequence": 6,
+            "face": [
+              3136,
+              2188,
+              4884
+            ],
+            "direction": "down",
+            "magnitudeSource": 0.0005885935035096463,
+            "held": {
+              "maxEdgeStrain": 0.001035777734861555,
+              "p95EdgeStrain": 0.00027966533623037965,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9947241580717684
+            },
+            "released": {
+              "maxEdgeStrain": 0.0011550109160480663,
+              "p95EdgeStrain": 0.000280873247351715,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9941631277848911
+            },
+            "heldComplete": true,
+            "releaseComplete": true,
+            "wallClockExceeded": false,
+            "recoveredDisplacementSource": 0.00021177160278857985,
+            "peakForceN": 2.013009214561654e-05,
+            "peakTrackingErrorMeters": 0.000145793553990165,
+            "releaseRuntimeMs": 153.88239998719655,
+            "releaseSteps": 2674,
+            "valid": true
+          },
+          {
+            "sequence": 7,
+            "face": [
+              2456,
+              1733,
+              82
+            ],
+            "direction": "forward",
+            "magnitudeSource": 0.00015916303582060747,
+            "held": {
+              "maxEdgeStrain": 0.0006955858092146187,
+              "p95EdgeStrain": 0.0001898823561217509,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.975947591765459
+            },
+            "released": {
+              "maxEdgeStrain": 0.0007402295715771809,
+              "p95EdgeStrain": 0.0001893900548018511,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9747074567423937
+            },
+            "heldComplete": true,
+            "releaseComplete": true,
+            "wallClockExceeded": false,
+            "recoveredDisplacementSource": 0.0001136367040256851,
+            "peakForceN": 4.4068096873687295e-06,
+            "peakTrackingErrorMeters": 2.038969084604932e-05,
+            "releaseRuntimeMs": 153.13900000182912,
+            "releaseSteps": 2674,
+            "valid": true
+          },
+          {
+            "sequence": 8,
+            "face": [
+              4810,
+              900,
+              3767
+            ],
+            "direction": "backward",
+            "magnitudeSource": 0.00013120372586090132,
+            "held": {
+              "maxEdgeStrain": 0.003946436593260851,
+              "p95EdgeStrain": 0.0008045725164828809,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9715486093041305
+            },
+            "released": {
+              "maxEdgeStrain": 0.005325591324556788,
+              "p95EdgeStrain": 0.0009556735097192468,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9739167941264081
+            },
+            "heldComplete": true,
+            "releaseComplete": true,
+            "wallClockExceeded": false,
+            "recoveredDisplacementSource": 0.0005811312489237385,
+            "peakForceN": 7.718625942268178e-06,
+            "peakTrackingErrorMeters": 1.874865760093669e-05,
+            "releaseRuntimeMs": 158.0619000014849,
+            "releaseSteps": 2674,
+            "valid": true
+          },
+          {
+            "sequence": 9,
+            "face": [
+              3626,
+              1114,
+              1695
+            ],
+            "direction": "left",
+            "magnitudeSource": 0.00016091454967519564,
+            "held": {
+              "maxEdgeStrain": 0.0008152542648673314,
+              "p95EdgeStrain": 0.00023344540577584626,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9541428755894092
+            },
+            "released": {
+              "maxEdgeStrain": 0.0010582953939368232,
+              "p95EdgeStrain": 0.00023337846467371342,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9556915259009122
+            },
+            "heldComplete": true,
+            "releaseComplete": true,
+            "wallClockExceeded": false,
+            "recoveredDisplacementSource": 0.00010657210744527744,
+            "peakForceN": 4.670735872144614e-06,
+            "peakTrackingErrorMeters": 2.3127041735388106e-05,
+            "releaseRuntimeMs": 152.72419998655096,
+            "releaseSteps": 2674,
+            "valid": true
+          },
+          {
+            "sequence": 10,
+            "face": [
+              1672,
+              2986,
+              4430
+            ],
+            "direction": "backward",
+            "magnitudeSource": 0.00014357787684929414,
+            "held": {
+              "maxEdgeStrain": 0.004061887319774941,
+              "p95EdgeStrain": 0.0007922666984470938,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9705038631331264
+            },
+            "released": {
+              "maxEdgeStrain": 0.00502704141520281,
+              "p95EdgeStrain": 0.0009507631853117975,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9734121786324875
+            },
+            "heldComplete": true,
+            "releaseComplete": true,
+            "wallClockExceeded": false,
+            "recoveredDisplacementSource": 0.0005804404812602681,
+            "peakForceN": 6.889757685632083e-06,
+            "peakTrackingErrorMeters": 8.95867507603221e-06,
+            "releaseRuntimeMs": 152.94619998894632,
+            "releaseSteps": 2674,
+            "valid": true
+          },
+          {
+            "sequence": 11,
+            "face": [
+              3455,
+              640,
+              3011
+            ],
+            "direction": "right",
+            "magnitudeSource": 0.0003466477637717372,
+            "held": {
+              "maxEdgeStrain": 0.0013431671362456959,
+              "p95EdgeStrain": 0.00032168458699720484,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9952319728834578
+            },
+            "released": {
+              "maxEdgeStrain": 0.001566363161239804,
+              "p95EdgeStrain": 0.0003231417222552374,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9931835893799985
+            },
+            "heldComplete": true,
+            "releaseComplete": true,
+            "wallClockExceeded": false,
+            "recoveredDisplacementSource": 0.0004791985023157336,
+            "peakForceN": 9.500057766428057e-06,
+            "peakTrackingErrorMeters": 7.572110915938546e-05,
+            "releaseRuntimeMs": 158.68639998370782,
+            "releaseSteps": 2674,
+            "valid": true
+          },
+          {
+            "sequence": 12,
+            "face": [
+              3075,
+              4037,
+              1170
+            ],
+            "direction": "forward",
+            "magnitudeSource": 0.0006840690603533535,
+            "held": {
+              "maxEdgeStrain": 0.004128022899086389,
+              "p95EdgeStrain": 0.00020558652009150508,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9757005688405447
+            },
+            "released": {
+              "maxEdgeStrain": 0.0011479770870921038,
+              "p95EdgeStrain": 0.0001886331032590687,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9742242076650701
+            },
+            "heldComplete": true,
+            "releaseComplete": true,
+            "wallClockExceeded": false,
+            "recoveredDisplacementSource": 0.00011370114513337052,
+            "peakForceN": 2.5113847544890933e-05,
+            "peakTrackingErrorMeters": 0.0001721894906307991,
+            "releaseRuntimeMs": 155.76530000544153,
+            "releaseSteps": 2674,
+            "valid": true
+          },
+          {
+            "sequence": 13,
+            "face": [
+              2937,
+              481,
+              43
+            ],
+            "direction": "backward",
+            "magnitudeSource": 0.0006130248315575411,
+            "held": {
+              "maxEdgeStrain": 0.004491701555166931,
+              "p95EdgeStrain": 0.0008147837109028339,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9703575052616894
+            },
+            "released": {
+              "maxEdgeStrain": 0.00528098911300924,
+              "p95EdgeStrain": 0.0009591331505862451,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9733512803163332
+            },
+            "heldComplete": true,
+            "releaseComplete": true,
+            "wallClockExceeded": false,
+            "recoveredDisplacementSource": 0.0005786832736807676,
+            "peakForceN": 1.6963442694289426e-05,
+            "peakTrackingErrorMeters": 0.00011963728886510064,
+            "releaseRuntimeMs": 154.65169999515638,
+            "releaseSteps": 2674,
+            "valid": true
+          },
+          {
+            "sequence": 14,
+            "face": [
+              2148,
+              4039,
+              2490
+            ],
+            "direction": "right",
+            "magnitudeSource": 0.00033096038281709556,
+            "held": {
+              "maxEdgeStrain": 0.0012594368523381125,
+              "p95EdgeStrain": 0.00032353598055155994,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9954260625469495
+            },
+            "released": {
+              "maxEdgeStrain": 0.001531485323627341,
+              "p95EdgeStrain": 0.00032841729116179385,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9930791371619363
+            },
+            "heldComplete": true,
+            "releaseComplete": true,
+            "wallClockExceeded": false,
+            "recoveredDisplacementSource": 0.00047906893423095543,
+            "peakForceN": 7.077443762336073e-06,
+            "peakTrackingErrorMeters": 6.491554688249934e-05,
+            "releaseRuntimeMs": 153.89080002205446,
+            "releaseSteps": 2674,
+            "valid": true
+          },
+          {
+            "sequence": 15,
+            "face": [
+              4452,
+              3040,
+              4962
+            ],
+            "direction": "right",
+            "magnitudeSource": 0.00023687861624842386,
+            "held": {
+              "maxEdgeStrain": 0.0011931487202346488,
+              "p95EdgeStrain": 0.0003235631634603998,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9954752003038136
+            },
+            "released": {
+              "maxEdgeStrain": 0.0016471087020165618,
+              "p95EdgeStrain": 0.0003243173293331061,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.993536641162145
+            },
+            "heldComplete": true,
+            "releaseComplete": true,
+            "wallClockExceeded": false,
+            "recoveredDisplacementSource": 0.00047936695439775533,
+            "peakForceN": 4.62380060442716e-06,
+            "peakTrackingErrorMeters": 4.422451022446897e-05,
+            "releaseRuntimeMs": 157.09239998250268,
+            "releaseSteps": 2674,
+            "valid": true
+          },
+          {
+            "sequence": 16,
+            "face": [
+              2252,
+              1911,
+              1421
+            ],
+            "direction": "backward",
+            "magnitudeSource": 0.0005894782885279693,
+            "held": {
+              "maxEdgeStrain": 0.004012893909535411,
+              "p95EdgeStrain": 0.0007856583213593323,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9674243487431589
+            },
+            "released": {
+              "maxEdgeStrain": 0.005977350183066539,
+              "p95EdgeStrain": 0.000969134690988907,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9214349190052444
+            },
+            "heldComplete": true,
+            "releaseComplete": true,
+            "wallClockExceeded": false,
+            "recoveredDisplacementSource": 0.0005813068505959605,
+            "peakForceN": 1.4466625571005313e-05,
+            "peakTrackingErrorMeters": 0.00010451587618977012,
+            "releaseRuntimeMs": 154.13510001963004,
+            "releaseSteps": 2674,
+            "valid": true
+          },
+          {
+            "sequence": 17,
+            "face": [
+              24,
+              3274,
+              2240
+            ],
+            "direction": "down",
+            "magnitudeSource": 0.0006275931412762901,
+            "held": {
+              "maxEdgeStrain": 0.0018872551929105964,
+              "p95EdgeStrain": 0.00028839767708552493,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9938170569435036
+            },
+            "released": {
+              "maxEdgeStrain": 0.0012815221586518742,
+              "p95EdgeStrain": 0.0002858358724602771,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9943132350156458
+            },
+            "heldComplete": true,
+            "releaseComplete": true,
+            "wallClockExceeded": false,
+            "recoveredDisplacementSource": 0.00024028822073910312,
+            "peakForceN": 1.4068038509968628e-05,
+            "peakTrackingErrorMeters": 0.0001269308944087812,
+            "releaseRuntimeMs": 155.3470000217203,
+            "releaseSteps": 2674,
+            "valid": true
+          },
+          {
+            "sequence": 18,
+            "face": [
+              4497,
+              98,
+              1018
+            ],
+            "direction": "backward",
+            "magnitudeSource": 0.0005460583282130494,
+            "held": {
+              "maxEdgeStrain": 0.0038980403737759275,
+              "p95EdgeStrain": 0.0008083632528301635,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.973183207664078
+            },
+            "released": {
+              "maxEdgeStrain": 0.004982409494852859,
+              "p95EdgeStrain": 0.0009540996288782059,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.970300449492231
+            },
+            "heldComplete": true,
+            "releaseComplete": true,
+            "wallClockExceeded": false,
+            "recoveredDisplacementSource": 0.000581686451540246,
+            "peakForceN": 1.3713140291390515e-05,
+            "peakTrackingErrorMeters": 9.937353457168066e-05,
+            "releaseRuntimeMs": 155.3297000064049,
+            "releaseSteps": 2674,
+            "valid": true
+          },
+          {
+            "sequence": 19,
+            "face": [
+              2092,
+              3689,
+              1984
+            ],
+            "direction": "forward",
+            "magnitudeSource": 0.0005417310001513438,
+            "held": {
+              "maxEdgeStrain": 0.0032608300969047305,
+              "p95EdgeStrain": 0.00020237717443036276,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9735449199135899
+            },
+            "released": {
+              "maxEdgeStrain": 0.0006084918037547566,
+              "p95EdgeStrain": 0.00018508556939052042,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9720901240971213
+            },
+            "heldComplete": true,
+            "releaseComplete": true,
+            "wallClockExceeded": false,
+            "recoveredDisplacementSource": 0.00011346431664357305,
+            "peakForceN": 1.8387617091545864e-05,
+            "peakTrackingErrorMeters": 0.00012752628887704496,
+            "releaseRuntimeMs": 154.08460001344793,
+            "releaseSteps": 2674,
+            "valid": true
+          }
+        ],
+        "runtimeMs": 14175.277300004382
+      }
+    },
+    {
+      "model": "male",
+      "domain": "full",
+      "vertices": 41920,
+      "gpu": {
+        "count": 20,
+        "seed": 20261214,
+        "holdSeconds": 0.0166666666666667,
+        "releaseSeconds": 0.02,
+        "valid": true,
+        "results": [
+          {
+            "sequence": 0,
+            "face": [
+              13956,
+              9655,
+              8007
+            ],
+            "direction": "up",
+            "magnitudeSource": 0.0032127683304416783,
+            "held": {
+              "maxEdgeStrain": 0.0013073655630497312,
+              "p95EdgeStrain": 0.00024467775260555394,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9881799870082852
+            },
+            "released": {
+              "maxEdgeStrain": 0.0011870893608636314,
+              "p95EdgeStrain": 0.00024344179347980134,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9883315163055759
+            },
+            "heldComplete": true,
+            "releaseComplete": true,
+            "wallClockExceeded": false,
+            "recoveredDisplacementSource": 0.00011512348600746974,
+            "peakForceN": 0.0001327203215090466,
+            "peakTrackingErrorMeters": 0.000936172407033668,
+            "releaseRuntimeMs": 509.69450001139194,
+            "releaseSteps": 1309,
+            "valid": true
+          },
+          {
+            "sequence": 1,
+            "face": [
+              30128,
+              17372,
+              34852
+            ],
+            "direction": "forward",
+            "magnitudeSource": 0.003051883932750946,
+            "held": {
+              "maxEdgeStrain": 0.004226879276663954,
+              "p95EdgeStrain": 0.0001903942813030181,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9510076344301218
+            },
+            "released": {
+              "maxEdgeStrain": 0.0008301782231180922,
+              "p95EdgeStrain": 0.0001879794567023811,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9856192084085638
+            },
+            "heldComplete": true,
+            "releaseComplete": true,
+            "wallClockExceeded": false,
+            "recoveredDisplacementSource": 0.00011244242263586029,
+            "peakForceN": 0.00010969912826582721,
+            "peakTrackingErrorMeters": 0.0007673162159706482,
+            "releaseRuntimeMs": 506.70440000249073,
+            "releaseSteps": 1309,
+            "valid": true
+          },
+          {
+            "sequence": 2,
+            "face": [
+              12357,
+              26932,
+              38364
+            ],
+            "direction": "left",
+            "magnitudeSource": 0.002800130490771641,
+            "held": {
+              "maxEdgeStrain": 0.01015667071141543,
+              "p95EdgeStrain": 0.00023848843797293865,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9749137693008888
+            },
+            "released": {
+              "maxEdgeStrain": 0.0010347426477763267,
+              "p95EdgeStrain": 0.00023607319439735428,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9840816989968879
+            },
+            "heldComplete": true,
+            "releaseComplete": true,
+            "wallClockExceeded": false,
+            "recoveredDisplacementSource": 0.0001191760609181471,
+            "peakForceN": 0.00011121817459528658,
+            "peakTrackingErrorMeters": 0.0007826702567268863,
+            "releaseRuntimeMs": 500.09529999806546,
+            "releaseSteps": 1309,
+            "valid": true
+          },
+          {
+            "sequence": 3,
+            "face": [
+              29731,
+              9019,
+              21644
+            ],
+            "direction": "down",
+            "magnitudeSource": 0.00286911976159349,
+            "held": {
+              "maxEdgeStrain": 0.00230253050537163,
+              "p95EdgeStrain": 0.0002457312886051235,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.988896076586339
+            },
+            "released": {
+              "maxEdgeStrain": 0.000961588420170566,
+              "p95EdgeStrain": 0.00024281339976106196,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9888765587906555
+            },
+            "heldComplete": true,
+            "releaseComplete": true,
+            "wallClockExceeded": false,
+            "recoveredDisplacementSource": 0.00011648008491601829,
+            "peakForceN": 0.00011668126075261921,
+            "peakTrackingErrorMeters": 0.0008307478283775105,
+            "releaseRuntimeMs": 501.49389999569394,
+            "releaseSteps": 1309,
+            "valid": true
+          },
+          {
+            "sequence": 4,
+            "face": [
+              11188,
+              15795,
+              1637
+            ],
+            "direction": "down",
+            "magnitudeSource": 0.0017148694137576318,
+            "held": {
+              "maxEdgeStrain": 0.001017380080629161,
+              "p95EdgeStrain": 0.00024326990444997081,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9885243676454629
+            },
+            "released": {
+              "maxEdgeStrain": 0.0009957770065620727,
+              "p95EdgeStrain": 0.00024351719945874407,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9883846444305268
+            },
+            "heldComplete": true,
+            "releaseComplete": true,
+            "wallClockExceeded": false,
+            "recoveredDisplacementSource": 0.00011881643341173526,
+            "peakForceN": 7.007462023432452e-05,
+            "peakTrackingErrorMeters": 0.00048650596666208575,
+            "releaseRuntimeMs": 495.95620000036433,
+            "releaseSteps": 1309,
+            "valid": true
+          },
+          {
+            "sequence": 5,
+            "face": [
+              33082,
+              12747,
+              14416
+            ],
+            "direction": "down",
+            "magnitudeSource": 0.0027278446270287793,
+            "held": {
+              "maxEdgeStrain": 0.00505830196476375,
+              "p95EdgeStrain": 0.0002466392335523693,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9890165314609947
+            },
+            "released": {
+              "maxEdgeStrain": 0.0009720645356810886,
+              "p95EdgeStrain": 0.0002438634456858512,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9887141894354253
+            },
+            "heldComplete": true,
+            "releaseComplete": true,
+            "wallClockExceeded": false,
+            "recoveredDisplacementSource": 0.00011833687906392319,
+            "peakForceN": 0.00010735359556395422,
+            "peakTrackingErrorMeters": 0.0007657494132709361,
+            "releaseRuntimeMs": 500.00959998578764,
+            "releaseSteps": 1309,
+            "valid": true
+          },
+          {
+            "sequence": 6,
+            "face": [
+              6723,
+              3848,
+              26875
+            ],
+            "direction": "right",
+            "magnitudeSource": 0.0012835131057971911,
+            "held": {
+              "maxEdgeStrain": 0.0010488002314895158,
+              "p95EdgeStrain": 0.00023412592853506406,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9666766167072185
+            },
+            "released": {
+              "maxEdgeStrain": 0.00100970066229135,
+              "p95EdgeStrain": 0.0002342245337917667,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9860984974698392
+            },
+            "heldComplete": true,
+            "releaseComplete": true,
+            "wallClockExceeded": false,
+            "recoveredDisplacementSource": 0.00011189740330934949,
+            "peakForceN": 5.090916540121624e-05,
+            "peakTrackingErrorMeters": 0.0003564159018806309,
+            "releaseRuntimeMs": 510.30729999183677,
+            "releaseSteps": 1309,
+            "valid": true
+          },
+          {
+            "sequence": 7,
+            "face": [
+              21442,
+              4465,
+              22551
+            ],
+            "direction": "forward",
+            "magnitudeSource": 0.0012881869332694341,
+            "held": {
+              "maxEdgeStrain": 0.0020014883118260173,
+              "p95EdgeStrain": 0.00018968278924426181,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9857439832234991
+            },
+            "released": {
+              "maxEdgeStrain": 0.0008211842858547654,
+              "p95EdgeStrain": 0.00018902939699887313,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9857027330121992
+            },
+            "heldComplete": true,
+            "releaseComplete": true,
+            "wallClockExceeded": false,
+            "recoveredDisplacementSource": 0.0001123174491213202,
+            "peakForceN": 4.7192130877344665e-05,
+            "peakTrackingErrorMeters": 0.00032808161155992383,
+            "releaseRuntimeMs": 509.3760000017937,
+            "releaseSteps": 1309,
+            "valid": true
+          },
+          {
+            "sequence": 8,
+            "face": [
+              12819,
+              5747,
+              18654
+            ],
+            "direction": "left",
+            "magnitudeSource": 0.002531158619436733,
+            "held": {
+              "maxEdgeStrain": 0.0012073664883530165,
+              "p95EdgeStrain": 0.00023576854568053572,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9847240085205085
+            },
+            "released": {
+              "maxEdgeStrain": 0.0010657575140104155,
+              "p95EdgeStrain": 0.00023599679775978847,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9844968687964628
+            },
+            "heldComplete": true,
+            "releaseComplete": true,
+            "wallClockExceeded": false,
+            "recoveredDisplacementSource": 0.0001191342768456494,
+            "peakForceN": 0.00010357001401410734,
+            "peakTrackingErrorMeters": 0.0007324262964967788,
+            "releaseRuntimeMs": 509.857800003374,
+            "releaseSteps": 1309,
+            "valid": true
+          },
+          {
+            "sequence": 9,
+            "face": [
+              38834,
+              20401,
+              38525
+            ],
+            "direction": "right",
+            "magnitudeSource": 0.0019286771919218612,
+            "held": {
+              "maxEdgeStrain": 0.0021056517319072285,
+              "p95EdgeStrain": 0.0002342437081721029,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9657688865366644
+            },
+            "released": {
+              "maxEdgeStrain": 0.0010226747405614619,
+              "p95EdgeStrain": 0.00023352711970143846,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9638469970564955
+            },
+            "heldComplete": true,
+            "releaseComplete": true,
+            "wallClockExceeded": false,
+            "recoveredDisplacementSource": 0.00011225880942762922,
+            "peakForceN": 7.784454731122997e-05,
+            "peakTrackingErrorMeters": 0.0005489636454512434,
+            "releaseRuntimeMs": 509.2841000005137,
+            "releaseSteps": 1309,
+            "valid": true
+          },
+          {
+            "sequence": 10,
+            "face": [
+              18649,
+              29224,
+              31517
+            ],
+            "direction": "right",
+            "magnitudeSource": 0.0031708384048425567,
+            "held": {
+              "maxEdgeStrain": 0.0010335729001496306,
+              "p95EdgeStrain": 0.0002339077254578645,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9666588130211023
+            },
+            "released": {
+              "maxEdgeStrain": 0.0009834912200020766,
+              "p95EdgeStrain": 0.0002337503406454462,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9860881567800192
+            },
+            "heldComplete": true,
+            "releaseComplete": true,
+            "wallClockExceeded": false,
+            "recoveredDisplacementSource": 0.00011189681079062403,
+            "peakForceN": 0.00013046437799436435,
+            "peakTrackingErrorMeters": 0.0009221761297156762,
+            "releaseRuntimeMs": 535.4331999842543,
+            "releaseSteps": 1309,
+            "valid": true
+          },
+          {
+            "sequence": 11,
+            "face": [
+              2324,
+              22919,
+              20146
+            ],
+            "direction": "backward",
+            "magnitudeSource": 0.0007561068230734402,
+            "held": {
+              "maxEdgeStrain": 0.0013798075879648038,
+              "p95EdgeStrain": 0.0002010245528501059,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9889264908777967
+            },
+            "released": {
+              "maxEdgeStrain": 0.0009310889822450788,
+              "p95EdgeStrain": 0.00020152475766574779,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9888987607822486
+            },
+            "heldComplete": true,
+            "releaseComplete": true,
+            "wallClockExceeded": false,
+            "recoveredDisplacementSource": 0.00012481429477925868,
+            "peakForceN": 2.118283843170868e-05,
+            "peakTrackingErrorMeters": 0.0001584191098019649,
+            "releaseRuntimeMs": 511.26359999761917,
+            "releaseSteps": 1309,
+            "valid": true
+          },
+          {
+            "sequence": 12,
+            "face": [
+              36188,
+              22275,
+              29745
+            ],
+            "direction": "backward",
+            "magnitudeSource": 0.0015676754695690578,
+            "held": {
+              "maxEdgeStrain": 0.0036174691576080237,
+              "p95EdgeStrain": 0.00020164637547617824,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9892443458432165
+            },
+            "released": {
+              "maxEdgeStrain": 0.0008647539123384623,
+              "p95EdgeStrain": 0.0002016535222469431,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9892368644246644
+            },
+            "heldComplete": true,
+            "releaseComplete": true,
+            "wallClockExceeded": false,
+            "recoveredDisplacementSource": 0.0001249107320151491,
+            "peakForceN": 5.6612197238021095e-05,
+            "peakTrackingErrorMeters": 0.00039772716661904886,
+            "releaseRuntimeMs": 507.0129999949131,
+            "releaseSteps": 1309,
+            "valid": true
+          },
+          {
+            "sequence": 13,
+            "face": [
+              18511,
+              10723,
+              11511
+            ],
+            "direction": "right",
+            "magnitudeSource": 0.002244344700125031,
+            "held": {
+              "maxEdgeStrain": 0.0048206928379965,
+              "p95EdgeStrain": 0.00023581314182937488,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9631509537147765
+            },
+            "released": {
+              "maxEdgeStrain": 0.0011458361363056275,
+              "p95EdgeStrain": 0.00023535792411403982,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9854928427340061
+            },
+            "heldComplete": true,
+            "releaseComplete": true,
+            "wallClockExceeded": false,
+            "recoveredDisplacementSource": 0.00011203530080765622,
+            "peakForceN": 8.849399137489543e-05,
+            "peakTrackingErrorMeters": 0.0006235191660175102,
+            "releaseRuntimeMs": 505.86330000078306,
+            "releaseSteps": 1309,
+            "valid": true
+          },
+          {
+            "sequence": 14,
+            "face": [
+              5196,
+              6816,
+              24115
+            ],
+            "direction": "up",
+            "magnitudeSource": 0.002558413193212161,
+            "held": {
+              "maxEdgeStrain": 0.0029066446191708833,
+              "p95EdgeStrain": 0.0002448844187721701,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9882195702853375
+            },
+            "released": {
+              "maxEdgeStrain": 0.0022349152001013297,
+              "p95EdgeStrain": 0.00024441063950424256,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9883074782786848
+            },
+            "heldComplete": true,
+            "releaseComplete": true,
+            "wallClockExceeded": false,
+            "recoveredDisplacementSource": 0.0006654144190961205,
+            "peakForceN": 6.086344352203796e-05,
+            "peakTrackingErrorMeters": 0.0005854458161012664,
+            "releaseRuntimeMs": 510.9078999958001,
+            "releaseSteps": 1309,
+            "valid": true
+          },
+          {
+            "sequence": 15,
+            "face": [
+              2845,
+              26538,
+              18676
+            ],
+            "direction": "right",
+            "magnitudeSource": 0.0007309655192758128,
+            "held": {
+              "maxEdgeStrain": 0.0010703726071680543,
+              "p95EdgeStrain": 0.00023539030324605054,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9864290378440211
+            },
+            "released": {
+              "maxEdgeStrain": 0.0010739631188890941,
+              "p95EdgeStrain": 0.00023525636966219326,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9860932209119386
+            },
+            "heldComplete": true,
+            "releaseComplete": true,
+            "wallClockExceeded": false,
+            "recoveredDisplacementSource": 0.00011190006152414421,
+            "peakForceN": 2.8149172786217633e-05,
+            "peakTrackingErrorMeters": 0.00019101696939575772,
+            "releaseRuntimeMs": 510.127299989108,
+            "releaseSteps": 1309,
+            "valid": true
+          },
+          {
+            "sequence": 16,
+            "face": [
+              19599,
+              41824,
+              3315
+            ],
+            "direction": "right",
+            "magnitudeSource": 0.001265046331124785,
+            "held": {
+              "maxEdgeStrain": 0.002024580085818084,
+              "p95EdgeStrain": 0.00023360410696700583,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9659218880832522
+            },
+            "released": {
+              "maxEdgeStrain": 0.001049444333365139,
+              "p95EdgeStrain": 0.00023391066289488828,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9861918271330303
+            },
+            "heldComplete": true,
+            "releaseComplete": true,
+            "wallClockExceeded": false,
+            "recoveredDisplacementSource": 0.00011198918028280548,
+            "peakForceN": 4.321278408331896e-05,
+            "peakTrackingErrorMeters": 0.0003067972707418733,
+            "releaseRuntimeMs": 508.3706000004895,
+            "releaseSteps": 1309,
+            "valid": true
+          },
+          {
+            "sequence": 17,
+            "face": [
+              17640,
+              37617,
+              5253
+            ],
+            "direction": "forward",
+            "magnitudeSource": 0.0023371023337161547,
+            "held": {
+              "maxEdgeStrain": 0.0053429757339881374,
+              "p95EdgeStrain": 0.00019109150053591204,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9856153421808529
+            },
+            "released": {
+              "maxEdgeStrain": 0.0007610960079028889,
+              "p95EdgeStrain": 0.0001884381731782247,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9858978538804372
+            },
+            "heldComplete": true,
+            "releaseComplete": true,
+            "wallClockExceeded": false,
+            "recoveredDisplacementSource": 0.00011236900052249781,
+            "peakForceN": 8.888847523845149e-05,
+            "peakTrackingErrorMeters": 0.0006198239222360512,
+            "releaseRuntimeMs": 511.4859999739565,
+            "releaseSteps": 1309,
+            "valid": true
+          },
+          {
+            "sequence": 18,
+            "face": [
+              39182,
+              493,
+              7512
+            ],
+            "direction": "right",
+            "magnitudeSource": 0.0015353530519251698,
+            "held": {
+              "maxEdgeStrain": 0.0010537676633250478,
+              "p95EdgeStrain": 0.00023411917617820787,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9664062452219011
+            },
+            "released": {
+              "maxEdgeStrain": 0.0010501444149389274,
+              "p95EdgeStrain": 0.00023312815336423048,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9863131696899199
+            },
+            "heldComplete": true,
+            "releaseComplete": true,
+            "wallClockExceeded": false,
+            "recoveredDisplacementSource": 0.00011184870850341362,
+            "peakForceN": 6.0247781054243845e-05,
+            "peakTrackingErrorMeters": 0.00042567108634031584,
+            "releaseRuntimeMs": 515.8284000062849,
+            "releaseSteps": 1309,
+            "valid": true
+          },
+          {
+            "sequence": 19,
+            "face": [
+              31525,
+              39242,
+              12469
+            ],
+            "direction": "right",
+            "magnitudeSource": 0.002785435636130061,
+            "held": {
+              "maxEdgeStrain": 0.0010385140119037264,
+              "p95EdgeStrain": 0.0002345647944162244,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9860034092004919
+            },
+            "released": {
+              "maxEdgeStrain": 0.0010464631934658287,
+              "p95EdgeStrain": 0.0002337626309917155,
+              "orientationFlips": 0,
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9861070474843094
+            },
+            "heldComplete": true,
+            "releaseComplete": true,
+            "wallClockExceeded": false,
+            "recoveredDisplacementSource": 0.00011189951288391946,
+            "peakForceN": 0.00011481942059709987,
+            "peakTrackingErrorMeters": 0.000808211934693803,
+            "releaseRuntimeMs": 520.6961000221781,
+            "releaseSteps": 1309,
+            "valid": true
+          }
+        ],
+        "runtimeMs": 49628.722099994775
+      }
+    }
+  ],
+  "overall": "SUCCESS"
+}

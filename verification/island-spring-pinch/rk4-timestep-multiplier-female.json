@@ -1,0 +1,96 @@
+{
+  "schema": "vela-rk4-timestep-multiplier-audit-v1",
+  "generatedAt": "2026-11-13T04:20:59Z",
+  "model": "female",
+  "domain": "full",
+  "vertices": 5036,
+  "seed": 20261113,
+  "holdSeconds": 0.016666666666666666,
+  "releaseSeconds": 0.02,
+  "pinchKp": 0.1,
+  "pinchKd": 0.01,
+  "pinchFace": [
+    868,
+    4244,
+    2011
+  ],
+  "pinchDirection": "down",
+  "pinchMagnitudeSource": 0.0002240318307523217,
+  "baselineFactor": 1.0,
+  "cases": [
+    {
+      "factor": 1.0,
+      "stableDt": 3.1164982786003106e-07,
+      "steps": 278091,
+      "runtimeMs": 16512.886600015918,
+      "heldGeometry": {
+        "maxEdgeStrain": 0.001336349988472084,
+        "p95EdgeStrain": 0.00019591231799218244,
+        "orientationFlips": 0,
+        "collapsedTriangles": 0,
+        "minAreaRatio": 0.9969888886555618
+      },
+      "releasedGeometry": {
+        "maxEdgeStrain": 0.001336349988472084,
+        "p95EdgeStrain": 0.00019591231799218244,
+        "orientationFlips": 0,
+        "collapsedTriangles": 0,
+        "minAreaRatio": 0.9969888886555618
+      },
+      "releasedPositionMaxDeltaSource": 0.0,
+      "releasedPositionRmsDeltaSource": 0.0,
+      "releasedPositionMaxDeltaNormalizedFace": 0.0,
+      "releasedVelocityMaxDeltaSourcePerSecond": 0.0
+    },
+    {
+      "factor": 12.0,
+      "stableDt": 3.739797934320373e-06,
+      "steps": 23176,
+      "runtimeMs": 1400.368399976287,
+      "heldGeometry": {
+        "maxEdgeStrain": 0.001279951029923788,
+        "p95EdgeStrain": 0.00025187859112537497,
+        "orientationFlips": 0,
+        "collapsedTriangles": 0,
+        "minAreaRatio": 0.9944391627561348
+      },
+      "releasedGeometry": {
+        "maxEdgeStrain": 0.0012628610427394913,
+        "p95EdgeStrain": 0.00025183849051177925,
+        "orientationFlips": 0,
+        "collapsedTriangles": 0,
+        "minAreaRatio": 0.9933521527361963
+      },
+      "releasedPositionMaxDeltaSource": 6.597039964955793e-05,
+      "releasedPositionRmsDeltaSource": 3.491853446821201e-05,
+      "releasedPositionMaxDeltaNormalizedFace": 0.0011484954157984558,
+      "releasedVelocityMaxDeltaSourcePerSecond": 0.04855458321194309
+    },
+    {
+      "factor": 24.0,
+      "stableDt": 7.479595868640746e-06,
+      "steps": 11590,
+      "runtimeMs": 710.4149000078905,
+      "heldGeometry": {
+        "maxEdgeStrain": 0.000909949224323513,
+        "p95EdgeStrain": 0.00027593629041118675,
+        "orientationFlips": 0,
+        "collapsedTriangles": 0,
+        "minAreaRatio": 0.9950554430128724
+      },
+      "releasedGeometry": {
+        "maxEdgeStrain": 0.0011092683321499643,
+        "p95EdgeStrain": 0.0002815247806696874,
+        "orientationFlips": 0,
+        "collapsedTriangles": 0,
+        "minAreaRatio": 0.9936724957145288
+      },
+      "releasedPositionMaxDeltaSource": 0.0001406781031376701,
+      "releasedPositionRmsDeltaSource": 4.667361815607941e-05,
+      "releasedPositionMaxDeltaNormalizedFace": 0.002449100769664947,
+      "releasedVelocityMaxDeltaSourcePerSecond": 0.047582942596892094
+    }
+  ],
+  "allFinite": true,
+  "zeroFlipsAndCollapses": true
+}

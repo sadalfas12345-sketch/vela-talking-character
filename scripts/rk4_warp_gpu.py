@@ -683,6 +683,8 @@ def main():
     parser.add_argument("--manifest", default="verification/island-spring-pinch/gpu-fixtures/manifest.json")
     parser.add_argument("--device", default="cuda:0")
     parser.add_argument("--seconds", type=float, default=0.001)
+    parser.add_argument("--dt-factor", type=float, default=1.0,
+                        help="temporary multiplier for the fixture RK4 timestep used by this audit")
     parser.add_argument("--domains", default="female:micro,female:screen,female:full,male:micro,male:screen,male:full")
     parser.add_argument("--output", default="verification/island-spring-pinch/rk4-warp-gpu-benchmark.json")
     parser.add_argument("--cpu-reference-manifest", default="verification/island-spring-pinch/gpu-cpu-references/manifest.json")
@@ -703,10 +705,13 @@ def main():
     reference_path = Path(args.cpu_reference_manifest)
     reference_manifest = json.loads(reference_path.read_text()) if reference_path.exists() else None
     domains = selected_domains(manifest, [x.strip() for x in args.domains.split(",") if x.strip()])
+    if not math.isfinite(args.dt_factor) or args.dt_factor <= 0.0:
+        raise ValueError("--dt-factor must be finite and positive")
     gravity_results = []
     pinch_results = []
     for model, domain in ([] if args.stress_only else domains):
         fixture = load_fixture(manifest_path, model, domain)
+        fixture["stable_dt"] *= args.dt_factor
         axes = fixture["anatomical_axes"]
         gravity = -9.81 * np.asarray(axes["up"], dtype=np.float64)
         cpu = cpu_simulate(fixture, args.seconds, gravity)
@@ -762,6 +767,7 @@ def main():
         "cudaAvailable": wp.is_cuda_available(),
         "sourceMetersPerUnit": manifest["sourceMetersPerUnit"],
         "secondsPerRun": args.seconds,
+        "dtFactor": args.dt_factor,
         "pinchKp": args.pinch_kp,
         "pinchKd": args.pinch_kd,
         "cudaGraph": args.cuda_graph,
@@ -774,6 +780,7 @@ def main():
         stress_records = []
         for model_index, (model, domain) in enumerate(domains):
             fixture = load_fixture(manifest_path, model, domain)
+            fixture["stable_dt"] *= args.dt_factor
             stress_records.append({
                 "model": model,
                 "domain": domain,
