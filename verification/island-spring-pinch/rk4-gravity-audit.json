@@ -1,0 +1,124 @@
+{
+  "schema": "vela-rk4-gravity-audit-v1",
+  "generatedAt": "2026-11-13T03:08:19.001Z",
+  "candidate": {
+    "massMultiplier": 1.9952623149688795,
+    "surfaceMultiplier": 0.1,
+    "innerMultiplier": 0.01,
+    "dampingMultiplier": 1,
+    "dtMultiplier": 0.1,
+    "pinchKpMultiplier": 0.0031622776601683794,
+    "pinchKdMultiplier": 0.1,
+    "logParameters": [
+      0.3,
+      -1,
+      -2,
+      0,
+      -1,
+      -2.5,
+      -1
+    ]
+  },
+  "fidelity": "micro",
+  "seconds": 0.2,
+  "offlineModelWallMs": 180000,
+  "evaluations": {
+    "female": {
+      "domain": "female-micro-facial-patch",
+      "fidelity": "micro",
+      "seconds": 0.2,
+      "vertices": 128,
+      "triangles": 206,
+      "gravity": {
+        "directions": {
+          "down": {
+            "geometry": {
+              "maxEdgeStrain": 0.0019256695625238824,
+              "p95EdgeStrain": 0.0008634281706520841,
+              "orientationFlips": 3,
+              "genuineFolds": 1,
+              "genuineFoldFaces": [
+                199
+              ],
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.9961500971196444,
+              "finite": true,
+              "maxDisplacement": 0.005037888850327223,
+              "maxVelocity": 0.04437354683582995,
+              "finalVelocity": 0.010537053194563837,
+              "normalizedVelocity": 0.003057370516238322,
+              "maxNetForceN": 1.1084548490100755e-8,
+              "rmsNetForceN": 5.55533389643987e-9,
+              "forceResidualRatio": 0.0056133281057476146
+            },
+            "steps": 50056,
+            "simulatedSeconds": 0.2,
+            "complete": true,
+            "wallClockExceeded": false,
+            "wallMs": 2229.3731000000002,
+            "settled": true
+          }
+        },
+        "worstFlips": 3,
+        "worstCollapses": 0,
+        "worstStrain": 0.0019256695625238824,
+        "maxDisplacement": 0.005037888850327223,
+        "maxVelocity": 0.04437354683582995,
+        "maxFinalVelocity": 0.010537053194563837,
+        "maxForceResidualRatio": 0.0056133281057476146,
+        "allComplete": true,
+        "allSettled": true,
+        "finite": true,
+        "fidelity": "micro"
+      }
+    },
+    "male": {
+      "domain": "male-micro-facial-patch",
+      "fidelity": "micro",
+      "seconds": 0.2,
+      "vertices": 128,
+      "triangles": 210,
+      "gravity": {
+        "directions": {
+          "down": {
+            "geometry": {
+              "maxEdgeStrain": 0.004257403339914929,
+              "p95EdgeStrain": 0.0012974853590758905,
+              "orientationFlips": 0,
+              "genuineFolds": 0,
+              "genuineFoldFaces": [],
+              "collapsedTriangles": 0,
+              "minAreaRatio": 0.979047895298228,
+              "finite": true,
+              "maxDisplacement": 0.006530390682143962,
+              "maxVelocity": 0.1368341469066712,
+              "finalVelocity": 0.01095333689361554,
+              "normalizedVelocity": 0.00060031714260991,
+              "maxNetForceN": 1.6759177606875434e-7,
+              "rmsNetForceN": 2.105045852131847e-8,
+              "forceResidualRatio": 0.02941429830510227
+            },
+            "steps": 32932,
+            "simulatedSeconds": 0.2,
+            "complete": true,
+            "wallClockExceeded": false,
+            "wallMs": 2015.4368000000004,
+            "settled": true
+          }
+        },
+        "worstFlips": 0,
+        "worstCollapses": 0,
+        "worstStrain": 0.004257403339914929,
+        "maxDisplacement": 0.006530390682143962,
+        "maxVelocity": 0.1368341469066712,
+        "maxFinalVelocity": 0.01095333689361554,
+        "maxForceResidualRatio": 0.02941429830510227,
+        "allComplete": true,
+        "allSettled": true,
+        "finite": true,
+        "fidelity": "micro"
+      }
+    }
+  },
+  "overall": "FAILED"
+}
