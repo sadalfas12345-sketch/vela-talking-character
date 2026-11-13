@@ -145,3 +145,14 @@ The browser still loads and renders the original GLBs. The local WebSocket bridg
 The female GPU browser test loaded the original face, selected island 32 with 1,503 vertices and 2,857 triangles, held a barycentric pinch, and released it. The released state recorded a `1.3058e-5 m` tracking error, `5.1711e-4 N` peak force, and zero reported geometry defects. Evidence: `verification/island-spring-pinch/gpu-browser-pinched-released.png`.
 
 The male browser test loaded the original GLB and selected its default source island 35 with 41,920 vertices and 82,807 triangles. The bridge alias maps the browser's `island-35` request to the matching full fixture, verified by a direct WebSocket bridge probe: `ready_domain=full`, `vertexCount=41920`, followed by a `0.001 s` GPU tick of 239 RK4 steps in `121.3 ms`. The neutral browser evidence is `verification/island-spring-pinch/gpu-browser-male-neutral.png`; that capture used the existing CPU fallback because the GPU handshake had not completed before the screenshot. The bridge now caches CUDA graphs for repeated frame advances and runs the GPU step off the browser event loop. A direct full-male `0.05 s` bridge advance completed 11,939 RK4 steps in `5,215.5 ms`, so the full male island remains decisively offline rather than real-time at this configuration. The female browser pinch is GPU-verified; the male browser endpoint and global-ID mapping are verified, but a complete male pointer replay is not claimed because the full-island physics cost exceeds the real-time frame budget.
+
+### Male full-island pinch audit
+
+The controlled male full-island bridge test is now preserved at `verification/island-spring-pinch/gpu-browser-male-full-bridge-pinch.json` and is reproducible with `python scripts/test_warp_bridge_pinch.py`. It uses the original source island 35, 41,920 vertices, one original triangle, barycentric weights `[1/3, 1/3, 1/3]`, `Kp=90 N/m`, `Kd=0.08 N·s/m`, and a `0.002` source-unit target offset for `0.001 s`.
+
+| Implementation | Max displacement after 0.001 s | Runtime | Finite |
+|---|---:|---:|---|
+| Warp GPU | `4.2119448223e+18` source units | `270.0 ms` | yes, but physically invalid |
+| NumPy Float64 reference | `4.2119488604e+18` source units | `54,536.5 ms` | yes, but physically invalid |
+
+This is a confirmed physical/controller instability of the tested full-male `Kp=90`, `Kd=0.08` configuration, not a GPU precision discrepancy: the GPU and Float64 trajectories agree while both diverge catastrophically. The browser pointer replay therefore remains FAILED for this configuration and is not relabeled as a successful deformation. No stiffness, damping, force clamp, mesh topology, or controller change was made to hide the failure.

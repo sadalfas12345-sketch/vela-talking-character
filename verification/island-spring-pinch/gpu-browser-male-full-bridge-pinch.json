@@ -1,0 +1,27 @@
+{
+  "ready": {
+    "model": "male",
+    "domain": "full",
+    "vertexCount": 41920
+  },
+  "triangleGlobalIds": [
+    631869,
+    404958,
+    455681
+  ],
+  "held": {
+    "runtimeMs": 270.0286000035703,
+    "steps": 239,
+    "maxDisplacementSource": 4.211944822254076e+18
+  },
+  "released": {
+    "runtimeMs": 107.02860000310466,
+    "steps": 239,
+    "maxDisplacementSource": 3.2879990880327434e+18
+  },
+  "cpuReference": {
+    "runtimeMs": 54536.45909999614,
+    "maxDisplacementSource": 4.211948860354125e+18,
+    "finite": true
+  }
+}

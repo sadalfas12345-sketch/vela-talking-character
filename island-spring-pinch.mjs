@@ -1116,12 +1116,16 @@ async function loadModel(name) {
     state.spring.update();
     return window.__velaDiagnostics();
   };
-  window.__velaPickTest = (clientX, clientY) => {
+  window.__velaPickTest = (clientX, clientY, islandFilter = null) => {
     const rect = canvas.getBoundingClientRect();
     pointer.x = (clientX - rect.left) / rect.width * 2 - 1;
     pointer.y = -((clientY - rect.top) / rect.height) * 2 + 1;
     raycaster.setFromCamera(pointer, camera);
-    const hit = raycaster.intersectObjects(state.meshes, false)[0];
+    const hits = raycaster.intersectObjects(state.meshes, false);
+    const hit = islandFilter == null ? hits[0] : hits.find(candidate => {
+      const entry = state.entries.find(item => item.mesh === candidate.object);
+      return entry && entry.faceIsland[candidate.faceIndex] === Number(islandFilter);
+    });
     return hit ? { mesh: hit.object.name, faceIndex: hit.faceIndex, islandId: state.entries.find(item => item.mesh === hit.object)?.faceIsland[hit.faceIndex], distance: hit.distance, point: hit.point.toArray() } : null;
   };
   window.__velaPlanDrag = (point, fraction = 0.02) => {
