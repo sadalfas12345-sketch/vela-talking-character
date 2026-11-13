@@ -1,0 +1,136 @@
+{
+  "schema": "vela-rk4-timestep-audit-v1",
+  "generatedAt": "2026-11-13T01:42:09.976Z",
+  "candidate": {
+    "massMultiplier": 1,
+    "surfaceMultiplier": 1,
+    "innerMultiplier": 1,
+    "dampingMultiplier": 1,
+    "dtMultiplier": 0.1,
+    "pinchKpMultiplier": 1,
+    "pinchKdMultiplier": 1,
+    "logParameters": [
+      0,
+      0,
+      0,
+      0,
+      -1,
+      0,
+      0
+    ]
+  },
+  "fidelity": "full",
+  "seconds": 0.0005,
+  "factors": [
+    1,
+    0.5,
+    0.25
+  ],
+  "domains": {
+    "female": {
+      "domain": "female",
+      "fidelity": "full",
+      "vertices": 5036,
+      "triangles": 9708,
+      "timestep": {
+        "startingEstimate": 3.1164982786003106e-7,
+        "samples": [
+          {
+            "factor": 1,
+            "timeStep": 3.1164982786003106e-7,
+            "steps": 1605,
+            "complete": true,
+            "wallClockExceeded": false,
+            "finite": true,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "maxStrain": 0.00030127688049625366,
+            "finalVelocity": 0.011569995407586808,
+            "forceResidualRatio": 2.1925322760613195
+          },
+          {
+            "factor": 0.5,
+            "timeStep": 1.5582491393001553e-7,
+            "steps": 3209,
+            "complete": true,
+            "wallClockExceeded": false,
+            "finite": true,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "maxStrain": 0.0003012768789624427,
+            "finalVelocity": 0.011569995417468015,
+            "forceResidualRatio": 2.192532276991939
+          },
+          {
+            "factor": 0.25,
+            "timeStep": 7.791245696500777e-8,
+            "steps": 6418,
+            "complete": true,
+            "wallClockExceeded": false,
+            "finite": true,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "maxStrain": 0.0003012768800637376,
+            "finalVelocity": 0.01156999541157884,
+            "forceResidualRatio": 2.192532277584696
+          }
+        ],
+        "largestTestedStableMultiplier": 1,
+        "smallestTestedStableMultiplier": 0.25
+      }
+    },
+    "male": {
+      "domain": "male",
+      "fidelity": "full",
+      "vertices": 41920,
+      "triangles": 82807,
+      "timestep": {
+        "startingEstimate": 6.37103983168012e-7,
+        "samples": [
+          {
+            "factor": 1,
+            "timeStep": 6.37103983168012e-7,
+            "steps": 785,
+            "complete": true,
+            "wallClockExceeded": false,
+            "finite": true,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "maxStrain": 0.00042903772869057935,
+            "finalVelocity": 0.015187104015144554,
+            "forceResidualRatio": 5.799211783490257
+          },
+          {
+            "factor": 0.5,
+            "timeStep": 3.18551991584006e-7,
+            "steps": 1570,
+            "complete": true,
+            "wallClockExceeded": false,
+            "finite": true,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "maxStrain": 0.00042903772876348994,
+            "finalVelocity": 0.015187104015568276,
+            "forceResidualRatio": 5.799211782580493
+          },
+          {
+            "factor": 0.25,
+            "timeStep": 1.59275995792003e-7,
+            "steps": 3140,
+            "complete": true,
+            "wallClockExceeded": false,
+            "finite": true,
+            "orientationFlips": 0,
+            "collapsedTriangles": 0,
+            "maxStrain": 0.00042903772896290843,
+            "finalVelocity": 0.01518710401373621,
+            "forceResidualRatio": 5.799211783771196
+          }
+        ],
+        "largestTestedStableMultiplier": 1,
+        "smallestTestedStableMultiplier": 0.25
+      }
+    }
+  },
+  "sourceMetersPerUnit": 0.3
+}
