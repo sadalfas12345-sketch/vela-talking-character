@@ -398,10 +398,10 @@ class WarpSimulation:
         self.positions, self.out_positions = self.out_positions, self.positions
         self.velocities, self.out_velocities = self.out_velocities, self.velocities
 
-    def advance(self, seconds, gravity, pinch=None):
+    def advance(self, seconds, gravity, pinch=None, graph_chunk=16):
         """Advance the resident GPU state without resetting or reading per substep."""
         h0 = self.fixture["stable_dt"]
-        graph_chunk = 16
+        graph_chunk = max(1, int(graph_chunk))
         elapsed = 0.0
         steps = 0
         started = time.perf_counter()
@@ -633,7 +633,9 @@ def gpu_random_stress(fixture, count, seed, hold_seconds, release_seconds, kp, k
             phase_target = pinch["origin"] + (pinch["target"].astype(np.float64) - pinch["origin"]) * (phase / 4.0)
             segment_pinch = (pinch["ids"], pinch["weights"], phase_target.astype(np.float32), pinch["velocity"], kp, kd)
             gravity = pinch["direction"] * 9.81
-            positions, velocities, forces, runtime_ms, steps = simulator.advance(hold_seconds, gravity, segment_pinch)
+            positions, velocities, forces, runtime_ms, steps = simulator.advance(
+                hold_seconds, gravity, segment_pinch, graph_chunk=max(1, graph_chunk)
+            )
             held_geometry = geometry_metrics(fixture, positions)
             held_complete = bool(held_complete and np.isfinite(positions).all() and np.isfinite(velocities).all())
             point, point_velocity, tracking_error = point_state(positions, velocities, pinch, phase_target)
@@ -643,7 +645,9 @@ def gpu_random_stress(fixture, count, seed, hold_seconds, release_seconds, kp, k
             peak_tracking_error = max(peak_tracking_error, tracking_error * fixture["meters"])
             invalid = invalid or held_geometry["orientationFlips"] > 0 or held_geometry["collapsedTriangles"] > 0
         release_gravity = pinch["direction"] * 9.81
-        release_positions, release_velocities, _, release_runtime, release_steps = simulator.advance(release_seconds, release_gravity, None)
+        release_positions, release_velocities, _, release_runtime, release_steps = simulator.advance(
+            release_seconds, release_gravity, None, graph_chunk=max(1, graph_chunk)
+        )
         released_geometry = geometry_metrics(fixture, release_positions)
         invalid = invalid or released_geometry["orientationFlips"] > 0 or released_geometry["collapsedTriangles"] > 0
         results.append({
@@ -691,6 +695,8 @@ def main():
     parser.add_argument("--stress-hold-seconds", type=float, default=1.0 / 60.0)
     parser.add_argument("--stress-release-seconds", type=float, default=0.05)
     parser.add_argument("--stress-output", default="verification/island-spring-pinch/rk4-warp-gpu-stress.json")
+    parser.add_argument("--stress-only", action="store_true",
+                        help="skip the CPU/GPU gravity and single-pinch benchmarks and run only the stress suite")
     args = parser.parse_args()
     manifest_path = Path(args.manifest)
     manifest = json.loads(manifest_path.read_text())
@@ -699,7 +705,7 @@ def main():
     domains = selected_domains(manifest, [x.strip() for x in args.domains.split(",") if x.strip()])
     gravity_results = []
     pinch_results = []
-    for model, domain in domains:
+    for model, domain in ([] if args.stress_only else domains):
         fixture = load_fixture(manifest_path, model, domain)
         axes = fixture["anatomical_axes"]
         gravity = -9.81 * np.asarray(axes["up"], dtype=np.float64)
