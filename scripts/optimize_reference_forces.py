@@ -37,6 +37,14 @@ A4 = load_module(Path(__file__).with_name("solve_plan_a4_projected_hookean.py"),
 A5 = load_module(Path(__file__).with_name("solve_plan_a5_subcutaneous.py"), "vela_a5_inverse")
 BASE = A4.load_base()
 
+REGIONS = {
+    "eyebrows": [70, 63, 105, 336, 293, 334, 107, 300, 65, 52, 53, 46, 285, 295, 282, 283, 276],
+    "eyelids": [33, 133, 159, 145, 160, 144, 153, 154, 155, 263, 362, 386, 374, 385, 380, 373, 390, 249],
+    "cheeks": [50, 101, 118, 123, 187, 205, 36, 206, 216, 215, 214, 280, 330, 347, 352, 411, 425, 266, 426, 436, 435, 434],
+    "mouth": [61, 291, 40, 270, 185, 409, 13, 14, 78, 308, 95, 324, 82, 312, 87, 317],
+    "jaw": [152, 148, 176, 149, 150, 136, 365, 377, 400, 378, 379, 394, 172, 132, 361],
+}
+
 
 def load_json_axes(target_json: Path):
     data = json.loads(target_json.read_text(encoding="utf-8"))
@@ -152,6 +160,42 @@ def nonlinear_force_equilibrium(x0, x, external, graph, edges, rest, base, suppo
     return x, {"iterations": len(history), "history": history, "finalGradientNorm": float(np.linalg.norm(gradient)), "finalEnergy": energy, "finalLengths": lengths}
 
 
+def iterative_force_update(x0, x, u, Bforce, L, d2, graph, edges, rest, base, support_ratio, eye, regularization, outer_iterations, response_iterations, nonlinear_inner_iterations):
+    """Update force coefficients with an implicit equilibrium sensitivity map."""
+    history = []
+    current = x.copy()
+    current_u = u.copy()
+    n = len(x0)
+    for outer in range(outer_iterations):
+        Je, re, _ = base.spring_jacobian(current, edges, rest, x0)
+        Js, rs = build_support_jacobian(current, graph, edges, base, support_ratio)
+        J = sparse.vstack((Je, Js), format="csr")
+        hop = LinearOperator((3 * n, 3 * n), matvec=lambda v: np.asarray(J.T @ (J @ v)).reshape(-1), rmatvec=lambda v: np.asarray(J.T @ (J @ v)).reshape(-1), dtype=float)
+        sensitivities = []
+        for col in range(Bforce.shape[1]):
+            response = lsqr(hop, Bforce[:, col].toarray().reshape(-1), atol=1e-5, btol=1e-5, iter_lim=response_iterations)
+            sensitivities.append(response[0])
+        S = np.column_stack(sensitivities) if sensitivities else np.zeros((3 * n, 0))
+        A = np.asarray(L @ S)
+        residual = d2 - np.asarray(L @ (current - x0).reshape(-1)).reshape(-1)
+        normal = (A.T @ A) / max(eye * eye, 1e-30) + regularization * np.eye(A.shape[1])
+        rhs = (A.T @ residual) / max(eye * eye, 1e-30) - regularization * current_u
+        du = np.linalg.lstsq(normal, rhs, rcond=1e-10)[0] if len(rhs) else np.zeros(0)
+        old_error = float(np.linalg.norm(residual / max(eye, 1e-30)))
+        chosen = None
+        for alpha in (1.0, 0.5, 0.25, 0.125):
+            candidate_u = current_u + alpha * du
+            candidate_force = np.asarray(Bforce @ candidate_u).reshape(n, 3)
+            candidate_x, candidate_report = nonlinear_force_equilibrium(x0, current, candidate_force, graph, edges, rest, base, support_ratio, 3, nonlinear_inner_iterations)
+            candidate_error = float(np.linalg.norm((L @ (candidate_x - x0).reshape(-1) - d2) / max(eye, 1e-30)))
+            if chosen is None or candidate_error < chosen["error"]:
+                chosen = {"alpha": alpha, "u": candidate_u, "x": candidate_x, "report": candidate_report, "error": candidate_error}
+        current_u = chosen["u"]
+        current = chosen["x"]
+        history.append({"outerIteration": outer + 1, "linearizedErrorBefore": old_error, "linearizedControlStepNorm": float(np.linalg.norm(du)), "acceptedAlpha": float(chosen["alpha"]), "actualImageObjective": float(chosen["error"]), "equilibriumGradientNorm": float(chosen["report"]["finalGradientNorm"])})
+    return current, current_u, history
+
+
 def solve_inverse(args):
     started = time.perf_counter()
     graph = np.load(args.graph)
@@ -217,6 +261,10 @@ def solve_inverse(args):
     external = np.asarray(Bforce @ u).reshape(n, 3)
 
     x, nonlinear = nonlinear_force_equilibrium(V0, x, external, graph, edges, rest, BASE, args.support_ratio, args.nonlinear_iterations, args.nonlinear_inner_iterations)
+    optimization_history = []
+    if args.outer_iterations > 0:
+        x, u, optimization_history = iterative_force_update(V0, x, u, Bforce, L, d2, graph, edges, rest, BASE, args.support_ratio, eye, args.outer_regularization, args.outer_iterations, args.response_iterations, args.nonlinear_inner_iterations)
+        external = np.asarray(Bforce @ u).reshape(n, 3)
 
     # Nonlinear audit at the actual state. This is not a hard landmark
     # projection. It reports the physical residual for the force-controlled
@@ -231,6 +279,16 @@ def solve_inverse(args):
     achieved_2d = np.column_stack(((achieved_lm - neutral_lm) @ right, (achieved_lm - neutral_lm) @ up))
     target_2d = np.column_stack((d3 @ right, d3 @ up))
     error_2d = achieved_2d - target_2d
+    before_2d = -target_2d
+    regional_errors = {}
+    for name, ids in REGIONS.items():
+        valid = np.asarray([i for i in ids if i < len(error_2d)], dtype=np.int64)
+        regional_errors[name] = {
+            "landmarkCount": int(len(valid)),
+            "beforeMean": float(np.mean(np.linalg.norm(before_2d[valid], axis=1))) if len(valid) else None,
+            "afterMean": float(np.mean(np.linalg.norm(error_2d[valid], axis=1))) if len(valid) else None,
+            "afterP95": float(np.quantile(np.linalg.norm(error_2d[valid], axis=1), 0.95)) if len(valid) else None,
+        }
     area0 = np.cross(V0[F[:, 1]] - V0[F[:, 0]], V0[F[:, 2]] - V0[F[:, 0]], axis=1)
     area1 = np.cross(x[F[:, 1]] - x[F[:, 0]], x[F[:, 2]] - x[F[:, 0]], axis=1)
     area0n = np.linalg.norm(area0, axis=1)
@@ -256,6 +314,8 @@ def solve_inverse(args):
         "scales": {"eyeWidth": eye, "equilibriumScale": eq_scale, "forceScale": force_scale},
         "linearSolve": {"iterations": int(result[2]), "istop": int(result[1]), "residualNorm": float(result[3]), "arnorm": float(result[7]), "acond": float(result[6]), "xnorm": float(result[8])},
         "nonlinearEquilibrium": {"iterations": int(nonlinear["iterations"]), "finalGradientNorm": float(nonlinear["finalGradientNorm"]), "finalEnergy": float(nonlinear["finalEnergy"]), "history": nonlinear["history"]},
+        "forceOptimization": {"outerIterations": int(args.outer_iterations), "responseIterations": int(args.response_iterations), "regularization": float(args.outer_regularization), "history": optimization_history},
+        "regionalErrors": regional_errors,
         "result": {"meanImageError": float(np.mean(np.linalg.norm(error_2d, axis=1))), "medianImageError": float(np.median(np.linalg.norm(error_2d, axis=1))), "p95ImageError": float(np.quantile(np.linalg.norm(error_2d, axis=1), 0.95)), "maxImageError": float(np.max(np.linalg.norm(error_2d, axis=1))), "forceNorm": float(np.linalg.norm(u)), "maxVertexDisplacement": float(np.max(np.linalg.norm(q.reshape(n, 3), axis=1))), "springEnergy": float(0.5 * np.sum(rx * rx) + 0.5 * args.support_ratio * np.sum(rxs * rxs)), "forceBalanceNorm": float(np.linalg.norm(force_balance)), "forceBalanceMax": float(np.max(np.linalg.norm(force_balance, axis=1))), "maxAbsPositiveRestEdgeStrain": float(np.max(np.abs(strains))) if len(strains) else 0.0, "p95AbsPositiveRestEdgeStrain": float(np.quantile(np.abs(strains), 0.95)) if len(strains) else 0.0, "maxZeroRestSpringLength": float(np.max(zero_rest_displacement)) if len(zero_rest_displacement) else 0.0, "positiveRestSpringCount": int(np.sum(positive_rest)), "zeroRestSpringCount": int(np.sum(~positive_rest)), "orientationReversalsConservative": folds, "triangleCollapses": collapsed, "finite": bool(np.isfinite(x).all())},
         "runtimeSeconds": time.perf_counter() - started,
         "status": "valid_state_unconverged_force_balance" if np.isfinite(x).all() and folds == 0 and collapsed == 0 else "invalid_geometry_or_orientation_reversals",
@@ -285,6 +345,9 @@ def main():
     p.add_argument("--linear-btol", type=float, default=1e-6)
     p.add_argument("--nonlinear-iterations", type=int, default=6)
     p.add_argument("--nonlinear-inner-iterations", type=int, default=40)
+    p.add_argument("--outer-iterations", type=int, default=0)
+    p.add_argument("--response-iterations", type=int, default=30)
+    p.add_argument("--outer-regularization", type=float, default=1e-4)
     args = p.parse_args()
     solve_inverse(args)
 

@@ -69,6 +69,24 @@ produce a valid frame on either character because the remaining reversals have
 not been proven to be harmless coherent rotations, and the force-balance
 residual is not at equilibrium tolerance.
 
+## Iterative force-control update
+
+The required force-control update was also executed using an implicit local
+equilibrium sensitivity map. Each control response was obtained by solving the
+linearized Hookean equilibrium system for the force-basis columns. A small
+regularized least-squares update was then applied, followed by nonlinear
+equilibrium relaxation with the updated external force held fixed.
+
+| Character | Controls | Response iterations | Image error before update | Image error after update | Force-balance residual | Conservative reversals | Runtime | Result |
+|---|---:|---:|---:|---:|---:|---:|---:|---|
+| Female | 4 | 12 | `0.7803` normalized objective | `0.7877` normalized objective | `1.08e-1` | 105 | 99.2 s | FAILED: update rejected by objective and geometry |
+| Male | 2 | 6 | `0.7712` normalized objective | `0.7906` normalized objective | `7.19e-1` | 255 | 469.4 s | FAILED: update rejected by objective and geometry |
+
+The update worsened both force-balance and conservative geometry metrics. This
+is evidence that the local response solve is ill-conditioned at the current
+support and spring scales; it is not evidence that the physical system can
+match the reference. The saved iterative states are retained for diagnosis.
+
 Zero-rest seam springs are reported separately. Their lengths are not divided
 by a rest length, so they are not folded into the positive-rest strain metric.
 
@@ -78,6 +96,10 @@ by a rest length, so they are not folded into the positive-rest strain metric.
 - [Female inverse positions and force field](female-frame045-inverse-final-positions.npz)
 - [Male inverse report](male-frame045-inverse.json)
 - [Male inverse positions and force field](male-frame045-inverse-positions.npz)
+- [Female iterative force update](female-frame045-inverse-iterative.json)
+- [Female iterative positions](female-frame045-inverse-iterative-positions.npz)
+- [Male iterative force update](male-frame045-inverse-iterative.json)
+- [Male iterative positions](male-frame045-inverse-iterative-positions.npz)
 - [Female hard-target replay](female-frame045.json)
 - [Male hard-target replay from the existing A5 evidence](../plan-a5-subcutaneous-run/male-stageb-frame45-supported.json)
 
