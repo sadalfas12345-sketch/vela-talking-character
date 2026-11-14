@@ -1,0 +1,137 @@
+{
+  "schema": "vela-reference-inverse-physics-v1",
+  "model": "female",
+  "frame": 45,
+  "method": "linearized constrained equilibrium inverse with compact barycentric force basis",
+  "physicsDefinition": "gpu-rk4-consistent-static",
+  "objective": {
+    "landmarkTerm": "confidence-weighted image-plane squared error in target right/up axes",
+    "forceRegularization": 1.0,
+    "temporalTerm": "not used for single-frame probe",
+    "depth": "not optimized; existing target depth is not included in the image objective"
+  },
+  "inputs": {
+    "vertices": 41747,
+    "triangles": 79627,
+    "springs": 121358,
+    "virtualSprings": 0,
+    "supportSprings": 166792,
+    "landmarks": 478,
+    "neutralSpringResidualMax": 0.0
+  },
+  "controls": {
+    "count": 4,
+    "landmarkIds": [
+      386,
+      149,
+      21,
+      58
+    ],
+    "basisColumns": 12,
+    "forceDistribution": "original attachment triangle barycentric weights"
+  },
+  "scales": {
+    "eyeWidth": 0.05744088140365605,
+    "equilibriumScale": 0.05744088140365605,
+    "forceScale": 0.001
+  },
+  "linearSolve": {
+    "iterations": 20,
+    "istop": 7,
+    "residualNorm": 0.8105451044404829,
+    "arnorm": 7279.423464359958,
+    "acond": 10025.122449751492,
+    "xnorm": 0.00812270329002447,
+    "source": "neutral_linear_inverse"
+  },
+  "nonlinearEquilibrium": {
+    "iterations": 3,
+    "finalGradientNorm": 0.0013461963235777187,
+    "finalEnergy": 1.2309224166683657e-06,
+    "history": [
+      {
+        "iteration": 1,
+        "energy": 0.00018037503257579428,
+        "gradientNorm": 0.07150986413200996,
+        "acceptedAlpha": 1.0,
+        "lsqrIterations": 18,
+        "accepted": true
+      },
+      {
+        "iteration": 2,
+        "energy": 1.0269270292776228e-05,
+        "gradientNorm": 0.01172742066306171,
+        "acceptedAlpha": 1.0,
+        "lsqrIterations": 18,
+        "accepted": true
+      },
+      {
+        "iteration": 3,
+        "energy": 2.304526052481195e-06,
+        "gradientNorm": 0.002754455088843572,
+        "acceptedAlpha": 1.0,
+        "lsqrIterations": 18,
+        "accepted": true
+      }
+    ]
+  },
+  "forceOptimization": {
+    "outerIterations": 0,
+    "responseIterations": 30,
+    "regularization": 0.0001,
+    "history": []
+  },
+  "regionalErrors": {
+    "eyebrows": {
+      "landmarkCount": 17,
+      "beforeMean": 0.0020659016333401466,
+      "afterMean": 0.0020267374101133407,
+      "afterP95": 0.0030299437609644865
+    },
+    "eyelids": {
+      "landmarkCount": 18,
+      "beforeMean": 0.002681731784629231,
+      "afterMean": 0.002596064466490211,
+      "afterP95": 0.0061539140164417775
+    },
+    "cheeks": {
+      "landmarkCount": 22,
+      "beforeMean": 0.001765387514477493,
+      "afterMean": 0.001705568248813706,
+      "afterP95": 0.0031423721760004348
+    },
+    "mouth": {
+      "landmarkCount": 16,
+      "beforeMean": 0.0016570185983043656,
+      "afterMean": 0.0015451917889168399,
+      "afterP95": 0.0026457909208305284
+    },
+    "jaw": {
+      "landmarkCount": 15,
+      "beforeMean": 0.0027797705465480833,
+      "afterMean": 0.0026912423358060804,
+      "afterP95": 0.00528106406473665
+    }
+  },
+  "result": {
+    "meanImageError": 0.0019062922262943914,
+    "medianImageError": 0.0018275179800532546,
+    "p95ImageError": 0.004090606659274703,
+    "maxImageError": 0.006391488030466994,
+    "forceNorm": 4.5721331210324156e-08,
+    "maxVertexDisplacement": 0.0010710166630509698,
+    "springEnergy": 1.2102399707631646e-06,
+    "forceBalanceNorm": 0.004487321078592396,
+    "forceBalanceMax": 0.0005371665615214514,
+    "maxAbsPositiveRestEdgeStrain": 0.4150633128922918,
+    "p95AbsPositiveRestEdgeStrain": 0.006259114672291671,
+    "maxZeroRestSpringLength": 0.0,
+    "positiveRestSpringCount": 121358,
+    "zeroRestSpringCount": 0,
+    "orientationReversalsConservative": 3,
+    "triangleCollapses": 0,
+    "finite": true
+  },
+  "runtimeSeconds": 17.654641000000993,
+  "status": "invalid_geometry_or_orientation_reversals"
+}

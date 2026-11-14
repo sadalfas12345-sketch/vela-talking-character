@@ -1,0 +1,135 @@
+{
+  "schema": "vela-reference-inverse-physics-v1",
+  "model": "male",
+  "frame": 45,
+  "method": "linearized constrained equilibrium inverse with compact barycentric force basis",
+  "physicsDefinition": "gpu-rk4-consistent-static",
+  "objective": {
+    "landmarkTerm": "confidence-weighted image-plane squared error in target right/up axes",
+    "forceRegularization": 1.0,
+    "temporalTerm": "not used for single-frame probe",
+    "depth": "not optimized; existing target depth is not included in the image objective"
+  },
+  "inputs": {
+    "vertices": 208351,
+    "triangles": 401474,
+    "springs": 609759,
+    "virtualSprings": 0,
+    "supportSprings": 832542,
+    "landmarks": 478,
+    "neutralSpringResidualMax": 0.0
+  },
+  "controls": {
+    "count": 2,
+    "landmarkIds": [
+      386,
+      172
+    ],
+    "basisColumns": 6,
+    "forceDistribution": "original attachment triangle barycentric weights"
+  },
+  "scales": {
+    "eyeWidth": 0.30409851126227233,
+    "equilibriumScale": 0.30409851126227233,
+    "forceScale": 0.001
+  },
+  "linearSolve": {
+    "iterations": 12,
+    "istop": 7,
+    "residualNorm": 0.7774952273444187,
+    "arnorm": 160.5618466516538,
+    "acond": 625.2372640774263,
+    "xnorm": 0.07200384829772773,
+    "source": "neutral_linear_inverse"
+  },
+  "nonlinearEquilibrium": {
+    "iterations": 3,
+    "finalGradientNorm": 0.015009072653628311,
+    "finalEnergy": 0.00010177016985878656,
+    "history": [
+      {
+        "iteration": 1,
+        "energy": 0.0139264244515615,
+        "gradientNorm": 0.7363657286778208,
+        "acceptedAlpha": 1.0,
+        "lsqrIterations": 16,
+        "accepted": true
+      },
+      {
+        "iteration": 2,
+        "energy": 0.0007552401823291292,
+        "gradientNorm": 0.10271847647144731,
+        "acceptedAlpha": 1.0,
+        "lsqrIterations": 16,
+        "accepted": true
+      },
+      {
+        "iteration": 3,
+        "energy": 0.0001934926633468042,
+        "gradientNorm": 0.029845017420207835,
+        "acceptedAlpha": 1.0,
+        "lsqrIterations": 16,
+        "accepted": true
+      }
+    ]
+  },
+  "forceOptimization": {
+    "outerIterations": 0,
+    "responseIterations": 30,
+    "regularization": 0.0001,
+    "history": []
+  },
+  "regionalErrors": {
+    "eyebrows": {
+      "landmarkCount": 17,
+      "beforeMean": 0.010937116488484944,
+      "afterMean": 0.010497411962448827,
+      "afterP95": 0.015480691885821476
+    },
+    "eyelids": {
+      "landmarkCount": 18,
+      "beforeMean": 0.01419739083701737,
+      "afterMean": 0.0135738678387365,
+      "afterP95": 0.03257962547656295
+    },
+    "cheeks": {
+      "landmarkCount": 22,
+      "beforeMean": 0.009346160814994703,
+      "afterMean": 0.008948371638721796,
+      "afterP95": 0.0170443360846153
+    },
+    "mouth": {
+      "landmarkCount": 16,
+      "beforeMean": 0.008772443537855978,
+      "afterMean": 0.008267516448402337,
+      "afterP95": 0.013994692064190548
+    },
+    "jaw": {
+      "landmarkCount": 15,
+      "beforeMean": 0.014716419111253076,
+      "afterMean": 0.01396765710180527,
+      "afterP95": 0.027142732892283267
+    }
+  },
+  "result": {
+    "meanImageError": 0.010052914915267466,
+    "medianImageError": 0.00964438034263596,
+    "p95ImageError": 0.02127668877860206,
+    "maxImageError": 0.033744642826205075,
+    "forceNorm": 8.795768068096205e-06,
+    "maxVertexDisplacement": 0.010548704206445493,
+    "springEnergy": 9.672414771524862e-05,
+    "forceBalanceNorm": 0.05003024217876103,
+    "forceBalanceMax": 0.0074179335028250835,
+    "maxAbsPositiveRestEdgeStrain": 0.6590652824794436,
+    "p95AbsPositiveRestEdgeStrain": 0.007623688961444207,
+    "maxZeroRestSpringLength": 0.0,
+    "positiveRestSpringCount": 609759,
+    "zeroRestSpringCount": 0,
+    "orientationReversalsConservative": 15,
+    "triangleCollapses": 0,
+    "finite": true
+  },
+  "runtimeSeconds": 88.04829890001565,
+  "status": "invalid_geometry_or_orientation_reversals"
+}

@@ -51,6 +51,25 @@ as local-fold candidates. Male triangles `24818`, `36899`, `37538`, `111514`,
 neighbor dihedral and normal-consistency evidence; they are not inferred from
 normal rotation alone. The exact machine-readable audits are linked below.
 
+### Fresh reproducibility rerun
+
+The GPU-consistent frame-45 commands were rerun from the saved graph and target
+inputs on 2026-11-14. The rerun reproduced the same failure metrics:
+
+| Character | Median image error | P95 image error | Force-balance residual | Conservative reversals | Runtime | Result |
+|---|---:|---:|---:|---:|---:|---|
+| Female | `0.001827518` | `0.004090607` | `0.004487321 N` | 3 | `17.65 s` | FAILED |
+| Male | `0.009644380` | `0.021276688` | `0.050030242 N` | 15 | `88.05 s` | FAILED |
+
+Fresh textured renders show severe spikes and dark void-like regions in the
+evaluated female and male faces. They are diagnostic evidence of the failed
+state, not accepted animation. See the [frame 45 force comparison](frame045-force-comparison.png).
+
+- [Female rerun metrics](female-frame045-gpu-consistent-rerun.json)
+- [Male rerun metrics](male-frame045-gpu-consistent-rerun.json)
+- [Female rerun evaluated render](female-frame045-gpu-consistent-rerun-render-supported.png)
+- [Male rerun evaluated render](male-frame045-gpu-consistent-rerun-render-supported.png)
+
 ### Force-response sensitivity
 
 The required forward sensitivity test now uses landmark 105's exact Goal 1
